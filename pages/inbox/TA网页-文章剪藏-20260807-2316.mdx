@@ -1,0 +1,52 @@
+---
+title: "网页/文章剪藏"
+tags: []
+---
+
+# 网页/文章剪藏
+
+> [!NOTE] 捕获元数据
+> - **来源**: [Toutiao_Article](https://m.toutiao.com/is/BwSLw3Hjuuk/)
+> - **捕获时间**: `2026-08-07 23:16:32`
+
+## 📊 多模型综合分析报告
+
+### 🟣 Gemini 1.5 Flash 总结
+> [!WARNING] Gemini 分析失败: Timeout of 600.0s exceeded, last exception: 503 failed to connect to all addresses; last error: UNKNOWN: ipv4:172.217.118.4:443: Failed to connect to remote host: getsockopt(SO_ERROR): Connection timed out
+
+---
+
+### 🔵 百炼 Qwen 3.7 Flash 总结
+## 核心摘要
+您提供的输入并非实际文章内容，而是一条**抓取失败的系统报错**。系统在尝试通过 Jina AI 代理服务拉取该头条链接的正文时，遭遇 `401 Unauthorized`（未授权）拦截，导致无法读取任何有效文本，因此无法进行常规的内容总结。
+
+## 详细提炼
+- **错误代码**：`401 Client Error: Unauthorized`
+- **调用路径**：`Jina AI URL Fetch 代理 → 今日头条移动端链接`
+- **失败原因分析**：
+  1. **平台反爬策略**：今日头条对非浏览器环境的自动化请求或第三方代理（如 `r.jina.ai`）常返回 401/403 拦截；
+  2. **链接状态异常**：原文章可能已被删除、设置为私密/仅关注可见，或所在圈子有访问限制；
+  3. **API 鉴权变更**：Jina AI 对部分国内内容源的解析策略可能已调整，临时失去免鉴权抓取能力；
+  4. **请求头缺失**：未携带必要的 `User-Agent`、`Referer` 或 `Cookie`，被服务端判定为非法客户端。
+- **应对建议**：
+  - ✅ **最优方案**：直接选中并粘贴原文内容到对话中，我将立即输出标准格式的《核心摘要+详细提炼+关键标签》；
+  - 🔍 **链接自检**：在桌面/手机浏览器中手动打开该链接，确认是否正常展示全文；
+  - 🛠 **工具替代**：若需批量剪藏，可改用 `Reader View`（阅读模式）、`简悦 SimpRead`、`Cubox` 等支持本地渲染与反爬绕过的应用；
+  - ⚙️ **开发者选项**：如需程序化抓取，建议使用 `Playwright/Puppeteer` 模拟真实浏览器会话，或接入头条开放平台的官方 Content API。
+
+## 关键标签
+`#抓取失败` `#HTTP401` `#JinaAI` `#今日头条` `#反爬拦截` `#内容剪藏` `#URL解析异常` `#自动化订阅`
+
+> 💡 提示：标题《网页/文章剪藏》本身偏向工具类主题。若您希望我围绕“网页剪藏的技术原理、主流工具对比、反爬对抗策略”生成一篇结构化文章摘要，请直接回复“是”，我将为您定制输出。
+
+---
+
+### 🟠 Groq Llama 3.1 8B 总结
+> [!WARNING] Groq Llama 分析失败: Client.__init__() got an unexpected keyword argument 'proxies'
+
+
+---
+
+### 网页原始抓取正文
+
+抓取正文失败: 401 Client Error: Unauthorized for url: https://r.jina.ai/https://m.toutiao.com/is/BwSLw3Hjuuk/

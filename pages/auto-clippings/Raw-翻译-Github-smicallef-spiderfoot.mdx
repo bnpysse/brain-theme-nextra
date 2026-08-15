@@ -1,0 +1,273 @@
+---
+title: "_smicallef_spiderfoot_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&lt;a href="https://www.spiderfoot.net/r.php?u=aHR0cHM6Ly93d3cuc3BpZGVyZm9vdC5uZXQv&s=os_gh"&gt;![](https://www.spiderfoot.net/wp-content/themes/spiderfoot/img/spiderfoot-wide.png)&lt;/a&gt;
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/smicallef/spiderfoot/master/LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.7+-green)](https://www.python.org)
+[![Stable Release](https://img.shields.io/badge/version-4.0-blue.svg)](https://github.com/smicallef/spiderfoot/releases/tag/v4.0)
+[![CI status](https://github.com/smicallef/spiderfoot/workflows/Tests/badge.svg)](https://github.com/smicallef/spiderfoot/actions?query=workflow%3A"Tests")
+[![Last Commit](https://img.shields.io/github/last-commit/smicallef/spiderfoot)](https://github.com/smicallef/spiderfoot/commits/master)
+[![Codecov](https://codecov.io/github/smicallef/spiderfoot/coverage.svg)](https://codecov.io/github/smicallef/spiderfoot)
+[![Twitter Follow](https://img.shields.io/twitter/follow/spiderfoot?label=follow&style=social)](https://twitter.com/spiderfoot)
+[![Discord](https://img.shields.io/discord/770524432464216074)](https://discord.gg/vyvztrG)
+
+**SpiderFoot** is an open source intelligence (OSINT) automation tool. It integrates with just about every data source available and utilises a range of methods for data analysis, making that data easy to navigate.
+
+**SpiderFoot** 是一个开源情报（OSINT）自动化工具。它几乎集成了所有可用的数据源，并利用多种数据分析方法，使这些数据易于浏览。
+
+SpiderFoot has an embedded web-server for providing a clean and intuitive web-based interface but can also be used completely via the command-line.  It's written in **Python 3** and **MIT-licensed**.
+
+SpiderFoot 内置了一个 Web 服务器，提供简洁直观的 Web 界面，但也可以完全通过命令行使用。它使用 **Python 3** 编写，并采用 **MIT 许可证**。
+
+![](https://www.spiderfoot.net/wp-content/uploads/2022/04/opensource-screenshot-v4.png)
+
+### FEATURES
+
+### 功能特性
+
+- Web based UI or CLI
+- Over 200 modules (see below)
+- Python 3.7+
+- YAML-configurable [correlation engine](/correlations/README.md) with [37 pre-defined rules](/correlations)
+- CSV/JSON/GEXF export
+- API key export/import
+- SQLite back-end for custom querying
+- Highly configurable
+- Fully documented
+- Visualisations
+- TOR integration for dark web searching
+- Dockerfile for Docker-based deployments
+- Can call other tools like DNSTwist, Whatweb, Nmap and CMSeeK
+- [Actively developed since 2012!](https://medium.com/@micallst/lessons-learned-from-my-10-year-open-source-project-4a4c8c2b4f64)
+
+- 基于 Web 的 UI 或 CLI
+- 超过 200 个模块（见下文）
+- Python 3.7+
+- 支持 YAML 配置的[关联引擎](/correlations/README.md)，包含 [37 条预定义规则](/correlations)
+- CSV/JSON/GEXF 导出
+- API 密钥导出/导入
+- 用于自定义查询的 SQLite 后端
+- 高度可配置
+- 文档齐全
+- 可视化
+- TOR 集成，用于暗网搜索
+- 用于 Docker 部署的 Dockerfile
+- 可以调用 DNSTwist、Whatweb、Nmap 和 CMSeeK 等其他工具
+- [自 2012 年起积极开发！](https://medium.com/@micallst/lessons-learned-from-my-10-year-open-source-project-4a4c8c2b4f64)
+
+### WANT MORE?
+
+### 想要更多？
+
+Need more from SpiderFoot? Check out [SpiderFoot HX](https://www.spiderfoot.net/hx) for:
+
+需要从 SpiderFoot 获得更多功能？请查看 [SpiderFoot HX](https://www.spiderfoot.net/hx)，它提供：
+
+- 100% Cloud-based and managed for you
+- Attack Surface Monitoring with change notifications by email, REST and Slack
+- Multiple targets per scan
+- Multi-user collaboration
+- Authenticated and 2FA
+- Investigations
+- Customer support
+- Third party tools pre-installed & configured
+- Drive it with a fully RESTful API
+- TOR integration built-in
+- Screenshotting
+- Bring your own Python SpiderFoot modules
+- Feed scan data to Splunk, ElasticSearch and REST endpoints
+
+- 100% 基于云并为您管理
+- 攻击面监控，支持通过电子邮件、REST 和 Slack 发送变更通知
+- 每次扫描支持多个目标
+- 多用户协作
+- 身份验证和双因素认证（2FA）
+- 调查功能
+- 客户支持
+- 预装并配置好的第三方工具
+- 通过完全 RESTful API 驱动
+- 内置 TOR 集成
+- 截图功能
+- 自带 Python SpiderFoot 模块
+- 将扫描数据发送到 Splunk、ElasticSearch 和 REST 端点
+
+See the full set of differences between SpiderFoot HX and the open source version [here](https://www.spiderfoot.net/open-source-vs-hx/).
+
+查看 SpiderFoot HX 与开源版本之间的完整差异，请点击[此处](https://www.spiderfoot.net/open-source-vs-hx/)。
+
+### USES
+
+### 用途
+
+SpiderFoot can be used offensively (e.g. in a red team exercise or penetration test) for reconnaissance of your target or defensively to gather information about what you or your organisation might have exposed over the Internet.
+
+SpiderFoot 既可以用于攻击性场景（例如红队演练或渗透测试）对目标进行侦察，也可以用于防御性场景，收集有关您或您的组织可能已在互联网上暴露的信息。
+
+You can target the following entities in a SpiderFoot scan:
+
+您可以在 SpiderFoot 扫描中针对以下实体：
+
+ - IP address
+ - Domain/sub-domain name
+ - Hostname
+ - Network subnet (CIDR)
+ - ASN
+ - E-mail address
+ - Phone number
+ - Username
+ - Person's name
+ - Bitcoin address
+
+ - IP 地址
+ - 域名/子域名
+ - 主机名
+ - 网络子网（CIDR）
+ - ASN
+ - 电子邮件地址
+ - 电话号码
+ - 用户名
+ - 人名
+ - 比特币地址
+
+SpiderFoot's 200+ modules feed each other in a publisher/subscriber model to ensure maximum data extraction to do things like:
+
+SpiderFoot 的 200 多个模块以发布/订阅模型相互协作，确保最大限度地提取数据，从而完成以下工作：
+
+- [Host/sub-domain/TLD enumeration/extraction](https://asciinema.org/a/295912)
+- [Email address, phone number and human name extraction](https://asciinema.org/a/295947)
+- [Bitcoin and Ethereum address extraction](https://asciinema.org/a/295957)
+- [Check for susceptibility to sub-domain hijacking](https://asciinema.org/a/344377)
+- DNS zone transfers
+- [Threat intelligence and Blacklist queries](https://asciinema.org/a/295949)
+- API integration with [SHODAN](https://asciinema.org/a/127601), [HaveIBeenPwned](https://asciinema.org/a/128731), [GreyNoise](https://asciinema.org/a/295943), AlienVault, SecurityTrails, etc.
+- [Social media account enumeration](https://asciinema.org/a/295923)
+- [S3/Azure/Digitalocean bucket enumeration/scraping](https://asciinema.org/a/295941)
+- IP geo-location
+- Web scraping, web content analysis
+- [Image, document and binary file meta data analysis](https://asciinema.org/a/296274)
+- Dark web searches
+- [Port scanning and banner grabbing](https://asciinema.org/a/295939)
+- [Data breach searches](https://asciinema.org/a/296145)
+- So much more...
+
+- [主机/子域名/TLD 枚举/提取](https://asciinema.org/a/295912)
+- [电子邮件地址、电话号码和人名提取](https://asciinema.org/a/295947)
+- [比特币和以太坊地址提取](https://asciinema.org/a/295957)
+- [检查是否容易受到子域名劫持](https://asciinema.org/a/344377)
+- DNS 区域传送
+- [威胁情报和黑名单查询](https://asciinema.org/a/295949)
+- 与 [SHODAN](https://asciinema.org/a/127601)、[HaveIBeenPwned](https://asciinema.org/a/128731)、[GreyNoise](https://asciinema.org/a/295943)、AlienVault、SecurityTrails 等的 API 集成
+- [社交媒体账户枚举](https://asciinema.org/a/295923)
+- [S3/Azure/Digitalocean 存储桶枚举/抓取](https://asciinema.org/a/295941)
+- IP 地理位置定位
+- 网页抓取、网页内容分析
+- [图像、文档和二进制文件元数据分析](https://asciinema.org/a/296274)
+- 暗网搜索
+- [端口扫描和横幅抓取](https://asciinema.org/a/295939)
+- [数据泄露搜索](https://asciinema.org/a/296145)
+- 以及更多...
+
+### INSTALLING & RUNNING
+
+### 安装与运行
+
+To install and run SpiderFoot, you need at least Python 3.7 and a number of Python libraries which you can install with `pip`. We recommend you install a packaged release since master will often have bleeding edge features and modules that aren't fully tested.
+
+要安装和运行 SpiderFoot，您至少需要 Python 3.7 以及一些可以通过 `pip` 安装的 Python 库。我们建议您安装打包发布版，因为 master 分支通常包含未经全面测试的前沿功能和模块。
+
+#### Stable build (packaged release):
+
+#### 稳定版（打包发布）：
+
+```
+ wget https://github.com/smicallef/spiderfoot/archive/v4.0.tar.gz
+ tar zxvf v4.0.tar.gz
+ cd spiderfoot-4.0
+ pip3 install -r requirements.txt
+ python3 ./sf.py -l 127.0.0.1:5001
+```
+
+#### Development build (cloning git master branch):
+
+#### 开发版（克隆 git master 分支）：
+
+```
+ git clone https://github.com/smicallef/spiderfoot.git
+ cd spiderfoot
+ pip3 install -r requirements.txt
+ python3 ./sf.py -l 127.0.0.1:5001
+```
+
+Check out the [documentation](https://www.spiderfoot.net/documentation) and our [asciinema videos](https://asciinema.org/~spiderfoot) for more tutorials.
+
+查看更多教程，请查阅[文档](https://www.spiderfoot.net/documentation)和我们的 [asciinema 视频](https://asciinema.org/~spiderfoot)。
+
+### COMMUNITY
+
+### 社区
+
+Whether you're a contributor, user or just curious about SpiderFoot and OSINT in general, we'd love to have you join our community! SpiderFoot now has a [Discord server](https://discord.gg/vyvztrG) for seeking help from the community, requesting features or just general OSINT chit-chat.
+
+无论您是贡献者、用户，还是仅仅对 SpiderFoot 和 OSINT 感兴趣，我们都欢迎您加入我们的社区！SpiderFoot 现在有一个 [Discord 服务器](https://discord.gg/vyvztrG)，您可以在那里寻求社区帮助、请求功能，或者进行一般的 OSINT 闲聊。
+
+### WRITING CORRELATION RULES
+
+### 编写关联规则
+
+We have a comprehensive write-up and reference of the correlation rule-set introduced in SpiderFoot 4.0 [here](/correlations/README.md).
+
+我们在这里提供了 SpiderFoot 4.0 中引入的关联规则集的全面说明和参考：[此处](/correlations/README.md)。
+
+Also take a look at the [template.yaml](/correlations/template.yaml) file for a walk through. The existing [37 rules](/correlations) are also quite readable and good as starting points for additional rules.
+
+还可以查看 [template.yaml](/correlations/template.yaml) 文件以进行演练。现有的 [37 条规则](/correlations) 也具有很好的可读性，并且可以作为添加新规则的起点。
+
+### MODULES / INTEGRATIONS
+
+### 模块 / 集成
+
+SpiderFoot has over 200 modules, most of which *don't require API keys*, and many of those that do require API keys *have a free tier*.
+
+SpiderFoot 拥有超过 200 个模块，其中大部分*不需要 API 密钥*，而许多需要 API 密钥的模块*也提供免费层级*。
+
+| Name     | Description | Type   |
+|:---------| :-----------|:-------|
+[AbstractAPI](https://app.abstractapi.com/)|Look up domain, phone and IP address information from AbstractAPI.|Tiered API
+[abuse.ch](https://www.abuse.ch)|Check if a host/domain, IP address or netblock is malicious according to Abuse.ch.|Free API
+[AbuseIPDB](https://www.abuseipdb.com)|Check if an IP address is malicious according to AbuseIPDB.com blacklist.|Tiered API
+[Abusix Mail Intelligence](https://abusix.org/)|Check if a netblock or IP address is in the Abusix Mail Intelligence blacklist.|Tiered API
+Account Finder|Look for possible associated accounts on over 500 social and other websites such as Instagram, Reddit, etc.|Internal
+[AdBlock Check](https://adblockplus.org/)|Check if linked pages would be blocked by AdBlock Plus.|Tiered API
+[AdGuard DNS](https://adguard.com/)|Check if a host would be blocked by AdGuard DNS.|Free API
+[Ahmia](https://ahmia.fi/)|Search Tor 'Ahmia' search engine for mentions of the target.|Free API
+[AlienVault IP Reputation](https://cybersecurity.att.com/)|Check if an IP or netblock is malicious according to the AlienVault IP Reputation database.|Free API
+[AlienVault OTX](https://otx.alienvault.com/)|Obtain information from AlienVault Open Threat Exchange (OTX)|Tiered API
+[Amazon S3 Bucket Finder](https://aws.amazon.com/s3/)|Search for potential Amazon S3 buckets associated with the target and attempt to list their contents.|Free API
+[Apple iTunes](https://itunes.apple.com/)|Search Apple iTunes for mobile apps.|Free API
+[Archive.org](https://archive.org/)|Identifies historic versions of interesting files/pages from the Wayback Machine.|Free API
+[ARIN](https://www.arin.net/)|Queries ARIN registry for contact information.|Free API
+[Azure Blob Finder](https://azure.microsoft.com/en-in/services/storage/blobs/)|Search for potential Azure blobs associated with the target and attempt to list their contents.|Free API
+Base64 Decoder|Identify Base64-encoded strings in URLs, often revealing interesting hidden information.|Internal
+[BGPView](https://bgpview.io/)|Obtain network information from BGPView API.|Free API
+Binary String Extractor|Attempt to identify strings in binary content.|Internal
+[BinaryEdge](https://www.binaryedge.io/)|Obtain information from BinaryEdge.io Internet scanning systems, including breaches, vulnerabilities, torrents and passive DNS.|Tiered API
+[Bing (Shared IPs)](https://www.bing.com/)|Search Bing for hosts sharing the same IP.|Tiered API
+[Bing](https://www.bing.com/)|Obtain information from bing to identify sub-domains and links.|Tiered API
+Bitcoin Finder|Identify bitcoin addresses in scraped webpages.|Internal
+[Bitcoin Who's Who](https://bitcoinwhoswho.com/)|Check for Bitcoin addresses against the Bitcoin Who's Who database of suspect/malicious addresses.|Tiered API
+[BitcoinAbuse](https://www.bitcoinabuse.com/)|Check Bitcoin addresses against the bitcoinabuse.com database of suspect/malicious addresses.|Free API
+[Blockchain](https://www.blockchain.com/)|Queries blockchain.info to find the balance of identified bitcoin wallet addresses.|Free API
+[blocklist.de](http://www.blocklist.de/en/index.html)|Check if a netblock or IP is malicious according to blocklist.de.|Free API
+[BotScout](https://botscout.com/)|Searches BotScout.com's database of spam-bot IP addresses and e-mail addresses.|Tiered API
+[botvrij.eu](https://botvrij.eu/)|Check if a domain is malicious according to botvrij.eu.|Free API
+[BuiltWith](https://builtwith.com/)|Query BuiltWith.com's Domain API for information about your target's web technology stack, e-mail addresses and more.|Tiered API
+[C99](https://api.c99.nl/)|Queries the C99 API which offers various data (geo location, proxy detection, phone lookup, etc).|Commercial API
+[CallerName](http://callername.com/)|Lookup US phone number location and reputation information.|Free API
+[Censys](https://censys.io/)|Obtain host information from Censys.io.|Tiered API
+[Certificate Transparency](https://crt.sh/)|Gather hostnames from historical certificates in crt.sh.|Free API
+[CertSpotter](https://sslmate.com/certspotter/)|Gather information about SSL certificates from SSLMate CertSpotter API.|Tiered API
+[CINS Army List](https://cinsscore.com/)|Check if a netblock or IP address is malicious according to Collective Intelligence Network Security (CINS) Army list.|Free API
+[CIRCL.LU](https://www.circl.lu/)|Obtain information

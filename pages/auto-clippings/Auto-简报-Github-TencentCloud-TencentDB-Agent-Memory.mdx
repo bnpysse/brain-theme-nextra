@@ -1,0 +1,30 @@
+---
+title: "_TencentCloud_TencentDB-Agent-Memory_简报"
+tags: ["Github_Trending", "深度解读"]
+---
+
+# TencentDB Agent Memory (腾讯云 AI Agent 团队记忆系统)
+
+## 📝 一句话简介
+一个面向 AI Agent 团队的持久化记忆与经验资产管理平台，能够将对话、文档和代码库提炼为可复用的结构化资产，实现 Agent 间的经验传承与高效冷启动。
+
+## 🛠 技术栈
+* **运行环境**: Node.js (>= 22.16)
+* **核心语言与包管理**: TypeScript / JavaScript (基于 npm 模块 `@tencentdb-agent-memory/memory-tencentdb`)
+* **架构组件**: 
+  * `Memory Core` (记忆提取与持久化核心引擎)
+  * `Memory Hub` (Web 控制面板，默认端口 8125)
+  * `Proxy` (代理层，适配 Claude Code / CodeBuddy 等客户端)
+* **生态集成**: OpenClaw, Hermes Gateway, Claude Code, CodeBuddy
+* **关键技术领域**: 知识图谱 (CodeGraph)、图结构化 RAG (Wiki Link Graph)、分层记忆提取 (L0-L3 Layering)、细粒度 ACL 权限控制
+
+## 🌟 核心亮点
+* **从“聊天记录”升维为“经验资产”**：不只是存储 Raw Context，而是通过分层提炼生成对话记忆（Chat Memory）、可执行技能（Skill）、结构化文档（Wiki）和代码关联图谱（CodeGraph）。
+* **支持一键导入“游戏存盘点”（冷启动）**：能够直接导入现有代码库、文档和历史会话，自动生成语法符号、调用链路与影响分析图谱，让新 Agent 无需重头学习项目。
+* **团队级协作与安全权限管理（ACL）**：提供 `Private`（私有）、`Team`（团队共享）、`Restricted`（受限访问）三级可见性，结合全局管理员与团队角色，确保资产安全流通。
+* **框架解耦与 Agent 协同装配**：记忆资产独立于特定的 AI Agent 框架，可在控制面板中像“装备武器”一样，针对不同角色的 Agent（如 Scout, Builder, Reviewer）灵活分配对应的记忆与技能。
+
+## 🎯 适用场景
+* **一人公司 / 超小型团队打造 Agent 军团**：需要组建多 Agent 团队（调研、编写代码、测试），并希望各 Agent 共享同一套项目背景，避免在每个会话中重复解释上下文。
+* **复杂/大型代码库的 AI 辅助重构与开发**：利用 CodeGraph 预先分析代码符号、调用关系和修改影响路径，解决 Agent 在大型项目中“看不全上下文”或“盲目修改引发连锁 bug”的问题。
+* **团队运维与开发 SOP 资产化**：将日常排错、Code Review 规范、发布 CheckList 提炼为 Skill 并共享给团队中的所有 Agent，实现团队知识资产的自动沉淀与标准化执行。

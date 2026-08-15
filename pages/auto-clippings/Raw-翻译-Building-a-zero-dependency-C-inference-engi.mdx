@@ -1,0 +1,33 @@
+---
+title: "Building a zero-dependency C inference engine for BitNet (1._全翻译"
+tags: ["Reddit_全文翻译", "r_LocalLLaMA"]
+---
+
+【帖子标题】：Building a zero-dependency C inference engine for BitNet (1.58-bit) - lessons from hitting 36 tok/s on a Xeon CPU
+
+【帖子正文】：
+过去几个月里，我从零开始用纯C99语言构建了一个CPU优先的推理引擎（不使用Python、CUDA或BLAS，仅使用GCC和make）。重点在于运行1.58比特三值模型时能够无重大的运行时开销地本地执行。
+
+当前，在Intel Xeon处理器上使用4个线程时，其性能达到了36.25 tok/s在BitNet b1.58-2B-4T上的表现。
+
+构建过程中的几个技术细节：
+
+原生三值SIMD：BitNet权重以每字节4个的方式打包（值为 -1, 0, +1）。我们没有先将这些数据解压到float32，而是使用自定义的AVX2和AVX-512指令直接在整数寄存器中进行累加操作，并利用VNNI指令（vpdpbusds）来完成。
+
+最小化运行时开销：线程池采用C11原子操作与回旋再让步机制，而不是重大的互斥体竞争，因此在生成标记期间的线程同步开销几乎为零。
+
+无依赖性：编译成一个单一的独立可执行文件，并直接提供一个兼容OpenAI API端点的服务。
+
+迄今为止最重要的收获是内存限制。我们花费数周时间优化低层矩阵乘法内核，但批量大小为1时的解码速度似乎卡在了内存带宽上。在我们的Xeon测试机上，我们运行的速度大约达到了理论上的95%内存带宽，因此更快的计算内核实际上只有当你对多个序列进行批处理后才能降低端到端标记延迟。
+
+代码库：
+
+https://github.com/shifulegend/project-zero
+
+很想知道其他人在不同CPU架构（尤其是AMD Zen或ARM NEON）上看到的标记速率是多少？或者人们是如何应对本地三值推理内存带宽天花板的？
+
+提交者：
+/u/shifu_legend
+
+[链接]
+[评论]

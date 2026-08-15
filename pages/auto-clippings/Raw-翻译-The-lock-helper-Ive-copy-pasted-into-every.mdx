@@ -1,0 +1,34 @@
+---
+title: "The lock helper I ve copy-pasted into every project, as a cr_全翻译"
+tags: ["Reddit_全文翻译", "r_rust"]
+---
+
+【帖子标题】：我复制粘贴到每个项目的锁助手，作为一个crate
+
+【帖子正文】：
+每段Rust代码最终都会包含某种形式的poisoned锁的LockExt trait。每次重写我都感到厌烦，所以就发布了它。
+
+在堆栈已经回退的情况下从Drop实现锁定一个被污染的Mutex或RwLock会导致在发生恐慌时panic，从而终止进程而不是正常地回退。这种情况很容易忽略，因为它只会在恐慌恰好通过接触了被污染锁的类型并触发其Drop方法时才会显现出来。
+
+poisoned是一个小型的LockExt trait，具有or_panic()方法。它会检查std::thread::panicking()，如果线程已经回退，则通过PoisonError::into_inner恢复guard而不是再次panic。在非回退情况下，它会在被污染时像预期那样panic。
+
+还提供了or_panic_with方法，用于构建延迟的消息。
+
+```rust
+use std::sync::Mutex;
+use poisoned::LockExt;
+
+let cache = Mutex::new(vec![1, 2, 3]);
+let first = cache.lock().or_panic();
+```
+
+这是一个小型的单一trait实现，没有依赖项。欢迎反馈意见。
+
+GitHub：
+https://github.com/abhishekshree/poisoned
+
+提交者：
+/u/shree_ee
+
+[链接]
+[评论]

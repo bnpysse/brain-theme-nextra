@@ -1,0 +1,29 @@
+---
+title: "RSS feed to NotebookLM n8n automation"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 RSS feed to NotebookLM n8n automation
+
+**来源**: The Wondrous Mind of Dereck Bearsong
+**链接**: https://dereckbearsong.substack.com/p/rss-feed-to-notebooklm-n8n-automation
+
+## 📝 核心主旨 (TL;DR)
+作者利用 n8n 构建了一套自动化工作流，每日定时抓取 RSS 订阅源中的最新文章，通过本地大模型（Ollama）清洗并提取纯文本后写入 Google Doc，最终同步至 NotebookLM 进行 AI 知识合成（如生成音频摘要和思维导图），从而以“曲线救国”的方式绕过 NotebookLM 无公开 API 的限制，高效解决海量科技资讯的阅读与消化痛点。
+
+## 💡 关键知识点 / 核心观点
+
+1. **基于 n8n 的端到端信息聚合自动化流**
+   工作流每日午夜触发，通过 RSS 节点（结合 RSS Bridge 聚合多源）拉取内容。核心 JS 代码节点负责计算“昨日”时间戳以过滤出最新 article，并随机分配 User-Agent 以规避反爬机制。随后通过 HTTP 请求并发抓取文章，过滤错误后，将 HTML 转换为 Markdown 格式，最终上传至指定的 Google Doc。
+2. **本地 LLM (Ollama) 在数据清洗中的应用与工程权衡**
+   作者使用本地部署的 Ollama (Gemma 3 12B 模型) 来执行“去 Markdown/HTML 标记、提取纯文本”的清洗任务。作者坦言，这并非最优解（常规做法是使用 JS 库在代码节点中处理），但由于 n8n 运行在 Docker 容器中，引入外部 JS 库存在技术阻碍，且作者希望借此实验本地模型。作者承认此举计算资源消耗较大，未来计划重构为纯代码实现。
+3. **绕过 NotebookLM API 缺失的“曲线救国”架构**
+   由于 Google NotebookLM 目前尚未开放公共 API，无法通过代码直接创建 Notebook 或写入数据。作者采用“n8n 抓取清洗 -> 写入 Google Doc -> 在 NotebookLM 中绑定并刷新该 Doc”的变通方案。这避免了引入 Selenium 等重型浏览器自动化带来的复杂性，是一个轻量且实用的 PoC（概念验证）设计。
+4. **面向 AI 原生消费的内容重构**
+   整个自动化链路的最终目的不是为了“阅读”，而是为了“合成”。通过将清洗后的纯文本喂给 NotebookLM，充分利用其 Audio Overview（深度音频对话摘要）和 Mind maps（思维导图）功能，将碎片化的 RSS 信息转化为高密度的结构化知识资产。
+
+## 🏷️ 提及的重要概念/公司/模型
+
+* **AI 模型与框架**: Ollama, Gemma 3 (12B parameter model), Prompt Engineering (用于文本清洗的特定指令)。
+* **自动化工具与平台**: n8n (核心工作流引擎), Google NotebookLM (知识合成终端), Google Docs (数据中转站), RSS Bridge (RSS 源聚合工具)。
+* **技术与工程概念**: RSS Feed, User-Agent Randomization (反爬虫策略), HTML to Markdown Conversion, Docker Containerization (导致 JS 库依赖困难的上下文), API Limitations (NotebookLM 无公开 API), Selenium (被放弃的备选自动化方案)。

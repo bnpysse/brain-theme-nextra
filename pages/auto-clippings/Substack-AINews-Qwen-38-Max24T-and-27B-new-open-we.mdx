@@ -1,0 +1,27 @@
+---
+title: "[AINews] Qwen 3.8 Max(2.4T) and 27B, new open weights models for Coding and Cowork"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 [AINews] Qwen 3.8 Max(2.4T) and 27B, new open weights models for Coding and Cowork
+
+**来源**: Latent Space
+**链接**: https://www.latent.space/p/ainews-qwen-38-max24t-and-27b-new
+
+## 📝 核心主旨 (TL;DR)
+Qwen 3.8-Max 的发布标志着阿里云在开放权重前沿模型上的战略转向：通过 2.4T 总参数（MoE稀疏激活约 95B）与极具攻击性的 API 定价，直接对标并部分超越西方闭源旗舰在长视界自主编程、芯片设计与多模态智能体工作流中的表现。文章指出，当前大模型竞争的核心已从单一基座能力跃迁至“模型 × 运行时 Harness”的系统级协同，同时伴随许可证地域限制争议与推理硬件门槛，真正的生态普及将依赖于同系的 27B 蒸馏版本与 Agent 基础设施的成熟。
+
+## 💡 关键知识点 / 核心观点
+1. **极致 MoE 稀疏化与部署现实的割裂**：模型总参数量高达 2.4T，但单 Token 仅激活约 95B 参数（激活率 ~4%），配合 $0.25/M 的 Cache Token 低价策略，大幅压低了长上下文与重复 Tool-call 场景的推理边际成本。然而“Open Weights”在实际工程中并不等同于“本地可跑”，仍需多卡集群或超节点调度；落地路径将快速分化：头部企业走 API/HaaS，大众开发者依赖即将开放的 27B 轻量版或蒸馏管线。
+2. **定位重构：从“对话助手”到“长视界 Agent 基座”**：官方叙事全面转向 `Coding & Cowork`，原生支持 10+ 天无干预代码自演进、RTL到物理版图的完整硅设计流、以及 365 天电商博弈策略。评测指标（CoWorkBench, PaperBench）强调目标维持、轨迹连贯与工具链容错，表明模型已深度适配验证密集型（Verification-heavy）的智能体循环，而非追求单次问答幻觉率。
+3. **第三方榜单印证“中西开放权重前沿互换领先局面的形成”**：在 Frontend Code Arena (#4, Elo 1668)、Vision Arena (#2) 及 Vals Index (#2 开源组) 中紧贴 Claude Opus 4.8/5 与 Kimi K3，SWE-bench 达 87.3%。更关键的是，相同配置下测试成本仅为 Opus 4.7 的约 40%，且从 3.7-Max 到 3.8-Max 仅用 2.5 个月取得 8.6 分的指数级跃升，验证了中国实验室在数据构造、Post-training 与训练配方上的体系化优势。
+4. **“开源”定义的合规摩擦与地缘技术博弈**：社区明确指出其授权协议疑似排除美、欧、英、韩等司法管辖区，触发对 “Open Weights ≠ Open Source” 的实质性警惕。结合同期 MiniMax H3 等同批争议，显示开源权重正成为技术扩散与生态锁定的载体，但其商业合法性与出口管制边界模糊，迫使工程团队在选型时必须将 License Review 纳入前置条件。
+5. **Agent 基础设施军备竞赛：控制平面从 Prompt 移至 Runtime**：单靠模型参数已无法构筑护城河。Cloudflare `@computer`、Cursor 云 Agent 插件、LangChain Managed Deep Agents 等纷纷切入，聚焦动态沙箱隔离、OAuth 安全网关、记忆压缩与状态感知（如 Stateful Tokenization 可削减 16-34% TTFT）。研究指出长视界失败模式呈系统化分布（目标漂移、上下文污染、稀疏奖励），Harness 质量可直接带来 ~20% 的有效性能增益，模型选择必须与运行环境联合调优。
+
+## 🏷️ 提及的重要概念/公司/模型
+| 类别 | 内容 |
+|:---|:---|
+| **公司/实验室** | Alibaba/Qwen, OpenAI, Anthropic, Google/Gemini, Moonshot/Kimi, 智谱AI/GLM, DeepSeek, MiniMax, Meta, Databricks, Cloudflare, Cursor, LangChain, Baseten, Intology, Jina, Sakana AI, Hugging Face, Epoch AI |
+| **模型架构/系列** | Qwen 3.8-Max (2.4T), Qwen 3.8-27B, Kimi K3 (2.8T), GLM-5.2 / 5.3, DeepSeek V4 Flash, MiniMax H3, Claude Opus 4.8 / 5, Fable 5, GPT-5.5 / 5.6, Gemma 4, Qwen3-Reranker-4B, jina-reranker-v3.5, Moonbeam |
+| **框架/工具/平台** | Hermes Agent, Command Code, Baseten, DSPy 3.3.0, Photon 2.0, Locus (自动化Post-training), MirrorCode, SWE-bench, Vals Index, Frontend/Vision Arena, PaperBench, CoWorkBench, RSIBench-Data, MerchantBench |
+| **核心技术概念** | Mixture of Experts (MoE) / 稀疏激活 (~4%), 1M Context Window, Stateful Tokenization / 增量缓存, Agentic Harness / Runtime, Long-Horizon Agent, Visual Feedback Loop, Tool Routing & Sandboxing, Post-training Distillation, License Jurisdiction Restrictions, Token Efficiency (TTFT/Decoding) |

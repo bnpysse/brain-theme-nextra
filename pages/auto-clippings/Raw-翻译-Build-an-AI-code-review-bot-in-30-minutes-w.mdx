@@ -1,0 +1,94 @@
+---
+title: "Build an AI code review bot in 30 minutes with Vercel Eve_全翻译"
+tags: ["大咖视点_全文翻译", "Lenny's_Newsletter"]
+---
+
+【文章标题】：使用 Vercel Eve 在30分钟内构建一个代码审查AI机器人
+
+【文章正文】：
+如今，我大部分的代码都是由AI撰写的，这带来了一个新问题：无法跟上PR排队的节奏。在这期节目中，我会介绍如何构建Merge Mommy，这是一个Vercel Eve代理，在检查通过后阅读每个PR，并在六个风险维度上打分，自动批准低风险的PR，并在Slack中提示我需要人工审查的部分。我整个过程都在一个Codex会话中完成，它兼容SOC 2标准并且已经清除了我的积压。
+
+在
+YouTube
+，
+Spotify
+或
+Apple Podcasts
+收听或观看
+
+你将学到的内容：
+
+为什么AI生成的PR会形成审查瓶颈以及为什么答案并不是审查所有这些PR
+
+Intercom如何通过将AI纳入审查流程提高PR审批速度并减少回滚率
+
+为什么我发现Vercel Eve是我迄今为止发现的最简单的框架，在Slack和GitHub部署AI代理
+
+我如何在一个Codex提示和几个引导转弯中构建了一个完整的PR审查代理
+
+用于评分PR风险的六个组件（辐射范围、可逆性、数据安全、运维影响、验证缺口以及更改面）
+
+如何使用Chrome浏览器配置Slack机器人和GitHub应用设置，以避免手动点击设置屏幕
+
+为什么只要过程是可审计、可查询且在你的风险管理政策中包含的，自动批准的PR可以符合SOC 2标准
+
+如何设置Slack递进，使低风险的PR成为两步合并而无需手动审查
+
+由
+WorkOS
+呈现——让你的应用今天企业就绪
+
+在这期节目中，我们将覆盖：
+
+（00:00）关于大家没有提到的PR审查积压问题
+
+（02:35）你不必审查所有AI生成的PR的原因
+
+（05:14）Intercom如何构建并证明了AI批准的PR更安全
+
+（06:10）Eve框架的工作原理（目录、技能、频道、连接器）
+
+（09:16）我用来构建整个机器人的Codex提示
+
+（11:36）代理实际执行的操作：读取、打分、批准或递进
+
+（13:07）设置你的Eve代理
+
+（15:47）六个组件风险评分模型
+
+（17:23）Merge Mommy实战：三个实时的PR示例
+
+（21:10）总结及如何构建你自己的版本
+
+提及工具：
+
+• Vercel Eve：
+https://vercel.com/eve
+• Vercel AI SDK：
+https://sdk.vercel.ai/
+• Vercel Chat SDK：
+https://chat-sdk.dev/
+• Codex (OpenAI)：
+https://openai.com/codex
+
+其他参考链接：
+
+• AI正在批准我们的代码库：我们如何使其更安全的：
+https://www.intercom.com/blog/ai-is-approving-our-pull-requests-heres-how-we-made-it-safe/
+
+• 审查现在是瓶颈：如何让AI安全地批准拉取请求：
+https://rewind.com/blog/ai-approve-pull-requests-safely/
+
+查找克莱尔·沃的信息：
+
+ChatPRD：
+https://www.chatprd.ai/
+网站：
+https://clairevo.com/
+LinkedIn：
+https://www.linkedin.com/in/clairevo/
+X：
+https://x.com/clairevo
+生产及营销由
+https://penname.co/
+如有任何关于赞助播客的咨询，请发送邮件至 jordan@penname.co.

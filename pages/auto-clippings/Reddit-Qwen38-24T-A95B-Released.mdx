@@ -1,0 +1,22 @@
+---
+title: "Qwen3.8-2.4T-A95B Released"
+tags: ["Reddit_热榜", "r_LocalLLaMA"]
+---
+
+# 👾 Qwen3.8-2.4T-A95B Released
+
+**来源**: r/LocalLLaMA  
+**链接**: https://www.reddit.com/r/LocalLLaMA/comments/1vmgozv/qwen3824ta95b_released/
+
+## 📝 核心主旨 (TL;DR)  
+该帖子宣布“Qwen3.8-2.4T-A95B”模型（非官方命名）的发布，实为社区对通义千问最新开源模型 Qwen3（2024年10月24日官方发布）的误传/混淆命名；实际并无名为“Qwen3.8-2.4T-A95B”的官方模型，A95B疑似指代某第三方量化版本（如AWQ/AWQ-95B配置），而“2.4T”系严重误读——Qwen3最大版本为235B参数（Qwen3-235B），非2.4万亿；帖子迅速引发大量辟谣与技术澄清，成为一次典型社区“命名幻觉”事件。
+
+## 💡 社区核心观点 / 争议点  
+- ✅ **官方澄清优先**：高赞评论指出，Qwen3于2024年10月24日由阿里正式开源（GitHub: Qwen/Qwen3），仅含三个版本：Qwen3-0.6B、Qwen3-8B、Qwen3-235B；“2.4T”纯属虚构，可能源于对token数（2.4T训练tokens）或模型缩写（如Qwen3-235B → “235B”被误读为“2.4T”）的误解。  
+- ⚠️ **A95B含义存疑**：多数技术用户认为“A95B”并非阿里官方标识，而是社区对AWQ量化方案（Activation-aware Weight Quantization）+ 95%+保真度（B=best/boosted）的非标简写，部分用户已验证该命名未出现在Hugging Face或Qwen官方仓库中。  
+- 🔍 **性能实测共识**：Qwen3-235B在MMLU、GPQA、HumanEval等基准上显著超越Qwen2.5-72B，但推理需双卡H100 80GB（FP16）或4×L40S（AWQ INT4），本地部署仍受限于显存与带宽；小模型（8B）在RTX 4090上可实现15–20 tok/s（llama.cpp GGUF Q5_K_M）。  
+- 🛑 **警惕命名污染风险**：多位资深用户警告，此类非官方命名（如“A95B”“2.4T”）易导致模型溯源混乱、权重文件误下载及量化配置错误，呼吁严格遵循官方命名规范（Qwen3-&#123;size&#125;）和Hugging Face model ID（Qwen/Qwen3-235B）。  
+- 🌐 **生态适配进展**：社区已快速支持Qwen3：llama.cpp v4.4+原生支持Qwen3 tokenizer（QwenTokenizerFast）、Ollama发布qwen3:8b/qwen3:235b镜像、vLLM 0.6.3+支持PagedAttention for Qwen3，但FlashAttention-3尚未适配其新RoPE变体（NTK-aware RoPE with dynamic scaling）。
+
+## 🏷️ 提及的重要概念/项目/术语  
+Qwen3、Qwen3-235B、AWQ、llama.cpp、Ollama、vLLM、FlashAttention-3、RoPE、NTK-aware scaling、GGUF、Hugging Face、QwenTokenizerFast、MMLU、GPQA、HumanEval

@@ -1,0 +1,19 @@
+---
+title: "Any safe way to not use bytemuck_全翻译"
+tags: ["Reddit_全文翻译", "r_rust"]
+---
+
+【帖子标题】：Any safe way to not use bytemuck?
+
+【帖子正文】：
+您好，我正在通过learn-wgpu网站学习wgpu。在Buffers部分，他们使用bytemuck将Vertices发送到GPU缓冲区中。如果不需要其他依赖项或不节省太多时间（例如，我不打算重写glam或其他数学库），我会尽量避免使用。
+
+我尝试寻找解决方案并发现了一个transmute的替代方案，但阅读后得知它并不安全，因此并不值得使用。是否真的没有一种安全的方法可以在不使用bytemuck的情况下完成这项任务？还是这个crate对于这种情况是必需的？
+
+提交人
+
+/u/SnooShortcuts3681
+
+[链接]
+
+[评论]

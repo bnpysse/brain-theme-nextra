@@ -1,0 +1,40 @@
+---
+title: "Is SMIC N+3’s Metal Pitch Smaller than Intel 18A’s"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 Is SMIC N+3’s Metal Pitch Smaller than Intel 18A’s?
+
+**来源**: SemiAnalysis
+**链接**: https://newsletter.semianalysis.com/p/steel-smic-n3-teardown
+
+## 📝 核心主旨 (TL;DR)
+中芯国际（SMIC）的 N+3 工艺通过激进的 DUV 多重曝光和设计技术协同优化（DTCO），在物理指标（如 32.5nm 的 M0 金属间距和逻辑密度）上确实追平甚至局部超越了台积电 N6 和 Intel 18A，但这是以极高的工艺复杂度、成本和良率风险为代价的。受限于缺乏 EUV 光刻机，华为麒麟 9030 芯片在绝对性能和能效上仍大幅落后于国际顶尖旗舰，但通过架构微调、核心面积压缩以及供应链的多元化（如引入长鑫存储内存），在出口管制的极限施压下走出了一条依赖底层工艺死磕与系统级封装优化的独特突围路径。
+
+## 💡 关键知识点 / 核心观点
+
+1. **SMIC N+3 工艺本质：用“复杂度”换取“物理密度”**
+   SMIC N+3 的最小金属间距（M0 pitch）为 32.5nm，确实小于 Intel 18A（Panther Lake）的 36nm，晶体管密度达到 113.4 MTr/mm²（略高于 TSMC N6 的 107.7 MTr/mm²）。但这完全依赖 DUV 多重曝光（如 M0 层采用 SAQP 自对准四重图案化）和激进的 DTCO 技术（如 Fin 减缩、COAG、SDB）。这种“硬缩”导致掩膜数量激增、工艺控制难度和成本大幅上升，且由于缺乏 EUV，其电压-频率曲线和能效表现远不及台积电和 Intel 的先进节点。
+
+2. **麒麟 9030 的 PPA 表现：面积微缩显著，但绝对性能与能效仍有代差**
+   麒麟 9030 是演进式升级。得益于 N+3 工艺和 DTCO，其 CPU 大核（TaiShan Prime）在 L2 缓存翻倍的情况下面积缩小了 7.6%，中核增加至 4 个；GPU（Maleoon 935）计算单元面积缩小 28% 且数量增加，图形性能提升约 70%，首次支持硬件光追。然而，其 CPU 大核单核性能仅相当于 2021 年的 Cortex-X2 级别，与苹果 M5 或高通最新旗舰相比，单核性能和能效存在数年的代差。
+
+3. **底层工艺细节深度对比（SMIC N+3 vs TSMC N6）**
+   * **Fin 结构**：N+3 的 Fin 更高、更窄，高宽比达 9.5:1（N6 为 7.8:1），顶部圆角更小，静电控制更好但制造更难。
+   * **标准单元**：N+3 单元高度降至 228nm（比 N6 小 5%），且仅采用 2 NMOS/2 PMOS 的单一库策略（N6 有 HD 和 HP 混合），反映了国内 EDA 生态和客户群的限制。
+   * **金属布线**：N+3 在 M1 层采用了非主流的 3:2 栅极比例（N6 为 1:1），以增加局部布线灵活性，但这进一步增加了光刻和布局设计的复杂性。
+
+4. **供应链多元化与封装策略：务实的成本控制**
+   内存方面，除了三星 1a 节点的 LPDDR5X，16GB 版本混用了长鑫存储（CXMT）相当于 1z 节点的 DRAM，证明国产内存已切入高端手机供应链。封装上，麒麟 9030 采用全有机基板的 iPoP（集成封装级封装）技术，通过 RDL  interposer 连接，避免了昂贵的硅中介层。这在控制成本的同时，满足了该芯片当前的带宽需求，且降低了热膨胀系数（CTE）不匹配导致的翘曲风险。
+
+5. **出口管制下的中国半导体突围路径**
+   出口管制并未完全阻断华为和 SMIC 推进先进硅片的步伐，但迫使他们放弃了常规路径。未来的 roadmap 将继续依赖更紧的设计规则、背面供电（BSPDN）以及系统技术协同优化（STCO）。华为提出的“LogicFolding（逻辑折叠）”路线图（堆叠有源逻辑以恢复密度并缩短信号路径）表明，中国半导体正试图通过 3D 先进封装和系统级架构创新，来弥补前端制程物理微缩的不足。
+
+## 🏷️ 提及的重要概念/公司/模型
+
+* **公司/机构**: SMIC (中芯国际), Huawei/HiSilicon (华为/海思), Intel, TSMC (台积电), MediaTek (联发科), Apple, Qualcomm, Samsung, CXMT (长鑫存储), SemiAnalysis, TechInsights.
+* **芯片/产品**: Kirin 9030 (麒麟 9030), Kirin 9020/9010/9000s, Helio G99, Panther Lake (Intel 18A), Mate 80 Pro.
+* **工艺/技术节点**: SMIC N+3, N+2, N+1; TSMC N6, N7+, N5, N4, N3P, N3E; Intel 18A, 22nm, 14nm, 10nm; Samsung 1a, 1z.
+* **半导体制造/光刻概念**: DUV multi-patterning (DUV多重曝光), EUV (极紫外光刻), SAQP (自对准四重图案化), SADP (自对准双重图案化), FinFET, Fin pitch/depopulation, COAG (有源栅极上接触), SDB (单扩散断裂), CGP (接触栅极间距), M0/M1/M2 pitch (金属间距), Bohr metric (玻尔度量).
+* **封装/系统架构概念**: DTCO (设计技术协同优化), STCO (系统技术协同优化), iPoP (集成封装级封装), RDL (重布线层), LogicFolding (逻辑折叠), PowerVia (背面供电).
+* **自研架构/模块**: TaiShan (泰山 CPU 核心), Maleoon (马良 GPU), Ascend NPU, LPDDR5X.

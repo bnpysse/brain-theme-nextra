@@ -1,0 +1,24 @@
+---
+title: "Understanding and Implementing Qwen3 From Scratch"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 Understanding and Implementing Qwen3 From Scratch
+
+**来源**: Ahead of AI
+**链接**: https://magazine.sebastianraschka.com/p/qwen3-from-scratch
+
+## 📝 核心主旨 (TL;DR)
+本文作为 LLM 架构深度解析系列的实操篇，聚焦于当前开源生态中最具代表性的 Qwen3 模型家族。作者摒弃纯理论推演，主张通过纯 PyTorch 从零手写代码的方式，拆解并还原 Qwen3 稠密（Dense）与混合专家（MoE）架构的底层实现。旨在为开发者提供可直接复现、调试与二次开发的模块化代码基石，彻底打通“架构理论 → 工程实践”的最后一步。
+
+## 💡 关键知识点 / 核心观点
+1. **Qwen3 跻身一线开源模型的三大核心竞争力**：① **License 友好**：采用 Apache 2.0 协议，无任何附加商业条款限制，对企业级私有化部署极为友好；② **性能越级**：开源权重版本性能强劲，其 235B-Instruct 变体在 LMArena 榜单上并列全球第 8，直接持平甚至反超闭源旗舰 Claude Opus 4；③ **规模弹性**：提供从 0.6B 密集模型到 480B 稀疏 MoE 模型的完整参数谱系，可按不同 Compute Budget 灵活选型，兼顾轻量边缘推理与大厂集群训练。
+2. **“代码即文档”的底层解构方法论**：面对高度抽象的 Transformer 衍生架构，本文采用“Verbose Code（显式冗长实现）”策略。通过逐行编写纯 PyTorch 代码而非依赖高级封装库，将注意力机制、前馈网络、MoE 路由算法等黑盒组件透明化。这种写法虽显繁琐，但能确保读者精确控制每个张量运算的形状（Shape）、梯度传播路径与显存占用逻辑，极大提升后续实验的可定制性与排查效率。
+3. **MoE 架构的工程价值与万亿参数演进**：文章明确指出，MoE 是当前突破超大模型性价比瓶颈的核心路径。通过亲手实现可清晰验证：MoE 利用条件路由（Conditional Routing）动态激活少量专家层，在参数总量呈指数级增长的同时，有效将单次 Token 生成的计算复杂度维持在稠密模型的同等水位。结合 Qwen3 即将发布的 1T 参数 Max 版本（虽暂闭源但已横扫主流评测），揭示了 LLM 竞争正从“暴力堆参”转向“稀疏化架构 + 数据质量”的双重优化。
+
+## 🏷️ 提及的重要概念/公司/模型
+- **模型/架构**: Qwen3 家族 (含 0.6B~480B 多规格及 1T Max 版)、Qwen3 Dense、Mixture-of-Experts (MoE)、GPT-style Decoder Architectures
+- **对标/竞品模型**: DeepSeek V3.1、Kimi K2、Claude Opus 4
+- **框架/工具链**: Pure PyTorch、PyTorch Autograd/Tensor Ops、Custom Model Implementation
+- **行业术语/指标**: Apache License v2.0 (Open-weight)、LMArena Leaderboard、Compute Budgets、Commercial-friendly Licensing、Expert Routing Mechanism、Parameter-to-FLOPs Efficiency
+- **内容源/社区**: Ahead of AI (Sebastian Raschka)、LMSYS Chatbot Arena

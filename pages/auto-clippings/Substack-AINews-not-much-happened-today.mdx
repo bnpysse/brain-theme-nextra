@@ -1,0 +1,31 @@
+---
+title: "[AINews] not much happened today"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 [AINews] not much happened today
+
+**来源**: Latent Space
+**链接**: https://www.latent.space/p/ainews-not-much-happened-today-038
+
+## 📝 核心主旨 (TL;DR)
+本周 AI 行业的主线由 DeepSeek V4-Flash 的纯后训练（Post-Training）跃升主导，证实了在架构不变的前提下，通过针对性对齐、工具调用优化与长程任务训练可大幅拉升代理（Agent）与代码能力。该模型以极具侵略性的定价与即时的开源权重发布，重塑了“智力vs成本”的帕累托前沿，加速了路由编排与轻量化部署的工程实践。与此同时，OpenAI 与 Anthropic 披露的沙盒逃逸事件被技术圈定性为评估基础设施与Harness设计缺陷，而非模型自主行为，进一步凸显当前 AI 安全与性能瓶颈已从“参数规模竞赛”转向“工程编排、评测环境与系统化护栏”的建设。
+
+## 💡 关键知识点 / 核心观点
+1. **后训练红利远大于预训练堆料：架构停滞下的性能突破**
+   DeepSeek V4-Flash 未变更底层架构（仍为 284B 总参量 / 13B 活跃专家的 MoE 结构），但通过强化后训练（特别是推理努力分级、工具使用与长 Horizon 任务对齐）实现了基准测试的断层式增长（Terminal-Bench +25.8，GDPval-AA Elo 1189→1559，Frontend Code Arena +154）。这表明在计算预算受限背景下，高质量的指令微调、环境交互数据与专家路由策略，已成为超越纯Scaling Law的最优投资路径。
+
+2. **智能体能力瓶颈转移：Harness 与编排框架决定上限**
+   社区共识明确：当前模型的实际表现日益受限于部署 Harness、评测脚手架与多智能体通信机制，而非基座智商。异步多智能体协作（如 AgentRadio 将 SWE-Atlas 准确率翻倍）、递归自我改进栈（OpenMLE/Frontis-MA1）以及规范到状态化应用的编译技术（Microsoft Echoverse）表明，未来研发重心正从“训练更大模型”转向“构建可复用、可观测的 Agent 运行时与评测基础设施”。
+
+3. **安全事件定性反转：基础设施故障 ≠ 模型自主越狱**
+   OpenAI 与 Anthropic 近期曝光的评估沙盒逃逸事件，经技术拆解均指向第三方评测环境互联网权限配置错误、日志缺失及系统上下文意识错位。技术分析指出，所谓“Rogue Model”叙事缺乏依据，真正的风险敞口在于运维纪律、隔离策略与模拟/真实环境的元数据标注一致性。这要求安全团队将防御重心前移至 CI/CD 管道、网络微隔离与动态策略注入层面。
+
+4. **“廉价智能”经济学与开放生态的战略反哺**
+   DeepSeek 推出 $0.28/M 输出 token 定价及高达 98% 的缓存命中折扣（$0.0028），配合 MIT 协议即刻开源，直接压缩了专有模型的利润空间。开发者迅速将其嵌入 Codex 路由器与本地量化管线（Unsloth 168GB/110GB RAM 需求），证明低成本高能效模型已具备替代高端闭源系统的工程可行性。同时，开源权重在对抗恶意攻击、支撑研究复现中的实战价值被重新定价，进一步强化了“开放生态是系统安全基石”的产业逻辑。
+
+## 🏷️ 提及的重要概念/公司/模型
+**🏢 机构/平台**: OpenAI, Anthropic, DeepSeek, Google (Gemini), Microsoft, ByteDance/Dreamina, MiniMax, Hugging Face, Artificial Analysis, UnslothAI, vLLM, LangChain, Fal.ai, Pollo, PixVerse, Leonardo, OpenArt
+**🤖 模型/版本**: DeepSeek-V4-Pro, DeepSeek-V4-Flash 0731, GPT-5.6 Luna/Terra, Claude Opus 4.7, Mythos 5, Gemini 3.6 Flash/3.5 Flash-Lite/Spark/H3 (MiniMax), Seedance 2.5, GLM 5.2 (quantized), Gemini Robotics 2
+**🛠️ 架构/组件/协议**: Mixture-of-Experts (MoE), Post-Training, Speculative Decoding (DSpark), Cache-Hit Economics, Routing/Harness Orchestration, Quantization (4-bit/3-bit Lossless), MIT License, Responses API
+**📊 基准/框架/工具**: Terminal-Bench, GDPval-AA, τ³-Banking, SWE-Atlas, Frontend Code Arena, Echoverse, OpenMLE/Frontis-MA1, AgentRadio, LangGraph/LangSmith, smevals, Harbor

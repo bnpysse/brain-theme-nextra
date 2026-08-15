@@ -1,0 +1,58 @@
+---
+title: "_goauthentik_authentik_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&lt;p align="center"&gt;
+    ![authentik logo](https://goauthentik.io/img/icon_top_brand_colour.svg)
+&lt;/p&gt;
+
+---
+
+[![加入Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/authentik/ci-main.yml?branch=main&label=核心构建&style=for-the-badge)](https://github.com/goauthentik/authentik/actions/workflows/ci-main.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/authentik/ci-outpost.yml?branch=main&label=out站构建&style=for-the-badge)](https://github.com/goauthentik/authentik/actions/workflows/ci-outpost.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/authentik/ci-web.yml?branch=main&label=Web构建&style=for-the-badge)](https://github.com/goauthentik/authentik/actions/workflows/ci-web.yml)
+[![代码覆盖率](https://img.shields.io/codecov/c/gh/goauthentik/authentik?style=for-the-badge)](https://codecov.io/gh/goauthentik/authentik)
+![最新版本](https://img.shields.io/docker/v/authentik/server?sort=semver&style=for-the-badge)
+[![](https://img.shields.io/badge/帮助翻译-transifex-blue?style=for-the-badge)](https://explore.transifex.com/authentik/authentik/)
+
+## 什么是authentik？
+
+authentik 是一个开源的身份提供商(IdP)，适用于现代单点登录(SSO)。它支持 SAML、OAuth2/OIDC、LDAP、RADIUS 等协议，旨在从小规模实验室到大规模生产集群进行自我托管。
+
+我们的 [企业版](https://goauthentik.io/pricing) 可供组织安全地替换现有的 IdP（如 Okta、Auth0、Entra ID 和 Ping Identity），以实现强大且可扩展的身份管理。
+
+## 安装
+
+- Docker Compose：推荐用于小型/测试环境。请参阅 [文档](https://docs.goauthentik.io/docs/install-config/install/docker-compose/)。
+- Kubernetes (Helm Chart)：推荐用于大规模部署。请参阅 [文档](https://docs.goauthentik.io/docs/install-config/install/kubernetes/) 和 Helm chart 仓库[GitHub] (https://github.com/goauthentik/helm)。
+- AWS CloudFormation：使用我们的官方模板在 AWS 上部署。请参阅 [文档](https://docs.goauthentik.io/docs/install-config/install/aws/)。
+- DigitalOcean Marketplace：通过官方市场应用实现一键部署。请参阅[应用程序列表](https://marketplace.digitalocean.com/apps/authentik)。
+
+## 屏幕截图
+
+| 光亮模式                                                       | 暗色模式                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------- |
+| ![](https://docs.goauthentik.io/img/screen_apps_light.jpg)  | ![](https://docs.goauthentik.io/img/screen_apps_dark.jpg)    |
+| ![](https://docs.goauthentik.io/img/screen_admin_light.jpg)  | ![](https://docs.goauthentik.io/img/screen_admin_dark.jpg)   |
+
+## 开发和贡献
+
+请参阅 [开发文档](https://docs.goauthentik.io/docs/developer-docs/) 以了解如何设置本地构建环境、测试您的贡献以及我们的贡献流程。
+
+当您为代码更改伴随时或作为独立贡献提交文档时，请务必遵循我们文档的[样式指南](website/docs/developer-docs/docs/style-guide.mdx)。
+
+## 安全
+
+请参阅 [SECURITY.md](SECURITY.md)。
+
+## 采用情况
+
+使用 authentik？ 我们很乐意听到您的故事并展示您的标志。请发送电子邮件至 [hello@goauthentik.io](mailto:hello@goauthentik.io)，或在 GitHub 上创建 Issue/PR！
+
+## 许可证
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey?style=for-the-badge)](website/LICENSE)
+[![authentik EE License](https://img.shields.io/badge/License-EE-orange?style=for-the-badge)](authentik/enterprise/LICENSE)

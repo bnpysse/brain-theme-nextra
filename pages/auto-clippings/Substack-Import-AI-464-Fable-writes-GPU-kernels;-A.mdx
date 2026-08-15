@@ -1,0 +1,38 @@
+---
+title: "Import AI 464 Fable writes GPU kernels; AI automation; and analog computation"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 Import AI 464: Fable writes GPU kernels; AI automation; and analog computation
+
+**来源**: Import AI
+**链接**: https://importai.substack.com/p/import-ai-464-fables-writes-gpu-kernels
+
+## 📝 核心主旨 (TL;DR)
+本文探讨了AI在底层系统优化、复杂经济任务自动化及长视野计算机操作方面的最新突破与基准测试，同时展示了中国电商巨头在超大规模库存管理中的AI落地实践；核心结论是：AI在核心研发（如GPU内核编写）和广泛经济领域（如在线高价值任务、复杂工作流）的能力正以超越人类适应速度的态势狂飙，这不仅将重塑就业市场与企业组织形态，也引发了关于通用计算安全与专用模拟计算的深刻反思。
+
+## 💡 关键知识点 / 核心观点
+
+1. **AI自主编写GPU内核取得突破，加速递归自我改进（RSI）信号**
+   Fable在KernelBench-Mega基准中通过编写CUDA代码实现了18.71倍的极致加速（超越使用Triton的Claude Opus 4.8和GPT 5.5等竞品）。其技术亮点在于实现了“单token单次cooperative kernel launch”（其他方案需4-14次）。这表明AI在底层算子开发上的能力正快速逼近甚至超越人类，而自主优化内核是AI研发的基础输入任务，这为AI实现“构建自身”和递归自我改进（RSI）提供了实质性进展。
+
+2. **AI自动化在线高价值任务能力呈指数级增长，冲击传统就业经济**
+   Remote Labor Index (RLI) 数据显示，AI端到端完成3D/CAD、建筑设计、视频动画等复杂自由职业任务的成功率，在8个月内从2.5%飙升至16.1%（Fable 5表现最佳）。作者指出，AI在经济相关能力上的扩张速度已远超人类扩大“比较优势”的速度。未来极有可能催生“极少人/无人”的AI重度组织，直接接管经济份额，对现有就业市场造成颠覆性冲击。
+
+3. **OSWORLD 2.0 确立长视野计算机使用基准，揭示当前Agent瓶颈与演进方向**
+   新发布的OSWORLD 2.0将任务复杂度大幅提升，中位数任务人类需耗时1.6小时（1.0版本为2分钟），涵盖Slack、GitLab、AWS等数十种专业软件及复杂业务流。当前最强模型（Claude Opus 4.8）准确率仅20.6%，在长上下文状态恢复和冲突解决上表现挣扎。这标志着AI Agent正从“分钟级简单工具调用”向“小时级复杂工作流”演进，是AI全面接管白领工作流的关键里程碑。
+
+4. **京东发布超大规模AI库存管理系统，彰显国产算力与自进化架构**
+   京东Oxygen AIIC系统管理数百亿SKU，采用“语义搜索+判别”的本体工程（减少幻觉）、自进化LLM/VLM（增量学习与轻量级专家模块池）及统一数据通道架构。该系统全面部署于华为昇腾NPU，不仅展示了AI如何赋能国家级电商后台实现自我更新与超大规模运营，也折射出中国在底层算力自主化（技术主权）方面的战略推进。
+
+## 🏷️ 提及的重要概念/公司/模型
+
+* **AI模型**: Fable (Fable 5), Claude Opus 4.8, GLM-5.2, GPT 5.5, MiniMax M3
+* **公司/机构**: Fable, CAIS (Center for AI Safety), Scale Labs, 京东 (JD), 华为 (Huawei), 亚马逊 (Amazon)
+* **硬件/算力**: RTX PRO 6000 Blackwell (NVIDIA), 华为昇腾 NPU (Huawei Ascend NPUs)
+* **基准测试/工具**: KernelBench-Mega, Remote Labor Index (RLI), OSWORLD 2.0 / 1.0
+* **技术/架构概念**: 
+  * **底层开发**: Megakernel, CUDA, Triton, PyTorch, torch.profiler, Cooperative kernel launch
+  * **AI演进**: 递归自我改进 (RSI), 计算机使用 (Computer Use), 长视野任务 (Long-horizon tasks)
+  * **系统架构**: 本体工程 (Ontology engineering), 语义搜索与判别, 增量学习 (Incremental learning), 统一物品通道 (Unified item tunnel)
+  * **计算范式**: 模拟计算 (Analog computation), 通用计算 (General computation)

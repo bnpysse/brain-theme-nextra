@@ -1,0 +1,49 @@
+---
+title: "Kimi K3 (Unsloth) IQ2-XXS from 711GB down to 478GB!!! Only M_全翻译"
+tags: ["Reddit_全文翻译", "r_LocalLLaMA"]
+---
+
+【帖子标题】：Kimi K3 (Unsloth) IQ2-XXS 从711GB 下降到478GB!!! 只移除了多语言，以减小模型大小
+
+【帖子正文】：
+首先，我要感谢发帖者 "hellohazine"。他基本上只是去掉了模型中的多语言脂肪，而保持了英语部分完整。这是同样的模型，并且其余的部分仍然保持完整，所有高智能功能都保留了下来。
+
+我认为这是一个极好的做法，我们应该在新的模型上采取类似的措施来帮助减小大小。下周的3.8 Qwen MAX 会有人发布吗？
+
+想象一下你可以在 DeepSeek V4 Flash 和其他版本中裁剪出多少内容。
+
+Kimi K3 的链接：
+
+[https://huggingface.co/hellohazime/Kimi-K3-REAP-512GB-GGUF](https://huggingface.co/hellohazime/Kimi-K3-REAP-512GB-GGUF)
+
+编辑：以下是模型编辑器当前的说明。
+
+“关于测试，我正在使用 SWE-Lancer 的‘任务选择’和‘按任务’选项进行尝试。
+
+几乎可以确定 Kimi-K3-REAP-512GB-GGUF 2-bit 模型比 Kimi K2.7 (2-bit) 更准确。
+
+由于这不会装入我的 Mac 的内存，所以我使用了一个补丁让模型从固态硬盘上实时加载“专家”模式（llama.cpp 中的 MoE 流动），并用 SWE-Lancer 解决了三个任务（14294 / 15815_1 / 15925）。结果完全失败。
+
+然而，来自同一权重的 reap576_iq2xxs (478GB)——我从发帖者 Hannibalj2ca 的建议中将其分离出来——能够解决同样的三个任务。
+
+最初，我认为我在测试过程中使用的 Kimi CLI 可能超时了。由于解码原因，流式传输很慢，平均每个任务需要 2.5 小时。然而，日志里并没有超时的记录。
+
+因为这些都是一次尝试的结果，很可能我的环境中有某种特定因素导致了问题。不过，仍然存在一个微小的可能性——移除“专家”层可能比标准的 2-bit 版本提高了编码性能。“微莱存”（micro-possibility）是我们日语中的一种说法，意指这种可能性存在于微观层面。
+
+我的下一步任务是租用带有全显卡内存的设备，在相同条件下比较移除和保留“专家”层的结果。然而，即使通过 RunPod 租赁它，所有 SWE-Lancer 任务的运行成本估计为 $1,800 😭
+
+如果你有任何机器可以运行完整的 2-bit 版本，请务必尝试并告诉我结果。
+
+SWE-Lancer 任务选择和按任务结果：
+
+k27_q2_2bit vs reap640_iq1s vs reap576_iq2xxs
+
+[https://github.com/01554/kimi-k3-gguf-prune/blob/main/evals/results.csv](https://github.com/01554/kimi-k3-gguf-prune/blob/main/evals/results.csv)
+
+提交者：
+
+/u/Hannibalj2ca
+
+[链接]
+
+[评论]

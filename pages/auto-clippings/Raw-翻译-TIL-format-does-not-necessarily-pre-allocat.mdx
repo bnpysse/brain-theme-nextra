@@ -1,0 +1,25 @@
+---
+title: "TIL format!() does not necessarily pre-allocate the optimal _全翻译"
+tags: ["Reddit_全文翻译", "r_rust"]
+---
+
+【帖子标题】：TIL: format!() 不一定会为结果字符串预先分配最佳大小
+
+【帖子正文】：
+我并不知道是否已经晚了一些时间，但在进行一些性能优化工作时，
+我发现
+format!()
+是导致目标程序频繁重新分配的主要原因之一。
+经过一番调查后，我惊讶地了解到输出字符串的容量只是基于一个估计值，
+这个估计值既不是上限也不是下限：
+https://github.com/rust-lang/rust/blob/1ed2df61a19042f231709eb05d032ae9e2cb2084/library/core/src/fmt/mod.rs#L749-L808
+首次引入此估计值的更改是在2017年，其中明确指出该估计值是基于字符串中的字面量部分：
+https://github.com/rust-lang/rust/pull/39356
+
+我还提供了一个godbolt链接及示例，当时我说明了这一点... 但未明显指出是因为godbolt没有显示库代码。
+显然我一直有一个错误的假设，即某些类型的运行时长度可以用于适当分配输出字符串。
+
+提交人：
+/u/anxxa
+[链接]
+[评论]

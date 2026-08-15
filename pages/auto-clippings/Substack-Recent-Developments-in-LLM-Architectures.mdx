@@ -1,0 +1,30 @@
+---
+title: "Recent Developments in LLM Architectures KV Sharing, mHC, and Compressed Attention"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 Recent Developments in LLM Architectures: KV Sharing, mHC, and Compressed Attention
+
+**来源**: Ahead of AI
+**链接**: https://magazine.sebastianraschka.com/p/recent-developments-in-llm-architectures
+
+## 📝 核心主旨 (TL;DR)
+近期开源LLM架构设计的核心演进方向已全面转向**“长上下文效率优化”**。为适配推理模型与Agent对超长上下文的强依赖，架构创新正密集聚焦于KV缓存压缩、注意力机制轻量化及残差流扩展。本文深度拆解了Gemmmma 4的跨层KV共享与逐层嵌入、Laguna的逐层注意力预算分配、ZAYA1的压缩卷积注意力，以及DeepSeek V4的流形约束残差流(mHC)与序列级压缩注意力(CSA/HCA)，揭示了行业如何通过在Transformer基础模块上进行“手术刀式”微调，在维持甚至提升模型容量的同时，大幅压低显存占用、内存带宽压力与计算FLOPs。
+
+## 💡 关键知识点 / 核心观点
+
+- **跨层KV共享与“有效参数”设计 (Gemma 4)**：突破传统每层独立计算K/V的范式，采用跨层注意力机制，使后续层直接复用同类型前置层（如滑动窗口层复用前一个滑动窗口层）的KV张量。该策略可削减约50%的KV缓存体积（E2B在128K上下文中节省2.7GB bf16显存）。辅以**逐层嵌入(PLP)**技术，将额外表征容量存入低开销的Embedding查找表，经隐藏状态门控后作为附加残差注入。此设计实现了用小计算量撬动大参数量（“Effective Params”），极大优化了移动端/嵌入式设备的内存利用率。
+  
+- **注意力资源的动态配额管理 (Laguna XS.2)**：摒弃各层均匀分配Query头的惯例，实施**逐层注意力预算(Layer-wise Attention Budgeting)**。在固定KV头总数的前提下，根据计算成本差异化分配：高成本的Global Attention层分配较少Query头，低成本的Sliding Window层分配较多Query头。该设计遵循“好钢用在刀刃上”原则，将有限的注意力算力精准投放到全局信息整合的关键层，避免了全量稠密计算的算力浪费。
+
+- **压缩潜空间内的直接注意力与局部性增强 (ZAYA1-8B)**：提出**压缩卷积注意力(CCA)**，核心突破在于直接在Q/K/V压缩后的潜空间中执行Attention计算，区别于MLA仅压缩KV用于检索的模式。为避免高压缩率导致的信息衰减，CCA在压缩后的Q和K上引入轻量级序列卷积与通道卷积进行混合，低成本恢复局部上下文感受野。实验表明在同等压缩设置下CCA表现优于MLA，有效兼顾了Prefill阶段的FLOPs下降与上下文建模质量。
+
+- **流形约束残差流与序列维度压缩注意力 (DeepSeek V4)**：
+  - **mHC架构**：将单一的残差流扩展为多条并行子流，并通过线性映射连接。**关键改进**在于将Res Mapping投影至**双随机矩阵**(Doubly Stochastic Matrices)流形上，强制所有元素非负且行列和为1，确保信息在多流道间进行稳定的概率性重分布，彻底规避了多层矩阵堆叠导致的信号放大/抵消问题，在仅增加~6.7%训练时间的代价下显著拓宽了信息传递通路。
+  - **CSA/HCA压缩策略**：从“单Token特征压缩”转向**“序列维度压缩”**。不保留每个历史Token的KV条目，而是将连续Token块聚合成极少量的压缩KV。CSA采用轻度压缩+稀疏Top-K选择保留细节；HCA采用重度压缩(128 tokens→1 entry)+全局稠密计算覆盖宏观语义。两者交替插桩使用，在1M上下文长度下将单次推理FLOPs压降至基线的27%，重新定义了百万级Token经济推理的硬件边界。
+
+## 🏷️ 提及的重要概念/公司/模型
+- **公司与机构**: Google, Poolside, Zyphra, DeepSeek, Apple
+- **AI模型**: Gemma 4 (E2B/E4B), Laguna XS.2, ZAYA1-8B, DeepSeek V4 (Pro)
+- **核心架构与技术**: KV Cache (KV缓存), Cross-Layer Attention (跨层注意力), Grouped Query Attention (GQA/MQA), Per-Layer Embeddings (PLE/逐层嵌入), Sliding-Window Attention (滑动窗口注意力), Layer-wise Attention Budgeting (逐层注意力预算), Compressed Convolutional Attention (CCA/压缩卷积注意力), Multi-head Latent Attention (MLA), Manifold-Constrained Hyper-Connections (mHC/流形约束超连接), Compressed Sparse Attention (CSA), Heavily Compressed Attention (HCA), Residual Stream (残差流), Doubly Stochastic Matrices (双随机矩阵), Gate Control (门控机制)
+- **行业术语**: Long-context Efficiency (长上下文效率), Agent Workflows (智能体工作流), Active Parameters Ratio (激活参数占比), Prefill/Decoding FLOPs (预填充/解码算力消耗), Memory Bandwidth (内存带宽)

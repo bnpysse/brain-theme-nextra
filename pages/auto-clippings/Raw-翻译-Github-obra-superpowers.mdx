@@ -1,0 +1,210 @@
+---
+title: "_obra_superpowers_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+超级能力
+
+超级能力是一个针对您的编码代理的完全软件开发方法论，基于一组可组合的能力和一些初始指令，确保您的代理使用这些能力。
+
+## 快速入门
+
+给您的代理赋予超级能力：[Claude Code](#claude-code)、[Antigravity](#antigravity)、[Codex App](#codex-app)、[Codex CLI](#codex-cli)、[Cursor](#cursor)、[Factory Droid](#factory-droid)、[Gemini CLI](#gemini-cli)、[GitHub Copilot CLI](#github-copilot-cli)、[Kimi Code](#kimi-code)、[OpenCode](#opencode)、[Pi](#pi)。
+
+## 如何工作
+
+它从您启动编码代理的那一刻开始。一旦它看到您在构建某物，它不会直接尝试编写代码。相反，它会退一步并问您真正想要做什么。
+
+一旦从对话中抽取出规格，它会让您分块阅读和消化这些信息。
+
+签署设计后，您的代理将根据一个充满热情但品味不高、没有判断力、缺乏项目上下文且厌恶测试的初级工程师的理解来组装实现计划。它强调真正的红色/绿色 TDD、你不需要的东西（You Aren't Gonna Need It），以及 DRY。
+
+接下来，在您说“开始”后，它会启动一种基于代理驱动的开发过程，让代理们依次完成每个工程任务，并对他们的工作进行检查和审查。继续前进。代理有时会在一次或几次独立的工作时间内独自工作而偏离计划之外。
+
+还有更多内容，但这就是系统的内核。而且由于技能自动触发，您不需要做任何特殊的事情。您的编码代理只是拥有超级能力。
+
+## 商业服务
+
+如果您在企业中使用超级能力，并且可以从商业支持、额外工具或管理支出中获益，请不要犹豫联系 sales@primeradiant.com。
+
+## 安装
+
+安装方式取决于插件。如果使用多个插件，请为每个插件单独进行安装。
+
+### Claude Code
+
+超级能力通过官方的 Claude 插件市场提供 [Claude Code](#claude-code)。
+
+#### 官方市场
+
+- 从 Anthropic 的官方市场中安装插件：
+
+```bash
+/plugin install superpowers@claude-plugins-official
+```
+
+#### 超级市场
+
+超级市场的超级市场提供了超级能力和一些其他相关插件给 Claude Code。
+
+- 注册市场：
+
+```bash
+/plugin marketplace add obra/superpowers-marketplace
+```
+
+- 从这个市场安装插件：
+
+```bash
+/plugin install superpowers@superpowers-marketplace
+```
+
+### Antigravity
+
+通过从此处的仓库安装超级能力作为插件：
+
+```bash
+agy plugin install https://github.com/obra/superpowers
+```
+
+Antigravity 运行插件启动钩子，因此超级能力在第一句话后就处于活动状态。通过相同的命令重新安装会更新。
+
+### Codex App
+
+超级能力可通过 [官方 Codex 插件市场](https://github.com/openai/plugins)获取 [Codex App](#codex-app)。
+
+- 在 Codex 应用程序的侧边栏中，点击插件。
+- 您应该在编码部分看到“超级能力”。
+- 点击“+”，然后按照提示操作。
+
+### Codex CLI
+
+超级能力可通过 [官方 Codex 插件市场](https://github.com/openai/plugins)获取 [Codex CLI](#codex-cli)。
+
+- 打开插件搜索界面：
+
+```bash
+/plugins
+```
+
+- 搜索超级能力：
+
+```bash
+superpowers
+```
+
+- 选择“安装插件”。
+
+### Cursor
+
+在 Cursor Agent 对话中，通过市场安装：
+
+```text
+/add-plugin superpowers
+```
+
+或者在插件市场中搜索“超级能力”安装。
+
+### Factory Droid
+
+- 注册市场：
+
+```bash
+/droid plugin marketplace add https://github.com/obra/superpowers
+```
+
+- 安装插件：
+
+```bash
+/droid plugin install superpowers@superpowers
+```
+
+### Gemini CLI
+
+通过此扩展安装超级能力 [Gemini CLI](#gemini-cli)。
+
+- 更新后：
+
+```bash
+/gemini extensions update superpowers
+```
+
+### GitHub Copilot CLI
+
+注册市场：
+
+```bash
+/copilot plugin marketplace add obra/superpowers-marketplace
+```
+
+- 安装插件：
+
+```bash
+/copilot plugin install superpowers@superpowers-marketplace
+```
+
+### Kimi Code
+
+超级能力可在 Kimi Code 的插件市场上获取。
+
+- 打开 Kimi Code 的插件管理器：
+
+```text
+/plugins
+```
+
+- 转到“市场” > “超级能力”，然后安装它。
+
+- 或者直接从此处的仓库中安装：
+
+```text
+/plugins install https://github.com/obra/superpowers
+```
+
+详细文档：[docs/README.kimi.md](docs/README.kimi.md)
+
+### OpenCode
+
+OpenCode 使用自己的插件安装方式；即使您已经在另一个代理上使用它，也要单独安装超级能力。
+
+- 告诉 OpenCode：
+
+```bash
+Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+```
+
+详细文档：[docs/README.opencode.md](docs/README.opencode.md)
+
+### Pi
+
+通过此存储库安装超级能力为 Pi 包：
+
+```bash
+/pi install git:github.com/obra/superpowers
+```
+
+对于本地开发，请运行 Pi 并使用此处的检查点作为临时包加载：
+
+```bash
+/pi -e /path/to/superpowers
+```
+
+超级能力包会加载超级能力和一个小扩展，在会话启动时和之后完成合并。超级能力拥有原生技能，因此无需兼容性“Skill”工具。子代理和任务列表工具仍然可以是配对 Pi 辅助包。
+
+## 基本工作流
+
+1. **头脑风暴** - 在编写代码之前激活。通过问题逐步细化模糊的想法，探索替代方案，并以部分呈现设计来验证。保存设计文档。
+2. **使用 Git 工作树** - 一旦设计得到批准后激活。在新分支上创建孤立的工作空间，运行项目设置，验证清新的测试基准。
+3. **编写计划** - 在得到批准的设计下激活。将工作分解为微小的任务（每次任务约 2 到 5 分钟）。每个任务都有明确的文件路径、完整的代码和验证步骤。
+4. **基于代理的开发**或 **执行计划** - 在计划中激活。每项分配一个新的代理来处理任务，并进行两阶段审查（规格合规性检查，然后是代码质量），或者以人类检查点的形式按批完成任务。
+5. **测试驱动开发** - 在实现过程中激活。通过 RED-GREEN-REFACTOR 循环来强制：写一个失败的测试，观察它失败，编写最小化的代码，观察它成功，并提交。删除在测试之前写的代码。
+6. **请求代码审查** - 在任务之间激活。根据计划进行审查，并按严重程度报告问题。关键问题必须得到解决。
+7. **社区**
+
+超级能力由 Jesse Vincent（[Blog](https://blog.fsck.com)）和 Prime Radiant 的其他成员构建。
+
+- **Discord**: 加入我们 [Join us](https://discord.gg/35wsABTejz)，获取社区支持、问题解答以及与超级能力一起建设的分享
+- **Issues**: https://github.com/obra/superpowers/issues
+- **发布通知**: [注册](https://primeradiant.com/superpowers/)以接收新版本的通知
+
+MIT 许可证 - 请参阅 LICENSE 文件获取详情。

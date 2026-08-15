@@ -1,0 +1,21 @@
+export default {
+  "Refined-Auto-简报-2026-Python-Type-System-and-Toolin": "Refined_Auto_简报_2026 Python Type System ...",
+  "Refined-Auto-简报-AMDs-upcoming-Zen-6-processors-cou": "Refined_Auto_简报_AMDs upcoming Zen 6 proc...",
+  "Refined-Auto-简报-Another-Giant-Leap-The-Rubin-CPX-S": "Refined_Auto_简报_Another Giant Leap The R...",
+  "Refined-Auto-简报-CURSOR-RULES-or-DIE-How-I-Build-Se": "Refined_Auto_简报_CURSOR RULES or DIE How ...",
+  "Refined-Auto-简报-Github-firecrawl-pdf-inspector": "Refined_Auto_简报_Github__firecrawl_pdf-in...",
+  "Refined-Auto-简报-Github-goauthentik-authentik": "Refined_Auto_简报_Github__goauthentik_auth...",
+  "Refined-Auto-简报-Investing-and-Trading-Scam-Reminde": "Refined_Auto_简报_Investing and Trading Sc...",
+  "Refined-Auto-简报-The-Chinese-labs-everyone-lumps-to": "Refined_Auto_简报_The Chinese labs everyon...",
+  "Refined-Auto-简报-This-CPO-regrets-that-product-mana": "Refined_Auto_简报_This CPO regrets that pr...",
+  "Refined-Auto-简报-🟩-NVIDIAs-whole-speech-stack-just": "Refined_Auto_简报_🟩 NVIDIAs whole speech s...",
+  "Refined-Raw-翻译-How-does-SuperGrok-Heavy-limits-com": "Refined_Raw_翻译_How does SuperGrok Heavy ...",
+  "Refined-Raw-翻译-Introducing-Kitesurf-Cloudflares-ne": "Refined_Raw_翻译_Introducing Kitesurf Clou...",
+  "Refined-Raw-翻译-Is-widely-used": "Refined_Raw_翻译_Is  widely used",
+  "Refined-Raw-翻译-Reminder-Please-do-not-submit-tech": "Refined_Raw_翻译_Reminder Please do not su...",
+  "Refined-Raw-翻译-The-Pulse-a-new-trend-smart-model-r": "Refined_Raw_翻译_The Pulse a new trend, sm...",
+  "Refined-Raw-翻译-They-almost-catched-up-on-Frontier": "Refined_Raw_翻译_They almost catched up on...",
+  "Refined-Raw-翻译-Whats-going-on-with-Dioxus": "Refined_Raw_翻译_Whats going on with Dioxu...",
+  "Refined-Raw-翻译-Zuck-will-share-more-on-open-source": "Refined_Raw_翻译_Zuck will share more on o...",
+  "Refined-Raw-翻译-🎙️-How-I-AI-ChatGPT-Codex-Voice-bro": "Refined_Raw_翻译_🎙️ How I AI ChatGPT Codex..."
+};

@@ -1,0 +1,148 @@
+---
+title: "City2Graph A Python library for Heterogeneous Graph Neural N_全翻译"
+tags: ["Reddit_全文翻译", "r_MachineLearning"]
+---
+
+【帖子标题】：City2Graph: A Python library for Heterogeneous Graph Neural Networks and spatial analysis in urban systems [R]
+
+【帖子标题】：City2Graph：一个用于城市系统中异构图神经网络和空间分析的Python库 [R]
+
+【帖子正文】：
+City2Graph
+
+is a Python library I built that turns geospatial data into analysis-ready graphs (for spatial analysis, network analysis, and Graph Neural Networks as GeoAI), and the paper describing it has just been published, so I wanted to share it here.
+
+【帖子正文】：
+City2Graph
+
+是我构建的一个Python库，它将地理空间数据转换为可用于分析的图（用于空间分析、网络分析和作为GeoAI的图神经网络），描述它的论文刚刚发表，所以我想在这里分享。
+
+Repository:
+
+https://github.com/c2g-dev/city2graph
+
+仓库：
+
+https://github.com/c2g-dev/city2graph
+
+import city2graph as c2g # buildings + street segments -> heterogeneous morphological graph nodes, edges = c2g.morphological_graph(buildings, segments) # straight into PyTorch Geometric data = c2g.gdf_to_pyg(nodes, edges)
+
+（以上代码展示了如何使用该库：将建筑和街道段转换为异构图节点和边，然后直接转换成PyTorch Geometric的Data格式。）
+
+What it covers:
+
+Morphology
+
+: graphs of buildings, streets, and tessellated urban fabric from OpenStreetMap and Overture Maps
+
+Transportation
+
+: GTFS and GBFS feeds loaded through DuckDB, with GTFS aggregated into stop-to-stop transit graphs
+
+Mobility
+
+: OD matrices and flow data (migration, bike-sharing, pedestrian counts) as weighted spatial graphs
+
+Proximity and contiguity
+
+: KNN, Delaunay, Gilbert, Waxman, plus queen/rook contiguity, under Euclidean, Manhattan, or network distances
+
+Heterogeneous graphs and metapaths
+
+: several node and edge types in one graph, with metapath-derived edges composing relations across them
+
+Conversion
+
+: round trips between GeoDataFrames, NetworkX, rustworkx, and PyTorch Geometric
+
+Data
+
+/
+
+HeteroData
+
+, with geometries and attributes kept intact
+
+涵盖内容：
+
+形态学
+
+：来自OpenStreetMap和Overture Maps的建筑、街道和细碎化城市肌理的图
+
+交通
+
+：通过DuckDB加载的GTFS和GBFS数据源，其中GTFS聚合为站点到站点的公交图
+
+移动性
+
+：OD矩阵和流量数据（迁移、共享单车、行人计数）作为加权空间图
+
+邻近性与连通性
+
+：KNN、Delaunay、Gilbert、Waxman，以及皇后/车连通性，基于欧几里得、曼哈顿或网络距离
+
+异构图和元路径
+
+：单个图中的多种节点和边类型，通过元路径派生边来组合它们之间的关系
+
+转换
+
+：在GeoDataFrame、NetworkX、rustworkx和PyTorch Geometric之间的往返转换
+
+数据
+
+/
+
+HeteroData
+
+，保持几何和属性不变
+
+It sets out why urban data is better treated as heterogeneous graphs than as flat feature tables, how the morphological, transport, mobility, and proximity constructions relate to each other, and how the library keeps geometry and graph structure consistent across conversions. If you use the library in research, that is the citation.
+
+它阐述了为什么城市数据更适合作为异构图而不是扁平的特征表，形态学、交通、移动性和邻近性构造如何相互关联，以及该库如何在转换过程中保持几何和图形结构的一致性。如果你在研究中使用这个库，请引用上述论文。
+
+Paper
+
+Sato, Y., Pietrostefani, E., Mahabir, R., & Arribas-Bel, D. (2026).
+
+City2Graph: A Python library for Heterogeneous Graph Neural Networks and spatial analysis in urban systems
+
+.
+
+Computers, Environment and Urban Systems
+
+, 130, 102492.
+
+论文
+
+Sato, Y., Pietrostefani, E., Mahabir, R., & Arribas-Bel, D. (2026).
+
+City2Graph：一个用于城市系统中异构图神经网络和空间分析的Python库
+
+。
+
+《Computers, Environment and Urban Systems》
+
+，130, 102492.
+
+Happy to answer questions about the design, and issues or PRs are very welcome. I am especially keen to hear which data sources people want supported next.
+
+submitted by
+
+/u/Tough_Ad_6598
+
+[link]
+
+[comments]
+
+很高兴回答关于设计的问题，也非常欢迎提出issue或PR。我特别想听听大家希望接下来支持哪些数据源。
+
+由
+
+/u/Tough_Ad_6598
+
+提交
+
+[链接]
+
+[评论]

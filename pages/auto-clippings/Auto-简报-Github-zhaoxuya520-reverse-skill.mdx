@@ -1,0 +1,29 @@
+---
+title: "_zhaoxuya520_reverse-skill_简报"
+tags: ["Github_Trending", "深度解读"]
+---
+
+# reverse-skill
+
+## 📝 一句话简介
+专为 AI Agent（如 Claude Code, Cursor 等）设计的网络安全与逆向工程技能路由框架，通过标准化工作流与工具感知，消除 AI 在面对复杂安全任务时的“盲目猜测”。
+
+## 🛠 技术栈
+* **运行环境/脚本：** Python 3.x, Node.js (22.12+), Java/JDK, PowerShell, Bash, Docker
+* **AI Agent 体系：** Claude Code, Cursor, Codex CLI, MCP (Model Context Protocol)
+* **逆向工程与安全工具链：** 
+  * **静态/动态逆向：** IDA Pro, Ghidra, radare2, JADX, Apktool, Frida
+  * **抓包与流量分析：** BurpSuite, Reqable (via MCP)
+  * **综合安全与编排：** YARA, CTF-Sandbox-Orchestrator, Pentest Swarm AI
+
+## 🌟 核心亮点
+1. **AI 专属的智能路由引擎 (Skill Router)**：构建了分层的路由矩阵（`MASTER-ROUTING`），AI 在面对 APK、二进制文件、JS 混淆或 CTF 题目时，能精准映射到对应的操作手册，避免随意尝试命令。
+2. **跨平台的本地工具自动感知**：内置跨平台脚本，可自动检测 Windows、Linux、macOS 和 Kali 系统中已安装的逆向/渗透工具并生成索引（`tool-index.md`），让 AI 明确知晓“当前可用什么工具”。
+3. **严谨的授权与证据链管理 (Scope Gate & Ops)**：通过 `case-init` 和 `RULES.md` 强制要求在执行具体攻击/分析前进行授权与范围确认（Scope check），并规范了证据链（Evidence→Finding→Path）和日志输出，确保分析过程严谨可追溯。
+4. **全场景安全覆盖 (20+ 细分领域)**：全面覆盖 Android/iOS 逆向、二进制/C# 分析、前端 JS 解密、DSL VM 逆向、OLLVM 去混淆、Pwn 漏洞利用、EDR 绕过、固件/IoT、LLM 安全等。
+
+## 🎯 适用场景
+* **AI 驱动的逆向工程辅助**：指引 AI Agent 自动化或半自动化地完成 Android/iOS App 逆向、EXE/ELF 二进制分析及 Web 前端加密逻辑还原。
+* **CTF 竞赛与沙盒编排**：利用集成的 40+ 子技能和 CTF 沙盒编排工具，辅助完成自动化解题与分析。
+* **渗透测试与红队演练**：规范 AI 在执行渗透扫描、API 安全检测、攻击链编排及固件审计时的行动路径，防止无授权的越权操作。
+* **恶意软件分析与安全研究**：用于 Malware/YARA 提特征、N-day 补丁对比分析 (Patch diff) 以及大模型（LLM）本身的安全评估。

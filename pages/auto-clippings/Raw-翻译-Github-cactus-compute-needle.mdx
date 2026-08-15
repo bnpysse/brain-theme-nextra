@@ -1,0 +1,80 @@
+---
+title: "_cactus-compute_needle_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+![针头](assets/banner.png)
+
+# 针头 2
+
+针头 2 是一个开源的 45M 参数模型，用于工具调用、设备使用和结构化提取。整个模型是一个单个的 14MB 的二进制文件，在大约 28MB 的内存中运行一次完整的会话。它基于我们的简单注意网络发现成果，经过 Cactus Quants 压缩至 CQ2-bit，并被集成到自己的引擎中。在以下基准测试中，针头 2 在与其他小型模型（如 FunctionGemma 270M、LFM2.5 230M 和 Apple FM）竞争时，在大小上为它们的五倍到七十倍小，且采用的是 2 位精度而非其 f16。
+
+本仓库是 Python 包：推理、LoRA 微调以及构建经过微调的模型。请使用它来运行并生成结果。
+
+### 推理
+
+```python
+import needle
+agent = needle.Needle(weights="my_needle.cact", tools=[...])
+agent.run("...")
+```
+
+### 微调
+
+针头 2 使用 LoRA 对冻结的基础模型进行微调，并在导出时合并适配器，因此运行成本低廉且经过微调的模型仍是一个单一的 `.cact` 文件，在相同的引擎中运行。
+
+#### 数据格式
+一个 JSONL 文件，每行一个示例。`reasoning` 可选；离题的例子有 `answers: []`。
+
+```json
+{"query": "将厨房的亮度调至 10", "tools": [{"name": "set_lights", "parameters": {"type": "object", "properties": {"room": {"type": "string"}, "brightness": {"type": "integer"}}, "required": ["room"]}}], "answers": [{"name": "set_lights", "arguments": {"room": "kitchen", "brightness": 10}}], "reasoning": "'厨房' -> 房间；'调至 10' -> 亮度 10"}
+```
+
+#### 1. 生成数据（可选）
+需要 `OPENROUTER_API_KEY`。从工具 schema 文件中进行初始化，或者扩展现有数据集：
+```sh
+export OPENROUTER_API_KEY=sk-or-...
+needle generate-data --tools my_tools.json --num-samples 500 --output data.jsonl
+needle generate-data --augment data.jsonl --num-samples 500      # 扩展现有的 JSONL 文件
+```
+
+设置 `OPENROUTER_URL` 使用与默认 OpenRouter 端点兼容的网关。
+
+#### 2. LoRA 微调
+如果未传递 `--checkpoint`，基础检查点会自动从 Hugging Face 下载。`--generate N` 首先根据你的数据中的工具生成额外的 N 个示例（同样需要 `OPENROUTER_API_KEY`）。
+```sh
+needle finetune data.jsonl --epochs 3
+needle finetune data.jsonl --epochs 3 --generate 300 --lora-rank 16 --lora-alpha 32
+```
+
+关键选项：`--lora-rank`(默认值为 16)、`--lora-alpha`(32)、`--lr`(1e-4)、`--batch-size`(16)、`--max-len`(1024)、`--checkpoint &lt;base.pkl&gt;`、`--out &lt;adapter.pkl&gt;`。适配器被写入 `checkpoints/needle_lora.pkl`。
+
+#### 3. 构建经过微调的 `.cact`
+将适配器合并到基础模型并量化。如果基础模型不存在，它会自动下载。
+```sh
+needle build checkpoints/needle2.pkl --lora checkpoints/needle_lora.pkl --out my_needle.cact
+```
+
+可添加 `--bits 2`(默认值为4)以构建一个更小的模型，或设置 `NEEDLE_HF_REPO=&lt;你&gt;/&lt;模型&gt;` 并传递 `--upload` 来发布 `.cact`。
+
+#### 4. 运行它
+引擎是权重无关的，所以经过微调的 `.cact` 可直接在上面运行 - 不需要重新编译：
+```python
+import needle
+agent = needle.Needle(weights="my_needle.cact", tools=[...])
+agent.run("...")
+```
+
+### 引用
+
+针头 2 是由 Cactus Compute 团队构建的。如果你将其用于你的工作，请引用以下内容：
+
+```bibtex
+@misc{needle2_2026,
+  title        = {针头 2：一个针对小型设备的 45M 参数基础工具调用模型},
+  author       = {恩杜巴库，亨利和莫斯扬，卡伦和摩兹，雅各布和席尔，诺亚和库马尔，萨蒂亚吉特和山都哈，帕克里特和谢梅特，罗马和李，朱斯特·H.},
+  year         = {2026},
+  organization = {Cactus Compute, Inc.},
+  howpublished = {\url{https://cactuscompute.com}}
+}
+```

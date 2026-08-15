@@ -1,0 +1,23 @@
+---
+title: "Categories of Inference-Time Scaling for Improved LLM Reasoning"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 Categories of Inference-Time Scaling for Improved LLM Reasoning
+
+**来源**: Ahead of AI
+**链接**: https://magazine.sebastianraschka.com/p/categories-of-inference-time-scaling
+
+## 📝 核心主旨 (TL;DR)
+本文系统阐述了“推理时扩展（Inference-Time Scaling）”这一免微调的核心范式，指出其通过在不修改模型权重的前提下，于推理阶段动态追加计算资源与时间开销，可有效换取大模型在复杂推理任务上的准确率跃升。该技术已从早期机器学习集成思想的延伸，演变为当前头部厂商部署高性能模型的标准配置，并与模型训练端扩展形成强互补关系，具备极高的工程落地价值与边际收益。
+
+## 💡 关键知识点 / 核心观点
+1. **推理时扩展的工程本质**：推理时扩展（亦称推理算力扩展/测试时扩展）是一类 `training-free` 技术集合。其核心机制是打破单次自回归生成的线性限制，通过生成多路候选路径、交叉验证、迭代修正或带奖励模型的过滤筛选，将额外的计算预算直接转化为输出质量，实现“以算力换精度”的确定性提升。
+2. **模型优化的双轴调控逻辑**：提升LLM性能存在两组相互正交的“调节旋钮”：训练端（更大数据量、更大参数量、更长训练周期）与推理端（更多推理步数、更强验证器、更优搜索策略）。工业实践表明二者叠加效果最优，但本文聚焦推理端，强调其在现有基座模型上无需重新训练即可无缝集成的高性价比优势。
+3. **技术演进催化剂与学术热点**：虽然该理念可追溯至传统ML的Ensemble Methods，但在LLM时代的真正爆发得益于OpenAI发布o1系列并公开披露“推理算力投入-准确率”的增长曲线。过去数月内，学术界围绕该方向涌现大量新工作，研究焦点正从基础的思维链（CoT）和自洽性解码，全面转向结构化的路径搜索、强化验证器驱动的拒绝采样，以及闭环式自我修正架构。
+4. **实证收益与标准化趋势**：作者在配套著作的底层实验中发现，通过精细化超参调优组合多种推理扩展技术，基座模型的任务准确率可从~15%跃升至~52%。这验证了该技术在无监督/弱监督场景下的爆发力，且随着API网关层与推理框架（如vLLM, TGI, SGLang等）对多路并行与延迟控制的原生支持，推理时扩展正快速从科研实验走向生产环境标准化组件。
+
+## 🏷️ 提及的重要概念/公司/模型
+- **核心概念**：Inference-Time Scaling / Test-Time Compute (推理时扩展/测试时算力)、Training-Free Techniques (免微调技术)、Scaling Law (扩展定律)、Ensemble Methods (集成学习)
+- **技术流派/方法**：Chain-of-Thought Prompting (思维链提示)、Self-Consistency (自洽解码)、Best-of-N Ranking (N选一投票)、Rejection Sampling with a Verifier (带验证器的拒绝采样)、Self-Refinement (自我修正/迭代优化)、Search Over Solution Paths (解空间路径搜索)
+- **机构/模型/生态**：OpenAI (o1系列)、Substack (内容分发平台)、GitHub (开源代码托管)、Sebastian Raschka (`Build a Reasoning Model From Scratch` 新书章节及未来Bonus代码库)

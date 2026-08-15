@@ -1,0 +1,45 @@
+---
+title: "Using Local Coding Agents"
+tags: ["Substack_深度解读"]
+---
+
+# 📰 Using Local Coding Agents
+
+**来源**: Ahead of AI
+**链接**: https://magazine.sebastianraschka.com/p/using-local-coding-agents
+
+## 📝 核心主旨 (TL;DR)
+本文是一篇面向开发者的本地化编程智能体（Local Coding Agent）全栈搭建与实战指南。作者详细拆解了“为什么选择本地栈”、“如何选型推理引擎与大模型”、“如何通过 Ollama + Qwen-Code/Codex 实现端到端配置”、“安全审计与隐私隔离要点”以及“当前本地模型在工具调用与自主代理任务上的真实能力边界”。核心结论是：本地编程智能体在成本可控、数据隐私、环境可复现及离线可用性上具备显著优势；目前 30B~40B 参数级别的开放权重模型（如 Qwen3.6 35B-A3B、Cohere North Mini Code）配合高效推理服务已能满足日常编码需求，但在复杂多步工具路由与自主决策上仍属“可用但非完全可靠”，需依赖工作流约束、重试机制与强项目上下文进行兜底。
+
+## 💡 关键知识点 / 核心观点
+1. **本地栈的核心驱动力与适用场景**
+   - **成本与订阅免疫**：规避云端 API 定价波动与配额限制，硬件电费为唯一边际成本。
+   - **隐私与数据主权**：敏感文件/代码/票据处理完全不出本机，避免云端遥测与提示词外泄。
+   - **可复现性与离线能力**：消除云端模型版本升级（如 GPT 5.4→5.5）带来的隐式行为突变；支持无网环境（飞行模式/偏远地区）持续迭代。
+   - **架构透明可控**：开源工作流允许开发者自定义 Harness、修改权限控制逻辑或替换推理后端。
+
+2. **模型选型与资源基准线**
+   - **推荐梯队**：35B 级别开放权重模型是当前性价比最优解。首选 `Qwen3.6 35B-A3B` 或 `Cohere North Mini Code 1.0`。
+   - **硬件门槛**：需预留 30~40 GB 内存/显存。Mac Silicon 设备强烈建议使用 `-mlx` 后缀的 MLX 优化版；Linux 环境使用标准 GGUF/AWQ 量化版本。
+   - **性能阈值**：本地推理速度 ≥20~30 tokens/sec 方可接受（约等于 GPT 5.5 High Reasoning 级别）。超过 50k 长上下文时，35B 模型内存占用稳定在 20~29 GB，吞吐量无明显衰减。
+
+3. **端对端配置链路（Ollama + Custom Harness）**
+   - **推理层**：使用 `Ollama` 作为默认服务端（跨平台 CLI/GUI 友好，默认暴露 OpenAI 兼容 API `http://127.0.0.1:11434/v1`）。也可按需切换 LM Studio、vLLM、SGLang 或 MLX。
+   - **Agent 层对接**：以 `Qwen-Code` 为例，安装后选择 `Custom Provider` → 协议选 `OpenAI-compatible` → Endpoint 填入 `/v1` → Key 占位填 `ollama` → 从 `ollama list` 映射可用模型 ID。
+   - **动态扩缩容**：通过编辑 `~/.qwen/settings.json` 中的 `providers` 数组，可零停机热插拔新拉取的模型，无需重装 Harness。
+
+4. **安全审计清单与隐私硬隔离**
+   - **风险面**：本地 Agent 具备 Shell 执行、文件读写与 MCP/插件扩展能力，默认配置常开启遥测、自动更新与元数据上报。
+   - **审计重点**：检查安装 Hook、环境变量继承、Secret 泄露路径、Prompt 注入面（Repo Instruction/Tool Output）、网络出口（Telemetry/Data Egress）。
+   - **硬修复方案**：在 `settings.json` 中全局关闭遥测与统计：`"privacy.usageStatisticsEnabled": false`, `"telemetry.enabled": false`, `"general.enableAutoUpdate": false`, `"disableAllHooks": true`。生产建议先在独立虚拟机、不同系统用户或物理隔离机（如 DGX Spark）中沙盒运行。
+
+5. **能力边界与生产级使用建议**
+   - **实测表现**：在自定义 Tool-Calling 与 Hard Reasoning 测试集中，35B 模型能准确完成调试与安全审查，但在“判断先读哪个文件/先执行哪条命令”等元认知路由任务上仍有幻觉（得分 ~3/5）。&lt;10B 小模型在工具路由上基本失效。
+   - **提效策略**：单纯依赖 LLM 无法实现全自主闭环。需结合 Harness 的动作拦截、自动重试、强 Project Context 注入与人工确认门控（Approval Gates），方可逼近生产可用性。Claude Code/OpenAI Codex 等商业产品虽体验更顺滑，但本地栈正快速缩小差距。
+
+## 🏷️ 提及的重要概念/公司/模型
+- **大语言模型/权重包**：Qwen3.6 35B-A3B、Qwen3-Coder、Qwen3.5、Cohere North Mini Code 1.0、Gemma 4 E2B/E4B、GLM 5.2、Nemotron-3-Nano 30B
+- **推理引擎与服务框架**：Ollama（推荐）、LM Studio、vLLM、SGLang、MLX（Apple Metal Performance Shaders）、TGI/Text Generation Inference
+- **编程智能体工作流（Harness）**：Qwen-Code（官方配套）、OpenAI Codex、Claude Code、Cline、Pi、OpenCode、Noumena Code
+- **核心技术与架构范式**：Agentic RL（强化学习代理）、Tool Calling & Function Routing、Prompt Injection 防御、Data Egress/Telemetry 隔离、Thinking/Chain-of-Thought 模式、MQTT/MCP 扩展协议、自回归推理 vs 多Token预测（MTP）
+- **生态公司与平台**：Alibaba Cloud / QwenLM Team、Nvidia（Polar RL 论文）、Cohere Labs、OpenAI、Anthropic、Datadog、Artificial Analysis、GitHub
