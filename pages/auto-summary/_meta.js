@@ -1,4 +1,5 @@
 export default {
+  "Daily-Summary-20260816": "Daily_Summary_20260816",
   "Refined-Auto-简报-2026-Python-Type-System-and-Toolin": "Refined_Auto_简报_2026 Python Type System ...",
   "Refined-Auto-简报-AMDs-upcoming-Zen-6-processors-cou": "Refined_Auto_简报_AMDs upcoming Zen 6 proc...",
   "Refined-Auto-简报-Another-Giant-Leap-The-Rubin-CPX-S": "Refined_Auto_简报_Another Giant Leap The R...",

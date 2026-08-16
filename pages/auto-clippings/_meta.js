@@ -200,6 +200,7 @@ export default {
   "Auto-简报-what-appsitecompany-do-you-use-for-investi": "what appsitecompany do you use for inves...",
   "Auto-简报-xAIs-Colossus-2-–-First-Gigawatt-Datacente": "xAIs Colossus 2 – First Gigawatt Datacen...",
   "Auto-简报-you-can-now-buy-llms-at-your-local-superma": "you can now buy llms at your local super...",
+  "Auto-简报-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "【小Lin求职100问】Data Analyst和Quant的区别在哪儿Data...",
   "Auto-简报-🎙️-How-I-AI-ChatGPT-Codex-Voice-browser-Si": "🎙️ How I AI ChatGPT Codex Voice  browser...",
   "Auto-简报-🧠-Community-Wisdom-Getting-started-with-op": "🧠 Community Wisdom Getting started with ...",
   "Raw-翻译-2025-Analysis-Questions-and-Discussions-Thr": "2025 Analysis Questions and Discussions ...",
