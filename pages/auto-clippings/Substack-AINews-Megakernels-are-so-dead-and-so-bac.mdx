@@ -18,7 +18,7 @@ tags: ["Substack_深度解读"]
    - **为何突然“复活”**：Cursor开源的MoK（Mixture-of-Kittens）证明了在确定性的NVL72 MoE训练集群中，将通信规约与计算深度融合为单一Deterministic Kernel，可打破传统流水线瓶颈，实测带来~41%的整体tokens/sec提升（最高2.37x加速）。这表明：**当通信拓扑与KV Cache结构高度规整时，Megakernels仍是榨干硬件算力的最后一道防线。**
 
 2. **模型演进的“两极分化”：极致压缩 vs 情境化多模态**
-   - **效率侧**：市场正 aggressively 探索低比特/三元权重（Ternary Weights）与超长上下文架构。例如Maple-Preview以20B参数跑通Mac M4本地推理（>200 tok/s），Pokee-Isaac 28B宣称10M Token上下文且RULER达93.3%，反映推理成本压力已直接驱动模型架构创新。
+   - **效率侧**：市场正 aggressively 探索低比特/三元权重（Ternary Weights）与超长上下文架构。例如Maple-Preview以20B参数跑通Mac M4本地推理（&gt;200 tok/s），Pokee-Isaac 28B宣称10M Token上下文且RULER达93.3%，反映推理成本压力已直接驱动模型架构创新。
    - **多模态/视频侧**：FLUX 3 Video与MiniMax H3标志着视频模型从“静态帧合成”转向“物理一致性+原生音频交互+主动任务执行”。H3在社区数日内完成消费级显卡/Mac适配，且输出展现出细粒度的物体重量反馈与动态音频表现力，预示视觉-语言-动作闭环将成为下一代AI终端的标准交互范式。
 
 3. **推理经济学重构：定价战倒逼路由编排与Harness工程化**

@@ -62,12 +62,12 @@ npx skills add addyosmani/agent-skills --skill interview-me              # requi
 npx skills add addyosmani/agent-skills --skill test-driven-development   # red-green-refactor, enforced
 ```
 
-> **Installing one skill?** A per-skill `npx` install copies only
-> `skills/&lt;name&gt;/`, not the repo-level `references/` directory. The skill still
-> works, but paths to supplementary shared checklists are unavailable. Use a
-> whole-repo integration, clone the repository, or copy the needed checklist into
-> a `references/` directory inside the installed skill. This portability gap is
-> tracked in [#361](https://github.com/addyosmani/agent-skills/issues/361).
+&gt; **Installing one skill?** A per-skill `npx` install copies only
+&gt; `skills/&lt;name&gt;/`, not the repo-level `references/` directory. The skill still
+&gt; works, but paths to supplementary shared checklists are unavailable. Use a
+&gt; whole-repo integration, clone the repository, or copy the needed checklist into
+&gt; a `references/` directory inside the installed skill. This portability gap is
+&gt; tracked in [#361](https://github.com/addyosmani/agent-skills/issues/361).
 
 Prefer a native integration? Pick your tool below.
 
@@ -81,16 +81,16 @@ Prefer a native integration? Pick your tool below.
 /plugin install agent-skills@addy-agent-skills
 ```
 
-> **SSH errors?** The marketplace clones repos via SSH. If you don't have SSH keys set up on GitHub, either [add your SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or use the full HTTPS URL to force HTTPS cloning during the marketplace-add step:
-> ```bash
-> /plugin marketplace add https://github.com/addyosmani/agent-skills.git
-> /plugin install agent-skills@addy-agent-skills
-> ```
->
-> If `/plugin install` still fails with `git@github.com: Permission denied (publickey)` on Windows or macOS, the recommended workaround is to configure Git once to rewrite GitHub SSH URLs to HTTPS for subprocess clones:
-> ```bash
-> git config --global url."https://github.com/".insteadOf git@github.com:
-> ```
+&gt; **SSH errors?** The marketplace clones repos via SSH. If you don't have SSH keys set up on GitHub, either [add your SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or use the full HTTPS URL to force HTTPS cloning during the marketplace-add step:
+&gt; ```bash
+&gt; /plugin marketplace add https://github.com/addyosmani/agent-skills.git
+&gt; /plugin install agent-skills@addy-agent-skills
+&gt; ```
+&gt;
+&gt; If `/plugin install` still fails with `git@github.com: Permission denied (publickey)` on Windows or macOS, the recommended workaround is to configure Git once to rewrite GitHub SSH URLs to HTTPS for subprocess clones:
+&gt; ```bash
+&gt; git config --global url."https://github.com/".insteadOf git@github.com:
+&gt; ```
 
 **Local / development:**
 

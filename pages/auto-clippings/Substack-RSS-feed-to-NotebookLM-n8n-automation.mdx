@@ -18,7 +18,7 @@ tags: ["Substack_深度解读"]
 2. **本地 LLM (Ollama) 在数据清洗中的应用与工程权衡**
    作者使用本地部署的 Ollama (Gemma 3 12B 模型) 来执行“去 Markdown/HTML 标记、提取纯文本”的清洗任务。作者坦言，这并非最优解（常规做法是使用 JS 库在代码节点中处理），但由于 n8n 运行在 Docker 容器中，引入外部 JS 库存在技术阻碍，且作者希望借此实验本地模型。作者承认此举计算资源消耗较大，未来计划重构为纯代码实现。
 3. **绕过 NotebookLM API 缺失的“曲线救国”架构**
-   由于 Google NotebookLM 目前尚未开放公共 API，无法通过代码直接创建 Notebook 或写入数据。作者采用“n8n 抓取清洗 -> 写入 Google Doc -> 在 NotebookLM 中绑定并刷新该 Doc”的变通方案。这避免了引入 Selenium 等重型浏览器自动化带来的复杂性，是一个轻量且实用的 PoC（概念验证）设计。
+   由于 Google NotebookLM 目前尚未开放公共 API，无法通过代码直接创建 Notebook 或写入数据。作者采用“n8n 抓取清洗 -&gt; 写入 Google Doc -&gt; 在 NotebookLM 中绑定并刷新该 Doc”的变通方案。这避免了引入 Selenium 等重型浏览器自动化带来的复杂性，是一个轻量且实用的 PoC（概念验证）设计。
 4. **面向 AI 原生消费的内容重构**
    整个自动化链路的最终目的不是为了“阅读”，而是为了“合成”。通过将清洗后的纯文本喂给 NotebookLM，充分利用其 Audio Overview（深度音频对话摘要）和 Mind maps（思维导图）功能，将碎片化的 RSS 信息转化为高密度的结构化知识资产。
 

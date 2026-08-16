@@ -30,7 +30,7 @@ runtime.
 
 **Loop engineering for long-running AI agents and peer agent teams.**
 
-> Keep the loop moving. Keep the judgment human.
+&gt; Keep the loop moving. Keep the judgment human.
 
 &lt;a id="how-it-works"&gt;&lt;/a&gt;
 
@@ -271,8 +271,8 @@ signals, and public/private boundary checks.
 | **Capability** | Defines the caller outcome, normalizes provider output, validates it, and proposes a typed transition. |
 | **Kernel** | Owns durable todos, gates, monitors, accepted writeback, quota, recovery, and scheduling. |
 
-The execution path is `Agent -> Capability -> Provider`; the control path
-returns `Provider readback -> Capability transition -> Kernel`. An extension is
+The execution path is `Agent -&gt; Capability -&gt; Provider`; the control path
+returns `Provider readback -&gt; Capability transition -&gt; Kernel`. An extension is
 how an optional provider is packaged and managed, not another control-plane
 owner. See [Architecture](docs/architecture.md) and
 [Extensions and Capabilities](docs/reference/extensions.md).
