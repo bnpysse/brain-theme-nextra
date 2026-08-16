@@ -4,6 +4,7 @@
   "description": "Nextra Theme for Woodman's Second Brain",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "rm -rf pages/notes 2>/dev/null || true",
     "build": "next build",
     "start": "next start"
   },
