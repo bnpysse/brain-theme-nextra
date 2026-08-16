@@ -480,6 +480,7 @@ export default {
   "Raw-翻译-🟩-NVIDIAs-whole-speech-stack-just-went-loca": "🟩 NVIDIAs whole speech stack just went l...",
   "Raw-翻译-🧠-Community-Wisdom-Crafting-outreach-that-r": "🧠 Community Wisdom Crafting outreach tha...",
   "Raw-翻译-🧠-Community-Wisdom-Getting-started-with-ope": "🧠 Community Wisdom Getting started with ...",
+  "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
   "Reddit-Introducing-Unsloth-Desktop-app": "Reddit_Introducing Unsloth Desktop app",
   "Reddit-Its-the-final-countdown-baby-Qwen-is-out-in": "Reddit_Its the final countdown, baby Qwe...",
   "Reddit-Mark-Zuckerberg-on-releases": "Reddit_Mark Zuckerberg on releases",
