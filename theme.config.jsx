@@ -1,9 +1,15 @@
 export default {
   logo: <span>Woodman's Second Brain</span>,
   project: {
-    link: 'https://github.com/bnpysse/obsidian-brain-data',
+    component: null,
   },
-  docsRepositoryBase: 'https://github.com/bnpysse/obsidian-brain-data',
+  docsRepositoryBase: '',
+  editLink: {
+    component: null,
+  },
+  feedback: {
+    content: null,
+  },
   footer: {
     text: 'Woodman 第二大脑 © 2026',
   },
@@ -12,11 +18,5 @@ export default {
   },
   toc: {
     title: '本页目录',
-  },
-  editLink: {
-    text: '在 GitHub 上编辑此页',
-  },
-  feedback: {
-    content: '有疑问？提供反馈 →',
   },
 }
