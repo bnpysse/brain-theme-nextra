@@ -1,4 +1,5 @@
 export default {
+  "TV多模型-Google-Antigravity-完整实战教程：一个项目贯穿全部核心功能｜Vibe": "[多模型] Google Antigravity 完整实战教程：一个项目贯穿全部...",
   "TV多模型-Learn-the-basics-of-Google-Antigravity-20260": "[多模型] Learn the basics of Google Antigra...",
   "TV多模型-人工智能算力是未来时代刚需长期逻辑。-财经-算力-金融-资本市场-20260817-21": "[多模型] 人工智能算力是未来时代刚需长期逻辑。 _财经 _算力 _金融 _资本...",
   "TV多模型-过去这个周末，华尔街已经在给AI泡沫写遗书了-20260817-2054": "[多模型] 过去这个周末，华尔街已经在给AI泡沫写遗书了__20260817_2...",
