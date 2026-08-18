@@ -46,6 +46,7 @@ export default {
   "Auto-简报-Whats-Better-Than-Binary-–-Advent-of-Compu": "Whats Better Than Binary – Advent of Com...",
   "Auto-简报-What-is-the-status-of-web-development-in-r": "What is the status of web development in...",
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
+  "Auto-简报-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
   "Auto-简报-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
   "Auto-简报-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Auto-简报-Stop-Just-Stop": "Stop, Just Stop",
