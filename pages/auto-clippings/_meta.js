@@ -77,6 +77,7 @@ export default {
   "Auto-简报-Github-megadose-holehe": "Github__megadose_holehe",
   "Auto-简报-Github-cursor-plugins": "Github__cursor_plugins",
   "Auto-简报-Github-cordiverse-cordis": "Github__cordiverse_cordis",
+  "Auto-简报-GLM-53-How-Chinese-labs-keep-stride-with-t": "GLM-5.3 How Chinese labs keep stride wit...",
   "Auto-简报-GLM-53-Released": "GLM 5.3 Released",
   "Auto-简报-Friday-Daily-Thread-rPython-Meta-and-Free": "Friday Daily Thread rPython Meta and Fre...",
   "Auto-简报-For-the-people-who-got-reviews-back-from-n": "For the people who got reviews back from...",
