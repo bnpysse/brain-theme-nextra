@@ -1,4 +1,5 @@
 export default {
+  "TV多模型-AI大周期二波已经开启，但这一段行情的离场标准一定要记牢-20260818-1348": "[多模型] AI大周期二波已经开启，但这一段行情的离场标准一定要记牢_20260...",
   "TV多模型-反弹行情拼节奏，大行情才能赚大钱-职业交易员保命的三条铁律-信仰、体系、策略-20260": "[多模型] 反弹行情拼节奏，大行情才能赚大钱_职业交易员保命的三条铁律_信仰、体...",
   "TV多模型-Google-Antigravity-完整实战教程：一个项目贯穿全部核心功能｜Vibe": "[多模型] Google Antigravity 完整实战教程：一个项目贯穿全部...",
   "TV多模型-Learn-the-basics-of-Google-Antigravity-20260": "[多模型] Learn the basics of Google Antigra...",
