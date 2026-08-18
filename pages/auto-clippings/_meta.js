@@ -6,6 +6,7 @@ export default {
   "Raw-翻译-Whats-everyone-working-on-this-week-332026": "Whats everyone working on this week 3320...",
   "Raw-翻译-What-is-the-status-of-web-development-in-ru": "What is the status of web development in...",
   "Raw-翻译-Trained-a-15B-to-write-shell-commands-so-Id": "Trained a 1.5B to write shell commands s...",
+  "Raw-翻译-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
   "Raw-翻译-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
   "Raw-翻译-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Raw-翻译-Stop-Just-Stop": "Stop, Just Stop",
