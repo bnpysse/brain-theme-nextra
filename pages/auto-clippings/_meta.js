@@ -32,6 +32,7 @@ export default {
   "Raw-翻译-Github-megadose-holehe": "Github__megadose_holehe",
   "Raw-翻译-Github-cursor-plugins": "Github__cursor_plugins",
   "Raw-翻译-Github-cordiverse-cordis": "Github__cordiverse_cordis",
+  "Raw-翻译-GLM-53-How-Chinese-labs-keep-stride-with-th": "GLM-5.3 How Chinese labs keep stride wit...",
   "Raw-翻译-GLM-53-Released": "GLM 5.3 Released",
   "Raw-翻译-Friday-Daily-Thread-rPython-Meta-and-Free-T": "Friday Daily Thread rPython Meta and Fre...",
   "Raw-翻译-For-the-people-who-got-reviews-back-from-ne": "For the people who got reviews back from...",
