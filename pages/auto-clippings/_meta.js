@@ -40,6 +40,7 @@ export default {
   "Raw-翻译-Fixed-Jinja-chat-template-for-Qwen-35-36-an": "Fixed Jinja chat template for Qwen 3.5, ...",
   "Raw-翻译-EU-GPU-prices-are-up-19-in-one-month-tracke": "EU GPU prices are up ~19 in one month, t...",
   "Raw-翻译-City2Graph-A-Python-library-for-Heterogeneo": "City2Graph A Python library for Heteroge...",
+  "Raw-翻译-An-opinionated-guide-to-which-AI-to-use-to": "An opinionated guide to which AI to use ...",
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
   "Raw-翻译-A-preliminary-Qwen38-27B-model-card-is-live": "A preliminary Qwen3.8-27B model card is ...",
   "Raw-翻译-23-low-regret-recommendations-for-AI-policy": "23 low-regret recommendations for AI pol...",
