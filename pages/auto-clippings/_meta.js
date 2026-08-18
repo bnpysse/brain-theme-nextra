@@ -63,6 +63,7 @@ export default {
   "Auto-简报-Qwen-38-27B-Released-Please-Share-Your-Exp": "Qwen 3.8 27B Released Please Share Your ...",
   "Auto-简报-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
   "Auto-简报-MiniMax-Music3-released": "MiniMax-Music3 released!",
+  "Auto-简报-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Auto-简报-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
   "Auto-简报-ITS-OUT": "ITS OUT",
   "Auto-简报-I-compiled-Dooms-renderer-into-a-21B-param": "I compiled Dooms renderer into a 21B-par...",
