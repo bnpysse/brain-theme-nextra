@@ -43,6 +43,7 @@ export default {
   "Auto-简报-Python-Low-Level-Physical-Media-Storage-Ar": "[Python] Low-Level Physical Media  Stora...",
   "Auto-简报-Yesterdays-eclipse-as-seen-from-Spain-simu": "Yesterdays eclipse as seen from Spain, s...",
   "Auto-简报-Whats-everyone-working-on-this-week-332026": "Whats everyone working on this week 3320...",
+  "Auto-简报-Whats-Better-Than-Binary-–-Advent-of-Compu": "Whats Better Than Binary – Advent of Com...",
   "Auto-简报-What-is-the-status-of-web-development-in-r": "What is the status of web development in...",
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
   "Auto-简报-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
