@@ -15,6 +15,7 @@ export default {
   "Raw-翻译-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Raw-翻译-Stop-Just-Stop": "Stop, Just Stop",
   "Raw-翻译-Slapping-Windows-11-PCs-with-a-Copilot-key": "Slapping Windows 11 PCs with a Copilot k...",
+  "Raw-翻译-Saplings-Unstable-Ground": "Saplings Unstable Ground",
   "Raw-翻译-Samsung-Foundry-updates-process-roadmap-to": "Samsung Foundry updates process roadmap ...",
   "Raw-翻译-Rust-on-the-JVM-now-passes-99-of-official-u": "Rust on the JVM now passes 99 of officia...",
   "Raw-翻译-QwenQwen38-27B-·-released": "QwenQwen3.8-27B · released",
