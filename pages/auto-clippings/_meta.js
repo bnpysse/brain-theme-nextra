@@ -15,6 +15,7 @@ export default {
   "Raw-翻译-Rust-on-the-JVM-now-passes-99-of-official-u": "Rust on the JVM now passes 99 of officia...",
   "Raw-翻译-QwenQwen38-27B-·-released": "QwenQwen3.8-27B · released",
   "Raw-翻译-Qwen38-27B-is-identical-to-Qwen36-27B": "Qwen3.8-27B is identical to Qwen3.6-27B",
+  "Raw-翻译-Qwen-38-27B-scores-52-on-the-Artificial-Ana": "Qwen 3.8 27B scores 52 on the Artificial...",
   "Raw-翻译-Qwen-38-27B-Released-Please-Share-Your-Expe": "Qwen 3.8 27B Released Please Share Your ...",
   "Raw-翻译-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
   "Raw-翻译-MiniMax-Music3-released": "MiniMax-Music3 released!",
