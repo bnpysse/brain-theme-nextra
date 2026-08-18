@@ -20,6 +20,7 @@ export default {
   "Raw-翻译-Qwen-38-27B-Released-Please-Share-Your-Expe": "Qwen 3.8 27B Released Please Share Your ...",
   "Raw-翻译-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
   "Raw-翻译-MiniMax-Music3-released": "MiniMax-Music3 released!",
+  "Raw-翻译-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Raw-翻译-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
   "Raw-翻译-ITS-OUT": "ITS OUT",
   "Raw-翻译-I-compiled-Dooms-renderer-into-a-21B-parame": "I compiled Dooms renderer into a 21B-par...",
