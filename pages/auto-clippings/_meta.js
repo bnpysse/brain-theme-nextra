@@ -66,6 +66,7 @@ export default {
   "Auto-简报-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Auto-简报-Stop-Just-Stop": "Stop, Just Stop",
   "Auto-简报-Slapping-Windows-11-PCs-with-a-Copilot-key": "Slapping Windows 11 PCs with a Copilot k...",
+  "Auto-简报-Saplings-Unstable-Ground": "Saplings Unstable Ground",
   "Auto-简报-Samsung-Foundry-updates-process-roadmap-to": "Samsung Foundry updates process roadmap ...",
   "Auto-简报-Rust-on-the-JVM-now-passes-99-of-official": "Rust on the JVM now passes 99 of officia...",
   "Auto-简报-QwenQwen38-27B-·-released": "QwenQwen3.8-27B · released",
