@@ -53,6 +53,7 @@ export default {
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
   "Auto-简报-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
   "Auto-简报-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
+  "Auto-简报-Teaching-Everyone-to-Fish-for-Tokens": "Teaching Everyone to Fish for Tokens",
   "Auto-简报-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Auto-简报-Stop-Just-Stop": "Stop, Just Stop",
   "Auto-简报-Slapping-Windows-11-PCs-with-a-Copilot-key": "Slapping Windows 11 PCs with a Copilot k...",
