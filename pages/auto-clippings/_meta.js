@@ -45,6 +45,7 @@ export default {
   "Raw-翻译-City2Graph-A-Python-library-for-Heterogeneo": "City2Graph A Python library for Heteroge...",
   "Raw-翻译-An-opinionated-guide-to-which-AI-to-use-to": "An opinionated guide to which AI to use ...",
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
+  "Raw-翻译-AI-Got-Good-at-Language-Now-Its-Learning-th": "AI Got Good at Language. Now Its Learnin...",
   "Raw-翻译-A-preliminary-Qwen38-27B-model-card-is-live": "A preliminary Qwen3.8-27B model card is ...",
   "Raw-翻译-38x-in-Ten-Months-Inside-One-of-Fintechs-Fa": "38x in Ten Months Inside One of Fintechs...",
   "Raw-翻译-23-low-regret-recommendations-for-AI-policy": "23 low-regret recommendations for AI pol...",
