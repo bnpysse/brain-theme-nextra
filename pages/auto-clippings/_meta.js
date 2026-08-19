@@ -120,6 +120,7 @@ export default {
   "Auto-简报-Friday-Daily-Thread-rPython-Meta-and-Free": "Friday Daily Thread rPython Meta and Fre...",
   "Auto-简报-For-the-people-who-got-reviews-back-from-n": "For the people who got reviews back from...",
   "Auto-简报-Fixed-Jinja-chat-template-for-Qwen-35-36-a": "Fixed Jinja chat template for Qwen 3.5, ...",
+  "Auto-简报-Endangered-Specious": "Endangered Specious",
   "Auto-简报-EU-GPU-prices-are-up-19-in-one-month-track": "EU GPU prices are up ~19 in one month, t...",
   "Auto-简报-City2Graph-A-Python-library-for-Heterogene": "City2Graph A Python library for Heteroge...",
   "Auto-简报-Cerebrass-Next-Generation-CS-4-Fast-Just-G": "Cerebrass Next Generation CS-4 Fast Just...",
