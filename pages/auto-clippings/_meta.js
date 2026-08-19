@@ -97,6 +97,7 @@ export default {
   "Auto-简报-City2Graph-A-Python-library-for-Heterogene": "City2Graph A Python library for Heteroge...",
   "Auto-简报-An-opinionated-guide-to-which-AI-to-use-to": "An opinionated guide to which AI to use ...",
   "Auto-简报-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
+  "Auto-简报-AI-Got-Good-at-Language-Now-Its-Learning-t": "AI Got Good at Language. Now Its Learnin...",
   "Auto-简报-A-preliminary-Qwen38-27B-model-card-is-liv": "A preliminary Qwen3.8-27B model card is ...",
   "Auto-简报-38x-in-Ten-Months-Inside-One-of-Fintechs-F": "38x in Ten Months Inside One of Fintechs...",
   "Auto-简报-23-low-regret-recommendations-for-AI-polic": "23 low-regret recommendations for AI pol...",
