@@ -56,6 +56,7 @@ export default {
   "Raw-翻译-Fixed-Jinja-chat-template-for-Qwen-35-36-an": "Fixed Jinja chat template for Qwen 3.5, ...",
   "Raw-翻译-Endangered-Specious": "Endangered Specious",
   "Raw-翻译-EU-GPU-prices-are-up-19-in-one-month-tracke": "EU GPU prices are up ~19 in one month, t...",
+  "Raw-翻译-Dirty-Secrets-Eight-SMIDs": "Dirty Secrets Eight SMIDs",
   "Raw-翻译-City2Graph-A-Python-library-for-Heterogeneo": "City2Graph A Python library for Heteroge...",
   "Raw-翻译-Cerebrass-Next-Generation-CS-4-Fast-Just-Go": "Cerebrass Next Generation CS-4 Fast Just...",
   "Raw-翻译-Base-Power-Company-Chapter-3": "Base Power Company Chapter 3",
