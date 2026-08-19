@@ -79,6 +79,7 @@ export default {
   "Auto-简报-The-twilight-of-the-chatbots": "The twilight of the chatbots",
   "Auto-简报-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
   "Auto-简报-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
+  "Auto-简报-The-Maradona-Theory-of-Interest-Rates": "The Maradona Theory of Interest Rates",
   "Auto-简报-Teaching-Everyone-to-Fish-for-Tokens": "Teaching Everyone to Fish for Tokens",
   "Auto-简报-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Auto-简报-Stop-Just-Stop": "Stop, Just Stop",
