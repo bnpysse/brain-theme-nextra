@@ -78,6 +78,7 @@ export default {
   "Auto-简报-Samsung-Foundry-updates-process-roadmap-to": "Samsung Foundry updates process roadmap ...",
   "Auto-简报-Rust-on-the-JVM-now-passes-99-of-official": "Rust on the JVM now passes 99 of officia...",
   "Auto-简报-Ranked-The-Worlds-Busiest-Airlines-by-Flig": "Ranked The Worlds Busiest Airlines by Fl...",
+  "Auto-简报-Ranked-The-Most-Popular-AI-Tools-in-2026": "Ranked The Most Popular AI Tools in 2026",
   "Auto-简报-QwenQwen38-27B-·-released": "QwenQwen3.8-27B · released",
   "Auto-简报-Qwen38-27B-is-identical-to-Qwen36-27B": "Qwen3.8-27B is identical to Qwen3.6-27B",
   "Auto-简报-Qwen-38-27B-scores-52-on-the-Artificial-An": "Qwen 3.8 27B scores 52 on the Artificial...",
