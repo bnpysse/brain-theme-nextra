@@ -107,6 +107,7 @@ export default {
   "Auto-简报-Fixed-Jinja-chat-template-for-Qwen-35-36-a": "Fixed Jinja chat template for Qwen 3.5, ...",
   "Auto-简报-EU-GPU-prices-are-up-19-in-one-month-track": "EU GPU prices are up ~19 in one month, t...",
   "Auto-简报-City2Graph-A-Python-library-for-Heterogene": "City2Graph A Python library for Heteroge...",
+  "Auto-简报-Cerebrass-Next-Generation-CS-4-Fast-Just-G": "Cerebrass Next Generation CS-4 Fast Just...",
   "Auto-简报-Base-Power-Company-Chapter-3": "Base Power Company Chapter 3",
   "Auto-简报-An-opinionated-guide-to-which-AI-to-use-to": "An opinionated guide to which AI to use ...",
   "Auto-简报-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
