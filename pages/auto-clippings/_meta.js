@@ -62,6 +62,7 @@ export default {
   "Auto-简报-What-it-feels-like-to-work-with-Mythos": "What it feels like to work with Mythos",
   "Auto-简报-What-is-the-status-of-web-development-in-r": "What is the status of web development in...",
   "Auto-简报-Weekly-Dose-of-Optimism-206": "Weekly Dose of Optimism 206",
+  "Auto-简报-Weekly-Dose-of-Optimism-205": "Weekly Dose of Optimism 205",
   "Auto-简报-We-Tracked-a-Shipment-of-Rare-Books-It-End": "We Tracked a Shipment of Rare Books. It ...",
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
   "Auto-简报-The-twilight-of-the-chatbots": "The twilight of the chatbots",
