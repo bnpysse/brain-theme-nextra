@@ -58,6 +58,7 @@ export default {
   "Raw-翻译-Cerebrass-Next-Generation-CS-4-Fast-Just-Go": "Cerebrass Next Generation CS-4 Fast Just...",
   "Raw-翻译-Base-Power-Company-Chapter-3": "Base Power Company Chapter 3",
   "Raw-翻译-An-opinionated-guide-to-which-AI-to-use-to": "An opinionated guide to which AI to use ...",
+  "Raw-翻译-Americas-Electricity-Gap": "Americas Electricity Gap",
   "Raw-翻译-All-You-Need-To-Know-About-Warsh": "All You Need To Know About Warsh",
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
   "Raw-翻译-AI-Got-Good-at-Language-Now-Its-Learning-th": "AI Got Good at Language. Now Its Learnin...",
