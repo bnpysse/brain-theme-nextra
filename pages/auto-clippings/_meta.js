@@ -70,6 +70,7 @@ export default {
   "Auto-简报-Weekly-Dose-of-Optimism-206": "Weekly Dose of Optimism 206",
   "Auto-简报-Weekly-Dose-of-Optimism-205": "Weekly Dose of Optimism 205",
   "Auto-简报-We-Tracked-a-Shipment-of-Rare-Books-It-End": "We Tracked a Shipment of Rare Books. It ...",
+  "Auto-简报-Ultra-High-Interactivity-on-NVIDIA-GPUs-Ti": "Ultra-High Interactivity on NVIDIA GPUs ...",
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
   "Auto-简报-The-twilight-of-the-chatbots": "The twilight of the chatbots",
   "Auto-简报-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
