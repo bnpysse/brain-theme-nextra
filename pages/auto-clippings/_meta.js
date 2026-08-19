@@ -14,6 +14,7 @@ export default {
   "Raw-翻译-Ultra-High-Interactivity-on-NVIDIA-GPUs-Til": "Ultra-High Interactivity on NVIDIA GPUs ...",
   "Raw-翻译-Trained-a-15B-to-write-shell-commands-so-Id": "Trained a 1.5B to write shell commands s...",
   "Raw-翻译-The-twilight-of-the-chatbots": "The twilight of the chatbots",
+  "Raw-翻译-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
   "Raw-翻译-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
   "Raw-翻译-Teaching-Everyone-to-Fish-for-Tokens": "Teaching Everyone to Fish for Tokens",
   "Raw-翻译-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
