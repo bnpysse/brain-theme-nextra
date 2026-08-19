@@ -24,6 +24,7 @@ export default {
   "Raw-翻译-Saplings-Unstable-Ground": "Saplings Unstable Ground",
   "Raw-翻译-Samsung-Foundry-updates-process-roadmap-to": "Samsung Foundry updates process roadmap ...",
   "Raw-翻译-Rust-on-the-JVM-now-passes-99-of-official-u": "Rust on the JVM now passes 99 of officia...",
+  "Raw-翻译-Run-It-Hot-Yet-Again": "Run It Hot, Yet Again",
   "Raw-翻译-Ranked-The-Worlds-Largest-Cities-1950-2100": "Ranked The Worlds Largest Cities 1950-21...",
   "Raw-翻译-Ranked-The-Worlds-Busiest-Airlines-by-Fligh": "Ranked The Worlds Busiest Airlines by Fl...",
   "Raw-翻译-Ranked-The-Most-Popular-AI-Tools-in-2026": "Ranked The Most Popular AI Tools in 2026",
