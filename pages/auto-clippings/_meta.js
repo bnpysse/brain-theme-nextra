@@ -121,6 +121,7 @@ export default {
   "Auto-简报-Cerebrass-Next-Generation-CS-4-Fast-Just-G": "Cerebrass Next Generation CS-4 Fast Just...",
   "Auto-简报-Base-Power-Company-Chapter-3": "Base Power Company Chapter 3",
   "Auto-简报-An-opinionated-guide-to-which-AI-to-use-to": "An opinionated guide to which AI to use ...",
+  "Auto-简报-All-You-Need-To-Know-About-Warsh": "All You Need To Know About Warsh",
   "Auto-简报-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
   "Auto-简报-AI-Got-Good-at-Language-Now-Its-Learning-t": "AI Got Good at Language. Now Its Learnin...",
   "Auto-简报-A-preliminary-Qwen38-27B-model-card-is-liv": "A preliminary Qwen3.8-27B model card is ...",
