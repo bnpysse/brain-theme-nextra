@@ -44,6 +44,7 @@ export default {
   "Raw-翻译-I-compiled-Dooms-renderer-into-a-21B-parame": "I compiled Dooms renderer into a 21B-par...",
   "Raw-翻译-How-is-the-qmusage-quota-for-Grok-46-in-cur": "How is the qmusage quota for Grok 4.6 in...",
   "Raw-翻译-Hey-Rustaceans-Got-a-question-Ask-here-3320": "Hey Rustaceans Got a question Ask here 3...",
+  "Raw-翻译-Here-Comes-the-Repo-Man": "Here Comes the Repo Man",
   "Raw-翻译-Github-unslothai-unsloth": "Github__unslothai_unsloth",
   "Raw-翻译-Github-smicallef-spiderfoot": "Github__smicallef_spiderfoot",
   "Raw-翻译-Github-megadose-holehe": "Github__megadose_holehe",
