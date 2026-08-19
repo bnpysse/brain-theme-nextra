@@ -18,6 +18,7 @@ export default {
   "Raw-翻译-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
   "Raw-翻译-The-Maradona-Theory-of-Interest-Rates": "The Maradona Theory of Interest Rates",
   "Raw-翻译-Teaching-Everyone-to-Fish-for-Tokens": "Teaching Everyone to Fish for Tokens",
+  "Raw-翻译-Taiwans-Modern-Miracle": "Taiwans Modern Miracle",
   "Raw-翻译-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Raw-翻译-Stop-Just-Stop": "Stop, Just Stop",
   "Raw-翻译-Slapping-Windows-11-PCs-with-a-Copilot-key": "Slapping Windows 11 PCs with a Copilot k...",
