@@ -98,6 +98,7 @@ export default {
   "Auto-简报-Qwen38-27B-is-identical-to-Qwen36-27B": "Qwen3.8-27B is identical to Qwen3.6-27B",
   "Auto-简报-Qwen-38-27B-scores-52-on-the-Artificial-An": "Qwen 3.8 27B scores 52 on the Artificial...",
   "Auto-简报-Qwen-38-27B-Released-Please-Share-Your-Exp": "Qwen 3.8 27B Released Please Share Your ...",
+  "Auto-简报-Over-Target": "Over Target",
   "Auto-简报-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
   "Auto-简报-MiniMax-Music3-released": "MiniMax-Music3 released!",
   "Auto-简报-Markdown-SVG-upgrades": "Markdown SVG upgrades",
