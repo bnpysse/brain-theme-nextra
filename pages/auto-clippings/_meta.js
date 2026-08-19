@@ -116,6 +116,7 @@ export default {
   "Auto-简报-MiniMax-Music3-released": "MiniMax-Music3 released!",
   "Auto-简报-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Auto-简报-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
+  "Auto-简报-Leopolds-Fall": "Leopolds Fall",
   "Auto-简报-ITS-OUT": "ITS OUT",
   "Auto-简报-I-wrote-an-AI-textbook-—-how-long-until-AI": "I wrote an AI textbook — how long until ...",
   "Auto-简报-I-compiled-Dooms-renderer-into-a-21B-param": "I compiled Dooms renderer into a 21B-par...",
