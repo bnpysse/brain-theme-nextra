@@ -61,6 +61,7 @@ export default {
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
   "Raw-翻译-AI-Got-Good-at-Language-Now-Its-Learning-th": "AI Got Good at Language. Now Its Learnin...",
   "Raw-翻译-A-preliminary-Qwen38-27B-model-card-is-live": "A preliminary Qwen3.8-27B model card is ...",
+  "Raw-翻译-A-Minor-Detail": "A Minor Detail",
   "Raw-翻译-38x-in-Ten-Months-Inside-One-of-Fintechs-Fa": "38x in Ten Months Inside One of Fintechs...",
   "Raw-翻译-23-low-regret-recommendations-for-AI-policy": "23 low-regret recommendations for AI pol...",
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
