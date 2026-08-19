@@ -78,6 +78,7 @@ export default {
   "Auto-简报-Saplings-Unstable-Ground": "Saplings Unstable Ground",
   "Auto-简报-Samsung-Foundry-updates-process-roadmap-to": "Samsung Foundry updates process roadmap ...",
   "Auto-简报-Rust-on-the-JVM-now-passes-99-of-official": "Rust on the JVM now passes 99 of officia...",
+  "Auto-简报-Ranked-The-Worlds-Largest-Cities-1950-2100": "Ranked The Worlds Largest Cities 1950-21...",
   "Auto-简报-Ranked-The-Worlds-Busiest-Airlines-by-Flig": "Ranked The Worlds Busiest Airlines by Fl...",
   "Auto-简报-Ranked-The-Most-Popular-AI-Tools-in-2026": "Ranked The Most Popular AI Tools in 2026",
   "Auto-简报-QwenQwen38-27B-·-released": "QwenQwen3.8-27B · released",
