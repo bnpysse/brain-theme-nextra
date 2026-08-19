@@ -21,6 +21,7 @@ export default {
   "Raw-翻译-Samsung-Foundry-updates-process-roadmap-to": "Samsung Foundry updates process roadmap ...",
   "Raw-翻译-Rust-on-the-JVM-now-passes-99-of-official-u": "Rust on the JVM now passes 99 of officia...",
   "Raw-翻译-Ranked-The-Worlds-Busiest-Airlines-by-Fligh": "Ranked The Worlds Busiest Airlines by Fl...",
+  "Raw-翻译-Ranked-The-Most-Popular-AI-Tools-in-2026": "Ranked The Most Popular AI Tools in 2026",
   "Raw-翻译-QwenQwen38-27B-·-released": "QwenQwen3.8-27B · released",
   "Raw-翻译-Qwen38-27B-is-identical-to-Qwen36-27B": "Qwen3.8-27B is identical to Qwen3.6-27B",
   "Raw-翻译-Qwen-38-27B-scores-52-on-the-Artificial-Ana": "Qwen 3.8 27B scores 52 on the Artificial...",
