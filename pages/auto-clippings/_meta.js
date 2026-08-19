@@ -117,6 +117,7 @@ export default {
   "Auto-简报-I-compiled-Dooms-renderer-into-a-21B-param": "I compiled Dooms renderer into a 21B-par...",
   "Auto-简报-How-is-the-qmusage-quota-for-Grok-46-in-cu": "How is the qmusage quota for Grok 4.6 in...",
   "Auto-简报-Hey-Rustaceans-Got-a-question-Ask-here-332": "Hey Rustaceans Got a question Ask here 3...",
+  "Auto-简报-Here-Comes-the-Repo-Man": "Here Comes the Repo Man",
   "Auto-简报-Github-unslothai-unsloth": "Github__unslothai_unsloth",
   "Auto-简报-Github-smicallef-spiderfoot": "Github__smicallef_spiderfoot",
   "Auto-简报-Github-megadose-holehe": "Github__megadose_holehe",
