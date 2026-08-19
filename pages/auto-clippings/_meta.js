@@ -56,6 +56,7 @@ export default {
   "Raw-翻译-Friday-Daily-Thread-rPython-Meta-and-Free-T": "Friday Daily Thread rPython Meta and Fre...",
   "Raw-翻译-For-the-people-who-got-reviews-back-from-ne": "For the people who got reviews back from...",
   "Raw-翻译-Fixed-Jinja-chat-template-for-Qwen-35-36-an": "Fixed Jinja chat template for Qwen 3.5, ...",
+  "Raw-翻译-Financing-the-AI-Boom-3": "Financing the AI Boom 3",
   "Raw-翻译-Endangered-Specious": "Endangered Specious",
   "Raw-翻译-EU-GPU-prices-are-up-19-in-one-month-tracke": "EU GPU prices are up ~19 in one month, t...",
   "Raw-翻译-Dirty-Secrets-Eight-SMIDs": "Dirty Secrets Eight SMIDs",
