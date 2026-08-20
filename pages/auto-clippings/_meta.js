@@ -169,6 +169,7 @@ export default {
   "Auto-简报-Endangered-Specious": "Endangered Specious",
   "Auto-简报-EU-GPU-prices-are-up-19-in-one-month-track": "EU GPU prices are up ~19 in one month, t...",
   "Auto-简报-Dirty-Secrets-Eight-SMIDs": "Dirty Secrets Eight SMIDs",
+  "Auto-简报-Controlling-Reasoning-Effort-in-LLMs": "Controlling Reasoning Effort in LLMs",
   "Auto-简报-City2Graph-A-Python-library-for-Heterogene": "City2Graph A Python library for Heteroge...",
   "Auto-简报-Cerebrass-Next-Generation-CS-4-Fast-Just-G": "Cerebrass Next Generation CS-4 Fast Just...",
   "Auto-简报-Building-an-AI-Text-Detector-From-Scratch": "Building an AI Text Detector From Scratc...",
