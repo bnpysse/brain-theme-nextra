@@ -131,6 +131,7 @@ export default {
   "Auto-简报-PayPal-Declined": "PayPal, Declined",
   "Auto-简报-Over-Target": "Over Target",
   "Auto-简报-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
+  "Auto-简报-North-Korean-Messiah": "North Korean Messiah",
   "Auto-简报-MiniMax-Music3-released": "MiniMax-Music3 released!",
   "Auto-简报-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Auto-简报-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
