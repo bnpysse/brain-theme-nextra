@@ -2,6 +2,7 @@ export default {
   "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
   "Raw-翻译-attune-forms-is-now-on-PyPI-—-and-as-of-thi": "attune-forms is now on PyPI — and as of ...",
   "Raw-翻译-Python-Low-Level-Physical-Media-Storage-Arc": "[Python] Low-Level Physical Media  Stora...",
+  "Raw-翻译-Young-Money-Launch-Week-Update": "Young Money Launch Week Update",
   "Raw-翻译-Yesterdays-eclipse-as-seen-from-Spain-simul": "Yesterdays eclipse as seen from Spain, s...",
   "Raw-翻译-Where-to-eat-in-San-Francisco": "Where to eat in San Francisco",
   "Raw-翻译-Whats-everyone-working-on-this-week-332026": "Whats everyone working on this week 3320...",
