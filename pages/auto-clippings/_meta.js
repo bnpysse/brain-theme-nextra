@@ -151,6 +151,7 @@ export default {
   "Auto-简报-A-preliminary-Qwen38-27B-model-card-is-liv": "A preliminary Qwen3.8-27B model card is ...",
   "Auto-简报-A-Minor-Detail": "A Minor Detail",
   "Auto-简报-38x-in-Ten-Months-Inside-One-of-Fintechs-F": "38x in Ten Months Inside One of Fintechs...",
+  "Auto-简报-29-Year-Olds-Can-Write-Memoirs-Too": "29-Year-Olds Can Write Memoirs Too",
   "Auto-简报-23-low-regret-recommendations-for-AI-polic": "23 low-regret recommendations for AI pol...",
   "Auto-简报-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Auto-简报-12B-of-US-ratepayers-money-wasted-on-a-mod": "$12B of US ratepayers money wasted on a ..."
