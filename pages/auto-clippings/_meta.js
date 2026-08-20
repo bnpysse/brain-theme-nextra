@@ -101,6 +101,7 @@ export default {
   "Auto-简报-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
   "Auto-简报-The-Supreme-Court-Ruled-Against-Trumps-Tar": "The Supreme Court Ruled Against Trumps T...",
   "Auto-简报-The-Pulse-Groks-CLI-caught-uploading-all-y": "The Pulse Groks CLI caught uploading all...",
+  "Auto-简报-The-Pulse-Bending-Spoons-Acquisition-Strat": "The Pulse Bending Spoons Acquisition Str...",
   "Auto-简报-The-Maradona-Theory-of-Interest-Rates": "The Maradona Theory of Interest Rates",
   "Auto-简报-The-Art-of-Self-Promotion": "The Art of Self-Promotion",
   "Auto-简报-Teaching-Everyone-to-Fish-for-Tokens": "Teaching Everyone to Fish for Tokens",
