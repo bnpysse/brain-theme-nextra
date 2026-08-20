@@ -44,6 +44,7 @@ export default {
   "Raw-翻译-PayPal-Declined": "PayPal, Declined",
   "Raw-翻译-Over-Target": "Over Target",
   "Raw-翻译-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
+  "Raw-翻译-North-Korean-Messiah": "North Korean Messiah",
   "Raw-翻译-MiniMax-Music3-released": "MiniMax-Music3 released!",
   "Raw-翻译-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Raw-翻译-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
