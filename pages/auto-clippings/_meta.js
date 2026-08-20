@@ -93,6 +93,7 @@ export default {
   "Auto-简报-Python-Low-Level-Physical-Media-Storage-Ar": "[Python] Low-Level Physical Media  Stora...",
   "Auto-简报-Young-Money-Launch-Week-Update": "Young Money Launch Week Update",
   "Auto-简报-Yesterdays-eclipse-as-seen-from-Spain-simu": "Yesterdays eclipse as seen from Spain, s...",
+  "Auto-简报-Why-Chinas-AI-Bubble-Is-Also-Industrial-Po": "Why Chinas AI Bubble Is Also Industrial ...",
   "Auto-简报-Where-to-eat-in-San-Francisco": "Where to eat in San Francisco",
   "Auto-简报-Whats-everyone-working-on-this-week-332026": "Whats everyone working on this week 3320...",
   "Auto-简报-Whats-Better-Than-Binary-–-Advent-of-Compu": "Whats Better Than Binary – Advent of Com...",
