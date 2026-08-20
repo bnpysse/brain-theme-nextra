@@ -20,6 +20,7 @@ export default {
   "Raw-翻译-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
   "Raw-翻译-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
   "Raw-翻译-The-Supreme-Court-Ruled-Against-Trumps-Tari": "The Supreme Court Ruled Against Trumps T...",
+  "Raw-翻译-The-Rise-of-Chinas-Electric-Vehicle-Industr": "The Rise of Chinas Electric Vehicle Indu...",
   "Raw-翻译-The-Pulse-Quitting-Spotify-Podcasts-over-re": "The Pulse Quitting Spotify Podcasts over...",
   "Raw-翻译-The-Pulse-Groks-CLI-caught-uploading-all-yo": "The Pulse Groks CLI caught uploading all...",
   "Raw-翻译-The-Pulse-Bending-Spoons-Acquisition-Strate": "The Pulse Bending Spoons Acquisition Str...",
