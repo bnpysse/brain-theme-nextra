@@ -156,6 +156,7 @@ export default {
   "Auto-简报-City2Graph-A-Python-library-for-Heterogene": "City2Graph A Python library for Heteroge...",
   "Auto-简报-Cerebrass-Next-Generation-CS-4-Fast-Just-G": "Cerebrass Next Generation CS-4 Fast Just...",
   "Auto-简报-Base-Power-Company-Chapter-3": "Base Power Company Chapter 3",
+  "Auto-简报-Announcing-Lennys-Jobs-The-best-place-in-t": "Announcing Lennys Jobs The best place in...",
   "Auto-简报-An-opinionated-guide-to-which-AI-to-use-to": "An opinionated guide to which AI to use ...",
   "Auto-简报-Americas-Electricity-Gap": "Americas Electricity Gap",
   "Auto-简报-All-You-Need-To-Know-About-Warsh": "All You Need To Know About Warsh",
