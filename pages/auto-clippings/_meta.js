@@ -51,6 +51,7 @@ export default {
   "Raw-翻译-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Raw-翻译-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
   "Raw-翻译-Leopolds-Fall": "Leopolds Fall",
+  "Raw-翻译-Import-AI-469-Science-AI;-RSI-simulator;-an": "Import AI 469 Science AI; RSI simulator;...",
   "Raw-翻译-ITS-OUT": "ITS OUT",
   "Raw-翻译-I-wrote-an-AI-textbook-—-how-long-until-AI": "I wrote an AI textbook — how long until ...",
   "Raw-翻译-I-tested-Grok-Bot-Grok-46-and-Cursor-Origin": "I tested Grok Bot, Grok 4.6, and Cursor ...",
