@@ -85,6 +85,7 @@ export default {
   "Raw-翻译-23-low-regret-recommendations-for-AI-policy": "23 low-regret recommendations for AI pol...",
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Raw-翻译-12B-of-US-ratepayers-money-wasted-on-a-mode": "$12B of US ratepayers money wasted on a ...",
+  "Auto-简报-🎙️-How-I-AI-How-a-solo-founder-used-Codex": "🎙️ How I AI How a solo founder used Code...",
   "Auto-简报-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "【小Lin求职100问】Data Analyst和Quant的区别在哪儿Data...",
   "Auto-简报-attune-forms-is-now-on-PyPI-—-and-as-of-th": "attune-forms is now on PyPI — and as of ...",
   "Auto-简报-Python-Low-Level-Physical-Media-Storage-Ar": "[Python] Low-Level Physical Media  Stora...",
