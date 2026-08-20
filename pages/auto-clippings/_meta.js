@@ -5,6 +5,7 @@ export default {
   "Raw-翻译-Python-Low-Level-Physical-Media-Storage-Arc": "[Python] Low-Level Physical Media  Stora...",
   "Raw-翻译-Young-Money-Launch-Week-Update": "Young Money Launch Week Update",
   "Raw-翻译-Yesterdays-eclipse-as-seen-from-Spain-simul": "Yesterdays eclipse as seen from Spain, s...",
+  "Raw-翻译-Why-Chinas-AI-Bubble-Is-Also-Industrial-Pol": "Why Chinas AI Bubble Is Also Industrial ...",
   "Raw-翻译-Where-to-eat-in-San-Francisco": "Where to eat in San Francisco",
   "Raw-翻译-Whats-everyone-working-on-this-week-332026": "Whats everyone working on this week 3320...",
   "Raw-翻译-Whats-Better-Than-Binary-–-Advent-of-Comput": "Whats Better Than Binary – Advent of Com...",
