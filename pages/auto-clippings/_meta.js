@@ -53,6 +53,7 @@ export default {
   "Raw-翻译-Leopolds-Fall": "Leopolds Fall",
   "Raw-翻译-Import-AI-469-Science-AI;-RSI-simulator;-an": "Import AI 469 Science AI; RSI simulator;...",
   "Raw-翻译-Import-AI-468-23-RSI-ideas;-PostTrainBench;": "Import AI 468 23 RSI ideas; PostTrainBen...",
+  "Raw-翻译-Import-AI-467-Self-sustaining-AI-viruses;-p": "Import AI 467 Self-sustaining AI viruses...",
   "Raw-翻译-ITS-OUT": "ITS OUT",
   "Raw-翻译-I-wrote-an-AI-textbook-—-how-long-until-AI": "I wrote an AI textbook — how long until ...",
   "Raw-翻译-I-tested-Grok-Bot-Grok-46-and-Cursor-Origin": "I tested Grok Bot, Grok 4.6, and Cursor ...",
