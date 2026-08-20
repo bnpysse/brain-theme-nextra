@@ -49,6 +49,7 @@ export default {
   "Raw-翻译-Leopolds-Fall": "Leopolds Fall",
   "Raw-翻译-ITS-OUT": "ITS OUT",
   "Raw-翻译-I-wrote-an-AI-textbook-—-how-long-until-AI": "I wrote an AI textbook — how long until ...",
+  "Raw-翻译-I-tested-Grok-Bot-Grok-46-and-Cursor-Origin": "I tested Grok Bot, Grok 4.6, and Cursor ...",
   "Raw-翻译-I-compiled-Dooms-renderer-into-a-21B-parame": "I compiled Dooms renderer into a 21B-par...",
   "Raw-翻译-How-is-the-qmusage-quota-for-Grok-46-in-cur": "How is the qmusage quota for Grok 4.6 in...",
   "Raw-翻译-Hey-Rustaceans-Got-a-question-Ask-here-3320": "Hey Rustaceans Got a question Ask here 3...",
