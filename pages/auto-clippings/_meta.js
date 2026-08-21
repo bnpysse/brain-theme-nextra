@@ -1,5 +1,6 @@
 export default {
   "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
+  "Raw-逐字稿-The-Insane-US-Japan-Currency-Bailout": "Raw_逐字稿_The Insane US-Japan Currency Bai...",
   "Raw-逐字稿-Stagflation-Explained": "Raw_逐字稿_Stagflation Explained",
   "Raw-逐字稿-Past-the-Point-of-No-Return": "Raw_逐字稿_Past the Point of No Return",
   "Raw-逐字稿-Different-Strengths-Different-Weaknesses": "Raw_逐字稿_Different Strengths  Different W...",
@@ -145,6 +146,7 @@ export default {
   "Auto-简报-The-Pulse-Groks-CLI-caught-uploading-all-y": "The Pulse Groks CLI caught uploading all...",
   "Auto-简报-The-Pulse-Bending-Spoons-Acquisition-Strat": "The Pulse Bending Spoons Acquisition Str...",
   "Auto-简报-The-Maradona-Theory-of-Interest-Rates": "The Maradona Theory of Interest Rates",
+  "Auto-简报-The-Insane-US-Japan-Currency-Bailout": "The Insane US-Japan Currency Bailout",
   "Auto-简报-The-Art-of-Self-Promotion": "The Art of Self-Promotion",
   "Auto-简报-Teaching-Everyone-to-Fish-for-Tokens": "Teaching Everyone to Fish for Tokens",
   "Auto-简报-Taiwans-Modern-Miracle": "Taiwans Modern Miracle",
