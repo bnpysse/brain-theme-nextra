@@ -113,6 +113,7 @@ export default {
   "Auto-简报-Using-Local-Coding-Agents": "Using Local Coding Agents",
   "Auto-简报-Ultra-High-Interactivity-on-NVIDIA-GPUs-Ti": "Ultra-High Interactivity on NVIDIA GPUs ...",
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
+  "Auto-简报-The-wayfinder-Skill-Navigating-the-Fog-of": "The wayfinder Skill Navigating the Fog o...",
   "Auto-简报-The-twilight-of-the-chatbots": "The twilight of the chatbots",
   "Auto-简报-The-end-of-an-era-for-Chinas-economy": "The end of an era for Chinas economy",
   "Auto-简报-The-countdown-to-Qwen38-27B-starts-now": "The countdown to Qwen3.8-27B starts now!",
