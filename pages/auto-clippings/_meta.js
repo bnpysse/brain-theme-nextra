@@ -14,6 +14,7 @@ export default {
   "Raw-翻译-Weekly-Dose-of-Optimism-206": "Weekly Dose of Optimism 206",
   "Raw-翻译-Weekly-Dose-of-Optimism-205": "Weekly Dose of Optimism 205",
   "Raw-翻译-We-Tracked-a-Shipment-of-Rare-Books-It-Ende": "We Tracked a Shipment of Rare Books. It ...",
+  "Raw-翻译-Using-Local-Coding-Agents": "Using Local Coding Agents",
   "Raw-翻译-Ultra-High-Interactivity-on-NVIDIA-GPUs-Til": "Ultra-High Interactivity on NVIDIA GPUs ...",
   "Raw-翻译-Trained-a-15B-to-write-shell-commands-so-Id": "Trained a 1.5B to write shell commands s...",
   "Raw-翻译-The-twilight-of-the-chatbots": "The twilight of the chatbots",
