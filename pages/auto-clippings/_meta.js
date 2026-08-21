@@ -1,5 +1,6 @@
 export default {
   "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
+  "Raw-逐字稿-Why-Wall-Street-is-Ignoring-Big-Techs-Debt": "Raw_逐字稿_Why Wall Street is Ignoring Big ...",
   "Raw-逐字稿-We-Need-To-Talk-About-Leopold": "Raw_逐字稿_We Need To Talk About Leopold",
   "Raw-逐字稿-The-Insane-US-Japan-Currency-Bailout": "Raw_逐字稿_The Insane US-Japan Currency Bai...",
   "Raw-逐字稿-Stagflation-Explained": "Raw_逐字稿_Stagflation Explained",
@@ -123,6 +124,7 @@ export default {
   "Auto-简报-AINews-Death-of-Params-Zai-CEO-Jie-Tang-on": "[AINews] Death of Params Z.ai CEO Jie Ta...",
   "Auto-简报-Young-Money-Launch-Week-Update": "Young Money Launch Week Update",
   "Auto-简报-Yesterdays-eclipse-as-seen-from-Spain-simu": "Yesterdays eclipse as seen from Spain, s...",
+  "Auto-简报-Why-Wall-Street-is-Ignoring-Big-Techs-Debt": "Why Wall Street is Ignoring Big Techs De...",
   "Auto-简报-Why-Chinas-AI-Bubble-Is-Also-Industrial-Po": "Why Chinas AI Bubble Is Also Industrial ...",
   "Auto-简报-Where-to-eat-in-San-Francisco": "Where to eat in San Francisco",
   "Auto-简报-Whats-everyone-working-on-this-week-332026": "Whats everyone working on this week 3320...",
