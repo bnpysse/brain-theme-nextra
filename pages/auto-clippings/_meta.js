@@ -3,6 +3,7 @@ export default {
   "Raw-翻译-🎙️-How-I-AI-How-a-solo-founder-used-Codex-a": "🎙️ How I AI How a solo founder used Code...",
   "Raw-翻译-attune-forms-is-now-on-PyPI-—-and-as-of-thi": "attune-forms is now on PyPI — and as of ...",
   "Raw-翻译-Python-Low-Level-Physical-Media-Storage-Arc": "[Python] Low-Level Physical Media  Stora...",
+  "Raw-翻译-AINews-Death-of-Params-Zai-CEO-Jie-Tang-on": "[AINews] Death of Params Z.ai CEO Jie Ta...",
   "Raw-翻译-Young-Money-Launch-Week-Update": "Young Money Launch Week Update",
   "Raw-翻译-Yesterdays-eclipse-as-seen-from-Spain-simul": "Yesterdays eclipse as seen from Spain, s...",
   "Raw-翻译-Why-Chinas-AI-Bubble-Is-Also-Industrial-Pol": "Why Chinas AI Bubble Is Also Industrial ...",
