@@ -101,6 +101,7 @@ export default {
   "Auto-简报-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "【小Lin求职100问】Data Analyst和Quant的区别在哪儿Data...",
   "Auto-简报-attune-forms-is-now-on-PyPI-—-and-as-of-th": "attune-forms is now on PyPI — and as of ...",
   "Auto-简报-Python-Low-Level-Physical-Media-Storage-Ar": "[Python] Low-Level Physical Media  Stora...",
+  "Auto-简报-AINews-Memory-prices-up-500-in-12-months": "[AINews] Memory prices up 500 in 12 mont...",
   "Auto-简报-AINews-Death-of-Params-Zai-CEO-Jie-Tang-on": "[AINews] Death of Params Z.ai CEO Jie Ta...",
   "Auto-简报-Young-Money-Launch-Week-Update": "Young Money Launch Week Update",
   "Auto-简报-Yesterdays-eclipse-as-seen-from-Spain-simu": "Yesterdays eclipse as seen from Spain, s...",
