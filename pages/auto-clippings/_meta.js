@@ -1,5 +1,6 @@
 export default {
   "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
+  "Raw-逐字稿-We-Need-To-Talk-About-Leopold": "Raw_逐字稿_We Need To Talk About Leopold",
   "Raw-逐字稿-The-Insane-US-Japan-Currency-Bailout": "Raw_逐字稿_The Insane US-Japan Currency Bai...",
   "Raw-逐字稿-Stagflation-Explained": "Raw_逐字稿_Stagflation Explained",
   "Raw-逐字稿-Past-the-Point-of-No-Return": "Raw_逐字稿_Past the Point of No Return",
@@ -131,6 +132,7 @@ export default {
   "Auto-简报-Weekly-Dose-of-Optimism-206": "Weekly Dose of Optimism 206",
   "Auto-简报-Weekly-Dose-of-Optimism-205": "Weekly Dose of Optimism 205",
   "Auto-简报-We-Tracked-a-Shipment-of-Rare-Books-It-End": "We Tracked a Shipment of Rare Books. It ...",
+  "Auto-简报-We-Need-To-Talk-About-Leopold": "We Need To Talk About Leopold",
   "Auto-简报-Using-Local-Coding-Agents": "Using Local Coding Agents",
   "Auto-简报-Ultra-High-Interactivity-on-NVIDIA-GPUs-Ti": "Ultra-High Interactivity on NVIDIA GPUs ...",
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
