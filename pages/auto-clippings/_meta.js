@@ -150,6 +150,7 @@ export default {
   "Auto-简报-Taiwans-Modern-Miracle": "Taiwans Modern Miracle",
   "Auto-简报-TMLR-Relevance-and-Prestige-D": "TMLR Relevance and Prestige [D]",
   "Auto-简报-Stop-Just-Stop": "Stop, Just Stop",
+  "Auto-简报-Stagflation-Explained": "Stagflation Explained",
   "Auto-简报-Slapping-Windows-11-PCs-with-a-Copilot-key": "Slapping Windows 11 PCs with a Copilot k...",
   "Auto-简报-Saplings-Unstable-Ground": "Saplings Unstable Ground",
   "Auto-简报-Samsung-Foundry-updates-process-roadmap-to": "Samsung Foundry updates process roadmap ...",
