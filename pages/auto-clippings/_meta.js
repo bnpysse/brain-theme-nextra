@@ -148,6 +148,7 @@ export default {
   "Auto-简报-Qwen-38-27B-scores-52-on-the-Artificial-An": "Qwen 3.8 27B scores 52 on the Artificial...",
   "Auto-简报-Qwen-38-27B-Released-Please-Share-Your-Exp": "Qwen 3.8 27B Released Please Share Your ...",
   "Auto-简报-PayPal-Declined": "PayPal, Declined",
+  "Auto-简报-Past-the-Point-of-No-Return": "Past the Point of No Return",
   "Auto-简报-Over-Target": "Over Target",
   "Auto-简报-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
   "Auto-简报-North-Korean-Messiah": "North Korean Messiah",
