@@ -1,5 +1,6 @@
 export default {
   "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
+  "Raw-逐字稿-Stagflation-Explained": "Raw_逐字稿_Stagflation Explained",
   "Raw-逐字稿-Past-the-Point-of-No-Return": "Raw_逐字稿_Past the Point of No Return",
   "Raw-逐字稿-Different-Strengths-Different-Weaknesses": "Raw_逐字稿_Different Strengths  Different W...",
   "Raw-翻译-🎙️-How-I-AI-How-a-solo-founder-used-Codex-a": "🎙️ How I AI How a solo founder used Code...",
