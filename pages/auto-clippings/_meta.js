@@ -149,6 +149,7 @@ export default {
   "Raw-翻译-38x-in-Ten-Months-Inside-One-of-Fintechs-Fa": "38x in Ten Months Inside One of Fintechs...",
   "Raw-翻译-29-Year-Olds-Can-Write-Memoirs-Too": "29-Year-Olds Can Write Memoirs Too",
   "Raw-翻译-23-low-regret-recommendations-for-AI-policy": "23 low-regret recommendations for AI pol...",
+  "Raw-翻译-202634-App-Snore": "2026.34 App Snore",
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Raw-翻译-12B-of-US-ratepayers-money-wasted-on-a-mode": "$12B of US ratepayers money wasted on a ...",
   "Auto-简报-🎙️-How-I-AI-How-a-solo-founder-used-Codex": "🎙️ How I AI How a solo founder used Code...",
@@ -301,6 +302,7 @@ export default {
   "Auto-简报-38x-in-Ten-Months-Inside-One-of-Fintechs-F": "38x in Ten Months Inside One of Fintechs...",
   "Auto-简报-29-Year-Olds-Can-Write-Memoirs-Too": "29-Year-Olds Can Write Memoirs Too",
   "Auto-简报-23-low-regret-recommendations-for-AI-polic": "23 low-regret recommendations for AI pol...",
+  "Auto-简报-202634-App-Snore": "2026.34 App Snore",
   "Auto-简报-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Auto-简报-12B-of-US-ratepayers-money-wasted-on-a-mod": "$12B of US ratepayers money wasted on a ..."
 };
