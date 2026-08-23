@@ -348,6 +348,7 @@ export default {
   "Auto-简报-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Auto-简报-Mapped-Where-Young-Americans-Are-Buying-Ho": "Mapped Where Young Americans Are Buying ...",
   "Auto-简报-Mapped-Where-Homelessness-Rates-Are-Highes": "Mapped Where Homelessness Rates Are High...",
+  "Auto-简报-Malware-infects-Android-based-automotive-h": "Malware infects Android-based automotive...",
   "Auto-简报-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
   "Auto-简报-LiteLLM-YC-W23-Is-Hiring-–-Rust-Performanc": "LiteLLM YC W23 Is Hiring – Rust  Perform...",
   "Auto-简报-Leopolds-Fall": "Leopolds Fall",
