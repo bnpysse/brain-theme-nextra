@@ -134,6 +134,7 @@ export default {
   "Raw-翻译-More-than-just-code-review": "More than just code review",
   "Raw-翻译-MiniMax-Music3-released": "MiniMax-Music3 released!",
   "Raw-翻译-Markdown-SVG-upgrades": "Markdown SVG upgrades",
+  "Raw-翻译-Marginal-Rations": "Marginal Rations",
   "Raw-翻译-Mapped-Where-Young-Americans-Are-Buying-Hom": "Mapped Where Young Americans Are Buying ...",
   "Raw-翻译-Mapped-Where-Homelessness-Rates-Are-Highest": "Mapped Where Homelessness Rates Are High...",
   "Raw-翻译-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
