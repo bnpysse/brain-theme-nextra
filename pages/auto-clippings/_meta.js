@@ -190,6 +190,7 @@ export default {
   "Raw-翻译-Americas-Electricity-Gap": "Americas Electricity Gap",
   "Raw-翻译-All-You-Need-To-Know-About-Warsh": "All You Need To Know About Warsh",
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
+  "Raw-翻译-AI-时代的-Surface-Pro-7-改造指南：看板、轻量工作站与-Linux-笔": "AI 时代的 Surface Pro 7 改造指南：看板、轻量工作站与 Linu...",
   "Raw-翻译-AI-即将接管流量，而广告正在疯狂「末日反扑」": "AI 即将接管流量，而广告正在疯狂「末日反扑」",
   "Raw-翻译-AI-Got-Good-at-Language-Now-Its-Learning-th": "AI Got Good at Language. Now Its Learnin...",
   "Raw-翻译-A-shot-scraper-style-JSON-API-on-Bun-14s-ne": "A shot-scraper-style JSON API on Bun 1.4...",
