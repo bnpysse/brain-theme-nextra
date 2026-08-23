@@ -207,6 +207,7 @@ export default {
   "Auto-简报-日租60元，被索赔10万，全季起诉小旅馆，老板苦言：大公司就不能先发个律师函吗": "日租60元，被索赔10万，全季起诉小旅馆，老板苦言：大公司就不能先发个律师函吗",
   "Auto-简报-微信灰测「按住转文字」功能被吐槽；DeepSeek-上线多模态功能；应急机械拉手难操": "微信灰测「按住转文字」功能被吐槽；DeepSeek 上线多模态功能；应急机械拉手...",
   "Auto-简报-微信-猫笔刀-算一笔烂账": "微信_猫笔刀_算一笔烂账",
+  "Auto-简报-张丹丹在学术上是扶不起的，不要再强行挽尊了": "张丹丹在学术上是扶不起的，不要再强行挽尊了",
   "Auto-简报-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "【小Lin求职100问】Data Analyst和Quant的区别在哪儿Data...",
   "Auto-简报-smolmachines-smolvm-as-a-sandbox-for-untru": "smolmachines  smolvm as a sandbox for un...",
   "Auto-简报-llm-openrouter-07": "llm-openrouter 0.7",
