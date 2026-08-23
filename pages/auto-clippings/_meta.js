@@ -24,6 +24,7 @@ export default {
   "Raw-翻译-越会用-AI-的人，学习能力退化得越快": "越会用 AI 的人，学习能力退化得越快",
   "Raw-翻译-日租60元，被索赔10万，全季起诉小旅馆，老板苦言：大公司就不能先发个律师函吗": "日租60元，被索赔10万，全季起诉小旅馆，老板苦言：大公司就不能先发个律师函吗",
   "Raw-翻译-微信灰测「按住转文字」功能被吐槽；DeepSeek-上线多模态功能；应急机械拉手难操作": "微信灰测「按住转文字」功能被吐槽；DeepSeek 上线多模态功能；应急机械拉手...",
+  "Raw-翻译-张丹丹在学术上是扶不起的，不要再强行挽尊了": "张丹丹在学术上是扶不起的，不要再强行挽尊了",
   "Raw-翻译-smolmachines-smolvm-as-a-sandbox-for-untrus": "smolmachines  smolvm as a sandbox for un...",
   "Raw-翻译-llm-openrouter-07": "llm-openrouter 0.7",
   "Raw-翻译-llm-033": "llm 0.33",
