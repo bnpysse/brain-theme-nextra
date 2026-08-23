@@ -139,6 +139,7 @@ export default {
   "Raw-翻译-Marginal-Rations": "Marginal Rations",
   "Raw-翻译-Mapped-Where-Young-Americans-Are-Buying-Hom": "Mapped Where Young Americans Are Buying ...",
   "Raw-翻译-Mapped-Where-Homelessness-Rates-Are-Highest": "Mapped Where Homelessness Rates Are High...",
+  "Raw-翻译-Malware-infects-Android-based-automotive-he": "Malware infects Android-based automotive...",
   "Raw-翻译-Made-a-cake-for-my-boyfriends-birthday": "Made a cake for my boyfriends birthday",
   "Raw-翻译-LiteLLM-YC-W23-Is-Hiring-–-Rust-Performance": "LiteLLM YC W23 Is Hiring – Rust  Perform...",
   "Raw-翻译-Leopolds-Fall": "Leopolds Fall",
