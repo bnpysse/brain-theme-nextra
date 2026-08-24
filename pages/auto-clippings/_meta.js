@@ -255,6 +255,7 @@ export default {
   "Raw-翻译-23-low-regret-recommendations-for-AI-policy": "23 low-regret recommendations for AI pol...",
   "Raw-翻译-202634-App-Snore": "2026.34 App Snore",
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
+  "Raw-翻译-130-亿美元，Hugging-Face-要卖了": "130 亿美元，Hugging Face 要卖了",
   "Raw-翻译-12B-of-US-ratepayers-money-wasted-on-a-mode": "$12B of US ratepayers money wasted on a ...",
   "Raw-微信-猫笔刀-算一笔烂账": "Raw_微信_猫笔刀_算一笔烂账",
   "Auto-简报-🧠-Community-Wisdom-Favorite-Lennys-Product": "🧠 Community Wisdom Favorite Lennys Produ...",
@@ -502,5 +503,6 @@ export default {
   "Auto-简报-23-low-regret-recommendations-for-AI-polic": "23 low-regret recommendations for AI pol...",
   "Auto-简报-202634-App-Snore": "2026.34 App Snore",
   "Auto-简报-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
+  "Auto-简报-130-亿美元，Hugging-Face-要卖了": "130 亿美元，Hugging Face 要卖了",
   "Auto-简报-12B-of-US-ratepayers-money-wasted-on-a-mod": "$12B of US ratepayers money wasted on a ..."
 };
