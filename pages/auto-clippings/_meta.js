@@ -386,6 +386,7 @@ export default {
   "Auto-简报-Ultra-High-Interactivity-on-NVIDIA-GPUs-Ti": "Ultra-High Interactivity on NVIDIA GPUs ...",
   "Auto-简报-Trained-a-15B-to-write-shell-commands-so-I": "Trained a 1.5B to write shell commands s...",
   "Auto-简报-Tragically-as-many-as-9625-out-of-every-10": "Tragically, as many as 9625 out of every...",
+  "Auto-简报-TikTok-同意支付-4-亿美元和解美国儿童隐私诉讼": "TikTok 同意支付 4 亿美元和解美国儿童隐私诉讼",
   "Auto-简报-This-new-startup-can-query-anywhere-youve": "This new startup can query anywhere youv...",
   "Auto-简报-This-is-a-great-sub-regardless-of-what-com": "This is a great sub, regardless of what ...",
   "Auto-简报-The-wayfinder-Skill-Navigating-the-Fog-of": "The wayfinder Skill Navigating the Fog o...",
