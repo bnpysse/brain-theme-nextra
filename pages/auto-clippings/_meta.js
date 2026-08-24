@@ -585,6 +585,7 @@ export default {
   "Auto-简报-AI-时代的-Surface-Pro-7-改造指南：看板、轻量工作站与-Linux": "AI 时代的 Surface Pro 7 改造指南：看板、轻量工作站与 Linu...",
   "Auto-简报-AI-即将接管流量，而广告正在疯狂「末日反扑」": "AI 即将接管流量，而广告正在疯狂「末日反扑」",
   "Auto-简报-AI-助力改造非智能升降桌：智能升降、语音控制、多端联动……": "AI 助力改造非智能升降桌：智能升降、语音控制、多端联动……",
+  "Auto-简报-AI-for-Science最难学会的，是换一个问题": "AI for Science最难学会的，是换一个问题",
   "Auto-简报-AI-Got-Good-at-Language-Now-Its-Learning-t": "AI Got Good at Language. Now Its Learnin...",
   "Auto-简报-A-shot-scraper-style-JSON-API-on-Bun-14s-n": "A shot-scraper-style JSON API on Bun 1.4...",
   "Auto-简报-A-preliminary-Qwen38-27B-model-card-is-liv": "A preliminary Qwen3.8-27B model card is ...",
