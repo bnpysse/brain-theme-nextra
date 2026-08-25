@@ -94,6 +94,7 @@ export default {
   "Raw-翻译-llm-033": "llm 0.33",
   "Raw-翻译-llm-0321": "llm 0.32.1",
   "Raw-翻译-iOS开放生态是中国AI参与国际竞争的基础设施": "iOS开放生态是中国AI参与国际竞争的基础设施",
+  "Raw-翻译-iCloud-Hide-My-Email-addresses-will-remain": "iCloud Hide My Email addresses will rema...",
   "Raw-翻译-hdiutil-is-deprecated-in-macOS-27-Golden-Ga": "hdiutil is deprecated in macOS 27 Golden...",
   "Raw-翻译-attune-forms-is-now-on-PyPI-—-and-as-of-thi": "attune-forms is now on PyPI — and as of ...",
   "Raw-翻译-Python-Low-Level-Physical-Media-Storage-Arc": "[Python] Low-Level Physical Media  Stora...",
