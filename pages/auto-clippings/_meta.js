@@ -560,6 +560,7 @@ export default {
   "Auto-简报-Github-affaan-m-ECC": "Github__affaan-m_ECC",
   "Auto-简报-Github-Wei-Shaw-sub2api": "Github__Wei-Shaw_sub2api",
   "Auto-简报-Github-AprilNEA-OpenLogi": "Github__AprilNEA_OpenLogi",
+  "Auto-简报-Github-Alishahryar1-free-claude-code": "Github__Alishahryar1_free-claude-code",
   "Auto-简报-Gen15-模型带来重要进展：物理-AI-正在接近-GPT3-时刻": "Gen1.5 模型带来重要进展：物理 AI 正在接近 GPT3 时刻",
   "Auto-简报-GLM-53-How-Chinese-labs-keep-stride-with-t": "GLM-5.3 How Chinese labs keep stride wit...",
   "Auto-简报-GLM-53-Released": "GLM 5.3 Released",
