@@ -201,6 +201,7 @@ export default {
   "Raw-翻译-NetBSD-and-My-Life-2005": "NetBSD and My Life 2005",
   "Raw-翻译-NanoGPT-Speedrun-Frontier": "NanoGPT Speedrun Frontier",
   "Raw-翻译-More-than-just-code-review": "More than just code review",
+  "Raw-翻译-Moon-2024": "Moon 2024",
   "Raw-翻译-MiniMax-Music3-released": "MiniMax-Music3 released!",
   "Raw-翻译-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Raw-翻译-Marginal-Rations": "Marginal Rations",
