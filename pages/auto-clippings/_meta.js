@@ -319,6 +319,7 @@ export default {
   "Auto-简报-🧠-Community-Wisdom-Favorite-Lennys-Product": "🧠 Community Wisdom Favorite Lennys Produ...",
   "Auto-简报-🎙️-How-I-AI-How-a-solo-founder-used-Codex": "🎙️ How I AI How a solo founder used Code...",
   "Auto-简报-🎙️-How-I-AI-Grok-Bot-Grok-46—whats-great-a": "🎙️ How I AI Grok Bot  Grok 4.6—whats gre...",
+  "Auto-简报-饮料厂商，谨慎造新": "饮料厂商，谨慎造新",
   "Auto-简报-飞书连降2级背后，是字节看透了中国ToB的真相": "飞书连降2级背后，是字节看透了中国ToB的真相",
   "Auto-简报-零食占座争议背后，是国人对火车票的深情与怨念": "零食占座争议背后，是国人对火车票的深情与怨念",
   "Auto-简报-離婚、智能手機與管控——BBC觀察塔利班如何治理阿富汗": "離婚、智能手機與管控——BBC觀察塔利班如何治理阿富汗",
