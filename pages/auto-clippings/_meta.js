@@ -448,6 +448,7 @@ export default {
   "Auto-简报-「AstraTennis」时刻：机器人在全球直播中打了一场真正的网球": "「AstraTennis」时刻：机器人在全球直播中打了一场真正的网球",
   "Auto-简报-《道路交通安全法》拟大改：「电鸡」限速上调至-20kmh，将严管「暴走团」占道": "《道路交通安全法》拟大改：「电鸡」限速上调至 20kmh，将严管「暴走团」占道",
   "Auto-简报-《有头有脸的大模型公司，集体搞起「匿名公测」》": "《有头有脸的大模型公司，集体搞起「匿名公测」》",
+  "Auto-简报-《奥德赛》的焦虑，确实是一种新中产身份证": "《奥德赛》的焦虑，确实是一种新中产身份证",
   "Auto-简报-主权AI与词元出海：当中美AI走向全球市场": "主权AI与词元出海：当中美AI走向全球市场",
   "Auto-简报-The-All-Spark-Cluster-Upgrading-from-16-36": "The All Spark Cluster Upgrading from 16 ...",
   "Auto-简报-smolmachines-smolvm-as-a-sandbox-for-untru": "smolmachines  smolvm as a sandbox for un...",
