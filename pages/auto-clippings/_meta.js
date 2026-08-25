@@ -381,6 +381,7 @@ export default {
   "Auto-简报-llm-033": "llm 0.33",
   "Auto-简报-llm-0321": "llm 0.32.1",
   "Auto-简报-iOS开放生态是中国AI参与国际竞争的基础设施": "iOS开放生态是中国AI参与国际竞争的基础设施",
+  "Auto-简报-iCloud-Hide-My-Email-addresses-will-remain": "iCloud Hide My Email addresses will rema...",
   "Auto-简报-hdiutil-is-deprecated-in-macOS-27-Golden-G": "hdiutil is deprecated in macOS 27 Golden...",
   "Auto-简报-attune-forms-is-now-on-PyPI-—-and-as-of-th": "attune-forms is now on PyPI — and as of ...",
   "Auto-简报-Python-Low-Level-Physical-Media-Storage-Ar": "[Python] Low-Level Physical Media  Stora...",
