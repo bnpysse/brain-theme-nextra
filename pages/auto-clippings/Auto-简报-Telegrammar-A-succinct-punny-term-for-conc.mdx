@@ -1,0 +1,18 @@
+---
+title: "Telegrammar - A succinct, punny term for concise, efficient_简报"
+tags: ["Reddit_热榜", "r_CursorAI"]
+---
+
+# CursorAI 社区情报简报：关于优化 AI 回复简洁性的 Prompt 工程实践
+
+## TL;DR
+Reddit 用户分享了一个名为“Telegrammar（电报语法）”的创新 Prompt 术语，旨在解决 AI 回复过于冗长的问题；该术语能有效引导 AI 输出极简、高效且清晰的文本，同时巧妙避免了使用“穴居人”或“军事风格”等词汇时引发的 AI 角色扮演（语境偏移）问题，为优化 Cursor 等 AI 编程助手的系统指令（如 `.cursorrules`）提供了极具实用价值的命名与策略参考。
+
+## 核心观点与技术细节
+* **创新 Prompt 术语定义**：“Telegrammar（电报语法）”被定义为一种追求极致信息压缩、最小化字数但不牺牲清晰度的回复语法。它允许在必要时牺牲严格的语法正确性，以实现最高效的技术沟通。
+* **规避 Prompt 语义污染（角色扮演陷阱）**：在设定 AI 输出风格时，应严格避免使用带有强烈角色或文化色彩的提示词（如 *"caveman speak"* 穴居人语 或 *"military communication style"* 军事通讯风格）。这类词汇会触发大语言模型的角色扮演（Role-playing）机制，导致 AI 模仿特定人物语气（如原始人或将军），从而污染技术输出的专业性。
+* **系统指令（System Prompt/Rules）优化策略**：通过建立专门的规则文件（如 Cursor 的 `.cursorrules`）来全局过滤和规范 AI 的响应类型。使用中性、具象且无角色绑定风险的隐喻词汇（如 Telegrammar），能够更精准地控制 AI 的输出语法（Syntax），使其专注于信息密度的提升而非语气模仿。
+
+## 核心痛点
+1. **AI 默认回复过度冗长（Verbosity）**：AI 模型在默认设置下倾向于生成详尽但充满废话的回答，导致开发者在阅读和提取关键技术信息时面临较高的认知负荷，严重拖慢了工作流（"slogging through responses a chore"）。
+2. **风格控制导致的语境偏移（Context Drift）**：开发者在尝试通过 Prompt 限制 AI 字数时，常因提示词选择不当导致 AI 陷入角色扮演。这使得输出的代码解释或技术建议夹杂无关的语气、口癖和角色设定，破坏了技术沟通的严谨性，降低了内容的直接可用性。
