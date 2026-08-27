@@ -578,6 +578,7 @@ export default {
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Raw-翻译-130-亿美元，Hugging-Face-要卖了": "130 亿美元，Hugging Face 要卖了",
   "Raw-翻译-129-亿美元，英伟达拿下-Hugging-Face": "129 亿美元，英伟达拿下 Hugging Face",
+  "Raw-翻译-900M-paid-out-to-end-wind-farm-project-goin": "$900M paid out to end wind farm project ...",
   "Raw-翻译-12B-of-US-ratepayers-money-wasted-on-a-mode": "$12B of US ratepayers money wasted on a ...",
   "Raw-微信-猫笔刀-算一笔烂账": "Raw_微信_猫笔刀_算一笔烂账",
   "Auto-简报-🧠-Community-Wisdom-Favorite-Lennys-Product": "🧠 Community Wisdom Favorite Lennys Produ...",
@@ -1143,5 +1144,6 @@ export default {
   "Auto-简报-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Auto-简报-130-亿美元，Hugging-Face-要卖了": "130 亿美元，Hugging Face 要卖了",
   "Auto-简报-129-亿美元，英伟达拿下-Hugging-Face": "129 亿美元，英伟达拿下 Hugging Face",
+  "Auto-简报-900M-paid-out-to-end-wind-farm-project-goi": "$900M paid out to end wind farm project ...",
   "Auto-简报-12B-of-US-ratepayers-money-wasted-on-a-mod": "$12B of US ratepayers money wasted on a ..."
 };
