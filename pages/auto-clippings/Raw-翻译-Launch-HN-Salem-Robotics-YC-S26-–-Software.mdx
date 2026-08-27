@@ -1,0 +1,48 @@
+---
+title: "Launch HN Salem Robotics YC S26 – Software for industrial in_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Launch HN: Salem Robotics (YC S26) – Software for industrial inspection robots  
+【文章标题】：发布HN：Salem Robotics（YC S26）——工业检测机器人软件  
+
+【文章正文】：  
+|  | Hacker Newsnew \| past \| comments \| ask \| show \| jobs \| submit | login |  
+|  | 黑客新闻new \| past \| comments \| ask \| show \| jobs \| submit | 登录 |  
+|  |  | Launch HN: Salem Robotics (YC S26) – Software for industrial inspection robots |  
+|  |  | 发布HN：Salem Robotics（YC S26）——工业检测机器人软件 |  
+|  |  | 3 points by Salem_robotics 14 minutes ago \| hide \| past \| favorite \| discuss |  
+|  |  | 3分 by Salem_robotics 14分钟前 \| 隐藏 \| 过去 \| 收藏 \| 讨论 |  
+
+Hi HN, we're the founders of Salem Robotics (https://salemroboticsinc.com). We give existing mobile robots the task-specific intelligence to carry out surveys and physically interactive inspections in hazardous industrial facilities. Here's a video of it running on real robot hardware with a few words from us: https://youtu.be/U_228h3NE7c  
+大家好，我们是Salem Robotics的创始人（https://salemroboticsinc.com）。我们为现有的移动机器人提供任务专用智能，使其能在危险工业设施中执行巡检和物理交互检测。这是我们系统在真实机器人硬件上运行的视频及我们的简短介绍：https://youtu.be/U_228h3NE7c  
+
+We came to Salem through robotics research at UT Austin and a combined 15 years working in nuclear, including about 10 years developing and deploying autonomous robots at Los Alamos National Laboratory. Over the last five years, we kept running into the same gap: robot hardware had become very capable, but making a robot carry out a complete industrial procedure still required a surprising amount of robotics work and manual intervention.  
+我们因在UT Austin的机器人研究以及合计15年的核工业工作经验（包括在洛斯阿拉莫斯国家实验室约10年的自主机器人开发部署经历）而创立Salem。过去五年里，我们反复遇到同一个问题：机器人硬件已非常强大，但让机器人完整执行工业流程仍需要惊人的机器人学工作和人工干预。  
+
+The part that interested us most was manipulation. A nuclear contamination survey, for example, can require taking a "smear": wiping a defined area of a surface so it can be checked for removable radioactive contamination. In an oil, gas, or chemical facility, an LDAR (leak detection and repair) inspection can require moving a detector around a particular valve, flange, or connection. Other inspections require positioning an instrument at a precise location and orientation relative to a pipe or piece of equipment.  
+最让我们感兴趣的是操控部分。例如核污染检测可能需要"擦拭采样"：擦拭表面特定区域以检测可去除的放射性污染。在石油、天然气或化工厂，LDAR（泄漏检测与修复）检查需要将探测器围绕特定阀门、法兰或连接件移动。其他检测则要求将仪器精确定位到相对于管道或设备的特定位置和朝向。  
+
+These are easy tasks to compress into verbs like "wipe", "measure", or "inspect", but considerably harder to make a robot do reliably. A probe might need to remain normal to a surface throughout a path, stay within a narrow offset from a pipe, or trace a region while maintaining a particular end-effector orientation. The planner has to find a feasible motion while respecting the task geometry, manipulator kinematics, joint limits, collisions, and the environment around it. We work down to joint-level control for those interactions.  
+这些任务虽可简化为"擦拭"、"测量"或"检测"等动词，但让机器人可靠执行却困难得多。探头可能需要在路径中始终垂直于表面，保持与管道的微小偏移，或在维持特定末端执行器朝向的情况下扫描区域。规划器必须找到满足任务几何、机械臂运动学、关节限制、碰撞规避及周边环境的可行运动。我们为此实现了关节级控制。  
+
+One problem we've spent a lot of time on is generating constrained manipulation plans quickly enough that they can be based on the geometry the robot actually observes instead of requiring someone to carefully author a trajectory for every individual surface, valve, or flange. The physical world makes this annoying. A few centimeters of error may not matter much when navigating down a hallway, but it matters if a sensor is supposed to remain normal to a curved surface.  
+我们投入大量时间解决的一个问题是快速生成受约束的操控方案，使其能基于机器人实际观测的几何形状，而非需要人工为每个表面、阀门或法兰精心设计轨迹。现实世界让这变得棘手——在走廊导航时几厘米误差可能无关紧要，但若传感器需保持垂直于曲面时就很关键。  
+
+And successfully executing a trajectory doesn't necessarily mean the inspection worked. The detector could be misaligned, contact could be wrong, the geometry could differ from the model, or the measurement itself could be invalid. We care about closing that loop around the inspection result, not just whether the arm reached the commanded pose.  
+成功执行轨迹也不意味着检测有效。探测器可能错位、接触不当、几何形状与模型不符，或测量本身无效。我们关注的是围绕检测结果的闭环验证，而不仅是机械臂是否到达指令位姿。  
+
+Our approach is a combination of AI and classical robotics. A lot of robotics research and industry attention right now is going toward increasingly end-to-end learned systems, particularly around humanoids. Working in safety-critical environments has made us appreciate how relevant classical approaches still are when you want explicit constraints, predictable behavior, and theoretical guarantees about what a robot can and cannot do.  
+我们的方法结合了AI与传统机器人技术。当前大量机器人研究和产业关注都投向端到端学习系统（尤其是人形机器人）。在安全关键环境的工作经历让我们认识到：当需要明确约束、可预测行为及机器人能力边界的理论保证时，传统方法依然不可替代。  
+
+We use AI where semantic understanding and flexibility are useful, such as interpreting less structured information or understanding what in an unfamiliar scene is relevant to a procedure. Once the system knows what physical interaction it needs to perform, we prefer explicit geometry, planning, optimization, and control where possible. We're interested in the marriage between the two rather than trying to make every part of the robotics stack learned.  
+我们在需要语义理解和灵活性的场景（如解读非结构化信息或识别陌生场景中与流程相关的要素）使用AI。一旦系统明确需要执行的物理交互，我们更倾向于采用显式几何、规划、优化和控制方法。我们追求二者的融合，而非让机器人技术栈的每个部分都依赖学习。  
+
+The other idea behind Salem is that we don't think every useful robot application should require building a new robot. Companies like Boston Dynamics are getting very good at building increasingly capable hardware platforms. We think there is room for a domain-specific application layer on top of that hardware. The same underlying robot might perform nuclear radiological surveys in one facility and LDAR inspections in another, but the procedures, sensors, manipulation constraints, success conditions, and outputs are different.  
+Salem的另一理念是：并非每个实用机器人应用都需要新建机器人。像波士顿动力这样的公司已非常擅长构建日益强大的硬件平台。我们认为在硬件之上存在领域专用应用层的空间——同一款基础机器人可能在某设施执行核辐射检测，在另一设施进行LDAR检查，但流程、传感器、操控约束、成功条件和输出都不同。  
+
+That's also why we're hardware agnostic. We don't expect one robot to be the best platform forever, and facilities already own different hardware. We'd rather describe an inspection in terms of what needs to happen and then map that onto the capabilities of the right robot for the job.  
+这也是我们保持硬件中立的原因。我们不认为某款机器人能永远是最佳平台，且各设施已配备不同硬件。我们更倾向于用"需要完成什么"来描述检测任务，再将其映射到适合该任务的机器人能力上。  
+
+One thing that surprised us after spending more time with facilities is how manual many inspection workflows still are. In sophisticated nuclear and industrial sites, people still physically walk survey routes, take measurements one at a time, visually i  
+与设施深入接触后让我们惊讶的是：许多检测流程仍高度依赖人工。在先进的核设施和工业现场，人们仍亲自走检测路线、逐点测量、通过视觉检...（原文截断）
