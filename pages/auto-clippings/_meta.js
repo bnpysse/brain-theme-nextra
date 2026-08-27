@@ -119,6 +119,7 @@ export default {
   "Raw-翻译-微软画图和照片应用生成的图像嵌入了看不见的水印": "微软画图和照片应用生成的图像嵌入了看不见的水印",
   "Raw-翻译-微软删除了逾-17-万非营利组织的数据": "微软删除了逾 17 万非营利组织的数据",
   "Raw-翻译-微信灰测「按住转文字」功能被吐槽；DeepSeek-上线多模态功能；应急机械拉手难操作": "微信灰测「按住转文字」功能被吐槽；DeepSeek 上线多模态功能；应急机械拉手...",
+  "Raw-翻译-影响了两代人后，Meta-被判赔-180-亿美元": "影响了两代人后，Meta 被判赔 180 亿美元",
   "Raw-翻译-当人形机器人还在学步，四足机器人已经开始领工资了": "当人形机器人还在学步，四足机器人已经开始领工资了",
   "Raw-翻译-当亲手写代码开始被叫作古法编程": "当亲手写代码开始被叫作古法编程",
   "Raw-翻译-当AI开始抽佣：下一代入口的商业模式困局": "当AI开始抽佣：下一代入口的商业模式困局",
@@ -524,6 +525,7 @@ export default {
   "Raw-翻译-202634-App-Snore": "2026.34 App Snore",
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Raw-翻译-130-亿美元，Hugging-Face-要卖了": "130 亿美元，Hugging Face 要卖了",
+  "Raw-翻译-129-亿美元，英伟达拿下-Hugging-Face": "129 亿美元，英伟达拿下 Hugging Face",
   "Raw-翻译-12B-of-US-ratepayers-money-wasted-on-a-mode": "$12B of US ratepayers money wasted on a ...",
   "Raw-微信-猫笔刀-算一笔烂账": "Raw_微信_猫笔刀_算一笔烂账",
   "Auto-简报-🧠-Community-Wisdom-Favorite-Lennys-Product": "🧠 Community Wisdom Favorite Lennys Produ...",
@@ -618,6 +620,7 @@ export default {
   "Auto-简报-微软画图和照片应用生成的图像嵌入了看不见的水印": "微软画图和照片应用生成的图像嵌入了看不见的水印",
   "Auto-简报-微信灰测「按住转文字」功能被吐槽；DeepSeek-上线多模态功能；应急机械拉手难操": "微信灰测「按住转文字」功能被吐槽；DeepSeek 上线多模态功能；应急机械拉手...",
   "Auto-简报-微信-猫笔刀-算一笔烂账": "微信_猫笔刀_算一笔烂账",
+  "Auto-简报-影响了两代人后，Meta-被判赔-180-亿美元": "影响了两代人后，Meta 被判赔 180 亿美元",
   "Auto-简报-当人形机器人还在学步，四足机器人已经开始领工资了": "当人形机器人还在学步，四足机器人已经开始领工资了",
   "Auto-简报-当亲手写代码开始被叫作古法编程": "当亲手写代码开始被叫作古法编程",
   "Auto-简报-当AI开始抽佣：下一代入口的商业模式困局": "当AI开始抽佣：下一代入口的商业模式困局",
@@ -1035,5 +1038,6 @@ export default {
   "Auto-简报-202634-App-Snore": "2026.34 App Snore",
   "Auto-简报-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Auto-简报-130-亿美元，Hugging-Face-要卖了": "130 亿美元，Hugging Face 要卖了",
+  "Auto-简报-129-亿美元，英伟达拿下-Hugging-Face": "129 亿美元，英伟达拿下 Hugging Face",
   "Auto-简报-12B-of-US-ratepayers-money-wasted-on-a-mod": "$12B of US ratepayers money wasted on a ..."
 };
