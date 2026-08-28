@@ -1,0 +1,126 @@
+---
+title: "Show HN OpenTIE and OpenXWA, Modern Ports of Tie Fighter and_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: OpenTIE and OpenXWA, Modern Ports of Tie Fighter and X-Wing Alliance
+【文章标题】：技术展示：OpenTIE与OpenXWA——《钛战机》与《X翼同盟》的现代移植版
+
+【文章正文】：
+OpenTIE is an open-source reimplementation of Star Wars: TIE Fighter for Windows, macOS, and Linux. It runs the original game data natively on current systems and supports both the 1995 Collector's CD-ROM and the 1998 Windows release.
+OpenTIE是《星球大战：钛战机》的开源重制版，支持Windows、macOS和Linux平台。它能在现代系统上原生运行原始游戏数据，兼容1995年典藏版CD-ROM和1998年Windows发行版。
+
+With both editions installed, OpenTIE can combine the 1995 menus, cutscenes, and adaptive iMUSE soundtrack with the 1998 flight simulation and 3D assets.
+安装双版本后，OpenTIE可将1995版的菜单、过场动画和自适应iMUSE音轨与1998版的飞行模拟及3D资源相结合。
+
+Important
+重要提示
+OpenTIE does not include any content from the original game. A complete installation of at least one supported edition is required. Install both editions to use the recommended combination.
+OpenTIE不包含原版游戏任何内容。需至少完整安装一个支持版本，推荐安装双版本以获得最佳组合体验。
+
+Star Wars: TIE Fighter Special Edition is available from GOG and Steam.
+《星球大战：钛战机特别版》可在GOG和Steam平台获取。
+
+The 1995 and 1998 releases each have their own presentation, flight simulation, and soundtrack. OpenTIE lets the menus and cutscenes, flight simulation, and music be selected independently.
+1995与1998版本各自拥有独特的界面、飞行模拟和音轨系统。OpenTIE允许独立选择菜单过场、飞行模拟和音乐组件。
+
+The recommended configuration combines:
+推荐配置组合：
+- the 1995 menus and cutscenes
+- 1995版菜单与过场动画
+- the 1998 flight simulation and 3D assets
+- 1998版飞行模拟与3D资源
+- the adaptive 1995 iMUSE soundtrack
+- 1995版自适应iMUSE音轨
+
+This retains the 1998 flight presentation without giving up the interactive music of the Collector's CD-ROM. Either supported edition can also be played on its own.
+该配置在保留1998版飞行表现的同时，不牺牲典藏版CD-ROM的交互式音乐。两个版本也可独立运行。
+
+OpenTIE reimplements the adaptive iMUSE soundtrack from the 1995 Collector's CD-ROM. The music responds to mission events and moves seamlessly between themes during flight.
+OpenTIE重构了1995典藏版的自适应iMUSE音轨系统，音乐能响应任务事件并在飞行中无缝切换主题。
+
+OpenTIE can emulate Roland SC-55 Sound Canvas, the hardware for which the game’s music was originally composed. This requires compatible SC-55 ROMs supplied by the user.
+支持模拟原版音乐创作硬件Roland SC-55音源，需用户自备兼容的SC-55 ROM文件。
+
+Built-in Sound Blaster-compatible OPL3 emulation is available for the classic FM-synth sound, while FluidSynth can play the soundtrack with a user-selected SoundFont.
+内置Sound Blaster兼容的OPL3模拟器可呈现经典FM合成音效，FluidSynth则支持用户自选SoundFont播放音轨。
+
+The original prerecorded TIE98 music remains available when the complete 1998 experience is preferred.
+当选择完整1998版体验时，仍可使用原版预录制的TIE98音乐。
+
+OpenTIE offers classic and modern graphics modes. Classic mode preserves the original presentation, while modern mode combines the original models and cockpit artwork with high-resolution rendering and substantially more advanced lighting.
+提供经典与现代图形模式：经典模式保留原始画面，现代模式则在原版模型与座舱美术基础上，实现高分辨率渲染和更先进的光照系统。
+
+Modern graphics include:
+现代图形特性包含：
+- shadows, ambient occlusion, and bloom
+- 阴影、环境光遮蔽与泛光效果
+- motion blur
+- 动态模糊
+- MSAA and AMD FidelityFX FSR 3.1.4 anti-aliasing and upscaling
+- 多重采样抗锯齿与AMD FidelityFX FSR 3.1.4超分辨率技术
+- HDR output
+- HDR输出
+
+Press TAB while the game is running to switch between classic and modern graphics.
+游戏中按TAB键可实时切换经典/现代画面模式。
+
+Flight simulation can update at up to 240 Hz to match modern high-refresh-rate displays, providing smoother motion and more responsive controls. The original TIE95 and TIE98 timing modes remain available when their exact behavior is preferred.
+飞行模拟最高支持240Hz刷新率，适配现代高刷显示器，带来更流畅动态和灵敏操控。仍可启用原版TIE95/TIE98时序模式以还原精确行为。
+
+Modern gamepads and joysticks are supported and can be configured from OpenTIE's settings.
+支持现代游戏手柄/摇杆，可通过OpenTIE设置进行配置。
+
+- Download the latest package for your platform from GitHub Releases.
+- 从GitHub Releases下载对应平台最新安装包
+- Extract or install the package and launch OpenTIE.
+- 解压/安装后启动OpenTIE
+- Select the complete TIE95 and/or TIE98 installation folders when prompted.
+- 按提示选择完整的TIE95/TIE98安装目录
+- If both editions are available, select the recommended configuration to combine the 1995 presentation and music with the 1998 flight experience.
+- 若双版本俱备，选择推荐配置以融合1995版界面音乐与1998版飞行体验
+
+OpenTIE validates the selected installations, remembers them for future launches, and imports compatible existing pilot files during initial setup.
+OpenTIE会验证安装文件，记忆配置供后续启动，并在初始化时导入兼容的已有飞行员存档。
+
+To access OpenTIE settings from the concourse, press ESC and select OpenTIE Settings. During flight, press ESC to open them directly.
+在基地界面按ESC选择"OpenTIE设置"，飞行中直接按ESC即可唤出。
+
+Useful shortcuts:
+实用快捷键：
+| Key | Action | 
+|---|---|
+| TAB | Switch between classic and modern graphics | 
+| TAB键 | 切换经典/现代图形模式 |
+
+| Platform | Target | Graphics backend | 
+|---|---|---|
+| 平台 | 目标架构 | 图形后端 | 
+| Windows | x86-64 | Direct3D 12或Vulkan | 
+| macOS | macOS 13+; arm64/x86-64 | Metal | 
+| Linux | x86-64; glibc 2.35+ | Vulkan | 
+
+OpenTIE remains under active development. Bugs and differences from the original releases are still possible.
+OpenTIE仍在积极开发中，可能存在与原版的差异或缺陷。
+
+Fans of Totally Games’ space simulators may also be interested in OpenXWA, an open-source reimplementation of Star Wars: X-Wing Alliance for Windows, macOS, and Linux.
+Totally Games太空模拟游戏粉丝可能也对OpenXWA感兴趣——这是《星球大战：X翼同盟》的开源重制版，支持Windows/macOS/Linux。
+
+Join the TotallyOpen Discord server to discuss OpenTIE, OpenXWA, development, and the Totally Games flight simulators.
+欢迎加入TotallyOpen Discord服务器讨论OpenTIE、OpenXWA开发及Totally Games飞行模拟系列。
+
+System requirements:
+系统需求：
+- a 64-bit system with a modern GPU
+- 64位系统及现代显卡
+- a complete installation of the 1995 Collector's CD-ROM or the 1998 Windows release
+- 完整安装1995典藏版CD-ROM或1998 Windows版
+
+Release packages include the required runtime libraries. Keep the executable, libraries, resources, and shader directories together when moving an installation.
+发行包包含必要运行时库，迁移安装时请保持可执行文件、库文件、资源与着色器目录结构完整。
+
+The build requires CMake 3.23 or later, a C/C++ toolchain, SDL3 3.4, zstd, FFmpeg, and SDL_shadercross. Release packaging pins its dependencies, including SDL3 3.4.14, and provides the reference for reproducible builds.
+编译需CMake 3.23+、C/C++工具链、SDL3 3.4、zstd、FFmpeg及SDL_shadercross。发行包固定依赖版本（如SDL3 3.4.14）以确保构建可复现。
+
+Platform-specific instructions are available for Windows, macOS, and Linux.
+各平台专属说明详见Windows、macOS和Linux文档。
