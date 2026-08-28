@@ -1,0 +1,31 @@
+---
+title: "I got tired of Cursor usage extensions asking for my session_简报"
+tags: ["Reddit_热榜", "r_CursorAI"]
+---
+
+```markdown
+# 技术情报简报：CursorAI 社区自制用量统计插件
+
+## TL;DR
+开发者因不满现有Cursor统计插件需获取用户会话令牌的安全隐患，自主开发了复用现有会话的轻量级插件，可展示用量比例和消费金额，代码已开源但属非官方方案。
+
+## 核心观点/技术细节
+- **安全改进**：避免传统方案需手动提取`WorkosCursorSessionToken`的高风险操作
+- **数据维度**：
+  - Cursor自动/编辑器用量（Auto/Composer）
+  - 第三方API模型用量
+  - 实时按需消费金额（On-demand spending）
+- **技术实现**：通过浏览器扩展直接读取现有会话数据
+- **部署渠道**：
+  - GitHub开源（MIT License）
+  - Open VSX扩展市场
+- **风险提示**：非官方方案可能因Cursor接口变更失效
+
+## 核心痛点
+1. **安全风险**：现有插件要求用户暴露会话令牌（Session Token），存在敏感凭证泄露隐患
+2. **用户体验**：需要手动操作开发者工具获取Token，流程繁琐
+3. **透明度缺失**：缺乏轻量、透明的用量监控方案
+4. **信任问题**：第三方插件获取高权限凭证引发的信任危机
+``` 
+
+（注：简报基于v0.1.0版本代码分析，主要依赖Cursor网页端的localStorage数据读取，未涉及深度逆向工程。建议企业用户关注该方案可能触发的数据合规审查点。）
