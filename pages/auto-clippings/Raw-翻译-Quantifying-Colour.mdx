@@ -1,0 +1,83 @@
+---
+title: "Quantifying Colour_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Quantifying Colour  
+【文章标题】：色彩的量化  
+
+【文章正文】：  
+Quantifying Colour  
+色彩的量化  
+
+There are billions of monitors worldwide that can reproduce the exact same colour when instructed to. This in itself is an engineering marvel, but it glosses over the fact that this is only possible if there is a standard definition for colours in the first place.  
+全球有数十亿台显示器能在指令下重现完全相同的颜色。这本身已是工程奇迹，但它掩盖了一个前提：唯有先对色彩进行标准化定义，这一技术才可能实现。  
+
+Earlier, colours were loosely defined using a limited set of words — most languages have at most twelve words to describe colours. These loose definitions are fine in most cases, but it is not precise enough for describing the tiny differences between similar looking colours that is required for accurate colour reproduction.  
+早期，色彩仅用有限的词汇模糊定义——多数语言中描述颜色的词不超过12个。这种粗放定义在大多数场景下够用，但对于需要精确复现颜色的场景而言，它无法准确描述相似颜色间的细微差异。  
+
+The above coloured rectangles shows some of the colours present in the above image. Despite being different, all the shades can be described by the same label — green. One could argue, they can be labelled as lime-green, olive-green, light-green, dark-green, etc to create some distinction. But this naming system is still clunky and highly inefficient. To display the above image accurately, there needs to be a way to describe the all the different shades of green uniquely without needing to resort to an ever-growing list of labels.  
+上方的彩色矩形展示了图像中的部分颜色。尽管存在差异，所有这些色调都可被统称为"绿色"。或许有人提议用"柠檬绿"、"橄榄绿"、"浅绿"、"深绿"等标签加以区分，但这种命名体系仍显笨拙且低效。要精确呈现图像，必须找到一种无需依赖无限扩展标签就能唯一描述所有绿色色调的方法。  
+
+Same name, different colours  
+同名异色  
+
+Instead of mapping colours to possibly millions of labels, it would be much simpler to use numbered units — the desired precision can then be achieved by simply using more or fewer digits. The idea of mapping colours to numbers might look odd, but it is not too far fetched. Most measurable physical phenomena have already been quantified (for eg. distances, temperature, etc). So if colours can be physically measured it should be easy to map them to numbers, in theory.  
+与其将色彩对应到可能数百万种的标签，不如采用数字单位——只需增减位数即可实现所需精度。用数字定义颜色的想法看似奇怪，但并非天方夜谭。多数可测量的物理现象（如距离、温度等）早已完成量化。因此理论上，只要色彩能被物理测量，数字映射就应非难事。  
+
+Defining colours using numbers also opens up interesting questions: What does addition or multiplication of colours look like? The process of quantifying colours will also reveal why colour hexcodes cannot show enough colours even with 16,777,216 values, and how a dress became a debate on the internet, and why colour blindness exists.  
+用数字定义颜色还引发出有趣问题：色彩的"加法"或"乘法"是怎样的？量化过程还将解释：为何1600万种取值的十六进制色码仍不足够，一条裙子如何引发网络论战，以及色盲现象的成因。  
+
+Spectral Power Distribution  
+光谱功率分布  
+
+The goal is to then measure colours as some physical entity. Unfortunately, colours are a subjective phenomenon. However the fact that most people can agree on the colour of something suggests that there must be at least something objective and physical about it. And there is. Colours are only visible in the presence of light, and that provides a huge clue as to what colours are.  
+目标是将色彩作为物理实体测量。遗憾的是，色彩本质是主观现象。但人们对某物颜色的普遍共识暗示其必有客观物理基础——确实如此。色彩唯有在光线下可见，这为理解色彩本质提供了关键线索。  
+
+Light is complicated, but it can be thought of as a bunch of wave-like particles, called photons — each carrying some specific amount of energy. The energy of these particles is determined by their wavelength or frequency.  
+光虽复杂，但可视为一群波状粒子（即光子）的集合，每个光子携带特定能量。其能量由波长或频率决定。  
+
+Wavelength The above is an interpretation of a photon, and is not necessarily accurate. The exact shape of photons is difficult to describe since photons exhibit both particle and wave-like behaviour. Trying to visualize photons as both a particle and a wave can get very tricky very quickly.  
+波长 上述光子图示仅为概念化呈现，未必精确。光子同时具备粒子与波动特性，其确切形态难以描述。试图将光子同时具象为粒子和波会迅速陷入认知困境。  
+
+Photon representation  
+光子示意  
+
+There are photons with different energies (or wavelengths). The different wavelengths of photons together form the electromagnetic spectrum. It is simply the full range photons energies, ordered by wavelength or frequency. The above wavelengths are not to scale.  
+不同能量（或波长）的光子构成了电磁波谱——即按波长/频率排序的所有光子能量范围。上图波长未按比例呈现。  
+
+Electromagnetic spectrum  
+电磁波谱  
+
+The energy carried by photons can be physically measured, making it trivial to quantify light. To simplify comparisons between different types of light however, the energy measurements are normalized per unit time as power, and then normalized per unit area as intensity — where the area is the total area of the body radiating the photons/light.  
+光子能量可被物理测量，使光的量化成为可能。为便于比较不同光源，能量测量先按时间单位归一化为功率，再按辐射光子/光的物体总面积归一化为强度。  
+
+So, light sources can be quantified using a singular intensity value. However, for reasons that will become more obvious later, light is actually represented using multiple intensity values — by measuring the intensity separately for photons at different wavelengths. The intensity-per-wavelength distribution is called the spectral power distribution.  
+因此光源可用单一强度值量化。但基于后文将阐明的原因，光实际需用多强度值表示——即分别测量不同波长光子的强度。这种按波长分布的强度称为光谱功率分布。  
+
+450nm Photons The above is an example of a spectral power distribution. The intensity at each wavelength depends on the number of photons at that wavelength and the energy of photons at that wavelength. The energy of a photon is inversely proportional to its wavelength, so the shorter wavelength photons shown above have a higher intensity for the same number of photons.  
+450nm光子 上图是光谱功率分布实例。各波长强度取决于该波长光子数量及其能量。光子能量与波长成反比，故相同光子数量下，较短波长的光子显示更高强度。  
+
+500nm Photons  
+500nm光子  
+550nm Photons  
+550nm光子  
+600nm Photons  
+600nm光子  
+650nm Photons  
+650nm光子  
+
+Spectral power distribution  
+光谱功率分布  
+
+The spectral power distribution provides a way to quantify light. But this is all irrelevant until there is a quantitative way to define a relationship between colours and the spectral power distribution (light) as well.  
+光谱功率分布提供了光的量化方法。但除非能定量定义色彩与光谱功率分布（光）的关系，否则这一切都无意义。  
+
+Photoreceptor Cells  
+感光细胞  
+
+The biggest clue to finding that relationship is rather obvious — colour perception is not possible without light, but it is also not possible without eyes. Eyes are sensitive to light, but more importantly they react differently to different wavelengths of light.  
+探寻该关系的关键线索显而易见：色彩感知既需要光，也离不开眼睛。眼睛对光敏感，但更重要的是——它们对不同波长光的反应存在差异。  
+
+To understand how eyes can distinguish between different wavelen  
+要理解眼睛如何区分不同波长...
