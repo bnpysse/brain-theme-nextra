@@ -1,0 +1,65 @@
+---
+title: "Most Neoclouds Suck At Security_全翻译"
+tags: ["大咖视点_全文翻译", "SemiAnalysis_(全球半导体产业链与AI算力)"]
+---
+
+【文章标题】：Most Neoclouds Suck At Security  
+【文章标题】：大多数新云平台的安全防护形同虚设  
+
+【文章正文】：  
+In Shakespeare’s *Julius Caesar*, Caesar ignores a soothsayer’s warning, shrugs off his wife’s dream of blood running through the streets, waves away a letter revealing his assassins by name, and strides gallantly into the one room in Rome where every senator is "required" to check their weapons at the door. Two thousand years later, neoclouds are making the same walk; so, increasingly, are the customers who trust them.  
+在莎士比亚的《尤利乌斯·凯撒》中，凯撒无视预言家的警告，对妻子梦见血流成河的梦境不以为然，随手丢弃了列明刺杀者姓名的密信，昂首阔步走进罗马那间要求每位元老必须在门口卸下武器的议事厅。两千年后，新云平台正重蹈覆辙；而信任它们的客户也日益如此。  
+
+The largest AI companies in the world are building a multivendor infrastructure supply chain at Mach speed. Every new vendor is a counterparty risk, with subcontractors and subprocesses that need to be checked. This means that neolab CISOs are getting a seat at the negotiating table: anyone serious about their future takes security deadly seriously.  
+全球顶尖AI公司正在以超音速构建多供应商基础设施供应链。每个新供应商都意味着交易对手风险，其分包商和子流程均需审查。这迫使新实验室的首席信息安全官跻身谈判桌：但凡重视未来的企业，都将安全视作生死攸关之事。  
+
+Yet, over the course of our neocloud testing for ClusterMAX 3.0, we saw some security horror stories. In this article, we’ll discuss the state of cybersec in the AI era, relay 5 frightening patterns we came across, and how neoclouds and neolabs can stay safe in this new world.  
+然而在为ClusterMAX 3.0进行新云平台测试期间，我们目睹了触目惊心的安全乱象。本文将探讨AI时代的网络安全现状，揭示我们发现的5大骇人模式，并指导新云平台与新实验室如何在这个新世界保全自身。  
+
+Before we get started…  
+在开始前...  
+
+To all neocloud operators and users…  
+致所有新云平台运营商及用户...  
+
+If you’re reading this, please make sure your shit is up to date.  
+若您正阅读本文，请务必更新您的系统。  
+
+Install the latest version of our ClusterMAX CLI by running `pip install clustermax` on your machine, or clone the repo on GitHub.  
+通过运行`pip install clustermax`安装最新版ClusterMAX命令行工具，或从GitHub克隆代码库。  
+
+Then run our convenience script: `cmax audit security` for a free report from us on your cluster or standalone GPU machine.  
+随后执行便捷脚本：`cmax audit security`，即可免费获取集群或独立GPU机器的安全评估报告。  
+
+The `cmax` CLI will auto-detect Slurm clusters, Kubernetes clusters, standalone VMs, bare-metal machines, and containers, and compare them against a set of baseline software versions with known vulnerabilities. For anything out of date, you will be provided a link to the relevant documentation and security bulletin.  
+`cmax`命令行工具将自动检测Slurm集群、Kubernetes集群、独立虚拟机、裸金属服务器及容器，并与存在已知漏洞的基准软件版本比对。针对过时组件，工具会提供相关文档和安全公告链接。  
+
+To be clear, this is a small subset of our ClusterMAX testing, and even a small subset of the full analysis we do on provider’s security. You will see things in this article that is not covered by the CLI. The CLI only involves things that we can test from the customer’s perspective. We do many interviews of end user customers and the providers themselves to check on the architecture decisions they have made on their orchestration software, OS provisioning, firmware management, networking, storage and more.  
+需说明的是，这仅是ClusterMAX测试的冰山一角，甚至不及我们对供应商安全全面分析的零头。本文披露的某些问题超出命令行工具的检测范围。该工具仅涵盖从客户视角可测试的内容。我们通过大量终端用户及供应商访谈，核验其在编排软件、操作系统配置、固件管理、网络、存储等方面的架构决策。  
+
+A full list of our testing criteria is available at: https://www.clustermax.ai/criteria  
+完整测试标准详见：https://www.clustermax.ai/criteria  
+
+The testing process we follow for ClusterMAX covers 3 phases: audit, performance, and reliability, where each takes longer and is more intense than the last, involving dozens of benchmarks and simulated hardware failures that stress the compute, networking, storage, monitoring systems, and health checks individually. Running an audit on your cluster should take a few minutes. Completing performance and reliability testing in full takes a few hours and a few days respectively, and requires a minimum of 4 nodes.  
+ClusterMAX测试流程包含审计、性能、可靠性三阶段，每阶段耗时与强度递增，涉及数十项基准测试及模拟硬件故障，分别压测计算、网络、存储、监控系统和健康检查。集群审计仅需数分钟，完整性能与可靠性测试则分别需数小时和数日，且至少需要4个节点。  
+
+Our decision to publish an article dedicated to neocloud security before the full ClusterMAX 3.0 report stems from two major factors:  
+我们选择在完整ClusterMAX 3.0报告前发布新云平台安全专题文章，主要基于两大因素：  
+
+1. *Project Glasswing* and *Daybreak* from Anthropic and OpenAI are discovering new vulnerabilities in industry-standard software, building POC exploits, and publishing the details in CVE descriptions.  
+    Anthropic的*Glasswing计划*与OpenAI的*Daybreak*正持续发现行业标准软件的新漏洞，构建概念验证攻击代码，并通过CVE描述公开细节。  
+
+2. Open models such as Kimi K3, GLM-5.2, DeepSeek V4, Qwen 3.8, MiMo V2.5, MiniMax M3, Nemotron, Gemma, and Inkling are all rising in security benchmarks such as Cybench, *NYU CTF Bench*, AutoAdvExBench, and *Cyberseceval 3*. This makes it trivial for black hats to develop exploits from a CVE description as they can circumvent model guardrails.  
+    如Kimi K3、GLM-5.2、DeepSeek V4、Qwen 3.8等开源模型在Cybench、*NYU CTF基准*等安全测试中表现攀升。这使得黑产分子能轻易根据CVE描述开发攻击代码，绕过模型防护栏。  
+
+Thus, when we began our research, we expected to find jarring statistics about AI agents tearing the internet *apart*. Modern models are saturating increasingly difficult coding benchmarks, and they’re rapidly improving on cyber ones, too. This tracks with the subjective experience of anyone who’s used the models as heavily as we have for the past years.  
+因此研究伊始，我们便预料会发现AI智能体"撕裂"互联网的惊悚数据。现代模型不仅横扫日益困难的编程基准测试，在网络安全领域的进步同样迅猛。这与我们这些常年重度使用模型者的主观体验完全吻合。  
+
+*Source: SemiAnalysis Research, sales@semianalysis.com*  
+*来源：SemiAnalysis研究团队，sales@semianalysis.com*  
+
+This also tracks with the press campaigns of frontier labs and security companies, whose CEOs have been *frequenting cable news* to warn that "AI has fundamentally changed the tempo of cybersecurity." Models like Mythos have discovered "thousands of vulnerabilities," *many of which are zero-days*. Last Thursday, OpenAI posted an open letter, cosigned by Anthropic and just about everyone else in the industry, announcing "A call for collective action on cyber defense."  
+前沿实验室与安全公司的宣传攻势亦佐证此点——其CEO们频频现身有线新闻，警告"AI已彻底改变网络安全节奏"。诸如Mythos等模型已发现"数千漏洞"，其中多为零日漏洞。上周四OpenAI发布公开信，获Anthropic等业界巨头联署，呼吁"集体行动加强网络防御"。  
+
+Disappointingly, instead of critical insights, the text was stuffed with self-help clichés: "the status quo… won’t be enough," but if we "share what works," then "together, we can." We agree that cybersecurity has never been more crucial—hence this article—and have already published *our experience hunting for bugs with LLMs*. But we are also aware that the loudest voices in this conversation, including everyone quoted in the previous paragraph, has something to sell.  
+遗憾的是，该信充斥自助式陈词滥调而非真知灼见："现状...远不足够"，但若"分享有效方案"，便"携手可达目标"。我们认同网络安全空前重要（故有此文），并已发布*利用大语言模型追踪漏洞的经验*。但我们也清醒认识到，这场讨论中最响亮的声音——包括前文所有引用对象——都怀揣兜售私货的目的。
