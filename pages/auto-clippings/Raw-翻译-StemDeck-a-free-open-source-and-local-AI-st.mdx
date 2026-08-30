@@ -1,0 +1,79 @@
+---
+title: "StemDeck, a free, open-source and local AI stem separator_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：StemDeck，一款免费、开源且本地的AI音轨分离工具
+
+【文章正文】：
+Drop in an MP3, WAV, FLAC, OGG/Opus, MP4, or M4A file, or paste a YouTube URL, and StemDeck splits the audio into up to six stems (vocals, drums, bass, guitar, piano, other). Play them back in a DAW-style multitrack mixer: mute, solo, balance levels, zoom the waveform, loop a region, and export individual stems or a custom mix. Everything runs locally on your own machine.
+拖入MP3、WAV、FLAC、OGG/Opus、MP4或M4A文件，或粘贴YouTube链接，StemDeck即可将音频分离为最多六种音轨（人声、鼓、贝斯、吉他、钢琴、其他）。通过DAW风格的多轨混音器进行回放：静音、独奏、平衡电平、波形缩放、片段循环，并导出独立音轨或自定义混音。所有操作都在你的本地设备上运行。
+
+What is this? StemDeck is a stem separation tool, not a downloader. Its main job is processing audio you already own: drag an MP3, WAV, FLAC, OGG, or M4A onto the import bar and go. YouTube support is a convenience for content you have the right to process. StemDeck does not store, cache, or redistribute any downloaded content. Everything happens locally and nothing leaves your machine.
+这是什么？StemDeck是音轨分离工具而非下载器。主要功能是处理你已拥有的音频：将MP3/WAV/FLAC/OGG/M4A拖到导入栏即可。YouTube支持仅适用于你有权处理的内容。StemDeck不会存储、缓存或重新分发任何下载内容。所有操作都在本地完成，数据绝不离开你的设备。
+
+StemDeck is a free, open alternative to cloud stem-splitters like Moises and LALAL.AI: no account, no quota, no uploads, no subscription. If you want stems for personal study and prefer to keep things local and free, StemDeck has you covered. If you need the polish, a mobile app, or deeper musician tooling, the commercial products are a better fit.
+作为Moises和LALAL.AI等云端音轨分离工具的免费开源替代品，StemDeck无需账户、不限次数、不上传、无订阅。若你希望本地化免费学习音轨分离，StemDeck是不二之选；若需要移动端应用或专业音乐工具，商业产品更合适。
+
+StemDeck is free and does not accept any money, sponsorship, or funding from anyone listed below. I share these makers and artists and communities purely for the joy of pointing you toward wonderful people doing beautiful work. Go meet them ❤️
+StemDeck完全免费且不接受下文所列任何人的资金赞助。推荐这些创作者/艺术家/社区纯粹出于分享美好的初心。快去认识他们吧❤️
+
+| Name | What they do | Link | 
+|---|---|---|
+| Analog4Lyfe | 全模拟音乐设备，拒绝数字捷径 | @analog4lyfe | 
+| r/bass | 我在Reddit最爱的贝斯社区 | r/Bass | 
+| Beltr | 将本地歌曲转为卡拉OK金曲，无需订阅/云端，仅需你和麦克风 | beltr.app | 
+| Dlima Guitars | 纯手工定制吉他/贝斯 | @dlimaguitars | 
+| Empress Effects | 为音色追求者打造的高端效果器 | empresseffects.com | 
+| Joao Gaspar | 制作人/影视配乐师，巡演/录音室乐手 | @jay_glaspar | 
+| Kris Luthier | 里斯本乐器修复师，精益求精 | @krisluthier | 
+| Lisbon Guitar Works | 里斯本手工吉他作坊 | dlimaguitars.com | 
+| More Notes Less Talk | 个性乐器设备，直录磁带无修饰 | @morenoteslesstalk | 
+| Seratone | 将任意电视变成专业卡拉OK舞台 | seratone.audio | 
+| slashCAM | 德语摄影器材测评，专注后期细节 | @slashcam.de | 
+| Thomann | 欧洲最大音乐设备零售商之一 | @thomann.music | 
+
+6-stem separation via Demucs htdemucs_6s, with auto-detection of the best Torch device (CUDA on NVIDIA, MPS on Apple Silicon, CPU fallback).
+基于Demucs htdemucs_6s的六轨分离，自动选择最佳Torch设备（NVIDIA用CUDA/苹果芯片用MPS/CPU备用）。
+
+YouTube and local file import. Paste a YouTube URL or drop an MP3, WAV, FLAC, OGG/Opus, MP4, or M4A directly onto the import bar.
+支持YouTube及本地文件导入。粘贴链接或直接拖拽MP3/WAV/FLAC/OGG/Opus/MP4/M4A到导入栏。
+
+DAW-style waveform editor with min/max sample rendering across all stems, shared normalization, zoom in/out/Fit, loop drag on the ruler, gold playhead overlay, and stem-aligned lanes.
+DAW风格波形编辑器：全音轨最小/最大采样渲染、统一标准化、缩放/适配、标尺循环拖拽、金色播放头覆盖、音轨对齐通道。
+
+Stem subset extraction. Click stem chips to choose which stems to keep. Clicking from "all selected" snaps to "only this one"; subsequent clicks add or remove.
+音轨子集提取。点击音轨标签选择保留内容。从"全选"点击切换为"仅当前"，再次点击增减选择。
+
+"Original" backing track. When you pick a subset, a 7th lane contains the complement (full song minus selected stems), perfect for A/B reference without doubling.
+"原始"伴奏轨。选择子集时，第7通道自动生成补集（全曲减去所选音轨），便于AB对比无需重复处理。
+
+Downloadable selected mix. A single mix.wav of just your selected stems, summed via ffmpeg amix.
+可下载选定混音。通过ffmpeg amix生成仅含所选音轨的mix.wav文件。
+
+Per-stem mixer with volume fader, mute, solo, and "monitor" (solo-only) per stem. State syncs between the preview mixer and the stems sidebar.
+独立音轨混音器：音量推子、静音、独奏、"监听"（仅独奏）功能。预览混音器与侧边栏状态同步。
+
+Live VU meters per stem. Post-gain RMS via Web Audio analysers with peak hold and slow falloff.
+实时VU表显示。通过Web Audio分析器获取增益后RMS值，带峰值保持与缓慢衰减。
+
+Song analysis including BPM (librosa beat tracker), key, scale, and confidence (Albrecht-Shanahan profiles), integrated LUFS (BS.1770), and sample peak in dBFS.
+歌曲分析：BPM（librosa节拍追踪）、调性/音阶/置信度（Albrecht-Shanahan算法）、综合LUFS（BS.1770标准）、dBFS采样峰值。
+
+Cancellable jobs. Cancel mid-pipeline and the runner terminates the active subprocess immediately, deletes the partial job dir, and returns to ready.
+可取消任务。处理过程中取消会立即终止子进程，删除临时目录并返回就绪状态。
+
+Library panel with folder-based track organisation, drag-and-drop, search, and trash.
+资源库面板：支持文件夹分类、拖拽管理、搜索及回收站功能。
+
+StemDeck is not trying to compete with commercial stem-separation products. It covers the core use case well and stops there. This table exists so you can make an informed choice rather than discover the gaps after the fact.
+StemDeck无意与商业音轨分离产品竞争，仅专注核心功能。下表助你做出知情选择而非事后发现局限：
+
+|  | StemDeck | Moises / LALAL.AI / similar | 
+|---|---|---|
+| 价格 | 永久免费 | 免费增值；常规使用需订阅/点数 | 
+| 托管 | 完全本地运行 | 云端；需上传至服务器 | 
+| 账户/登录 | 无需 | 必需 | 
+| 网络需求 | 仅首次模型下载(~170MB)和YouTube下载 | 始终在线；无法离线使用 | 
+| 隐私 | 音频绝不离开本地设备 | 音频上传至第三方服务器处理 | 
+| 数据保留 | 用户完全控制 | 通常有服务条款约束 |

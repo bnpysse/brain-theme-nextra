@@ -1,0 +1,76 @@
+---
+title: "What Is a Harness_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：What Is a Harness?
+【文章标题】：什么是 Harness？
+
+【文章正文】：
+【文章正文】：
+
+What is a Harness?
+什么是 Harness？
+
+Harness – definition by the Cambridge Dictionary
+Harness——剑桥词典的定义
+
+Noun. a piece of equipment with straps and belts, used to control or hold in place a person, animal, or object
+名词。一种带有带子和束带的装备，用于控制或固定人、动物或物体。
+
+Verb. to control something, usually in order to use its power
+动词。控制某物，通常是为了利用其力量。
+
+–
+–
+
+When I think of a harness, I think first of the set of straps and belts that I put on in middle school before scrambling up the walls of my school. I was a mediocre climber at best.
+当我想到安全带时，我首先想到的是我中学时在攀爬学校墙壁之前穿上的那套带子和束带。我充其量只是个平庸的攀岩者。
+
+If you’re main-lining into the AI newsfeed these days however, your archetypal harness may already be an agent harness. And, this post was not written for you.
+然而，如果你最近正沉迷于 AI 新闻流，那么你心目中的典型安全带可能已经是一个智能体框架（agent harness）了。而且，这篇文章不是写给你的。
+
+This was written for those who may be curious to know what an agent harness is, but don’t, and have been too embarrassed to ask.
+这篇文章是写给那些可能好奇想知道智能体框架是什么、但还不知道、又不好意思问的人。
+
+Let’s get back to climbing.
+让我们回到攀岩。
+
+Why do you strap on a harness when you go climbing? Well, firstly, the harness supports you and keeps you safe. It does that by connecting you to carabiners and ropes that secure you from falls, moderate your pace, and govern your route. You can also attach other tools to your harness like a chalk bag, nut tools and quickdraws.
+为什么攀岩时要系上安全带？首先，安全带支撑你并保护你的安全。它通过将你连接到锁扣和绳索上来实现这一点，这些锁扣和绳索可以防止你坠落、调节你的速度并控制你的路线。你还可以在安全带上挂上其他工具，比如镁粉袋、岩塞工具和快挂。
+
+And when you go climb different mountains or make different ascents you can take your harness with you. Depending on the terrain, you can even modify your harness and what goes on your gear loops. Climbing harnesses are adaptable. They are used by acrobats and arborists. The people who own them can make them their own.
+当你去攀爬不同的山峰或进行不同的攀登时，你可以随身携带安全带。根据地形，你甚至可以改装安全带以及挂在装备环上的东西。攀岩安全带具有适应性。杂技演员和树艺师也使用它们。拥有它们的人可以让它们成为自己的专属装备。
+
+There are similarities between climbing harnesses and agent harnesses both in terms of structure and function.
+攀岩安全带和智能体框架在结构和功能上都有相似之处。
+
+Agent Harnesses
+智能体框架
+
+Others have written (simplistically) that Agent = Model + Harness. Here the word Harness refers to an Agent Harness. But what is an agent harness? Agent harnesses use AI models to create AI agents, and their first application was for coding. Now, agent harnesses sit at the core of all types of AI agents and understanding how an agent harness works will help you understand what an AI agent is.
+其他人（过于简单地）写道：智能体 = 模型 + 框架（Harness）。这里的框架指的是智能体框架。但什么是智能体框架？智能体框架使用 AI 模型来创建 AI 智能体，它们的第一个应用是编码。如今，智能体框架已成为所有类型 AI 智能体的核心，理解智能体框架的工作原理将帮助你理解什么是 AI 智能体。
+
+An agent harness is a piece of software that provides an environment for an AI model to operate within. Unlike most AI models, you as an end user can own your own agent harness.
+智能体框架是一种软件，它为 AI 模型提供运行环境。与大多数 AI 模型不同，作为最终用户，你可以拥有自己的智能体框架。
+
+Often, users like software engineers interact directly with harnesses like Pi using the Terminal application on their computer. But, harnesses like OpenClaw also use different user interfaces like iMessage, a chat app, or email. Our harness Lefos was built primarily to interact via email. Regardless of the interface, harnesses generally do four things: Firstly, they provide a set of instructions that help govern how the AI model responds. This set of instructions is typically called a “system prompt”. Secondly, they describe and provide a set of tools that are made available to the AI model to use in service of responding to requests from the user. Thirdly, the harness establishes a framework that governs how the model behaves. This framework does a lot of different things, but one of the main things it does is establish the “agentic loop”. Finally, most harnesses provide a crucial translation layer that enables the harness to work with a variety of different AI models.
+通常，像软件工程师这样的用户会直接与 Pi 等框架交互，使用计算机上的终端应用程序。但是，像 OpenClaw 这样的框架也会使用不同的用户界面，比如 iMessage、聊天应用或电子邮件。我们的框架 Lefos 主要是为了通过电子邮件进行交互而构建的。无论使用何种界面，框架通常都会做四件事：首先，它们提供一套指令，帮助管理 AI 模型如何响应。这套指令通常被称为“系统提示词”。其次，它们描述并提供一套工具，供 AI 模型在响应用户请求时使用。第三，该框架建立了一个用于管理模型行为的框架。这个框架做很多不同的事情，但其中最主要的事情之一是建立“智能体循环”。最后，大多数框架提供了一个关键的转换层，使框架能够与各种不同的 AI 模型协同工作。
+
+I. System Prompt
+一、系统提示词
+
+Most AI models come with an embedded set of rules and guidelines that has been refined and arrived at during the training process. Most famously, Claude Opus 4.5 had a widely publicized “soul document” that explained to the AI model what it was and how it should act. The System Prompt in an AI harness is similar to this but is less embedded into the model. It’s more like a set of instructions a new employee might get on their first day of a job. It hasn’t internalized the instructions but it knows it should follow them when performing that work. System prompts are injected into the conversation together with every prompt and play an important role in ensuring that the AI model acts appropriately in the context of that harness.
+大多数 AI 模型都带有一套嵌入式的规则和指南，这些规则和指南是在训练过程中经过打磨和形成的。最著名的是，Claude Opus 4.5 有一份广为人知的“灵魂文档”，向 AI 模型解释它是什么以及应该如何行动。AI 框架中的系统提示词与此类似，但它没有那么深入地嵌入到模型中。它更像是一份新员工在入职第一天可能得到的指令。它还没有将这些指令内化，但它知道在执行工作时应该遵循这些指令。系统提示词会随着每一个提示词一起被注入到对话中，并在确保 AI 模型在该框架的上下文中行为得当方面发挥重要作用。
+
+II. Tools
+二、工具
+
+Tools are a set of capabilities, written in code, that the model can “call”. The harness describes the tools and also provides the software that is the tool itself. Examples of these tools might include a web search tool, a tool that allows the model to write and execute software code, or a tool that allows the model to compose an email. Critically, the harness usually does not dictate when and how the AI model should use the tool. Instead, it simply makes the tools available, describes them clearly, and allows the AI model itself to decide when and how it should use them.
+工具是一组用代码编写的能力，模型可以“调用”这些能力。框架描述这些工具，并提供作为工具本身的软件。这些工具的例子可能包括网络搜索工具、允许模型编写和执行软件代码的工具，或者允许模型撰写电子邮件的工具。关键的是，框架通常不会规定 AI 模型应该何时以及如何使用工具。相反，它只是让工具可用，清楚地描述它们，并让 AI 模型自己决定何时以及如何使用它们。
+
+III. Agentic Loops
+三、智能体循环
+
+Now we have an AI model sitting within an agent harness with a set of instructions and a set of tools. Let us assume our harness was built to work within email, had the tools we described above (WebSearch, WriteCode, ComposeEmail), and that the user has asked the agent to compare rankings and test scores of local primary schools and provide recommendations. How will the agent behave? Firstly, it will try to understand the request (or, "prompt"). It will use its pre-training and weights to understand what a "primary sc
+现在我们有一个 AI 模型位于智能体框架内，并配有一套指令和一套工具。让我们假设我们的框架是为在电子邮件中工作而构建的，拥有我们上面描述的工具（WebSearch、WriteCode、ComposeEmail），并且用户要求智能体比较当地小学的排名和考试成绩并提供建议。智能体将如何表现？首先，它会尝试理解请求（或“提示词”）。它会利用其预训练和权重来理解什么是“primary sc。

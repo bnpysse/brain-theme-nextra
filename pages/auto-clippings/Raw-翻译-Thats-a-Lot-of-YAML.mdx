@@ -1,0 +1,173 @@
+---
+title: "That s a Lot of YAML_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：That's a Lot of YAML  
+【文章标题】：这YAML也太多了吧  
+
+【文章正文】：  
+# Made with 💖 by https://ghuntley.com after one too many CustomResourceDefinitions  
+# 由https://ghuntley.com怀着💖创作，起因是受够了CustomResourceDefinitions  
+# Improvements welcome, mash the ↗️ Octocat ↗️ and share how YAML makes your life better.  
+# 欢迎改进，猛戳↗️Octocat↗️分享YAML如何让你的生活更美好。  
+No:  
+Body:  
+Wants:  
+To:  
+Write:  
+- YAML  
+# 🤔 Why YAML is the right devops technology for you 🤔  
+# 🤔 为什么YAML是你的理想DevOps技术🤔  
+#  
+# - 100% test coverage, always compiles just fine with no errors or warnings, always shippable  
+# - 100%测试覆盖率，编译永远零错误零警告，随时可交付  
+# - no enforced error handling during development because runtime "panic at the disco" in production is dope  
+# - 开发时无需错误处理，毕竟生产环境"迪斯科式崩溃"才够潮  
+# - "something broke" is way better than stack traces with line numbers  
+# - "某处坏了"可比带行号的堆栈跟踪优雅多了  
+# - you need to burn hours as part of setting up a new CI pipeline  
+# - 你需要花几小时搭建新CI流水线作为入职仪式  
+# - safe choice with unquestionable industry adoption, "used by kubernetes"  
+# - 业界公认的安全选择，"Kubernetes也在用"  
+# - is marginally better than windows.ini  
+# - 比windows.ini略胜一筹  
+# - unlike json [1][2], YAML supports comments  
+# - 不像json[1][2]，YAML支持注释  
+# - no official documentation (other than a specification for implementers) is totally fine  
+# - 没有官方文档（除了实现者规范）完全没问题  
+# - you need a super safe way to "execute this code"  
+# - 你需要"执行此代码"的超安全方式  
+# 🍿 wait a sec, did you say "executable yaml"?? 🍿  
+# 🍿 等等，你刚说"可执行YAML"？？🍿  
+# - https://ruby-doc.org/stdlib-2.4.0/libdoc/yaml/rdoc/YAML.html#module-YAML-label-Security  
+# - https://www.php.net/manual/en/function.yaml-parse.php#refsect1-function.yaml-parse-notes  
+# - https://securitylab.github.com/research/swagger-yaml-parser-vulnerability/  
+# - https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation  
+# 🚨 Anyone who uses YAML long enough will eventually get burned when attempting to abbreviate Norway 🚨  
+# 🚨 长期使用YAML的人试图缩写挪威时终将翻车 🚨  
+# `NO` is parsed as a boolean type, which with the YAML 1.1 spec, there are 22 options to write "true" or "false."  
+# `NO`会被解析为布尔类型，在YAML 1.1规范中有22种书写"true"或"false"的方式  
+# You have to wrap "NO" in quotes to get the expected result.  
+# 必须给"NO"加引号才能得到预期结果  
+NI: Nicaragua  
+NL: Netherlands  
+NO: Norway # 💣!  
+# 🚨 Anyone wondering why their first seven Kubernetes clusters deploy just fine, and the eighth fails? 🚨  
+# 🚨 是否好奇为什么前七个Kubernetes集群部署顺利，第八个却失败？🚨  
+- 07  
+- 08  
+# Results in  
+[ 7, "08" ]  
+# YAML knows that, when you have something that looks like the time of day,  
+# YAML认为，当内容看起来像时间时  
+# what you _really_ wanted is the time of seconds since midnight  
+# 你真正想要的是午夜后的秒数  
+timeOfDay:  
+whatYouWrote: 04:30 # And when you parse this file and serialize it again, you may get before YAML 1.2 ...  
+whatYouSurelyMeant: 16200 # Have fun debugging this one!  
+whatYouShouldHaveWritten: !!str 04:30  
+# YAML is the super best way to encode Octal (tm) and learning the hard way that Kubernetes uses YAML 1.1  
+# YAML是编码八进制(tm)的绝佳方式，而得知Kubernetes使用YAML 1.1的教训令人难忘  
+# is a DevOps rite of passage. Below YAML 1.2 a large integer is automatically converted to octal.[3]  
+# 这是DevOps的成人礼。YAML 1.2以下版本会自动将大整数转为八进制[3]  
+- YAML 1.1 uses `0666` notation.  
+- YAML 1.2 uses `0o666` notation  
+# YAML is great for specifying package versions, as long as you like versions being parsed as floating point.  
+# YAML非常适合指定包版本——如果你喜欢版本号被解析为浮点数的话  
+versions:  
+foo: 1.7 # These two packages have the same version.  
+bar: 1.70 # These two packages have the same version.  
+fizz: 1.7.0 # But these two packages have different versions.  
+buzz: 1.70.0 # But these two packages have different versions.  
+# 🤢 I have recently been learning GitHub Actions  
+# 🤢 最近在学习GitHub Actions  
+#  
+# I just made 8 commits/pushes in one hour, and the last commit message, in its entirety, was:  
+# 我一小时做了8次提交/推送，最后一条提交信息全文是：  
+#  
+# "I don't really like yml"  
+# "我真的不喜欢yml"  
+- https://twitter.com/eric_sink/status/1430954572848287744  
+# 😭 If SQL were built on YAML 😭  
+# 😭 如果SQL基于YAML构建 😭  
+SELECT:  
+- num  
+- name  
+FROM:  
+- customers  
+WHERE EXISTS:  
+SELECT:  
+- name  
+FROM:  
+- orders  
+WHERE:  
+AND:  
+- EQUALS:  
+- customers.num  
+- orders.customer_num  
+- LT:  
+- price  
+- 50  
+# Speaking of CI, did you know that 8-character SHAs could be all numbers?  
+# 说到CI，你知道8字符的SHA可能全是数字吗？  
+# If the system that parses `my.flaky_version` is typed, it will happily explode 2% of the time.  
+# 如果解析`my.flaky_version`的系统是类型化的，它会有2%的概率愉快地爆炸  
+my:  
+# this will be a string ~98% of the time  
+flaky_version: $&#123;GIT_SHORT_SHA&#125;  
+# this will be a string ~100% of the time  
+string_version: "$&#123;GIT_SHORT_SHA&#125;"  
+# him: "Look, I bought a box of DevOps"  
+# her: "You can't just buy a box of DevOps"  
+# 🤣 https://twitter.com/mike_kaufmann/status/1454712996933025794  
+# "Don't forget the extra line break otherwise all shit goes to hell"  
+# "别忘了额外换行符，否则全完蛋"  
+# 👉 https://github.com/IronScheme/IronScheme/commit/2f847793946935bd9143cdfb064f9006f763df68  
+# 🤡 Doing the same thing with different CI providers 🤡  
+# 🤡 用不同CI提供商做同一件事 🤡  
+# Azure devops  
+jobs:  
+- job: job1  
+steps:  
+- script: chmod +x ./script.sh  
+- script: ./script.sh  
+# CircleCI  
+jobs:  
+job1:  
+steps:  
+- checkout  
+- run: "execute-script-for-job1"  
+# Some future CI system, probably  
+jobs:  
+- steps: job1  
+- step1:  
+- script: chmod +x ./script.sh  
+- step2:  
+- run: "execute-script-for-job1-inside-step2"  
+# If you're building a YAML file for Cloudformation for a DashboardBody for Cloudwatch  
+# 如果你在为Cloudwatch的DashboardBody构建Cloudformation的YAML文件  
+# and theres a SEARCH function? you need to escape the already-escaped and close the  
+# 而且有SEARCH函数？你需要对已转义的内容再次转义  
+# whole JSON with double-quotes:  
+"&#123;\n\"search(' var=\\\"blue\\\" .  
+# 🍻 Overheard in a pub  
+# 🍻 酒吧听闻  
+- The problem with YAML they did one thing well. Shitty boiler plate. Then everyone thought it was a good idea.  
+# YAML的问题是它只做好了一件事：糟糕的样板文件。然后大家都觉得这是个好主意。  
+# 💊 Mega twitter thread of pain  
+# 💊 大型推特痛苦串  
+# 👉 https://twitter.com/brunoborges/status/1098472238469111808 👈  
+# 📢 Mandatory reading 📢  
+# 📢 必读材料 📢  
+#  
+# "Today we’re going to look at some general problems with the YAML format"  
+# "今天我们来聊聊YAML格式的普遍问题"  
+# 👉 https://arp242.net/yaml-config.html 👈  
+#  
+# "We replaced 1,000 lines of YAML with 10 structs and people started contributing again"  
+# "我们用10个结构体替换了1000行YAML后，人们又开始贡献代码了"  
+# 👉 https://tinyurl.com/lessons-in-over-engineering 👈  
+#  
+# "What if  
+# "如果...会怎样"
