@@ -1,0 +1,72 @@
+---
+title: "AnkiDroid Google Play no longer allowing Open Collective don_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+### **精华简报：AnkiDroid 因捐赠链接问题面临 Google Play 下架风险**  
+**来源**：Hacker News Top | **日期**：2026年8月29日  
+**原文标题**：AnkiDroid: Google Play no longer allowing Open Collective donation link  
+**原文链接**：[GitHub Issue #21656](https://github.com/ankidroid/Anki-Android/issues/21656)  
+
+---
+
+#### **核心问题**  
+1. **政策冲突**：  
+   - Google Play 近期禁止 AnkiDroid 使用 **Open Collective**（开源非营利组织）的捐赠链接，要求其通过 Google Play 支付系统处理捐款，或提供符合“免税组织”资质的证明。  
+   - AnkiDroid 的财政托管方 **Open Source Collective** 持有美国 IRS 501(c)(6) 免税资格（非慈善性质，捐赠者不可抵税），但 Google 要求提供 **501(c)(3)**（慈善性质，捐赠者可抵税）或同等资质的证明。  
+   - 截至2026年8月29日，Google 未解释为何 501(c)(6) 不符合其“免税捐赠”政策。  
+
+2. **后果与时间线**：  
+   - 自8月28日起，AnkiDroid 的更新被拒绝，若未解决，**将于9月11日从全球 Play Store 下架**（印度和俄罗斯除外）。  
+   - 团队已被迫移除捐赠链接以维持应用上架，但强调这是“抗议性妥协”，因捐赠是项目唯一的资金来源。  
+
+---
+
+#### **背景与影响**  
+- **AnkiDroid 是什么**：  
+  - 一款开源、免费的 Android 闪卡应用，超1000万次安装，广泛用于医学教育和语言学习。  
+  - 完全由志愿者维护，依赖 Open Collective 的公开账本接受捐赠，无其他盈利模式。  
+
+- **Google Play 政策矛盾点**：  
+  - 政策第3节允许“免税捐赠”绕过 Play 支付系统，但 Google 将“免税”狭义定义为 **501(c)(3)**，排除 501(c)(6)。  
+  - 团队认为 Google 的沟通存在歧义（政策写“tax-exempt”，但执行要求“charitable”）。  
+
+---
+
+#### **团队诉求与行动**  
+1. **短期**：  
+   - 呼吁社区扩散问题，尤其寻求 Google 内部人士的帮助（但避免直接联系客服）。  
+   - 提交 IRS 501(c)(6) 文件申诉，要求政策澄清。  
+
+2. **长期风险**：  
+   - 若问题未解决，可能被迫依赖其他分发渠道（如 F-Droid），但会失去 Play Store 的主要用户流量。  
+   - 开源项目可持续性受挑战，因 Google 政策对非营利性捐赠的模糊限制。  
+
+---
+
+#### **关键资料与时间线**  
+- **政策依据**：  
+  - [Google Play 支付政策](https://play.google.com/about/payments-policy/)  
+  - [Open Collective 账本](https://opencollective.com/ankidroid)  
+
+- **事件时间线**：  
+  - **2026-07-20**：Google 首次通知违反支付政策。  
+  - **2026-08-06/07**：Google 邮件要求 501(c)(3) 资质，拒绝 501(c)(6)。  
+  - **2026-08-28**：更新被拒，下架倒计时启动。  
+
+---
+
+#### **分析师评论**  
+- **政策透明度问题**：Google 对“免税”的解释缺乏一致性，可能误伤开源生态。501(c)(6) 常见于行业协会和开源集体，与慈善组织（501(c)(3)）的税务处理不同，但均为合法免税实体。  
+- **开源项目困境**：此类事件凸显开源依赖商业平台（如 Play Store）的脆弱性。建议项目探索多元化分发和筹资（如 Patreon、GitHub Sponsors）。  
+- **行动建议**：  
+  - 联合其他受影响的开源项目向 Google 施压，推动政策细化。  
+  - 法律角度论证 501(c)(6) 的合规性，或寻求数字权利组织（如 EFF）支持。  
+
+---  
+**简报撰写**：商业技术分析师 | 基于公开信息与政策文档 | 供决策参考
+
+## 🔗 知识库双向关联
+- [Teaching Everyone to Fish for Tokens_简报](/auto-clippings/Teaching-Everyone-to-Fish-for-Tokens-简报)
+- [The Pulse Grok’s CLI caught uploading all your local files t_简报](/auto-clippings/The-Pulse-Groks-CLI-caught-uploading-all-your-loca)
+- [当AI开始抽佣：下一代入口的商业模式困局_简报](/auto-clippings/当AI开始抽佣：下一代入口的商业模式困局-简报)
