@@ -1,0 +1,83 @@
+---
+title: "一日一技  借助 PowerShell 自定义 Windows 更新暂停时间_简报"
+tags: ["大咖视点_深度解读", "少数派_sspai_(数字工具与生产力思维)"]
+---
+
+### 精华简报：通过PowerShell自定义Windows更新暂停时间
+
+#### **核心价值**
+本文提供了一种技术解决方案，帮助用户突破Windows默认35天的更新暂停限制，通过PowerShell脚本将更新时间延长至自定义日期（如2030年）。同时深入解析了Windows更新策略的演变及其对用户的影响，尤其适合需要长期稳定工作环境的企业用户和技术爱好者。
+
+---
+
+### **技术解决方案**
+#### **操作步骤**
+1. **基础准备**  
+   - 进入「Windows 设置」→「Windows 更新」，先手动暂停更新（任意日期）。
+2. **执行PowerShell脚本**  
+   - 以管理员身份运行PowerShell，输入以下代码（可修改目标日期）：
+     ```powershell
+     $path = "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings"
+     $end = (Get-Date "2030-01-01").ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+     Set-ItemProperty -Path $path -Name "PauseUpdatesExpiryTime" -Value $end
+     Set-ItemProperty -Path $path -Name "PauseFeatureUpdatesEndTime" -Value $end
+     Set-ItemProperty -Path $path -Name "PauseQualityUpdatesEndTime" -Value $end
+     ```
+3. **验证结果**  
+   - 返回Windows更新界面，确认暂停时间已延长至设定日期。
+
+#### **技术原理**
+- **注册表修改**：直接操作`HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings`下的三个关键值：
+  - `PauseUpdatesExpiryTime`：全局暂停截止时间。
+  - `PauseFeatureUpdatesEndTime`：功能更新暂停时间。
+  - `PauseQualityUpdatesEndTime`：质量更新暂停时间。
+- **时间格式转换**：通过UTC时间和ISO 8601格式确保兼容性。
+
+---
+
+### **背景分析：Windows更新策略演变**
+#### **Windows 10之前**
+- **更新类型**：  
+  - **重要更新**：安全补丁、错误修复（需手动安装）。  
+  - **服务包（SP）**：大型功能更新，发布频率低（如Windows 8.1视为Windows 8的SP）。
+- **用户控制权**：更新需主动触发，灵活性高。
+
+#### **Windows 10及以后**
+- **强制更新模式**：采用SaaS模式，定期推送更新。  
+  - **版本更新（Feature Updates）**：每年1-2次，引入新功能（如Fluent Design）。  
+  - **累积更新**：每月“补丁星期二”发布，修复安全/稳定性问题。  
+  - **紧急更新（OOB）**：应对高危漏洞。  
+- **痛点**：频繁更新可能导致系统不稳定，且默认暂停期仅35天。
+
+#### **企业解决方案**
+- **延迟策略**：通过组策略/MDM最多延迟功能更新365天、质量更新30天。  
+- **LTSC版本**：2-3年一次大更新，适合追求极致稳定的场景。
+
+---
+
+### **用户场景与需求**
+1. **个人用户**  
+   - 痛点：强制更新中断工作流（如丢失未保存文件）。  
+   - 建议：使用PowerShell脚本延长暂停期，或加入Windows Insider的**Beta渠道**平衡新功能与稳定性。
+2. **企业用户**  
+   - 痛点：更新可能引发兼容性问题。  
+   - 建议：部署LTSC版本或通过Windows Update for Business控制更新节奏。
+
+---
+
+### **风险提示**
+- **注册表修改风险**：错误操作可能影响系统稳定性，建议备份注册表。  
+- **安全权衡**：长期暂停更新会错过安全补丁，需评估业务场景的优先级。
+
+---
+
+### **延伸思考**
+微软通过Windows Insider计划将用户变为“测试者”，加速迭代但牺牲稳定性。对于普通用户，本文提供的脚本是一种折中方案，但需权衡安全与便利性。企业用户则应建立系统化的更新管理流程。
+
+**关联阅读**：  
+《Windows和macOS版本号命名逻辑对比》（分析系统更新策略的底层设计差异）
+
+## 🔗 知识库双向关联
+- [社媒的设计方式让年轻人难以批判性思考_简报](/auto-clippings/社媒的设计方式让年轻人难以批判性思考-简报)
+- [Increased included usage and update to Auto pricing_简报](/auto-clippings/Increased-included-usage-and-update-to-Auto-pricin)
+- [国际计量大会将讨论用闰时取代闰秒_简报](/auto-clippings/国际计量大会将讨论用闰时取代闰秒-简报)
