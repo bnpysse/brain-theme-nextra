@@ -1,0 +1,52 @@
+---
+title: "Claude s new system prompt really doesn t want to reproduce_简报"
+tags: ["大咖视点_深度解读", "Simon_Willison_(AI_实用工程化)"]
+---
+
+### **精华简报：Claude新系统指令的版权合规升级**  
+**来源**：Simon Willison（AI实用工程化专栏）  
+**主题**：Anthropic公开Claude系统指令的更新细节，重点强化版权保护策略  
+
+---
+
+#### **核心发现**  
+1. **指令透明度提升**  
+   - Anthropic公开了面向消费者的Claude（Claude.ai及移动端）系统指令，包含历史版本对比，但未涵盖企业版（Claude Cowork/Code）。  
+   - 文档设计优化：通过`.md`后缀可直接获取Markdown格式内容，便于开发者/LLM解析与差异比对。  
+
+2. **版权限制强化**  
+   - **歌词/文本复制禁令**：  
+     - 严禁完整或部分复现歌词、诗歌、书籍段落（包括副歌、旋律记录等），仅允许分析或描述。  
+     - **例外**：1929年前发表的作品（如莎士比亚诗歌），但Claude会自主验证年代，不确定时一律拒绝。  
+     - **背景**：新增条款与索尼音乐、华纳查普尔起诉Anthropic使用歌词数据训练的时间高度吻合。  
+   - **图像生成限制**：  
+     - 禁止生成受版权保护的视觉内容（角色、商标、封面等），即使通过代码（SVG/ASCII等）实现。  
+     - **判定逻辑**：基于最终图像效果而非用户描述，拒绝“变体替换”等规避手段。  
+     - **案例**：用户请求“蓝色高速刺猬”生日横幅时，Claude识别出索尼克角色，转而生成原创的“滑板蝾螈”设计。  
+
+3. **其他更新**  
+   - 回答风格微调、对话终止指南缺失、推荐心理支持资源、知识截止日期（2026年6月）。  
+
+---
+
+#### **行业影响**  
+- **版权合规标杆**：Anthropic通过系统指令明确边界，规避法律风险，可能推动其他AI厂商效仿。  
+- **工程化实践**：公开指令版本历史与Markdown友好设计，提升开发者协作效率，值得技术团队参考。  
+
+---
+
+#### **关键疑问**  
+- 为何企业版（Claude Cowork/Code）未公开指令？是否存在差异化合规策略？  
+- SVG生成能力提升（如Fable模型）是否促使Anthropic提前防范图像版权风险？  
+
+**延伸阅读**：  
+- [索尼/华纳起诉事件](https://www.billboard.com/pro/sony-music-warner-chappell-sue-anthropic-ai-lyrics-copyright/)  
+- [Anthropic系统指令文档](https://platform.claude.com/docs)  
+
+---  
+**分析师建议**：AI企业需建立动态版权合规机制，平衡创新能力与法律风险；开发者可借鉴Anthropic的透明化实践优化工具链。
+
+## 🔗 知识库双向关联
+- [Bringing the cybersecurity capabilities of Claude Mythos 5 t_简报](/auto-clippings/Bringing-the-cybersecurity-capabilities-of-Claude)
+- [DeepSeek is back... and Silicon Valley is terrified_逐字稿](/auto-clippings/DeepSeek-is-back-and-Silicon-Valley-is-terrified-逐)
+- [llm-anthropic 0.27_简报](/auto-clippings/llm-anthropic-027-简报)
