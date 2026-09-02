@@ -1,0 +1,95 @@
+---
+title: "The efficient frontier of LLM inference_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The efficient frontier of LLM inference  
+【文章标题】：大语言模型推理的效率前沿  
+
+【文章正文】：  
+In the AI industry, we borrowed the term “efficient frontier” from economists. We use it to talk about managing tradeoffs, most often the tradeoff between cost and capabilities for models. A model is a “frontier model” if it offers the highest degree of intelligence at a given cost or size.  
+在人工智能行业，我们从经济学家那里借用了"效率前沿"这一术语。用它来描述管理权衡的问题，最常见的是模型成本与能力之间的权衡。如果一个模型在给定成本或规模下能提供最高智能水平，它就是"前沿模型"。  
+
+We also have efficient frontiers in inference engineering. Most often, this is expressed as a tradeoff between latency and throughput (which determines cost), though we can also exchange quality for throughput (via quantization, distillation, and pruning) or intelligence for speed (in the form of reasoning level).  
+推理工程中也存在效率前沿。最常见的表现是延迟与吞吐量（决定成本）之间的权衡，但我们也可以通过量化、蒸馏和剪枝等技术用质量换取吞吐量，或以推理级别为形式用智能换取速度。  
+
+There are two types of techniques available to inference engineers:  
+推理工程师可使用两类技术：  
+- Techniques which make a tradeoff between two factors to move a deployment along an efficient frontier.  
+- 通过在两个因素间权衡使部署沿效率前沿移动的技术  
+- Techniques which push out the entire frontier for a given deployment, creating more overall efficiency which can be allocated to whatever outcome is most beneficial.  
+- 为给定部署推动整个前沿外移的技术，创造可分配给最有利结果的整体效率  
+
+Both types of techniques are valuable.  
+两类技术都极具价值。  
+
+It’s useful to be able to target any point along an efficient frontier by making tradeoffs. Giving up per-user speed makes it possible to build high-throughput, low-cost pipelines for batch workloads. Sacrificing throughput to improve speed makes sense when latency-sensitive users have a high willingness to pay.  
+通过权衡瞄准效率前沿上的任意点很有价值。放弃单用户速度可构建面向批处理工作负载的高吞吐、低成本管道。当延迟敏感用户付费意愿高时，牺牲吞吐量提升速度是合理选择。  
+
+And of course, it’s incredibly useful to push out the entire frontier. Unlocking more efficiency creates gains that can be allocated to lower latency, higher throughput, or a combination of the two.  
+当然，推动整个前沿外移也极为重要。释放更多效率带来的收益可分配给更低延迟、更高吞吐或二者组合。  
+
+This article details which inference engineering techniques let you target a point on the frontier, and which techniques push the entire frontier out. For this article, we’ll assume we’re running an LLM like GLM-5.3 or Kimi K3 for agentic coding with KV cache reuse enabled and optimal KV-aware routing.  
+本文将详述哪些推理工程技术能瞄准前沿特定点，哪些能推动前沿外移。本文假设我们运行GLM-5.3或Kimi K3等LLM进行智能编码，并启用KV缓存复用和最优KV感知路由。  
+
+Techniques that manage tradeoffs  
+管理权衡的技术  
+
+Hitting a certain target in production is often less about discovering some novel approach and more about finding the right set of configurations given the nature of the traffic.  
+在生产环境中达成特定目标，通常不在于发现新方法，而在于根据流量特性找到正确配置组合。  
+
+In practice, the efficient frontier is very jagged. Rather than a smooth, continuous line between outcomes, small changes can have big impacts. These cutoff points are often unintuitive and must be discovered empirically through sweeps.  
+实践中效率前沿非常锯齿状。结果间并非平滑连续的线，微小变化可能产生重大影响。这些临界点通常不符合直觉，必须通过扫描实验发现。  
+
+Batch sizing  
+批处理规模  
+
+The most obvious tradeoff between latency and throughput comes from batch sizing. A batch is the number of requests that are processed concurrently. While token-level continuous batching means that there isn’t any latency from waiting for batches to start, the configured batch size determines the per-user latency and the overall throughput.  
+延迟与吞吐量最明显的权衡来自批处理规模。批次指并发处理的请求数。虽然token级连续批处理意味着没有等待批次启动的延迟，但配置的批次大小决定了单用户延迟和整体吞吐量。  
+
+With small batch sizes, per-user latency is excellent, but few total tokens are generated per GPU. This means the cost per token is quite high. Increasing batch size has the opposite effect: worse per-user latencies, better overall throughput for lower cost.  
+小批次下单用户延迟优异，但GPU生成的总token数少。这意味着单token成本较高。增大批次有相反效果：单用户延迟变差，但整体吞吐量提升且成本降低。  
+
+Parallelism strategy  
+并行策略  
+
+Today’s LLMs measure in the hundreds of billions or trillions of parameters and must be spread across multiple GPUs. The way in which they are shared, or parallelized, across GPUs can boost either latency or throughput.  
+当今LLM参数规模达数千亿或数万亿，必须分布在多个GPU上。它们在GPU间的共享或并行方式可优化延迟或吞吐量。  
+
+For latency-sensitive deployments, focus on increasing Tensor Parallelism (TP). While TP has expensive all-to-all communication, it is effective for lowering latencies as these operations are fast over high-bandwidth NVLink interconnects.  
+对延迟敏感型部署，应侧重增加张量并行(TP)。虽然TP需要昂贵的全通信，但由于这些操作在高速NVLink互连上很快，能有效降低延迟。  
+
+Expert Parallelism (EP) can help with both latency and throughput. A lower degree of EP is often associated with better latencies, while wide EP, including EP across a full rack of GPUs, generally supports higher throughput.  
+专家并行(EP)可同时优化延迟和吞吐量。低程度EP通常对应更好延迟，而宽范围EP（包括跨整机柜GPU的EP）通常支持更高吞吐量。  
+
+Another parallelism technique for improving throughput is Attention Data Parallelism (ADP). This technique replicates attention layers for parallel computation, which boosts system throughput at the expense of per-request speed.  
+另一项提升吞吐量的并行技术是注意力数据并行(ADP)。该技术复制注意力层进行并行计算，以单请求速度为代价提升系统吞吐量。  
+
+Quantization  
+量化  
+
+Quantization, or running a model with a lower level of precision in weights, activations, and/or KV cache values, improves both latency and throughput. A quantized model pushes out the efficient frontier on serving tradeoffs.  
+量化（以更低精度运行模型的权重、激活值和/或KV缓存值）可同时改善延迟和吞吐量。量化模型会外移服务权衡的效率前沿。  
+
+However, quantization introduces a new set of tradeoffs between quality and serving efficiency. This is a particularly jagged frontier, where a large degree of improvement to serving efficiency is possible with little-to-no reduction in model quality, especially when using microscaling floating-point number formats like MXFP4 and NVFP4.  
+但量化引入了质量与服务效率的新权衡。这是个特别锯齿状的前沿，在使用MXFP4和NVFP4等微缩放浮点数格式时，可能实现服务效率的大幅提升而几乎不降低模型质量。  
+
+Techniques that move the frontier  
+推动前沿的技术  
+
+These techniques are the ones that make the headlines. Improving overall performance is the most fun part of inference engineering.  
+这些技术常成为头条新闻。提升整体性能是推理工程中最有趣的部分。  
+
+The best part is that these techniques often compound. For example, doubling performance from better hardware while also doubling performance from better software means a four times improvement in overall serving, which can be allocated across latency and throughput.  
+最妙的是这些技术常产生复合效应。例如硬件优化使性能翻倍的同时软件优化也实现翻倍，意味着整体服务能力提升四倍，这些增益可分配给延迟和吞吐量。  
+
+Kernel optimization and runtime improvements  
+内核优化与运行时改进  
+
+A CUDA kernel is a low-level function that executes a single piece of the inference  
+CUDA内核是执行单块推理任务的底层函数
+
+## 🔗 知识库双向关联
+- [Controlling Reasoning Effort in LLMs_全翻译](/auto-clippings/Controlling-Reasoning-Effort-in-LLMs-全翻译)
+- [GLM-5.3 How Chinese labs keep stride with the frontier_全翻译](/auto-clippings/GLM-53-How-Chinese-labs-keep-stride-with-the-front)
+- [Death of Params Z.ai CEO Jie Tang on GLM 5.3 and th_全翻译](/auto-clippings/Death-of-Params-Zai-CEO-Jie-Tang-on-GLM-53-and-th)

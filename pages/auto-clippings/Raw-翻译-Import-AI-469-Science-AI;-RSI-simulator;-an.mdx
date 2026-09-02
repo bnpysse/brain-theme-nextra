@@ -1,0 +1,209 @@
+---
+title: "Import AI 469 Science AI; RSI simulator; and Zuck s technolo_全翻译"
+tags: ["大咖视点_全文翻译", "Import_AI_(Jack_Clark_AI政策与技术前沿)"]
+---
+
+【文章标题】：Import AI 469: Science AI; RSI simulator; and Zuck's technological pessimism
+【文章标题】：Import AI 469：科学AI；RSI模拟器；以及扎克伯格的技术悲观主义
+
+【文章正文】：
+Welcome to Import AI, a newsletter about AI research. Import AI runs on arXiv, cappuccinos, and feedback from readers. If you'd like to support this, please subscribe.
+欢迎阅读Import AI，一份关于AI研究的通讯。Import AI依靠arXiv、卡布奇诺咖啡和读者的反馈来运转。如果您愿意支持我们，请订阅。
+
+Subscribe now
+立即订阅
+
+DiG-bench shows that Fable displays some creative intuition:
+DiG-bench显示Fable展现出一定的创造性直觉：
+
+…The new frontier for analyzing AI systems is understanding how good they are at inferring the unwritten rules of their environment…
+……分析AI系统的新前沿在于理解它们推断环境中不成文规则的能力有多强……
+
+How well can AI systems figure out the rules of their environment through exploration and curiosity, versus being fed them? That's an important question for better understanding the intuitive and creative capabilities of AI systems and it's one being asked by DiG-bench (Discovery in Games), a new benchmark of 70 games "designed to map the surface of discovery in well-controlled interactive systems". Similar to the visual 'ARC' game, in DiG-bench "each game is a self-contained miniature world with its own laws, but both the rules and the objective are hidden from the player and must be uncovered through interaction". You can play some of the games yourself online to get a feel for them at the official project website (digbench.ai).
+AI系统通过探索和好奇心弄清环境规则的能力有多强，与直接被告知规则相比又如何？这是一个重要问题，有助于更好地理解AI系统的直觉和创造能力，而DiG-bench（游戏中的发现）正是针对这一问题提出的新基准，包含70个游戏，"旨在描绘在受控交互系统中的发现表面"。与视觉"ARC"游戏类似，在DiG-bench中，"每个游戏都是一个自足的微型世界，拥有自己的法则，但规则和目标都对玩家隐藏，必须通过交互来揭示"。您可以在官方项目网站（digbench.ai）上亲自在线体验其中一些游戏，以感受其设计。
+
+The key thing this is measuring is the ability for players to spot the important mechanics that determine their success - basically, by playing around with the games you get a sense for how your actions change the environment and through this you also uncover mechanics that you must understand to succeed at the game. The idea is that if you can solve these games you have a decent ability to spot important information in novel environments and update your priors.
+这里衡量的关键能力是玩家识别决定成败的重要机制的能力——基本上，通过摆弄这些游戏，你会感知到自己的行动如何改变环境，并由此揭示出那些必须在游戏中取得成功所必须理解的机制。其理念是，如果你能解决这些游戏，你就具备了在新奇环境中识别重要信息并更新先验知识的良好能力。
+
+Who did the research:
+谁做了这项研究：
+
+The authors come from Thinking About Thinking, University of Oxford, Princeton University, King Abdullah University of Science and Technology, Swiss AI Lab, Inria, MIT. One of the authors is Juergen Schmidhuber, an extremely creative OG AI researcher.
+作者来自Thinking About Thinking、牛津大学、普林斯顿大学、阿卜杜拉国王科技大学、瑞士AI实验室、法国国家信息与自动化研究所（Inria）、麻省理工学院。其中一位作者是Jürgen Schmidhuber，一位极具创造力的AI研究先驱。
+
+Key facts:
+关键事实：
+
+Purely text-based:
+纯文本形式：
+
+The games are basically native to language models. They are also mostly "short enough that most traces fit entirely within the context window of current frontier models".
+这些游戏基本上是为语言模型量身定制的。它们大多"足够简短，大多数轨迹能完全容纳在当前前沿模型的上下文窗口之内"。
+
+Handcrafted and novel and private:
+手工制作、新颖且非公开：
+
+All of these games have been built by human experts. The majority of the games are kept private so that AI systems don't train on them.
+所有这些游戏都由人类专家构建。大多数游戏保持非公开状态，以免AI系统在其上进行训练。
+
+Beatable but difficult:
+可通关但具有挑战性：
+
+Every game has been beaten by at least one human "but players reported finding many games difficult".
+每个游戏都至少被一位人类通关，"但玩家反馈称许多游戏难度较大"。
+
+Varied skills:
+技能多样化：
+
+Solving all these games requires different skills and strategies.
+解决所有这些游戏需要不同的技能和策略。
+
+Experimentation:
+实验模式：
+
+The games come with an optional experimentation mode which lets people play around with them without having as intense a "step limit" on actions they can take.
+这些游戏带有可选的实验模式，让玩家可以在不那么严格的"步数限制"下进行探索。
+
+Reassuringly hard:
+难度令人安心：
+
+The games are difficult enough that they are not beatable by today's frontier models.
+这些游戏难度足够高，当前的前沿模型无法通关。
+
+How well do AI systems do?
+AI系统的表现如何？
+
+The benchmark is split into seven tiers with tier 1 being the easiest and tier 7 the hardest. 21 games have been released publicly with the remaining held back. Most of the games have multiple levels and the number of available actions for players to take at each step ranges from 2 all the way up to 34.
+该基准分为七个层级，第1层最容易，第7层最难。21个游戏已公开发布，其余则保留不公开。大多数游戏有多个关卡，玩家每一步可采取的动作数量从2个到34个不等。
+
+Opus 5 and Fable 5 with Claude Code are the best overall models, followed by GPT-5.5
+Opus 5和Fable 5配合Claude Code是整体表现最好的模型，其次是GPT-5.5。
+
+Only Opus 5 and Fable 5 were able to beat any tasks (0.2) in (Tier 7). Opus 5, GPT-5.5, and Kimi K3 were able to beat some tasks in Tier 6 when given access to a harness (e.g, Claude Code).
+只有Opus 5和Fable 5能够在（第7层）中通关任何任务（0.2）。Opus 5、GPT-5.5和Kimi K3在获得工具框架（如Claude Code）访问权限时，能够通关第6层中的部分任务。
+
+GLM-5.2 and Gemini 3.1 Pro were able to beat some levels in Tier 4.
+GLM-5.2和Gemini 3.1 Pro能够通关第4层中的部分关卡。
+
+Overall, this seems really hard!
+总体而言，这看起来真的很难！
+
+Why this matters - proxies for creativity and discovery: Tests like this are attempts to isolate a prerequisite for creativity, which is being able to autonomously discover useful undocumented things about novel situations you find yourself in. As this test shows, some frontier models are already capable of some fairly impressive feats of discovery, but still struggle compared to humans (for instance, a 20% success rate on Tier 7 is pretty poor compared to the fact individual humans were able to get 100% on the tests). My guess is we'll reach human parity on DiG-bench by middle of 2027, at which point we should expect things like recursive self-improvement to seriously kick off.
+为什么这很重要——创造力和发现的代理指标：这类测试试图分离出创造力的一个先决条件，即能够自主发现在你所处的新奇情境中有用的、未被记录的事物。正如这项测试所示，一些前沿模型已经具备了相当令人印象深刻的发现能力，但与人类相比仍有差距（例如，第7层20%的成功率与人类个体能够在测试中获得100%的成绩相比，实在相形见绌）。我的猜测是，我们将在2027年年中之前在DiG-bench上达到人类水平，届时我们应该预期递归自我改进之类的事情将真正启动。
+
+Read more: DiG-bench: Discovery in Games (GitHub, PDF).
+了解更多：DiG-bench：游戏中的发现（GitHub，PDF）。
+
+Play the games and view the leaderboard at the official site (digbench.ai).
+在官方网站（digbench.ai）上试玩游戏并查看排行榜。
+
+***
+
+Get a feel for recursive self-improvement by playing this browser-based game:
+通过玩这款基于浏览器的游戏来感受递归自我改进：
+
+…Cookie Clicker, but for the singularity…
+……饼干点击器，但为奇点而设……
+
+Here's a fun game from the folks at Paradigm Research which aims to simulate what it's like to run a company building AI systems which become capable of recursive self-improvement. If you play the game you can get a good feel for how different components of AI research interact, ranging from how you balance investing in researchers versus compute, how and when to license data, and more. Be warned, it's hard - but then again, so is frontier AI development.
+这是来自Paradigm Research团队的一款有趣游戏，旨在模拟运营一家构建具备递归自我改进能力的AI系统的公司是什么体验。如果你玩这款游戏，就能很好地感受到AI研究的不同组成部分如何相互作用，从如何平衡对研究人员与算力的投资，到如何以及何时授权数据，等等。提醒一下，这款游戏很难——但话说回来，前沿AI开发也同样艰难。
+
+Why this matters: Developing better intuitions about recursive self-improvement is of existential importance to us all; games like this help make it easier for us to reason about this technology and the labs building it.
+为什么这很重要：对递归自我改进建立更好的直觉对我们所有人都具有关乎存亡的重要性；像这样的游戏有助于我们更容易地对这项技术及其构建实验室进行推理。
+
+Play the game here: RSI Simulator (Paradigm Research).
+在这里试玩游戏：RSI模拟器（Paradigm Research）。
+
+***
+
+AI systems are showing early signs of scientific research taste:
+AI系统正展现出科学研究品味的早期迹象：
+
+…Inherent post-trains an open weight model into an AI scientist that supervises a frontier model…
+……Inherent将开源权重模型后训练为一名AI科学家，由其监督一个前沿模型……
+
+Taste is a hard thing to quantify but an intuitive thing to sense, as any of us know who have sat in a well-designed room, looked at someone wearing a particularly good fit, or read a research paper that asks just the right questions. Now, researchers with AI startup Inherent have published a paper showing how they are building Faraday, an AI scientist model that they hope can develop some taste in terms of research.
+品味是一个难以量化但凭直觉就能感知的东西，我们中任何坐在设计精良的房间里、看到穿着得体的人、或读到一篇提出了恰到好处问题的研究论文的人，都深有体会。现在，AI初创公司Inherent的研究人员发表了一篇论文，展示了他们如何构建Faraday——一个他们希望能在研究方面培养出一定品味的AI科学家模型。
+
+What they did:
+他们做了什么：
+
+The company built a supervisory harness and relatively small LLM which sits on top of large, proprietary frontier models, and controls them in a way that improves their effectiveness at science. (In some ways, this is a capabilities-centric version of the scalable oversight problem).
+该公司构建了一个监督框架和相对较小的LLM，置于大型专有前沿模型之上，并以提升其科学研究效率的方式控制这些模型。（在某些方面，这是可扩展监督问题的以能力为中心的版本）。
+
+To help them train and evaluate the system they assemble a dataset ("Replica") consisting of research papers that have key graphs or results missing from them, then they see how well AI systems can autonomously do experiments that fill in the blanks, and they continuously train a small supervisory model ("Faraday") via GRPO on well-designed fill-ins to achieve better and better results.
+为了帮助训练和评估该系统，他们组装了一个数据集（"Replica"），其中包含缺失关键图表或结果的研究论文，然后观察AI系统能多好地自主进行实验来填补空白，并通过GRPO在精心设计的填空任务上持续训练一个小型监督模型（"Faraday"），以取得越来越好的结果。
+
+Faraday is a 27B model that uses a coding agent (OpenAI Codex) as an underlying tool and is post-trained on top of Qwen-3.6-27B.
+Faraday是一个270亿参数的模型，使用编码代理（OpenAI Codex）作为底层工具，并在Qwen-3.6-27B的基础上进行后训练。
+
+What Replica consists of:
+Replica包含什么：
+
+Replica is a set of 100 ML and AI-for-science papers published between 1990 and 2026. The authors convert this dataset into a set of 310 replication tasks by knocking out individual results. "For each task, we use Claude Opus 4.7 prompted with a meta-rubric to generate a task-specific grading rubric," they write. They then use a Codex-based Judge model to provide "an overall reward and per-turn credit assignment weights, which are used to train the Faraday agent using a modified version of GRPO."
+Replica是一组1990年至2026年间发表的100篇机器学习和AIforScience论文。作者通过剔除个别结果，将该数据集转化为310个复现任务。"对于每个任务，我们使用带有元评分标准的Claude Opus 4.7提示来生成任务特定的评分标准，"他们写道。然后他们使用基于Codex的Judge模型来提供"总体奖励和逐轮信用分配权重，用于通过修改版GRPO训练Faraday代理。"
+
+Results:
+结果：
+
+Faraday using Codex is able to beat standard Opus 4.8 and GPT-5.5 on some replication tasks, exceeding their performance "on 73% of in-distribution ML tasks, and on 60% of held-out AI-for-science tasks, according to our rubric-based judge."
+使用Codex的Faraday能够在某些复现任务上击败标准Opus 4.8和GPT-5.5，根据我们的评分标准判断器，"在73%的分布内机器学习任务和60%的保留AIforScience任务上"超越了它们的表现。
+
+"We achieve a comprehensive uplift in performance compared to the base Qwen model, on both train and test tasks," they write.
+"与基础Qwen模型相比，我们在训练和测试任务上都实现了全面的性能提升，"他们写道。
+
+Why this matters - the better systems like Faraday get, the higher the chance AI systems will become capable of recursive self-improvement:
+为什么这很重要——像Faraday这样的系统越强大，AI系统具备递归自我改进能力的可能性就越高：
+
+These days, most high-signal AI evaluations are trying to capture some property of creativity and intuition and Faraday/Replica is the same. The better AI systems get at this, the more likelihood we can assign to the idea that AI systems will imminently become capable of building themselves.
+如今，大多数高信号AI评估都在试图捕捉创造力和直觉的某种属性，Faraday/Replica也是如此。AI系统在这方面表现越好，我们就越有可能相信AI系统即将具备自我构建的能力。
+
+"The skills that allow Faraday to fill in vaguely-specified details may be the very same skills that would allow it to advance the state of the art by designing its own experiment," the company writes. "The skills Faraday acquires – deciding what to investigate, scoping experiments to a budget, and judging a replication – compound with advances in frontier coding models. One might hope that a single post-trained outer agent can track the frontier as better models are released, at least over some time period."
+"让Faraday能够填补模糊指定细节的技能，可能正是让它能够通过设计自己的实验来推进技术前沿的同一套技能，"该公司写道。"Faraday获得的技能——决定研究什么、在预算范围内规划实验、以及评判复现结果——会与前沿编码模型的进步相互叠加。人们或许可以期待，一个经过后训练的外部代理能够在更好的模型发布时追踪前沿，至少在某个时间段内如此。"
+
+Read more: Training AI Scientists to Replicate Research (arXiv).
+了解更多：训练AI科学家复现研究（arXiv）。
+
+***
+
+Mark Zuckerberg seems to be a technological pessimist:
+马克·扎克伯格似乎是一位技术悲观主义者：
+
+…Zuck's big essay on AI seems to ignore or elide or not confront what AI systems capable of invention mean…
+……扎克伯格关于AI的长文似乎忽略、回避或不直面具备发明能力的AI系统意味着什么……
+
+Mark Zuckerberg has written an essay called "The Future is for Everyone" that serves as something of a manifesto for how he and Meta are approaching the development of AI systems. The core idea inherent to Zuck's strategy is to massively proliferate AI capabilities to everyone on the planet in a bid to avoid concentrating power and creating tyranny in a small number of players. It's a broadly sensible idea except for the fact that superintelligences capable of inventing new ideas might want to do different things to what Mark Zuckerberg proposes and on this crucial area his essay is silent.
+马克·扎克伯格写了一篇名为《未来属于每个人》的文章，在某种程度上充当了他和Meta应对AI系统发展的宣言。扎克伯格策略的核心思想是向地球上的每个人大规模普及AI能力，以避免权力集中并在少数参与者中形成暴政。这大体上是一个明智的想法，但问题在于，能够发明新思想的超级智能可能想要做的事情与马克·扎克伯格提议的有所不同，而在这个关键领域，他的文章保持沉默。
+
+Mark's view:
+马克的观点：
+
+"The defining questions of our age are who will have access to superintelligence and what will we direct it towards," Zuckerberg writes. "We propose a philosophy based on individual empowerment as the source of prosperity, invention as the primary purpose of superintelligence, and balance of power as the foundation of safety."
+"我们这个时代的关键问题是，谁将获得超级智能，以及我们将引导它做什么，"扎克伯格写道。"我们提出一种基于以下理念的哲学：个人赋能作为繁荣的源泉，发明作为超级智能的首要目的，以及权力平衡作为安全的基础。"
+
+Meta's goals and beliefs:
+Meta的目标和信念：
+
+"Everyone will have an exceptionally capable personal agent that understands you, your goals, and everything you care about."
+"每个人都将会拥有一个能力非凡的个人代理，它理解你、你的目标以及你在乎的一切。"
+
+"Everyone will have incredible tools for creation to express your ideas."
+"每个人都将会拥有令人难以置信的创作工具来表达你的想法。"
+
+"Everyone will have powerful tools to create new businesses and the economy will become more entrepreneurial."
+"每个人都将会拥有创建新企业的强大工具，经济将变得更加具有创业精神。"
+
+"Everyone will have a personalized tutor and coach with a PhD in every subject and unlimited patience to help you learn anything you want."
+"每个人都将会拥有一位个性化的导师和教练，它在每个学科都有博士学位，并且有无限的耐心帮助你学习任何你想学的东西。"
+
+"Everyone will benefit from scientific advances and be able to contribute to scientific progress."
+"每个人都将会从科学进步中受益，并能够为科学进步做出贡献。"
+
+"Everyone will have free or affordable access to these tools."
+"每个人都将会免费或以可负担的价格使用这些工具。"
+
+The missing question:
+缺失的问题：
+
+The part of this essay I understand the least is Zuckerberg's co-mingling of AI systems capable of invention with individual empowerment. The essay is full of things that seem to assume these things come as a package, for instance:
+这篇文章中我最不理解的部分是扎克伯格将具备发明能力的AI系统与个人赋能混为一谈。文章充满了似乎默认这些事物是捆绑出现的表述，

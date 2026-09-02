@@ -1,0 +1,106 @@
+---
+title: "PRs NOT Welcome How Top AI Open Source Projects Are Managing_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：PRs NOT Welcome: How Top AI Open Source Projects Are Managing Thousands of Contributors  
+【拒绝PR：顶级AI开源项目如何管理数千贡献者】  
+
+【文章正文】：  
+GitHub invented pull requests, and for 18 years they have been open by default.  
+GitHub发明了拉取请求功能，18年来默认保持开放状态。  
+
+But now some of the top AI-native open source projects are shutting PRs off, because they’ve found a better way.  
+但如今一些顶级AI原生开源项目正在关闭PR通道，因为他们找到了更好的方式。  
+
+These projects, which include Flue and tldraw, refuse to accept PRs from external contributors — in part because they’re usually AI-generated. Instead, the maintainers prefer to use their own agents to create and manage PRs.  
+包括Flue和tldraw在内的这些项目拒绝接收外部贡献者的PR——部分原因是这些PR通常由AI生成。维护者更倾向于使用自己的智能体来创建和管理PR。  
+
+Also, many projects have begun using a "software factory" to manage community contributions.  
+此外，许多项目开始采用"软件工厂"模式管理社区贡献。  
+
+Typically this involves a ‘team’ of agents triaging a PR, reproducing the issue (if it’s a bug), implementing a fix or a new feature, reviewing it, and then handing it back to a human to merge it.  
+典型流程包括：智能体"团队"对PR进行分类、复现问题（如果是错误）、实施修复或新功能、审查代码，最后交由人类合并。  
+
+**Vercel’s software factory for AI SDK**  
+**Vercel的AI SDK软件工厂**  
+
+Vercel recently published a post entitled "Building a software factory for AI SDK." It describes how the open source AI SDK project, which gets over 20 million npm downloads per week, deployed agents to get control over its PR and issue backlog — which had reached "over 1,000 open issues and almost 800 pull requests" by late June.  
+Vercel近期发布题为《构建AI SDK的软件工厂》的文章，描述了这个每周npm下载量超2000万的开源项目如何部署智能体管理积压的PR和问题——截至6月底已累积"1000多个未解决问题和近800个拉取请求"。  
+
+There are several types of agents in Vercel’s system, each of which focuses on a different task. For example, there’s an agent that reproduces a bug, another that applies a fix, and yet another that reviews the fix.  
+Vercel系统中有多种智能体，各司其职：包括复现错误的智能体、实施修复的智能体以及审查修复方案的智能体。  
+
+*Diagram from Vercel; comments by Latent Space*  
+*图表来自Vercel；Latent Space注释*  
+
+One of the key reasons why Vercel set up this software factory is because it trusts its own agents to do the work, more so than agents run by community members.  
+Vercel建立软件工厂的核心原因在于：相比社区成员运行的智能体，他们更信任自己的智能体。  
+
+"If we have a very specific agent with a very specific prompt that we optimized — and we know that, over history, it was very successful in fixing a certain category of bugs — then we develop trust in that particular agent configuration," Vercel engineer Lars Grammel explained in a YouTube video.  
+Vercel工程师Lars Grammel在YouTube视频中解释："如果我们优化了具有特定提示词的专用智能体，并且历史证明它能成功修复某类错误，我们就会对这个特定配置建立信任。"  
+
+"For open-source projects, it’s worth considering having your own agents and your own setup, and not necessarily trusting the community, because it can actually cut down your time to review," he added.  
+他补充道："开源项目值得考虑建立自己的智能体和系统，不必完全依赖社区，这能大幅减少审查时间。"  
+
+*Example of software factory workflow in AI SDK project.*  
+*AI SDK项目中软件工厂的工作流示例*  
+
+Grammel also showed the deployment architecture for its system, noting that "there is a UI, there’s a web app, there’s an underlying API, there’s an execution space, and there are sandboxes." It’s then synchronized with GitHub, which automatically triggers other actions. The UI Grammel mentioned was custom-made.  
+Grammel还展示了系统部署架构："包含UI界面、Web应用、底层API、执行空间和沙箱环境"，这些组件与GitHub同步后会自动触发其他操作。所述UI为定制开发。  
+
+*Vercel’s software factory deployment architecture; diagram by Lars Grammel.*  
+*Vercel软件工厂部署架构图；由Lars Grammel制作*  
+
+Just four weeks after this software factory was implemented, Vercel claims the factory now "authors between 25 and 35% of PRs we merge and closes 70-80% of issues."  
+实施仅四周后，Vercel宣称该工厂"创造了我们合并PR的25%-35%，并解决了70%-80%的问题"。  
+
+**Astro’s auto-triage system**  
+**Astro的自动分类系统**  
+
+The Astro web framework, which has 62,000 stars on GitHub, has also adopted what creator Fred Schott calls "that software factory idea."  
+GitHub获6.2万星的Astro网页框架同样采纳了创始人Fred Schott所说的"软件工厂理念"。  
+
+"For five years, we were in this place where issues came in faster than we could handle them," Schott told Latent Space.  
+Schott告诉Latent Space："五年来我们一直面临问题涌入速度超过处理能力的困境。"  
+
+But now, with agents handling the triage work, they’ve reestablished control. "It’s totally shifted in the last six months," he said. "We can now solve these issues with these automations — handling triage, reproduction, getting the user to actually verify the fix that the bot is suggesting before we even look at it."  
+如今通过智能体处理分类工作，团队重获掌控权。"过去六个月彻底改变了局面，"他表示，"现在通过自动化流程处理分类、复现，甚至在人类查看前就让用户验证机器人建议的修复方案。"  
+
+*Example of an Astro factory bot in action*  
+*Astro工厂机器人的运行示例*  
+
+The result was not just a large decrease in open issues, but a complete change in how the Astro team deals with incoming community requests.  
+成果不仅是未解决问题大幅减少，更彻底改变了团队处理社区请求的方式。  
+
+"I’ve never seen that in my entire decade-plus experience with open source," Schott said. "Being able to essentially treat issues as a thing that every week, you prioritize — no matter what — versus a backlog that you’re constantly trimming."  
+Schott表示："在我十余年的开源经历中从未见过这种转变——现在能像处理每周必做事项那样对待问题，而非不断修剪的积压清单。"  
+
+Furthermore, the Astro "auto-triage" system directly led to Schott creating a brand new agent framework, called Flue.  
+Astro的"自动分类"系统直接促使Schott创建了全新智能体框架Flue。  
+
+**Flue doesn’t accept your PRs, but is open for discussion**  
+**Flue不接受PR，但开放讨论**  
+
+With Flue, Schott is trying an even more radical approach to PRs.  
+通过Flue，Schott尝试了更激进的PR处理方式。  
+
+Flue’s contributor guide states that "we’re going to try to reimagine things" — partly to prevent what it calls "Drive-by AI slop PRs."  
+Flue的贡献者指南声明"我们将尝试重构流程"，部分是为防止所谓"AI随手生成的劣质PR"。  
+
+Basically, Schott explained, every external pull request in the Flue project is automatically closed and converted into an issue or discussion. Bug reports and fix proposals get turned into issues, feature requests become discussions.  
+Schott解释称，Flue项目中所有外部PR都会自动关闭并转化为问题或讨论：错误报告和修复建议转为问题，功能请求转为讨论。  
+
+*Agents can do most PR tasks now, according to Flue’s contributor guide.*  
+*据Flue贡献者指南所述，智能体现已能处理大部分PR任务*  
+
+"If you submit a PR, no hard feelings, we’re just going to go and represent it for you as issues and discussions. And from there, trying to figure out the right way to bring people on."  
+"提交PR无需介怀，我们会将其转化为问题和讨论，并从中寻找合适的协作方式。"  
+
+It’s kind of like treating incoming requests as leads, rather than as a piece of work a maintainer feels obliged to review. The contributor guide explains that it uses the team’s own expertise combined with "the best available SOTA [State-of-the-Art] LLMs that we have access to"  
+这种方式将入站请求视为线索，而非维护者必须审查的工作。贡献者指南说明该项目结合团队专业知识和"可获取的最先进大语言模型"
+
+## 🔗 知识库双向关联
+- [硅谷押注的下一个 Harness，是整个桌面操作系统_全翻译](/auto-clippings/硅谷押注的下一个-Harness，是整个桌面操作系统-全翻译)
+- [llm-anthropic 0.27_简报](/auto-clippings/llm-anthropic-027-简报)
+- [An opinionated guide to which AI to use to do stuff_全翻译](/auto-clippings/An-opinionated-guide-to-which-AI-to-use-to-do-stuf)

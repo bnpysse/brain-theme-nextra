@@ -1,0 +1,163 @@
+---
+title: "44 on ARC-AGI-1 in 67 cents_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：44% on ARC-AGI-1 in 67 cents  
+【标题翻译】：以67美分成本在ARC-AGI-1上实现44%准确率  
+
+【文章正文】：  
+44% on ARC-AGI-1 in 67 cents  
+以67美分成本在ARC-AGI-1上实现44%准确率  
+
+I trained a small transformer from scratch in 1.5hrs on a 5090  
+我在5090显卡上用1.5小时从头训练了一个小型Transformer  
+
+Beats many LLMs, and scores the same as TRM/HRM  
+击败了许多大语言模型，成绩与TRM/HRM持平  
+
+This is an upgrade to my previous model  
+这是对我之前模型的升级  
+
+Faster, better, cheaper and still open source.  
+更快、更好、更便宜且依然开源  
+
+Also gets 7% on ARC-2  
+在ARC-2上也取得了7%的成绩  
+
+Discussion on Twitter, Code on github  
+讨论见Twitter，代码在GitHub  
+
+This is the 3rd blog in a series of works on ARC-AGI. Prev: Blog 2, Blog 1.  
+这是ARC-AGI系列研究的第三篇博客，前篇：博客2、博客1  
+
+Many ppl thought the prev result was impossible. It got attention from top researchers and went viral on X. Eg: Discussions by Lucas Beyer, Jeremy Howard, Rohan Anil, and comments by many others.  
+许多人曾认为先前结果不可能实现。它引起了顶尖研究者的关注并在X平台爆火，例如Lucas Beyer、Jeremy Howard、Rohan Anil等人的讨论  
+
+Why work on this?  
+为何研究这个？  
+
+I think sample efficiency is the most important problem in AI today and I want to solve it.  
+我认为样本效率是当前AI领域最重要的问题，我想解决它  
+
+The intention behind this work is to (1) find the limits of sample efficiency when restricted to transformers / today’s deep learning methods and (2) reduce costs so iteration is much faster and cheaper.  
+本研究旨在：(1)探索Transformer/现有深度学习方法的样本效率极限 (2)降低研发成本以加速迭代  
+
+ARC is a great benchmark to test this:  
+ARC是绝佳的测试基准：  
+
+- Very few samples (only a 1000 puzzles) in a high dimensional space  
+  高维空间中样本极少（仅1000个谜题）  
+
+- Its a metalearning benchmark, so each puzzle uses a different rule, with some common concepts  
+  作为元学习基准，每个谜题采用不同规则但共享某些概念  
+
+- Very few priors needed: every concept needed in the eval set is present in the train set  
+  所需先验极少：评估集所需概念均包含在训练集中  
+
+- It is incredibly easy for humans to solve, and accessible to even poor AI researchers  
+  人类极易解决，资源匮乏的AI研究者也能参与  
+
+- Benchmark is still unsaturated (for data efficiency, ignore LLMs and approaches that use tons of synthetic data or human inductive biases)  
+  基准尚未饱和（针对数据效率研究时，应忽略使用海量合成数据或人类归纳偏置的LLM方案）  
+
+Next, I’ll work on new research ideas to break these limits. I’ll try to keep costs low so that anyone in the world can work on this.  
+下一步将探索突破这些限制的新思路，并保持低成本以便全球研究者参与  
+
+Tech details  
+技术细节  
+
+How does it work?  
+工作原理  
+
+The overall approach is similar to last time (full technical details here), but I added a bunch of upgrades. Here’s a quick summary of the approach:  
+整体方案类似前作（完整技术细节见此），但进行了多项升级。方法概要：  
+
+- Each input-output pair is converted to a sequence of tokens. These sequences are autoregressively trained on by a small transformer. This is done from scratch at test time on both the train set and eval set puzzles (test labels hidden).  
+  每个输入-输出对转为token序列，由小型Transformer自回归训练。测试时同时在训练集和评估集谜题上从头开始（隐藏测试标签）  
+
+- To enable cross-task learning, each puzzle is given a separate additive embedding (learnt). Since each sequence has two 2D grids, positional are learnt using 3D RoPE embeddings.  
+  为实现跨任务学习，每个谜题分配独立可学习叠加嵌入。因序列含两个2D网格，位置编码采用3D RoPE嵌入  
+
+- The sequences are augmented with color and dihedral permutations. During inference, the test inputs are augmented, and the inverse aug is applied on the outputs produced. The 2 most common outputs are submitted (AAIVR).  
+  序列通过颜色和二面体置换增强。推理时增强测试输入，并对输出应用逆增强。提交两个最常见输出（AAIVR）  
+
+Changes since last time  
+相比前作的改进  
+
+The main goal was to find improvements to the architecture / algorithm that improve the sample efficiency of the model.  
+主要目标是提升架构/算法以提高模型样本效率  
+
+The biggest increases in scores were due to  
+最大性能提升来自：  
+
+- Modern architecture (SwiGlu instead of GELU, RMSnorm not layernorm, etc.)  
+  现代架构（SwiGlu替代GELU，RMSnorm替代layernorm等）  
+
+- More data diversity, better shuffling of data  
+  更高数据多样性，更优数据混洗  
+
+- scaling up: 8 layers instead of 4  
+  规模扩展：8层替代4层  
+
+Biggest decreases in cost were due to:  
+最大成本降低源于：  
+
+- Way fewer augmentations (more sample efficient!)  
+  大幅减少增强（更高样本效率！）  
+
+- AdamW -&gt; Normuon  
+  优化器从AdamW转为Normuon  
+
+- flash attention with varlen training + flex attention kernels for inference  
+  采用可变长度训练的flash attention + 灵活注意力推理内核  
+
+A major change is that I don’t train on input tokens anymore. This means the loss function only includes output tokens (which makes the approach supervised). This. performs slightly better 40% $\to$ 44% but I don’t understand why. Perhaps finite model capacity  
+重大变化是不再训练输入token，损失函数仅含输出token（转为监督学习）。准确率从40%→44%但原因不明，可能是有限模型容量  
+
+I also increased the training data by adding the non-overlapping tasks from ARC-2. I did this very carefully to ensure no leakage. You can remove the extra data if you don’t like it and it will still score ~40%, but it will need ~double the compute.  
+通过添加ARC-2非重叠任务谨慎扩充训练数据（确保无泄露）。移除额外数据仍可保持~40%准确率，但需约双倍算力  
+
+Context: ARC-2 contains 773 ARC-1 puzzles and 347 new puzzles. Most eval puzzles of ARC-1 are repeated, so if you naively train on ARC-2, then its a dataleak and you will score 100%. I avoid this by carefully filtering out the 773 repeated puzzles (so no leak!)  
+背景：ARC-2包含773个ARC-1谜题和347个新谜题。若直接训练会导致数据泄露（得分100%），我通过严格过滤773个重复谜题避免此问题  
+
+There are many other changes that gave incremental improvements in performance or speed. Find the full list of changes here.  
+其他改进详见完整变更列表  
+
+Interesting behaviour  
+有趣现象  
+
+Since I am no longer training on inputs, this approach is now supervised. What’s weird is that the test loss is now worse, yet it scores better! Also it is more stable and there’s less variance in scores.  
+转为监督学习后，测试损失反而上升但准确率提高！且稳定性增强，分数波动减小  
+
+Many ppl today are working on sample efficiency by aiming for the lowest val loss on a small dataset. I think that’s great, but this points out a failure mode in such an approach  
+当前许多人通过最小化验证损失提升样本效率，但本实验揭示了该方法的潜在缺陷  
+
+I do think the unsupervised style training will be better in some scenarios, and I am evaluating this.  
+我认为无监督训练在某些场景更优，正在验证  
+
+Before NorMuon, I tried vanilla Muon. Obviously it trained much faster than AdamW, but the loss (and scores) would loiter at the end instead of converging. I found that cranking down the momentum and/or LR drastically at this point helped, but I didn’t want to make manually changes like this. When I switched to NorMuon, the problem disappeared  
+使用NorMuon前尝试原始Muon：训练速度显著快于AdamW，但损失/分数在末期停滞。大幅降低动量/学习率可改善，但改用NorMuon后问题消失  
+
+Ablations  
+消融实验  
+
+The biggest contribution to performance seems to be good representations (3D RoPE + per-task embedding).  
+最大性能提升来自优质表征（3D RoPE+单任务嵌入）  
+
+- Training on inputs performs slightly worse -&gt; ~39%  
+  训练输入token略差→~39%  
+
+- Restricting training set to ARC-1+ConceptARC only performs about the same: ~40%  
+  仅用ARC-1+ConceptARC训练集效果相当：~40%  
+
+- Switching from 3D RoPE to 1D drops score to ~24%  
+  3D RoPE转为1D导致分数降至~24%  
+
+- Removing  
+  移除...（原文截断）
+
+## 🔗 知识库双向关联
+- [Memory prices up 500 in 12 months_全翻译](/auto-clippings/Memory-prices-up-500-in-12-months-全翻译)
+- [🎙️ How I AI Grok Bot  Grok 4.6—what’s great and what’s still_全翻译](/auto-clippings/🎙️-How-I-AI-Grok-Bot-Grok-46—whats-great-and-whats)
+- [AI for Science最难学会的，是换一个问题_简报](/auto-clippings/AI-for-Science最难学会的，是换一个问题-简报)

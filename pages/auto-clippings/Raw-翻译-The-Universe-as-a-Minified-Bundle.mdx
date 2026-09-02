@@ -1,0 +1,41 @@
+---
+title: "The Universe as a Minified Bundle_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The Universe as a Minified Bundle  
+【文章标题】：宇宙作为一份压缩代码包  
+
+【文章正文】：  
+Imagine finding a file called universe.js. It is 1.3 pebibytes, minified, and apparently contains everything. No source maps. No comments. No Git history. No README written by some exhausted engineer explaining why gravity depends on a utility called q7. Just one endless slab of punctuation, single-letter variables, collapsed functions, and deeply suspicious side effects. You are told the file runs stars, electrons, black holes, time, chemistry, your nervous system, and whatever consciousness is. You do not get the source.  
+想象你发现了一个名为universe.js的文件。它有1.3拍字节大小，经过压缩，显然包含了一切。没有源码映射。没有注释。没有Git历史。没有疲惫工程师写的README来解释为什么引力依赖一个叫q7的工具。只有无尽堆砌的标点符号、单字母变量、折叠的函数和极其可疑的副作用。你被告知这个文件运行着恒星、电子、黑洞、时间、化学反应、你的神经系统以及意识这类东西。但你拿不到源代码。  
+
+This is not quite our situation, but it is uncomfortably close. We can run the application because we are inside the application. We can hit it with things, freeze parts of it, accelerate parts of it to nearly the speed of light, bounce photons off it, put bits of it in vacuum chambers, and spend eleven billion dollars building a circular machine whose primary purpose is to smash extremely small things together and inspect the debris. What we cannot do is ask the universe to open the repository. Physics is what you do when prod is running, the source is missing, and somehow you still have to figure out the architecture.  
+这虽不完全是我们面临的处境，但已接近得令人不安。我们能运行这个程序是因为我们就在程序内部。我们可以用物体撞击它、冻结它的某些部分、将某些部分加速到近光速、用光子轰击它、把它的片段放进真空室，并花费110亿美元建造一个主要目的是将极小物体对撞并观察碎片的环形机器。但我们无法要求宇宙打开代码仓库。物理学就是你面对生产环境正在运行、源码缺失、却仍要设法理解系统架构时的应对方式。  
+
+Physics is what you do when prod is running, the source is missing, and somehow you still have to figure out the architecture.  
+物理学就是你面对生产环境正在运行、源码缺失、却仍要设法理解系统架构时的应对方式。  
+
+Humans reverse engineered this thing with comically primitive tooling. Newton watches objects fall and discovers that nature is not improvising. The same rules keep appearing. Planets, cannonballs, apples: wildly different tickets, same underlying function. Maxwell later discovers that electricity, magnetism, and light, which had been sitting in different conceptual folders, are really one system. Einstein then discovers that space and time themselves are not the static coordinate grid under the program. The coordinate grid is executable.  
+人类用原始得可笑的工具对这个系统进行逆向工程。牛顿观察物体下落，发现自然并非即兴发挥。相同的规律不断重现。行星、炮弹、苹果：差异巨大的实例，相同的底层函数。后来麦克斯韦发现电、磁和光这些原本分属不同概念文件夹的现象实为同一系统。爱因斯坦继而发现时空本身并非程序底层的静态坐标网格——坐标网格是可执行的。  
+
+Then quantum mechanics PR is merged and everybody has a bad century. Things behave like particles and waves depending on how you interrogate them. Empty space turns out to be busy. Measurement somehow cannot be treated as an innocent spectator. Entangled particles produce correlations across large distances that make our everyday picture of separate little objects carrying private local state look naive. The theory is not failing. That would be merciful. It works so well that entire industries depend on it.  
+接着量子力学的PR被合并，所有人都度过了糟糕的一个世纪。事物根据观测方式呈现粒子或波的特性。真空原来热闹非凡。测量行为无法被视作无辜旁观者。纠缠粒子在远距离产生的关联性，让我们日常认知中携带独立局部状态的小物体图景显得幼稚。这套理论并非失效——那倒算仁慈了——它运作得如此完美，整个产业都依赖它。  
+
+This is the point where Donald Hoffman makes me do that dog tilted head perplexed look thing. Hoffman argues that what we perceive is not reality as it exists in itself but an interface shaped by evolution. The claim sounds mystical until you translate it into just optimization. Evolution does not optimize for truth. It optimizes for fitness. If a brutally simplified representation helps an organism survive better than an accurate one, evolution has no moral obligation to preserve the accurate version.  
+此时唐纳德·霍夫曼让我做出了那种狗歪头困惑的表情。霍夫曼认为我们感知的并非现实本身，而是进化塑造的界面。这个主张听起来神秘，直到你将其转译为优化问题：进化不追求真理，只追求适应度。如果残酷简化的表征比准确版本更能帮助生物生存，进化就没有道德义务保留准确版本。  
+
+A red apple is not reality generously revealing its native object model. It is more like a UI element marked edible thing. It's this far away, this big, and probably worth reaching for. The visual system does not need metaphysical fidelity. It needs latency low enough that your ancestors can eat lunch without becoming lunch. An organism that perceives the deep ontology of fruit but requires forty seconds to decide whether to bite it is not going to leave descendants. Nature has always had strong opinions about performance.  
+红苹果并非现实慷慨展示其原生对象模型，而更像是标记为"可食用"的UI元素：距离这么远，尺寸这么大，可能值得伸手。视觉系统不需要形而上的保真度，它需要足够低的延迟，让你的祖先能在沦为午餐前吃完午餐。一个能感知水果深层本体但需要40秒决定是否下口的生物，不会留下后代。自然向来对性能有严格要求。  
+
+Hoffman likes the desktop icon analogy. The blue folder on your Mac is real in a perfectly useful sense but nothing inside the machine resembles a tiny blue folder. You confused the interface with the implementation. The icon succeeds because it hides almost everything that is actually happening. The Filesystem metadata, memory addresses, controller logic, cache state, electrical transitions, NAND cells, and billions of events that would make opening 2025_federal_taxes.pdf feel like operating a nuclear submarine.  
+霍夫曼喜欢用桌面图标类比：Mac上的蓝色文件夹在实用层面是真实的，但机器内部没有任何东西类似微型蓝色文件夹。你混淆了界面与实现。图标之所以成功，正因它隐藏了几乎所有实际发生的细节——文件系统元数据、内存地址、控制器逻辑、缓存状态、电信号转换、NAND存储单元，以及那些让打开"2025联邦税表.pdf"像操作核潜艇般复杂的数十亿事件。  
+
+You confused the interface with the implementation.  
+你混淆了界面与实现。  
+
+The uncomfortable move is to ask why human perception should be exempt from this principle. Maybe the moon is real in roughly the way the folder is real. Something absolutely exists, and that something reliably participates in interactions we can model, photograph, land spacecraft on (insert fake moon landing joke here) and bounce lasers off. But it does not follow that the deepest form of that thing is literally a gray sphere occupying coordinates in a fundamentally 3D container. The sphere may be the icon. We might have spent thousands of years becoming extremely sophisticated experts in the behavior of icons.  
+令人不安的推论是质问人类感知为何能豁免于此原则。或许月亮的真实程度大致类似于文件夹的真实程度：某种绝对存在之物确实参与着我们能建模、拍摄、着陆航天器（此处插入登月阴谋论玩笑）和激光反射的互动。但这不意味着该物最深层的形态真是占据3D容器坐标的灰色球体。球体可能只是图标——我们或许花了数千年时间成为研究图标行为的顶尖专家。  
+
+Look at entanglement. Spooky action at a distance is famous because the situation seems insane if distance is part of the substrate. Two systems far apart behave as though some relationship between them matters more deeply than our classical picture allows. And nothing usable is simply shooting faster than light between them. The phrase itself quietly assumes the thing under di  
+看看量子纠缠。"远距离幽灵作用"之所以著名，是因为若距离属于底层基质，这种现象就显得荒谬。两个相隔遥远的系统表现得仿佛它们之间的某种关系比经典图景允许的更为深刻。且没有任何可用之物单纯以超光速在它们之间传递。这个表述本身悄然假设了......

@@ -1,0 +1,533 @@
+---
+title: "Simulation the new Scaling Law — Joon Sung Park, Simile AI_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：Simulation: the new Scaling Law — Joon Sung Park, Simile AI
+
+【文章标题】：模拟：新的规模法则——Joon Sung Park，Simile AI
+
+【文章正文】：
+When we first dicsussed the
+
+**Summer of Simulative AI**
+
+in 2024 we knew it would be a brief summer, but it has recently come back with a vengeance with
+
+**SimGym in April**
+
+and now
+
+**Simile AI’s $2B Series B**
+
+, backed by GreenOaks and Index Ventures with prominent backers like Fei-Fei Li and Andrej Karpathy, running tens of millions of simulations for
+
+**Fortune 100 clients like CVS**
+
+and
+
+**85–99% accuracy**
+
+vs human focus groups.
+
+Time to catch up on why this Second Summer of simulation is working!
+
+当我们第一次在 2024 年讨论
+
+**模拟式人工智能之夏**
+
+时，我们就知道那会是一个短暂的夏天，但最近它又强势回归——先是
+
+**四月的 SimGym**
+
+，如今又有
+
+**Simile AI 的 20 亿美元 B 轮融资**
+
+，由 GreenOaks 和 Index Ventures 支持，并拥有李飞飞、安德烈·卡帕西等知名支持者，为
+
+**CVS 等财富 100 强客户**
+
+运行数千万次模拟，并且相较于人类焦点小组达到了
+
+**85–99% 的准确率**
+
+。
+
+是时候来了解一下为什么模拟的“第二个夏天”正在奏效了！
+
+From creating
+
+**Smallville**
+
+, the landmark 2023 paper on Generative Agents that showed
+
+**AI characters could remember, plan, socialize, and develop emergent behaviors**
+
+, to now building foundation models of human behavior, Joon Sung Park is trying to answer a much bigger question:
+
+**what if we could simulate the world before making decisions in it?**
+
+从创建
+
+**Smallville**
+
+——这篇 2023 年关于生成式智能体的里程碑论文展示了
+
+**AI 角色能够记忆、规划、社交并发展出涌现行为**
+
+——到现在构建人类行为的基础模型，Joon Sung Park 正试图回答一个更大的问题：
+
+**如果我们能在做出决策之前先模拟这个世界，会怎样？**
+
+In this episode, the Simile co-founder and CEO joins us to unpack the path from generative agents to digital twins, why today’s frontier models still fail to capture how humans actually behave, and what it would take to eventually simulate all 8 billion people on Earth.
+
+在本期节目中，这位 Simile 联合创始人兼 CEO 与我们一起剖析从生成式智能体到数字孪生的发展路径，为什么当今的前沿模型仍然无法捕捉人类的真实行为方式，以及最终要模拟地球上全部 80 亿人需要什么条件。
+
+We go deep on Simile’s approach to
+
+**modeling human behavior**
+
+: long-form interviews, observational and transaction data, randomized controlled trials, population-level and individual-level models, and post-training on
+
+**the causal mechanisms behind why people make decisions.**
+
+我们深入探讨 Simile 在
+
+**建模人类行为**
+
+方面的方法：长式访谈、观察数据和交易数据、随机对照试验、群体层面和个体层面的模型，以及针对
+
+**人们做出决策背后的因果机制**
+
+进行后训练。
+
+Joon explains how his research created digital twins that reproduced human behavior and attitudes
+
+**85% as accurately as people reproduced their own responses**
+
+, why models optimized to be rational can be bad simulations of irrational humans, and why understanding “social physics” may require changing model weights rather than simply prompting frontier LLMs.
+
+Joon 解释了他的研究如何创建出数字孪生，这些数字孪生在复现人类行为和态度方面的准确度，
+
+**达到人们复现自己回答时准确度的 85%**
+
+；为什么被优化为理性的模型可能无法很好地模拟非理性的人类；以及为什么理解“社会物理学”可能需要改变模型权重，而不是仅仅对前沿大语言模型进行提示。
+
+We also explore the
+
+**much larger ambition behind simulation**
+
+: testing products and policies before deploying them, finding counterintuitive paths toward desired outcomes, modeling emergent behavior across entire societies, and potentially tackling problems like
+
+**climate change**
+
+, democratic instability, and
+
+**UBI**
+
+. Joon reflects on
+
+**scaling laws for simulation**
+
+, the economics of
+
+**data-center-scale simulated worlds**
+
+, the connection to Thomas Schelling and psychohistory, why simulation is surprisingly similar to painting, and whether we might already be living in one.
+
+我们还探讨了
+
+**模拟背后更大的雄心**
+
+：在部署产品和政策之前先进行测试，找到通往预期结果的违反直觉的路径，对整个社会的涌现行为进行建模，并有可能应对
+
+**气候变化**
+
+、民主不稳定和
+
+**全民基本收入**
+
+等问题。Joon 反思了
+
+**模拟的规模法则**
+
+、
+
+**数据中心规模模拟世界**
+
+的经济学、与 Thomas Schelling 和心理史学的联系、为什么模拟与绘画惊人地相似，以及我们是否可能已经生活在模拟之中。
+
+We discuss:
+
+我们讨论了：
+
+How
+
+**Smallville and Generative Agents**
+
+led to Simile
+
+如何
+
+**Smallville 和生成式智能体**
+
+催生了 Simile
+
+Why Joon’s team asked: “What if we can just
+
+**recreate the world**
+
+that we live in?”
+
+为什么 Joon 的团队会问：“如果我们能直接
+
+**重建我们所生活的世界**
+
+，会怎样？”
+
+Why useful personal agents require
+
+**deep models of their users**
+
+为什么有用的个人智能体需要
+
+**对用户的深度模型**
+
+Memory architectures, Markdown files, and the
+
+**limits of prompting**
+
+记忆架构、Markdown 文件以及
+
+**提示的局限性**
+
+“Social physics” and
+
+**behavioral foundation models**
+
+“社会物理学”与
+
+**行为基础模型**
+
+Why web data captures what people say more than
+
+**what they actually do**
+
+为什么网络数据更多捕捉到的是人们的言论，而非
+
+**他们实际的行为**
+
+Interviews, transactions, observational data, and
+
+**randomized controlled trials**
+
+访谈、交易、观察数据以及
+
+**随机对照试验**
+
+Why predicting the future matters less than understanding
+
+**how to shape it**
+
+为什么预测未来不如理解
+
+**如何塑造未来**
+
+重要
+
+How Simile creates
+
+**representative simulated populations**
+
+Simile 如何创建
+
+**具有代表性的模拟人口**
+
+Simulation versus prediction and the connection to
+
+**Foundation’s psychohistory**
+
+模拟与预测，以及与
+
+**《基地》心理史学**
+
+的联系
+
+How to evaluate simulations instead of simply stacking
+
+**LLM hallucinations**
+
+如何评估模拟，而不是简单地堆叠
+
+**大语言模型幻觉**
+
+Creating digital twins of 1,000 real people and reaching
+
+**85% behavioral accuracy**
+
+创建 1000 个真实人物的数字孪生，并达到
+
+**85% 的行为准确率**
+
+Why frontier models can struggle to reproduce
+
+**real human behavior**
+
+为什么前沿模型可能难以复现
+
+**真实的人类行为**
+
+Why good simulations need to reproduce
+
+**human biases and mistakes**
+
+为什么好的模拟需要复现
+
+**人类的偏见和错误**
+
+Post-training models on
+
+**randomized controlled trials**
+
+基于
+
+**随机对照试验**
+
+对模型进行后训练
+
+Population-level versus
+
+**individual-level simulation**
+
+群体层面模拟与
+
+**个体层面模拟**
+
+**Scaling laws**
+
+for human simulation
+
+人类模拟的
+
+**规模法则**
+
+The long-term ambition to
+
+**simulate all 8 billion people**
+
+on Earth
+
+**模拟地球上全部 80 亿人**
+
+的长期雄心
+
+Whether simulations could help solve
+
+**climate change**
+
+or detect collapsing democracy
+
+模拟是否有助于解决
+
+**气候变化**
+
+或察觉民主的崩溃
+
+Thomas Schelling and the history of
+
+**agent-based modeling**
+
+Thomas Schelling 与
+
+**基于智能体的建模**
+
+历史
+
+Why future simulations could require an
+
+**entire data center**
+
+为什么未来的模拟可能需要
+
+**整个数据中心**
+
+Multi-agent simulations and what happens when
+
+**simulated people interact**
+
+多智能体模拟，以及当
+
+**模拟人物互动**
+
+时会发生什么
+
+Replacing expensive human panels with
+
+**synthetic populations**
+
+用
+
+**合成人口**
+
+取代昂贵的人类样本组
+
+Why market research is only the
+
+**starting point for simulation**
+
+为什么市场研究只是
+
+**模拟的起点**
+
+Why Joon sees simulation as surprisingly similar to
+
+**painting**
+
+为什么 Joon 认为模拟与
+
+**绘画**
+
+惊人地相似
+
+Using simulation to study questions like
+
+**UBI**
+
+利用模拟研究
+
+**全民基本收入**
+
+等问题
+
+Whether we are already
+
+**living in a simulation**
+
+我们是否已经
+
+**生活在模拟之中**
+
+Why
+
+**AGI and simulation**
+
+may be the twin technologies of advanced civilizations
+
+为什么
+
+**通用人工智能与模拟**
+
+可能是先进文明的双生技术
+
+Joon Sung Park
+
+Joon Sung Park
+
+LinkedIn:
+
+领英：
+
+https://www.linkedin.com/in/joonspark
+
+https://www.linkedin.com/in/joonspark
+
+X:
+
+X：
+
+https://x.com/joon_s_pk
+
+https://x.com/joon_s_pk
+
+Website:
+
+网站：
+
+https://www.joonsungpark.com
+
+https://www.joonsungpark.com
+
+Simile:
+
+Simile：
+
+https://www.simile.com
+
+https://www.simile.com
+
+Timestamps
+
+时间戳
+
+00:00:00
+
+00:00:00
+
+Introduction and Joon’s Path from Art to AI
+
+引言及 Joon 从艺术到 AI 的道路
+
+00:01:46
+
+00:01:46
+
+Smallville, Generative Agents, and the Origins of Simulation
+
+Smallville、生成式智能体与模拟的起源
+
+00:05:03
+
+00:05:03
+
+“Let’s Just Create a World” and the Future of Personal Agents
+
+“让我们直接创造一个世界”与个人智能体的未来
+
+00:09:53
+
+00:09:53
+
+Social Physics and Behavioral Foundation Models
+
+社会物理学与行为基础模型
+
+00:14:08
+
+00:14:08
+
+Prediction vs. Simulation: How Do You Shape the Future?
+
+预测 vs. 模拟：你如何塑造未来？
+
+00:16:59
+
+00:16:59
+
+How Simile Models Real People and Populations
+
+Simile 如何对真实人物和人口建模
+
+00:25:35
+
+00:25:35
+
+Evaluating Simulations, Digital Twins, and 85% Accuracy
+
+评估模拟、数字孪生与 85% 准确率
+
+00:30:23
+
+00:30:23
+
+Post-Training Models to Reproduce Human Behavior
+
+后训练模型以复现人类行为
+
+00:40:04
+
+00:40:04
+
+Scaling Laws and Simulating 8 Billion Pe
+
+规模法则与模拟 80 亿 Pe
