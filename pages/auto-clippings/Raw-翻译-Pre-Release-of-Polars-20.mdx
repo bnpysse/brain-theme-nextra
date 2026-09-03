@@ -1,0 +1,107 @@
+---
+title: "Pre-Release of Polars 2.0_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Pre-Release of Polars 2.0
+【文章标题】：Polars 2.0 预发布版
+
+【文章正文】：
+Today we are releasing the first release candidate for Polars 2.0. The definite 2.0 release will land in the following weeks. We don’t aim to make a big feature release of Polars 2.0. In fact we hope it to be a boring experience for you. The reason we bump this major version is that we can get rid of design decisions made in the past that currently block us and then we want to change defaults to more sensible settings that will benefit a greater audience. The biggest default change will be that all LazyFrame queries now will run on the streaming engine. Casual Polars users can therefore expect huge improvements in memory usage and performance. In aggregate we expect the streaming engine to be easily 5x faster.
+今天我们发布 Polars 2.0 的第一个候选版本。正式版将在未来几周内推出。我们并不打算让 Polars 2.0 成为重大功能更新，实际上希望它能带来"无聊"的升级体验。此次主版本升级的目的是摆脱过去阻碍发展的设计决策，并将默认设置调整为更合理的配置以惠及更多用户。最重大的默认变更在于所有 LazyFrame 查询现在都将运行在流式引擎上，普通用户将因此获得内存使用和性能的巨大提升。综合来看，流式引擎预计可轻松实现 5 倍的速度提升。
+
+To help users transition to 2.0, we have posted a full migration guide. This post will cover a few of the highlights.
+为帮助用户过渡到 2.0 版本，我们已发布完整迁移指南。本文将重点介绍部分亮点。
+
+Streaming engine as default
+This is the biggest impact change of 2.0. Calling collect on a LazyFrame will now default to the streaming engine, leading to massive memory and performance improvements on most queries for users. The reason this required a major version bump is that the streaming engine doesn’t guarantee row-order by default for certain operations (join, group_by, unpivot, etc.). If you require observable row-order in those operations, you can opt in to that by setting maintain_order=True.
+流式引擎作为默认选项
+这是 2.0 版本最具影响力的变更。现在对 LazyFrame 调用 collect 将默认使用流式引擎，能为大多数查询带来内存和性能的显著提升。之所以需要主版本升级，是因为流式引擎默认不保证某些操作（连接、分组、逆透视等）的行顺序。如需在这些操作中保持行顺序，可通过设置 maintain_order=True 实现。
+
+For users who want to keep using the "in-memory" engine as default, they can do so by setting the engine affinity.
+希望继续使用"内存"引擎作为默认选项的用户，可通过设置引擎亲和性实现：
+
+lf = pl.LazyFrame(&#123;"k": [2, 1, 0], "v": ["a", "b", "c"]&#125;)
+other = pl.LazyFrame(&#123;"k": [0, 1, 2], "r": ["x", "y", "z"]&#125;)
+# 2.0: engine="auto" now resolves to the streaming engine.
+# Row order is no longer guaranteed for joins, group_by, unpivot, ...
+(
+    lf
+    .join(other, on="k", how="left")
+    .collect()
+)
+# ┌─────┬─────┬─────┐
+# │ k   ┆ v   ┆ r   │   &lt;- 顺序可能与 `lf` 原始行顺序不一致
+# └─────┴─────┴─────┘
+# 为该查询启用可观察顺序：
+(
+    lf
+    .join(other, on="k", how="left", maintain_order="left")
+    .collect()
+)
+# 或在进程范围内保持旧的内存引擎作为默认设置：
+pl.Config.set_engine_affinity("in-memory")
+# ...或按查询设置：
+(
+    lf
+    .join(other, on="k", how="left")
+    .collect(engine="in-memory")
+)
+
+Stricter Polars
+Polars aims to be strict and fail fast. Errors should ideally raise up-front, not 20 minutes into a pipeline. Implicit behavior on data-mismatches should be opt-in, not a default, since those mismatches can hide bugs. This strictness has become even more valuable with the rise of AI-driven development. Agents can validate a query’s structure early by calling collect_schema(), which resolves types and catches schema-level mismatches without materializing any data. This ensures fast feedback for the agents, meaning they can iterate faster. Not all errors can be caught during compilation of the query plan, some depend on data. In these cases Polars defaults to stricter behavior to ensure inconsistencies are caught instead of silently producing different results.
+更严格的 Polars
+Polars 追求严格规范与快速失败。错误最好能在管道运行初期就抛出，而非运行20分钟后才出现。对于数据不匹配的隐式行为应该设为可选而非默认，因为这些不匹配可能隐藏错误。随着AI驱动开发的兴起，这种严格性变得更有价值。智能体可通过调用 collect_schema() 提前验证查询结构，该方法能解析类型并捕获模式级不匹配而无需具体化数据，确保智能体获得快速反馈以加速迭代。并非所有错误都能在查询计划编译时捕获，有些错误取决于数据。这类情况下 Polars 默认采用更严格的行为来确保发现不一致性，而非静默产生不同结果。
+
+Below are a few examples where Polars has gotten more strict:
+以下是 Polars 变得更严格的几个示例：
+
+is_in lossless type-coercion
+If you run an is_in expression on different data-types, Polars used to cast both types to their common supertype, even if that conversion was lossy
+Below is an example with user-ids that can go wrong by silent data-type mismatches.
+is_in 无损类型强制
+在不同数据类型上运行 is_in 表达式时，Polars 过去会将两种类型强制转换为它们的共同超类型，即使这种转换会导致精度损失。以下是一个因静默数据类型不匹配而出错的用户ID示例：
+
+# Checking if a user ID matches a list of "flagged" account IDs
+# (flagged_ids loaded from a JSON export, where large IDs became floats)
+flagged_ids = pl.Series([9007199254740992.0])
+user_id = pl.Series([9007199254740993])  # Int64 -&gt; a different ID, off by 1
+user_id.is_in(flagged_ids)
+# 检查用户ID是否匹配"标记"账户ID列表
+# (flagged_ids 从 JSON 导出加载，其中大ID变成了浮点数)
+Before 2.0, user_id gets coerced to Float64 to match flagged_ids. But 9007199254740993 sits above 2^53 (9007199254740992), the largest integer float64 can represent exactly, so it silently rounds down to 9007199254740992.0, giving a false positive.
+在 2.0 之前，user_id 会被强制转换为 Float64 以匹配 flagged_ids。但 9007199254740993 超过了 float64 能精确表示的最大整数 2^53 (9007199254740992)，因此会静默向下舍入为 9007199254740992.0，导致误报。
+
+In 2.0 this raises: InvalidOperationError: 'is_in' cannot check for Int64 values in List(Float64) data., users should explicitly cast to deal with lossy type conversion.
+在 2.0 中会抛出：InvalidOperationError: 'is_in' 无法在 List(Float64) 数据中检查 Int64 值，用户应显式处理有损类型转换。
+
+Strict concatenation
+Horizontal concat will now check lengths instead of silently filling with null.
+严格连接
+水平连接现在会检查长度，而不再静默填充 null 值。
+
+# Joining per-day transaction counts with per-day fraud-flag counts,
+transactions = pl.DataFrame(&#123;"day": [1, 2, 3, 4, 5], "count": [120, 98, 143, 87, 156]&#125;)
+# Upstream job for day 5 failed silently
+fraud_flags = pl.DataFrame(&#123;"flagged": [2, 0, 5, 1]&#125;)  # only 4 rows
+pl.concat([transactions, fraud_flags], how="horizontal")shape: (5, 2)
+┌─────┬───────┬─────────┐
+│ day ┆ count ┆ flagged │
+│ 1   ┆ 120   ┆ 2       │
+│ 2   ┆ 98    ┆ 0       │
+│ 3   ┆ 143   ┆ 5       │
+│ 4   ┆ 87    ┆ 1       │
+│ 5   ┆ 156   ┆ null    │  &lt;- 第5天静默没有标志计数
+└─────┴───────┴─────────┘
+In 2.0 this will raise with:
+ShapeError: cannot concat dataframes with different heights in 'strict' mode
+在 2.0 中将抛出：
+ShapeError: 在 'strict' 模式下无法连接高度不同的数据框
+
+If padding is what you wanted, you have to explicitly opt-in to that with how="horizontal_extend". Making that intention clear
+如需填充效果，必须显式选择 how="horizontal_extend" 来明确意图
+
+## 🔗 知识库双向关联
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/派评-近期值得关注的-App-全翻译)
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/派评-近期值得关注的-App-全翻译)
+- [派评  近期值得关注的 App_简报](/auto-clippings/派评-近期值得关注的-App-简报)
