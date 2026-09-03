@@ -1,0 +1,106 @@
+---
+title: "Vermell – Minimal, dependency-free C web framework using epo_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Vermell – 基于epoll的极简、无依赖C++ Web框架
+
+【文章正文】：
+一个专为现代C++环境设计的极简、零膨胀Web框架。快速、结构化且强类型。
+Vermell是为现代C++环境打造的Web框架：只需包含一个头文件，链接一个静态库，别无其他。没有运行时、没有垃圾回收器、没有框架专属DSL、没有第三方依赖——你写的是C++，运行的也是C++。
+其核心是事件驱动引擎：非阻塞的epoll循环读取请求，并将任务分配给工作线程池。这种分离设计使Vermell在高负载下保持高速，并能抵御慢速客户端攻击。
+- 零依赖——仅需基础Linux API（套接字、epoll、pthreads、fork/exec）
+- 单命令构建——g++ -std=c++20 server.cpp -o exe -lvermell
+- 兼容所有带g++的Linux——x86_64、ARM（aarch64、armv7）、通过Termux的Android、WSL、树莓派、容器
+- 默认强化防护——开箱即用超时控制、请求限制、连接数限制和渲染沙盒
+- 内置JSON DOM——严格遵循RFC 8259的解析器/序列化器，支持类型化参数、原始正文和多部分上传
+- C++模板——compose()模块和render()变量
+- 流畅配置——通过configure(&#123;...&#125;)调用或链式设置器，支持运行时读取
+📚 完整文档：vermell.cc——双语（英文/西班牙文）手册，含示例图表详解本文档所有章节
+
+$ git clone https://github.com/vermellcc/vermell.git
+$ cd Vermell
+$ cmake .
+$ cmake --build .
+$ make install
+
+开箱即用脚手架：
+$ npx create-vermell-static
+
+$ docker pull vermellcc/vermell
+
+GitHub Pages提供已签名即用包（amd64/arm64/armhf）：
+$ sudo install -d -m 0755 /etc/apt/keyrings
+$ curl -fsSL https://vermellcc.github.io/vermell/vermell-apt-key.asc | sudo gpg --dearmor --yes -o /etc/apt/keyrings/vermell.gpg
+$ echo "deb [signed-by=/etc/apt/keyrings/vermell.gpg] https://vermellcc.github.io/vermell stable main" | sudo tee /etc/apt/sources.list.d/vermell.list
+$ sudo apt-get update
+$ sudo apt-get install -y libvermell
+密钥指纹：022D 56AA 7A6B 2028 B005 3629 F616 54D8 8AD1 C323
+
+Vermell服务器即路由器：注册路由处理器，选择端口后调用listen()。
+
+#include &lt;vermell/vermell.h&gt;
+int main() &#123;
+    Router router;
+    router.setPort(8080);
+    router.get("/", &#123; [](Query &http) &#123;
+        http.send("Hello from Vermell");
+    &#125;&#125;);
+    router.listen();
+&#125;
+
+注意处理器的&#123;...&#125;包裹。router.get(...)的第二个参数是MiddlewareList，因此处理器总是以花括号列表形式传递：router.get("/", &#123; [](Query &http) &#123; ... &#125; &#125;)。
+
+编译运行：
+$ g++ -std=c++20 server.cpp -o exe -lvermell
+$ ./exe
+
+浏览器或curl访问：
+$ curl http://localhost:8080/
+Hello from Vermell
+
+router.listen()会阻塞并永久服务。listenOne()处理单次请求后返回——适合测试和一次性服务。
+
+单条g++命令完成编译链接——无需额外标志或调整链接顺序：
+$ g++ -std=c++20 server.cpp -o exe -lvermell
+
+大型项目可用CMake，但服务器始终一键可建。
+
+跨平台性。Vermell无依赖，任何衍生自Linux且支持C++20 g++的环境均可构建：x86_64、ARM（aarch64、armv7）、通过Termux的Android、WSL、树莓派、容器。不支持macOS和Windows（因epoll限制）。
+
+无root权限？不成问题。Termux（或其他无root系统）无法安装到/usr/local。通过相对路径包含头文件（#include "../include/vermell/vermell.h"）并直接链接静态库——将libvermell.a复制到源码旁，编译时添加-L. -lvermell：
+
+// Termux/无root构建：通过相对路径引用头文件
+#include "../include/vermell/vermell.h"
+int main() &#123;
+    Router router;
+    router.setPort(8080);
+    router.get("/", &#123; [](Query &http) &#123;
+        http.send("hi from termux");
+    &#125;&#125;);
+    router.listen();
+&#125;
+
+$ cp libvermell.a .          # 静态库与源码同目录
+$ g++ -std=c++20 server.cpp -o exe -L. -lvermell
+$ ./exe
+
+路由器为每个HTTP动词提供注册方法。静态路由通过透明哈希路由表实现O(1)调度。
+
+router.get("/users",     &#123; [](Query &web) &#123; web.send("list"); &#125; &#125;);
+router.post("/users",    &#123; [](Query &web) &#123; web.send("create"); &#125; &#125;);
+router.put("/users/:id", &#123; [](Query &web) &#123; web.send("update"); &#125; &#125;);
+router.deleteX("/users/:id", &#123; [](Query &web) &#123; web.send("delete"); &#125; &#125;);
+router.patch("/users/:id",   &#123; [](Query &web) &#123; web.send("patch"); &#125; &#125;);
+router.head("/status",   &#123; [](Query &web) &#123; web.send("head"); &#125; &#125;);
+router.options("/ping",  &#123; [](Query &web) &#123; web.send("options"); &#125; &#125;);
+router.link("/rel",      &#123; [](Query &web) &#123; web.send("link"); &#125; &#125;);
+router.unlink("/unlink", &#123; [](Query &web) &#123; web.send("unlink"); &#125; &#125;);
+router.purge("/cache",   &#123; [](Query &web) &#123; web.send("purge"); &#125; &#125;);
+
+注意deleteX()命名：delete是C++关键字。大型应用可将路由声明分离后挂载。
+
+## 🔗 知识库双向关联
+- [LLMs could control their host machines by exploiting inferen_简报](/auto-clippings/LLMs-could-control-their-host-machines-by-exploiti)
+- [Refined_Raw_翻译_🎙️ How I AI ChatGPT Codex Voice  browser  Sit](/auto-clippings/Refined-Raw-翻译-🎙️-How-I-AI-ChatGPT-Codex-Voice-bro)
+- [Refined_Raw_翻译_Introducing Kitesurf Cloudflares new headless](/auto-clippings/Refined-Raw-翻译-Introducing-Kitesurf-Cloudflares-ne)

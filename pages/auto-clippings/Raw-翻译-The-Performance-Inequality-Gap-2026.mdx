@@ -1,0 +1,136 @@
+---
+title: "The Performance Inequality Gap, 2026_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The Performance Inequality Gap, 2026
+
+【文章标题】：2026年性能不平等差距
+
+【文章正文】：
+
+【文章正文】：
+
+The Performance Inequality Gap, 2026
+
+2026年性能不平等差距
+
+Have we finally rounded the corner? A look at the device and network landscape.
+
+我们终于迎来了转机？一文洞察设备与网络生态现状。
+
+The Budget, 2026 Edition
+
+预算，2026版
+
+Let's cut to the chase, shall we? Updated network test parameters for 2026 are:
+
+我们开门见山吧。2026年更新的网络测试参数如下：
+
+- 9 Mbps downlink
+
+- 9 Mbps 下行
+
+- 3 mbps uplink
+
+- 3 Mbps 上行
+
+- 100 millisecond RTT
+
+- 100毫秒 RTT
+
+Regarding devices, my updated recommendations are the Samsung Galaxy A24 4G (or equivalent) and the HP 14. The goal of these recommendations is to emulate a 75th percentile user experience, meaning a full quarter of devices and networks will perform worse than this baseline.
+
+在设备方面，我更新后的推荐机型是三星Galaxy A24 4G（或同等机型）以及惠普14英寸笔记本。这些推荐旨在模拟第75百分位的用户体验，这意味着整整四分之一的设备和网络表现将低于此基准线。
+
+Plugging these parameters into the updated budget calculator, we can derive critical-path resource thresholds for three and five second page load targets. Per usual, we consider pages built in two styles: JS-light, where only 15% of critical-path bytes are JavaScript, and JS-heavy, comprised of 50% JavaScript:
+
+将这些参数输入更新后的预算计算器，我们可以得出3秒和5秒页面加载目标的关键路径资源阈值。与以往一样，我们考虑两种构建风格的页面：JS轻量级（关键路径字节中仅15%为JavaScript）和JS重量级（JavaScript占比50%）：
+
+| Time | JS-light (MiB) |  |  | JS-heavy |  |  | 
+
+| 时间 | JS轻量级 (MiB) |  |  | JS重量级 |  |  | 
+
+|---|---|---|---|---|---|---|
+
+|---|---|---|---|---|---|---|
+
+|  | Total | JS | Other | Total | JS | Other | 
+
+|  | 总计 | JS | 其他 | 总计 | JS | 其他 | 
+
+| 3 sec | 2.0 | 0.3 | 1.7 | 1.2 | 0.62 | 0.62 | 
+
+| 3秒 | 2.0 | 0.3 | 1.7 | 1.2 | 0.62 | 0.62 | 
+
+| 5 sec | 3.7 | 0.57 | 3.2 | 2.3 | 1.15 | 1.15 | 
+
+| 5秒 | 3.7 | 0.57 | 3.2 | 2.3 | 1.15 | 1.15 | 
+
+Note: Budgets account for two TLS connections.
+
+注：预算已计入两个TLS连接。
+
+Many sites initiate more early connections, reducing time available to download resources. Using four connections cuts the three-second budget by 350 KiB, to 1.5 MiB / 935 KiB. The five-second budget loses nearly half a megabyte, dropping to 3.2 / 1.9 MiB.
+
+许多网站会发起更多的早期连接，从而减少了可用于下载资源的时间。使用四个连接会使3秒预算减少350 KiB，降至1.5 MiB / 935 KiB。5秒预算则减少近半兆字节，降至3.2 / 1.9 MiB。
+
+It pays to adopt H/2 or H/3 and consolidate connections.
+
+采用H/2或H/3协议并合并连接是值得的。
+
+These budgets are extremely generous. Even the target of three seconds is lavish; most sites should be able to put up interactive content much sooner for nearly all users.
+
+这些预算极其宽裕。即便是3秒的目标也相当奢侈；对于几乎所有用户而言，大多数网站本应能更快地呈现交互式内容。
+
+Meanwhile, sites are ballooning. The median mobile page is now 2.6 MiB, blowing past the size of DOOM (2.48 MiB) in April. The 75th percentile site is now larger than two copies of DOOM. P90+ sites are more than 4.5x larger, and sizes at each point have doubled over the past decade. Put another way, the median mobile page is now 70 times larger than the total storage of the computer that landed men on the moon.
+
+与此同时，网站体积却在不断膨胀。中位数移动端页面大小现已达到2.6 MiB，在4月份便已超过了《毁灭战士》（DOOM）的体积（2.48 MiB）。第75百分位的网站体积现在更是超过了两份《毁灭战士》。P90及以上的网站体积大了4.5倍以上，且过去十年间各个百分位点的体积都翻了一番。换句话说，如今中位数移动端页面的体积，是当年将人类送上月球的计算机总存储容量的70倍。
+
+An outsized contributor to this bloat comes from growth in JavaScript. Mobile JavaScript payloads have more than doubled since 2015, reaching 680 KiB and 1.3 MiB at P50 and P75 (respectively). This compositional shift exacerbates latent inequality and hurts businesses trying to grow.
+
+造成这种膨胀的一个巨大因素是JavaScript的增长。自2015年以来，移动端JavaScript负载翻了一倍多，在P50和P75分别达到了680 KiB和1.3 MiB。这种构成的转变加剧了潜在的不平等，并损害了那些努力发展的企业。
+
+When JavaScript grows as a proportion of critical-path resources, the impact of higher CPU cost per byte reduces budgets. This coffin corner effect explains why image and CSS-heavy experiences perform better byte-for-byte than sites built with the failed tools of frontend's lost decade.
+
+当JavaScript在关键路径资源中的比例增加时，每字节更高的CPU成本所带来的影响会进一步压缩预算。这种“死角效应”解释了为什么以图片和CSS为主的体验在同等字节数下，表现要优于那些用前端“失去的十年”中那些失败工具构建的网站。
+
+Indeed, the latest CrUX data shows not even half of origins have passing Core Web Vitals scores for mobile users. More than 40% of sites still perform poorly for desktop users, and progress in both cohorts is plateauing:
+
+事实上，最新的CrUX数据显示，甚至不到一半的源站能为移动用户交出合格的Core Web Vitals分数。超过40%的网站在桌面端用户面前表现依然糟糕，而且这两类群体的进展都已陷入停滞：
+
+Core Web Vitals Pass Rate (%)
+
+Core Web Vitals 通过率 (%)
+
+Source: the Chrome User Experience Report via BigQuery.
+
+来源：通过BigQuery获取的Chrome用户体验报告。
+
+This is a technical and business challenge, but also an ethical crisis. Anyone who cares to look can see the tragic consequences for those who most need the help technology can offer. Meanwhile, the lies, half-truths, and excuses made by frontend's influencer class are in defence of these approaches are, if anything, getting worse.
+
+这既是一个技术和商业挑战，也是一场伦理危机。任何愿意关注的人都能看到，这对那些最需要技术帮助的人造成了悲惨的后果。与此同时，前端“网红”阶层为这些做法辩护而编造的谎言、半真半假的言辞和借口，甚至可以说是愈演愈烈。
+
+Through no action of their own, frontend developers have been blessed with more compute and bandwidth every year. Instead of converting that bounty into delightful experiences and positive business results, the dominant culture of frontend has leant into self-aggrandising narratives that venerate failure as success. The result is a web that increasingly punishes the poor for their bad luck while paying developers huge salaries to deliver business-undermining results.
+
+前端开发者并非凭借自身努力，却年年受惠于更多的算力和带宽。然而，前端的主流文化并没有将这些红利转化为令人愉悦的体验和积极的商业成果，反而沉迷于自我膨胀的叙事中，将失败奉为成功。其结果是，这个网络世界越来越因为运气不佳而惩罚穷人，同时却支付开发者巨额薪水，让他们交付破坏商业成果的产品。
+
+Nobody comes to work wanting to do a bad job, but low-quality results are now the norm. This is a classic case of under-priced externalities created by induced demand from developers and PMs living in a privilege bubble.
+
+没有人上班是奔着敷衍了事去的，但低质量的结果如今却成了常态。这是一个典型的负外部性定价过低的案例，它源于生活在特权泡沫中的开发者和产品经理所引发的诱导需求。
+
+Embedded in this year's estimates is hopeful news about the trajectory of devices and networks. Compared with early 2024's estimates, we're seeing budget growth of 600+KiB for three seconds, and a full megabyte of extra headroom at five seconds.1
+
+今年的估算中蕴含着关于设备和网络发展趋势的乐观消息。与2024年初的估算相比，我们看到3秒预算增长了600多KiB，5秒预算则增加了整整1兆字节的额外余量。1
+
+While this is not enough to overcome continued growth in payloads, budgets are now an order of magnitude more generous than those first sketched in 2017. It has never been easier to deliver pages quickly, but we are not collectively hitting the mark.
+
+虽然这不足以克服负载持续增长的势头，但如今的预算比2017年首次勾勒的预算宽裕了一个数量级。快速交付页面从未像现在这样容易，但我们作为一个整体却未能达标。
+
+To get back to a healthy, competitive web, developers will need to apply considerably more restraint. If past is prologue, moderation is unlikely to arise organically. It's also unhelpful to conceive of ecosystem-level failures as personal failings. Yes, today's frontend culture is broken, but we should not expect better while incentives remain misaligned.
+
+为了回归健康、充满竞争力的网络环境，开发者需要施加更多的克制。如果说过去只是序幕，那么节制恐怕难以自发产生。将生态系统层面的失败归结为个人过失也无济于事。是的，当今的前端文化已经崩坏，但在激励机制依然错位的情况下，我们不应指望情况会有所好转。
+
+Browsers, search engines, and developer tools will need to provide stronger nudges, steering users away from bloated sites where possible, and
+
+浏览器、搜索引擎和开发者工具需要提供更强有力的引导，尽可能将用户从臃肿的网站中分流出去，并且
