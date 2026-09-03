@@ -1,0 +1,92 @@
+---
+title: "OpenAI s GPT-6 Astra on ARC-AGI-3_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：OpenAI's GPT-6 Astra on ARC-AGI-3
+【文章标题】：OpenAI的GPT-6 Astra在ARC-AGI-3上的表现
+
+【文章正文】：
+OpenAI's GPT-6 Astra on ARC-AGI-3
+OpenAI的GPT-6 Astra在ARC-AGI-3上的表现
+
+Summary
+概要
+- GPT-6 Astra scores 62.7% for $26K on ARC-AGI-3 Semi-Private with our Standard harness enables a model to carry forward notes it chooses to keep with it throughout the environment., and 99.9% for $19K with a The Provider Adapter harness preserves opaque reasoning state between requests and uses compaction for longer conversations, allowing the model to reuse prior work..
+- GPT-6 Astra在标准测试环境下（允许模型自主选择保留环境中的注释信息）以26,000美元成本取得ARC-AGI-3半私有测试62.7%的得分；在提供者适配器测试环境下（保留请求间的不透明推理状态，采用压缩技术处理长对话，允许模型复用先前工作）以19,000美元成本取得99.9%的得分。
+- GPT-6 Astra surpasses the human baseline in action efficiency on ARC-AGI-3. It used fewer actions than the median tested human on 96% of levels.
+- GPT-6 Astra在ARC-AGI-3上的行动效率超越人类基准线，在96%的关卡中使用的行动次数少于测试人类的中位数。
+- A key behavior observed in GPT-6 Astra was its ability to turn unfamiliar environments into compact symbolic world models. It represented game mechanics as logical rules and developed its own domain-specific language shorthand to track state and plan actions.
+- 观察到的GPT-6 Astra关键行为是能将陌生环境转化为紧凑的符号化世界模型。它将游戏机制表示为逻辑规则，并开发了自己的领域特定语言简写来跟踪状态和规划行动。
+
+ARC-AGI-3
+ARC-AGI-3
+ARC-AGI-3 is a benchmark for studying agentic intelligence through novel, abstract, turn-based environments. Agents must explore, infer goals, and build internal models of environments to effectively plan actions without explicit instructions. You can play ARC-AGI-3 yourself.
+ARC-AGI-3是通过新颖、抽象、回合制环境研究智能体能力的基准测试。智能体必须通过探索推断目标，在没有明确指令的情况下建立环境内部模型以有效规划行动。你可以亲自体验ARC-AGI-3。
+
+These environments only contain core knowledge priors and are difficulty-calibrated through controlled testing with human participants. Humans can solve 100% of the environments.
+这些环境仅包含核心先验知识，并通过人类参与者的对照测试进行难度校准。人类可以解决100%的环境挑战。
+
+The goal of the ARC-AGI series is to measure the "residual gap" between current artificial intelligence and AGI. We define AGI as a system's ability to acquire any skill a human can, as efficiently as a human can.
+ARC-AGI系列的目标是测量当前人工智能与通用人工智能（AGI）之间的"残余差距"。我们将AGI定义为系统能以人类同等效率获取人类任何技能的能力。
+
+ARC-AGI-3 is the third generation of the ARC-AGI benchmark series. It tests agentic capabilities beyond ARC-AGI-1 and ARC-AGI-2. Each generation expands on the one before it - as frontier AI capabilities advance, our benchmarks must advance with them.
+ARC-AGI-3是该基准测试系列的第三代，测试范围超越前两代。随着前沿AI能力的进步，每一代基准测试都在前代基础上扩展。
+
+ARC-AGI-3 tests four components of agentic intelligence:
+ARC-AGI-3测试智能体能力的四个组成部分：
+- Exploration: In real-world environments, information is rarely provided passively. Agents must actively obtain it by interacting with their surroundings.
+- 探索能力：现实环境中信息很少被动提供，智能体必须通过与环境互动主动获取。
+- Modeling: Agents must turn raw observations into a generalizable model that can predict future states and outcomes.
+- 建模能力：智能体需将原始观察转化为可预测未来状态和结果的通用模型。
+- Goal-setting: Agents must identify target future states with only sparse rewards.
+- 目标设定：智能体需在稀疏奖励条件下识别目标未来状态。
+- Planning and execution: Agents must map a path from their current state to a goal, course correcting as new information appears.
+- 规划执行：智能体必须规划从当前状态到目标的路径，并根据新信息调整路线。
+
+Astra Results
+Astra测试结果
+With our Standard harness enables a model to carry forward notes it chooses to keep with it throughout the environment., OpenAI's Astra (max) scores 62.7% on ARC-AGI-3 Semi-Private for $26K. With the The Provider Adapter harness preserves opaque reasoning state between requests and uses compaction for longer conversations, allowing the model to reuse prior work., Astra (high) scores 99.9% for $19K. Both are state-of-the-art scores. See the full leaderboard.
+在标准测试环境下，OpenAI的Astra（最大推理强度）以26,000美元成本取得ARC-AGI-3半私有测试62.7%的得分；在提供者适配器测试环境下，Astra（高强度）以19,000美元成本取得99.9%的得分。两者均为最先进水平。查看完整排行榜。
+
+| At max reasoning effort, Astra solves games more efficiently, requiring fewer actions and therefore lowering total cost relative to the other reasoning-effort levels. |  |  | 
+|---|---|---|
+| 在最大推理强度下，Astra能更高效解决问题，所需行动更少，因此相比其他推理强度级别总成本更低 |  |  | 
+| Reasoning effort | Standard harness enables a model to carry forward notes it chooses to keep with it throughout the environment. | The Provider Adapter harness preserves opaque reasoning state between requests and uses compaction for longer conversations, allowing the model to reuse prior work. | 
+| 推理强度 | 标准测试环境（允许模型自主选择保留环境中的注释信息） | 提供者适配器测试环境（保留请求间的不透明推理状态，采用压缩技术处理长对话） | 
+| max | 62.7%, $26,098 | 98.6%, $17,332 | 
+| 最大 | 62.7%，26,098美元 | 98.6%，17,332美元 | 
+| xhigh | 59.3%, $37,317 | 98.4%, $18,147 | 
+| 极高 | 59.3%，37,317美元 | 98.4%，18,147美元 | 
+| high | 54.8%, $40,705 | 99.9%, $18,817 | 
+| 高 | 54.8%，40,705美元 | 99.9%，18,817美元 | 
+| medium | 38.6%, $48,090 | 98.4%, $19,285 | 
+| 中 | 38.6%，48,090美元 | 98.4%，19,285美元 | 
+| low | 17.5%, $38,166 | 98.0%, $21,298 | 
+| 低 | 17.5%，38,166美元 | 98.0%，21,298美元 | 
+| none | 35.2%, $49,791 | 96.7%, $23,457 | 
+| 无 | 35.2%，49,791美元 | 96.7%，23,457美元 | 
+
+For a cost comparison, during our controlled testing, human participants were paid $115 per 90-minute session, plus $5 per game completed. Participants attempted approximately nine games per session, roughly $12.78 per attempted game before bonuses.
+成本对比显示，在对照测试中人类参与者每90分钟获得115美元报酬，每完成一个游戏额外获得5美元。参与者每次测试平均尝试9个游戏，奖金前每个尝试游戏约合12.78美元。
+
+Most of this fee pays for the participant's time and willingness to take the test, rather than the energy their brain uses (a closer proxy to compare with AI). If we look at only the brain's energy, and price it as electricity, the estimate drops to about 0.6 cents per session, or 0.067 cents per game attempted.1
+这笔费用主要支付参与者的时间和测试意愿，而非大脑能耗（与AI更可比的部分）。若仅计算大脑能耗并按电力计价，每次测试约合0.6美分，每个尝试游戏约合0.067美分。
+
+Analysis
+分析
+Beyond the scores, Astra's replays show how it turns unfamiliar game mechanics into useful working models. Three findings stood out: the compact algebraic notation it develops, its action efficiency compared with humans, and the custom tools it builds.
+除得分外，Astra的回放显示其如何将陌生游戏机制转化为有效工作模型。三个突出发现：其开发的紧凑代数符号系统、相比人类的行动效率、以及构建的自定义工具。
+
+Custom Algebraic Notation
+自定义代数符号系统
+When playing ARC-AGI-3, Astra chooses which strategy notes it would like to carry forward. It tracked objects, coordinates, rules, and unfinished plans, while also using a custom domain-specific language notation it generated for the environments.
+在ARC-AGI-3中，Astra自主选择需要保留的策略注释。它追踪对象、坐标、规则和未完成计划，同时使用为环境生成的自定义领域特定语言符号。
+
+We've seen similar behavior in other models, but Astra's notes stood out for their precision and information density. It distille
+其他模型也有类似行为，但Astra的注释以其精确性和信息密度见长。它提炼...（原文截断）
+
+## 🔗 知识库双向关联
+- [AgentX - InferenceXv3 Does CUDA Moat Hold up in Agentic Infe_全翻译](/auto-clippings/AgentX-InferenceXv3-Does-CUDA-Moat-Hold-up-in-Agen)
+- [Weekly Dose of Optimism 205_简报](/auto-clippings/Weekly-Dose-of-Optimism-205-简报)
+- [Import AI 469 Science AI; RSI simulator; and Zuck's technolo_简报](/auto-clippings/Import-AI-469-Science-AI;-RSI-simulator;-and-Zucks)
