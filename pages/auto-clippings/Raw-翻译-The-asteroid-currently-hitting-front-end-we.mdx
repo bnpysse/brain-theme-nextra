@@ -1,0 +1,109 @@
+---
+title: "The asteroid currently hitting front end web development_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The asteroid currently hitting front end web development  
+当前冲击前端Web开发的"小行星"  
+
+【文章正文】：  
+A lot of the educators I admire in the frontend web space seem to be either bowing out or dialing back their efforts: Axel Rauschmayer, Salma Alam-Naylor, Josh W. Comeau, to name a few.  
+许多我敬佩的前端领域教育者似乎正在退出或减少投入：比如Axel Rauschmayer、Salma Alam-Naylor、Josh W. Comeau等人。  
+
+Other well-known luminaries like Kent C. Dodds, Addy Osmani, Rachel Nabors, and Lydia Hallie have pivoted from talking about frontend development to talking about… well, take a wild guess.  
+其他知名专家如Kent C. Dodds、Addy Osmani、Rachel Nabors和Lydia Hallie都已从讨论前端开发转向谈论...好吧，不妨猜猜看。  
+
+I never made a living from talking about web dev, but I do have this blog, and I’ve done conference talks and podcasts about stuff I’m excited about.  
+我从未以谈论Web开发为生，但我确实拥有这个博客，并曾就我热衷的话题进行会议演讲和播客分享。  
+
+Recently for example, my passion was explaining all the ins and outs of CSS performance: how shadow DOM works, how the browser’s style engine works, the traps of CSS-in-JS, etc.  
+例如最近，我的热情在于解释CSS性能的方方面面：Shadow DOM的工作原理、浏览器样式引擎的运作机制、CSS-in-JS的陷阱等。  
+
+Just for kicks, I decided to ask Claude Sonnet how it would handle a Chrome trace with high "Style Calculation" costs. This is one of my favorite brain-teasers, because it’s the kind of thing that I saw web devs – even experienced ones! – trip up on over and over again.  
+出于好玩，我决定问问Claude Sonnet会如何处理"样式计算"成本高的Chrome跟踪记录。这是我最喜欢的脑筋急转弯之一，因为我看到Web开发者——甚至是有经验的开发者！——在这个问题上反复栽跟头。  
+
+Claude gave a perfectly admirable answer:  
+Claude给出了一个令人钦佩的回答：  
+
+Click to see  
+点击查看  
+
+Prompt: Answer without searching the internet: you’re looking at a Chrome trace, and you see repeated spans of high Style cost but relatively low Layout cost. What kind of things do you look for in the webapp to optimize? What do you measure next?  
+提示：不搜索网络回答：当你查看Chrome跟踪记录时，发现重复出现高样式成本但布局成本相对较低的情况。你会查看Web应用中的哪些方面来进行优化？接下来你会测量什么？  
+
+What "Style" cost actually represents  
+"样式"成本实际代表的含义  
+
+The Style (Recalculate Style) phase is where the browser matches CSS selectors against the DOM and computes the final computed style for each affected element. It’s expensive independent of whether anything actually moves or resizes (that’s Layout’s job). So if Style is high but Layout is low, you’re likely paying for selector matching / invalidation over many elements, not for expensive geometry.  
+样式（重新计算样式）阶段是浏览器将CSS选择器与DOM匹配并为每个受影响的元素计算最终计算样式的过程。它的开销与实际是否有元素移动或调整大小（这是布局的工作）无关。因此，如果样式成本高而布局成本低，你很可能是在为许多元素的选择器匹配/失效付出代价，而不是昂贵的几何计算。  
+
+What to look for in the webapp  
+在Web应用中需要查看的内容  
+
+1. Selector complexity and count  
+1. 选择器复杂性和数量  
+
+- Overly complex or deeply nested selectors (.a .b .c &gt; .d + .e), especially descendant combinators, force the engine to walk more of the DOM/ancestor chain per match attempt.  
+- 过于复杂或深度嵌套的选择器（如.a .b .c &gt; .d + .e），特别是后代组合器，会迫使引擎在每次匹配尝试时遍历更多的DOM/祖先链。  
+
+- Universal selectors or attribute selectors ([data-foo="bar"]) applied broadly.  
+- 广泛应用的通用选择器或属性选择器（如[data-foo="bar"]）。  
+
+- CSS-in-JS libraries that generate huge numbers of unique class names/rules (style recalculation has to consider the whole rule set).  
+- 生成大量唯一类名/规则的CSS-in-JS库（样式重新计算必须考虑整个规则集）。  
+
+2. Invalidation scope — this is usually the big one  
+2. 失效范围——这通常是最主要的问题  
+
+- A class/attribute/style toggle high up in the DOM tree (e.g., toggling a class on &lt;body&gt; or a top-level container) can force style recalculation on large subtrees even if only a few elements’ final styles change.  
+- 在DOM树高层切换类/属性/样式（例如在&lt;body&gt;或顶级容器上切换类）会强制对大子树进行样式重新计算，即使只有少数元素的最终样式发生变化。  
+
+- Check whether a single state change (e.g., a "theme" class, a "loading" class, a hover state) is invalidating far more elements than necessary. Chrome’s "Selector Stats" (enable in DevTools Performance settings) will show you which selectors are slow and how many elements they were tested against — this is the single most useful next measurement.  
+- 检查单个状态变化（如"theme"类、"loading"类、悬停状态）是否使过多元素失效。Chrome的"选择器统计"（在DevTools性能设置中启用）将显示哪些选择器较慢以及它们针对多少元素进行了测试——这是接下来最有用的单一测量指标。  
+
+3. Frequency/amplification  
+3. 频率/放大效应  
+
+- Something re-triggering style recalc many times per frame — e.g., reading a style/layout property in a loop right after a class change (forces synchronous recalc), or a JS animation using .classList.toggle() or inline style updates on many nodes per rAF tick instead of batching.  
+- 某些操作每帧多次重新触发样式重新计算——例如在类更改后立即在循环中读取样式/布局属性（强制同步重新计算），或者JS动画在每rAF周期对许多节点使用.classList.toggle()或内联样式更新而不是批量处理。  
+
+- Repeated small DOM mutations each forcing a style pass rather than being batched into one.  
+- 重复的小DOM突变每次都强制样式处理，而不是批量处理为一次。  
+
+4. Inherited/computed property propagation  
+4. 继承/计算属性传播  
+
+- Changing an inherited property (like font-size or color on a common ancestor) forces recompute of all descendants’ computed styles, even without layout changes (e.g., color, visibility, cursor are Style-only, not Layout-triggering).  
+- 更改继承属性（如公共祖先上的font-size或color）会强制重新计算所有后代的计算样式，即使没有布局变化（例如color、visibility、cursor仅影响样式，不会触发布局）。  
+
+- Custom properties (CSS variables) changed at a high-level scope — updating a --custom-prop on :root or a shared ancestor recomputes style for every element referencing it.  
+- 在高层作用域更改自定义属性（CSS变量）——在:root或共享祖先上更新--custom-prop会重新计算引用它的每个元素的样式。  
+
+5. Shadow DOM / component boundaries  
+5. Shadow DOM/组件边界  
+
+- If using a framework with lots of shadow roots or scoped styles, check whether style recalculation is being needlessly repeated per component instance due to non-shared stylesheets.  
+- 如果使用具有大量shadow root或作用域样式的框架，检查是否由于非共享样式表导致每个组件实例不必要地重复样式重新计算。  
+
+What to measure next  
+接下来要测量的内容  
+
+- Enable "Selector Stats" in the Performance panel (gear icon → Enable selector stats). Re-record the trace. This gives you, per Recalculate Style event, the top slow selectors and match counts — that tells you directly which CSS rules and how many elements are responsible.  
+- 在性能面板中启用"选择器统计"（齿轮图标→启用选择器统计）。重新记录跟踪。这会为每个重新计算样式事件提供最慢的选择器和匹配计数——直接告诉你哪些CSS规则和多少元素是罪魁祸首。  
+
+- Check the "Recalculate Style" event’s initiator/call stack in the trace to see what JS triggered it — a class toggle, a style.setProperty, an animation frame callback, etc.  
+- 检查跟踪中"重新计算样式"事件的发起者/调用堆栈，查看是什么JS触发了它——类切换、style.setProperty、动画帧回调等。  
+
+- Count how many elements are affected per recalc — DevTools shows "Elements Affected" per Recalculate Style event in the summary pane. Compare that number to how many elements actually changed appearance — a big gap indicates over-broad invalidation.  
+- 计算每次重新计算影响多少元素——DevTools在摘要面板中显示每个重新计算样式事件的"受影响元素"。将该数字与实际改变外观的元素数量进行比较——大差距表明失效范围过广。  
+
+- Look at where in the DOM the triggering mutation happens — is it near the root (broad invalidation) vs. scoped to a small subtree (narrow, cheap)?  
+- 查看触发突变发生在DOM中的哪个位置——是在根部附近（广泛失效）还是限定在小子树范围内（范围小，开销低）？  
+
+- Check for forced synchronous style — look for "Forced reflow" purple warnings; even though you said Layout is low, sometimes a forced style read (getComputedStyle) interleaved with a DOM wri  
+- 检查强制同步样式——寻找"强制回流"的紫色警告；尽管你说布局成本低，但有时强制样式读取（getComputedStyle）与DOM写操作交错...
+
+## 🔗 知识库双向关联
+- [Quick impressions A week of using Codex more than Claude_简报](/auto-clippings/Quick-impressions-A-week-of-using-Codex-more-than)
+- [DeepSeek is back... and Silicon Valley is terrified_逐字稿](/auto-clippings/DeepSeek-is-back-and-Silicon-Valley-is-terrified-逐)
+- [手艺还在，手工生产已不再是中心：程序员能力的三次上移_简报](/auto-clippings/手艺还在，手工生产已不再是中心：程序员能力的三次上移-简报)
