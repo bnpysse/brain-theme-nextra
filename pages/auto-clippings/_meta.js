@@ -2333,6 +2333,7 @@ export default {
   "Auto-简报-Autonomous-YC-F25-Is-Hiring-Engineers": "Autonomous YC F25 Is Hiring Engineers",
   "Auto-简报-Autisticiinventati-Manifesto-–-who-we-are": "Autisticiinventati Manifesto – who we ar...",
   "Auto-简报-Authoritarianism-of-Code": "Authoritarianism of Code",
+  "Auto-简报-August-newsletter-is-out": "August newsletter is out",
   "Auto-简报-Audacity-40": "Audacity 4.0",
   "Auto-简报-Attimet-YC-F24-Is-Hiring-Members-of-Techni": "Attimet YC F24 Is Hiring Members of Tech...",
   "Auto-简报-Ask-HN-What-is-one-simple-thing-LLMs-are-i": "Ask HN What is one simple thing LLMs are...",
