@@ -1110,6 +1110,7 @@ export default {
   "Raw-翻译-ChatGPT-和-Reddit-被要求遵守欧盟的-DSA": "ChatGPT 和 Reddit 被要求遵守欧盟的 DSA",
   "Raw-翻译-ChatGPT-search-now-uses-the-siteoperator-at": "ChatGPT search now uses the siteoperator...",
   "Raw-翻译-Cerebrass-Next-Generation-CS-4-Fast-Just-Go": "Cerebrass Next Generation CS-4 Fast Just...",
+  "Raw-翻译-Carbon-aware-electricity-pricing-measured-d": "Carbon-aware electricity pricing, measur...",
   "Raw-翻译-Cancer-Related-Mortality-Among-US-Pilots-an": "Cancer-Related Mortality Among US Pilots...",
   "Raw-翻译-Canada-suspends-trade-negotiations-with-USA": "Canada suspends trade negotiations with ...",
   "Raw-翻译-California-lawmakers-unanimously-pass-Linux": "California lawmakers unanimously pass Li...",
