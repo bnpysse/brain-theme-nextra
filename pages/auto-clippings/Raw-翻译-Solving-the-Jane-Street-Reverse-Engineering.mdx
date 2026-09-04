@@ -1,0 +1,118 @@
+---
+title: "Solving the Jane Street Reverse Engineering Challenge_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Solving the Jane Street Reverse Engineering Challenge  
+【文章标题】：破解Jane Street逆向工程挑战  
+
+【文章正文】：  
+On solving the Jane Street Reverse Engineering Challenge  
+关于破解Jane Street逆向工程挑战  
+
+Or: Why do I always do things the hard way?  
+或者说：为什么我总是选择最困难的方式？  
+
+Jane Street periodically puts out challenges, and this one thoroughly nerd-sniped me and sent me down a month-long rabbit hole that I’m only now emerging from. This post is an overview of how I solved it with a combination of hard-headedness and sleep deprivation. It’s going to be decently technical, but in future posts I’ll go over the specifics of each step if people are interested.  
+Jane Street定期发布挑战，而这个挑战彻底吸引了我的注意力，让我陷入了一个长达一个月的“兔子洞”，直到现在我才爬出来。这篇文章概述了我如何通过固执和睡眠不足的组合解决了它。内容会相当技术性，但如果大家感兴趣，我将在未来的文章中详细介绍每一步的具体内容。  
+
+For some background I’d recommend looking at the original post on the Jane Street blog here - Can you reverse Engineer an ASIC?  
+作为背景，我推荐阅读Jane Street博客上的原文——《你能逆向设计一个ASIC吗？》  
+
+And if you ever want to read the (terrible) code I used for this challenge, you can find it at my github page here  
+如果你想看我用于这个挑战的（糟糕的）代码，可以在这里找到我的GitHub页面  
+
+Challenge Accepted  
+接受挑战  
+
+I have an engineering degree rotting away somewhere in my brain, so a lot of the words of the challenge are familiar. The challenge is to take an ASIC and work out what it does. For those unfamiliar, an ‘ASIC’ is an Application-Specific Integrated-Circuit, which is a fancy word for what we’d usually call a ‘Computer Chip’. Firms like Jane Street presumably design these to get extra performance relative to the equipment you can buy from a normal manufacturer.  
+我的大脑里还残留着一些工程学位的内容，所以挑战中的许多术语对我来说很熟悉。这个挑战的目标是拿到一个ASIC并弄清楚它的功能。对于不熟悉的人来说，“ASIC”是“专用集成电路”的缩写，也就是我们通常所说的“计算机芯片”的华丽说法。像Jane Street这样的公司设计这些芯片可能是为了获得比普通制造商设备更高的性能。  
+
+In any case, the challenge is to take a ‘GDS’ file describing a chip, and work backwards to understand what it does, and then I guess maybe there’s a password in there or something. I didn’t, and still don’t, know what ‘GDS’ stand for.  
+无论如何，挑战的内容是拿到一个描述芯片的“GDS”文件，然后逆向推导出它的功能，我猜里面可能藏有密码之类的东西。我当时不知道，现在仍然不知道“GDS”代表什么。  
+
+There’s two parts to the challenge - one is a warmup where you’re given a lot more information (like the actual design of the chip), and the real puzzle where you’re given a firm handshake and a ‘good luck’ as you face the increasing prospect of not sleeping for the next three weeks.  
+挑战分为两部分——一部分是热身，你会得到更多信息（比如芯片的实际设计）；另一部分是真正的谜题，你会得到一个坚定的握手和一句“祝你好运”，同时面对接下来三周可能无法睡觉的残酷现实。  
+
+What’s in the files?  
+文件里有什么？  
+
+For some reason, I like to do things the hard way so rather than doing any research I just started poking around in the files. I can see there’s some familiar words in them like like ‘clk’ (clock), ‘rst’ (reset) and ‘VGND’ (Ground Voltage) and ‘VPWR’ (Power Voltage).  
+出于某种原因，我喜欢用困难的方式做事，所以我没有做任何研究，而是直接开始翻看文件。我看到里面有一些熟悉的术语，比如“clk”（时钟）、“rst”（复位）、“VGND”（地电压）和“VPWR”（电源电压）。  
+
+And there’s a bunch of …. something with a prefix of sky130_fd_sc_hd__ followed by things that sound like logic element, like ‘or’ and ‘not’ and things like that. I guess that’s what I’ll need to pull out of the file?  
+还有一些以“sky130_fd_sc_hd__”为前缀的内容，后面跟着听起来像逻辑元件的东西，比如“or”（或门）、“not”（非门）之类的。我猜这就是我需要从文件中提取的内容？  
+
+I found there’s a really nice library ‘gdstk’ in python that seems to be able to read them. It tell me that there’s 27 elements on the warmup puzzle. A good start!  
+我发现Python中有一个很好的库“gdstk”，似乎可以读取这些文件。它告诉我热身谜题中有27个元素。这是个不错的开始！  
+
+% python3 -c 'print(len(__import__("gdstk").read_gds("warmup/04_final.gds").cells))'  
+27  
+
+There’s also a ‘vcd’ file for the main puzzle, which is a text file, and I guess is a simulation input or output or something. I didn’t, and still don’t, know what ‘vcd’ stands for. I can see some suspicious entries in it that look like ASCII characters. I play around with it, writing a small C program, and get the output ‘TRY AGAIN’. Ah, so the circuit has messages in it somehow!  
+主谜题还有一个“vcd”文件，是一个文本文件，我猜是模拟输入或输出之类的。我当时不知道，现在仍然不知道“vcd”代表什么。我看到里面有一些可疑的条目，看起来像ASCII字符。我折腾了一下，写了一个小的C程序，得到了输出“TRY AGAIN”（再试一次）。啊，所以电路里藏着某种消息！  
+
+$ gcc what-is-this-thing.c && ./a.out  
+T R Y   A G A I N  T R Y   A G A I N  
+
+Ok we’re on to something  
+好吧，我们找到线索了  
+
+Getting Distracted and wasting my time. And my life.  
+分心并浪费我的时间。还有我的生命。  
+
+Here we need to do a huge digression and of course build our own circuit simulator. For reasons.  
+这里我们需要做一个巨大的题外话，当然还要自己建一个电路模拟器。出于某些原因。  
+
+You can skip this section. I sure wish I did.  
+你可以跳过这一部分。我真希望我当时跳过了。  
+
+Several days later  
+几天后  
+
+Ok so I built a circuit sim using sqlite3 as a driver. Quite neat really. But it’s quite hard to design circuits in Python! If only there was a language for describing hardware.  
+好吧，我用sqlite3作为驱动建了一个电路模拟器。真的很简洁。但用Python设计电路太难了！要是有一种描述硬件的语言就好了。  
+
+Several days later  
+几天后  
+
+Ok so I built a parser for my new language and now I can design circuits. But I need to test them! If only there was some way of scriptings inputs and validating outputs.  
+好吧，我为我的新语言建了一个解析器，现在我可以设计电路了。但我需要测试它们！要是有某种方法能脚本化输入和验证输出就好了。  
+
+Several days later  
+几天后  
+
+Ok so I built a harness for my circuit simulator. But it’s really hard to visualise what it’s doing! If only there was… well you see where this is going  
+好吧，我为我的电路模拟器建了一个测试框架。但很难可视化它在做什么！要是能……好吧，你懂的  
+
+Several days later  
+几天后  
+
+Ok so I gave up on writing a wave form viewer and decided to just use ‘surfer’. But these gds files are hard to work with, how can I make that easier?  
+好吧，我放弃了写一个波形查看器，决定直接用“surfer”。但这些gds文件很难处理，怎么能让它更容易些呢？  
+
+Several days later  
+几天后  
+
+Ok so I wrote a basic GDS viewer in raylib but I can’t get the blocks to sit quite the way I want to. So anyway, I realised I’m down too many tangents and it’s time to drop all of the custom software.  
+好吧，我用raylib写了一个基本的GDS查看器，但我无法让模块完全按照我想要的方式排列。总之，我意识到我偏离主题太远了，是时候放弃所有这些自定义软件了。  
+
+Ok we’re done with that section. Aren’t you glad you skipped it?  
+好吧，这部分结束了。你是不是很高兴跳过了它？  
+
+Focus, Chris, Focus.  
+专注，Chris，专注。  
+
+The Jane Street blog actually points to quite a handy GDS Viewer, so I spent some time just looking at it real hard and hoping something would come to me. I was able to roughly annotate what I though were which inputs, and I could later confirm that by looking through the approximate locations of wires in the files. Because this was the warmup I could compare what I knew about the circuit against what I could see.  
+Jane Street的博客实际上指向了一个很方便的GDS查看器，所以我花了一些时间仔细观察它，希望灵感能降临。我大致标注了我认为的输入，之后可以通过查看文件中导线的近似位置来确认这一点。因为这是热身部分，我可以将我对电路的了解与我所看到的进行对比。  
+
+What do these files represent?  
+这些文件代表什么？  
+
+These files seem to have some sense of ‘layers’ of different types of material or something, I imagine it’s a bit like a big 3d-printer that has to be told where to move the print head, and at what depth it needs to put a new material. Maybe these files are close to the i  
+这些文件似乎有某种“层”的概念，代表不同类型的材料或其他东西，我想这有点像一台大型3D打印机，需要告诉它打印头移动到什么位置，以及在什么深度放置新材料。也许这些文件接近……
+
+## 🔗 知识库双向关联
+- [OpenAI’s AI Agents Just Crossed A Line_逐字稿](/auto-clippings/OpenAIs-AI-Agents-Just-Crossed-A-Line-逐字稿)
+- [DeepSeek is back... and Silicon Valley is terrified_逐字稿](/auto-clippings/DeepSeek-is-back-and-Silicon-Valley-is-terrified-逐)
+- [Github__mattpocock_skills_全翻译](/auto-clippings/Github-mattpocock-skills-全翻译)
