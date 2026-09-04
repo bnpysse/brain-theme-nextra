@@ -1,6 +1,7 @@
 export default {
   "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
   "Raw-逐字稿-Why-Wall-Street-is-Ignoring-Big-Techs-Debt": "Raw_逐字稿_Why Wall Street is Ignoring Big ...",
+  "Raw-逐字稿-Why-Bad-Advisors-Keep-Getting-Rehired": "Raw_逐字稿_Why Bad Advisors Keep Getting Re...",
   "Raw-逐字稿-We-Need-To-Talk-About-Leopold": "Raw_逐字稿_We Need To Talk About Leopold",
   "Raw-逐字稿-WHAT-IS-TRANSCENDENTAL-MEDITATION-Ray-Dali": "Raw_逐字稿_WHAT IS TRANSCENDENTAL MEDITATIO...",
   "Raw-逐字稿-This-new-startup-can-query-anywhere-youve": "Raw_逐字稿_This new startup can query anywh...",
@@ -1915,6 +1916,7 @@ export default {
   "Auto-简报-Why-do-I-lose-my-passion-and-want-to-do-no": "Why do I lose my passion and want to do ...",
   "Auto-简报-Why-Wall-Street-is-Ignoring-Big-Techs-Debt": "Why Wall Street is Ignoring Big Techs De...",
   "Auto-简报-Why-Chinas-AI-Bubble-Is-Also-Industrial-Po": "Why Chinas AI Bubble Is Also Industrial ...",
+  "Auto-简报-Why-Bad-Advisors-Keep-Getting-Rehired": "Why Bad Advisors Keep Getting Rehired",
   "Auto-简报-Which-tools-do-Claude-Codex-and-Cursor-cho": "Which tools do Claude, Codex and Cursor ...",
   "Auto-简报-Which-NFL-Teams-Have-Won-the-Most-Super-Bo": "Which NFL Teams Have Won the Most Super ...",
   "Auto-简报-Where-to-eat-in-San-Francisco": "Where to eat in San Francisco",
