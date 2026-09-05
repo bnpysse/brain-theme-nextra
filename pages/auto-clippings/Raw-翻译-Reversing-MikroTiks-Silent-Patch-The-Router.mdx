@@ -1,0 +1,98 @@
+---
+title: "Reversing MikroTik s Silent Patch The RouterOS 7.23.4 Fix Th_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Reversing MikroTik's Silent Patch: The RouterOS 7.23.4 Fix They Wouldn't Explain
+【文章标题】：逆向破解MikroTik静默补丁：他们拒绝解释的RouterOS 7.23.4修复
+
+【文章正文】：
+On the 3rd of September 2026, MikroTik quietly pushed RouterOS 7.23.4 (long-term), 7.24.2 (stable) and 6.49.21 (v6) all on the same day. Every one of them carried the same banner:
+2026年9月3日，MikroTik在同一天静默推送了RouterOS 7.23.4（长期支持版）、7.24.2（稳定版）和6.49.21（v6版）。每个版本都带有相同的公告：
+
+This is an important security update. Most configurations are not at risk, but upgrading is highly recommended. To give time to update your systems, we are not currently publishing detailed information.
+"这是重要的安全更新。多数配置不受影响，但强烈建议升级。为留出系统更新时间，我们暂不公布详细信息。"
+
+Translation: “we found something nasty, we patched it, and we are not going to tell you what it is until enough of you have updated.” Fair enough. Except there is a delicious irony baked into that sentence. If you ship the fixed binaries to the entire planet, then the diff between old and new is the disclosure. The embargo protects the unpatched fleet, not the patched binary sitting on your download mirror.
+翻译过来就是："我们发现了个严重问题，打了补丁，但在足够多用户升级前不会透露细节。"这很合理——但这句话蕴含绝妙讽刺：当你向全球发布修复后的二进制文件时，新旧版本的差异本身就是漏洞披露。禁运期保护的是未打补丁的设备群，而非下载镜像上已修复的二进制文件。
+
+So let us do what any operator running a fleet of these should do: pull both versions, reverse the delta, and work out what changed. This post is the full walk from static diff to reproduced code execution. There are three real bugs here, and two conditional chains. One is the low-exponent RSA signature forgery into the mtget overflow. The other—now matched to an active-exploitation support trace—is an SSH username of -2 reaching a legacy file-descriptor login transport, letting an authenticated read-only session supply its own full policy mask. That second path gives full RouterOS command execution and can in turn reach mtget. What I have not reproduced is a stock, credential-free way to make SSH accept literal user -2 in the first place; that boundary matters, and this revision keeps it explicit.
+因此我们做了任何运维人员都该做的事：拉取两个版本，逆向差异，找出变更点。本文完整记录了从静态差异分析到代码执行复现的全过程。这里存在三个真实漏洞和两条条件链：其一是低指数RSA签名伪造导致的mtget溢出；另一条（现已匹配到活跃攻击痕迹）是通过SSH用户名"-2"触发的遗留文件描述符登录传输机制，使得已认证的只读会话能自定完整策略掩码。第二条路径可实现完整RouterOS命令执行，并最终触及mtget。我尚未复现的是让SSH原生接受字面值"-2"用户的免凭证方法——这个边界很重要，本次修订也明确保留了该限制。
+
+The one line they hoped you would skim past
+他们希望你忽略的那行文字
+
+Every RouterOS release dumps a wall of “improve stability” bullet points. The trick with a silent security release is to find the entry that appears in all maintained branches on the same day, because a coordinated cross-branch backport is the fingerprint of a single serious fix. Diffing the changelogs, exactly one line qualifies:
+每个RouterOS版本都会列出一堆"提升稳定性"的条目。静默安全更新的破解关键，是找到同一天出现在所有维护分支中的那条记录——因为跨分支协同回溯移植正是重大单点修复的指纹。对比变更日志后，唯有一条符合条件：
+
+*) ssh - refactor SSH internal processes and improved system stability;
+*) ssh - 重构SSH内部流程并提升系统稳定性
+
+Present in 7.23.4, 7.24.2 and 6.49.21. Absent from 7.23.3. That is our thread to pull.
+该记录存在于7.23.4、7.24.2和6.49.21中，而7.23.3没有。这就是我们要追踪的线索。
+
+Getting the bits out of an NPK
+从NPK文件中提取数据
+
+RouterOS ships as NPK (“Nova Package”) files. I grabbed the x86 base package for the patched and the previous release, about 20MB each, no auth needed:
+RouterOS以NPK（"Nova Package"）文件形式发布。我下载了已修复版和前一版的x86基础包（各约20MB，无需认证）：
+
+curl -O https://download.mikrotik.com/routeros/7.23.4/routeros-x86-7.23.4.npk
+curl -O https://download.mikrotik.com/routeros/7.23.3/routeros-x86-7.23.3.npk
+
+An NPK is a custom container: a 4-byte magic (1E F1 D0 BA), a run of TLV parts, a signature block, and the interesting bit, a squashfs payload. binwalk finds the filesystem for us:
+NPK是自定义容器：4字节魔数(1E F1 D0 BA)、若干TLV部件、签名块，以及关键部分——squashfs有效载荷。binwalk可帮我们定位文件系统：
+
+$ binwalk routeros-x86-7.23.4.npk
+DECIMAL   HEXADECIMAL   DESCRIPTION
+4096      0x1000        SquashFS filesystem, little endian, version 4.0,
+                        compression: xz, size: 16650908 bytes
+
+Standard squashfs 4.0 with xz. Carve from offset 0x1000 and unsquash it. My host was missing unsquashfs, so a throwaway Alpine container did the honours:
+标准的xz压缩squashfs 4.0。从偏移量0x1000处提取并解压。由于主机缺少unsquashfs，临时Alpine容器解决了这个问题：
+
+dd if=routeros-x86-7.23.4.npk of=root.sqsh bs=4096 skip=1
+docker run --rm -v "$PWD":/w -w /w alpine:3 sh -c 
+  'apk add squashfs-tools &gt;/dev/null; unsquashfs -d rootfs root.sqsh'
+
+RouterOS is not one monolithic daemon. It is a swarm of small “nova” processes under /nova/bin/ talking over an internal message bus, brokered by a master loader process. The SSH server lives in a bundle, and interestingly the client and server are the same binary:
+RouterOS不是单一守护进程，而是由/nova/bin/下众多"nova"微进程通过主加载进程协调的内部消息总线通信。SSH服务器位于组件包中，有趣的是客户端和服务端是同一个二进制文件：
+
+rootfs/bndl/security/nova/bin/sshd    &lt;- SSH服务端（与ssh客户端字节级相同）
+rootfs/lib/libucrypto.so              &lt;- 加密原语库
+rootfs/lib/libumsg.so                 &lt;- 消息总线及登录处理库
+
+Diffing at the symbol level, not the byte level
+符号级差异分析（非字节级）
+
+A naive cmp of the two sshd binaries reports 170KB of differences, which is useless noise. Insert a few bytes near the top of .text and every address downstream shifts, so the whole file “changes”. The signal is not in the bytes, it is in the symbols. Stripped or not, the dynamic symbol table survives, and a diff of exported and imported symbols cuts straight to intent.
+直接对比两个sshd二进制文件会显示170KB差异，这种字节级噪声毫无意义。在.text段头部插入几个字节会导致后续所有地址偏移，使整个文件"被改变"。真正的信号不在字节中而在符号里。无论是否经过剥离，动态符号表始终存在，对比导入导出符号能直达变更意图。
+
+One trap worth mentioning: BusyBox sh in Alpine has no process substitution, so diff &lt;(...) &lt;(...) silently compares two empty streams and reports everything as identical. That will happily convince you nothing changed. Temp files and comm instead:
+值得注意的陷阱：Alpine的BusyBox sh不支持进程替换，diff &lt;(...) &lt;(...)会静默对比两个空流并报告所有内容相同，错误诱导你认为没有变更。改用临时文件和comm命令：
+
+nm -D old/$bin | awk '&#123;print $NF&#125;' | sort -u &gt; a
+nm -D new/$bin | awk '&#123;print $NF&#125;' | sort -u &gt; b
+comm -13 a b   # 新增符号
+comm -23 a b   # 移除符号
+
+Run that across every changed ELF and the story falls out. Two shared libraries changed, and the same handful of symbols move together across a whole cluster of binaries:
+对所有变更的ELF文件执行此操作后，真相浮出水面：两个共享库发生变更，且有一组符号在整个二进制集群中同步移动：
+
+### lib/libumsg.so
+  + _Z20validLoginParamInput11string_view
+### lib/libucrypto.so
+  + _ZN12RsaPublicKey23parseHashFromDerEncodedE6HashIDN4asn14blobE
+  - _ZN12RsaPublicKey23parseHashFromDerEncodedEjN4asn14blobE
+### referencing the
+### lib/libumsg.so
+  + _Z20validLoginParamInput11string_view （新增：登录参数验证函数）
+### lib/libucrypto.so
+  + _ZN12RsaPublicKey23parseHashFromDerEncodedE6HashIDN4asn14blobE （新增：DER编码哈希解析函数）
+  - _ZN12RsaPublicKey23parseHashFromDerEncodedEjN4asn14blobE （移除：旧版哈希解析函数）
+### 引用关系...
+
+## 🔗 知识库双向关联
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/派评-近期值得关注的-App-全翻译)
+- [Auto_简报_This Week in Rust 663](/auto-clippings/Auto-简报-This-Week-in-Rust-663)
+- [The Pulse Grok’s CLI caught uploading all your local files t_简报](/auto-clippings/The-Pulse-Groks-CLI-caught-uploading-all-your-loca)
