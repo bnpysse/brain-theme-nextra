@@ -1,0 +1,81 @@
+---
+title: "AI handles incidents, engineers lose touch with their system_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：AI处理事故，工程师与系统脱节
+
+【文章正文】：
+AI handles incidents, engineers lose touch with their systems
+AI处理事故，工程师与系统脱节
+
+When I was an SRE at LinkedIn, back in 2012, I designed a system that could heal itself and learn from previous incidents. AI capabilities were nowhere near what we have today, and that remained a prototype, but this is now a reality.
+2012年我在LinkedIn担任站点可靠性工程师时，曾设计过能自我修复并从历史事故中学习的系统。当时的AI能力远不及现在，那只是个原型——但如今这已成为现实。
+
+These tools do it all: inspect alerts, form hypotheses, query telemetry, correlate recent deployments, and even implement the fix themselves. As much as I love to see it, I have a major concern: we are losing touch with our systems.
+现代工具能完成全流程：检查警报、形成假设、查询遥测数据、关联近期部署，甚至自主实施修复。虽然乐见其成，但我深感忧虑：我们正与自己的系统失去联系。
+
+The better these tools become at resolving routine incidents, the less practice human responders will get. And when an ambiguous, high-severity incident comes in that automation cannot solve, responding engineers will be in trouble.
+工具处理常规事故越高效，人类应对者获得的实践就越少。当自动化无法解决的模糊高危事故发生时，值班工程师将陷入困境。
+
+Automation leaves humans with the hardest incidents
+自动化将最棘手的事故留给人类
+
+These AI-assisted incident response tools, more commonly called "AI SREs" – a term I don't particularly like – are fantastic in many ways. They feel especially magical when they handle a routine incident at night and you don't have to wake up for a capacity issue.
+这些AI辅助事故响应工具（我不太喜欢"AI SRE"这个称呼）在多方面表现卓越。当它们在深夜处理常规容量事故而你不必醒来时，这种感觉尤为神奇。
+
+The problem is that routine incidents are also how responders "safely" develop an intuition for how their systems behave and fail. When AI runs into a hard, never-seen-before incident it cannot solve, engineers will have to take over with less practice than they would have had before.
+问题在于，常规事故本是响应者"安全"培养系统行为直觉的途径。当AI遇到无法解决的全新复杂事故时，工程师将被迫以更少的实践经验接手。
+
+Human-factors researcher Lisanne Bainbridge described this paradox in her famous 1983 paper, The Ironies of Automation. She explained that automation reduces operators' opportunities to practice routine work while leaving them responsible for new and abnormal situations. She argues that, therefore, operators need to be more skilled and receive even more training than before automation.
+人因研究专家Lisanne Bainbridge在其1983年经典论文《自动化的讽刺》中阐述了这一悖论：自动化减少了操作员的常规实践机会，却让他们负责处理新型异常状况。因此她主张操作员需要比自动化前更娴熟的技能和更密集的培训。
+
+In the years to come, I predict that the average MTTR for most incidents will go down – thanks to AI-assisted incident response – but that the resolution time will shoot up for complex incidents because incident responders lost touch with their system and are struggling to investigate.
+我预测未来数年，得益于AI辅助响应，多数事故的平均解决时间将下降；但复杂事故的解决时间会暴增，因为响应者与系统脱节且缺乏调查能力。
+
+Aviation trains pilots for rare failures
+航空业为罕见故障训练飞行员
+
+We can look at the aviation industry for inspiration.
+我们可以从航空业汲取灵感。
+
+Plane automation handles much of the flying, but pilots remain responsible for situations that automation cannot manage: engine failures, unreliable instruments, rejected takeoffs, stalls, and other abnormal conditions.
+飞机自动化承担大部分飞行操作，但飞行员仍需负责自动化无法处理的情况：发动机故障、仪表失灵、中断起飞、失速等异常状况。
+
+These events are extremely rare. Modern turbine engines, for example, experience fewer than one in-flight shutdown per 100,000 engine flight hours. In other words, that is rare enough that a commercial pilot may complete an entire career without experiencing one outside a simulator.
+这类事件极其罕见。现代涡轮发动机每10万飞行小时遭遇空中停车的概率不足一次。换言之，商业飞行员可能整个职业生涯都不会在模拟器外经历此类事件。
+
+But when a failure occurs, pilots must react quickly and correctly. For example, on TransAsia Airways Flight 235, the right engine's propeller autofeathered shortly after takeoff. And while the aircraft was designed to continue flying on its left engine, the crew misidentified the problem. The aircraft stalled and crashed only 117 seconds after the first warning.
+但故障发生时，飞行员必须快速正确应对。例如复兴航空235号班机起飞后右发动机自动顺桨，虽然飞机设计为可单发飞行，机组却误判故障。首条警报发出仅117秒后飞机失速坠毁。
+
+Airline pilots regularly return to simulators to rehearse rare emergencies. Under US FAA rules, captains must complete recurrent training or a proficiency check every six months, including scenarios such as an engine failure during takeoff.
+航空公司飞行员定期返回模拟器演练罕见紧急情况。根据美国联邦航空局规定，机长每半年必须完成复训或熟练度检查，包含起飞时发动机故障等场景。
+
+While most software incidents do not threaten lives, that is no reason not to perfect our craft. Turns out the technology that created the issue can also help close it.
+虽然多数软件事故不威胁生命，但这不应成为我们懈怠的理由。事实证明，制造问题的技术也能助力解决问题。
+
+The software industry needs incident simulators
+软件行业需要事故模拟器
+
+At Rootly, where I work, we partnered with Uptime Labs to apply this idea through realistic incident simulations. Engineers take the incident commander's seat during a simulated e-commerce outage, using observability tools while coordinating with LLM-powered stakeholders in Slack.
+在我供职的Rootly，我们与Uptime Labs合作通过逼真的事故模拟实践该理念。工程师在模拟电商中断中担任事故指挥官，使用可观测性工具同时与Slack中LLM驱动的利益相关方协调。
+
+The result feels real. You have to investigate what's going wrong while keeping the response organized and dealing with the CEO and customer support. You get to practice the skills that matter during an incident: making sense of incomplete information, communicating clearly, coordinating people, and actually running the response.
+模拟效果极其真实。你需要在保持响应条理的同时调查故障根源，还要应对CEO和客服部门。你能锻炼事故中的核心技能：理解碎片信息、清晰沟通、人员协调及实际指挥响应。
+
+AI can also help preserve these skills
+AI也能帮助保留这些技能
+
+But what about using AI as a trainer? Responders can ask an agent to explain the steps it took, the signals it examined, and the evidence behind its diagnosis.
+但用AI作为训练师如何？响应者可要求AI代理解释其处理步骤、检查的信号及诊断依据。
+
+But explanation and observation are not substitutes for practice. You might pick up a few things from watching Serena Williams play, but you only learn tennis by getting on the court, and incident response is no different.
+但解释和观察无法替代实践。观看小威廉姆斯比赛或许能学到些技巧，但唯有上场才能真正掌握网球——事故响应亦是如此。
+
+I spent more than half a decade of my career building a software engineering school around progressive education: learning by doing. It was in-person, but we had no teachers; students worked on projects instead of listening to lectures. When Dropbox told me graduates it hired were still too inexperienced at troubleshooting, I created projects that gave students broken infrastructure and required them to diagnose and r
+我花费六年多职业生涯围绕"做中学"的进步教育理念创建软件工程学院。虽是线下教学，但我们没有教师；学生通过项目实践而非听课学习。当Dropbox反馈所聘毕业生排障经验仍不足时，我便设计让学生诊断修复故障基础设施的项目...
+
+## 🔗 知识库双向关联
+- [OpenAI’s AI Agents Just Crossed A Line_逐字稿](/auto-clippings/OpenAIs-AI-Agents-Just-Crossed-A-Line-逐字稿)
+- [OpenAI’s AI Agents Just Crossed A Line_逐字稿](/auto-clippings/OpenAIs-AI-Agents-Just-Crossed-A-Line-逐字稿)
+- [Import AI 468 23 RSI ideas; PostTrainBench; and how trust an_全翻译](/auto-clippings/Import-AI-468-23-RSI-ideas;-PostTrainBench;-and-ho)
