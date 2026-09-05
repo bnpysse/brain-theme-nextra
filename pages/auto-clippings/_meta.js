@@ -2411,6 +2411,7 @@ export default {
   "Auto-简报-Gemini-38-Flash-光速发布：干活挺勤快，就是没开窍": "Gemini 3.8 Flash 光速发布：干活挺勤快，就是没开窍",
   "Auto-简报-GPU-World": "GPU World",
   "Auto-简报-GPT‑6-Astra": "GPT‑6 Astra",
+  "Auto-简报-GPT-6-突然全量上线，额度重置再1，全网实测效果太离谱": "GPT-6 突然全量上线，额度重置再1，全网实测效果太离谱",
   "Auto-简报-GPT-6-曝光，-OpenAI-总裁说：AGI-来了": "GPT-6 曝光， OpenAI 总裁说：AGI 来了",
   "Auto-简报-GPT-6-Astra全面解析-欢迎来到AGI时代。": "GPT-6 Astra全面解析- 欢迎来到AGI时代。",
   "Auto-简报-GPT-6-Astra-正式发布：性能-AGI，贵到要负债": "GPT-6 Astra 正式发布：性能 AGI，贵到要负债",
