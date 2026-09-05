@@ -1,0 +1,82 @@
+---
+title: "_anthropics_skills_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&gt; **Note:** This repository contains Anthropic's implementation of skills for Claude. For information about the Agent Skills standard, see [agentskills.io](http://agentskills.io).
+
+&gt; **注意：** 本代码库包含Anthropic为Claude实现的技能集。有关Agent Skills标准的信息，请参阅[agentskills.io](http://agentskills.io)。
+
+[![skills.sh](https://skills.sh/b/anthropics/skills)](https://skills.sh/anthropics/skills)
+
+# Skills
+
+技能是包含指令、脚本和资源的文件夹，Claude会动态加载这些内容以提升特定任务的执行能力。技能教会Claude如何以可重复的方式完成具体任务，无论是按照公司品牌规范创建文档、使用组织特定工作流程分析数据，还是自动化个人任务。
+
+For more information, check out:
+- [What are skills?](https://support.claude.com/en/articles/12512176-what-are-skills)
+- [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude)
+- [How to create custom skills](https://support.claude.com/en/articles/12512198-creating-custom-skills)
+- [Equipping agents for the real world with Agent Skills](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+
+更多信息请查看：
+- [什么是技能？](https://support.claude.com/en/articles/12512176-what-are-skills)
+- [在Claude中使用技能](https://support.claude.com/en/articles/12512180-using-skills-in-claude)
+- [如何创建自定义技能](https://support.claude.com/en/articles/12512198-creating-custom-skills)
+- [通过Agent Skills为现实世界装备智能体](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+
+# About This Repository
+
+本代码库包含展示Claude技能系统可能性的各类技能。这些技能涵盖从创意应用（艺术、音乐、设计）到技术任务（测试Web应用、MCP服务器生成）再到企业工作流（通讯、品牌等）的广泛领域。
+
+Each skill is self-contained in its own folder with a `SKILL.md` file containing the instructions and metadata that Claude uses. Browse through these skills to get inspiration for your own skills or to understand different patterns and approaches.
+
+每个技能都独立存放在自己的文件夹中，包含Claude使用的指令和元数据的`SKILL.md`文件。浏览这些技能可以获取创建自定义技能的灵感，或理解不同的模式和方法。
+
+Many skills in this repo are open source (Apache 2.0). We've also included the document creation & editing skills that power [Claude's document capabilities](https://www.anthropic.com/news/create-files) under the hood in the [`skills/docx`](./skills/docx), [`skills/pdf`](./skills/pdf), [`skills/pptx`](./skills/pptx), and [`skills/xlsx`](./skills/xlsx) subfolders. These are source-available, not open source, but we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application.
+
+本代码库中许多技能是开源的（Apache 2.0协议）。我们还包含了支撑[Claude文档能力](https://www.anthropic.com/news/create-files)的文档创建与编辑技能，这些技能位于[`skills/docx`](./skills/docx)、[`skills/pdf`](./skills/pdf)、[`skills/pptx`](./skills/pptx)和[`skills/xlsx`](./skills/xlsx)子文件夹中。这些属于源代码可用（非开源），但我们希望与开发者分享这些在生产AI应用中实际使用的复杂技能作为参考。
+
+## Disclaimer
+
+**免责声明：这些技能仅用于演示和教育目的。** 虽然Claude可能提供部分功能，但您从Claude获得的实现和行为可能与这些技能展示的内容有所不同。这些技能旨在说明模式和可能性。在关键任务中依赖这些技能前，请务必在您自己的环境中进行全面测试。
+
+# Skill Sets
+技能集：
+- [./skills](./skills): 创意与设计、开发与技术、企业与通讯以及文档技能的示例
+- [./spec](./spec): Agent Skills规范
+- [./template](./template): 技能模板
+
+# Try in Claude Code, Claude.ai, and the API
+在Claude Code、Claude.ai和API中试用
+
+## Claude Code
+您可以通过在Claude Code中运行以下命令，将此代码库注册为Claude Code插件市场：
+```
+/plugin marketplace add anthropics/skills
+```
+
+安装特定技能集的步骤：
+1. 选择`浏览并安装插件`
+2. 选择`anthropic-agent-skills`
+3. 选择`document-skills`或`example-skills`
+4. 选择`立即安装`
+
+或者直接通过以下命令安装任一插件：
+```
+/plugin install document-skills@anthropic-agent-skills
+/plugin install example-skills@anthropic-agent-skills
+```
+
+安装插件后，只需提及即可使用技能。例如，如果您从市场安装了`document-skills`插件，可以要求Claude Code执行："使用PDF技能从`path/to/some-file.pdf`提取表单字段"
+
+## Claude.ai
+
+这些示例技能已对Claude.ai付费计划用户开放可用。
+
+要使用本代码库中的任何技能或上传自定义技能，请按照[在Claude中使用技能](https://support.claude.com/en/arti中的说明操作
+
+## 🔗 知识库双向关联
+- [Github__mattpocock_skills_简报](/auto-clippings/Github-mattpocock-skills-简报)
+- [Github__mattpocock_skills_全翻译](/auto-clippings/Github-mattpocock-skills-全翻译)
+- [Github__mattpocock_skills_简报](/auto-clippings/Github-mattpocock-skills-简报)
