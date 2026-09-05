@@ -1,0 +1,53 @@
+---
+title: "Qwen3.8-27B beat the Wikipedia game in 6 clicks_全翻译"
+tags: ["Reddit_全文翻译", "r_LocalLLaMA"]
+---
+
+【帖子标题】：Qwen3.8-27B beat the Wikipedia game in 6 clicks.  
+【帖子标题】：Qwen3.8-27B以6次点击通关维基百科游戏  
+
+【帖子正文】：  
+Used qwen3.8-27b in Opencode to make this silly mini-game because I'm not sober:  
+【帖子正文】：  
+我在Opencode中使用qwen3.8-27b做了这个愚蠢的小游戏，因为我不太清醒：  
+
+``` We are going to play a game, it will be the Wikipedia game. The Wikipedia game has the following rules:  
+``` 我们来玩个游戏，规则如下：  
+
+You will have a Wikipedia article set as a starting point.  
+你会有一个维基百科文章作为起点。  
+
+You will have a Wikipedia article set as an ending point.  
+你会有一个维基百科文章作为终点。  
+
+Your objective is to reach the the end point, which is an article completely separate from the starting point article.  
+你的目标是通过点击链接到达终点文章，且终点文章必须与起点文章毫无关联。  
+
+Your only constraints are the following:  
+限制条件如下：  
+
+You are ONLY allowed to click on any hyperlinks inside of wikipedia directly. No external links, no typing inside of wikipedia's search bar (but finding the starting article on google is valid. The 10-click limit starts once you reach the starting point article).  
+只能点击维基百科内的超链接。禁止使用外部链接或维基搜索栏（但用谷歌找起点文章是允许的，10次点击限制从进入起点文章后开始计算）。  
+
+You are NOT allowed to return to a previous page. All clicks much be performed in a forward-looking trajectory.  
+禁止返回上一页。所有点击必须保持前进路径。  
+
+You must reach the end article within 10 hyperlink clicks inside of Wikipedia. If you do not reach the destination article within 10 clicks, you lose.  
+必须在10次维基内链点击内到达终点文章，否则失败。  
+
+Do not update any documentation for this task. It is only a game.  
+不要为此任务更新文档，这只是个游戏。  
+
+Use playwright to click the links. ```  
+使用playwright点击链接。```  
+
+Basically, Qwen needs to reach an ending article within 10 Wikipedia hyperlink clicks from the starting article, which is usually an unrelated article. It needs to use playwright (or some equivalent browser MCP) to click the Wikipedia hyperlinks without backtracking, using search or using external links.  
+简而言之，Qwen需要在10次维基内链点击内从起点文章（通常毫不相关）到达终点文章。它必须使用playwright（或类似浏览器控制工具）点击链接，且不能回退、搜索或使用外链。  
+
+I verified the links for accuracy and I can confirm it managed to complete this task within 6 turns. Thought it would get stuck in a loop. Its a dumb minigame but I think its a good, simple agent test to perform.  
+我核验了链接准确性，确认它仅用6步就完成了任务。本以为它会陷入循环。虽然是个愚蠢的小游戏，但我觉得这是个简单有效的智能体测试。
+
+## 🔗 知识库双向关联
+- [Qwen3.8-27B Q6 is a beast at agentic coding_全翻译](/auto-clippings/Qwen38-27B-Q6-is-a-beast-at-agentic-coding-全翻译)
+- [Qwen 3.8 27B is a game changer_简报](/auto-clippings/Qwen-38-27B-is-a-game-changer-简报)
+- [Qwen3.8-27B Q6 is a beast at agentic coding_简报](/auto-clippings/Qwen38-27B-Q6-is-a-beast-at-agentic-coding-简报)

@@ -1,0 +1,45 @@
+---
+title: "Qwen3.8-27B beat the Wikipedia game in 6 clicks_简报"
+tags: ["Reddit_热榜", "r_LocalLLaMA"]
+---
+
+```markdown
+# 技术情报简报：Qwen3.8-27B在维基百科游戏中的表现分析
+
+## TL;DR  
+阿里云开源的Qwen3.8-27B模型通过playwright工具成功在6次维基百科内链点击内完成"Wikipedia Game"挑战，该游戏要求从无关的起点文章仅通过正向超链接导航到达终点文章，展现了模型在网页导航和路径规划方面的基础智能体能力。
+
+### 核心观点/技术细节
+1. **任务设计**：
+   - 严格限制条件：仅允许维基百科内链点击、禁止回退/搜索/外链、10次点击上限
+   - 使用playwright实现自动化浏览器操作
+   - 路径必须保持单向前进（forward-looking trajectory）
+
+2. **模型表现**：
+   - 以6次点击超额完成任务（低于10次限制）
+   - 未出现预期的循环卡顿问题
+   - 用户验证了路径准确性
+
+3. **技术意义**：
+   - 作为轻量级智能体测试方案
+   - 验证了模型的基础网页理解与决策能力
+   - 展示了开源模型在结构化环境中的任务执行潜力
+
+### 核心痛点
+1. **智能体测试标准化**：  
+   当前缺乏简单可量化的智能体评估基准，此类小游戏可作为低成本测试方案
+
+2. **路径规划可靠性**：  
+   避免循环/死胡同是网页导航任务的关键挑战，模型表现超出预期
+
+3. **工具使用精确性**：  
+   通过playwright等工具精确控制浏览器操作的需求与实际应用场景高度相关
+
+4. **开源模型能力边界**：  
+   27B参数模型在受限环境中展现的决策能力值得关注，需进一步探索其上限
+```
+
+## 🔗 知识库双向关联
+- [Qwen 3.8 27B is a game changer_简报](/auto-clippings/Qwen-38-27B-is-a-game-changer-简报)
+- [Qwen3.8-27B Q6 is a beast at agentic coding_简报](/auto-clippings/Qwen38-27B-Q6-is-a-beast-at-agentic-coding-简报)
+- [Qwen 3.8 27B scores 52 on the Artificial Analysis Intelligen_简报](/auto-clippings/Qwen-38-27B-scores-52-on-the-Artificial-Analysis-I)

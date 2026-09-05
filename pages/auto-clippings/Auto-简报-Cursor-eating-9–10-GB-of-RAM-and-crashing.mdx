@@ -1,0 +1,42 @@
+---
+title: "Cursor eating 9–10 GB of RAM and crashing my 16GB system out_简报"
+tags: ["Reddit_热榜", "r_CursorAI"]
+---
+
+```markdown
+# 技术情报简报：Cursor AI 编辑器内存泄漏问题
+
+## TL;DR 摘要
+多名用户报告Cursor AI编辑器在近期更新后出现严重内存泄漏问题，突发性占用9-10GB内存导致16GB配置系统崩溃，常规清理手段无效，疑似与后台索引或语言服务器相关进程有关。
+
+## 核心技术细节
+- **问题表现**：突发性内存占用激增（达物理内存60%+）
+- **复现环境**：
+  - 16GB RAM配置
+  - 软件工程师日常开发场景
+  - 持续正常运行4-5个月后突发异常
+- **已尝试措施**：
+  - 清理AppData缓存（无效）
+  - 监控后台进程（未明确异常进程）
+- **可疑组件**：
+  - 代码库索引系统
+  - TypeScript/LSP语言服务器
+  - 第三方插件兼容性问题
+
+## 核心痛点分析
+1. **稳定性危机**：生产级工具突发崩溃导致工作流中断
+2. **诊断盲区**：缺乏内存占用的详细进程分析工具
+3. **版本回溯困难**：用户无法确认具体触发更新的版本
+4. **应急方案缺失**：官方尚未提供临时配置调整方案
+
+## 情报建议
+```diff
++ 建议监控GitHub issue页面的内存泄漏标签
+! 需验证问题是否与特定语言项目规模相关
+- 警惕在关键任务环境使用近期版本
+```
+
+## 🔗 知识库双向关联
+- [[Refined_Auto_简报_CURSOR RULES or DIE How I Build Secure, Prod]]
+- [[Memory prices up 500 in 12 months_简报]]
+- [[Auto_简报_Browser MCP inside Cursor is eating context for a 90]]
