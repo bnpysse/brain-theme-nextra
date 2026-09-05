@@ -1,0 +1,62 @@
+---
+title: "Show HN Moadim.io – A scheduler for agents_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+```markdown
+# 精华简报：Moadim.io —— 智能体调度器
+
+## TL;DR
+Moadim.io 是一款开源的AI智能体循环调度引擎，通过定义提示词、调度计划和智能体（如Claude/Codex等）实现自动化任务循环执行，支持本地化运行、跨重启持久化和多接口访问（REST/MCP/WebUI），采用MIT协议完全自托管，无需云端依赖。
+
+---
+
+## 核心观点与技术洞察
+
+### 技术架构
+1. **循环工程范式**：  
+   - 将传统手工触发升级为"prompt + schedule + agent"的自动化循环，每次触发都在隔离的tmux工作台执行，通过看门狗机制确保任务健康度
+   - 内置OpenAPI/Swagger UI实现自文档化，支持iCal订阅实现时间驱动
+
+2. **轻量级调度系统**：  
+   - 独创便携式进程内调度器（替代cron），通过launchd/systemd实现持久化
+   - 依赖tmux进行会话管理，无需额外队列服务（如Redis）
+
+3. **多智能体支持**：  
+   - 兼容Claude/Codex/Hermes/Pi等主流模型，NanoClaw支持任务队列分发
+   - 内置MCP协议工具链，实现智能体间通信标准化
+
+### 商业价值
+1. **开源商业化模型**：  
+   - MIT许可允许企业自由修改和私有化部署，通过开发者生态构建护城河
+   - 无付费墙策略降低采用门槛，潜在通过企业支持服务盈利
+
+2. **边缘AI新范式**：  
+   - 完全本地化运行规避数据隐私风险，符合金融/医疗等合规场景需求
+   - 重启存活特性满足工业级可靠性要求（99.9%可用性）
+
+---
+
+## 行业启发与影响
+
+1. **AI工程化趋势**：  
+   - 将提示工程升级为可编排、可监控的"循环工程"，标志AI应用进入工业化生产阶段
+   - 隔离工作台设计为多智能体协作提供安全沙箱，可能催生新型AgentOps工具链
+
+2. **去中心化基础设施**：  
+   - 挑战传统云原生AI架构，证明轻量级本地调度在特定场景的可行性
+   - tmux+systemd的创新组合为边缘计算设备部署AI提供新思路
+
+3. **开发者体验革新**：  
+   - 内置OpenAPI/Swagger降低集成成本，可能成为AI中间件新标准
+   - cargo/npm双包管理器支持展现跨语言生态野心
+
+4. **合规性示范**：  
+   - 自托管+无数据出站的设计为受监管行业提供合规AI实施样板
+   - 看门狗机制和状态隔离对AI审计需求具有参考价值
+```
+
+## 🔗 知识库双向关联
+- [派评  近期值得关注的 App_简报](/auto-clippings/派评-近期值得关注的-App-简报)
+- [Headlong A Microharness for Persistent Agents_简报](/auto-clippings/Headlong-A-Microharness-for-Persistent-Agents-简报)
+- [An opinionated guide to which AI to use to do stuff_简报](/auto-clippings/An-opinionated-guide-to-which-AI-to-use-to-do-stuf)
