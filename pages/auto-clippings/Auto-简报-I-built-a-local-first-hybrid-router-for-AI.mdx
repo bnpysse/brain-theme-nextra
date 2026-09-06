@@ -1,0 +1,45 @@
+---
+title: "I built a local-first hybrid router for AI Agent Skills sub-_简报"
+tags: ["Reddit_热榜", "r_CursorAI"]
+---
+
+# 技术情报简报：Routed - 本地优先AI智能体技能路由系统
+
+## TL;DR
+开发者推出开源混合路由系统Routed，通过本地CPU运行的4层评分管道（向量嵌入+关键词+精确匹配+元数据）实现20ms内零token消耗的AI技能路由，解决传统LLM路由方案导致的上下文爆炸或高延迟/高成本问题，支持多语言识别及主流AI开发环境。
+
+## 核心观点/技术细节
+1. **混合路由架构**：
+   - 60% Arctic Embed S/MiniLM量化ONNX模型（CPU本地向量嵌入）
+   - 25% Okapi BM25关键词算法
+   - 10% 精确命令/别名匹配
+   - 5% 时效性/频率元数据
+
+2. **性能指标**：
+   - &lt;20ms响应延迟
+   - 零网络数据传输
+   - 100%离线CPU运行
+
+3. **环境支持**：
+   - 自动适配Cursor/Claude Code/Ollama等11个平台
+   - 新增MCP服务器协议（动态技能架构注入）
+
+4. **v1.1关键升级**：
+   - 原生支持100+语言复合名词解析
+   - `/route`指令触发复合意图识别
+
+## 核心痛点
+1. **传统路由方案缺陷**：
+   - 系统提示塞入技能定义 → 上下文窗口爆炸 & 指令跟随性能下降
+   - LLM路由分类 → 单次消耗1000+token & 2秒+延迟 & 持续API成本
+
+2. **解决方案价值**：
+   - 保留精细技能路由能力的同时，消除云服务依赖和token经济成本
+   - 通过本地化处理满足隐私敏感/低延迟场景需求
+
+GitHub: [bshea-1/Routed](https://github.com/bshea-1/Routed) | License: MIT
+
+## 🔗 知识库双向关联
+- [Refined_Raw_翻译_The Pulse a new trend, smart model routing](/auto-clippings/Refined-Raw-翻译-The-Pulse-a-new-trend-smart-model-r)
+- [llm-openrouter 0.7_简报](/auto-clippings/Auto-简报-llm-openrouter-07)
+- [LiteLLM YC W23 Is Hiring – Rust  Performance Engineers_简报](/auto-clippings/Auto-简报-LiteLLM-YC-W23-Is-Hiring-–-Rust-Performanc)
