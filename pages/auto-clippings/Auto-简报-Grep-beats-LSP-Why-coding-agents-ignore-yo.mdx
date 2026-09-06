@@ -3,7 +3,6 @@ title: "Grep beats LSP Why coding agents ignore your fancier tools_简报"
 tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
 ---
 
-```markdown
 # 技术简报：Grep vs LSP - 编程智能体的工具选择逻辑
 
 ## TL;DR 核心主旨
@@ -14,7 +13,7 @@ tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
 ### 工具选择行为学
 1. **路径依赖现象**：模型在简单定位任务中6%以下选择LSP，但在引用查找任务中提升至57%，显示智能体会动态路由工具
 2. **训练惯性效应**：grep的文本直出格式更接近训练数据分布，降低模型认知负荷
-3. **界面友好度>精度**：LSP返回行列号需要二次查询，而grep直接提供代码行的设计更符合LLM处理模式
+3. **界面友好度&gt;精度**：LSP返回行列号需要二次查询，而grep直接提供代码行的设计更符合LLM处理模式
 
 ### 性能经济学
 1. **token成本悖论**：LSP在整洁代码库多消耗16%token，在杂乱库却节省12%，显示工具ROI与代码质量强相关
@@ -47,6 +46,6 @@ tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
 该简报通过结构化呈现实验发现→技术原理→商业影响的逻辑链，帮助技术决策者快速把握：1）当前AI代理的工具使用特征 2）工具链优化方向 3）代码库管理的新价值维度。关键突破点在于揭示"精度优势≠采用率"的反常识现象，为AI工程化提供新视角。
 
 ## 🔗 知识库双向关联
-- [Auto_简报_H100 vs GB200 NVL72 Training Benchmarks – Power, TCO](/auto-clippings/Auto-简报-H100-vs-GB200-NVL72-Training-Benchmarks-–)
-- [LLMs could control their host machines by exploiting inferen_简报](/auto-clippings/LLMs-could-control-their-host-machines-by-exploiti)
-- [What Is a Harness_全翻译](/auto-clippings/What-Is-a-Harness-全翻译)
+- [[Auto_简报_H100 vs GB200 NVL72 Training Benchmarks – Power, TCO]]
+- [[Raw_翻译_LLMs could control their host machines by exploiting inferen|LLMs could control their host machines by exploiting inferen_简报]]
+- [[Raw_翻译_What Is a Harness|What Is a Harness_全翻译]]

@@ -3,7 +3,6 @@ title: "Burry s Tragic Algebra the NASDAQ-100 keeps 83 cents of ever_简报"
 tags: ["Reddit_热榜", "r_SecurityAnalysis"]
 ---
 
-```markdown
 # 精华简报：Burry's Tragic Algebra - 纳斯达克100盈利真实性与股东成本测算
 
 ## TL;DR  
@@ -16,7 +15,7 @@ Michael Burry提出新模型（Ω = C + V）量化股东因员工股票激励产
    - `ΔE = (N + G - Ω)/报告利润`：真实利润留存率  
 
 2. **数据验证**  
-   - 与Burry原始数据误差<0.02%（如NASDAQ-100高估率19.77% vs 19.78%）  
+   - 与Burry原始数据误差&lt;0.02%（如NASDAQ-100高估率19.77% vs 19.78%）  
    - Alphabet十年数据完全吻合，Meta ΔE精确到83.35%  
 
 3. **关键参数**  
@@ -33,11 +32,10 @@ Michael Burry提出新模型（Ω = C + V）量化股东因员工股票激励产
 ### 方法论价值
 ```python
 # 自动化核验逻辑示例
-def calculate_V(T: float, P: float, deltaS: float) -&gt; float:
+def calculate_V(T: float, P: float, deltaS: float) -> float:
     """计算股东股权激励成本"""
     return T + P * deltaS  # 规避W项缺失的巧妙代数变换
 ```
 **创新点**：通过`V = T + P·ΔS`实现无回购数据(W)条件下的精准测算，使全市场扫描成为可能  
 
-（注：完整版需嵌入SEC EDGAR数据接口说明及XBRL标签缺失的具体案例）  
-```
+（注：完整版需嵌入SEC EDGAR数据接口说明及XBRL标签缺失的具体案例）
