@@ -1391,6 +1391,7 @@ export default {
   "Raw-翻译-13-年前被喷爆的-XBOX-功能，怎么成了游戏光盘最后的救命稻草": "13 年前被喷爆的 XBOX 功能，怎么成了游戏光盘最后的救命稻草",
   "Raw-翻译-129-亿美元，英伟达拿下-Hugging-Face": "129 亿美元，英伟达拿下 Hugging Face",
   "Raw-翻译-1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦": "1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦",
+  "Raw-翻译-00-后维权的新思维": "00 后维权的新思维",
   "Raw-翻译-900M-paid-out-to-end-wind-farm-project-goin": "$900M paid out to end wind farm project ...",
   "Raw-翻译-44M-Solar-Powered-EV-Production-Deal-Struck": "$44M Solar-Powered EV Production Deal St...",
   "Raw-翻译-12B-of-US-ratepayers-money-wasted-on-a-mode": "$12B of US ratepayers money wasted on a ...",
@@ -2769,6 +2770,7 @@ export default {
   "Auto-简报-13-年前被喷爆的-XBOX-功能，怎么成了游戏光盘最后的救命稻草": "13 年前被喷爆的 XBOX 功能，怎么成了游戏光盘最后的救命稻草",
   "Auto-简报-129-亿美元，英伟达拿下-Hugging-Face": "129 亿美元，英伟达拿下 Hugging Face",
   "Auto-简报-1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦": "1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦",
+  "Auto-简报-00-后维权的新思维": "00 后维权的新思维",
   "Auto-简报-900M-paid-out-to-end-wind-farm-project-goi": "$900M paid out to end wind farm project ...",
   "Auto-简报-44M-Solar-Powered-EV-Production-Deal-Struc": "$44M Solar-Powered EV Production Deal St...",
   "Auto-简报-12B-of-US-ratepayers-money-wasted-on-a-mod": "$12B of US ratepayers money wasted on a ..."
