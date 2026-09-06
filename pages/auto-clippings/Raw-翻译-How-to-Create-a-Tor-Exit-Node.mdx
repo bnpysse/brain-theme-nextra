@@ -1,0 +1,112 @@
+---
+title: "How to Create a Tor Exit Node_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：How to Create a Tor Exit Node  
+如何搭建Tor出口节点  
+
+【文章正文】：  
+This will be a quick tutorial on how to configure an Exit Node for the Tor Network. Doing this comes with some inherent risks for the operator but exit nodes are essential for bridging Tor with the ‘clear net’. Without exit nodes, anyone suffering from ISP filtering or those not wishing to have their Internet activity logged (BBC Article) couldn’t utilise Tor to access the Internet.  
+这是一篇关于如何为Tor网络配置出口节点的快速教程。虽然运营者需承担固有风险，但出口节点对连接Tor与"明网"至关重要。若没有出口节点，遭受ISP过滤的用户或不愿被记录网络活动的人（BBC报道）将无法通过Tor访问互联网。  
+
+Unlike bridges, exit nodes (and normal relays) are publicly known devices, for which their IP address and configuration is available for anyone to see. They effectively make the final connection to the destination on behalf of the originating (anonymous) client. The Tor network is drastically short of exit nodes, but for good reason. Because they are the final hop in the chain, they will be making hundreds of outbound connections to whatever website or service Tor users request. It is therefore easy for the powers who be to blame an exit node operator for ‘doing bad things’ when in fact their node is merely participating in a network, much like a traditional router would in any network.  
+与网桥不同，出口节点（及普通中继）是公开设备，其IP地址和配置对所有人可见。它们代表匿名用户与目标建立最终连接。Tor网络极度缺乏出口节点有其合理原因：作为链路最后一跳，它们需为Tor用户的每个请求建立数百条出站连接。因此当权者很容易将"作恶"罪名强加给节点运营者，而实际上节点只是网络参与者——就像传统路由器在任何网络中的角色。  
+
+Anyway, assuming you have balls of steel and willing to run an exit node I’ll take a look at how to do this with least hassle as possible.  
+假设您有钢铁般的意志仍决定运营出口节点，下面我将介绍最简化的搭建方法。  
+
+Before we begin, let me make it clear running this from home is possibly dangerous, due to harassment from ISPs and the powers that be. Although you are not breaking any law by doing this you are acting as the exit point for Tor traffic and you have no control over what any of the 2.5 million Tor users across the world are going to be doing. If you do experience harassment, stay calm and know you have done nothing wrong. There is lots of information out there to help you if required.  
+首先声明：家庭网络搭建存在风险，可能遭遇ISP或权力机构骚扰。虽然此举不违法，但作为Tor流量出口点，您无法控制全球250万Tor用户的行为。若遇骚扰请保持冷静——您没有过错。必要时可寻求现有的大量支援信息。  
+
+Another issue you may face is one of reputation. Some websites block exit nodes and others make Captcha a requirement (such as cloudflare CDN & Google if it sees lots of traffic).  
+另一个问题是声誉影响：部分网站会屏蔽出口节点，或强制验证码（如Cloudflare CDN和谷歌在检测到高流量时）。  
+
+First up lets assume you have a working Linux machine, I’ll go with Ubuntu 14.04 (Trusty). Secondly lets assume you are NAT’ed behind a bog standard router.  
+假设您已准备Linux主机（本文以Ubuntu 14.04为例），且位于普通路由器的NAT后方。  
+
+We need to install tor and tor-arm. To do we need to add the Tor repos:  
+需安装tor和tor-arm，先添加Tor仓库：  
+```bash
+echo 'deb http://deb.torproject.org/torproject.org trusty main' >> /etc/apt/sources.list
+echo 'deb-src http://deb.torproject.org/torproject.org trusty main' >> /etc/apt/sources.list
+```  
+
+Next, install the GPG keys for the repo:  
+安装仓库GPG密钥：  
+```bash
+gpg --keyserver keys.gnupg.net --recv 886DDD89
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+```  
+
+Now install tor, tor-arm, curl, vnstat, nginx and socat:  
+安装所需软件包：  
+```bash
+apt-get update
+apt-get install tor tor-arm vnstat vnstati nginx curl socat
+```  
+
+Weyhey, Tor is installed. By default it acts as a client so we need to make it into an exit node.  
+Tor已安装！默认作为客户端运行，现需配置为出口节点。  
+
+Replace the contents of /etc/tor/torrc with a basic relay configuration.  
+用基础中继配置替换/etc/tor/torrc文件内容：  
+```bash
+curl -o /etc/tor/torrc https://madpsy.uk/wp-content/uploads/2015/11/torrc.txt
+```  
+
+The sample configuration looks like this:  
+示例配置如下：  
+```
+ORPort 127.0.0.1:9001 NoAdvertise
+ORPort 443 NoListen
+DirPort 9030
+Nickname TorExit
+RelayBandwidthRate 100 KB
+RelayBandwidthBurst 100 KB
+ContactInfo [email protected]
+DisableDebuggerAttachment 0
+ExitPolicy accept *:20-23     # FTP, SSH, telnet
+...
+...
+ExitPolicy reject *:*
+```  
+
+Edit /etc/tor/torrc and set your email address next to ‘ContactInfo’.  
+编辑/etc/tor/torrc文件，在ContactInfo处填写您的邮箱。  
+
+You may also wish to set ‘RelayBandwidthRate’ and ‘RelayBandwidthBurst’ to something else, depending on your Internet connection speed. The example value is 100 KB (Kilobytes Per Second) which is fine for a typical ADSL broadband connection. You will notice ‘DirPort’ is also set, enabling this node as a Directory Server – remove the line if you don’t want that.  
+可根据网速调整RelayBandwidthRate和RelayBandwidthBurst值（示例100KB/秒适合普通ADSL）。DirPort设置使节点兼任目录服务器——不需要可删除该行。  
+
+Next, we need to run socat to redirect port 443 traffic to localhost port 9001. This is because a useful Entry Guard (the relay will accept incoming connections as well as being an exit node) needs to run on a port which is likely to be available for every Tor user. Port 443 is HTTPS so a sensible choice. The problem is Tor doesn’t run as root and will be denied permission when trying to bind to port 443. For this reason it’s bound to 9001 locally and we will redirect traffic using ‘socat’.  
+需用socat将443端口流量重定向到本地9001端口：优质入口守卫（同时作为出口节点的中继）需运行在Tor用户通用端口。443端口（HTTPS）是理想选择，但Tor非root运行无法绑定该端口，故本地绑定9001端口并通过socat重定向。  
+
+To run socat:  
+运行socat：  
+```bash
+/usr/bin/socat TCP-LISTEN:443,fork,su=nobody TCP:127.0.0.1:9001 &
+```  
+
+We need to ensure this starts on reboot so to do that we add it to root’s crontab.  
+添加至root的crontab实现开机自启：  
+```bash
+echo '@reboot /usr/bin/socat TCP-LISTEN:443,fork,su=nobody TCP:127.0.0.1:9001 &' >> /var/spool/cron/crontabs/root
+```  
+
+Almost done! Finally, we need to serve an ‘about this node’ page over HTTP so anyone querying what this node is will be able to find out.  
+最后需提供HTTP版"节点说明页"供查询：  
+
+Note: You can also do something similar with ‘DirPortFrontPage’, however I don’t believe it will let you add additional content easily (such as the bandwidth graph).  
+注：也可用DirPortFrontPage实现，但难以添加带宽图等额外内容。  
+
+Replace the default nginx page with the official Tor Exit Node page.  
+替换nginx默认页为Tor出口节点官方页：  
+```bash
+curl -o /usr/share/nginx/html/index.html https://madpsy.uk/wp-content/uploads/2015/11/tor-exit-node.txt
+curl -o /usr/share/nginx/html/how_tor_works_thumb.png https://madpsy.uk/wp-content/uploads/2015/11/how_tor_wo
+```
+
+## 🔗 知识库双向关联
+- [Using Local Coding Agents_全翻译](/auto-clippings/Using-Local-Coding-Agents-全翻译)
+- [LLMs could control their host machines by exploiting inferen_简报](/auto-clippings/LLMs-could-control-their-host-machines-by-exploiti)
+- [How AI Becomes a Political Crisis_简报](/auto-clippings/How-AI-Becomes-a-Political-Crisis-简报)

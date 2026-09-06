@@ -1,0 +1,54 @@
+---
+title: "Shutting down our public encrypted DNS_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Shutting down our public encrypted DNS  
+【文章标题】：关闭我们的公共加密DNS服务  
+
+【文章正文】：  
+Shutting down our public encrypted DNS servers and sponsoring Quad9 instead  
+【文章正文】：  
+关闭我们的公共加密DNS服务器并转而为Quad9提供赞助  
+
+News  
+新闻  
+
+Mullvad has operated public encrypted DNS (DoH) servers since 2022. They are unnecessary when using Mullvad VPN — traffic is already encrypted and Mullvad VPN's internal DNS handles all queries.  
+Mullvad自2022年起运营公共加密DNS（DoH）服务器。使用Mullvad VPN时这些服务器并非必需——流量已被加密，且Mullvad VPN的内部DNS会处理所有查询。  
+
+Outside the VPN, they serve two purposes:  
+在VPN之外，这些服务器有两个用途：  
+- Mullvad Browser uses them by default when you're not on Mullvad VPN, preventing your ISP from seeing the domains you visit.  
+- 当您未连接Mullvad VPN时，Mullvad浏览器默认使用这些服务器，防止您的ISP看到您访问的域名。  
+- Anyone can use them as a free public service to protect their DNS queries.  
+- 任何人都可以将其作为免费公共服务使用，以保护其DNS查询。  
+
+We want a public service to be available. Going forward, we will support Quad9 instead of running it ourselves. Running a privacy-focused public DNS service is a highly specialized undertaking, and the Quad9 Foundation is the undisputed leader in the field. Rather than duplicating their efforts to achieve only part of what they do, we're putting those resources toward financially supporting Quad9 instead.  
+我们希望公共服务能够持续可用。未来，我们将转而支持Quad9，而非自行运营。运营一个以隐私为核心的公共DNS服务是高度专业化的工作，而Quad9基金会是该领域无可争议的领导者。与其重复他们的工作却只能实现部分功能，我们决定将这些资源用于为Quad9提供资金支持。  
+
+Migrating to Quad9  
+迁移至Quad9  
+
+If you have manually configured our DoH servers, switch before November 2nd 2026. You can follow Quad9 guides.  
+如果您手动配置了我们的DoH服务器，请在2026年11月2日前切换。您可以参考Quad9的指南。  
+
+Mullvad Browser  
+Mullvad浏览器  
+
+Mullvad Browser users who have kept the default DoH settings or the included ad blocking one, will automatically be migrated to Quad9.  
+保持默认DoH设置或使用内置广告拦截功能的Mullvad浏览器用户将自动迁移至Quad9。  
+
+If you have customized the DoH, we will not change them. If you have manually configured a variant of the Mullvad DoH (base, extended, family. etc.), please make sure to change it back to the default.  
+如果您自定义了DoH设置，我们将不会更改它们。如果您手动配置了Mullvad DoH的变体（基础版、扩展版、家庭版等），请确保将其改回默认设置。  
+
+iOS and macOS profiles  
+iOS和macOS配置文件  
+
+Any existing iOS and macOS Mullvad DoH profile will stop working, please make sure to replace them with Quad9 iOS profiles or macOS profiles.  
+现有的iOS和macOS Mullvad DoH配置文件将停止工作，请确保将其替换为Quad9的iOS或macOS配置文件。
+
+## 🔗 知识库双向关联
+- [iCloud Hide My Email addresses will remain on icloud.com_简报](/auto-clippings/iCloud-Hide-My-Email-addresses-will-remain-on-iclo)
+- [iCloud Hide My Email addresses will remain on icloud.com_简报](/auto-clippings/iCloud-Hide-My-Email-addresses-will-remain-on-iclo)
+- [iCloud Hide My Email addresses will remain on icloud.com_简报](/auto-clippings/iCloud-Hide-My-Email-addresses-will-remain-on-iclo)

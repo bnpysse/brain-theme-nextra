@@ -1,0 +1,151 @@
+---
+title: "Rebuilding a 1995 GPS Time Server so I don t get Telstra d_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Rebuilding a 1995 GPS Time Server so I don't get Telstra'd
+【文章标题】：重构1995年GPS时间服务器，避免重蹈澳洲电信覆辙
+
+【文章正文】：
+Rebuilding a 1995 GPS Time Server so I don't get Telstra'd
+重构1995年GPS时间服务器，避免重蹈澳洲电信覆辙
+
+In June I purchased this TrueTime XL-AK time server, so I could learn more of the history of GPS-based time.
+六月我购入这台TrueTime XL-AK时间服务器，想深入了解GPS授时技术发展史。
+
+I received it on June 22, and just 16 days later a similar GPS time server took down Australia's cell service for 12 hours! I made a short video about it but put off digging into the TrueTime... until now.
+6月22日收货后仅16天，同类GPS时间服务器就导致澳大利亚蜂窝网络瘫痪12小时！我虽制作了短视频解说，但TrueTime的拆解研究直到现在才进行。
+
+Over the past couple weeks, I've 'restomodded' this device with a Raspberry Pi, to build a stratum 1 NTP Time server, which I'd like to eventually add to the NTP Pool. I found a way to drop in a Pi 5 and GNSS HAT, display the time and GPS status on the built-in 16x2 LCD, show the status on the bicolor LED, and make this box useful again.
+过去两周我用树莓派改造这台设备，构建 stratum 1级NTP时间服务器，最终计划加入NTP服务器池。我成功整合了Pi 5和GNSS扩展板，在内置16x2 LCD屏显示时间与GPS状态，通过双色LED指示灯展示运行状态，让这个老设备重获新生。
+
+I lay out more of the hardware details in today's YouTube video:
+更多硬件细节已在今日YouTube视频展示：
+
+But in this post, I'll show how I configured the Raspberry Pi to work as a stratum 1 NTP time server with:
+本文将重点介绍树莓派作为stratum 1级NTP服务器的配置方案：
+
+- Jimmy Paputto's L1 GNSS HAT
+- Jimmy Paputto L1 GNSS扩展板
+- Chrony (for time synchronization and NTP services)
+- Chrony（时间同步与NTP服务）
+- Time and Daytime Protocols
+- 时间与Daytime协议
+- A Densitron LCD built into the TrueTime XL-AK
+- TrueTime XL-AK内置的Densitron液晶屏
+- The bicolor LED built into the TrueTime AL-AK
+- TrueTime AL-AK双色LED指示灯
+- My TrueTime Pi Mounting Bracket
+- 自制的TrueTime树莓派支架
+
+I used a Raspberry Pi 5 with 4GB of RAM, but there's no reason you can't use a $44 Pi 5 with 1GB of RAM for this project (if all you're running on it are timing services for a small network).
+采用4GB内存的树莓派5，但44美元1GB版本同样适用（仅需为小型网络提供授时服务时）。
+
+My immediate need for this server is to provide time services for VCF Midwest next weekend. As with all my projects, I have parts gathered for months, and assembly usually waits until a week or two before a deadline :)
+本周末需为中西部复古计算机展提供授时服务。延续我一贯作风：零件收集数月，最后期限前一两周才突击组装:)
+
+Jimmy Paputto L1 GNSS HAT
+Jimmy Paputto L1 GNSS扩展板
+
+I mounted the GNSS HAT on top of the Pi using the included GPIO riser and mounting screws. I used screws on the bottom to secure a Raspberry Pi Bumper underneath.
+使用配套的GPIO增高柱和螺丝将扩展板固定在树莓派上方，底部加装防震垫片。
+
+After flashing Pi OS 'Lite' (no GUI) to a microSD card, I built the Jimmy Paputto GNSS HAT software from source:
+刷入无图形界面的Pi OS Lite系统后，从源码编译安装扩展板驱动：
+
+sudo apt -y install build-essential cmake libgpiod-dev python3-dev
+git clone https://github.com/jimmypaputto/gnsshat.git
+cd gnsshat
+mkdir -p build && cd build
+cmake .. -DBUILD_PYTHON=ON -DBUILD_EXAMPLES=ON
+make -j$(nproc)
+sudo make install
+
+This software includes a GNSS data bridge to transfer NMEA sentences (the time and date information) to gpsd and chrony; you could also plug the GNSS HAT's USB-C port into a USB-A port on the Pi and access the u-blox NEO-M9N directly.
+该软件包含GNSS数据桥接功能，可将NMEA语句（时间日期信息）传输至gpsd和chrony；也可通过USB-C转USB-A直连u-blox NEO-M9N模块。
+
+After the install was complete, I followed the guide to set up a Raspberry Pi Time Server with PPS.
+安装完成后，参照PPS（脉冲每秒）时间服务器指南进行配置。
+
+Chrony
+Chrony配置
+
+When it was time to configure Chrony, I used the following settings inside /etc/chrony/chrony.conf:
+在/etc/chrony/chrony.conf中配置如下参数：
+
+# GNSS + PPS time server
+# GPS时间通过gpsd共享内存获取
+refclock SHM 0 offset 0.0 delay 0.05 refid NMEA noselect
+# PPS精准边缘计时
+refclock PPS /dev/pps0 refid PPS lock NMEA prefer trust poll 3 filter 16
+# 树莓派晶振较稳定但未达TCXO级别
+maxclockerror 0.5 
+# Pi 5硬件时间戳提升精度
+hwtimestamp *
+# 备用NTP服务器池
+pool 0.pool.ntp.org iburst
+pool 1.pool.ntp.org iburst
+# 允许局域网客户端
+allow 10.0.0.0/16
+# 允许Twingate容器路由请求
+allow 172.17.0.0/16
+maxupdateskew 100.0
+makestep 1000 3
+rtcsync
+# 忽略&gt;100ms的时钟更新（解决gpsd每31分钟报1秒偏差）
+maxchange 0.1 1 -1
+
+I'm accessing my NTP demo setup remotely through Twingate, since I'm dealing with multiple WANs while testing, and it was easier to punch through things like double NAT with a proxying service.
+通过Twingate远程访问NTP演示环境，测试期间需处理多WAN口场景，代理服务更易穿透双重NAT。
+
+Restart chrony after updating the configuration:
+更新配置后重启服务：
+sudo systemctl restart chrony
+
+Verify everything's working with:
+验证运行状态：
+chronyc sources -v
+chronyc tracking
+
+After measuring chrony metrics for a few days, I tweaked parts of the configuration to match my setupâfor maxclockerror, I reduced it from the default because I was able to stabilize the oscillator frequency with some tweaks to the Pi's settings.
+经数日指标监测后调整配置：通过树莓派参数优化稳定晶振频率，将maxclockerror从默认值降低。
+
+Pi Timekeeping Tweaks
+树莓派计时优化
+
+The changes I found especially helpful:
+关键优化措施：
+
+- Running the fan at a constant duty cycle
+- 风扇恒定占空比运行
+- Forcing the Pi's SoC to run full speed with force_turbo
+- force_turbo强制SoC全速运行
+- Pinning the kernel PPS interrupts to CPU core 4 (after isolating that core)
+- 将内核PPS中断绑定至隔离后的CPU核心4
+- Insulating the bottom of the Pi so the oscillator is in a more stable thermal environment
+- 底部加装隔热层稳定晶振温度
+- Insulating the rest of the Pi by enclosing it in the TrueTime enclosure
+- 整体装入TrueTime外壳实现热隔离
+
+Some other things I tried didn't seem to have a measurable impact, at least over 6-12 hour testing periods.
+其他尝试在6-12小时测试周期内未见明显效果。
+
+I highly recommend reading this Austin's Nerdy Things blog post if you're interested in this stuff.
+推荐阅读Austin's Nerdy Things技术博客获取更多细节。
+
+Stable Pi Clock
+稳定时钟方案
+
+To force the Pi to stay at 2.4 GHz for a more stable thermal environment (since the oscillator is near the SoC, and it is impacted significantly by bursty CPU activity), you can set the force_turbo option. This burns maybe 1W more power continuously, but is worth it if you want a stable oscillator frequency (important for timing).
+通过force_turbo选项强制Pi维持2.4GHz频率（晶振邻近SoC，突发负载会显著影响其稳定性）。虽持续增加约1W功耗，但对维持晶振频率稳定性（关键计时指标）至关重要。
+
+Add the following inside /boot/firmware/config.txt and reboot the Pi:
+在/boot/firmware/config.txt添加以下内容后重启：
+
+# Force performance governor so CPU maintains a more stable temperature.      
+# 启用性能模式维持CPU温度稳定
+
+## 🔗 知识库双向关联
+- [AI 助力改造非智能升降桌：智能升降、语音控制、多端联动……_简报](/auto-clippings/AI-助力改造非智能升降桌：智能升降、语音控制、多端联动……-简报)
+- [国际计量大会将讨论用闰时取代闰秒_简报](/auto-clippings/国际计量大会将讨论用闰时取代闰秒-简报)
+- [中美到底在博弈什么翟东升教授的分析值得细细品味 - 今日头条_20260809_2057](/auto-clippings/中美到底在博弈什么翟东升教授的分析值得细细品味-今日头条-20260809-2057)

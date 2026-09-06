@@ -1,0 +1,165 @@
+---
+title: "Python 3.15.0 candidate 2 is here_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：Python 3.15.0 candidate 2 is here!
+【文章标题】：Python 3.15.0 候选版本2发布！
+
+【文章正文】：
+Python 3.15.0 candidate 2 is here!
+Python 3.15.0 候选版本2现已发布！
+
+Hugo van Kemenade (release manager for Python 3.14 and 3.15) announces the final release candidate for Python 3.15, scheduled for release in October:
+Python 3.14和3.15的发布经理Hugo van Kemenade宣布了Python 3.15的最终候选版本，计划于10月正式发布：
+
+Entering the release candidate phase, only reviewed code changes which are clear bug fixes are allowed between this release candidate and the final release. [...]
+进入候选发布阶段后，在此候选版本与最终版本之间，仅允许经过审查的明确错误修复代码变更。[...]
+
+We
+我们
+
+strongly encourage
+强烈建议
+
+maintainers of third-party Python projects to prepare their projects for 3.15 during this phase, and publish Python 3.15 wheels on PyPI to be ready for the final release of 3.15.0, and to help other projects do their own testing. Any binary wheels built against Python 3.15.0 release candidates
+第三方Python项目的维护者在此期间为3.15做好准备，并在PyPI上发布Python 3.15的wheel包，以便为3.15.0的最终发布做好准备，并帮助其他项目进行自己的测试。任何基于Python 3.15.0候选版本构建的二进制wheel包
+
+will work
+都将兼容
+
+with future versions of Python 3.15.
+未来的Python 3.15版本。
+
+Back in 2021 I
+早在2021年，我
+
+found a bug in Python 3.10
+在Python 3.10中发现了一个错误
+
+by running my test suites against it... but I hadn't done this during the RC period, so that bug had already shipped! Since then I've always paid much closer attention to these RCs.
+通过对其运行我的测试套件...但我没有在候选版本期间这样做，所以那个错误已经发布了！从那时起，我一直更加关注这些候选版本。
+
+The new RC isn't available for GitHub Actions just yet - keep an eye on
+新的候选版本尚未在GitHub Actions上提供 - 请关注
+
+actions/python-versions
+actions/python-versions
+
+for that. For the moment though you can add this to a testing matrix:
+以获取更新。目前你可以将其添加到测试矩阵中：
+
+strategy
+策略
+
+:
+：
+
+matrix
+矩阵
+
+:
+：
+
+python-version
+python版本
+
+:
+：
+
+["3.14", "3.15"]
+["3.14", "3.15"]
+
+steps
+步骤
+
+:
+：
+  -
+  -
+
+uses
+使用
+
+:
+：
+
+actions/setup-python@v7
+actions/setup-python@v7
+
+with
+参数
+
+:
+：
+
+python-version
+python版本
+
+:
+：
+
+$&#123;&#123; matrix.python-version &#125;&#125;
+$&#123;&#123; matrix.python-version &#125;&#125;
+
+allow-prereleases
+允许预发布版本
+
+:
+：
+
+true
+true
+
+check-latest
+检查最新版本
+
+:
+：
+
+true
+true
+
+The
+这些
+
+allow-prereleases
+allow-prereleases
+
+and
+和
+
+check-latest
+check-latest
+
+flags mean that today this will test against RC1, and when RC2 lands it will automatically switch to that version (and then the stable version once that comes out.)
+标志意味着今天将测试RC1，当RC2发布时，它将自动切换到该版本（然后在稳定版本发布后再切换到稳定版本）。
+
+Via
+通过
+
+@hugovk.dev
+@hugovk.dev
+
+Tags:
+标签：
+
+open-source
+开源
+
+,
+,
+
+python
+Python
+
+,
+,
+
+github-actions
+GitHub Actions
+
+## 🔗 知识库双向关联
+- [Raw_翻译_Python 3.15.0 RC1 Is Here — Python 3.15 Is Almost Rea](/auto-clippings/Raw-翻译-Python-3150-RC1-Is-Here-—-Python-315-Is-Alm)
+- [Refined_Auto_简报_2026 Python Type System and Tooling Survey](/auto-clippings/Refined-Auto-简报-2026-Python-Type-System-and-Toolin)
+- [Github__TauricResearch_TradingAgents_全翻译](/auto-clippings/Github-TauricResearch-TradingAgents-全翻译)

@@ -1,0 +1,235 @@
+---
+title: "monty-go Pure-Go wrapper for Pydantic s Monty Python Interpr_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：monty-go: Pure-Go wrapper for Pydantic's Monty Python Interpreter
+【文章标题】：monty-go：Pydantic Monty Python解释器的纯Go封装器
+
+【文章正文】：
+Run LLM-generated Python safely from Go — no containers, no CGO, no subprocess.
+【文章正文】：
+安全地从Go运行LLM生成的Python代码——无需容器、无需CGO、无需子进程。
+
+A pure-Go wrapper around Pydantic's Monty Python interpreter, compiled to WebAssembly and loaded via wazero. Your Go agent writes Python code, monty-go executes it in a sandboxed WASM instance with sub-millisecond startup, and pauses whenever the code calls an external function so your Go code can handle it.
+围绕Pydantic的Monty Python解释器构建的纯Go封装器，编译为WebAssembly并通过wazero加载。您的Go代理编写Python代码，monty-go在具有亚毫秒级启动时间的沙盒化WASM实例中执行，并在代码调用外部函数时暂停，以便您的Go代码可以处理它。
+
+go get github.com/fugue-labs/monty-go
+go get github.com/fugue-labs/monty-go
+
+LLMs work faster, cheaper, and more reliably when they write code instead of making sequential tool calls. Instead of:
+当LLM编写代码而非进行顺序工具调用时，它们工作得更快、更便宜、更可靠。替代以下方式：
+Agent → tool_call("search", &#123;query: "weather london"&#125;) → result
+Agent → tool_call("search", &#123;query: "weather tokyo"&#125;)  → result
+Agent → tool_call("compare", &#123;a: result1, b: result2&#125;) → result
+代理 → tool_call("search", &#123;query: "weather london"&#125;) → 结果
+代理 → tool_call("search", &#123;query: "weather tokyo"&#125;) → 结果
+代理 → tool_call("compare", &#123;a: result1, b: result2&#125;) → 结果
+
+The LLM writes:
+LLM编写：
+london = search(query="weather london")
+tokyo = search(query="weather tokyo")
+compare(a=london, b=tokyo)
+伦敦 = 搜索(query="weather london")
+东京 = 搜索(query="weather tokyo")
+比较(a=伦敦, b=东京)
+
+One model call instead of three. The Python code calls your Go functions, Monty pauses at each call, your Go code executes it, and Monty resumes. No containers. No sandbox services. No exec(). Just a 2.9MB WASM binary embedded in your Go binary.
+一次模型调用而非三次。Python代码调用您的Go函数，Monty在每次调用时暂停，您的Go代码执行它，然后Monty恢复。无需容器。无需沙盒服务。无需exec()。仅需嵌入到Go二进制文件中的2.9MB WASM二进制文件。
+
+For motivation, see:
+动机参见：
+- Programmatic Tool Calling from Anthropic
+- Anthropic的程序化工具调用
+- Code Execution with MCP from Anthropic
+- Anthropic的MCP代码执行
+- Code Mode from Cloudflare
+- Cloudflare的代码模式
+- Smol Agents from Hugging Face
+- Hugging Face的Smol代理
+
+package main
+&#105;mport (
+    "context"
+    "fmt"
+    "log"
+    montygo "github.com/fugue-labs/monty-go"
+)
+func main() &#123;
+    runner, err := montygo.New()
+    if err != nil &#123;
+        log.Fatal(err)
+    &#125;
+    defer runner.Close()
+    result, err := runner.Execute(context.Background(),
+        "x * 2 + y",
+        map[string]any&#123;"x": 10, "y": 5&#125;,
+    )
+    if err != nil &#123;
+        log.Fatal(err)
+    &#125;
+    fmt.Println(result) // 25
+&#125;
+
+The real power is external function calls. Monty pauses execution whenever Python code calls a function you've declared, your Go callback handles it, and Monty resumes with the return value:
+真正的威力在于外部函数调用。每当Python代码调用您声明的函数时，Monty暂停执行，您的Go回调处理它，然后Monty带着返回值恢复：
+
+result, err := runner.Execute(ctx,
+    `
+london = get_weather("London")
+tokyo = get_weather("Tokyo")
+f"&#123;london['city']&#125;: &#123;london['temp']&#125;°C, &#123;tokyo['city']&#125;: &#123;tokyo['temp']&#125;°C"
+    `,
+    nil,
+    montygo.WithExternalFunc(func(ctx context.Context, call *montygo.FunctionCall) (any, error) &#123;
+        city, _ := call.Args["city"].(string)
+        // Your real implementation here — HTTP call, database query, anything.
+        return map[string]any&#123;"city": city, "temp": 22&#125;, nil
+    &#125;, montygo.Func("get_weather", "city")),
+)
+// result: "London: 22°C, Tokyo: 22°C"
+结果, 错误 := 运行器.执行(上下文,
+    `
+伦敦 = 获取天气("London")
+东京 = 获取天气("Tokyo")
+f"&#123;伦敦['city']&#125;: &#123;伦敦['temp']&#125;°C, &#123;东京['city']&#125;: &#123;东京['temp']&#125;°C"
+    `,
+    无,
+    montygo.带外部函数(func(上下文 context.Context, 调用 *montygo.函数调用) (任意, 错误) &#123;
+        城市, _ := 调用.参数["city"].(string)
+        // 在此处实现您的真实逻辑——HTTP调用、数据库查询等
+        return map[string]any&#123;"city": 城市, "temp": 22&#125;, nil
+    &#125;, montygo.函数("get_weather", "city")),
+)
+// 结果: "London: 22°C, Tokyo: 22°C"
+
+Multiple functions work the same way — register them all and dispatch by name:
+多个函数以相同方式工作——全部注册并按名称分发：
+
+result, err := runner.Execute(ctx, code, nil,
+    montygo.WithExternalFunc(func(ctx context.Context, call *montygo.FunctionCall) (any, error) &#123;
+        switch call.Name &#123;
+        case "search":
+            return doSearch(call.Args)
+        case "calculate":
+            return doCalculate(call.Args)
+        case "store":
+            return doStore(call.Args)
+        default:
+            return nil, fmt.Errorf("unknown function: %s", call.Name)
+        &#125;
+    &#125;,
+        montygo.Func("search", "query"),
+        montygo.Func("calculate", "expression"),
+        montygo.Func("store", "key", "value"),
+    ),
+)
+结果, 错误 := 运行器.执行(上下文, 代码, 无,
+    montygo.带外部函数(func(上下文 context.Context, 调用 *montygo.函数调用) (任意, 错误) &#123;
+        switch 调用.名称 &#123;
+        case "search":
+            return 执行搜索(调用.参数)
+        case "calculate":
+            return 执行计算(调用.参数)
+        case "store":
+            return 执行存储(调用.参数)
+        default:
+            return nil, fmt.Errorf("未知函数: %s", 调用.名称)
+        &#125;
+    &#125;,
+        montygo.函数("search", "query"),
+        montygo.函数("calculate", "expression"),
+        montygo.函数("store", "key", "value"),
+    ),
+)
+
+Prevent runaway code with memory, time, allocation, and recursion limits:
+通过内存、时间、分配和递归限制防止失控代码：
+
+result, err := runner.Execute(ctx, code, inputs,
+    montygo.WithLimits(montygo.Limits&#123;
+        MaxDuration:       5 * time.Second,
+        MaxMemoryBytes:    10 * 1024 * 1024, // 10 MB
+        MaxAllocations:    100000,
+        MaxRecursionDepth: 100,
+    &#125;),
+)
+结果, 错误 := 运行器.执行(上下文, 代码, 输入,
+    montygo.带限制(montygo.限制&#123;
+        最大持续时间:       5 * time.Second,
+        最大内存字节:    10 * 1024 * 1024, // 10 MB
+        最大分配次数:    100000,
+        最大递归深度: 100,
+    &#125;),
+)
+
+Infinite loops, memory bombs, and deep recursion all terminate cleanly with a *MontyError. Go's context.Context deadlines are also respected — cancel the context and the WASM instance stops.
+无限循环、内存炸弹和深度递归都会以*MontyError干净地终止。Go的context.Context截止时间也被遵守——取消上下文，WASM实例即停止。
+
+Capture Python print() output:
+捕获Python print()输出：
+
+var output strings.Builder
+_, err := runner.Execute(ctx, `print("step 1 done")`, nil,
+    montygo.WithPrintFunc(func(s string) &#123; output.WriteString(s) &#125;),
+)
+fmt.Print(output.String()) // "step 1 done\n"
+var 输出 strings.Builder
+_, 错误 := 运行器.执行(上下文, `print("step 1 done")`, 无,
+    montygo.带打印函数(func(s string) &#123; 输出.WriteString(s) &#125;),
+)
+fmt.Print(输出.String()) // "step 1 done\n"
+
+Python filesystem and environment access routes through your Go callback:
+Python文件系统和环境访问通过您的Go回调路由：
+
+result, err := runner.Execute(ctx,
+    `
+from pathlib import Path
+data = Path("/config/settings.json").read_text()
+data
+    `,
+    nil,
+    montygo.WithOsCallFunc(func(ctx context.Context, call *montygo.OsCall) (any, error) &#123;
+        switch call.Function &#123;
+        case "Path.read_text":
+            path, _ := call.Args[0].(string)
+            return readFromYourStorage(path)
+        case "Path.exists":
+            path, _ := call.Args[0].(string)
+            return existsInYourStorage(path), nil
+        default:
+            return nil, fmt.Errorf("blocked: %s", call.Function)
+        &#125;
+    &#125;),
+)
+结果, 错误 := 运行器.执行(上下文,
+    `
+from pathlib import Path
+数据 = Path("/config/settings.json").read_text()
+数据
+    `,
+    无,
+    montygo.带系统调用函数(func(上下文 context.Context, 调用 *montygo.系统调用) (任意, 错误) &#123;
+        switch 调用.函数 &#123;
+        case "Path.read_text":
+            路径, _ := 调用.参数[0].(string)
+            return 从您的存储读取(路径)
+        case "Path.exists":
+            路径, _ := 调用.参数[0].(string)
+            return 存在于您的存储(路径), nil
+        default:
+            return nil, fmt.Errorf("已阻止: %s", 调用.函数)
+        &#125;
+    &#125;),
+)
+
+No filesystem access happens unless your callback allows it.
+除非您的回调允许，否则不会发生文件系统访问。
+
+monty-go is designed to power code-mode in Gollem, the production agent framework for Go. Instead of sequential tool calls, the LLM writes Python that calls your tools as functions — Monty executes it safely, and Gollem orchestrates the whole thing.
+monty-go旨在为Go的生产代理框架Gollem提供代码模式支持。替代顺序工具调用，LLM编写将您的工具作为函数调用的Python代码——Monty安全地执行它，而Gollem协调整个过程。
+
+Here's what this looks
+以下是这种情况的

@@ -1,0 +1,95 @@
+---
+title: "Just a rumour of a bug is enough to find a security exploit_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：Just a rumour of a bug is enough to find a security exploit these days  
+【文章标题】：如今只需一个漏洞的传闻就足以发现安全漏洞  
+
+【文章正文】：  
+Just a rumour of a bug is enough to find a security exploit these days  
+如今只需一个漏洞的传闻就足以发现安全漏洞  
+
+Anil Madhavapeddy is a professor of computer science at Cambridge and a core maintainer of the OCaml compiler. In this somewhat alarming post he reports that security issues in OCaml projects are seeing evidence of attempted exploits within minutes of patches being shared for discussion:  
+Anil Madhavapeddy是剑桥大学计算机科学教授，也是OCaml编译器的核心维护者。在这篇有些令人担忧的帖子中，他报告称，OCaml项目中的安全问题在补丁被分享讨论后的几分钟内就出现了被尝试利用的证据：  
+
+This normally takes a few days and a release within a week or two is reasonable. Within about ten minutes (!) this website was fielding probes for percent-encoded traversal sequences, indicating that automated watchers are keeping an eye on public repositories.  
+通常这需要几天时间，一两周内发布是合理的。但大约十分钟内（！）这个网站就收到了针对百分比编码遍历序列的探测，这表明自动化监视程序正在密切关注公共代码库。  
+
+Modern coding agents have become so effective at finding flaws that the slightest hint at a new bug can be enough information for them to find it, something Anil has been able to demonstrate using his own agents, switching to DeepSeek V4 Pro⁠ when Claude Fable refused the task.  
+现代编码代理在发现漏洞方面变得如此高效，以至于对新漏洞的最轻微提示就足以让它们找到它。Anil通过自己的代理证明了这一点——当Claude Fable拒绝任务时，他转而使用DeepSeek V4 Pro。  
+
+Anil points out that this rate of discovery appears incompatible with existing open source embargo practices for new issues. If an issue can become an exploit this fast, we need to figure out new processes for keeping our communities safe.  
+Anil指出，这种发现速度似乎与现有的开源漏洞披露实践不相容。如果一个漏洞能这么快被利用，我们需要找出新的流程来保护我们的社区安全。  
+
+rclone maintainer Nick Craig-Wood  
+rclone维护者Nick Craig-Wood  
+
+confirms in the Hacker News comments  
+在Hacker News评论中证实  
+
+that his project is seeing this problem:  
+他的项目也遇到了这个问题：  
+
+In the first 10 years of the rclone project we received about 20 security disclosures through GitHub. We had to deal with over 40 in the last month! That has taken a huge amount of my time, even using AI tools to triage and come up with fixes for review.  
+在rclone项目的前10年，我们通过GitHub收到了约20个安全披露。而上个月我们不得不处理超过40个！这占用了我大量时间，即使使用AI工具进行分类和提出修复方案以供审查。  
+
+The hit rate for those security disclosures is pretty good - about 75% of them have a nugget of something which needs looking at. [...]  
+这些安全披露的命中率相当高——其中约75%确实包含需要关注的问题核心。[...]  
+
+GitHub assigns CVEs for the advisories. Before the AI apocalypse they took 2-3 days for an assignment but now it they are running at 3-4 weeks so I have to send the point releases out with CVE-PENDING in the changelog which isn't ideal.  
+GitHub为安全公告分配CVE编号。在AI爆发前需要2-3天，但现在需要3-4周，因此我不得不在变更日志中使用CVE-PENDING标记发布版本，这并不理想。  
+
+Via  
+通过  
+
+Hacker News  
+Hacker News  
+
+Tags:  
+标签：  
+
+open-source  
+开源  
+
+,  
+,  
+
+security  
+安全  
+
+,  
+,  
+
+ai  
+人工智能  
+
+,  
+,  
+
+generative-ai  
+生成式AI  
+
+,  
+,  
+
+llms  
+大语言模型  
+
+,  
+,  
+
+coding-agents  
+编码代理  
+
+,  
+,  
+
+ocaml  
+OCaml  
+
+,  
+,  
+
+ai-security-research  
+AI安全研究

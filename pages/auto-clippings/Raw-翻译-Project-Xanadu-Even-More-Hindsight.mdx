@@ -1,0 +1,72 @@
+---
+title: "Project Xanadu Even More Hindsight_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Project Xanadu: Even More Hindsight  
+【项目仙那度：更深度的后见之明】  
+
+【文章正文】：  
+Project Xanadu: Even More Hindsight  
+【项目仙那度：更深度的后见之明】  
+
+Retrospective on Project Xanadu’s success and failure: a lack of design iteration, meaningful use-cases, or practicality stopped a valuable vision from maturing into something useful. (And contrasted with my approach.)  
+【回顾仙那度项目的成败：缺乏设计迭代、有意义的用例或实用性，阻碍了这一宝贵愿景发展成真正有用的成果。（并与我的方法形成对比。）】  
+
+In December 2024 during a visit to San Francisco, I was lucky enough to be invited at the last minute to a party that could only have happened there: a celebration of the 50th anniversary of hypermedia visionary Ted Nelson’s 1974 manifesto, Computer Lib/Dream Machines, extolling the vision of Project Xanadu hypertext.  
+【2024年12月造访旧金山期间，我有幸在最后一刻受邀参加了一场唯有此地才会举办的派对——庆祝超媒体先驱泰德·尼尔森1974年宣言《计算机解放/梦想机器》发表50周年，该宣言盛赞了仙那度超文本项目的愿景。】  
+
+I’ve contributed to English Wikipedia for 20 years now, and I’ve been working on Gwern.net on and off for 15 years now, so I could not possibly miss an entire party of people with strong opinions on hypertext.  
+【我为英文维基百科贡献内容已有20年，断断续续建设Gwern.net网站也有15年，因此绝不可能错过这场满是超文本狂热爱好者的聚会。】  
+
+Our host, James, had arranged for a surprisingly extensive collection of Nelson memorabilia: not just copies of that book (far larger and more impressive in person than I had realized, similar to a Compact OED in requiring a magnifying glass, also provided), or Nelson’s 1997 book The Future of Information, but also copies of his Swarthmore College mimeograph magazines, and most impressive of all—several vintage computers running copies of various Xanadu implementations.  
+【主办人詹姆斯精心准备了令人惊叹的尼尔森纪念品收藏：不仅有那本书的副本（实物远比我想象的厚重震撼，类似《牛津简明词典》需搭配放大镜阅读，现场也提供了），还有尼尔森1997年著作《信息的未来》、他在斯沃斯莫尔学院油印的杂志副本，最震撼的是——几台古董电脑正运行着不同版本的仙那度系统。】  
+
+Ted Nelson was still alive at age 87, but unfortunately could not attend. Fortunately, one of the attendees was one of the former Xanadu programmers from the Autodesk era (c. 1988–1993), and we could listen to some of his stories.  
+【87岁的泰德·尼尔森依然健在，但遗憾未能出席。幸运的是，一位欧特克时代（约1988-1993年）的前仙那度程序员在场，我们得以聆听他的往事。】  
+
+They were a reminder of how, while we romanticize earlier eras of computing, the hardware constraints were really quite severe, and made productive development difficult.  
+【这些故事提醒我们：尽管我们浪漫化早期计算时代，但当时的硬件限制极其严苛，严重阻碍开发效率。】  
+
+I think some disappointments in past software systems become more comprehensible when we remember how much time and ingenuity is spent working around the limitations—eg. McIlroy 1982 is justifiably proud of the months of clever algorithm design & optimization he did to get a useful spellchecker to fit in RAM in under 1MB that today we would write in a few lines of JavaScript (and done by an LLM).  
+【当我们记起人们曾耗费多少时间与巧思来突破限制时，过去软件系统的某些遗憾就更容易理解了——例如麦基尔罗伊1982年完全有理由为他耗时数月设计的智能算法感到自豪：他将实用拼写检查器压缩到1MB内存内，而如今用几行JavaScript（或由大语言模型）就能实现。】  
+
+For example, he described how they prototyped Xanadu in Smalltalk (which made sense, as a highly-productive, pleasant language/OS whose object-oriented model matches hypermedia beautifully), but then had to cross-compile it to C++ and compile that… which took about a week to compile. Not a minute, or an hour, or even a day, but a week. (And I thought that Gwern.net’s multi-hour compile-times were bad for my development speed!) He also had to waste a lot of time dealing with C++ silliness and compile issues.  
+【例如他描述团队如何用Smalltalk构建仙那度原型（这很合理，因其高效愉悦的面向对象特性完美匹配超媒体），但随后不得不交叉编译到C++再编译……整个过程需耗时约一周。不是一分钟、一小时甚至一天，而是一周。（我曾以为Gwern.net数小时的编译时间已严重拖累开发效率！）他还不得不耗费大量时间处理C++的琐碎问题和编译故障。】  
+
+Getting this to run at all for the PCs we saw was a challenge, and one reason for the party.  
+【让这些程序在当时我们看到的PC上运行本身就是个挑战，也是举办派对的原因之一。】  
+
+I had, I must admit, sometimes wondered how the Xanadu years at Autodesk could have so little to show for multiple fulltime man-years, when implementing the various client-side transclusion or popup features on Gwern.net were typically a few days of work for Said Achmiz.  
+【必须承认，我常疑惑为何欧特克时期的仙那度团队投入多人全年工作量却成果寥寥，而赛义德·阿赫米兹为Gwern.net实现各类客户端嵌入或弹窗功能通常只需数日。】  
+
+But hearing some war stories from the horse’s mouth helped put things in proper perspective, and remind me just how incredibly compute-impoverished people were at that time.  
+【但亲耳听到这些"战争故事"后，我得以正确看待问题，并想起那时人们的计算资源何等匮乏。】  
+
+(Perhaps worse than the CPU was the storage: I take for granted being able to host any PDF or PostScript or HTML file I need, but a meaningful fraction of my hosted documents exceed the total hard drive space of a mid-range 1990 PC, which might have a 50 MB hard drive. Meanwhile, the Markdown source files of the Gwern.net essays are themselves ~40MB, the annotations twice that, and the final site is 221,438 MB!)  
+【（或许比CPU更糟的是存储：如今我能理所当然地托管任何PDF/PostScript/HTML文件，但我托管文档中相当部分已超过1990年中端PC的总硬盘空间——那时可能只有50MB硬盘。而Gwern.net文章的Markdown源文件约40MB，注释文件是其两倍，最终站点大小达221,438MB！）】  
+
+The college magazines were a surprise and entertaining to leaf through: young Ted already liked to write, quite a lot, and dispense his advice.  
+【翻阅大学杂志令人惊喜又愉悦：年轻的泰德早已热衷写作，且非常乐于提供建议。】  
+
+Someone mentioned that Nelson had dreamed of being a Hollywood director and regretted that he went into technology instead; I thought that made sense and explained some things about his auteur approach to software development (like his insistence he is “not a programmer”, 50 years later) or use of film-editing metaphors like “edit decision lists”.  
+【有人提到尼尔森曾梦想成为好莱坞导演，后悔投身技术领域；我认为这很合理，也解释了他对软件开发的"作者论"态度（如50年后仍坚称自己"不是程序员"）或使用"剪辑决策表"等电影剪辑隐喻。】  
+
+I also had never sat down to read Computer Lib/Dream Machines properly, and leafed through a few pages. It was interesting to see such a large book, in multiple columns to get as much in as possible: Nelson can’t assume the reader knows anything about computers and has to start from scratch to explain the basic concepts like bytes or files. (You really would need the magnifying glass if you were older.)  
+【我也从未认真通读《计算机解放/梦想机器》，随手翻了几页。这本巨著采用多栏排版尽可能容纳内容，很有趣：尼尔森不能假设读者具备计算机知识，必须从字节、文件等基础概念讲起。（年纪大的人确实需要放大镜。）】  
+
+The later (and much more obscure) book Future of Information was also interesting for an unusual structure of chapters, where you could read in multiple orders, with a central summary chapter.  
+【后期更晦涩的著作《信息的未来》也很有趣，采用非传统章节结构——读者可按多种顺序阅读，并设有核心摘要章节。】  
+
+Yuxi Liu points out that Xanadu resembles another famous long-running boil-the-ocean project with close connections to databases & AI with a charismatic leader who never changed his mind, averse to open-source, and which showed similar signs of ‘pathological science’: Douglas Lenat’s Cyc.  
+【刘雨曦指出，仙那度与另一个著名长期项目相似：同样与数据库和AI紧密相关，同样有位从不改换立场的魅力领袖，同样抵触开源，同样显现"病态科学"迹象——道格拉斯·莱纳特的Cyc项目。】  
+
+And thinking abo  
+【而思考关...】  
+
+（注：原文末尾不完整，翻译相应截断）
+
+## 🔗 知识库双向关联
+- [Vintage Artificial Intelligence Before It Got Awkward_全翻译](/auto-clippings/Vintage-Artificial-Intelligence-Before-It-Got-Awkw)
+- [Vintage Artificial Intelligence Before It Got Awkward_简报](/auto-clippings/Vintage-Artificial-Intelligence-Before-It-Got-Awkw)
+- [The Pulse Bending Spoons' Acquisition Strategy_全翻译](/auto-clippings/The-Pulse-Bending-Spoons-Acquisition-Strategy-全翻译)

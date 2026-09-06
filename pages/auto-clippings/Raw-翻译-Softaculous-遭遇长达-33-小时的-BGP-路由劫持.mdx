@@ -1,0 +1,14 @@
+---
+title: "Softaculous 遭遇长达 33 小时的 BGP 路由劫持_全翻译"
+tags: ["大咖视点_全文翻译", "Solidot_(奇客科技与极客资讯)"]
+---
+
+【文章标题】：Softaculous 遭遇长达 33 小时的 BGP 路由劫持
+
+【文章正文】：
+8 月 28 日 20:57 UTC 左右，一个不相关网络 BGP 路由通告了 Softaculous 使用的 Hetzner IP 段，将部分原本发送到 Softaculous 系统的流量劫持到攻击者控制的服务器。Hetzner 是 Softaculous 的上游基础设施供应商，而 Softaculous 则是一家为 Web 托管服务商提供软件的公司，它的 Virtualizor 控制面板被管理员用于部署和管理 VPS。这次 BGP 路由劫持影响了 Virtualizo 更新服务器以及客户和计费网站。攻击者还从 Let's Encrypt CA 获取了有效的 TLS 证书，Let's Encrypt 的自动域名所有权验证也被劫持到了攻击者控制的 IP。Softaculous 于 8 月 29 日 08:50 UTC 向 Hetzner 报告了事件，Hetzner 随后通过发布相同的路由通告遏制了问题。但攻击者于 20:00 UTC 再次了长达 10 小时的路由劫持。8 月 30 日 05:50-06:10 UTC 路由通告被撤回，劫持停止。Softaculous 建议在攻击期间登陆过的用户立即重置密码，以及重置所有重用该密码的账户。同一时间段内输入过银行卡信息的客户也应检查其账单。攻击者在此期间推送了一个恶意的 Virtualizor 更新包，它建议所有 Virtualizor 用户检查其服务器并轮换凭证。
+
+## 🔗 知识库双向关联
+- [OpenAI’s AI Agents Just Crossed A Line_深度简报](/auto-clippings/OpenAIs-AI-Agents-Just-Crossed-A-Line-深度简报)
+- [Autonomy and Innovation_全翻译](/auto-clippings/Autonomy-and-Innovation-全翻译)
+- [Weekly Dose of Optimism 207_全翻译](/auto-clippings/Weekly-Dose-of-Optimism-207-全翻译)

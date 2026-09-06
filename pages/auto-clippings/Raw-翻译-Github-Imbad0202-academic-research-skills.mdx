@@ -1,0 +1,43 @@
+---
+title: "_Imbad0202_academic-research-skills_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+# Claude Code学术研究技能集
+
+[![版本](https://img.shields.io/badge/版本-v3.21.1-蓝色)](https://github.com/Imbad0202/academic-research-skills/releases/tag/v3.21.1)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20696614-蓝色)](https://doi.org/10.5281/zenodo.20696614)
+[![许可协议: CC BY-NC 4.0](https://img.shields.io/badge/许可协议-CC%20BY--NC%204.0-浅灰色)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![赞助](https://img.shields.io/badge/赞助-请我喝杯咖啡-橙色?logo=buy-me-a-coffee)](https://buymeacoffee.com/crucify020v)
+
+[简体中文版](README.zh-CN.md) | [繁體中文版](README.zh-TW.md) | [日本語版](README.ja-JP.md) | [한국어](README.ko-KR.md)
+
+一套完整的Claude Code学术研究技能集，涵盖从研究到发表的全流程。
+
+**30秒安装指南** (Claude Code CLI / VS Code / JetBrains, v3.7.0+):
+
+```text
+/plugin marketplace add Imbad0202/academic-research-skills
+/plugin install academic-research-skills
+```
+
+安装后可通过`/ars-plan`命令使用苏格拉底式对话规划论文结构，或查看[快速安装](#quick-install)了解传统符号链接安装流程。
+
+&gt; **AI是您的副驾驶，而非主驾驶。** 本工具不会代写论文。它负责处理繁琐工作——检索文献、格式化引用、验证数据、检查逻辑一致性——让您能专注于真正需要大脑的工作：定义研究问题、选择方法、解读数据含义，以及撰写"我认为..."之后的观点陈述。
+&gt;
+&gt; 与"人性化"工具不同，本工具不帮助掩盖AI使用痕迹，而是提升写作质量。风格校准功能会从您过往作品中学习写作风格。写作质量检查能捕捉机器生成文本的特征模式。我们的目标是提升质量，而非作弊。
+
+### 为何采用人机协同而非全自动化？
+
+Lu等人(2026,《自然》651:914-919)开发的**AI科学家**——首个通过顶级机器学习会议(ICLR 2025研讨会，评分6.33/10 vs 研讨会平均4.87)盲审的全自动AI研究系统。其"局限性"章节列举了全自动AI研究流程的固有缺陷：实现错误、虚构结果、捷径依赖、将错误重构为洞见、方法论捏造、框架锁定、引用幻觉。
+
+ARS基于以下前提开发：**人类研究者与AI协同工作能更好地规避这些缺陷**。阶段2.5和阶段4.5的完整性检查包含7种阻断模式(参见[`academic-pipeline/references/ai_research_failure_modes.md`](academic-pipeline/references/ai_research_failure_modes.md))；审阅模块提供可选校准模式，可根据用户提供的标准数据集测量自身的假阴性/假阳性率。
+
+[**Zhao等人**](https://arxiv.org/abs/2605.07723)(2026-05)审计了arXiv、bioRxiv、SSRN和PMC上250万篇论文的1.11亿条引用。其保守估计仅2025年就有146,932条虚构引用，并在2024年中观察到拐点；在bioRxiv到PMC的配对中，预印本到发表版本的持续性达85.3%。该论文将"使用真实引用来支持被引文献实际并未提出的主张"列为开放挑战。ARS v3.7.1新增了来源溯源的信任链元数据；v3.7.3增加了定位器基础设施(三层引用锚点)用于未来声明级审计，并在引用时显示风险提示(ARS内部将声明忠实度差距标记为"L3"，此为ARS术语而非论文术语)。v3.7.x版本受Zhao等人大规模研究发现启发；ARS本身的大规模评估仍是未来工作。
+
+v3.8版本解决了L3差距的后半部分。v3.7.3让每个引用携带定位锚点；v3.8新增可选审计流程(`ARS_CLAIM_AUDIT=1`)，会获取被引来源并判断主张是否确实得到支持。新增了五...
+
+## 🔗 知识库双向关联
+- [Github__TauricResearch_TradingAgents_全翻译](/auto-clippings/Github-TauricResearch-TradingAgents-全翻译)
+- [Claude AI Failed 650 Times…Then Beat The Human Record_深度简报](/auto-clippings/Claude-AI-Failed-650-Times…Then-Beat-The-Human-Rec)
+- [I wrote an AI textbook — how long until AI can do it better_简报](/auto-clippings/I-wrote-an-AI-textbook-—-how-long-until-AI-can-do)

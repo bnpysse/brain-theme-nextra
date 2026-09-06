@@ -1,0 +1,134 @@
+---
+title: "Audacity 4.0_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Audacity 4.0
+
+【文章正文】：
+Audacity 4.0
+Audacity 4.0
+
+Audacity 4 rebuilds the application interface on Qt and introduces many new quality-of-life improvements, including a new clip-editing model. Most Audacity 3 workflows remain available, but some controls have moved or changed.
+Audacity 4基于Qt框架重构了应用界面，带来诸多体验优化，包括全新的音频片段编辑模式。虽然Audacity 3的大部分工作流程得以保留，但部分控件位置和功能有所调整。
+
+Watch the video:
+观看视频演示：
+
+Editing clips
+音频片段编辑
+- Clips can be selected directly. Click a clip header to select it, or Shift-click to select multiple clips.
+- 支持直接选择片段：点击片段头部进行单选，Shift+点击可多选
+- Several clips can be edited together. Moving, trimming and time stretching apply to all selected clips.
+- 支持多片段协同编辑：移动、裁剪、时间拉伸等操作可同时作用于所有选中片段
+- Clips can be grouped. Groups remain together when moved, copied, pasted or duplicated.
+- 新增片段编组功能：组内片段在移动/复制/粘贴/克隆时保持整体性
+- Clips can be placed more freely. They can move between mono and stereo tracks. Moving a clip over another replaces the overlapped part instead of blocking the move.
+- 更自由的片段放置：可在单声道/立体声轨道间移动，覆盖其他片段时会替换重叠部分而非阻止操作
+- Splitting has a dedicated tool. Press or hold S , then click the waveform or clip header. Split, split-cut, split-delete, split at silences and split to a new track are also available as commands.
+- 独立分割工具：按S键后点击波形或片段头部，支持常规分割/分割剪切/分割删除/静默分割/分割至新轨道等操作
+- Paste handles more cases automatically. Audacity can create a track when needed, adapt compatible channel layouts and paste audio files from the operating-system clipboard.
+- 智能化粘贴：自动创建轨道、适配声道配置，支持从系统剪贴板直接粘贴音频文件
+- Alignment guides, sample-boundary snapping and per-project snap settings have been added or expanded.
+- 新增/增强：对齐参考线、采样边界吸附、项目级吸附设置
+
+Interface and tools
+界面与工具
+- The interface has been rebuilt on Qt, with native high-DPI rendering.
+- 基于Qt框架重构界面，原生支持高DPI渲染
+- Toolbars and panels can be moved, docked, floated, shown or hidden.
+- 工具栏和面板支持移动/停靠/浮动/显示/隐藏
+- UI layouts can be saved as Workspaces. Audacity includes Modern, Classic and Music workspaces.
+- 界面布局可保存为工作区，预设现代/经典/音乐三种工作区
+- Light, dark and high-contrast themes are available, along with accent colors, track colors and several clip styles.
+- 提供浅色/深色/高对比度主题，支持强调色/轨道色/多种片段样式
+- The new Home screen shows recent projects with preview thumbnails.
+- 全新首页展示最近项目及预览缩略图
+
+The separate Select, Envelope, Draw and Multi-tool modes have been removed. Their functions are now context-sensitive:
+取消独立的选择/包络线/绘制/多工具模式，改为情境敏感操作：
+- Volume envelopes are displayed in the Clip gain mode.
+- 音量包络线显示在片段增益模式中
+- Sample drawing becomes available when the waveform is zoomed to individual samples.
+- 波形放大至采样级别时启用采样绘制
+- Splitting is available by holding S .
+- 长按S键启用分割功能
+- Track and effect parameters use consistent rotary controls with fine adjustment and double-click reset.
+- 轨道与效果参数采用统一旋钮控件，支持微调及双击重置
+- Sync-Lock has been removed. Delete, cut and paste now have explicit variants for either leaving a gap or moving later material to preserve timing.
+- 取消同步锁定功能，删除/剪切/粘贴操作现提供保留间隙或移动后续素材的明确选项
+
+Playback and recording
+播放与录音
+- The playhead remains visible during navigation and can be dragged to a new position.
+- 播放指针在导航时保持可见，支持拖拽定位
+- Playback can seek to another position without stopping.
+- 播放中可直接跳转至其他位置
+- Recording can start anywhere on the timeline and creates a clip at that position.
+- 支持时间轴任意位置录音并即时创建片段
+- Loop boundaries and the interaction between playback, selections and loops have been revised.
+- 优化循环边界设置及播放/选区/循环的交互逻辑
+- Punch and Roll, lead-in recording, latency compensation, software playthrough and per-track input monitoring have been rebuilt for the new interface.
+- 针对新界面重构穿插录音/预录/延迟补偿/软件监听/单轨输入监听功能
+- Audio Setup now includes system-default devices, refreshable device lists and custom channel mapping. Audacity can follow operating-system device changes automatically.
+- 音频设置新增系统默认设备/可刷新设备列表/自定义声道映射，自动跟随系统设备变更
+- Official Windows builds include ASIO playback and recording support.
+- 官方Windows版本支持ASIO播放/录音
+
+Tracks, meters and effects
+轨道、仪表与效果
+- Track headers now contain live playback and recording meters.
+- 轨道头部集成实时播放/录音电平表
+- Preset handling is consistent across built-in, destructive and realtime effects.
+- 内置/破坏性/实时效果器的预设管理保持统一
+- Built-in effects, generators and analyzers have been rebuilt for the Qt interface.
+- 为Qt界面重构内置效果器/生成器/分析器
+- Supported plugin formats are VST3, Nyquist, LV2 on Linux and Audio Units on macOS. Audacity can display generated controls when a plugin's own interface is unavailable.
+- 支持VST3/Nyquist/LV2(Linux)/Audio Units(macOS)插件，在插件无界面时可生成控制面板
+- Spectrogram has been redesigned with clearer guides and rulers, and faster rendering.
+- 频谱图重新设计：更清晰的标尺参考线，渲染速度更快
+
+Projects, import and export
+项目、导入与导出
+- Audacity 4 uses the new .aup4 project format.
+- 采用新版.aup4项目格式
+- .aup3 projects open and convert to.aup4 without changing the original file. Converted projects cannot be saved back to.aup3 .
+- .aup3项目可无损转换为.aup4格式（原文件保留），转换后不可回存
+- Older .aup projects can be imported.
+- 支持导入旧版.aup项目
+- Project files store preview thumbnails and Audacity 4's additional clip and appearance data.
+- 项目文件现存储预览缩略图及新增的片段/外观数据
+
+And last but not least, we had the audacity to change the Audacity logo.
+最后同样重要的是——我们大胆更新了Audacity的Logo
+
+Compatibility notes
+兼容性说明
+The following Audacity 3 features are not available in Audacity 4.0, but we're working on adding them in future releases.
+以下Audacity 3功能暂未包含在4.0版，将在未来版本中逐步添加：
+- Time Tracks
+- 时间轨道
+- Note/MIDI tracks
+- 音符/MIDI轨道
+- Mixer
+- 混音器
+- Macro Manager and the scripting pipe
+- 宏管理器与脚本管道
+- VAMP and LADSPA plugin hosting
+- VAMP/LADSPA插件支持
+- Play-at-speed
+- 变速播放
+
+Sync-Lock and the old tool modes were replaced by the workflows described above.
+同步锁定与旧工具模式已被前文所述工作流替代
+
+Additionally, Audacity 4 ships with some missing exporting and rendering features, analyzers, and effects.
+当前版本还缺少部分导出/渲染功能、分析器和效果器
+
+Update: audacity-sources-4.0.0.tar.xz was updated to include SoundTouch and sbsms 3rd-party libraries.
+更新：audacity-sources-4.0.0.tar.xz已更新包含SoundTouch和sbsms第三方库
+
+## 🔗 知识库双向关联
+- [Refined_Raw_翻译_🎙️ How I AI ChatGPT Codex Voice  browser  Sit](/auto-clippings/Refined-Raw-翻译-🎙️-How-I-AI-ChatGPT-Codex-Voice-bro)
+- [Poolside gets $12B reverse-execuhire to NVIDIA; fou_简报](/auto-clippings/Poolside-gets-12B-reverse-execuhire-to-NVIDIA;-fou)
+- [快捷指令  让特定 app 小点声：在 iPhone 上实现独立音量控制_全翻译](/auto-clippings/快捷指令-让特定-app-小点声：在-iPhone-上实现独立音量控制-全翻译)

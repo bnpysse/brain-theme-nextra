@@ -1,0 +1,79 @@
+---
+title: "Can AI design circuit boards yet_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Can AI design circuit boards yet?  
+AI能设计电路板了吗？
+
+【文章正文】：  
+Can AI design circuit boards yet?  
+AI能设计电路板了吗？  
+
+OpenAI showed GPT-6 Astra working in KiCad. We have been building a way to measure whether the circuits that come out of these models are any good.  
+OpenAI展示了GPT-6 Astra在KiCad中工作的场景。我们一直在构建一种方法来衡量这些模型生成的电路是否合格。  
+
+We got pretty excited yesterday when OpenAI put a demo of GPT-6 Astra working on a circuit board in KiCad on the front page of its launch post. It is cool to see electronics show up in a major model release like this.  
+昨天，当OpenAI在其发布帖子的首页展示了GPT-6 Astra在KiCad中设计电路板的演示时，我们非常兴奋。在这样的重要模型发布中看到电子设计的身影，确实很酷。  
+
+We are obviously still some distance from asking an AI to build an entire phone in one prompt. The demo does raise a question we have been thinking about for a while, though: how do we measure whether the electronics an AI produces are actually any good?  
+显然，我们距离让AI通过一个提示就设计出整部手机还有一段路要走。但这个演示确实引发了一个我们思考已久的问题：如何衡量AI设计的电子电路是否真的合格？  
+
+The models know a surprising amount about electronics  
+这些模型对电子学的了解令人惊讶  
+
+Our experience has been that current models know much more about electronics than their output in conventional design tools tends to show. They have read textbooks, datasheets, application notes and a lot of code.  
+我们的经验是，当前模型对电子学的了解远比它们在传统设计工具中的输出所显示的要多。它们已经阅读了教科书、数据手册、应用笔记和大量代码。  
+
+You can have an agent operate a graphical CAD tool, but it spends a lot of time clicking around and keeping track of what is on screen. A lot of its context consists of coordinates, menus and application state.  
+你可以让一个代理操作图形化的CAD工具，但它会花费大量时间点击和跟踪屏幕上的内容。它的上下文主要由坐标、菜单和应用程序状态组成。  
+
+EEBench uses atopile instead. The circuit lives in declarative code, so the agent can work directly on components, connections and electrical constraints. It can change the design, build it, run a simulation and inspect what failed without leaving the project.  
+EEBench使用了atopile。电路以声明性代码的形式存在，因此代理可以直接处理组件、连接和电气约束。它可以修改设计、构建电路、运行仿真并检查失败的原因，而无需离开项目。  
+
+This has worked much better for us than asking a model to draw lines in a GUI. It also means the benchmark can spend less time testing computer use and more time testing electronics.  
+这种方法比让模型在GUI中画线效果要好得多。这也意味着基准测试可以花更少的时间测试计算机使用，更多的时间测试电子设计。  
+
+The real world is messy  
+现实世界是复杂的  
+
+One of the public tasks is based on a residential energy meter. When its 5 V supply disappears, the circuit has to keep the processor alive for another 20 ms so it can save the accumulated reading. The protected rail must stay above the processor's 3.0 V brownout threshold during that window.  
+其中一个公共任务基于住宅电能表。当5V电源消失时，电路必须让处理器再存活20毫秒，以便保存累积的读数。在此期间，保护轨必须保持在处理器的3.0V欠压阈值以上。  
+
+Most models intuitively jump to the right base conclusion: add a capacitor.  
+大多数模型会直观地得出正确的基本结论：添加一个电容器。  
+
+A real capacitor makes the task more interesting. A ceramic part may provide much less than its advertised capacitance once it has voltage across it. Parts have tolerances. Adding more capacitance costs more, takes up space and makes the rail slower to recharge when the power returns. A design that works with nominal values can fail with the parts that arrive.  
+真实的电容器让任务变得更有趣。陶瓷电容器在有电压时提供的电容可能远低于其标称值。元件存在公差。增加更多电容会提高成本、占用空间，并在电源恢复时让电源轨充电更慢。基于标称值的设计可能在遇到实际元件时失败。  
+
+EEBench cuts the input power in simulation and measures what happens. It checks the voltage throughout the outage, the effective capacitance at the operating point, the recovery after power returns and the limits on package, dielectric, voltage rating and cost.  
+EEBench在仿真中切断输入电源并测量结果。它会检查整个断电期间的电压、工作点的有效电容、电源恢复后的恢复情况，以及封装、介电材料、额定电压和成本的限制。  
+
+The meter is one of the easier tasks. In a harder analog task, the agent may have to synthesize a multiple-feedback low-pass filter around an op-amp, solve the resistor and capacitor ratios for the required poles, and keep its gain, cutoff frequency and Q inside their limits after every component is pushed to a worst-case tolerance corner. The harness rebuilds the SPICE deck for those corners, runs the AC and transient captures, binds measurements to named probes, and records each result against its lower and upper specification limits.  
+电能表是较简单的任务之一。在一个更难的模拟任务中，代理可能需要围绕运算放大器合成一个多反馈低通滤波器，为所需的极点求解电阻和电容比例，并在每个元件被推到最坏情况公差角后保持其增益、截止频率和Q值在限制范围内。测试工具会为这些角重建SPICE电路，运行交流和瞬态捕获，将测量结果绑定到命名的探针，并记录每个结果相对于其上下规格限制的情况。  
+
+But getting the equations right is only part of electronics engineering. EEBench uses real manufacturer parts, with specifications extracted from their datasheets and carried into the SPICE model. The agent has to find a combination that works across those tolerance corners while also choosing parts that exist, can be ordered and are reasonably priced for the product. That trade-off between electrical performance, cost and supply is much closer to designing real hardware than picking ideal values from a textbook.  
+但正确求解方程只是电子工程的一部分。EEBench使用真实的制造商元件，其规格从数据手册中提取并带入SPICE模型。代理必须找到一个在这些公差角下都能工作的组合，同时选择实际存在、可订购且价格合理的元件。这种在电气性能、成本和供应之间的权衡，比从教科书中选择理想值更接近真实硬件设计。  
+
+This is the part we find most interesting, because it is what electrical engineering eventually boils down to, just like every other engineering discipline: trade-offs.  
+这是我们觉得最有趣的部分，因为这是电子工程最终的归宿，就像其他所有工程学科一样：权衡。  
+
+How the grading works  
+评分如何运作  
+
+EEBench checks are fully deterministic. It builds the submitted design, constructs the circuit graph and bill of materials, and runs a set of SPICE simulations and design checks. Each requirement produces a measurement with a limit.  
+EEBench的检查是完全确定性的。它会构建提交的设计，生成电路图和物料清单，并运行一组SPICE仿真和设计检查。每个需求都会生成一个带有限制的测量结果。  
+
+For the energy-meter task, the harness measures the protected rail while the input drops out and returns. Other tasks measure gain, thresholds, ripple, transient response and behavior at component-tolerance corners. The technical score is combined with cost efficiency against a reference bill of materials. Cost only helps once the circuit works.  
+对于电能表任务，测试工具会在输入电源断开和恢复时测量保护轨。其他任务会测量增益、阈值、纹波、瞬态响应以及在元件公差角下的行为。技术分数会与参考物料清单的成本效率相结合。成本只有在电路正常工作后才起作用。  
+
+This is similar to giving a coding agent a compiler and tests, except the tests are measuring voltages and component behavior..  
+这类似于给编码代理一个编译器和测试，只不过测试是测量电压和元件行为。  
+
+EEBench V1 covers analog and digital design through simulation. It does not yet tell us whether a model can lay out, manufacture and bring up a complete product. We want to add those parts later. The current benchmark concentrates on the requirements, design and verification loop because that is where we can already grade useful engineering work objectively. The full methodology and sampl  
+EEBench V1通过仿真覆盖模拟和数字设计。它还不能告诉我们一个模型是否能布局、制造并完成一个完整的产品。我们希望以后添加这些部分。当前的基准测试专注于需求、设计和验证循环，因为这是我们已经可以客观评价有用工程工作的地方。完整的方法论和示例
+
+## 🔗 知识库双向关联
+- [Weekly Dose of Optimism 205_简报](/auto-clippings/Weekly-Dose-of-Optimism-205-简报)
+- [The twilight of the chatbots_全翻译](/auto-clippings/The-twilight-of-the-chatbots-全翻译)
+- [OpenAI Jalapeño Better Than Nvidia Blackwell_全翻译](/auto-clippings/OpenAI-Jalapeño-Better-Than-Nvidia-Blackwell-全翻译)

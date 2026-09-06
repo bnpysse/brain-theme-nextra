@@ -1,0 +1,94 @@
+---
+title: "Show HN Moadim.io – A scheduler for agents_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: Moadim.io – A scheduler for agents
+【文章标题】：展示HN：Moadim.io —— 智能体调度器
+
+【文章正文】：
+Open source · Loop engine
+开源 · 循环引擎
+
+Put your
+agents on a loop.
+让您的智能体
+进入循环工作模式
+
+Moadim is a loop engine for AI agents. Define a loop — a prompt, a schedule, an agent — and it runs Claude, Codex, Hermes, or Pi against your repo on every tick, or queues a NanoClaw task, in an isolated workbench with a watchdog on every run. Loop engineering, not prompting by hand.
+Moadim是AI智能体的循环引擎。只需定义循环（包含提示词、调度计划和智能体），它就会在每次触发时针对您的代码库运行Claude、Codex、Hermes或Pi，或排队NanoClaw任务——所有操作都在隔离工作台中完成，每次运行都有看门狗监控。这是循环工程，而非手工触发。
+
+cargo install --locked moadimmoadim
+通过cargo安装：cargo install --locked moadimmoadim
+
+Starts the server in the background at http://localhost:5784/. Requires a Unix-like OS with tmux — Moadim's portable in-process scheduler dispatches loops, then launches each agent inside a tmux session. No host cron daemon is required.
+后台服务启动于http://localhost:5784/。需要类Unix系统和tmux——Moadim的便携式进程内调度器会分配循环任务，然后在tmux会话中启动每个智能体。无需主机cron守护进程。
+
+Prefer a prebuilt install? Use cargo binstall moadim or npm install -g moadim.
+想要预构建安装？可使用cargo binstall moadim或npm install -g moadim。
+
+The loop
+循环体系
+
+Quickstart
+快速开始
+
+curl http://localhost:5784/api/v1/routines
+通过curl调用：curl http://localhost:5784/api/v1/routines
+
+Every loop is also a documented HTTP endpoint, with an OpenAPI schema and Swagger UI baked into the daemon.
+每个循环都是文档化的HTTP端点，守护进程内置OpenAPI规范和Swagger UI。
+
+&#123; "name": "list_routines", "arguments": &#123;&#125; &#125;
+示例调用：&#123; "name": "list_routines", "arguments": &#123;&#125; &#125;
+
+The same call as an MCP tool, for any MCP-compatible agent connected to /mcp.
+对于连接到/mcp的任何MCP兼容智能体，可通过MCP工具进行相同调用。
+
+Features
+核心特性
+
+- A loop runs an agentA loop pairs a prompt, a schedule, and an agent — Claude, Codex, Hermes, NanoClaw, or Pi. Each tick launches it in a fresh, isolated workbench, kills hung runs, and reaps the session when it's done.
+- 智能体循环运行：每个循环包含提示词、调度计划和智能体（Claude/Codex/Hermes/NanoClaw/Pi）。每次触发都在全新隔离工作台启动，终止卡死任务，并在完成后回收会话。
+
+- Runs locally, survives rebootLoops fire from Moadim's portable in-process scheduler — no hidden queue, no cloud. Run moadim install to register a launchd / systemd service so the daemon keeps running across logins and reboots.
+- 本地运行&重启持久化：循环由便携式进程内调度器触发——无隐藏队列、无需云端。运行moadim install可注册launchd/systemd服务，守护进程将跨越登录和重启持续运行。
+
+- UI · REST · MCPEvery loop is an MCP tool and a documented HTTP endpoint — Swagger UI, an iCal feed, and a web UI baked into the daemon.
+- 多接口支持：每个循环既是MCP工具也是文档化HTTP端点——守护进程内置Swagger UI、iCal订阅和网页界面。
+
+On loop engineering
+关于循环工程
+
+FAQ
+常见问题
+
+- Is Moadim free? What's the license?
+- Moadim是否免费？采用什么许可证？
+- Yes — Moadim is open source under the MIT license, free to use, modify, and self-host. There's no paid tier and no account to create.
+- 免费——Moadim采用MIT开源协议，可自由使用、修改和自托管。无付费层级，无需创建账户。
+
+- Is it self-hosted or a cloud service?
+- 这是自托管还是云服务？
+- It runs entirely on your own machine. Loops fire from Moadim's portable in-process scheduler — no hidden queue, no cloud, no sign-up. Run moadim install to register a launchd (macOS) or systemd (Linux) service so the daemon survives logins and reboots.
+- 完全在本地运行。循环由便携式进程内调度器触发——无隐藏队列、无需云端、无需注册。运行moadim install注册launchd(macOS)/systemd(Linux)服务可使守护进程跨越登录和重启持续运行。
+
+- Which agents does it support?
+- 支持哪些智能体？
+- Built-in agents include Claude, Codex, Hermes, NanoClaw, and Pi. Each loop names the agent it runs; NanoClaw queues a one-shot task in its configured agent group, while the others run in Moadim's isolated workbench. The built-in Claude agent additionally needs python3 on your PATH to pre-seed unattended trust and MCP-approval state.
+- 内置智能体包括Claude/Codex/Hermes/NanoClaw/Pi。每个循环会指定运行的智能体；NanoClaw在其配置的智能体组中排队一次性任务，其他智能体则在Moadim隔离工作台运行。内置Claude智能体还需PATH中的python3来预置无人值守信任和MCP批准状态。
+
+- Which operating systems are supported?
+- 支持哪些操作系统？
+- macOS and Linux. Moadim schedules loops inside its daemon and runs agents inside tmux; running moadim install registers a launchd (macOS) or systemd (Linux) service that keeps the daemon alive across reboots. tmux needs to be on your PATH, but no host cron daemon is required.
+- macOS和Linux。Moadim在守护进程内调度循环，在tmux中运行智能体；运行moadim install会注册launchd(macOS)/systemd(Linux)服务使守护进程跨越重启存活。需要PATH中有tmux，但无需主机cron守护进程。
+
+- How is each run isolated?
+- 如何实现运行隔离？
+- Every tick launches the agent in a fresh, isolated workbench. A watchdog kills hung runs, and the session is reaped once it finishes — so one run can't leak state into the next.
+- 每次触发都在全新隔离工作台启动智能体。看门狗会终止卡死任务，会话完成后立即回收——确保单次运行状态不会泄漏到后续任务。
+
+## 🔗 知识库双向关联
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/派评-近期值得关注的-App-全翻译)
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/派评-近期值得关注的-App-全翻译)
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/派评-近期值得关注的-App-全翻译)

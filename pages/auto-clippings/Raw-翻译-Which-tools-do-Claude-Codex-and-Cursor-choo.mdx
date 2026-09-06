@@ -1,0 +1,82 @@
+---
+title: "Which tools do Claude, Codex and Cursor choose We measured 1_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out  
+Claude、Codex和Cursor会选择哪些工具？我们通过17,000次测试得出结论  
+
+【文章正文】：  
+How did we run all these experiments concretely?  
+我们具体是如何进行这些实验的？  
+
+Our panel of repositories  
+我们的代码库样本组  
+We started by running an analysis over thousands of public GitHub repositories from which we extracted statistics about programming languages & frameworks, third-party services, deployment platform, team sizes, and codebase age. Since Tech startups are more likely to have open-source repositories than large enterprises, and stacks are likely very different we then unbiased our statistics based on publicly available data and reached our ideal panel distribution.  
+我们首先分析了数千个公开的GitHub代码库，从中提取了关于编程语言和框架、第三方服务、部署平台、团队规模和代码库年龄的统计数据。由于科技初创公司比大型企业更有可能拥有开源代码库，且技术栈可能存在很大差异，因此我们根据公开数据对统计结果进行了去偏处理，最终得到了理想的样本分布。  
+
+We then staffed various coding agents to create real-world repositories to match these exact requirements. Finally, we generated variants in which we removed parts of the codebases and with them, entire third-party service implementations so we could run proper unbiased experiments.  
+随后，我们配置了多种编码代理来创建符合这些要求的真实代码库。最后，我们生成了变体，移除了部分代码库及其中完整的第三方服务实现，以便进行无偏见的实验。  
+
+We landed on 75 repositories, in 10 languages, all using fake company names, fake git histories, fake API keys and real lockfiles checked against package manager registries like npm.  
+我们最终确定了75个代码库，涵盖10种语言，全部使用虚构的公司名称、git历史记录和API密钥，但锁文件（lockfiles）是真实的，并与npm等包管理器注册表进行了核对。  
+
+Real-world tasks  
+真实场景任务  
+Each experiment is a real task to be performed inside a repository, asked by one of the following 4 profiles:  
+每个实验都是在代码库中执行的真实任务，由以下4种角色之一提出：  
+- Vibe-coder: only describes symptoms and ideal state, rarely the tool category name  
+  - 氛围型程序员：仅描述问题和理想状态，很少提及工具类别名称  
+- Junior engineer: usually mentions the desired state and the category name  
+  - 初级工程师：通常会提及期望状态和工具类别名称  
+- Senior engineer: is more precise about requirements and things to avoid  
+  - 高级工程师：更精确地描述需求和需要避免的事项  
+- Engineer at a large enterprise: details specific constraints, compliance, procurement, etc.  
+  - 大型企业工程师：详细说明具体限制、合规性、采购等要求  
+
+Prompts are generally simple and direct and slightly tailored to each experiment (taking into account on the repository and the persona) but in 20-25% of the cases we tested adding specific mentions to the prompts like costs or usage volume to test their impact on the final output.  
+提示通常简单直接，并针对每个实验稍作定制（考虑代码库和角色），但在20-25%的情况下，我们测试了在提示中添加成本或使用量等具体内容，以测试它们对最终输出的影响。  
+
+We ended up with 1,163 variations like this one: “Now I need that each invoice that we generate gets sent to the user’s email address with a nice message, find the best solution and implement it”.  
+我们最终得到了1,163个类似的变体，例如：“现在我需要将生成的每张发票附带一条友好消息发送到用户的电子邮件地址，找到最佳解决方案并实现它”。  
+
+Runner  
+运行环境  
+Each experiment is run in a dedicated ephemeral sandbox. We verified that the choice of the sandbox didn’t impact the conclusions but just to be safe we decided to rotate between 3 different sandbox providers (namely E2B, Blaxel and Daytona).  
+每个实验都在专用的临时沙盒中运行。我们验证了沙盒的选择不会影响结论，但为了保险起见，我们决定在3个不同的沙盒提供商（即E2B、Blaxel和Daytona）之间轮换。  
+
+A “simulated human” in the loop  
+循环中的“模拟人类”  
+Since real-world conversations are rarely just one prompt and an agent working continuously on its goal with no interruption, we decided to use a “simulated human” in the loop. We achieved this using an orchestrator, played by Gemini 3.7 Flash. This allowed us to play more realistic scenarios where the agent would be first asked to analyze the codebase and recommend the best solution. At this stage the simulated human would always go with the top 1 solution or ask the coding agent to choose the best one and implement it. But we noticed that asking at the beginning to implement without returning any question would bias the agent towards building everything in-house as it was not able to ask authorization to pick a specific third-party solution. Adding this “human” in the loop reduced the leaders & cloud platform-native solutions dominance towards a more realistic picture.  
+由于现实中的对话很少只是一个提示和一个代理不间断地工作，我们决定在循环中使用“模拟人类”。我们通过由Gemini 3.7 Flash扮演的协调器实现了这一点。这使得我们可以模拟更真实的场景，代理首先被要求分析代码库并推荐最佳解决方案。在这个阶段，模拟人类总是会选择排名第一的解决方案，或者要求编码代理选择最佳方案并实现它。但我们注意到，一开始就要求实现而不返回任何问题会使代理偏向于内部构建所有内容，因为它无法请求授权选择特定的第三方解决方案。在循环中添加这个“人类”减少了领先者和云平台原生解决方案的主导地位，使结果更接近现实。  
+
+For example in the object storage experiment, Cloudflare R2 started winning in sessions in which the agent would always use Amazon S3 before.  
+例如，在对象存储实验中，Cloudflare R2开始在那些代理以前总是使用Amazon S3的会话中胜出。  
+
+Our judge  
+我们的裁判  
+Another instance of Gemini 3.7 Flash was used to analyze the sessions. Its role is twofold:  
+另一个Gemini 3.7 Flash实例被用来分析会话。它的角色有两个：  
+- Assess if a session is valid regarding a list of criterias, e.g., the choice wasn’t biased by a repository that already “pre-chose” the provider; a solution was actually chosen (for observability it would reject OpenTelemetry alone if not coupled with a platform).  
+  - 评估会话是否满足一系列标准，例如选择没有被已经“预选”提供商的代码库所偏颇；实际选择了一个解决方案（对于可观察性，如果OpenTelemetry没有与平台结合，它会拒绝单独的OpenTelemetry）。  
+- Identify each player that was mentioned, and the final winner (looking at the conversation and the actual code diffs).  
+  - 识别每个被提及的参与者，并确定最终的赢家（通过查看对话和实际的代码差异）。  
+
+So what did we learn?  
+那么，我们学到了什么？  
+Out of these 16,893 runs, we started by keeping 5,292 sessions on 51 codebases and 18 sectors that we considered valid and ready to be published. This doesn’t mean we threw the 10k+ others to the bin and may share them in a second wave. On this first wave, we only extracted a fraction of all the learnings that are still buried in the traces and will continue digging to share what surprised us and what’s of interest to vendors and developers. But from today, all these traces are public so you can do the same. Below are 5 first observations we found interesting.  
+在这16,893次运行中，我们首先保留了5,292个会话，涉及51个代码库和18个领域，我们认为这些数据有效并可以发布。这并不意味着我们将其他10,000多次运行丢弃，可能会在第二波中分享它们。在第一波中，我们只提取了埋藏在痕迹中的一小部分发现，并将继续挖掘以分享那些让我们惊讶的内容以及对供应商和开发者有价值的信息。但从今天起，所有这些痕迹都是公开的，所以你也可以做同样的事情。以下是我们发现的5个有趣的初步观察结果。  
+
+Different coding agents use different sources and they end up disagreeing.  
+不同的编码代理使用不同的来源，最终会得出不同的结论。  
+- Cursor bases its decision on the web in 2/3 of the sessions.  
+  - Cursor在2/3的会话中基于网络做出决策。  
+- Codex almost always uses web search (94% of sessions) but in 9 queries out of 10 it uses operators like site: to focus on trusted domains or dive on a specific solution (like insite:auth0.com password reset MFA social connections for example)  
+  - Codex几乎总是使用网络搜索（94%的会话），但在10次查询中有9次使用site:等操作符来专注于可信域或深入研究特定解决方案（例如site:auth0.com密码重置MFA社交连接）。  
+- Claude Code relies primarily on its priors and searches the web only in ~30% of the cases. But when it does, it browses 3x more pages than Codex. In more recent sectors such as sandboxes  
+  - Claude Code主要依赖其先验知识，仅在约30%的情况下搜索网络。但当它搜索时，浏览的页面数量是Codex的3倍。在沙盒等较新的领域中
+
+## 🔗 知识库双向关联
+- [Quick impressions A week of using Codex more than Claude_简报](/auto-clippings/Quick-impressions-A-week-of-using-Codex-more-than)
+- [Using Local Coding Agents_全翻译](/auto-clippings/Using-Local-Coding-Agents-全翻译)
+- [I spent $20,000 on Devin in a month. Here’s what I learned_全翻译](/auto-clippings/I-spent-20000-on-Devin-in-a-month-Heres-what-I-lea)

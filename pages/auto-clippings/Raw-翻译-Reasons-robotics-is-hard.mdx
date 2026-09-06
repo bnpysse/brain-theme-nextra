@@ -1,0 +1,57 @@
+---
+title: "Reasons robotics is hard_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：机器人技术为何如此艰难
+
+【文章正文】：
+AI progress is racing along, but virtually all of the visible progress is in the realm of knowledge work, i.e. activities that can take place inside a computer.
+人工智能发展日新月异，但几乎所有可见的进步都集中在知识工作领域，即那些可以在计算机内部完成的活动。
+
+In the San Francisco AI scene, there is a widespread belief that robots will soon enter the picture. In parallel with the race to develop broadly capable AI, there is an equally aggressive race to develop broadly capable robots – humanoid machines imbued with physical intelligence. Artificial workers that can cook and clean, fetch and carry… and do everything else, including building more of themselves, leading (in many forecasts) to economic growth best characterized as an "explosion".
+在旧金山AI圈，普遍认为机器人即将登场。与开发通用人工智能的竞赛并行，一场同样激烈的通用机器人开发竞赛正在展开——这些被赋予物理智能的人形机器。能烹饪清洁、搬运物品...乃至完成其他所有工作的人工劳动者，包括自我复制，在许多预测中这将引发堪称"爆炸式"的经济增长。
+
+In other words, the thinking goes, AI in the data center will soon subsume all intellectual labor, and AI in humanoid bodies will soon subsume all physical labor. However, there is an important difference: while we can see progress in the intellectual realm, the physical side of AI is mostly confined to test facilities and demo videos. There is no robot equivalent to ChatGPT – nothing that you or I, or even most people in the AI community, can get our hands on.
+换言之，人们认为数据中心里的AI将很快接管所有脑力劳动，而人形AI将接管所有体力劳动。但关键区别在于：虽然我们在智力领域看到了进展，但AI的物理表现仍主要局限于测试场地和演示视频。目前还没有相当于ChatGPT的机器人——没有你我甚至AI界多数人能实际接触的产品。
+
+So we're stuck with demo videos. Unfortunately, they are a poor tool for assessing progress. We might be seeing the one successful task achieved in 100 attempts. The scenario might have been carefully arranged to avoid challenges the robot isn't ready for. The video might be edited to make it look like the robot is acting with more speed and reliability than is actually the case. Here's one very impressive demo... with a suspiciously large number of camera cuts.
+因此我们只能依赖演示视频。遗憾的是，这是评估进展的糟糕工具。我们看到的可能是百次尝试中唯一成功的案例。场景可能经过精心设计以规避机器人尚未准备好的挑战。视频可能经过剪辑使机器人看起来比实际更快速可靠。比如这个令人印象深刻的演示...却有着可疑的大量镜头切换。
+
+(I have not yet had much chance to watch videos from the recent World Humanoid Robot Games. These are valuable for providing a public platform less amenable to cherry-picking. The handful of videos I've watched include some impressive feats, but don't address many of the challenges I list below... and there are also a lot of spectacular failures.)
+（我尚未有机会观看近期世界人形机器人大会的视频。这类公开平台较难进行选择性展示，因此很有价值。我看过的少量视频展示了一些惊人技艺，但未涉及下文列出的诸多挑战...同时也存在大量明显失败案例。）
+
+Demos draw attention to the things a robot can already do. The question then becomes: what's missing? In today's post, I'll catalog the technical challenges that will have to be overcome along the road to broadly capable artificial workers. The next time you watch a robot doing something impressive, ask yourself: which of these capabilities has the robot demonstrated, and which challenges might the demo scenario be avoiding?
+演示聚焦于机器人已能完成的任务。问题于是变成：还缺什么？本文将梳理实现全能人工劳动者必须攻克的技术挑战。下次看到机器人炫技时，不妨自问：演示展示了哪些能力？又规避了哪些难题？
+
+(Note that some challenges get easier if we consider wheeled robots rather than strictly humanoid robots. A wheeled robot can carry more weight, meaning that strength, endurance, and power for electronics are less of a challenge. And wheeled robots are less likely to fall over. But they can't climb stairs1, step over clutter, or angle themselves to reach into a cupboard.)
+（注：若考虑轮式而非严格人形机器人，某些挑战会减轻。轮式机器人承重更强，意味着力量、耐力和电力供应挑战较小，且不易跌倒。但它们无法爬楼梯1、跨过杂物或调整角度够橱柜。）
+
+Hands, dexterity and coordination
+双手、灵巧性与协调性
+
+The human hand is an engineering miracle – opposable thumbs, and all that. It has roughly two dozen "degrees of freedom" (distinct joints and/or directions in which each joint can bend), and approximately 17,000 tactile sensors. Our brains can control our hands with exquisite grace, using touch, sight, and even auditory cues to carry out all manner of delicate tasks, precisely and reliably.
+人类双手是工程奇迹——对生拇指等构造。拥有约24个"自由度"（独立关节及其弯曲方向），近17,000个触觉传感器。大脑能以极致优雅控制双手，结合触觉、视觉甚至听觉线索，精准可靠地完成各类精细操作。
+
+Current robot "manipulators" are a pale imitation. Some existing robot hands can match the human standard on one or another physical attribute. For example, some have as many as 27 degrees of freedom. However, none come close to matching the overall package of flexibility, sensitivity, strength, reliability, and other physical attributes. It is the combination of factors that is especially difficult to match, even if the demos are getting more impressive. For instance, some companies have managed to cram thousands of tactile sensors into a robotic fingertip, but none have managed to make these tiny sensors able to stand up to heavy use2.
+现有机械臂只是拙劣模仿。某些机器人手能在单项指标上媲美人类，例如某款具备27个自由度。但无一能整体匹配人类在灵活性、灵敏度、力量及可靠性等维度的综合表现。正是这种复合特质极难复现，即便演示日益惊艳。比如已有公司将数千触觉传感器集成至机械指尖，但都未能使其耐受高强度使用2。
+
+The control problem may be as challenging as the problem of physical construction. A competent robot must be able to find the right set of joint positions to grasp a complicated object; plan out the sequence of motions to fold a shirt, flip an omelette, or tighten a bolt in a constrained space; and handle squishy or floppy materials (which can require reacting instantly to a sudden shift).
+控制问题与物理构造同样棘手。合格机器人需能：找到正确关节组合抓握复杂物体；规划叠衬衫、翻煎蛋或狭窄空间拧螺栓的动作序列；处理柔软材料（需对突发形变即时响应）。
+
+Visual understanding
+视觉理解
+
+Computer vision has made incredible strides over the last decade or two (and is responsible for kicking off the deep learning boom that led to LLMs). But making sense of complicated visual scenes – picking out an object from a crowded environment, understanding where it should be grasped, determining where it's safe to put your feet and how to avoid knocking something over – is not a solved problem.
+计算机视觉过去一二十年突飞猛进（正是它引发深度学习浪潮并催生大语言模型）。但理解复杂视觉场景——从杂乱环境中识别物体、判断抓取位置、确定落脚点及避碰策略——仍是未解难题。
+
+Planning and reacting
+规划与反应
+
+A general-purpose robot must be able to break down a task into individual steps, and relate those steps to its environment. How do you maneuver your arm to get a screwdriver into a piece of machinery? What's the quickest way to clear a path to the spice bottle at the back of the shelf? In what order should yo
+通用机器人必须能将任务分解为步骤，并使步骤与环境关联。如何摆动手臂将螺丝刀对准机器部件？最快清理出够到架子深处调料瓶的路径是什么？应该以何种顺序...（原文截断）
+
+## 🔗 知识库双向关联
+- [The twilight of the chatbots_全翻译](/auto-clippings/The-twilight-of-the-chatbots-全翻译)
+- [Weekly Dose of Optimism 207_全翻译](/auto-clippings/Weekly-Dose-of-Optimism-207-全翻译)
+- [The twilight of the chatbots_全翻译](/auto-clippings/The-twilight-of-the-chatbots-全翻译)

@@ -1,0 +1,87 @@
+---
+title: "Maybe We Shouldn t Be Reviewing All This Code_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Maybe We Shouldn't Be Reviewing All This Code  
+或许我们不该审查所有代码  
+
+【文章正文】：  
+Maybe We Shouldn't Be Reviewing All This Code  
+或许我们不该审查所有代码  
+
+TL;DR  
+简而言之  
+Or, perhaps the problem isn't that AI has broken code review, maybe it's that we've been using code review to solve the wrong problems  
+又或者，问题不在于AI破坏了代码审查，而在于我们一直用代码审查来解决错误的问题  
+
+I was on a panel recently with Brian Houck from DX at Code Remix, hosted by Moderne. It was one of the more interesting panels I've done, largely because we disagreed. As my colleague Martin Fowler says, panels are much more interesting when people disagree and both sides have a good argument. Brian and I definitely did.  
+最近我参加了Moderne主办的Code Remix研讨会，与DX的Brian Houck同台讨论。这是我最参与过最有趣的讨论之一，主要因为我们存在分歧。正如我同事Martin Fowler所说，当双方持不同观点且都能有力论证时，讨论才最精彩。Brian和我确实做到了这点。  
+
+Brian has since written a thoughtful piece called What are code reviews even for? He is clearly passionate about his position, and I am passionate enough about mine that I'm writing this response. To be clear, I think we mostly want the same things. I just don't think code review is the best way to get them. Brian is lovely, by the way, and encouraged me to write this. But I'd be lying if I said I didn't want you to think I'm right by the end :)  
+Brian后来写了一篇深思熟虑的文章《代码审查究竟为了什么？》。他显然对自己的立场充满热情，而我也足够坚持己见，因此写下这篇回应。需要说明的是，我认为我们的目标大体一致。只是我不认为代码审查是实现这些目标的最佳方式。顺便说一句，Brian很可爱，还鼓励我写这篇文章。但如果我说不希望你们读完觉得我是对的，那就是在撒谎 :)  
+
+So what were we disagreeing about?  
+那么我们的分歧点在哪里？  
+
+AI is producing more code than humans can realistically review. Brian cites some pretty striking numbers: at Meta, significant lines of code per human-landed diff reportedly increased 106% in a year, while DX's own data shows median pull request size increasing 64%.  
+AI生成的代码量已超出人类实际可审查的范围。Brian引用了一些惊人数据：Meta公司每个有效代码差异对应的代码行数一年内增长106%，而DX自身数据显示合并请求的中位数体积增加了64%。  
+
+His concern, which I share, is that simply automating code review away risks losing all the other things we use it for. Code review isn't just about finding bugs. It's how teams share knowledge, teach junior engineers, build collective ownership and spread architectural understanding.  
+我们共同的担忧是，单纯用自动化取代代码审查可能会丧失其多重价值。代码审查不仅是发现缺陷，更是团队分享知识、指导初级工程师、建立集体所有权和传播架构理解的重要方式。  
+
+My question is: why are we waiting until code review to do all of those things?  
+我的疑问是：为什么我们要等到代码审查时才做这些事情？  
+
+I've never particularly liked pull requests as the centre of the software development process. Not because engineers shouldn't look at each other's code, but because I've always struggled with the idea that we should build something, finish it, package it up, throw it over to somebody else and then have the important conversation about whether we built the right thing in the right way.  
+我向来不认同将合并请求作为软件开发流程的核心。不是因为工程师不该互相审查代码，而是因为这种"先构建完成再打包扔给别人，最后才讨论是否用正确方式构建了正确东西"的理念让我深感不适。  
+
+And don't even get me started on merge conflicts. I've lost too many hours of my life.  
+更别提合并冲突了——我已经为此浪费了太多生命。  
+
+Shift the judgment left  
+将判断左移  
+
+One of the principles I learned very early at Thoughtworks was to shorten feedback loops. If feedback is valuable, don't remove it. Move it closer to the decision it is informing.  
+我在Thoughtworks早期学到的原则之一就是缩短反馈循环。如果反馈有价值，不要取消它，而是让它更贴近其要影响的决策。  
+
+Take the things we say code review gives us.  
+以我们常说的代码审查价值为例：  
+
+If we want to explore alternative solutions, I'd rather do that before implementing one of them.  
+若要探索替代方案，我宁愿在实施前就进行讨论。  
+
+If we want knowledge transfer, pair. Sitting next to someone, physically or virtually, while they reason through a problem teaches you far more than reading their completed solution afterwards.  
+要实现知识传递，就结对编程。无论是物理还是虚拟相邻，观察他人解决问题的思考过程远比事后阅读成品代码更有教育意义。  
+
+If we want junior engineers to learn how experienced engineers think, let them work with experienced engineers while they're thinking. Pairing comes to mind again here, but teams could also do design sessions collectively with a whiteboard before they write (or instruct the agent to write) anything.  
+要让初级工程师学习资深者的思维方式，就该让他们在资深者思考时协同工作。这里再次体现结对的价值，但团队也可以在编写（或指示AI编写）代码前，先通过白板进行集体设计会议。  
+
+If we want collective ownership, organise teams so people actually build and operate software collectively rather than relying on a pull request to tell everyone what somebody else has already built. For this again use pairing, mob programming, or team design sessions around whiteboard.  
+要建立集体所有权，就该组织团队真正协同构建和运维软件，而非依赖合并请求告知他人已完成的改动。这同样可通过结对编程、群体编程或团队白板设计会议实现。  
+
+If we want architectural alignment, design together (I won't repeat myself about pairing and team design sessions, oh wait…) and then encode the important constraints as fitness functions.  
+要实现架构一致性，就共同设计（好吧我又提到了结对和团队设计会议...），然后将重要约束编码为适应度函数。  
+
+And if we're reviewing code for formatting, linting, known security problems or things that can be deterministically tested, automate them. We really shouldn't still be arguing about whitespace in 2026.  
+至于代码格式、静态检查、已知安全问题等可确定性验证的内容，直接自动化处理。到2026年我们实在不该还在争论空格问题。  
+
+Pair programming, trunk-based development, automated testing, static analysis, fitness functions and security scanning all move feedback earlier. Increasingly, agents can participate in those loops too, challenging designs, testing assumptions and continuously verifying what is being built, but the real thinking is coming from experienced humans and if we want that experience to benefit the whole team then we have to act like one much earlier than code review.  
+结对编程、基于主干的开发、自动化测试、静态分析、适应度函数和安全扫描都能提前反馈。AI代理也能越来越多地参与这些循环——质疑设计、测试假设并持续验证构建内容——但真正的思考仍来自经验丰富的人类。若要让这些经验惠及整个团队，我们必须比代码审查阶段更早就开始协同工作。  
+
+Review by exception  
+例外审查  
+
+None of this means nobody ever reviews code. There are absolutely changes where I want another experienced human looking. An example would be a fundamental architectural change. Assuming we did a design session as a wider team, we might want to review the code as a team or agree it was implemented right, or discuss if we want to change anything. Other examples could be something crossing a sensitive security boundary, a change with a huge blast radius, an unfamiliar part of a critical system or simply something where the team says, "I'm not confident about this."  
+这并非完全否定代码审查。某些变更确实需要其他经验丰富者过目，比如基础架构变更。假设我们已进行过团队设计会议，可能仍需集体审查代码实现，或讨论是否需要调整。其他例子包括涉及敏感安全边界、影响范围巨大的修改、关键系统的陌生部分，或是团队直言"我对这个没把握"的情况。  
+
+Those are exactly the places where human judgment is valuable, but that's very different from requiring a human to inspect every change because that's the ceremony we've historically used to create confidence.  
+这些正是人类判断力体现价值之处，但这与要求人工检查每个变更截然不同——后者只是我们历史上用来建立信心的仪式。  
+
+And we know now it's not viable to continue dow  
+我们现在已经明白，继续沿...（原文截断）
+
+## 🔗 知识库双向关联
+- [当亲手写代码开始被叫作“古法编程”_全翻译](/auto-clippings/当亲手写代码开始被叫作古法编程-全翻译)
+- [More than just code review_简报](/auto-clippings/More-than-just-code-review-简报)
+- [当亲手写代码开始被叫作“古法编程”_简报](/auto-clippings/当亲手写代码开始被叫作古法编程-简报)
