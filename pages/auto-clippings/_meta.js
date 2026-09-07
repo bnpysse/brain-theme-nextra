@@ -2340,6 +2340,7 @@ export default {
   "Auto-简报-Show-HN-I-made-a-retirement-simulator-125": "Show HN I made a retirement simulator 12...",
   "Auto-简报-Show-HN-HN-Match-Maker-–-Matching-Who-Want": "Show HN HN Match Maker – Matching Who Wa...",
   "Auto-简报-Show-HN-GET-Together-–-A-social-network-wh": "Show HN GET Together – A social network ...",
+  "Auto-简报-Show-HN-Engrim-–-A-universal-local-first-S": "Show HN Engrim – A universal, local-firs...",
   "Auto-简报-Show-HN-Conduct-open-source-guardrails-for": "Show HN Conduct, open-source guardrails ...",
   "Auto-简报-Show-HN-Banking-Access-Index-–-19-US-banki": "Show HN Banking Access Index – 19 US ban...",
   "Auto-简报-Show-HN-AgentSight-–-eBPF-observability-fo": "Show HN AgentSight – eBPF observability ...",
