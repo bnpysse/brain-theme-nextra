@@ -1,0 +1,176 @@
+---
+title: "Queryable Executables_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Queryable Executables
+【文章标题】：可查询的可执行文件
+
+【文章正文】：
+【文章正文】：
+
+I was pleasantly surprised and happy to see that my article ‘Your executable is a SQLite database’ resonated with people. It is a format I have been thinking about for a while, and the idea seems to have struck a chord with others.
+看到我的文章《你的可执行文件就是一个SQLite数据库》引起大家的共鸣，我感到既惊喜又高兴。这个格式我已经构思了一段时间，看来这个想法也触动了其他人的心弦。
+
+A quick recap: SELF, a format where the program is a SQLite database. We can use binfmt_misc to trigger a custom
+interpreter that maps the rows in the segments table and jumps to the entry point,
+and a whole class of binary tooling collapses into SQL.
+简单回顾一下：SELF是一种将程序作为SQLite数据库的格式。我们可以使用binfmt_misc来触发一个自定义解释器，该解释器映射segments表中的行并跳转到入口点，这样一来，整整一类二进制工具就都归结为SQL了。
+
+What keeps surprising me is how having the file format be a SQLite database keeps collapsing everything into SQL. One idea that was immediately evident to myself and others through comments: If the executable is a database, and a database is something you can write to, can the running program use it to also store its state? 🤔
+让我不断感到惊讶的是，将文件格式设为SQLite数据库，似乎能把一切都归结为SQL。通过评论，我和其他人立刻想到了一个显而易见的想法：如果可执行文件是一个数据库，而数据库是可以写入的，那么运行中的程序能否用它来存储自己的状态呢？🤔
+
+Yes! 🤯
+答案是肯定的！🤯
+
+We can collapse not only a complete distribution but all the state for every application into a single file, alleviating the need for /var/ or /tmp/ or /home/ or any other filesystem. The program can store its own state in the same file it is running from, and it can do so transactionally.
+我们不仅可以把完整的发行版，还可以把所有应用的所有状态都压缩到一个单一文件中，从而免除对/var/、/tmp/、/home/或任何其他文件系统的需求。程序可以将自己的状态存储在它正在运行的同一个文件中，并且可以以事务方式进行处理。
+
+self-httpd is a proof-of-concept webserver that does exactly that. It is a single file program executed from a database. The file contains the program, the website, the routes and all the visitor logs. All state is updated in the same SQLite file as the program itself.
+self-httpd就是一个概念验证的Web服务器，它正是这样做的。它是一个从数据库中执行的单文件程序。该文件包含了程序、网站、路由以及所有访客日志。所有状态都在与程序本身相同的SQLite文件中进行更新。
+
+```
+# Our server is a single file, and it is a SQLite database
+$ file server
+server: SQLite 3.x database, application id 1397050438, ...
+$ ./server --journal wal 8080
+self-httpd: serving 3 routes out of /srv/self/server
+self-httpd: listening on http://0.0.0.0:8080 with 4 workers
+$ curl -s localhost:8080 | head -1
+<!doctype html>
+# nobody has pressed the button on that page yet
+$ sqlite3 server 'SELECT count(*) FROM presses'
+0
+$ curl -s -X POST -d press localhost:8080/api/press
+{"presses":1,"button":"press"}
+# the application data is inside the same database
+$ sqlite3 server 'SELECT id, at, button FROM presses'
+1|2026-08-25 03:11:28|press
+# so was the GET that fetched the page in the first place
+$ sqlite3 server 'SELECT count(*) AS n, path
+                  FROM visits GROUP BY path'
+1|/
+1|/api/press
+```
+```
+# 我们的服务器是一个单文件，且是一个SQLite数据库
+$ file server
+server: SQLite 3.x database, application id 1397050438, ...
+$ ./server --journal wal 8080
+self-httpd: serving 3 routes out of /srv/self/server
+self-httpd: listening on http://0.0.0.0:8080 with 4 workers
+$ curl -s localhost:8080 | head -1
+<!doctype html>
+# 还没人按过那个页面上的按钮
+$ sqlite3 server 'SELECT count(*) FROM presses'
+0
+$ curl -s -X POST -d press localhost:8080/api/press
+{"presses":1,"button":"press"}
+# 应用数据就在同一个数据库中
+$ sqlite3 server 'SELECT id, at, button FROM presses'
+1|2026-08-25 03:11:28|press
+# 最初获取该页面的GET请求也被记录了
+$ sqlite3 server 'SELECT count(*) AS n, path
+                  FROM visits GROUP BY path'
+1|/
+1|/api/press
+```
+
+This web-server is live at https://selfdb.exe.xyz.11If the site is not working for you, sorry. I deployed it on their smallest tier. I included a screenshot of the site just in case for posterity! It is one file, a SQLite database, and it is also the server. It is the website, it is the program, and it is the visitor log and state.
+这个Web服务器已上线，网址是 https://selfdb.exe.xyz。11如果网站无法访问，抱歉。我把它部署在了最低配置的层级上。为了以防万一，我截了一张网站的图留作纪念！它就是一个文件，一个SQLite数据库，同时也是服务器本身。它是网站，是程序，也是访客日志和状态。
+
+§Everything is my demon muse
+§万物皆是我的恶魔缪斯
+
+I have a lot of admiration for the work of Justine Tunney, whose prior art redbean: a webserver in a single file, built as an Actually Portable Executable with a self-extracting ZIP archive, inspired the idea.
+我非常钦佩Justine Tunney的工作，她的先行作品redbean：一个单文件Web服务器，构建为带有自解压ZIP归档的“真正可移植可执行文件”，启发了这个想法。
+
+SELF is many ways is less brilliant. It relies on simpler tools to achieve something very similar but I’m amazed how much collapses into a single domain: SQL.
+SELF在很多方面没那么惊艳。它依赖更简单的工具来实现非常相似的功能，但令我惊叹的是，有多少东西能归结到一个单一的领域：SQL。
+
+Whereas, redbean needs to include an archive format (ZIP), the database
+itself is the container. Redbean provides Lua hooks to manipulate the responses,
+whereas the equivalent in SELF is a new row in a handlers table.
+redbean需要包含一种归档格式（ZIP），而数据库本身就是容器。Redbean提供Lua钩子来操作响应，而在SELF中，等效的操作只是在handlers表中新增一行。
+
+```
+INSERT INTO handlers VALUES
+  ('/api/busiest', 'SELECT path, count(*)
+                    FROM visits GROUP BY path
+                    ORDER BY 2 DESC LIMIT 5');
+```
+```
+INSERT INTO handlers VALUES
+  ('/api/busiest', 'SELECT path, count(*)
+                    FROM visits GROUP BY path
+                    ORDER BY 2 DESC LIMIT 5');
+```
+
+If redbean is an Actually Portable Executable, this is an Actually Queryable Executable. One of them runs anywhere, the other one you can SELECT from.
+如果说redbean是一个“真正可移植可执行文件”，那么这就是一个“真正可查询可执行文件”。前者可以在任何地方运行，后者则可以被SELECT查询。
+
+§All you need is argv[0]
+§你只需要argv[0]
+
+How does the process get access to itself? 🤔
+进程是如何访问自身的呢？🤔
+
+For now, you cannot use /proc/self/exe.22Funny enough, the VFS Linux maintainer recently landed support for 
+            transparent binfmt_misc in the kernel, which would make /proc/self/exe point to the original file. I wrote about it here.  When binfmt_misc matches, the kernel does
+not execve your file at all , it execs the interpreter,  and hands it the
+path:
+目前，你还不能使用/proc/self/exe。22有趣的是，Linux VFS维护者最近在内核中加入了对透明binfmt_misc的支持，这将使/proc/self/exe指向原始文件。我在这里写过相关文章。 当binfmt_misc匹配时，内核根本不会execve你的文件，而是exec解释器，并将路径传给它：
+
+self-exec passes argv + 1 through to the program, so the program’s
+argv[0] is the path to the executable itself. The interpreter also releases its SQLite connection before jumping to the entry point, so the program can open its own file and query it.
+self-exec将argv + 1传递给程序，因此程序的argv[0]就是可执行文件本身的路径。解释器在跳转到入口点之前还会释放其SQLite连接，这样程序就可以打开自己的文件并对其进行查询。
+
+```
+int main(int argc, char **argv) {
+	sqlite3 *db;
+	/* the file the kernel just executed */
+	sqlite3_open(argv[0], &db);
+	...
+}
+```
+```
+int main(int argc, char **argv) {
+	sqlite3 *db;
+	/* 内核刚刚执行的文件 */
+	sqlite3_open(argv[0], &db);
+	...
+}
+```
+
+This is pretty unrestricted and magical. You can read your own segment table or a new table next to it. The writes persist across invocations. ✨
+这相当不受限制，简直像魔法一样。你可以读取自己的段表或它旁边的新表。写入的内容在多次调用之间持久保存。✨
+
+§self-httpd
+§self-httpd
+
+The web-server for our example is three tables: routes, visits and presses.
+We will record every visitor and every button press.
+我们示例中的Web服务器包含三个表：routes、visits和presses。我们将记录每一位访客和每一次按钮点击。
+
+```
+-- the content, added to the executable
+-- after it is compiled and linked
+CREATE TABLE routes  (path TEXT PRIMARY KEY,
+                      mime TEXT, body BLOB);
+-- what the site collects, written back 
+-- into the executable while it runs
+CREATE TABLE visits  (id INTEGER PRIMARY KEY, at TEXT,
+                      ua TEXT, path TEXT);
+CREATE TABLE presses (id INTEGER PRIMARY KEY,
+                      at T
+```
+```
+-- 内容，在编译和链接后添加到可执行文件中
+CREATE TABLE routes  (path TEXT PRIMARY KEY,
+                      mime TEXT, body BLOB);
+-- 网站收集的数据，在运行时写回可执行文件
+CREATE TABLE visits  (id INTEGER PRIMARY KEY, at TEXT,
+                      ua TEXT, path TEXT);
+CREATE TABLE presses (id INTEGER PRIMARY KEY,
+                      at T
+```

@@ -1,0 +1,312 @@
+---
+title: "Using Local Coding Agents_全翻译"
+tags: ["大咖视点_全文翻译", "Ahead_of_AI_(Sebastian_Raschka_机器学习与大模型)"]
+---
+
+【文章标题】：Using Local Coding Agents
+
+【文章标题】：使用本地编码代理
+
+Many people reached out to me in the past asking about my local agent stack as well as how I set up my local agent stack.
+
+过去有很多人联系我，询问我的本地代理技术栈以及我是如何搭建这个本地代理技术栈的。
+
+So, I thought it might be useful to put together a little tutorial on how to set up a local (coding) agent using open-source tools and open-weight LLMs.
+
+所以，我想整理一个关于如何使用开源工具和开放权重大语言模型来搭建本地（编码）代理的小教程，或许会很有用。
+
+Figure 1: Overview of the local stack, that is, a coding agent harness that uses a local model hosted through an inference engine / runtime server.
+
+图1：本地技术栈概览，即一个使用通过推理引擎/运行时服务器托管的本地模型的编码代理框架。
+
+This article is a tutorial on setting up a production-ready coding agent with a fully local stack. We will use a locally served LLM together with a local coding harness that can read files, make edits, run commands, and verify changes as shown in the figure above.
+
+本文是一篇关于使用完全本地技术栈搭建可用于生产环境的编码代理的教程。我们将使用一个本地服务的大语言模型，并配以一个本地编码框架，该框架可以读取文件、进行编辑、运行命令并验证更改，如上图所示。
+
+Here, we can think of the LLM as the engine that provides the reasoning and code generation. And the surrounding harness provides the operating environment that allows the LLM to do meaningful coding work in our local projects.
+
+在这里，我们可以将大语言模型视为提供推理和代码生成的引擎。而外围框架则提供了运行环境，使大语言模型能够在我们的本地项目中开展有意义的编码工作。
+
+Why local? For many coding workflows, a local setup is an interesting alternative to proprietary services such as GPT in Codex or Opus in Claude Code. The local setup is transparent, inspectable, and free to run apart from hardware and electricity costs. It also stays fully under your control, and you can modify the coding harness in any way you like.
+
+为什么要本地化？对于许多编码工作流程来说，本地设置是专有服务（如Codex中的GPT或Claude Code中的Opus）的一个有趣替代方案。本地设置透明、可检查，除了硬件和电费外，运行完全免费。而且它完全由你掌控，你可以随心所欲地修改编码框架。
+
+Plus, it’s a lot of fun!
+
+而且，它非常有趣！
+
+By the way, in case you want a bit more background information on coding agent harnesses, I covered the core components of coding agents (and building a coding agent from scratch for learning purposes) here:
+
+顺便说一下，如果你想了解更多关于编码代理框架的背景信息，我在这里介绍了编码代理的核心组件（以及为了学习目的从零开始构建编码代理的方法）：
+
+1. Intro
+
+1. 引言
+
+I have to admit that I still primarily alternate between Codex and Claude Code as my daily drivers, for now (and just to keep up with the new tooling and functions that are constantly being added). Also, the plan limits (especially for Codex) are still so generous that I haven’t had to worry about costs so far.
+
+我不得不承认，目前我日常使用的主力仍然是Codex和Claude Code，在两者之间切换（同时也是为了跟上不断新增的工具和功能）。此外，套餐限制（尤其是Codex的）仍然非常宽松，到目前为止我还没有担心过成本问题。
+
+However, I’ve been using local solutions for a while, too, to test things and because it somehow gives me joy to have and use a fully local setup (versus proprietary services).
+
+不过，我也已经使用本地解决方案一段时间了，一方面是为了测试，另一方面是因为拥有并使用一个完全本地的环境（相对于专有服务）会给我带来某种乐趣。
+
+Either way, local solutions become more and more attractive each day. One aspect is the costs. If you have the hardware, they are practically free to run. And then there’s, of course, the privacy angle. For example, for organizing and processing my receipts, I’d be more comfortable with a local model ingesting them rather than sending the data over to OpenAI or Anthropic.
+
+无论如何，本地解决方案正变得日益有吸引力。一方面是成本。如果你有合适的硬件，它们运行起来几乎免费。当然，还有隐私方面的考量。例如，在整理和处理我的收据时，我更愿意让本地模型来读取它们，而不是将数据发送给OpenAI或Anthropic。
+
+(Then, if we keep in mind that Anthropic was recently
+
+throttling their flagship model’s performance for LLM research
+
+, proprietary services may become more restrictive over time, and it’s maybe a good idea to be comfortable with open-weight alternatives as a backup.)
+
+（另外，如果我们记住Anthropic最近
+
+为了LLM研究而限制其旗舰模型的性能
+
+，那么专有服务可能会随着时间推移变得更加受限，因此熟悉开放权重模型作为备选方案或许是个好主意。）
+
+And there are many, many additional reasons and use cases like that.
+
+而且还有很多很多类似这样的理由和使用场景。
+
+Your motivations for using local LLMs and coding harnesses may include:
+
+你使用本地大语言模型和编码框架的动机可能包括：
+
+Predictable, fixed costs if you reach your subscription plan limits, and immunity to API price changes.
+
+如果你达到订阅套餐限制，可预测的固定成本，以及对API价格变化的免疫。
+
+Reproducibility; sometimes it’s nice if a model is upgraded (e.g., GPT 5.4 -&gt; GPT 5.5 -&gt; GPT 5.6) and it solves all your queries more reliably. However, this can also break existing workflows.
+
+可复现性；有时候，如果模型升级（例如GPT 5.4 -&gt; GPT 5.5 -&gt; GPT 5.6）并且能更可靠地解决你所有查询，那固然很好。然而，这也可能破坏现有的工作流程。
+
+Offline use in the classic airplane flight scenario with slow or no internet, or when going on a coding/writing retreat in the cabin in the woods w/o a Starlink subscription.
+
+在经典的飞机飞行场景中离线使用（网络缓慢或没有网络），或者在没有Starlink订阅的情况下，去森林小屋进行编码/写作静修时使用。
+
+And there are probably several others.
+
+可能还有其他几个原因。
+
+So, in this article, we will set up and use popular harnesses like Codex and Claude Code with open-weight models and investigate whether using a model-specific harness (like Qwen-Code for Qwen3.6) brings any additional benefits. (Of course, there are many more harnesses like OpenCode, Cline, Pi, and Noumena Code, but I thought that most people already have muscle memory with either Codex or Claude Code, which makes switching to open-weight models a bit smoother).
+
+因此，在本文中，我们将使用Codex和Claude Code等流行框架搭配开放权重模型进行设置和使用，并探讨使用特定于模型的框架（如适用于Qwen3.6的Qwen-Code）是否能带来额外的好处。（当然，还有更多框架，如OpenCode、Cline、Pi和Noumena Code，但我认为大多数人已经对Codex或Claude Code形成了肌肉记忆，这使得切换到开放权重模型会稍微顺畅一些。）
+
+2. Coding Agent Harness Overview
+
+2. 编码代理框架概览
+
+Most coding agent harnesses follow similar principles and have more or less the same features and functionality. However, the implementation details may differ, and certain LLMs have usually been primarily optimized for a specific harness. Of course, many open-weight LLMs like GLM 5.2, for example, would run Claude Code, etc.
+
+大多数编码代理框架遵循相似的原则，并且或多或少具有相同的特性和功能。然而，实现细节可能会有所不同，而且某些大语言模型通常主要针对特定的框架进行优化。当然，许多开放权重模型，例如GLM 5.2，也可以运行Claude Code等。
+
+However, if an LLM developer also develops a coding harness, it is somewhat safe to assume that their model is optimized for their own harness first (while also supporting others).
+
+然而，如果一个大语言模型开发者同时也开发编码框架，那么可以比较有把握地假设，他们的模型首先针对自己的框架进行了优化（同时也支持其他框架）。
+
+Here, I am primarily going to use Qwen3.6 with the Qwen-Coder coding client. However, I will also go over other options for using a local LLM with other agent harnesses, for example, Claude Code, Codex, and the increasingly popular Cline, but more on that later.
+
+在这里，我主要将使用Qwen3.6搭配Qwen-Coder编码客户端。不过，我也会介绍其他将本地大语言模型与其他代理框架配合使用的选项，例如Claude Code、Codex，以及越来越流行的Cline，但稍后会详细说明。
+
+The reason why I am primarily using Qwen-Code when working with Qwen models is that:
+
+我主要在使用Qwen模型时选择Qwen-Code的原因是：
+
+it is open-source, like Codex (
+
+https://github.com/openai/codex
+
+) but unlike Claude Code;
+
+它是开源的，与Codex（
+
+https://github.com/openai/codex
+
+）类似，但与Claude Code不同；
+
+Qwen models have been specifically optimized for the Qwen-Code harness (more information below);
+
+Qwen模型专门针对Qwen-Code框架进行了优化（更多信息见下文）；
+
+I can run both Codex (with the latest GPT model) and Qwen-Code with a local Qwen model side by side on the same machine without having to switch manually back and forth between models.
+
+我可以同时在同一台机器上运行Codex（使用最新的GPT模型）和Qwen-Code（搭配本地Qwen模型），而无需手动在模型之间来回切换。
+
+Regarding the second point in the list above, that Qwen models work better in Qwen-Code, Nvidia’s
+
+Polar: Agentic RL on Any Harness at Scale
+
+paper (May 2026) has a benchmark showing that the Qwen3.5-4B base model has the best coding performance in said Qwen-Code harness (both before and after their Polar-RL training), which I included below.
+
+关于上面列表中的第二点，即Qwen模型在Qwen-Code中表现更好，Nvidia的
+
+《Polar: Agentic RL on Any Harness at Scale》
+
+论文（2026年5月）提供了一个基准测试，显示Qwen3.5-4B基础模型在上述Qwen-Code框架中具有最佳的编码性能（无论是在他们的Polar-RL训练之前还是之后），我在下面包含了该基准测试。
+
+Figure 2: Qwen model performance in different coding harnesses via
+
+Polar: Agentic RL on Any Harness at Scale
+
+(
+
+https://arxiv.org/abs/2605.24220
+
+)
+
+图2：Qwen模型在不同编码框架中的性能，来源：
+
+《Polar: Agentic RL on Any Harness at Scale》
+
+（
+
+https://arxiv.org/abs/2605.24220
+
+）
+
+The benchmark in the table above is for an older Qwen3.5 model, and I am assuming that the latest Qwen3.6 models are even further optimized to do well in Qwen-Code specifically.
+
+上表中的基准测试针对的是较旧的Qwen3.5模型，我假设最新的Qwen3.6模型在Qwen-Code中的表现会进一步优化。
+
+However, Pi (
+
+https://github.com/earendil-works/pi
+
+) also seems to be a very interesting candidate that I need to play around with in the future.
+
+然而，Pi（
+
+https://github.com/earendil-works/pi
+
+）似乎也是一个非常有趣的候选者，我将来需要好好研究一下。
+
+By the way, Qwen3.6 35B-A3B is about 22 GB to download, requires roughly 30-40 GB of RAM, and runs pretty swiftly on both a Mac Mini with M4 and a DGX Spark.
+
+顺便说一下，Qwen3.6 35B-A3B下载大小约为22 GB，需要大约30-40 GB的内存，并且无论是在搭载M4芯片的Mac Mini上还是在DGX Spark上，运行都相当迅速。
+
+Based on the recent benchmarks shared by Cohere earlier in June, it is currently the best local model in its size class.
+
+根据Cohere在6月初分享的最新基准测试，它目前是同尺寸级别中最好的本地模型。
+
+Figure 3: Cohere benchmark from North Mini Code report published in June (
+
+https://huggingface.co/blog/CohereLabs/introducing-north-mini-code
+
+)
+
+图3：来自6月发布的North Mini Code报告的Cohere基准测试（
+
+https://huggingface.co/blog/CohereLabs/introducing-north-mini-code
+
+）
+
+As seen above, Qwen3.6 35B-A3B dominates all but one benchmark in this size class. However, that being said, Qwen Code is a general harness and also supports other types of models. For instance, we could also connect North Mini Code or Gemma 4 in Qwen Code.
+
+如上所示，Qwen3.6 35B-A3B在这个尺寸级别中几乎主导了所有基准测试（仅有一项除外）。不过，话虽如此，Qwen Code是一个通用框架，也支持其他类型的模型。例如，我们也可以在Qwen Code中连接North Mini Code或Gemma 4。
+
+Figure 4: Yes, Qwen3.6 35B-A3B is a really good model! (Via x.com/pupposandro/status/2064707907489272147/)
+
+图4：是的，Qwen3.6 35B-A3B确实是一个非常棒的模型！（来源：x.com/pupposandro/status/2064707907489272147/）
+
+Architecture-wise, the Qwen3.6 35B-A3B model has hybrid attention similar to Qwen3-Coder and Qwen3.5. I wrote more about it in
+
+Beyond Standard LLMs
+
+.
+
+在架构方面，Qwen3.6 35B-A3B模型采用了与Qwen3-Coder和Qwen3.5类似的混合注意力机制。我在
+
+《Beyond Standard LLMs》
+
+中写了更多相关内容。
+
+Figure 5: Qwen3.6 architecture and fact sheet from my
+
+LLM gallery
+
+.
+
+图5：来自我的
+
+LLM画廊
+
+的Qwen3.6架构和参数表。
+
+Alternatively, if you don’t want to use Qwen3.6, Cohere’s North Mini Code is probably the most interesting, capable alternative at this size class right now. I will go over this model in the next local LLM setup section as well.
+
+另外，如果你不想使用Qwen3.6，Cohere的North Mini Code可能是目前这个尺寸级别中最有趣、最有能力的替代方案。我也会在接下来的本地大语言模型设置部分介绍这个模型。
+
+Figure 6: North Mini Code architecture and fact sheet from my
+
+LLM gallery
+
+.
+
+图6：来自我的
+
+LLM画廊
+
+的North Mini Code架构和参数表。
+
+3. Local LLM Setup
+
+3. 本地大语言模型设置
+
+No matter what agent harness we use (Qwen-Code, Codex, or Claude Code), we have to set up a local LLM, such as Qwen3.6 35B-A3B, first.
+
+无论我们使用什么代理框架（Qwen-Code、Codex或Claude Code），都必须先设置一个本地大语言模型，例如Qwen3.6 35B-A3B。
+
+There are several options like Ollama, LM Studio, vLLM, SGLang, MLX, etc to serve models locally. You know from my Build A Large Language Model (From Scratch) and Build A Reasoning Model (From Scratch) projects that I like to code these myself. Implementing a model from scratch has the benefits that we understand the whole stack, plus we can modify and further train and fine-tune it.
+
+有多种选项可以在本地提供模型服务，例如Ollama、LM Studio、vLLM、SGLang、MLX等。你从我的《Build A Large Language Model (From Scratch)》和《Build A Reasoning Model (From Scratch)》项目中知道，我喜欢自己编写这些代码。从零开始实现模型的好处是我们可以理解整个技术栈，而且我们可以修改、进一步训练和微调它。
+
+However, here, we just look for a model serving framework that has been super optimized for inference speed and resource needs since we don’t plan to do any training or fine-tuning at this point. (We could, as an extra step, convert and import our own from-scratch fine-tuned model into these efficient serving stacks, but this is out of the scope for this article.)
+
+然而，在这里，我们只是寻找一个在推理速度和资源需求方面经过高度优化的模型服务框架，因为我们目前不打算进行任何训练或微调。（作为额外步骤，我们可以将自己从零开始微调的模型转换并导入到这些高效的服务技术栈中，但这超出了本文的范围。）
+
+For this tutorial, we will use
+
+Ollama
+
+as our efficient model serving engine because it’s relatively easy to install and use from the command line across different operating systems (although LM Studio also added a non-GUI
+
+llmster
+
+client, but I am less familiar with it).
+
+在本教程中，我们将使用
+
+Ollama
+
+作为我们的高效模型服务引擎，因为它相对容易安装，并且可以在不同操作系统的命令行中使用（尽管LM Studio也增加了一个非GUI的
+
+llmster
+
+客户端，但我不太熟悉它）。
+
+By the way, I am not affiliated with any of the tools mentioned in this article, but one nice thing about Ollama is that they also optionally support open-weight models hosted in the cloud, including the currently strongest open-weight model, GLM 5.2, which is too large to run locally on consumer hardware. (The cloud models are not free, of course, but have similar subscription plans as ChatGPT and Claude; it’s still nice though that this option exists to conveniently test the latest state-of-the-art open-weight models “locally.”)
+
+顺便说一下，我与本文中提到的任何工具都没有关联，但Ollama的一个好处是，它们还可选地支持托管在云端的开放权重模型，包括目前最强的开放权重模型GLM 5.2，该模型太大，无法在消费级硬件上本地运行。（当然，云端模型并非免费，但提供与ChatGPT和Claude类似的订阅方案；不过，有这个选项还是很不错的，可以方便地“在本地”测试最新的最先进开放权重模型。）
+
+Anyways, setting up Ollama is pretty straightforward, and you can find the official macOS/Linux/Windows download instructions on their
+
+download
+
+page.
+
+总之，安装Ollama非常简单，你可以在其
+
+下载
+
+页面上找到macOS/Linux/Windows的官方安装说明。
+
+After installing, I recommend downloading a model for a quick test run. For instance, on macOS, we can use the ollama app to download models directly via the GUI:
+
+安装完成后，我建议下载一个模型进行快速测试运行。例如，在macOS上，我们可以使用ollama应用通过GUI直接下载模型：
+
+Figure 7: Using the Ollama app to find and download models
+
+图7：使用Ollama应用查找并下载

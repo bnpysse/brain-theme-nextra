@@ -1,0 +1,96 @@
+---
+title: "Show HN Conduct, open-source guardrails for LLM and MCP tool_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+# Conduct：面向LLM和MCP工具调用的开源安全护栏 - 精华简报
+
+## 核心价值主张
+Conduct是一款开源的AI运行时治理系统，为企业和开发团队提供**统一的安全策略执行框架**，覆盖LLM调用、Shell工具和MCP（多模态计算平台）操作。其核心创新在于将传统"事后检测"的安全模型转变为"事前控制"。
+
+## 技术架构亮点
+
+### 双重核心组件
+1. **Conduct Guard**：策略决策引擎
+   - 执行"拦截/警告/审计/注入"四类动作
+   - 基于签名配置和哈希链审计日志
+   - 默认采用fail-closed（失败关闭）模式
+
+2. **Conduct Router**：LLM流量代理
+   - 兼容主流AI提供商SDK（Anthropic/OpenAI/Perplexity）
+   - 所有请求先经Guard检测再转发
+
+### 三大防御支柱
+1. **签名配置系统**：工作区级数字签名验证，防篡改
+2. **哈希链审计**：基于SHA-256的不可篡改证据链
+3. **策略优先机制**：结构化预执行决策（非事后异常检测）
+
+## 差异化优势
+
+| 对比维度        | 传统运行时防火墙       | Conduct Guard          |
+|---------------|-------------------|---------------------|
+| 触发时机        | 动作发生后          | 动作执行前            |
+| 配置完整性      | 信任策略包          | 工作区签名验证         |
+| 审计机制        | 日志流            | SHA-256哈希链        |
+| 覆盖范围        | 仅LLM调用         | LLM+Shell/MCP工具    |
+| 故障模式        | 失败开放(soft)     | 默认失败关闭(hard)    |
+
+## 部署与集成
+
+### 快速启动
+```bash
+git clone https://github.com/sseshachala/conductai
+cd conductai
+docker compose up
+```
+
+### 主要服务端口
+- API服务：`http://localhost:8000`
+- 可视化界面：`http://localhost:3000`
+- 内置Redis和Postgres
+
+### 集成方式
+1. **SDK代理模式**：
+   ```bash
+   curl https://api.conductai.ai/proxy/anthropic/v1/messages \
+     -H "Authorization: Bearer cond_agt_..." \
+     -H "Content-Type: application/json" \
+     -d '{"model":"claude-sonnet-4-6","max_tokens":1024,"messages":[{"role":"user","content":"Hello"}]}'
+   ```
+
+2. **CLI钩子模式**：
+   ```bash
+   pip install conduct-cli
+   conduct login
+   conduct sync
+   ```
+
+## 合规与预置资源
+- **20+开箱即用合规包**：
+  - 国际标准：OWASP、SOC 2、HIPAA、PCI DSS 4.0
+  - AI专项：欧盟AI法案、NIST AI RMF、ISO 42001
+  - 开发框架：Python/Node/Terraform专属包
+
+- **22个预置工作流**：
+  - 代码审查、事件响应、生产部署门禁等
+  - 基于YAML的可编辑模板
+
+## 适用场景
+1. **企业AI应用治理**：统一管控多团队AI工具使用
+2. **合规敏感行业**：医疗(HIPAA)、金融(PCI DSS)等
+3. **DevSecOps整合**：CI/CD流水线中的AI操作审计
+4. **多AI代理系统**：协调复杂AI工作流的安全边界
+
+## 商业价值
+- **风险控制**：将AI安全左移，预防而非补救
+- **合规效率**：预置主流合规框架，降低审计成本
+- **统一管理**：单点控制LLM、Shell和MCP操作
+- **开发友好**：无需修改现有代码即可集成
+
+## 技术趋势映射
+1. **AI Governance 2.0**：从监测到主动控制
+2. **Policy as Code**：可版本化的安全策略
+3. **Cryptographic Accountability**：可验证的审计链条
+4. **Unified AIOps**：跨工具的统一管理界面
+
+项目采用Apache 2.0许可证，适合需要细粒度控制AI操作的企业级用户和合规敏感场景。其架构设计特别考虑了现代分布式团队的协作需求，通过工作区签名机制实现策略的分布式验证。

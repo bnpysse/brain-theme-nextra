@@ -1,0 +1,99 @@
+---
+title: "[AINews] Memory prices up 500 in 12 months_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：[AINews] Memory prices up 500% in 12 months
+【文章标题】：[AINews] 内存价格12个月内上涨500%
+
+Even as Sama follows through on the Great Pacing, and Etched becomes a double unicorn and Cerebras announced CS4 running 10T models at 1000 tok/s, the memory shortage has continued unabated since we did our SemiAnalysis pod in Feb.
+
+就在 Sama 持续推进“伟大节奏”（Great Pacing），Etched 成为双重独角兽，Cerebras 宣布 CS4 以 1000 tok/s 运行 10T 模型之际，自我们2月录制 SemiAnalysis 播客以来，内存短缺问题依然未减。
+
+Per Tom’s Hardware: We’re officially in dire straits. There’s almost no way, if you’re reading this site, that you aren’t aware that memory prices have become entirely divorced from reality. Some are calling it the RAMpocalypse; I prefer “RAMageddon.”
+
+据 Tom’s Hardware 报道：我们正式陷入困境。如果你正在阅读本网站，几乎不可能不知道内存价格已经与现实完全脱节。有人称之为“RAMpocalypse”（内存末日）；我更愿意叫它“RAMageddon”（内存浩劫）。
+
+That’s right: 128GB DDR5 kits are fully ten times more expensive than the lowest price we’ve ever seen. In fact, the situation is so severe that hyperscale buyers have reportedly already locked in almost all of the global DRAM production capacity for 2027, handing over advance deposits to guarantee their supply of precious DRAM, which is now among the highest-value commodities in the world by weight; mainstream DRAM chips are worth over half as much per kilogram as solid gold. Put another way, the famous Moore’s Law driving all hardware unit prices down has been reversed for memory:
+
+没错：128GB DDR5 内存套件的价格已经是我们所见过最低价的整整十倍。事实上，情况如此严峻，据报道超大规模买家已经锁定了2027年全球DRAM产能的绝大部分，并支付预付款以确保获得宝贵的DRAM供应。按重量计算，DRAM如今已是世界上价值最高的商品之一；主流DRAM芯片每公斤的价值超过纯金的一半。换句话说，推动所有硬件单价下降的著名摩尔定律，在内存领域已经被逆转：
+
+AI News for 8/17/2026-8/18/2026. We checked 12 subreddits, 544 Twitters and no further Discords.
+
+2026年8月17日至8月18日的AI新闻。我们检查了12个subreddit、544个Twitter账号，没有额外的Discord。
+
+AINews’ website lets you search all past issues. As a reminder, AINews is now a section of Latent Space. You can opt in/out of email frequencies!
+
+AINews 的网站允许你搜索所有历史期刊。提醒一下，AINews 现在是 Latent Space 的一个栏目。你可以选择订阅/退订邮件频率！
+
+AI Twitter Recap
+
+AI Twitter 摘要
+
+OpenAI’s Frontier RL Pause, Expanded Monitoring, and the Shift Toward “Pacing the Frontier”
+
+OpenAI 的前沿强化学习暂停、扩展监控，以及向“掌控前沿节奏”的转变
+
+OpenAI slowed frontier training to harden security and alignment controls: The day’s biggest systems/safety development was OpenAI saying it paused some frontier RL training for two weeks and is still holding its largest planned frontier RL run while it strengthens monitoring, isolation, and red-teaming. Sam Altman framed this as a case where capabilities were outpacing safety/alignment readiness, while Greg Brockman emphasized that confidence in safety will increasingly set the pace of frontier scaling. OpenAI also clarified the slowdown mainly affects farther-out releases, not models already near ship.
+
+OpenAI 放缓前沿训练以强化安全与对齐控制：当天最大的系统/安全进展是 OpenAI 表示，它已暂停部分前沿强化学习训练两周，并在加强监控、隔离和红队测试的同时，仍搁置其计划中最大规模的前沿强化学习运行。Sam Altman 将此描述为能力超越安全/对齐就绪度的案例，而 Greg Brockman 强调，对安全的信心将日益决定前沿扩展的节奏。OpenAI 还澄清，此次放缓主要影响较远期的发布，而非已接近发布的模型。
+
+Concrete controls matter more than broad messaging: OpenAI shared more implementation detail than usual, including stronger workload/network isolation, continuous security testing, and multistage monitoring. Secondary commentary highlighted interesting operational details: monitoring may add roughly 20% overhead, sampled-token monitoring can page safety/security/research teams within ~30 minutes, and tool-using inference for higher-risk systems may ship with active monitors attached, per @eliebakouch. Whatever one thinks of the policy framing, this is notable as a public admission that training/eval infra and inference-time monitors are now bottlenecks on frontier progress, not just raw compute.
+
+具体控制措施比宽泛表态更重要：OpenAI 分享了比以往更多的实施细节，包括更强的工作负载/网络隔离、持续安全测试和多阶段监控。次要评论指出了有趣的运维细节：监控可能增加约20%的开销，采样token监控可在约30分钟内呼叫安全/安保/研究团队，而针对高风险系统的工具调用推理可能会随附活动监控器一同发布，据 @eliebakouch 称。无论人们对这一政策框架作何看法，值得注意的是，这公开承认了训练/评估基础设施和推理时监控现在已成为前沿进展的瓶颈，而不仅仅是原始算力。
+
+Open Models: Qwen3.8-27B Momentum, GLM-5.3’s Post-Training Gains, and the Small-Model Debate
+
+开源模型：Qwen3.8-27B 势头、GLM-5.3 的训练后增益，以及小模型之争
+
+Qwen3.8-27B became the focal point of the local/open model conversation: Several posts cast Qwen3.8-27B as a new “locally runnable frontier-ish” moment, with @kimmonismus calling it a “DeepSeek moment” and Alibaba Qwen celebrating it reaching #1 local model in Cline in four days. Benchmarks cited in the thread include #7 on Artificial Analysis’ Agentic Index at 27B, #6 among open-weight models on Vals Index v2 and #1 on Harvey’s legal benchmark among open weights, and Cline’s own ranking as its new top local model. The pushback was equally strong: @scaling01 argued benchmark wins are overstated versus Opus 4.5 in real coding use, underscoring the growing divide between bench success, cost efficiency, and qualitative reliability on long tasks.
+
+Qwen3.8-27B 成为本地/开源模型讨论的焦点：多篇帖子将 Qwen3.8-27B 视为新的“本地可运行的前沿近似”时刻，@kimmonismus 称之为“DeepSeek 时刻”，阿里云 Qwen 则庆祝其在四天内成为 Cline 中排名第一的本地模型。该讨论串中引用的基准包括：在 Artificial Analysis 的 Agentic Index 中 27B 排名第7；在 Vals Index v2 中位列开源权重模型第6，并在 Harvey 的法律基准中位列开源权重第一；以及 Cline 自身将其评为新的顶级本地模型。反对声音同样强烈：@scaling01 认为，在实际编码使用中，基准胜利相对于 Opus 4.5 被夸大了，这凸显了基准成功、成本效率与长任务定性可靠性之间日益扩大的鸿沟。
+
+Safety implications of capable local models are getting harder to dismiss: A high-engagement post from @kimmonismus noted a “refusal-removed” MLX build of Qwen3.8-27B running locally on Apple Silicon in 2/4/6/8-bit variants, claiming preserved vision, reasoning, tool use, and 262K context with near-zero refusals. Independent of the rhetoric, this is the clearest thread in the set pointing to a real shift: useful, locally deployable, partially uncensored models are no longer hypothetical.
+
+强大本地模型的安全影响越来越难以忽视：@kimmonismus 的一篇高互动帖子提到，Qwen3.8-27B 的“去拒绝”MLX 版本可在 Apple Silicon 上以 2/4/6/8 位变体本地运行，声称保留了视觉、推理、工具使用和 262K 上下文，且拒绝率几乎为零。撇开这些修辞不谈，这是所有讨论中最清晰的一条线索，指向一个真实转变：有用的、可本地部署的、部分无审查的模型不再是假设。
+
+GLM-5.3 looks like a post-training/infrastructure story, not a base-model story: Z.ai launched GLM-5.3 via API for coding, defensive cyber, and long-horizon agents, at the same price as GLM-5.2. Artificial Analysis reported it ties Kimi K3 at 60 on its Intelligence Index, with a 246-point jump on GDPval-AA v2 to 1770 Elo, while keeping the same 753B total / 40B active MoE footprint, 1M context, and MIT license once weights land. The most technically interesting interpretation came from a long Zhihu summary relayed by @ZhihuFrontier: GLM-5.3’s gains appear driven by stronger post-training, especially asynchronous RL (SAO), executable sandbox training, and on-policy distillation to prevent catastrophic forgetting. If true, this is a meaningful data point for the idea that agentic capability scaling is shifting from parameter count toward RL systems + environment quality.
+
+GLM-5.3 看起来是一个训练后/基础设施的故事，而不是基础模型的故事：Z.ai 通过 API 发布了 GLM-5.3，面向编码、防御性网络和长周期智能体，价格与 GLM-5.2 相同。Artificial Analysis 报告称，其在 Intelligence Index 上以 60 分与 Kimi K3 持平，GDPval-AA v2 上跃升 246 分达到 1770 Elo，同时保持相同的 753B 总参数 / 40B 激活 MoE 规模、1M 上下文，以及权重发布后的 MIT 许可证。最具技术趣味性的解读来自 @ZhihuFrontier 转述的一篇长篇知乎摘要：GLM-5.3 的提升似乎主要由更强的训练后技术驱动，尤其是异步强化学习（SAO）、可执行沙盒训练，以及防止灾难性遗忘的在策略蒸馏。如果属实，这将为“智能体能力扩展正从参数数量转向 RL 系统 + 环境质量”这一观点提供有意义的数据点。
+
+Inference and Systems Infra: Mojo Open Source, TensorRT Connect, Cursor’s Git Storage, and Faster Decoding
+
+推理与系统基础设施：Mojo 开源、TensorRT Connect、Cursor 的 Git 存储，以及更快的解码
+
+Mojo is now open source under Apache 2.0: Modular’s announcement drew broad attention, with the company formally open-sourcing Mojo and also positioning its broader platform as a portability layer across accelerators, including Qualcomm datacenter AI accelerators. For infra engineers, the significance is less “new language hype” than toolchain openness plus hardware abstraction arriving together.
+
+Mojo 现已在 Apache 2.0 下开源：Modular 的公告引起了广泛关注，公司正式将 Mojo 开源，并将其更广泛的平台定位为跨加速器的可移植层，包括高通数据中心 AI 加速器。对于基础设施工程师而言，其意义与其说是“新语言炒作”，不如说是工具链开放与硬件抽象同时到来。
+
+NVIDIA compressed model-to-TensorRT deployment to “two commands”: NVIDIA launched TensorRT Model Connect in public preview, promising direct conversion from supported Hugging Face models to end-to-end TensorRT inference without intermediate ONNX export, with output deployable via native C++ APIs. The post also claims the project itself was largely built with Codex agents under human review, which is noteworthy less as marketing than as another signal that infra/tooling teams are now willing to say agent assistance touched implementations, tuning, tests, integrations, and docs.
+
+NVIDIA 将模型到 TensorRT 的部署压缩为“两条命令”：NVIDIA 推出了公开预览版 TensorRT Model Connect，承诺可将受支持的 Hugging Face 模型直接转换为端到端 TensorRT 推理，无需中间 ONNX 导出，并且输出可通过原生 C++ API 部署。该帖子还声称，该项目本身主要是在人工审查下由 Codex 智能体构建的，这与其说是营销，不如说是又一个信号，表明基础设施/工具团队现在愿意承认智能体辅助涉及了实现、调优、测试、集成和文档。
+
+Cursor published a strong infra retrospective on Git hosting at scale: The standout systems post by engagement was Cursor’s writeup on designing Git storage “as if it were a database”. This is adjacent to AI rather than model-specific, but highly relevant for anyone building coding-agent backends: as agents amplify repo churn, background automation, and branch/session proliferation, Git hosting becomes a core AI infra dependency rather than a generic devops primitive.
+
+Cursor 发表了一篇关于大规模 Git 托管的强力基础设施回顾：按互动量计算，最突出的系统类帖子是 Cursor 关于“像设计数据库一样设计 Git 存储”的文章。这与 AI 相邻而非模型专属，但对任何构建编码智能体后端的人都高度相关：随着智能体加剧仓库变更、后台自动化以及分支/会话激增，Git 托管成为核心 AI 基础设施依赖，而非通用的 DevOps 原语。
+
+Fast decoding and accelerator claims kept escalating: On-device inference got a notable boost with DFlash 2 claiming Qwen3.8-27B at 70 tok/s on an M5 Max, up to 4.6× autoregressive decoding “with the same output.” On the datacenter side, Cerebras announced CS-4, with follow-on claims around 10T models at 1000 tok/s, ~1300 tok/s for GPT-5.6 Sol, and up to 10× higher throughput per MW. Even allowing for vendor framing, the throughline is clear: inference speed is becoming product UX, economics, and national-competitiveness policy all at once.
+
+快速解码与加速器相关声明不断升级：端侧推理获得显著提升，DFlash 2 声称在 M5 Max 上以 70 tok/s 运行 Qwen3.8-27B，自回归解码速度最高提升 4.6 倍，“且输出相同”。在数据中心方面，Cerebras 发布了 CS-4，随后宣称支持 10T 模型以 1000 tok/s 运行，GPT-5.6 Sol 约 1300 tok/s，每兆瓦吞吐量最高提升 10 倍。即使考虑到厂商宣传因素，主线也很清晰：推理速度正在同时成为产品体验、经济性和国家竞争力政策。
+
+Agent Harnesses, Evals, and Production Feedback Loops
+
+智能体外壳、评估与生产反馈回路
+
+Miles v0.1 is a serious new OSS RL stack for LLMs and multimodal models: @radixark announced Miles, an open-source RL framework built over 9 months, with 72 contributors, 1,326 commits, and 85 GPU E2E CI tests, reportedly battle-tested on models including Kimi K3, DeepSeek V4, Qwen 3.8, GLM 5.2, Inkling, and MiniMax H3. The pitch is practical: getting RL runs started is easy, but debugging correctness, utilization, and scale is the real bottleneck. This fits the broader theme of the day: the frontier is shifting from “who has PPO/GRPO” to who has robust rollouts, CI, observability, and environment plumbing.
+
+Miles v0.1 是一个严肃的新开源 LLM 和多模态模型 RL 技术栈：@radixark 宣布了 Miles，这是一个历时 9 个月构建的开源 RL 框架，拥有 72 位贡献者、1,326 次提交和 85 个 GPU 端到端 CI 测试，据称已在包括 Kimi K3、DeepSeek V4、Qwen 3.8、GLM 5.2、Inkling 和 MiniMax H3 在内的模型上经过实战检验。其定位很务实：启动 RL 运行很容易，但调试正确性、利用率和扩展才是真正的瓶颈。这符合当天更广泛的主题：前沿正在从“谁拥有 PPO/GRPO”转向“谁拥有稳健的 rollout、CI、可观测性和环境管道”。
+
+Search benchmarking for agents is maturing: Artificial Analysis launched its Search Index, comparing providers in a fixed harness with GPT-5.6 Luna inside its open-source Stirrup agent framework. Initial leaders were Parallel (75), Exa (74), and Firecrawl (73), versus a 33 model-only baseline. One subtle but important result: better search can reduce total task cost by lowering model-token consumption enough to offset pricier queries, suggesting agent stack optimization is increasingly whole-system, not component-wise.
+
+针对智能体的搜索基准测试正在成熟：Artificial Analysis 推出了 Search Index，在其开源 Stirrup 智能体框架中，使用 GPT-5.6 Luna 在固定测试平台上比较各提供商。最初领先的是 Parallel (75)、Exa (74) 和 Firecrawl (73)，而纯模型基线为 33。一个微妙但重要的结果：更好的搜索可以通过降低模型 token 消耗来减少总任务成本，足以抵消更昂贵的查询，这表明智能体栈优化日益成为整个系统的优化，而非组件层面的优化。
+
+LangSmith pushed “specialized evaluators on every trace” as the new normal: LangChain introduced LangSmith Tuned Evaluators, starting with Perceived Error, claiming better performance than frontier models at 82% lower cost. The more strategic point came from follow-up commentary by @Vtrivedy10 and others: teams want hundreds of cheap judges running continuously on production traces, turning eval from a pre-launch checkpoint into a persistent data-mining loop for agent improvement.
+
+LangSmith 将“对每条轨迹使用专用评估器”推为新常态：LangChain 推出了 LangSmith Tuned Evaluators，从 Perceived Error 开始，声称以 82% 更低的成本实现优于前沿模型的性能。更具战略意义的观点来自 @Vtrivedy10 等人的后续评论：团队希望有数百个廉价评判器在生产轨迹上持续运行，将评估从发布前检查点转变为智能体改进的持续数据挖掘循环。
+
+Harnesses are becoming the real product surface: Multiple tweets converged on this: LangChain’s Managed Deep Agents/channels model, Cloudflare-powered personal workbenches like Tiller, Vercel’s HarnessAgent integration for Cline, and coding-agent UX wars around T3 Code, where Theo defended the product and later shipped a triage flow that hands local debugging to Claude Code or Codex. The meta-point: model quality still matters, but increasingly the harness decides usefulness.
+
+外壳正在成为真正的产品表面：多条推文都指向这一点：LangChain 的 Managed Deep Agents/渠道模型、由 Cloudflare 驱动的个人工作台（如 Tiller）、Vercel 面向 Cline 的

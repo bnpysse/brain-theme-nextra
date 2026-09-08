@@ -1,0 +1,85 @@
+---
+title: "Any Nix package, live in the browser_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Any Nix package, live in the browser  
+【标题翻译】：任何Nix软件包，都能在浏览器中实时运行  
+
+【文章正文】：
+tl;dr Try it at https://trynix.dev. Click hello, or python 3.6.2 from 2017, or two eras of hello at once, or a package that exists in no public cache. A Linux machine boots in the tab and you get a shell with those Nix packages on PATH.  
+【正文翻译】：  
+简而言之：在https://trynix.dev上试试吧。点击hello，或者2017年的python 3.6.2，或者同时运行两个不同版本的hello，甚至运行一个不存在于任何公共缓存中的软件包。一个Linux系统会在浏览器标签页中启动，你就能在PATH上使用这些Nix软件包的shell环境。  
+
+This is my magnum opus of Nix work.  
+【翻译】：这是我Nix工作的巅峰之作。  
+
+I knew all the ideas I have been creating were building blogs for something greater: nixpkgs-multiverse indexed every version of every package nixpkgs ever shipped, grail taught it version ranges and omniflake allowed adding over sixteen thousand flakes from a single input.  
+【翻译】：我深知之前所有的创意都在为更伟大的事物奠基：nixpkgs-multiverse索引了nixpkgs发布过的每个软件包的所有版本，grail教会了它版本区间管理，而omniflake实现了通过单一输入添加超1.6万个flakes的能力。  
+
+The crazy insight I had lately was the craziness of the "fast-mode" of the nixmultiverse.com, which lets you skip evaluation and go straight to the store path. This lets you leverage the amazingness of Nix without having to deal with the complexity of evaluation and building. You can just ask for a package and get the exact store path that Hydra built for it, at any version it ever had.  
+【翻译】：我最近的疯狂洞见来自nixmultiverse.com的"快速模式"，它能跳过评估直接获取存储路径。这让你享受Nix的强大功能，却无需处理评估和构建的复杂性。你可以直接索取某个软件包，立即获得Hydra为其构建的精确存储路径——无论哪个历史版本。  
+
+If we have the produced binaries, we can run them. And if we can run them, we can run any of them, in a browser tab, with nothing installed on the host machine.  
+【翻译】：既然我们能获取构建好的二进制文件，就能运行它们。而如果能运行，就意味着能在浏览器标签页里运行其中任何一个——主机上无需安装任何东西。  
+
+Welcome to trynix, a browser-based Nix package runner. You can browse the complete history of nixpkgs, over 310,083 package versions, and run any of them11It is a serial console, so nothing graphical. The machine boots to a shell, and you can run any command-line program in the store. in a Linux machine that boots in your tab. It is a Nix store in memory, a Linux kernel in WebAssembly, and a terminal emulator in the page.  
+【翻译】：欢迎来到trynix，这款基于浏览器的Nix软件包运行器。你可以浏览nixpkgs的完整历史（超过310,083个软件包版本），并在标签页启动的Linux机器中运行其中任意一个11注：这是串行控制台，不包含图形界面。系统会启动到shell环境，你可以运行存储中的任何命令行程序。。它由内存中的Nix存储、WebAssembly实现的Linux内核和页面内的终端模拟器构成。  
+
+This is bonkers! 🤯 We can boot the VM with the store-path closure within seconds. Nothing is pre-installed: search, pick a version, boot, run it.  
+【翻译】：这太疯狂了！🤯 我们能在几秒内启动包含存储路径闭包的虚拟机。无需预装任何内容：搜索→选择版本→启动→运行。  
+
+The craziest part? We are not restricted to the public cache. You can share a store path you built yourself, and anyone can boot it in their browser tab. The only requirement is that the cache is served with access-control-allow-origin: *, which GitHub Pages does for free22I was a little surprised to learn that GitHub Pages can work as a binary cache. It is just a static file server, and it serves access-control-allow-origin: * on every file. That is all that is needed to make a Nix store path available to trynix. , so does Cachix and obviously cache.nixos.org as well.  
+【翻译】：最疯狂的是什么？我们不受限于公共缓存。你可以分享自己构建的存储路径，任何人都能在浏览器标签页启动它。唯一要求是缓存服务器需设置access-control-allow-origin: *——GitHub Pages免费提供此服务22得知GitHub Pages能作为二进制缓存令我惊讶。它只是静态文件服务器，但为每个文件提供access-control-allow-origin: *响应头，这正是trynix获取Nix存储路径所需的全部条件。，Cachix和cache.nixos.org显然也满足。  
+
+In a unbelievable twist of fate, I had actually requested 5 years ago for cache.nixos.org to serve access-control-allow-origin: * via issue#156 to make it possible to query the cache from an OpenAPI specification I had implemented. Thank you universe. 🙏  
+【翻译】：命运的奇妙转折在于，五年前我竟通过issue#156提议让cache.nixos.org提供access-control-allow-origin: *，以便通过我实现的OpenAPI规范查询缓存。感谢宇宙。🙏  
+
+This link boots a VM with a store-path served from Github Pages of a modified GNU hello. This is a store path that does not exist on cache.nixos.org and yet it boots in your browser tab.  
+【翻译】：这个链接会启动一个虚拟机，其存储路径来自托管于GitHub Pages的修改版GNU hello。这个存储路径不存在于cache.nixos.org，却能在你浏览器标签页中启动。  
+
+§Making the pieces fit  
+【小节标题】：让拼图严丝合缝  
+
+Since we can access store-paths from caches that serve access-control-allow-origin: *, that makes the browser a legitimate Nix client.  
+【翻译】：既然能从提供access-control-allow-origin: *的缓存获取存储路径，浏览器就成了合法的Nix客户端。  
+
+The missing piece the browser lacked was somewhere to run the binaries since they store-paths are either x86-64 or aarch64 ELF executables.  
+【翻译】：浏览器缺失的关键环节是运行这些二进制文件的环境——因为存储路径包含的是x86-64或aarch64架构的ELF可执行文件。  
+
+Standing on the shoulders of giants, we can run a Linux kernel in WebAssembly. This means we can boot a real x86_64 kernel inside our browser tab. Give that kernel a filesystem containing a Nix store. All that’s left knowing which store-paths to fetch, which we beautifully solved with nixpkgs-multiverse. 🤌  
+【翻译】：站在巨人肩膀上，我们能在WebAssembly中运行Linux内核。这意味着可以在浏览器标签页内启动真正的x86_64内核。为这个内核配备包含Nix存储的文件系统后，唯一剩下的就是确定要获取哪些存储路径——这个问题已被nixpkgs-multiverse优雅解决。🤌  
+
+I have to keep reminding myself: there is no server in the above picture, the web-page is purely static files and everything else is a publicly accessible cache. It is a virtual machine that exists only inside your tab. The ultimate embodiment of Erase your darlings.  
+【翻译】：我必须不断提醒自己：整个架构中不存在服务器，网页是纯静态文件，其他所有组件都是可公开访问的缓存。这台虚拟机仅存在于你的标签页中，是"擦除式部署"理念的终极体现。  
+
+Since this is Nix, we get the simplicity of managing multiple versions of the same package. You can boot two versions of hello in one machine, and they will not conflict because each binary names its own dependencies by absolute path (RUNPATH) down to the loader and libc.  
+【翻译】：由于采用Nix，我们可以轻松管理同一软件包的多个版本。你能在同一台机器启动两个版本的hello程序，它们绝不会冲突——因为每个二进制文件都通过绝对路径(RUNPATH)指名自己的依赖，直到加载器和libc。  
+
+Once the VM is already started, you can add more store-paths to it while it’s running. This is no different than adding more paths to your own /nix/store on your laptop. No reboot, or dnf install, or apt-get install, the site fetches the closure and adds it to the store.  
+【翻译】：虚拟机启动后，你还能在运行时添加更多存储路径。这和在你笔记本的/nix/store添加路径没有区别。无需重启，不用dnf install或apt-get install，网站会获取闭包并添加到存储中。  
+
+§It has to feel instant  
+【小节标题】：必须实现瞬时响应  
+
+Booting a kernel under emulation is slow, and despite the amazingness of the idea, no one would use it if it took 30 seconds to get a shell.  
+【翻译】：模拟环境下启动内核很慢，尽管创意惊人，但如果需要30秒才能获得shell，没人会使用它。  
+
+The site employs some neat tricks to make it feel instant. The site pre-fetches the engine and the VM snapshot in the background, so by the time you click a link, you have already downloaded it.  
+【翻译】：网站采用了一些精巧技巧来实现瞬时感：在后台预加载引擎和虚拟机快照，当你点击链接时，所需内容早已下载完毕。  
+
+The site also never boots the VM from scratch. It resumes. A machine is booted once, ahead of time, on a native build of the same QEMU, and paused at the moment before it mounts the store which is then saved to a snapshot.  
+【翻译】：网站从不从头启动虚拟机，而是恢复运行。先用原生构建的QEMU提前启动一次机器，在挂载存储前暂停，并将状态保存为快照。  
+
+Subsequent visits to the site have the engine and snapshot already in the browser cache, so the only thing that has to be fetched is the closure of the store-path you asked for. This makes each subsequent visit feel much faster.  
+【翻译】：再次访问时，引擎和快照已存在于浏览器缓存中，只需获取你请求的存储路径闭包。这使得每次后续访问都更加迅捷。  
+
+I have to give a lot of cr...  
+【翻译】：我必须感谢许多...(原文截断)  
+
+（注：由于原文末尾不完整，最后一句保留原文未翻译）
+
+## 🔗 知识库双向关联
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/Raw-翻译-派评-近期值得关注的-App)
+- [The Pulse Grok’s CLI caught uploading all your local files t_全翻译](/auto-clippings/Raw-翻译-The-Pulse-Groks-CLI-caught-uploading-all-yo)
+- [The Pulse Grok’s CLI caught uploading all your local files t_全翻译](/auto-clippings/Raw-翻译-The-Pulse-Groks-CLI-caught-uploading-all-yo)
