@@ -22,6 +22,7 @@ export default {
   "Raw-逐字稿-OpenAIs-AI-Agents-Just-Crossed-A-Line": "Raw_逐字稿_OpenAIs AI Agents Just Crossed A...",
   "Raw-逐字稿-How-Much-Would-an-AI-Crash-Destroy": "Raw_逐字稿_How Much Would an AI Crash Destr...",
   "Raw-逐字稿-Here-We-Go-Again": "Raw_逐字稿_Here We Go Again",
+  "Raw-逐字稿-GPT-6-Astra-Changes-Everything": "Raw_逐字稿_GPT-6 Astra Changes Everything",
   "Raw-逐字稿-Finfluencer-Promotions-Are-Getting-Worse": "Raw_逐字稿_Finfluencer Promotions Are Getti...",
   "Raw-逐字稿-Elon-Musks-Plan-For-Mars": "Raw_逐字稿_Elon Musks Plan For Mars",
   "Raw-逐字稿-Different-Strengths-Different-Weaknesses": "Raw_逐字稿_Different Strengths  Different W...",
