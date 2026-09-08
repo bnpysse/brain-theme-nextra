@@ -1224,6 +1224,7 @@ export default {
   "Raw-翻译-Knowing-When-to-Stop-The-Art-of-Making-a-Lo": "Knowing When to Stop The Art of Making a...",
   "Raw-翻译-Kimi涨价、OpenAI降价：中国土AI冲击美国山大王": "Kimi涨价、OpenAI降价：中国土AI冲击美国山大王",
   "Raw-翻译-Kimi-启动IPO，赶在市场不再按梦想定价之前": "Kimi 启动IPO，赶在市场不再按梦想定价之前",
+  "Raw-翻译-Kimi-K3-28T-at-1-tokens-on-a-MacBook-Pro-st": "Kimi K3 2.8T at 1 tokens on a MacBook Pr...",
   "Raw-翻译-Kids-These-Days": "Kids These Days",
   "Raw-翻译-Keep市值暴跌": "Keep市值暴跌",
   "Raw-翻译-Just-a-rumour-of-a-bug-is-enough-to-find-a": "Just a rumour of a bug is enough to find...",
