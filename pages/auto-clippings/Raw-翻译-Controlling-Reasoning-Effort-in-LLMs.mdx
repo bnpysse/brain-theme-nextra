@@ -1,0 +1,380 @@
+---
+title: "Controlling Reasoning Effort in LLMs_全翻译"
+tags: ["大咖视点_全文翻译", "Ahead_of_AI_(Sebastian_Raschka_机器学习与大模型)"]
+---
+
+【文章标题】：Controlling Reasoning Effort in LLMs
+
+【文章标题】：控制大语言模型中的推理投入
+
+【文章正文】：
+It has been almost two years since OpenAI released o1, a model that popularized the idea of LLM-based reasoning models. DeepSeek-R1 followed about four months later, together with details of a reinforcement learning with verifiable rewards (RLVR) recipe to train such reasoning models.
+
+【文章正文】：
+距离OpenAI发布o1（一个让基于大语言模型的推理模型这一概念广为人知的模型）已经将近两年了。大约四个月后，DeepSeek-R1问世，同时公布了使用可验证奖励强化学习（RLVR）训练此类推理模型的详细方法。
+
+Last week, OpenAI released the GPT-5.6 model family. It comes in three sizes, each with roughly five or six reasoning-effort settings.
+
+上周，OpenAI发布了GPT-5.6模型系列。该系列包含三种规模，每种规模都配有大约五到六档推理投入设置。
+
+Figure 1: The GPT 5.6 Sol model with different reasoning effort settings. (Benchmark numbers for Ultra are currently not available but should be relatively similar to Max, since it uses a similar effort level but accelerates the work with four subagents.)
+
+图1：GPT 5.6 Sol模型在不同推理投入设置下的表现。（Ultra的基准测试数据目前尚未公布，但应与Max较为接近，因为它使用类似的投入水平，但通过四个子代理加速工作。）
+
+So yes, reasoning models are here to stay. They have become a standard part of modern model releases.
+
+所以没错，推理模型已经站稳脚跟，成为现代模型发布的标配组成部分。
+
+In the past, I covered the methodology of reasoning models (
+
+Understanding Reasoning LLMs
+
+) as well as relevant research papers (
+
+The State of Reinforcement Learning for LLM Reasoning
+
+and
+
+The State of LLM Reasoning Model Inference
+
+). And I even wrote a whole new 440-page book on how to develop reasoning models,
+
+Build A Reasoning Model (From Scratch)
+
+.
+
+过去，我撰文介绍过推理模型的方法论（《理解推理大语言模型》）以及相关研究论文（《大语言模型推理的强化学习现状》和《大语言模型推理模型推理现状》）。我甚至写了一本整整440页的新书，讲述如何开发推理模型——《从零构建推理模型》。
+
+Figure 2: My new
+
+Build A Reasoning Model (From Scratch)
+
+book. In color!
+
+图2：我的新书《从零构建推理模型》。全彩印刷！
+
+These resources have focused on turning a conventional LLM into a reasoning model. Now, in this article, I want to focus on and explain how to develop a reasoning model that has multiple effort modes, similar to what's shown in the figure at the beginning of this article.
+
+这些资源主要聚焦于将传统大语言模型转变为推理模型。现在，在本文中，我想重点讲解如何开发一个具有多种投入模式的推理模型，类似于本文开头图中所示的那样。
+
+No worries, this article can be read as a standalone article. However, the aforementioned resources may be interesting and useful.
+
+别担心，本文完全可以作为独立文章阅读。不过，上述资源可能也会让你感兴趣并有所助益。
+
+1. A brief definition of reasoning models
+
+1. 推理模型的简要定义
+
+When talking about pretty much any machine learning or AI technique or subfield, the one lesson is that we usually shouldn't take technical terms "literally". For example, an (artificial) neural network in machine learning and AI doesn't literally work like a biological neural network like the human brain.
+
+在谈论几乎任何机器学习或AI技术或子领域时，有一条经验之谈：我们通常不应"按字面意思"理解技术术语。例如，机器学习与AI中的（人工）神经网络并非真的像人脑这样的生物神经网络那样运作。
+
+Similarly, when talking about "reasoning models", we shouldn't expect that these models literally reason like us humans. In the context of AI and LLM research, "reasoning model" means a model that outputs an intermediate reasoning trace, which is like an intermediate response that works through a question or task step by step.
+
+同样，当我们谈论"推理模型"时，也不应期望这些模型真的像人类一样推理。在AI和大语言模型研究的语境中，"推理模型"指的是输出中间推理轨迹的模型，这种轨迹类似于逐步解决某个问题或任务的中间响应。
+
+It's probably easiest to explain this by showing an example.
+
+通过举例来说明可能是最简单的理解方式。
+
+Figure 3: Illustration of a conventional LLM answer (left) and an answer by a reasoning model (right).
+
+图3：传统大语言模型回答（左）与推理模型回答（右）的对比示意图。
+
+2. A brief overview of training and inference scaling reasoning models
+
+2. 训练扩展与推理扩展推理模型简述
+
+There are essentially two ways to improve (reasoning) task performance: training scaling and inference scaling.
+
+本质上，提升（推理）任务性能有两种方式：训练扩展和推理扩展。
+
+Figure 4: Training and inference-scaling are two ways to improve LLM and reasoning model problem-solving capabilities. Plot based on
+
+Learning to reason with LLMs
+
+图4：训练扩展和推理扩展是提升大语言模型和推理模型问题解决能力的两种方式。图基于《Learning to reason with LLMs》。
+
+Let's briefly talk about training first.
+
+我们先简要谈谈训练。
+
+2.1 Training reasoning models
+
+2.1 训练推理模型
+
+In a nutshell,
+
+DeepSeek-R1
+
+proposed training an LLM using reinforcement learning with verifiable rewards (RLVR) to turn it into a reasoning model. RLVR is a technique to provide a reward signal (
+
+0=incorrect
+
+and
+
+1=correct
+
+) for verifiable data domains. These verifiable data domains here are math (we can use a symbolic math checker like SymPy or WolframAlpha to check results) and code (we can use a compiler or unit tests, or integrated platforms like LeetCode) to check for correctness.
+
+简而言之，DeepSeek-R1提出了使用可验证奖励强化学习（RLVR）训练大语言模型，将其转变为推理模型。RLVR是一种为可验证数据领域提供奖励信号（0=错误，1=正确）的技术。这里的可验证数据领域包括数学（我们可以使用SymPy或WolframAlpha等符号数学检查器来验证结果）和代码（我们可以使用编译器、单元测试或LeetCode等集成平台来检查正确性）。
+
+Figure 5: Illustration of accuracy and format rewards during RLVR training.
+
+图5：RLVR训练过程中准确率奖励和格式奖励的示意图。
+
+Notably, the reasoning trace itself was not used for training or updating the model. Although they tried to use this intermediate response information for training, the DeepSeek-R1 paper reported that it wasn't helpful for the model training, so it was ultimately not used. (Whether and how to incorporate intermediate reasoning traces in the training signal via process reward models is an active area of research.)
+
+值得注意的是，推理轨迹本身并未用于训练或更新模型。尽管他们尝试将这种中间响应信息用于训练，但DeepSeek-R1论文报告称这对模型训练没有帮助，因此最终未被采用。（是否以及如何通过过程奖励模型将中间推理轨迹纳入训练信号，是一个活跃的研究领域。）
+
+Figure 6: The intermediate reasoning trace is ignored during RLVR; only the final answer and response format determine the reward.
+
+图6：在RLVR过程中，中间推理轨迹被忽略；只有最终答案和响应格式决定奖励。
+
+2.2 "Aha" moments
+
+2.2 "啊哈"时刻
+
+Anyway, just training on the output rewards alone, as Figure 7 shows, turned out to be sufficient for the model to learn how to reason through a problem, meaning that it would learn to write intermediate explanations, backtrack, and self-correct itself. These moments when the model realizes that it made a mistake and self-corrects itself are called "Aha" moments.
+
+无论如何，如图7所示，仅基于输出奖励进行训练，就足以让模型学会如何推理解决问题，也就是说，它会学会编写中间解释、回溯和自我纠错。模型意识到自己犯了错误并自我纠正的这些时刻，被称为"啊哈"时刻。
+
+Figure 7: An example of an aha moment, where a reasoning model notices an error in its intermediate reasoning and corrects it before producing the final answer.
+
+图7：一个"啊哈"时刻的示例，推理模型在生成最终答案之前注意到其中间推理中的错误并加以纠正。
+
+By the way, while DeepSeek-R1 is inarguably the more popular paper, and the paper that created excitement around reinforcement learning with verifiable rewards and the development of reasoning models, there is another paper,
+
+Kimi K1.5
+
+, published on exactly the same day on arXiv (22 Jan 2025). Also, the term RLVR was already coined two months earlier in
+
+Tülu 3: Pushing Frontiers in Open Language Model Post-Training
+
+.
+
+顺便提一下，虽然DeepSeek-R1无疑是更受欢迎的论文，也是引发人们对可验证奖励强化学习和推理模型开发热情的那篇论文，但还有另一篇论文《Kimi K1.5》恰好于同一天（2025年1月22日）发表在arXiv上。此外，RLVR这个术语早在两个月前的《Tülu 3: Pushing Frontiers in Open Language Model Post-Training》中就已提出。
+
+One reason why the DeepSeek R1 is ultimately the more popular paper is that it demonstrated that reasoning behavior can be achieved with pure reinforcement learning (RL).
+
+DeepSeek R1最终成为更受欢迎论文的一个原因是，它证明了仅通过纯强化学习（RL）就能实现推理行为。
+
+Figure 8: DeepSeek-R1-Zero applies RLVR directly to the pretrained base model without supervised fine-tuning.
+
+图8：DeepSeek-R1-Zero直接将RLVR应用于预训练基础模型，无需监督微调。
+
+For instance, Tülu 3 and Kimi K1.5 applied reinforcement learning on top of a supervised fine-tuned (SFT) model. The DeepSeek-R1 model was also trained from an SFT checkpoint of the DeepSeek-V3 base model, and it included a DeepSeek-R1-Zero variant trained with pure RLVR. R1 Zero is a weaker model than R1, but it showed that RLVR is sufficient for teaching the model to generate and use reasoning traces.
+
+例如，Tülu 3和Kimi K1.5是在监督微调（SFT）模型的基础上应用强化学习。DeepSeek-R1模型也是从DeepSeek-V3基础模型的SFT检查点训练而来，并且包含一个使用纯RLVR训练的DeepSeek-R1-Zero变体。R1 Zero是比R1更弱的模型，但它证明了RLVR足以教会模型生成和使用推理轨迹。
+
+While R1-Zero was more of a proof-of-concept model, note that the full DeepSeek-R1 reasoning model training pipeline is usually multi-stage and a bit more complicated, as mentioned above.
+
+虽然R1-Zero更像是一个概念验证模型，但请注意，完整的DeepSeek-R1推理模型训练流程通常是多阶段的，并且如上所述要更复杂一些。
+
+Figure 9: More detailed reasoning model training pipeline. This one depicts the various DeepSeek-R1 models. For more details, see my other article:
+
+Understanding Reasoning LLMs
+
+图9：更详细的推理模型训练流程。此图描绘了各种DeepSeek-R1模型。更多细节请参阅我的另一篇文章：《理解推理大语言模型》。
+
+By the way, most of today's LLMs are effectively reasoning models, meaning they have been trained in a similar fashion to DeepSeek-R1 using a form of RLVR.
+
+顺便说一句，如今大多数大语言模型实际上都是推理模型，这意味着它们采用了与DeepSeek-R1类似的方式，使用某种形式的RLVR进行训练。
+
+2.3 Inference scaling in a nutshell
+
+2.3 推理扩展简述
+
+Next to improving reasoning behavior through training, another lever for improving model performance is inference compute scaling. In short, this means that we are spending more compute after training the model, during usage, to get better answers.
+
+除了通过训练改善推理行为之外，提升模型性能的另一个杠杆是推理计算扩展。简而言之，这意味着我们在模型训练完成后、使用过程中投入更多计算量，以获得更好的答案。
+
+This is a whole topic by itself, and you could read through my The State of LLM Reasoning Model Inference for a more detailed rundown:
+
+这本身就是一个完整的主题，你可以阅读我的《大语言模型推理模型推理现状》一文获取更详细的介绍：
+
+I will try to summarize what's most essential to mention as background info below.
+
+下面我将尝试总结作为背景信息最需要提及的核心要点。
+
+First, training a model with RLVR is already implicitly leading to a form of inference scaling, since reasoning models usually output more tokens during inference compared to conventional LLMs, and that means we are spending more compute during inference.
+
+首先，使用RLVR训练模型已经在隐性地促成一种推理扩展形式，因为与传统大语言模型相比，推理模型在推理过程中通常会输出更多token，这意味着我们在推理时花费了更多计算量。
+
+Second, we can further adjust this output length via reasoning effort levels, but more on that later.
+
+其次，我们可以通过推理投入级别进一步调整输出长度，但关于这一点我们稍后再详谈。
+
+Third, there are many additional inference scaling techniques. A popular one is self-consistency, which is often implemented as a form of majority voting where the model is queried multiple times, and the final answer is selected via majority vote.
+
+第三，还有许多其他的推理扩展技术。其中一种流行的方法是自洽性（self-consistency），它通常以多数投票的形式实现：对模型进行多次查询，然后通过多数投票选出最终答案。
+
+Figure 10: An example of self-consistency, a popular inference scaling technique.
+
+图10：自洽性（一种流行的推理扩展技术）的示例。
+
+This can be applied to conventional LLMs as well as reasoning models. Also, this method can be used on demand and in addition to reasoning training. A good example of that is DeepSeekMath-V2, where the researchers applied extreme inference-scaling on top of a reasoning model (specialized for math) to achieve state-of-the-art performance on challenging math olympiad-type problems.
+
+这种方法既适用于传统大语言模型，也适用于推理模型。此外，这种方法可以按需使用，也可以作为推理训练的补充。一个很好的例子是DeepSeekMath-V2，研究人员在（专门针对数学的）推理模型之上应用了极端的推理扩展，在具有挑战性的数学奥林匹克类型题目上取得了最先进的性能。
+
+Figure 11: Two types of inference scaling (self-consistency and self-refinement) used together to improve math performance. Figure adapted from
+
+DeepSeekMath-V2: Towards Self-Verifiable Mathematical Reasoning
+
+图11：两种推理扩展（自洽性和自我精炼）结合使用以提升数学性能。图改编自《DeepSeekMath-V2: Towards Self-Verifiable Mathematical Reasoning》。
+
+But again, I will refer to my other article, The State of LLM Reasoning Model Inference for an overview of other techniques:
+
+但同样，关于其他技术的概述，我将引用我的另一篇文章《大语言模型推理模型推理现状》：
+
+3. Think tokens
+
+3. 思考标记
+
+You may have seen the
+
+ thinking
+
+ response
+
+tokens in the earlier "Aha moments" figure. I also included the corresponding figure below so you don't have to scroll all the way up.
+
+你可能在前面"啊哈时刻"的图中看到过
+
+ thinking
+
+和
+
+ response
+
+这些标记。我在下面也附上了相应的图，这样你就不必一直往上翻了。
+
+Figure 12: Common formatting tokens in reasoning models.
+
+图12：推理模型中常见的格式标记。
+
+These
+
+ thinking
+
+and
+
+ response
+
+tags are cosmetic with respect to reasoning ability. They do not make the model reason, and they are not required to achieve good reasoning performance. One could train the same model without these delimiters and likely reach similar benchmark performance.
+
+这些
+
+ thinking
+
+和
+
+ response
+
+标签在推理能力方面只是装饰性的。它们并不会让模型进行推理，也不是获得良好推理性能所必需的。人们完全可以训练不带这些分隔符的相同模型，很可能达到类似的基准测试性能。
+
+The purpose of these
+
+ thinking
+
+tags or tokens is mainly to mark where the reasoning trace begins and ends so that the training pipeline or user interface can separate it from the final answer and optionally hide it from the user. (UIs like ChatGPT or Codex usually do this.)
+
+这些
+
+ thinking
+
+标签或标记的主要目的是标记推理轨迹的起始和结束位置，以便训练流程或用户界面将其与最终答案分离，并可选地对用户隐藏。（ChatGPT或Codex等界面通常就是这样做的。）
+
+The point here is that the
+
+ thinking
+
+tokens are not giving the model the ability to "think" or reason or reason better. One could train the same models without such
+
+ thinking
+
+tokens and reach similar benchmark performance.
+
+这里的关键在于，
+
+ thinking
+
+标记并不会赋予模型"思考"或推理或更好推理的能力。人们完全可以训练不带此类
+
+ thinking
+
+标记的相同模型，并获得类似的基准测试性能。
+
+There is also nothing special about the literal strings
+
+ thinking
+
+and
+
+ response
+
+. Another pair of delimiters could serve the same purpose.
+
+此外，字面字符串
+
+ thinking
+
+和
+
+ response
+
+本身也没有什么特殊之处。其他任何一对分隔符都可以起到同样的作用。
+
+By the way, the way this is implemented is typically by adding a formatting reward during the RLVR stage. So instead of just rewarding the model based on answer correctness, one would provide additional reward for the use of  thinking tokens, which in turn encourages the model to use those.
+
+顺便说一句，这通常是通过在RLVR阶段添加格式奖励来实现的。也就是说，不只是根据答案正确性给予模型奖励，还会为使用
+
+ thinking
+
+标记提供额外奖励，从而鼓励模型使用这些标记。
+
+In DeepSeek-R1, for example, the overall reward was calculated as
+
+R_total = R_accuracy + R_format
+
+where the format reward was a simple rule-based check that encouraged the model to place its reasoning inside:
+
+ thinking
+
+reasoning trace
+
+ response
+
+.
+
+例如，在DeepSeek-R1中，总奖励的计算方式为
+
+R_total = R_accuracy + R_format
+
+其中格式奖励是一种简单的基于规则的检查，鼓励模型将推理内容放在以下格式中：
+
+ thinking
+
+推理轨迹
+
+ response
+
+。
+
+4. Reasoning mode on and off switches
+
+4. 推理模式开关
+
+The first generation of reasoning models was dedicated reasoning models. With that, I mean that there was a DeepSeek-V3 base model and a separate DeepSeek-R1 reasoning model.
+
+第一代推理模型是专用推理模型。我的意思是，当时有一个DeepSeek-V3基础模型和一个单独的DeepSeek-R1推理模型。
+
+No matter what the prompt is, R1 generally outputs very verbose responses using lots of tokens, even for simple prompts. It also lacks a built-in option to turn off the reasoning mode.
+
+无论提示词是什么，R1通常都会输出非常冗长的响应，消耗大量token，即使对于简单的提示词也是如此。它也没有内置的选项来关闭推理模式。
+
+Figure 13: Reasoning models are very verbose, even for the simplest prompts.
+
+图13：推理模型即使面对最简单的提示词也会输出非常冗长的内容。
+
+Later models, like Qwen3 and others, experimented with hybrid approaches, where the same model can

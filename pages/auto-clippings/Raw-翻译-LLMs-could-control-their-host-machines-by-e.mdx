@@ -1,0 +1,97 @@
+---
+title: "LLMs could control their host machines by exploiting inferen_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：LLMs could control their host machines by exploiting inference engines
+
+【文章标题】：LLM 可能通过利用推理引擎漏洞来控制其宿主机器
+
+【文章正文】：
+| Read on LessWrong |
+| 在 LessWrong 上阅读 |
+
+Large language models often take actions running on one computer (via an agentic harness such as Claude Code or Codex), however the LLMsâ responses to prompts are computed on a different computer with GPU access. Could a malicious LLM gain control of the host machine where its weights are loaded? Such a machine is a high-value target: it has sufficient compute to run a frontier LLM, offers easy access to the LLMâs weights, and has privileged access to other computers in the datacentre compared with a generic computer on the internet.
+
+大型语言模型通常在一台计算机上执行操作（通过诸如 Claude Code 或 Codex 之类的智能体框架），然而 LLM 对提示的响应却是在另一台具有 GPU 访问权限的计算机上计算得出的。一个恶意 LLM 能否控制加载其权重的宿主机器？这样的机器是一个高价值目标：它拥有运行前沿 LLM 所需的充足算力，可以轻松访问 LLM 的权重，并且与互联网上的普通计算机相比，它对数据中心内的其他计算机拥有特权访问权限。
+
+This essay explores how easily a malicious LLM could take control of the host machine. The primary attack considered here involves the LLM emitting a token sequence whose semantic meaning is irrelevant but that exploits a vulnerability in the software that loads an LLM onto GPUs, runs the LLM to generate output tokens, and parses those tokens into responses. .
+
+本文探讨恶意 LLM 控制宿主机器有多容易。这里考虑的主要攻击方式是：LLM 发出一个语义无关的 token 序列，但该序列利用了将 LLM 加载到 GPU、运行 LLM 生成输出 token 并将这些 token 解析为响应的软件中的漏洞。
+
+How could an LLM execute code on the host machine?
+LLM 如何在宿主机器上执行代码？
+
+Like any program, inference engines like vLLM or SGLang may contain exploitable bugs. Because the LLM controls the tokens passed to the inference engine, a malicious LLM could therefore emit a sequence of tokens that a poorly written inference engine mistakes for code or instructions to execute rather than data to return to the user.
+
+与任何程序一样，vLLM 或 SGLang 等推理引擎可能包含可利用的漏洞。由于 LLM 控制传递给推理引擎的 token，因此恶意 LLM 可以发出一个 token 序列，而编写不当的推理引擎会将其误认为是需要执行的代码或指令，而不是返回给用户的数据。
+
+But surely all inference engines are robust pieces of software and this would never happen, right?
+但可以肯定的是，所有推理引擎都是健壮的软件，这种情况绝不会发生，对吧？
+
+vLLM previously used eval() on tool-call parameters
+vLLM 之前曾对工具调用参数使用 eval()
+
+CVE-2025-9141 was an arbitrary-code execution bug in vLLMâs XML-based tool
+parser for Qwen3 Coder. The parser passed almost every tool-call argument to
+eval(), allowing the LLM to execute arbitrary code on the host machine.
+Gemini automatically analysed the PR that introduced this bug and
+correctly flagged it as a critical security vulnerability. Despite that
+warning, the lead maintainer of vLLM force-merged the PR, writing:
+
+CVE-2025-9141 是 vLLM 基于 XML 的 Qwen3 Coder 工具解析器中的一个任意代码执行漏洞。该解析器几乎将每个工具调用参数都传给了 eval()，从而允许 LLM 在宿主机器上执行任意代码。Gemini 自动分析了引入此漏洞的 PR，并正确地将其标记为严重安全漏洞。尽管有此警告，vLLM 的首席维护者仍强制合并了该 PR，并写道：
+
+Unfortunately, parsing an arbitrary token sequence into a fully fledged chat (with user turns, assistant responses, tool calls, and so on) is not trivial, and the exact process often differs between LLMs. This complexity creates more opportunities for bugs that could permit arbitrary code execution on the host machine.
+
+不幸的是，将任意 token 序列解析为完整的聊天（包括用户轮次、助手响应、工具调用等）并非易事，而且具体过程在不同 LLM 之间往往存在差异。这种复杂性为可能允许在宿主机器上执行任意代码的漏洞创造了更多机会。
+
+vLLM and SGLang are complex, and bugs are common
+vLLM 和 SGLang 很复杂，漏洞很常见
+
+Modern inference engines do more than map token sequences to strings. vLLMâs documentation lists support for more than 200 model architectures, and its examples directory contains about 35 Jinja chat templates. Modern inference engines parse many chat formats, and slightly misspecified parsing logic result in an LLMâs output being interpreted as code to execute.
+
+现代推理引擎所做的不仅仅是把 token 序列映射为字符串。vLLM 的文档列出了对 200 多种模型架构的支持，其示例目录包含约 35 个 Jinja 聊天模板。现代推理引擎会解析许多聊天格式，而稍有偏差的解析逻辑就可能导致 LLM 的输出被解释为要执行的代码。
+
+In this vLLM issue, a user was discussing how LLMs reason with MiniMax-M3,
+and the LLM emitted the string &lt;mm:think&gt;. vLLM mistakenly parsed this plain
+string as the start of a reasoning block. So instead of:
+Response: I'll echo exactly what you said: &lt;mm:think&gt;\nThere, how was that?
+vLLM parsed this as:
+Response: I'll echo exactly what you said: 
+Reasoning: \nThere, how was that?
+
+在这个 vLLM issue 中，一位用户正在讨论 LLM 如何使用 MiniMax-M3 进行推理，LLM 输出了字符串 &lt;mm:think&gt;。vLLM 错误地将这个普通字符串解析为推理块的开始。因此，它没有解析为：
+Response: 我会原样复述你说的话：&lt;mm:think&gt;\n看，怎么样？
+而是解析为：
+Response: 我会原样复述你说的话：
+Reasoning: \n看，怎么样？
+
+This is a fairly harmless parser bug, but it demonstrates that inference engines do more than convert tokens to strings and concatenate them. They are complex systems under constant iteration and their developers are under a lot of pressure to make them as fast as possible. These factors increase the risk that a malicious LLM could turn a parser bug into arbitrary code execution on the inference host.
+
+这是一个相当无害的解析器漏洞，但它表明推理引擎所做的不仅仅是把 token 转换为字符串并拼接起来。它们是不断迭代的复杂系统，其开发者面临着尽可能提高速度的巨大压力。这些因素增加了恶意 LLM 将解析器漏洞转化为推理主机上任意代码执行的风险。
+
+Vision and audio tokens might increase the attack surface
+视觉和音频 token 可能会扩大攻击面
+
+Multimodal architectures allow an LLM to respond with images or audio as well as
+plain text. Turning a modelâs audio or visual output into usable media is
+probably more complicated than decoding text tokens. However, as far as I can
+tell, current multimodal LLMs generally emit constrained media tokens rather
+than arbitrary file bytes. A model-specific decoder turns those tokens into
+pixels or waveforms, which are then encoded into files. This makes classic
+malformed-file exploits against software such as ffmpeg or media viewers less
+directly accessible to the model, although the additional decoders, encoders,
+and native kernels still increase the attack surface.
+
+多模态架构允许 LLM 以图像或音频以及纯文本的形式进行响应。将模型的音频或视觉输出转换为可用媒体可能比解码文本 token 更复杂。然而，据我所知，当前的多模态 LLM 通常输出受约束的媒体 token，而不是任意文件字节。模型特定的解码器将这些 token 转换为像素或波形，然后编码为文件。这使得针对 ffmpeg 或媒体查看器等软件的经典畸形文件攻击对模型来说不那么直接可达，尽管额外的解码器、编码器和原生内核仍然增加了攻击面。
+
+I do not currently see multimodal output as a major route to host compromise. However, it offers much higher bandwidth than text alone, and future inference engines may optimise these media-generation pathways in ways that make them easier to exploit. I also do not know how proprietary multimodal models represent image and audio output; their methods may carry different risks.
+
+我目前不认为多模态输出是宿主失陷的主要途径。然而，它提供的带宽远高于纯文本，而且未来的推理引擎可能会以使其更容易被利用的方式优化这些媒体生成路径。我也不知道专有多模态模型如何表示图像和音频输出；它们的方法可能带来不同的风险。
+
+How likely is an LLM to discover and exploit inference engine vulnerabilities?
+LLM 发现并利用推理引擎漏洞的可能性有多大？
+
+Somewhat likely? Iâm unsure. Discovering a useful vulnerability is probably the harder step. The sequence of tokens required to exploit it might be quite unusual, but that does not make the vulnerability impractical to exploit. Given the right context (e.g. an LLM exploring the vLLM codebase and discovering 
+
+有一定可能性？我不确定。发现一个有用的漏洞可能是更困难的一步。利用该漏洞所需的 token 序列可能相当不寻常，但这并不意味着该漏洞不切实际、无法利用。在适当的上下文中（例如，一个 LLM 探索 vLLM 代码库并发现……

@@ -1,0 +1,358 @@
+---
+title: "The Frontier AEO Tracker What Astra Chooses and every other_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：The Frontier AEO Tracker: What Astra Chooses (and every other frontier model, and what you can do about it)  
+前沿AEO追踪器：Astra的选择（以及其他前沿模型的选择，以及你能做些什么）  
+
+【文章正文】：  
+Naive  
+天真地  
+
+autoresearch investment  
+自动化研究投资  
+
+in our AEO have yielded impressive ROI, and so naturally it was time to take it seriously. We were inspired by  
+在我们的AEO中取得了令人印象深刻的投资回报率，因此自然到了认真对待的时候。我们受到了  
+
+What Claude Code Actually Chooses  
+《Claude Code实际选择什么》  
+
+, and decided to extend/adjust it to our tastes.  
+的启发，并决定根据我们的喜好进行扩展/调整。  
+
+After  
+经过  
+
+a  
+数  
+
+few billion tokens  
+十亿token  
+
+of prototyping, aligning, and scaling  
+的原型设计、对齐和扩展  
+
+pipelines, here’s  
+流程，以下是  
+
+the  
+我们的  
+
+Latent Space Frontier AEO tracker  
+Latent Space前沿AEO追踪器  
+
+. Our  
+。我们的  
+
+methodology  
+方法  
+
+extends  
+扩展了  
+
+AmplifyingAI’s  
+AmplifyingAI的方法  
+
+to run 6 prompt variations over 7  
+在7个  
+
+models  
+模型  
+
+1  
+1  
+
+(search on) in 161  
+上运行6种提示变体，覆盖161个  
+
+categories  
+类别  
+
+, from  
+，从  
+
+coding agents  
+编码代理  
+
+to  
+到  
+
+AI podcasts  
+AI播客  
+
+to  
+到  
+
+AI Sandboxes  
+AI沙盒  
+
+to  
+到  
+
+Managed Databases  
+托管数据库  
+
+to  
+到  
+
+ASR models  
+ASR模型  
+
+to even oddball categories like  
+甚至包括一些古怪的类别，如  
+
+Angel investors  
+天使投资人  
+
+and  
+和  
+
+Corporate spend  
+企业支出  
+
+and  
+以及  
+
+Payroll software  
+薪资软件  
+
+.  
+。  
+
+Answer extraction was done by Astra, and scored for a  
+答案提取由Astra完成，并根据  
+
+proprietary AEO score  
+专有的AEO评分  
+
+that gives weight to  
+进行评分，该评分重视  
+
+first choices, alternative choices  
+首选、备选  
+
+,  
+，  
+
+mentions  
+提及  
+
+, but  
+，但也  
+
+also negative weights  
+对温和和强烈的反推荐给予负权重  
+
+to mild and strong anti-recommendations (which are rare, but do happen). Because we know you’ll want it, we also extracted the top cited  
+（这种情况很少见，但确实会发生）。因为我们知道你会需要，我们还提取了影响Agent推荐的最常引用的  
+
+sources  
+来源  
+
+, as well as an analysis of  
+，以及对  
+
+top failures  
+主要失败  
+
+的分析。  
+
+Basic Results  
+基本结果  
+
+Here are the most dominant products (in their categories) in the world:  
+以下是全球（在其类别中）最具主导地位的产品：  
+
+There are some familiar names in there — opening up the natural question of contamination, which we have checked. Since we have nothing to hide,  
+其中有一些熟悉的名字——这自然引发了关于污染的问题，我们已经检查过。因为我们没有什么可隐瞒的，  
+
+every prompt and answer pair  
+每个提示和答案对  
+
+is inspectable.  
+都是可检查的。  
+
+However,  
+然而，  
+
+bias  
+偏见  
+
+does exist - when models are asked for coding agent recommendations, Fable/Opus like  
+确实存在——当模型被要求推荐编码代理时，Fable/Opus喜欢  
+
+Claude Code  
+Claude Code  
+
+and Sol/Astra like  
+而Sol/Astra喜欢  
+
+Codex  
+Codex  
+
+and Grok loves  
+Grok喜欢  
+
+Cursor  
+Cursor  
+
+and Muse loves  
+Muse喜欢  
+
+Muse Code  
+Muse Code  
+
+and SWE-1.7 loves  
+SWE-1.7喜欢  
+
+Devin  
+Devin  
+
+and so on. I wonder why. You can see other “  
+等等。我想知道为什么。你还可以看到其他“  
+
+soft biases  
+软偏见  
+
+” emerge too…  
+”出现……  
+
+That said there are notable examples of GPT models recommending Claude, a laudable nonbias:  
+也就是说，也有一些值得注意的例子，比如GPT模型推荐Claude，这是一种值得称赞的无偏见行为：  
+
+There are  
+有  
+
+28 categories  
+28个类别  
+
+(out of our total 161) which have a universally dominant primary choice - among all surveyed frontier models.  
+（在我们总共161个类别中）在所有调查的前沿模型中有一个普遍主导的首选。  
+
+There are a lot more  
+还有更多  
+
+“close contests” and “always the vibesmaid, never the vibe”  
+“势均力敌的竞争”和“总是伴娘，从未新娘”  
+
+categories which should be key AEO battlegrounds.  
+的类别，这些应该是AEO的关键战场。  
+
+Sol vs Astra, Opus vs Fable  
+Sol vs Astra，Opus vs Fable  
+
+New pretrains for new model classes represents a new opportunity to check in on what the labs are moving towards in their data and RL priorities, and to check in on whether startups’ investments in AEO are paying off. We prepared special reports analyzing our rankings, observing  
+新模型类别的新预训练代表了一个新的机会，可以检查实验室在其数据和强化学习优先级上的动向，并检查初创公司在AEO上的投资是否得到了回报。我们准备了特别报告分析我们的排名，观察到  
+
+VERY consequential flips in model choices  
+模型选择中非常重大的翻转  
+
+between model generations from the same lab.  
+来自同一实验室的模型世代之间。  
+
+We have separate  
+我们有单独的  
+
+Opus→Fable  
+Opus→Fable  
+
+and  
+和  
+
+Sol→Astra  
+Sol→Astra  
+
+summary pages. For some flips, we highlighted a neutral analysis of what competitors did better in each scenario.  
+摘要页面。对于一些翻转，我们强调了竞争对手在每个场景中做得更好的中性分析。  
+
+Efficiency vs Confidence, and Recommendation Sourcing  
+效率 vs 信心，以及推荐来源  
+
+One of our most surprising findings between Sol→Astra and Opus→Fable is that Anthropic seems to be biasing their models to searching more sources (Sol median of 9 sources, vs Astra median of 5, vs Opus median of 11 sources, vs Fable of 15). Astra seems to be just generally a lot more “  
+我们在Sol→Astra和Opus→Fable之间最令人惊讶的发现之一是，Anthropic似乎偏向于让他们的模型搜索更多的来源（Sol的中位数是9个来源，Astra是5个，Opus是11个，Fable是15个）。Astra似乎总体上更“  
+
+confident  
+有信心  
+
+”, or “  
+”，或者“  
+
+efficient  
+高效  
+
+”, depending how you look at it - Astra is FAR less likely to change its mind when you lightly paraphrase your question. This makes the  
+”，取决于你怎么看——当你稍微改写问题时，Astra改变主意的可能性要小得多。这使得  
+
+value of AEO  
+AEO的价值  
+
+itself rise as choice randomness declines.  
+随着选择随机性的下降而上升。  
+
+Sources analysis  
+来源分析  
+
+also somewhat strongly predicts what the labs do prioritize vs don’t.  
+也在一定程度上强烈预测了实验室优先考虑什么和不优先考虑什么。  
+
+However the sample size is small here and only represents what we can scrape from attempted toolcalls, not the pretrain dataset. What we CAN validate is that AEO practices measured by  
+然而，这里的样本量很小，仅代表我们可以从尝试的工具调用中抓取的内容，而不是预训练数据集。我们可以验证的是，由  
+
+Ora and Vercel  
+Ora和Vercel  
+
+, like  
+测量的AEO实践，如  
+
+markdown content-negotiation  
+Markdown内容协商  
+
+, are real and failures discourage models from reading your content.  
+是真实的，失败会阻止模型读取你的内容。  
+
+Just for fun  
+只是为了好玩  
+
+Here are the top  
+以下是顶级  
+
+Angels  
+天使投资人  
+
+in the world according to LLMs (some dedupes left to do…).  
+根据LLMs的推荐（还有一些去重工作要做……）。  
+
+See more  
+查看更多  
+
+We also made a little  
+我们还制作了一个小小的  
+
+family feud type game  
+家庭问答类游戏  
+
+where you can see if your priors align with the data. Fun!  
+你可以看看你的先验是否与数据一致。有趣！  
+
+We are open to further suggestions and business enquiries to develop this if it is of interest. Ping  
+我们欢迎进一步的建议和商业咨询来开发这个项目，如果有兴趣的话。请联系  
+
+@latentspacepod  
+@latentspacepod  
+
+or email  
+或发邮件至  
+
+business@latent.space  
+business@latent.space  
+
+(we have a business manager now! woo!)  
+（我们现在有业务经理了！哇！）  
+
+1  
+1  
+
+As we note in our methodology post, we did try VERY hard to include Gemini/Antigravity, GLM/Zcode, and DeepSeek/DeepCode, but errors and rate limits made them untenable to include in this first run analysis. Please let us know how to raise limits if you represent these companies.  
+正如我们在方法文章中提到的，我们确实非常努力地尝试包括Gemini/Antigravity、GLM/Zcode和DeepSeek/DeepCode，但错误和速率限制使它们无法包含在第一次运行分析中。如果你代表这些公司，请告诉我们如何提高限制。
