@@ -1363,6 +1363,7 @@ export default {
   "Raw-翻译-Government-Rails-Site-Hit-Hours-After-CVE-P": "Government Rails Site Hit Hours After CV...",
   "Raw-翻译-Google-要求-Android-应用开发商降低内存占用": "Google 要求 Android 应用开发商降低内存占用",
   "Raw-翻译-Google-改变了其搜索结果的展示方式": "Google 改变了其搜索结果的展示方式",
+  "Raw-翻译-Google-将降级欧洲搜索服务": "Google 将降级欧洲搜索服务",
   "Raw-翻译-Google-Lake-OntarioLake-America-name-change": "Google Lake OntarioLake America name cha...",
   "Raw-翻译-Google-Has-Removed-MV2-Extensions-from-the": "Google Has Removed MV2 Extensions from t...",
   "Raw-翻译-GoGoGrandparent-YC-S16-is-hiring-back-end-e": "GoGoGrandparent YC S16 is hiring back en...",
