@@ -1,0 +1,21 @@
+---
+title: "27.5KB language-agnostic WebGPU syntax highlighter_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：27.5KB language-agnostic WebGPU syntax highlighter
+
+【文章正文】：
+27.5KB language-agnostic1 WebGPU syntax highlighter
+&#105;mport &#123; highlight &#125; from 'gpu-lexer'
+const spans = await highlight('source code')
+// &#123;
+//   type: 'plain' | 'comment' | 'string' | 'number' | 'keyword' | 'type' | 'function' | 'constant' | 'operator'
+//   start: number
+//   end: number
+// &#125;[]
+gpu-lexer splits source code into simple parts—words, whitespace, newlines, and symbols. Then a tiny WebGPU model combines local and whole-file context to label each part. It is designed for any language: instead of choosing a grammar, it guesses each part's type from the surrounding source, even when it never saw that language or syntax during training. Adjacent labels become the highlight spans returned to your code.
+This is an experiment, not a grammar-equivalent highlighter. On files kept out of training, 12.57% of the current model's token labels differ from Shiki. This measures agreement with Shiki—not objective correctness—and unseen languages or real-world code may differ more often.
+[ live demos ]
+75 languages
+react.development.js0 bytes
