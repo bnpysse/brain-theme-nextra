@@ -1537,6 +1537,7 @@ export default {
   "Raw-翻译-Apparently-CodePen-20-sends-data-to-their-s": "Apparently CodePen 2.0 sends data to the...",
   "Raw-翻译-App1｜ArkFlow：满足你的卡面收集癖，给信用卡做个卡面墙": "App1｜ArkFlow：满足你的卡面收集癖，给信用卡做个卡面墙",
   "Raw-翻译-Any-Nix-package-live-in-the-browser": "Any Nix package, live in the browser",
+  "Raw-翻译-Anthropic研究员因担心AGI失控而辞职：或十年内致人类灭绝": "Anthropic研究员因担心AGI失控而辞职：或十年内致人类灭绝",
   "Raw-翻译-Anthropics-best-AI-model-struggles-to-attra": "Anthropics best AI model struggles to at...",
   "Raw-翻译-Anthropic-最强模型难以吸引用户": "Anthropic 最强模型难以吸引用户",
   "Raw-翻译-Anthropic-将发招股书，预计募资-1300-亿美元超越-SpaceX；腾讯发布": "Anthropic 将发招股书，预计募资 1300 亿美元超越 SpaceX；腾...",
