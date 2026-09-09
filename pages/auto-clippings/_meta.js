@@ -1150,6 +1150,7 @@ export default {
   "Raw-翻译-One-corner-of-Chinas-internet-is-insisting": "One corner of Chinas internet is insisti...",
   "Raw-翻译-One-Go-binary-one-YAML-file-one-SQLite-data": "One Go binary, one YAML file, one SQLite...",
   "Raw-翻译-On-the-Navier–Stokes-Millennium-Prize-Probl": "On the Navier–Stokes Millennium Prize Pr...",
+  "Raw-翻译-On-Really-Trying-2009": "On Really Trying 2009",
   "Raw-翻译-Oldinsurancemapsnet-is-now-a-Charter-Projec": "Oldinsurancemaps.net is now a Charter Pr...",
   "Raw-翻译-OKF-Agent-Memory-–-Git-native-persistent-me": "OKF Agent Memory – Git-native persistent...",
   "Raw-翻译-Nördlinger-Ries-Impact-Crater": "Nördlinger Ries Impact Crater",
