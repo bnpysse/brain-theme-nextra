@@ -1641,6 +1641,7 @@ export default {
   "Raw-翻译-A-Kantian-Critique-of-Sorry-by-Justin-Biebe": "A Kantian Critique of Sorry by Justin Bi...",
   "Raw-翻译-A-Friendly-Introduction-to-Racket": "A Friendly Introduction to Racket",
   "Raw-翻译-A-CVE-Dispute": "A CVE Dispute",
+  "Raw-翻译-9月之后，手机行业还能卷什么": "9月之后，手机行业还能卷什么",
   "Raw-翻译-92岁坏脾气蛋烘糕婆婆遭围观：表达和审判的边界，何以丢失，又如何找回": "92岁坏脾气蛋烘糕婆婆遭围观：表达和审判的边界，何以丢失，又如何找回",
   "Raw-翻译-99元AI洗头、499元AI按摩…体验完深圳5款AI大保健，我碎了": "9.9元AI洗头、49.9元AI按摩…体验完深圳5款AI大保健，我碎了",
   "Raw-翻译-9-Mothers-YC-P26-Is-Hiring-in-Austin-TX": "9 Mothers YC P26 Is Hiring in Austin, TX",
