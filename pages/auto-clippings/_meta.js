@@ -1429,6 +1429,7 @@ export default {
   "Raw-翻译-Fastpotify": "Fastpotify",
   "Raw-翻译-Fast-and-Hard-Code": "Fast and Hard Code",
   "Raw-翻译-Falsehoods-Programmers-Believe-About-LANs": "Falsehoods Programmers Believe About LAN...",
+  "Raw-翻译-Falkland-Around": "Falkland Around",
   "Raw-翻译-Fair-Work-Commission-condemns-plain-wrong-A": "Fair Work Commission condemns plain wron...",
   "Raw-翻译-Fable-51-Enterprise-Frontier-Safeguards": "Fable 5.1, Enterprise Frontier Safeguard...",
   "Raw-翻译-FICOs-monopoly-already-left-in-2025": "FICOs monopoly already left in 2025",
