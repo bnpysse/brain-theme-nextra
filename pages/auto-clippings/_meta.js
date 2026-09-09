@@ -1433,6 +1433,7 @@ export default {
   "Raw-翻译-Fixed-Jinja-chat-template-for-Qwen-35-36-an": "Fixed Jinja chat template for Qwen 3.5, ...",
   "Raw-翻译-Finder-is-so-frustrating-and-has-been-since": "Finder is so frustrating and has been si...",
   "Raw-翻译-Financing-the-AI-Boom-3": "Financing the AI Boom 3",
+  "Raw-翻译-Fermi-Explorer-Mission-项目考虑-2029-年向半人马座α星发射": "Fermi Explorer Mission 项目考虑 2029 年向半人马座α...",
   "Raw-翻译-Fastpotify": "Fastpotify",
   "Raw-翻译-Fast-and-Hard-Code": "Fast and Hard Code",
   "Raw-翻译-Falsehoods-Programmers-Believe-About-LANs": "Falsehoods Programmers Believe About LAN...",
