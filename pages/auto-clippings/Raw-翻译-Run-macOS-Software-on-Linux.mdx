@@ -1,0 +1,41 @@
+---
+title: "Run macOS Software on Linux_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：在Linux上运行macOS软件
+
+【文章正文】：
+~ $ uname
+Linux
+~ $ darling shell
+Darling [~]$ uname
+Darwin
+Darling是一个翻译层，可让你在Linux上运行macOS软件
+- 
+        快速 Darling直接运行macOS软件，无需使用硬件模拟器。
+- 
+        免费 与Linux一样，Darling是免费开源软件。
+它在GitHub上公开开发，并依据GNU GPL第3版许可证分发。
+- 
+        兼容 Darling实现了完整的Darwin环境。Mach、dyld、launchd——应有尽有。
+- 
+        易用 Darling为你完成了大部分设置。只需放松享受使用心仪软件。
+- 
+        原生 我们致力于让Darling下运行的应用程序在视觉、操作和表现上都像原生Linux应用，完全融入Linux桌面体验。
+- 
+        这听起来很像Wine 确实如此！Wine让你在Linux上运行Windows软件，而Darling则为macOS软件实现了相同功能。
+- 
+        支持GUI应用程序吗？ 快了！这耗费了我们大量时间和精力，但终于实现了对简单图形应用程序的基础实验性支持。
+- 
+        违反苹果EULA吗？ 不！我们仅直接使用那些作为完全自由软件发布的Darwin部分。
+- 
+        名字Darling有何含义？ 名称Darling是"Darwin"和"Linux"的组合。Darwin是macOS和iOS基于的核心操作系统。
+- 
+        能在Windows的WSL上运行Darling吗？ 使用WSL 2可以！详见文档。
+- 
+        你们了解opensource.apple.com、GNUstep、The Cocotron等项目吗？ 当然，事实上Darling主要基于苹果发布的原始Darwin源代码。我们以The Cocotron为基础实现Cocoa，同时结合Apportable Foundation和GNUstep的多个组件。
+- 
+        有计划支持iOS应用吗？ 是的，长远来看我们希望能在ARM设备（如大多数安卓手机）上运行iOS应用。主要挑战在于编写自己的UIKit实现。若你有兴趣参与开发，欢迎交流！
+- 
+        如何贡献？ 先从阅读文档和博客开始了解Darling内部机制，然后加入我们在GitHub的社区。拥有macOS/iOS开发经验固然好，但绝非贡献的必要条件。
