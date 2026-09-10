@@ -1106,6 +1106,7 @@ export default {
   "Raw-翻译-Show-HN-Keen-Bean-–-Mac-meeting-notes-that": "Show HN Keen Bean – Mac meeting notes th...",
   "Raw-翻译-Show-HN-Kadō-–-open-source-habit-tracker-wi": "Show HN Kadō – open-source habit tracker...",
   "Raw-翻译-Show-HN-I-made-a-retirement-simulator-125-y": "Show HN I made a retirement simulator 12...",
+  "Raw-翻译-Show-HN-I-couldnt-afford-interview-prep-so": "Show HN I couldnt afford interview prep,...",
   "Raw-翻译-Show-HN-HomeCat-–-Design-your-backyard-offi": "Show HN HomeCat – Design your backyard o...",
   "Raw-翻译-Show-HN-HN-Match-Maker-–-Matching-Who-Wants": "Show HN HN Match Maker – Matching Who Wa...",
   "Raw-翻译-Show-HN-GET-Together-–-A-social-network-whe": "Show HN GET Together – A social network ...",
