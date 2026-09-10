@@ -1,0 +1,168 @@
+---
+title: "🔬“We have foundation models for language, not for physics” —_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：🔬“We have foundation models for language, not for physics” — Anima Anandkumar, Bren Professor of Computing
+【文章标题】：🔬“我们有语言的基础模型，却没有物理学的基础模型”——阿尼玛·阿南德库马尔，布伦计算学教授
+
+【文章正文】：
+A few years ago, Caltech Prof. and co-founder of Accelerated Understanding,
+
+Anima Anandkumar
+
+set out to develop the first open-source weather model with AI. Talking to experts in the field, she was met with skepticism. Weather is chaotic, physics simulations are hard, have been developed for decades, and require supercomputers, the data just isn’t there. Despite reservations, Anima went forth and built. Within a year her team had developed
+
+FourCastNet
+
+, a predictive model that is competitive with the best physics-based simulations available. Thanks to Anima, and her follow up work, anyone can now predict weather accurately over a short timescale using consumer grade GPUs.
+【文章正文】：
+几年前，加州理工学院教授兼“加速理解”公司联合创始人
+
+阿尼玛·阿南德库马尔
+
+着手开发首个基于AI的开源天气模型。在与该领域专家交流时，她遭遇了质疑。天气系统是混沌的，物理模拟难度极大，历经数十年发展且依赖超级计算机，而且根本没有足够的数据。尽管心存疑虑，阿尼玛依然迎难而上，付诸实践。不到一年，她的团队就开发出了
+
+FourCastNet
+
+，这是一个能与现有最佳物理模拟模型相媲美的预测模型。得益于阿尼玛及其后续研究，现在任何人都可以使用消费级GPU，在短时间尺度上准确预测天气。
+
+1
+
+In the fifteen or so science episodes we’ve released on
+
+Latent.Space
+
+, we’ve covered atoms, molecules, materials, biology, and math. Anima is a pioneer in studying physical systems that are continuous. Weather, fusion, and fluid or heat flow are huge areas of science that are extremely difficult to model: they are large, chaotic, and fundamentally multi-scale. This is a field the AI community has somewhat neglected, but one we expect will grow fast. We plan to cover large physical systems more in coming episodes.
+1
+
+在我们于
+
+Latent.Space
+
+发布的约十五期科学节目中，我们探讨了原子、分子、材料、生物学和数学。阿尼玛是研究连续物理系统的先驱。天气、核聚变以及流体或热流是科学领域的巨大分支，建模难度极高：它们规模庞大、具有混沌性，且本质上是多尺度的。这是一个AI界有所忽视的领域，但我们预计它将快速发展。我们计划在未来的节目中更多地探讨大型物理系统。
+
+One thing you can glean from Anima’s work is that this area of AI resists the scaling ideas that have permeated the rest of the field. The data isn’t there: open source datasets in many of these domains are limited to tens or hundreds of thousands of examples, far from what token-hungry transformers need. Even worse, the resolution that physics demands pushes the context length into the hundreds of billions, so you can’t just throw more tokens at the problem. That isn’t a ceiling though, just a slower road: progress here comes from building in structure and inductive biases. Sorry for all you bitter-lesson-pilled language modelers.
+从阿尼玛的工作中你可以看出，AI的这一领域抵制了已渗透到该领域其他部分的缩放理念。数据不够：许多领域的开源数据集仅限于数万或数十万个样本，远不能满足极度消耗token的Transformer模型的需求。更糟糕的是，物理学所需的分辨率将上下文长度推高到了数千亿级别，因此你不能仅仅通过堆砌更多token来解决问题。但这并非不可逾越的天花板，只是一条更缓慢的道路：这里的进步源于融入结构和归纳偏置。对于那些深信“苦涩的教训”的语言模型研究者来说，抱歉了。
+
+“If each dimension is even a few hundred grid points, which is where industrial scale starts... we’re talking hundreds of billions to even a trillion context length. So forget ever having a transformer for anything of this scale, all of the world’s compute will not be enough.”
+“如果每个维度哪怕只有几百个网格点，也就是工业级规模的起点……我们讨论的就是数千亿甚至上万亿的上下文长度。所以，别指望能为这种规模的问题构建Transformer模型了，全世界的算力加起来都不够。”
+
+The math underneath
+
+To tackle these systems, Anima pioneered a technique known as
+
+Neural Operators
+
+, one of the most beautiful theoretical developments in AI of the last decade.
+
+2
+背后的数学原理
+
+为了攻克这些系统，阿尼玛开创了一种被称为
+
+神经算子
+
+的技术，这是过去十年AI领域最优美的理论进展之一。
+
+2
+
+These allow you to combine data and physical laws to enable multi-scale inputs and outputs. We’re no longer modeling a grid, we’re modeling a function that evolves over many scales. This allows Anima and crew to build in priors based upon physical intuition.
+
+Neural Operators
+
+What if we created a neural network where every layer was itself a function?
+这些技术使您能够将数据与物理定律相结合，从而实现多尺度的输入和输出。我们不再是对网格进行建模，而是对一个在多个尺度上演化的函数进行建模。这使得阿尼玛及其团队能够基于物理直觉融入先验知识。
+
+神经算子
+
+如果我们创建一个神经网络，其中每一层本身就是一个函数，会怎样？
+
+To see how physical priors are still helpful for AI modeling, let’s revisit the problem of weather forecasting on a global scale. The earth is a sphere, which meant that accurate modeling involved using the right basis set —
+
+3
+
+the
+
+Spherical Harmonics
+
+. Run a weather model on a grid and it blows up fast. Move to the natural basis for the problem and it stays stable far longer, long enough to roll out months ahead instead of days. Anima’s
+
+Fourier Neural Operator
+
+learns directly in this frequency domain, and its spherical variant powers
+
+FourCastNet 3
+
+, which models the weather across the whole globe and keeps running stably far into the future.
+为了了解物理先验知识如何继续助力AI建模，让我们重新审视全球尺度的天气预报问题。地球是一个球体，这意味着精确建模需要使用正确的基组——
+
+3
+
+即
+
+球谐函数
+
+。在网格上运行天气模型，它很快就会崩溃。转而使用适用于该问题的自然基，它就能保持稳定长得多的时间，长到足以预测未来数月而非数天。阿尼玛的
+
+傅里叶神经算子
+
+直接在这个频域中进行学习，其球面变体驱动着
+
+FourCastNet 3
+
+，该模型对全球天气进行建模，并能在未来很长一段时间内保持稳定运行。
+
+FourCastNet 3
+
+The earth is (almost) a sphere — bake the spherical harmonics into your network!
+FourCastNet 3
+
+地球（几乎）是一个球体——把球谐函数融入你的网络吧！
+
+The physical world is forgiving
+
+Anima explored Neural Operators across other physical domains too, and one striking observation is that the physical world is more forgiving than you’d expect. In fusion, a few thousand samples are enough to predict plasma disruptions, and to do it a million times faster than traditional simulation.
+物理世界是宽容的
+
+阿尼玛还在其他物理领域探索了神经算子，一个引人注目的发现是，物理世界比你想象的要宽容得多。在核聚变领域，几千个样本就足以预测等离子体破裂，而且速度比传统模拟快一百万倍。
+
+None of this is a rejection of scale, it is a different route to it. Anima ultimately still wants to build a “foundation model for physics”, a model that spans many phenomena and does both simulation and design. You get there by building in the structure the physical world already has, not by waiting for data that will never exist. It is a start, and it will take longer than the token-driven parts of AI, because for the physical world tokens were never the answer.
+这一切都不是对规模的否定，而是通往规模的另一条路径。阿尼玛最终仍希望构建一个“物理学基础模型”，一个跨越多种现象并同时具备模拟和设计能力的模型。实现这一目标的途径是融入物理世界已有的结构，而不是等待永远不会存在的数据。这只是一个开始，它将比AI中由token驱动的部分花费更长时间，因为对于物理世界而言，token从来都不是答案。
+
+“All of the things that work with deep learning, let’s take them, but make them a bit more principled.”
+“所有在深度学习中行之有效的方法，我们都要拿来用，但要让它们更具原则性。”
+
+Weather is only the beginning
+
+Neural operators and weather modeling were a personal passion of mine, so we’ve spent much of this blog and the episode exploring this work. Anima has done so much more! In the episode, we cover several other recent developments from Anima:
+天气仅仅是个开始
+
+神经算子和天气建模是我个人的热情所在，因此我们在这篇博客和这期节目中花了大量篇幅探讨这项工作。但阿尼玛的成就远不止于此！在节目中，我们还涵盖了阿尼玛近期的其他几项进展：
+
+Anima has a series of works integrating neural networks and automated proof techniques. We talk about
+
+TorchLean
+
+, a new framework that lets you write PyTorch-style networks inside the proof assistant
+
+Lean
+
+and
+
+formally verify them
+
+. This is a major step for pro
+阿尼玛有一系列将神经网络与自动证明技术相结合的研究成果。我们谈到了
+
+TorchLean
+
+，这是一个新框架，允许你在证明助手
+
+Lean
+
+中编写PyTorch风格的网络，并
+
+对其进行形式化验证
+
+。这是迈向pro
