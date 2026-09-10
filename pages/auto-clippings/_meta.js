@@ -22,6 +22,7 @@ export default {
   "Raw-逐字稿-Past-the-Point-of-No-Return": "Raw_逐字稿_Past the Point of No Return",
   "Raw-逐字稿-OpenAIs-AI-Agents-Just-Crossed-A-Line": "Raw_逐字稿_OpenAIs AI Agents Just Crossed A...",
   "Raw-逐字稿-I-built-the-same-game-with-Astra-and-Fable": "Raw_逐字稿_I built the same game with Astra...",
+  "Raw-逐字稿-I-Never-Thought-Id-See-This-Happen": "Raw_逐字稿_I Never Thought Id See This Happ...",
   "Raw-逐字稿-How-Much-Would-an-AI-Crash-Destroy": "Raw_逐字稿_How Much Would an AI Crash Destr...",
   "Raw-逐字稿-Here-We-Go-Again": "Raw_逐字稿_Here We Go Again",
   "Raw-逐字稿-GPT-6-Astra-Changes-Everything": "Raw_逐字稿_GPT-6 Astra Changes Everything",
