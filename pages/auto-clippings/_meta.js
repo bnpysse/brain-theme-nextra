@@ -1755,6 +1755,7 @@ export default {
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Raw-翻译-2026-烟灶选购指南": "2026 烟灶选购指南",
   "Raw-翻译-2026-年雨果奖公布": "2026 年雨果奖公布",
+  "Raw-翻译-2026-年拉斯克奖宣布": "2026 年拉斯克奖宣布",
   "Raw-翻译-2026-年-Ig-Nobel-宣布": "2026 年 Ig Nobel 宣布",
   "Raw-翻译-2026-Hugo-Awards": "2026 Hugo Awards",
   "Raw-翻译-1914元制作1集漫剧仍困在隐性成本中": "1914元制作1集漫剧仍困在隐性成本中",
