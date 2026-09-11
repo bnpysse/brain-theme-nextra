@@ -1298,6 +1298,7 @@ export default {
   "Raw-翻译-Never-Launch-Alone": "Never Launch Alone",
   "Raw-翻译-Netflix-to-Sell-Streaming-Services-Streamer": "Netflix to Sell Streaming Services, Stre...",
   "Raw-翻译-NetBSD-and-My-Life-2005": "NetBSD and My Life 2005",
+  "Raw-翻译-Neijuan": "Neijuan",
   "Raw-翻译-Necessary-Inventions": "Necessary Inventions",
   "Raw-翻译-Nebula-Sans": "Nebula Sans",
   "Raw-翻译-Navier-Stokes-–-Tristan-Buckmaster-pdf": "Navier-Stokes – Tristan Buckmaster [pdf]",
