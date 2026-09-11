@@ -1,0 +1,167 @@
+---
+title: "AADP 出现之后：AGENT 安全开始把“能做”和“该做”真正分开_简报"
+tags: ["大咖视点_深度解读", "虎嗅网_(科技与商业深度观察)"]
+---
+
+# 精华简报 | AADP 出现之后：AGENT 安全开始把“能做”和“该做”真正分开
+
+&gt; **来源**：虎嗅网 / HavenlonLabs
+&gt; **链接**：https://www.huxiu.com/article/4890597.html?f=rss
+&gt; **类型**：AI Agent 安全 / 身份与授权架构 / 协议层技术趋势
+
+---
+
+## 一、TL;DR（核心主旨）
+
+传统的计算机安全体系——Identity（你是谁）、Authentication（你是你）、Authorization（你能访问什么）——已经有效运转了几十年。但当 AI Agent 进入业务流程，这套体系的根基发生了根本性动摇：**一个 Agent 拥有某项能力（Capability），不再等同于它的每一个具体动作都应当被执行。** 文章以 2026 年 8 月出现的 AADP（Agent Action Decision Protocol）Internet-Draft 为切入点，判断安全行业的控制点正在发生一次不可逆的集体后移：从管理“谁拥有权限”（Who is allowed），走向治理“哪些动作能够成为现实”（What is allowed to happen），并最终逼近最后一个尚未解决的问题——**谁真正拥有让动作发生的执行权威（Execution Authority）**。
+
+---
+
+## 二、核心观点与深层洞察
+
+### 1. 传统权限体系的前提正在被 Agent 瓦解
+
+过去几十年的安全架构，建立在“主体静态度量”之上：识别身份、验证身份、分配权限、控制资源访问。Zero Trust 虽然收紧了信任半径，但本质上仍在同一范式内迭代。
+
+**Agent 打破了这个前提。** 原因在于：
+
+- **LLM 使软件从“确定路径”变为“动态路径”**——Agent 根据上下文实时推理并生成下一步动作，而不是执行预编译的程序流。
+- **安全风险的计量单位从“主体”变成了“动作”**。同一个 Agent、同一个 Credential、同一个 Scope、同一个 API，可以产生截然不同的两次调用（向供应商支付 100 美元 vs. 凌晨三点向陌生账户支付 10 万美元）。
+- 传统 Access Control 无法区分这两种情形，因为它们的 Identity、Token、Scope 完全相同。
+
+&gt; **核心判断：当 Action 本身成为风险单位，安全体系必须重新寻找自己的控制点。**
+
+### 2. AADP 的关键概念拆分：Standing Capability vs. Per-Action Authorization
+
+AADP 最重要的术语贡献，是把 Agent 安全中两个长期被混为一谈的概念彻底分开：
+
+| 概念 | 含义 | 传统安全体系的对应 |
+|---|---|---|
+| **Standing Capability** | Agent 是谁、持有什么凭据、能访问哪些工具 | Identity + Permission + Access Grant |
+| **Per-Action Authorization** | 这一个具体动作，携带着这一组参数，在当前状态下能否执行 | **传统体系没有对应物** |
+
+AADP 的论证很直接：静态权限无法表达**累计预算消耗、尚未释放的 Reservation、审批生命周期、Kill Switch 状态、以及此前已经发生过的历史**。因此，真正的授权决策必须发生在**动作被提出的那一刻**。
+
+这意味着 Authorization 从“权限查询”变成了一个**有状态的运行时计算过程**。
+
+### 3. Authorization 正在变成 Runtime Computation（运行时计算）
+
+AADP 没有把 Action Authorization 设计成简单的 Policy Check（查表式授权），而是要求授权取决于**当下状态**：
+
+- 今天已消耗多少预算？
+- 是否有未释放的 Reservation？
+- 审批是否已经过期？
+- Kill Switch 是否刚刚被触发？
+- 相同的 Action 是否已执行过？
+
+架构上，AADP 将决策与执行分离：
+
+- **PDP（Policy Decision Point）**：负责产生 Verdict（允许/拒绝/需审批等）
+- **PEP（Policy Enforcement Point）**：位于动作真正发生的位置，**没有 Permit 就不得执行**受控 Action
+
+其中的执行语义原则极具现实感：
+
+&gt; - 未知 Action **默认拒绝**
+&gt; - Kill Switch **优先于一切普通 Policy**
+&gt; - 不可逆 Action **不得直接自动执行**
+&gt; - Budget Reservation **必须原子化**
+&gt; - **Undo 本身也是一个需要重新治理的 Action**（回滚动作同样可能有害）
+&gt; - 审批后恢复执行时，**必须重新评估当前状态**——因为审批完成的那一刻，世界可能已经变了
+
+### 4. Evidence 的重新定义：从审计日志到决策状态重建
+
+AADP 对 Evidence 的要求超出传统 Audit Log——
+
+它不只是记录“谁在什么时候做了什么”，而是要求：
+
+- 记录 Request、Verdict、Reason、Tier、时间与执行结果
+- **保留足以重建当时决策所依据的完整 Authorization State**
+
+理由很深刻：如果 Policy 后来变了，仅说“当时允许了”无法回答“当时**为什么应该**允许”。安全不只需要证明“谁拥有权力”，还需要证明“权力为什么在那个时刻被允许转化为现实”。
+
+### 5. Fail Closed 获得新含义：从可用性牺牲到现实保持不变的保证
+
+AADP 对失败的处理方式反映了一种不同的信任模型：
+
+| 场景 | AADP 要求 |
+|---|---|
+| 输入缺失/格式错误/条件不满足 | 明确 Deny |
+| 未知 Obligation | **不得静默忽略** |
+| PEP 无法联系 PDP | **不执行受治理 Action，而非默认放行** |
+
+传统互联网系统中，失败通常意味着“服务暂时不可用”；但在**执行型系统**中（转账、删除资源、修改生产环境、控制设备），失败必须意味着**现实状态保持不变**。
+
+&gt; **“Unknown、Missing、Expired、Conflict 本身就应当被视为无法建立执行依据的状态。无法证明可以执行，就意味着不能执行。”**
+
+这是软件从“处理信息”走向“改变现实”之后一次认知层面的深刻调整。
+
+### 6. 同一时间窗口的集体同步：多家独立团队走向同一方向
+
+文章强调，AADP 并非孤立现象。几乎在同一时间窗内，多个背景完全不同的团队在独立地往同一个方向移动：
+
+| 时间 | 团队/产品 | 关键动作 |
+|---|---|---|
+| 8月31日 | Broadcom AgentMinder | 在 Action 到达企业资源前，依据 Agent 的 Mission、Intent、Context 与当前风险**逐动作独立验证授权**，而非仅管理 Agent Identity |
+| 9月1日 | OWASP GenAI Security Project — Agent Control Standard | 要求 Agent Platform 暴露 **Middleware Hooks**，让安全策略在 Runtime 直接执行，使 Agent 行为可观察、追踪、控制 |
+| 9月2日 | MuleSoft Agent Kill Switch（GA） | 控制粒度下沉到 **Request / Session / Agent Instance / Tenant**；Agent 因 Prompt Injection 或 Loop 进入异常执行路径时，可直接停掉该实例，而不必关闭整套 Runtime |
+
+&gt; **Identity 不再被认为足够，静态 Permission 不再被认为足够，Prompt 层 Guardrail 同样不再被认为足够。控制点正在向 Runtime、Action 与 Execution 本身移动。**
+
+这种跨团队独立收敛的同步，通常比任何单一发布都更能说明一个结构性转变正在发生。
+
+### 7. 协议自我设界：Trust Boundary 与 Execution Authority 的未解之谜
+
+AADP 在 Security Considerations 中诚实写出了自己的边界：
+
+- 如果 PEP 能直接绕过 PDP 调用受治理 Capability，协议无法保护
+- 如果真正执行动作的那一层已经失陷，协议无法阻止
+- 如果系统中还存在一条不经 Authorization Decision 的通路，协议无能为力
+
+文章指出，这并不是缺陷，而是成熟协议的标志。但这条边界顺理成章地引出最后一个更深的问题：
+
+&gt; **如果 Decision 是正确的，谁保证这个 Decision 真正约束了 Execution？**
+
+由此产生了一个关键概念区分：
+
+| 概念 | 回答的问题 |
+|---|---|
+| **Authorization（授权）** | 系统判断“这个动作应当被允许” |
+| **Execution Authority（执行权威）** | 谁最终拥有让这件事**真正发生**的能力 |
+
+**Authorization ≠ Execution Authority。**
+
+如果系统既负责生成 Policy，又负责计算 Decision，还拥有直接改变现实的能力，它的 Trust Boundary 就存在结构性风险。决策如何变成不可绕过的 Enforcement，目前没有任何一层给出完整答案。
+
+---
+
+## 三、启发与影响
+
+### 对安全行业的启发
+
+1. **范式转换的不可逆性。** Agent 安全不是“多了一种新 Identity”，而是多了一种“持续产生 Action 的主体”。这意味着安全行业过去几十年对身份问题的优化能力，无法直接迁移到动作治理层面。增量改进不够，需要架构级重构。
+
+2. **Per-Action Authorization 将成为 Agent 安全的基本单元。** 未来 Agent 安全的讨论中心会从“这个 Agent 有哪些权限”转向“这个动作在当前状态下是否应该被执行”。任何只做身份管理或静态权限管理的 Agent 安全方案，价值覆盖面都正在缩小。
+
+3. **运行时决策基础设施的地位上升。** PDP/PEP 分离的架构形态，正在从传统 IAM 的边缘位置走向 Agent 架构的核心路径。Kill Switch、Budget Reservation、Approval Lifecycle 等有状态运行时机制，将成为 Agent 平台的标配能力。
+
+4. **Fail Closed 作为默认原则不再是可选项。** 在“执行型系统”中，不可判定意味着不执行，而不是“尽量执行”。这种思维将深刻影响 Agent 平台的错误处理设计和 SRE 实践。
+
+### 对技术架构的影响
+
+1. **Agent 平台将不得不提供 Runtime Middleware 或 Enforcement Hook**。只有让安全策略在动作生成与动作执行之间的狭窄缝隙中生效，Per-Action Authorization 才有实践空间。平台如果不暴露这一层，上层安全方案将无计可施。
+
+2. **Audit Log 的功能定位正在升级为 Decision Evidence。** 可重用、可重建决策上下文的审计能力，将成为合规与事故回溯的核心基础设施。记录“发生了什么”不够，要能回答“为什么当时是被允许的”。
+
+### 对商业格局的影响
+
+1. **安全厂商的分类竞争优势将围绕“控制点位置”重新洗牌。** 停留在 Identity 层的厂商将在 Agent 场景中逐渐失去相关性；能在 Runtime 动作层面建立 Enforcement 的厂商将占据结构性优势。
+
+2. **标准生态的窗口期正在开启。** AADP 虽只是个人 Internet-Draft，但它与 Broadcom、OWASP、MuleSoft 等动作在同一时间窗内的汇聚，暗示一个关于 Agent 安全协议层共识的形成窗口。早期参与者在后续标准演进中将拥有话语权红利。
+
+3. **最终未解的 Execution Authority 问题，将是下一轮安全创新的主战场。** 谁能真正解决“决策如何不可绕过硬约束执行”的问题——尤其是在 Agent 拥有直接调用外部 API、操作账户、修改数据甚至物理执行能力的场景中——谁就掌握了下一代执行型软件的安全入口。
+
+---
+
+## 四、一句话收束
+
+&gt; 安全行业花了几十年回答 **“Who is allowed”**；AI Agent 正在迫使它回答 **“What is allowed to happen”**；而当这个问题抵达现实世界，还会剩下最后一问——**“Who can actually make it happen”**。Agent Security 的重心，正在从**控制谁拥有权限**，转向**控制哪些动作能够成为现实**，并最终不可回避地指向**执行权威**这个尚未被任何协议层方案解决的深层空白。
