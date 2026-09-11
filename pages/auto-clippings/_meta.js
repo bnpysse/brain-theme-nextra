@@ -1867,6 +1867,7 @@ export default {
   "Raw-翻译-2026国谈价格博弈全面前移，创新药估值迎来新变量": "2026国谈价格博弈全面前移，创新药估值迎来新变量",
   "Raw-翻译-2026台灣地方選舉：「九合一」為何重要選舉時程是什麼": "2026台灣地方選舉：「九合一」為何重要選舉時程是什麼",
   "Raw-翻译-2026中国能源主线": "2026中国能源主线",
+  "Raw-翻译-202637-Duo-Threats": "2026.37 Duo Threats",
   "Raw-翻译-202636-Friction-and-Feedback": "2026.36 Friction and Feedback",
   "Raw-翻译-202635-Internet-Hype-and-Real-World-Change": "2026.35 Internet Hype and Real World Cha...",
   "Raw-翻译-202634-App-Snore": "2026.34 App Snore",
