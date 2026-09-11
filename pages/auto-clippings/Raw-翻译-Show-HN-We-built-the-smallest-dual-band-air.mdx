@@ -1,0 +1,64 @@
+---
+title: "Show HN We built the smallest dual-band aircraft tracker_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: We built the smallest dual-band aircraft tracker
+【文章标题】：Show HN：我们打造了最小的双频段飞机追踪器
+
+【文章正文】：
+【文章正文】：
+
+Pants for Birds is excited to introduce a new product in the ADSBee family of open-source ADS-B receivers: ADSBee 1421!
+Pants for Birds 非常高兴能向大家介绍 ADSBee 开源 ADS-B 接收器家族的一款新产品：ADSBee 1421！
+
+Background
+背景
+
+In the past year, developers and enthusiasts have brought ADSBee 1090U’s open source aircraft tracking technology to a wide range of platforms, from airport ground stations to drones to weather balloons.
+在过去的一年里，开发者和爱好者们将 ADSBee 1090U 的开源飞机追踪技术带到了各种各样的平台上，从机场地面站到无人机，再到气象气球。
+
+While working closely with some of our customers, we discovered that many applications have a need for an ultra low-power, low-cost ADS-B receiver tuned specifically for aircraft detect and avoid applications, without the need for the full feature set of ADSBee 1090U.
+在与一些客户密切合作的过程中，我们发现许多应用场景需要一款超低功耗、低成本的 ADS-B 接收器，专门针对飞机探测与避障应用进行调优，而无需 ADSBee 1090U 的完整功能集。
+
+Simultaneously, Semtech released their fourth-generation LoRA IP on a chip called the LR2021, which includes a new high bit rate OOK reception RF frontend and demodulator. This new chip neatly containerizes an RF architecture that was previously implemented in custom discrete components (like in ADSBee 1090U and most other receivers) drastically shrinking both form factor and power dissipation required for receiving Mode S packets. Combined with a low power RF MCU, the LR2021 provides the perfect basis for a super small, low power, low cost dual-band ADS-B receiver. We already had the perfect candidate part for the RF MCU in TI’s CC1314, the next-generation iteration of the TI CC1312 that we use for receiving UAT (and soon, other sub-GHz aircraft tracking protocols), on the ADSBee 1090U.
+与此同时，Semtech 在名为 LR2021 的芯片上发布了其第四代 LoRa IP，其中包含全新的高比特率 OOK 接收射频前端和解调器。这款新芯片巧妙地将以前由定制分立元件实现的射频架构（如 ADSBee 1090U 和大多数其他接收器中所采用的）进行了高度集成，大幅缩小了接收 S 模式数据包所需的尺寸并降低了功耗。结合低功耗射频 MCU，LR2021 为超小型、低功耗、低成本的双频段 ADS-B 接收器提供了完美的基础。对于射频 MCU，我们已经有了完美的候选器件——TI 的 CC1314，它是我们在 ADSBee 1090U 上用于接收 UAT（以及即将到来的其他 sub-GHz 飞机追踪协议）的 TI CC1312 的下一代迭代产品。
+
+At the beginning of 2026, we embarked on a design effort with these two MCUs, dubbing the combination “ADSBee 1421”, based on a concatenation of the constituent part numbers (TI CC1314 and LR 2021). In line with our existing part conventions, a la ADSBee m1090, we added an “m” to the beginning of our part to denote that it would be built as a solder-down module, for easy integration into any custom PCB design. Thus, the ADSBee m1421 was born!
+2026 年初，我们开始围绕这两款 MCU 展开设计工作，并将这一组合命名为“ADSBee 1421”，名称来源于组成器件型号的拼接（TI CC1314 和 LR 2021）。按照我们现有的器件命名惯例，类似于 ADSBee m1090，我们在型号开头加上了一个“m”，表示它将被制造为贴片焊接模块，以便轻松集成到任何定制 PCB 设计中。就这样，ADSBee m1421 诞生了！
+
+Feature Set
+功能特性
+
+ADSBee m1421 features dual-band ADS-B reception (Mode S and UAT), including support for UAT uplink protocols (TIS-B traffic / FIS-B weather). Perfect for mass and power constrained embedded applications, m1421 weighs less than 2 grams, draws less than 60mW of power, and features an ultra-small form factor of 23.4 x 14.5mm x 2.7mm.
+ADSBee m1421 具备双频段 ADS-B 接收功能（S 模式和 UAT），包括支持 UAT 上行链路协议（TIS-B 交通信息 / FIS-B 气象信息）。它非常适合对重量和功耗有严格限制的嵌入式应用，m1421 重量不到 2 克，功耗低于 60mW，并拥有 23.4 x 14.5mm x 2.7mm 的超小尺寸。
+
+ADSBee m1421’s firmware and schematic are open source under a GPL v3 license. All aircraft position decoding and tracking logic is unified with our widely adopted ADSBee 1090 firmware, and available for building in cloud CI.
+ADSBee m1421 的固件和原理图在 GPL v3 许可证下开源。所有飞机位置解码和追踪逻辑均与我们广泛采用的 ADSBee 1090 固件统一，并可在云端 CI 中进行构建。
+
+Output protocols supported by ADSBee m1421 include GDL90, MAVLINK1, MAVLINK2, Aircraft JSON, CSBee, and raw packets, with more protocols to come!
+ADSBee m1421 支持的输出协议包括 GDL90、MAVLINK1、MAVLINK2、Aircraft JSON、CSBee 和原始数据包，未来还将支持更多协议！
+
+ADSBee m1421 is available in both standard and NDAA-compliant variants. The standard variant of ADSBee m1421 costs just $48 in single quantities, and even less at volume. Currently, our NDAA compliant variant is more expensive ($75), but we are actively working on increasing manufacturing capacity in the USA in order to bring our NDAA compliant variant to cost parity with our standard module version. We expect to reach cost parity around the end of this year (December 2026).
+ADSBee m1421 提供标准版和符合 NDAA 标准的版本。标准版 ADSBee m1421 单件售价仅为 48 美元，批量购买价格更低。目前，我们的 NDAA 合规版本价格较高（75 美元），但我们正积极提升在美国的制造产能，以使 NDAA 合规版本的成本与标准模块版本持平。我们预计将在今年年底（2026 年 12 月）左右实现成本持平。
+
+ADSBee m1421 Module
+ADSBee m1421 模块
+
+High performance low power dual-band ADS-B receiver module
+高性能低功耗双频段 ADS-B 接收器模块
+
+Does the ADSBee 1421 family replace the ADSBee 1090 family?
+ADSBee 1421 系列会取代 ADSBee 1090 系列吗？
+
+Not really! ADSBee 1421 and ADSBee 1090 series receivers have very different architectures, and are good for different things. ADSBee 1421 uses the LR2021 for a highly integrated, low power Mode S receiver, but the LR2021 has some shortcomings compared to the discrete RF component + RP2040 PIO receiver architecture on ADSBee 1090. Most notably, in order to achieve satisfactory dynamic range (receiving both very close and very far away aircraft simultaneously), the LR2021 has to be tuned to listen to only one Mode S packet type; Downlink Format 17 aka. ADS-B. In short, it’s great at seeing where planes are, but you won’t receive squawk codes, and you will also receive fewer non-ADSB packets. This is generally not a cause for concern in detect and avoid applications, but can be a drawback for data gathering use cases. ADSBee m1421 features a high degree of configurability exposed through our firmware, so reception using the Mode S preamble (and therefore, reception of all Mode S packet types) is supported, but this results in poorer dynamic range (close-in aircraft can have poor reception).
+其实不会！ADSBee 1421 和 ADSBee 1090 系列接收器采用截然不同的架构，各有所长。ADSBee 1421 使用 LR2021 实现高度集成的低功耗 S 模式接收器，但与 ADSBee 1090 上的分立射频元件 + RP2040 PIO 接收器架构相比，LR2021 存在一些不足。最明显的是，为了获得令人满意的动态范围（同时接收非常近和非常远的飞机信号），LR2021 必须调谐为仅监听一种 S 模式数据包类型；即下行链路格式 17，也就是 ADS-B。简而言之，它非常擅长探测飞机的位置，但你无法接收应答机代码，并且接收到的非 ADS-B 数据包也会更少。这在探测与避障应用中通常不是问题，但在数据收集用例中可能是个缺点。ADSBee m1421 通过我们的固件提供了高度的可配置性，因此支持使用 S 模式前导码进行接收（从而接收所有 S 模式数据包类型），但这会导致动态范围变差（近距离飞机的接收效果可能不佳）。
+
+Additionally, in its high-throughput configuration, Semtech LR2021 does not support per-packet timestamps nor RSSI. This can be a drawback for users attempting to use ADSBee m1421 for multilateration applications (tracking aircraft using a receiver array and time of arrival of each packet). We have some ideas in the back of our head about how MLAT might be added to our ADSBee 1421 firmware, but this still requires a good deal of tinkering and testing so we aren’t supporting it as an “out of the box” capability at this time.
+此外，在其高吞吐量配置下，Semtech LR2021 不支持逐包时间戳和 RSSI。对于试图将 ADSBee m1421 用于多点定位应用（使用接收器阵列和每个数据包的到达时间来追踪飞机）的用户来说，这可能是个缺点。我们脑海中有一些关于如何将 MLAT 添加到 ADSBee 1421 固件中的想法，但这仍需要大量的调试和测试，因此我们目前暂不支持将其作为“开箱即用”的功能。
+
+So, which one should you choose?
+那么，你应该选择哪一款呢？
+
+Full-featured dual-band ADS-B with all the bells and whistles, where pow
+功能齐全、配备各种花哨功能的双频段 ADS-B，在功耗方

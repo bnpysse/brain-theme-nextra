@@ -1,0 +1,139 @@
+---
+title: "Datasette 1.0a39 and 0.65.4 security releases_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：Datasette 1.0a39 and 0.65.4 security releases
+
+【文章正文】：
+Datasette 1.0a39 and 0.65.4 security releases
+
+Datasette 1.0a39 和 0.65.4 安全版本发布
+
+Today we're releasing two new security patch versions of Datasette:
+
+今天，我们发布两个新的 Datasette 安全补丁版本：
+
+1.0a39
+
+1.0a39
+
+and
+
+和
+
+0.65.4
+
+0.65.4
+
+- one for the current alpha series and one for the stable 0.65.x family.
+
+——一个针对当前的 alpha 系列，另一个针对稳定的 0.65.x 系列。
+
+These are security fixes which you should apply if you are running a Datasette instance on the public web - in particular if that instance mixes both public and private tables.
+
+这些是安全修复，如果你在公共网络上运行 Datasette 实例，就应该应用这些修复——尤其是当该实例同时包含公共和私有表时。
+
+Following issues reported by
+
+在收到来自
+
+Sevban Dönmez
+
+Sevban Dönmez
+
+,
+
+、
+
+Alex Garcia
+
+Alex Garcia
+
+and I ran an extensive audit of Datasette using Claude Fable 5.1, GPT-5.6, and GPT-6 Astra. We then spent almost a week collaborating on and reviewing the fixes.
+
+和我的问题报告后，我们使用 Claude Fable 5.1、GPT-5.6 和 GPT-6 Astra 对 Datasette 进行了一次全面审计。随后，我们花了将近一周的时间协作并审查这些修复。
+
+They helped find some
+
+它们帮助发现了一些
+
+very
+
+非常
+
+subtle bugs. We'll be incorporating security audits by frontier models into all of our development work going forward.
+
+隐蔽的漏洞。今后，我们将把前沿模型进行的安全审计纳入我们所有的开发工作中。
+
+Alex came up with a way of splitting the work which I found extremely productive:
+
+Alex 提出了一种拆分工作的方式，我觉得这种方式极其高效：
+
+Alex Garcia and I worked together running and then responding to the audit, working in a shared private repository. For most of the issues we split the work: one of us would create the automated tests highlighting the issue, then the other would implement the fix. This ensured that two separate humans had eyes on each of the issues, in addition to our coding agents running different models.
+
+Alex Garcia 和我一起在一个共享的私有仓库中运行审计并做出响应。对于大多数问题，我们进行了分工：其中一人编写自动测试来凸显问题，另一人则负责实现修复。这确保了除了我们运行不同模型的编码代理之外，还有两个独立的人对每个问题进行了审查。
+
+Tags:
+
+标签：
+
+releases
+
+发布
+
+,
+
+、
+
+security
+
+安全
+
+,
+
+、
+
+ai
+
+人工智能
+
+,
+
+、
+
+datasette
+
+datasette
+
+,
+
+、
+
+generative-ai
+
+生成式人工智能
+
+,
+
+、
+
+llms
+
+大语言模型
+
+,
+
+、
+
+agentic-engineering
+
+智能体工程
+
+,
+
+、
+
+ai-security-research
+
+人工智能安全研究
