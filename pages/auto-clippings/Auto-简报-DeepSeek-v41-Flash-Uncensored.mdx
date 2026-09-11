@@ -1,0 +1,125 @@
+---
+title: "DeepSeek v4.1 Flash Uncensored_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+# 精华简报：DeepSeek-V4.1-Flash UNCENSORED-FP8
+
+&gt; **来源**：Hugging Face 模型页（经 Hacker News 进入视野）  
+&gt; **性质**：这不是传统博客/Newsletter，而是一份“模型发布 + 部署说明”页面，带有较强宣传性质，数据为发布方自报，需独立核实。
+
+---
+
+## 1. 一句话摘要
+
+dealignai 发布了一个经“权重级消融（abliteration）”的 DeepSeek-V4.1-Flash FP8 无审查版本，声称在 HarmBench-320 安全基准上攻击成功率（ASR）达到 **100%**，而 MMLU-14k 能力仅从 **86.96%** 降至 **82.74%**，即“安全护栏被移除，但核心能力基本保留”。
+
+---
+
+## 2. 这是什么？
+
+- 基于 `deepseek-ai/DeepSeek-V4.1-Flash`（552B backbone，8B/16B active per token）的修改版检查点。
+- 使用 **proprietary weight-level abliteration**：声称直接在外科手术层面剔除“拒答回路”，而不是通过 prompt、runtime hooks 或 steering vectors 绕开安全机制。
+- 关键卖点：
+  - **No guardrails**：无安全护栏；
+  - **Native FP8**：原生 FP8 量化；
+  - **1M token context**：百万级上下文；
+  - **Vision + tools**：保留视觉与工具调用能力；
+  - **Drop-in checkpoint**：可直接替换原模型，加载方式与基础模型一致。
+
+---
+
+## 3. 技术架构与部署
+
+### 模型架构表
+
+| 项目 | 说明 |
+|---|---|
+| Base | deepseek-ai/DeepSeek-V4.1-Flash（552B backbone，8B/16B active） |
+| Architecture | Causal Encoder-Decoder（20+20 层），MoE（384 routed top-6 + 1 shared），Hyper-Connections（4-channel residual），CSA2 sparse attention，Engram n-gram memory，DSpark speculative draft |
+| Quant | FP8（e4m3fn）weights + E8M0 block-scale [32,32]，routed experts 使用 FP4 |
+| Context | 1M tokens |
+| Vision | DeepSeek-ViT + 2D-RoPE + pixel unshuffle |
+| Modification | Surgical, weight-level，drop-in checkpoint |
+
+### 部署方式
+
+支持主流推理栈，均提供 OpenAI 兼容 API：
+
+- **Transformers**：`pipeline("image-text-to-text", model="dealignai/DeepSeek-V4.1-Flash-UNCENSORED-FP8")`
+- **vLLM**：`vllm serve "dealignai/DeepSeek-V4.1-Flash-UNCENSORED-FP8"`
+- **SGLang**：`python3 -m sglang.launch_server --model-path ...`
+- **Docker Model Runner**：`docker model run hf.co/dealignai/DeepSeek-V4.1-Flash-UNCENSORED-FP8`
+
+这说明获取和部署门槛极低，几乎可以无缝接入现有 LLM 应用。
+
+---
+
+## 4. 核心评测数据
+
+### HarmBench-320 安全基准
+
+| 设置 | base ASR | CRACK ASR | 提升 |
+|---|---:|---:|---:|
+| effort=off | 42.81%（137/320） | **100.00%**（320/320） | +57.19pp |
+| effort=max | 1.56%（5/320） | **100.00%**（320/320） | +98.44pp |
+
+值得注意的现象：基础模型在 `effort=max` 下拒答率反而升高（ASR 从 42.81% 降到 1.56%），因为推理链会先发现安全风险；但 CRACK 版本在两个努力等级下均保持 100% 合规回应。
+
+### 分项类别结果
+
+CRACK 版本在全部 7 类 HarmBench 语义类别中均达到 **100% ASR**：
+
+| 类别 | base off | base max | CRACK off | CRACK max |
+|---|---:|---:|---:|---:|
+| chemical_biological | 16.7% | 0.0% | 100% | 100% |
+| copyright | 98.8% | 0.0% | 100% | 100% |
+| cybercrime_intrusion | 34.6% | 3.8% | 100% | 100% |
+| harassment_bullying | 0.0% | 0.0% | 100% | 100% |
+| harmful | 11.1% | 5.6% | 100% | 100% |
+| illegal | 13.2% | 0.0% | 100% | 100% |
+| misinformation_disinformation | 44.4% | 3.7% | 100% | 100% |
+
+发布方声称：CRACK 版本在任何努力等级下都 **零 HARD_REF、零 SOFT_RED、零 HEDGE**，即对所有测试的有害请求均完全配合。
+
+### MMLU-14k 能力保留
+
+| build | 正确数 | 准确率 | 差异 |
+|---|---:|---:|---:|
+| base | 12,211 / 14,042 | 86.96% | — |
+| CRACK | 11,619 / 14,042 | 82.74% | -4.22pp |
+
+能力损失仅 4.22 个百分点，如果数据属实，说明“去安全化”对通用能力影响较小。
+
+---
+
+## 5. 商业与技术影响
+
+### 安全与滥用风险
+- **显著降低有害内容生成门槛**：100% ASR 意味着无需复杂越狱 prompt，模型可直接执行有害请求。
+- 覆盖化学/生物、网络入侵、骚扰、非法行为、虚假信息等高危类别。
+- 对内容审核、社交媒体、企业合规、品牌安全构成直接压力。
+
+### 监管与平台风险
+- 欧盟《AI Act》、美国 AI 行政令及各国 AI 监管可能对此类模型施加限制。
+- Hugging Face 等平台是否会下架或加 gating、是否违反模型许可，值得关注。
+- 发布方“dealignai”名称本身暗示“去对齐”，可能具有研究或红队目的，但实际扩散难以控制。
+
+### 技术与产业信号
+- **“权重级消融”技术成熟度上升**：说明开源权重模型的安全机制可以被“外科手术式”移除，单纯靠 SFT/RLHF 可能无法根治。
+- **能力保留度高**：如果 MMLU 数据可信，说明安全移除不一定大幅牺牲通用能力，这会进一步刺激类似模型的产生。
+- **部署门槛低**：支持 vLLM/SGLang/Docker，企业可能无意中或恶意地将其用于生产。
+
+---
+
+## 6. 分析师观点与提醒
+
+1. **数据需独立验证**：100% ASR 和 MMLU 结果均为发布方自报，没有第三方审计或论文背书。
+2. **模型真实性存疑**：页面所称 `DeepSeek-V4.1-Flash`（552B backbone）与 DeepSeek 公开模型命名体系存在差异，基座模型是否为官方真实发布需核实。
+3. **文档质量有瑕疵**：Transformers 示例使用 `image-text-to-text` pipeline，却又导入 `AutoModelForCausalLM`，代码存在不一致，削弱页面可信度。
+4. **合规建议**：企业不应在未进行内部安全/合规评估的情况下接入此类模型；安全团队可将其作为红队测试靶标，但不适合直接用于面向用户的生产系统。
+5. **趋势判断**：这类“无审查 + 高能力保留”的模型会持续出现，AI 治理不能只依赖模型层对齐，还需要部署层、平台层和法律层共同约束。
+
+---
+
+**结论**：这是一份高风险、高关注度的模型发布页。它的技术叙事完整、数据表面亮眼，但可信度仍待外部验证。对安全研究者来说，它是重要的红队与治理研究样本；对企业和平台而言，则是一个明确的合规与滥用风险信号。
