@@ -963,6 +963,7 @@ export default {
   "Raw-翻译-AINews-Claude-FableMythos-51-new-SOTA-model": "[AINews] Claude FableMythos 5.1 new SOTA...",
   "Raw-翻译-AINews-Andrew-Ng-gets-into-AI-Engineering": "[AINews] Andrew Ng gets into AI Engineer...",
   "Raw-翻译-AINews-10-worse-100x-cheaper-10000x-faster": "[AINews] 10 worse, 100x cheaper, 10000x ...",
+  "Raw-翻译-Zep-AI-YC-W24-Is-Hiring-a-Head-of-Forward-D": "Zep AI YC W24 Is Hiring a Head of Forwar...",
   "Raw-翻译-Your-executable-is-a-SQLite-database": "Your executable is a SQLite database",
   "Raw-翻译-Young-Money-Launch-Week-Update": "Young Money Launch Week Update",
   "Raw-翻译-You-probably-own-this-7-Eleven-and-thats-wh": "You probably own this 7-Eleven and thats...",
