@@ -324,6 +324,7 @@ export default {
   "Raw-翻译-派早报：英伟达正式发布-DLSS-5、戴森发布智能电动牙刷-CameraJet-等": "派早报：英伟达正式发布 DLSS 5、戴森发布智能电动牙刷 CameraJet ...",
   "Raw-翻译-派早报：智谱开源-GLM-53-Flash-原生多模态模型等": "派早报：智谱开源 GLM-5.3-Flash 原生多模态模型等",
   "Raw-翻译-派早报：微软公布-Project-Zenith-计划、F-Droid-拟效仿-Debi": "派早报：微软公布 Project Zenith 计划、F-Droid 拟效仿 D...",
+  "Raw-翻译-派早报：商务部回应美国-AI-蒸馏指控": "派早报：商务部回应美国 AI 蒸馏指控",
   "Raw-翻译-派早报：华为举办-HarmonyOS-7-HUAWEI-Mate-XT-2-及全场景新": "派早报：华为举办 HarmonyOS 7  HUAWEI Mate XT 2 及...",
   "Raw-翻译-派早报：OpenClaw-推出-20-版本更新，网易-CC-直播正式停运等": "派早报：OpenClaw 推出 2.0 版本更新，网易 CC 直播正式停运等",
   "Raw-翻译-派早报：OpenAI-发布-GPT-6-Astra-模型、Meta-发布-Muse-S": "派早报：OpenAI 发布 GPT-6 Astra 模型、Meta 发布 Mus...",
