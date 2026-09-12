@@ -1516,6 +1516,7 @@ export default {
   "Raw-翻译-How-accurate-have-Ed-Zitrons-AI-skeptic-pre": "How accurate have Ed Zitrons AI skeptic ...",
   "Raw-翻译-How-Universities-Should-Prepare-Founders": "How Universities Should Prepare Founders",
   "Raw-翻译-How-Trump-and-Xi-Can-Do-AI-Safety": "How Trump and Xi Can Do AI Safety",
+  "Raw-翻译-How-SaaS-startup-guys-get-first-100-custome": "How SaaS startup guys get first 100 cust...",
   "Raw-翻译-How-I-turned-Claude-into-a-self-improving-P": "How I turned Claude into a self-improvin...",
   "Raw-翻译-How-Claude-Watermarks-AI-Generated-Text": "How Claude Watermarks AI-Generated Text",
   "Raw-翻译-How-AI-Becomes-a-Political-Crisis": "How AI Becomes a Political Crisis",
