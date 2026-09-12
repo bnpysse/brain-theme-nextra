@@ -1,0 +1,66 @@
+---
+title: "I compiled Doom s renderer into a 21B-parameter transformer_全翻译"
+tags: ["Reddit_全文翻译", "r_MachineLearning"]
+---
+
+【帖子标题】：I compiled Doom's renderer into a 21B-parameter transformer -- no training anywhere [P]
+
+【帖子标题】：我把《毁灭战士》的渲染器编译成了一个210亿参数的Transformer——全程无需训练 [P]
+
+【帖子正文】：
+This is the project my last two posts were building towards (this is the last of this silliness). I ported the Doom rendering algorithm to run inside a transformer. Instead of training a model, I used a compiler I wrote which converts computation graphs into transformer weights, and then ported Doom's algorithm into a compatible graph. The generated checkpoints can be loaded in Hugging Face without trust_remote_code -- it's just a standard transformers checkpoint. You feed the model a prompt representing the scene data, and generate until the model stops. The result is a token sequence which includes simple pixel drawing commands (to move the cursor, draw a pixel, etc). When you mechanically apply those drawing commands you get the rendered frame.
+
+【帖子正文】：
+这个项目是我前两篇帖子一直在铺垫的成果（这也是这系列胡闹的最后一篇）。我将《毁灭战士》的渲染算法移植到了Transformer中运行。我没有训练模型，而是使用了一个自己编写的编译器，它可以将计算图转换为Transformer权重，然后我把《毁灭战士》的算法移植成兼容的计算图。生成的检查点可以直接在Hugging Face上加载，无需trust_remote_code——这就是一个标准的transformers检查点。你向模型输入一段代表场景数据的提示词，然后让它一直生成直到停止。输出的是一个包含简单像素绘制指令（移动光标、绘制像素等）的token序列。当你机械地执行这些绘制指令时，就能得到渲染出的帧画面。
+
+The article includes the entire host program necessary to load the checkpoint, generate the render, and parse the output into the famous E1M1 frame. This host code is 43 lines of python. The python to define the computation graph is much longer, but that gets compiled into the transformer itself.
+
+文章包含了加载检查点、生成渲染画面以及将输出解析为著名的E1M1关卡画面所需的全部宿主程序。这段宿主代码只有43行Python。用于定义计算图的Python代码要长得多，但那段代码会被编译进Transformer本身。
+
+One frame is a 3,614-token prompt plus 53,747 generated tokens -- just over 40 minutes on a B200.
+
+一帧画面需要3,614个token的提示词加上53,747个生成的token——在B200上需要40多分钟。
+
+The original Doom could achieve 35 FPS on a 486. This achieves 35 FPD (frames per day) on a B200.
+
+原版《毁灭战士》在486处理器上能达到35 FPS。而这个项目在B200上达到了35 FPD（每天渲染帧数）。
+
+Write-up:
+
+文章链接：
+
+https://ood.dev/posts/doom/
+
+https://ood.dev/posts/doom/
+
+Weights:
+
+权重文件：
+
+https://huggingface.co/physicsrob/torchwright-doom-e1m1
+
+https://huggingface.co/physicsrob/torchwright-doom-e1m1
+
+Github for the source code which gets compiled:
+
+被编译的源代码GitHub仓库：
+
+https://github.com/physicsrob/torchwright_doom/
+
+https://github.com/physicsrob/torchwright_doom/
+
+submitted by
+
+由以下用户提交
+
+/u/notforrob
+
+/u/notforrob
+
+[link]
+
+[链接]
+
+[comments]
+
+[评论]

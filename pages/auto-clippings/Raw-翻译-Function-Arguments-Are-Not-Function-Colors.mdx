@@ -1,0 +1,129 @@
+---
+title: "Function Arguments Are Not Function Colors_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Function Arguments Are Not Function Colors
+
+【文章正文】：
+Why Function Arguments Are Not Function Colors
+In several debates online about function colors over the years, people have argued the apparently reasonable position that function arguments can constitute colors as well.
+For instance,
+in Go, there is a context.Context
+value, which manages timeouts,
+cancellation, and a small amount of data that can be threaded through
+various functions. It is, by design, intended to be something passed
+through functions even if the receiver doesn’t use it directly but
+only passes it along. Generally, once one function starts using a
+context, you should thread it along to all called functions that could
+conceivably have a use for it.
+So, superficially, this appears to be a color. Once you have this particular argument in hand, you “have” to call all future functions of that type with that argument.
+Extending this out you can end up arguing that all function parameters are “colors”, as some do.
+A quick, though still important, objection is to observe that if this was the case, we wouldn’t be talking about this at all. If async was merely one “color” in a dazzling chaotic rainbow of thousands of other colors, this “color” concept wouldn’t have been invented 50+ years after the invention of programming language functions. There is still something distinct about how async works in some languages that is worth trying to capture and understand.
+But understanding the situation deeply from one example is difficult. Here is my attempt to turn it into a criterion rather than a single example:
+Color As A Change Dependency Graph Shape
+Let’s phrase the problem this way:
+Suppose I have to change an attribute of some function 4 levels buried in a call stack, be that a parameter that it takes, whether it is “async” or not, or some other thing like “whether or not it has ASM in it” or any other attribute of the function. Any change to the function at all, depending on what characteristics the local language permits functions to have.
+This change could result in having to change the callers as well.
+There’s three basic cases that can emerge:
+- 
+No change to any caller is necessary.
+- 
+The change may require a change to the direct caller.
+- 
+The change may require a change to all functions in the stack.
+Graphically, we have the following. For the no-color, function parameter case, the “need to change” relationship may look like this:
+For the color case, it looks like this:
+The difference between a “color” and a “normal” change is that in the case of the color, the change to the bottom function in the stack does not just affect its parent. It immediately and inescapably affects every function above it in the call stack, and therefore, they all must react to the change.
+For a “normal” change, it only propagates to the caller. It may then chain to its caller. If it propagates all the way up to the top-level function, as demonstrated in the diagram, this may seem like a distinction without a difference.
+But the key is that the diagram isn’t showing the common case, it is showing the worst case. In practice, functions almost always break the chain before it reaches to the top of the call stack. Any function can “catch” the propagating change and encapsulate it so that functions above it won’t see it anymore.
+You can measure this by how often you do in fact end up threading a change up the stack… well… you could back in the Bad Old Days when we were programming by hand. You know it’s something you do, but it’s certainly not something you do all the time, and it’s not something you often did all the way up to the main function at the top.
+Change Isolation
+We humans pervasively use structured programming precisely because of its ability to do this for most function changes, to isolate higher functions from needing to know every detail of the lower functions.
+What would it even look like for the top-most function to have to know “everything” that all the child functions end up ever needing? For every function parameter change in the entire program to somehow force a change all the way up the entire call stack?
+Clearly this does not happen. It so thoroughly does not happen that you may be having difficulty even imagining what it is I am talking about.
+For instance,
+in the case of Go’s context, which I keep bringing up not just because
+Go is one of my main programming languages but because this is the
+example that keeps coming up, any function anywhere can call
+context.Background() to obtain a degenerate, but fully functional,
+context value.
+So a function that is changed to take a context can
+still be called by any other normal function just by passing the
+result of context.Background(). Moreover this is not a hypothetical
+situation; it is very common for me, when I add a context.Context
+parameter to a function that did not previously have one, to do
+exactly that in real code, to adapt testing code or other callers
+that don’t care about the context to the new parameter.
+So this “linked list” relationship in practice doesn’t just tend to break the chain before it hits main, it tends to break the chain very, very early. It hurts to have to thread changes all the way up, so we’ve developed a lot of ways of not having to do that and improving the encapsulation our functions provide. While you may have to do that sometimes, it’s the sort of rare event that is very cognitively available and easy to remember and notice, but as a result, is completely outsized in your memory. In reality it is a very rare case, not the common one.
+A normal change can be encapsulated. A very specific change may for some reason need to go all the way up to main, but this is clearly the exception, and even then, the rest of the program may use this ability to encasulate in other ways.
+A color change escapes this encapsulation. All functions above it in the stack must match its requirements.
+Color Definition
+Any change to a function with the “color” shape of dependencies is a color. Any change to a function that is shaped like the linked list is not a color.
+While the original defining essay used async as its canonical example,
+that does not mean all async in all languages is always a color.
+You must examine the specifics of the language’s async support to
+see if it matches. In many languages it is not a color. I think with
+some current changes to Zig a function that does IO either is
+or is not a color depending on
+which Io value you pass to it,
+or perhaps rather, the color is an attribute of the Io value rather than
+the function itself. Async is a color based on whether it fits the definition; the definition
+is not that async is always a color.
+This is further complicated by the fact that it isn’t always quite as bright and shining a line as we’d like even in the canonical “Javascript async” case the original essay is about. It is still possible to run an async action in a synchronous context is Javascript. It just comes at the cost of the rest of the async actions that should be running at the same time. I would consider this “not really running async at all”, given the staggering nature of the cost and how it destroys the essential functionality of the feature and just barely works. However, your mileage may vary. As with everything, the closer you look, the more it seems to become a spectrum rather than a binary and the more complicated the spectrum becomes.
+However, just because things are spectrums and drawing the line ends up more complicated than it may have initially seemed doesn’t mean there aren’t real differences between color changes and normal changes.
+Advanced Topic: Partial Coloring
+For an advanced understanding, from this point of view we can also imagine partial colors. Haskell is the king of partial colors, using them to make powerful guarantees about what the intervening functions can do by using the color to constrain them somehow.
+For instance, the Software Transaction Memory monad
+STM
+implements software transactional memory by allowing the creation of
+transactional values. These values can only be accessed via functions
+like
+readTVar
+from within an STM monad context.
+An STM function can call a pure function which calls a pure function,
+but if that pure function needs to then use something in STM, that
+propagates up the entire stack between that call and the previous use
+of STM, forcing the lifting of every intervening function into the STM
+“color”. The color is used to enforce the guarantee that only code in
+the STM monad, running through the STM machinery that guarantees
+transactionality of the result, can access transactional variables.
+However, while that is a non-local, color-like interaction with some of the the
+functions above it in the call stack, it does not propagate all the
+way to the top of the call stack. The type of a top-level Haskell
+program is IO (). STM does not appear in that type signature. Anything
+other than IO is guaranteed to be encapsulated somewhere in the
+program below the main function itself.
+This is indeed a color because this rides on Haskell’s IO color; an
+STM transaction can only itself be done in IO, so while the type
+system will allow you to pass a TVar a to a pure function, the pure
+function will not be able to do anything with it without
+unsafePerformIO. Haskell permits you to add “shades” of color to
+IO that you can enforce on portions of your codebase.
+Originally I tried to write this in terms of the simpler
+State
+but as I was working through it I realized that State is not a
+color. Nothing stops a function from being passed the entire state,
+calling some other pure function with that state, and then that pure
+function can construct its own State-based computation with it and
+if you like you can thread that new state all the way back to the
+original context with no problems. That would be klunky and
+unidiomatic, but it is both legal and moral.
+So not all monads inside of Haskell are colors, just the ones that
+can only be resolved within IO somehow. But Haskell does allow you
+to create additional “colors” with that mechanism.
+I believe it is reasonable to say that most languages do not permit you to add your own colors to it in this manner. However, again, I would leave it to the experts in each language to debate whether or not this is the case.
+To close, let me reiterate a color must have this characteristic where
+it jumps over intervening calls and forces the change on all other
+functions within the relevant island of color. In the STM case above,
+anything that wants to access the transactional variables must be in
+the STM monad; the type checker will rigidly prevent any attempt to
+encapsulate the change to a portion of the calls in between, modulo
+unsafe. There is no way for one of the pure functions in the middle
+to somehow satisfy the STM constraint for everything below it (modulo
+unsafe), which is why it is reasonable to say that it isn’t just
+being transmitted up as a linked requirement but actually directly
+imposed on all intervening stack frames. If something in the middle
+can satisfy the requirement and encapsulate it from functions above
+it in principle, even if for some particular code change it may not
+be practical for a specific instance, it is not a color.

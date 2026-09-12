@@ -1,0 +1,146 @@
+---
+title: "_MoonTechLab_LunaTV_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+# MoonTV
+
+&lt;div align="center"&gt;
+  ![MoonTV Logo](public/logo.png)
+&lt;/div&gt;
+
+&gt; 🎬 **MoonTV** 是一个开箱即用的、跨平台的影视聚合播放器。它基于 **Next.js 14** + **Tailwind&nbsp;CSS** + **TypeScript** 构建，支持多资源搜索、在线播放、收藏同步、播放记录、云端存储，让你可以随时随地畅享海量免费影视内容。
+
+&lt;div align="center"&gt;
+
+![Next.js](https://img.shields.io/badge/Next.js-14-000?logo=nextdotjs)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-38bdf8?logo=tailwindcss)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.x-3178c6?logo=typescript)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Docker Ready](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
+
+&lt;/div&gt;
+
+---
+
+## ✨ 功能特性
+
+- 🔍 **多源聚合搜索**：一次搜索立刻返回全源结果。
+- 📄 **丰富详情页**：支持剧集列表、演员、年份、简介等完整信息展示。
+- ▶️ **流畅在线播放**：集成 HLS.js & ArtPlayer。
+- ❤️ **收藏 + 继续观看**：支持 Kvrocks/Redis/Upstash 存储，多端同步进度。
+- 📱 **PWA**：离线缓存、安装到桌面/主屏，移动端原生体验。
+- 🌗 **响应式布局**：桌面侧边栏 + 移动底部导航，自适应各种屏幕尺寸。
+- 👿 **智能去广告**：自动跳过视频中的切片广告（实验性）。
+
+### 注意：部署后项目为空壳项目，无内置播放源和直播源，需要自行收集
+
+&lt;details&gt;
+  &lt;summary&gt;点击查看项目截图&lt;/summary&gt;
+  ![项目截图](public/screenshot1.png)
+  ![项目截图](public/screenshot2.png)
+  ![项目截图](public/screenshot3.png)
+&lt;/details&gt;
+
+### 请不要在 B站、小红书、微信公众号、抖音、今日头条或其他中国大陆社交平台发布视频或文章宣传本项目，不授权任何“科技周刊/月刊”类项目或站点收录本项目。
+
+## 🗺 目录
+
+- [技术栈](#技术栈)
+- [部署](#部署)
+  - [一键部署](#zeabur-一键部署)
+  - [Docker 部署](#Kvrocks-存储推荐)
+- [配置文件](#配置文件)
+- [订阅](#订阅)
+- [自动更新](#自动更新)
+- [环境变量](#环境变量)
+- [客户端](#客户端)
+- [AndroidTV 使用](#AndroidTV-使用)
+- [Roadmap](#roadmap)
+- [安全与隐私提醒](#安全与隐私提醒)
+- [License](#license)
+- [致谢](#致谢)
+
+## 技术栈
+
+| 分类      | 主要依赖                                                                                              |
+| --------- | ----------------------------------------------------------------------------------------------------- |
+| 前端框架  | [Next.js 14](https://nextjs.org/) · App Router                                                        |
+| UI & 样式 | [Tailwind&nbsp;CSS 3](https://tailwindcss.com/)                                                       |
+| 语言      | TypeScript 4                                                                                          |
+| 播放器    | [ArtPlayer](https://github.com/zhw2590582/ArtPlayer) · [HLS.js](https://github.com/video-dev/hls.js/) |
+| 代码质量  | ESLint · Prettier · Jest                                                                              |
+| 部署      | Docker                                                                    |
+
+## 部署
+
+本项目**仅支持 Docker 或其他基于 Docker 的平台** 部署。
+
+### zeabur 一键部署
+
+点击下方按钮即可一键部署，自动配置 LunaTV + Kvrocks 数据库：
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/8MPTQU/deploy)
+
+**优势**：
+- ✅ 无需配置，一键启动（自动部署完整环境）
+- ✅ 自动 HTTPS 和全球 CDN 加速
+- ✅ 持久化存储，数据永不丢失
+- ✅ 免费额度足够个人使用
+
+**⚠️ 重要提示**：部署完成后，需要在 Zeabur 中为 LunaTV 服务设置访问域名（Domain）才能在浏览器中访问。详见下方 [设置访问域名](#5-设置访问域名必须) 步骤。
+
+### Kvrocks 存储（推荐）
+
+```yml
+services:
+  moontv-core:
+    image: ghcr.io/moontechlab/lunatv:latest
+    container_name: moontv-core
+    restart: on-failure
+    ports:
+      - '3000:3000'
+    environment:
+      - USERNAME=admin
+      - PASSWORD=admin_password
+      - NEXT_PUBLIC_STORAGE_TYPE=kvrocks
+      - KVROCKS_URL=redis://moontv-kvrocks:6666
+    networks:
+      - moontv-network
+    depends_on:
+      - moontv-kvrocks
+  moontv-kvrocks:
+    image: apache/kvrocks
+    container_name: moontv-kvrocks
+    restart: unless-stopped
+    volumes:
+      - kvrocks-data:/var/lib/kvrocks
+    networks:
+      - moontv-network
+networks:
+  moontv-network:
+    driver: bridge
+volumes:
+  kvrocks-data:
+```
+
+### Redis 存储（有一定的丢数据风险）
+
+```yml
+services:
+  moontv-core:
+    image: ghcr.io/moontechlab/lunatv:latest
+    container_name: moontv-core
+    restart: on-failure
+    ports:
+      - '3000:3000'
+    environment:
+      - USERNAME=admin
+      - PASSWORD=admin_password
+      - NEXT_PUBLIC_STORAGE_TYPE=redis
+      - REDIS_URL=redis://moontv-redis:6379
+    networks:
+      - moontv-network
+    depends_on:
+      - moontv-redis
+ 

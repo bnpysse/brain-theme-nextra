@@ -1,0 +1,139 @@
+---
+title: "Show HN Conduct, open-source guardrails for LLM and MCP tool_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: Conduct, open-source guardrails for LLM and MCP tool calls
+【文章标题】：展示HN：Conduct——面向LLM和MCP工具调用的开源安全护栏
+
+【文章正文】：
+Runtime governance for AI agents — one policy enforces across every LLM call, every shell tool, every teammate's AI session.
+【正文】：
+AI智能体的运行时治理——单一策略覆盖每次LLM调用、每个Shell工具、每位团队成员的AI会话。
+
+Two product surfaces, one repo, one policy:
+两大产品界面，单一代码库，统一策略：
+- Conduct Guard — the policy engine. Decides block / warn / audit / inject for every AI action before it executes, backed by signed configuration and a hash-chained audit log.
+- Conduct Guard（守卫引擎）：策略决策核心。在每次AI动作执行前判定拦截/警告/审计/注入，由签名配置和哈希链审计日志提供支持。
+- Conduct Router — the LLM proxy. Point any provider SDK (Anthropic, OpenAI, Perplexity) at Router and every request runs through Guard on the way to the upstream provider.
+- Conduct Router（路由代理）：LLM流量网关。将任意供应商SDK（Anthropic/OpenAI/Perplexity）指向Router，所有请求都会经由Guard检测再转发至上游供应商。
+
+Runtime firewalls like Straiker and Lakera tell you what an agent did. Guard controls what an agent can do — with cryptographic proof.
+类似Straiker和Lakera的运行时防火墙仅能告知智能体的行为，而Guard通过加密证明直接控制智能体的行为权限。
+
+|  | Runtime firewalls | Conduct Guard | 
+|---|---|---|
+| 对比维度 | 运行时防火墙 | Conduct守卫系统 |
+| Timing | After the action | Before the action | 
+| 触发时机 | 动作发生后 | 动作执行前 |
+| Config integrity | Trust the pack | Workspace-signed | 
+| 配置完整性 | 信任策略包 | 工作区签名验证 |
+| Audit | Log stream | SHA-256 hash chain | 
+| 审计机制 | 日志流 | SHA-256哈希链 |
+| Coverage | LLM calls only | LLM and shell / MCP | 
+| 覆盖范围 | 仅LLM调用 | LLM+Shell/MCP工具 |
+| Failure mode | Fail-open (soft) | Fail-closed by default | 
+| 故障模式 | 失败开放（软性） | 默认失败关闭 |
+
+The three-pillar moat:
+三大核心防御：
+- Signed configuration — every workspace signs its active policy set. Every Guard check verifies the signature before enforcing. A tampered pack — pushed by anyone, at any layer — is rejected before it can decide anything.
+- 签名配置：每个工作空间对其生效策略集进行签名。每次Guard检查都会先验证签名。任何人在任何层级推送的篡改策略包都会在决策前被拦截。
+- Hash-chained audit — every decision appends to a SHA-256 chain rooted at workspace genesis. Any missing or altered entry breaks the chain and is caught on one-click verification. Evidence you can hand to an auditor.
+- 哈希链审计：每个决策都会追加到以工作空间创世块为根的SHA-256链。任何缺失或篡改记录都会破坏链条，一键验证即可发现。可直接提交审计的完整证据链。
+- Policy-first, not detection-first — rules decide before the action executes, with structured reasons. Not anomaly detection after the fact.
+- 策略优先（非检测优先）：基于结构化原因在动作执行前决策，而非事后异常检测。
+
+New here? Start with Discovery mode: read-only visibility into every AI action your team takes for 14 days. No policy to author, nothing to install upstream, no cost. When you're ready to enforce, promote a rule from what Discovery already saw.
+新用户？从发现模式开始：14天内以只读方式观察团队所有AI行为。无需编写策略、无需上游安装、零成本。准备就绪后，可直接将发现模式记录转为正式规则。
+
+git clone https://github.com/sseshachala/conductai
+cd conductai
+docker compose up
+- API on http://localhost:8000 (Guard + Router live at/guard/* and/proxy/* )
+- Canvas UI on http://localhost:3000
+- Redis worker + Postgres come up in the same stack
+
+克隆代码 → 启动容器：
+- API运行于http://localhost:8000（守卫引擎在/guard/*，路由代理在/proxy/*）
+- 可视化界面http://localhost:3000
+- Redis工作队列与Postgres数据库同步启动
+
+Point any provider SDK at Router:
+将任意SDK指向路由代理：
+curl https://api.conductai.ai/proxy/anthropic/v1/messages \
+  -H "Authorization: Bearer cond_agt_..." \
+  -H "Content-Type: application/json" \
+  -d '&#123;"model":"claude-sonnet-4-6","max_tokens":1024,"messages":[&#123;"role":"user","content":"Hello"&#125;]&#125;'
+
+Or wrap your CLI hooks with Guard:
+或通过Guard封装CLI钩子：
+pip install conduct-cli
+conduct login
+conduct sync        # installs hook + MCP, pulls policies
+安装CLI工具 → 登录同步 → 自动安装钩子并拉取策略
+
+Now every Claude Code, Cursor, Copilot, ChatGPT, or Codex session on that machine is governed by the same active packs.
+此后该设备上所有Claude Code/Cursor/Copilot/ChatGPT/Codex会话都将受统一策略包管控。
+
+架构组件路径：
+| Component | Path | 
+|---|---|
+| Guard runtime | apps/api/app/modules/guard/ | 
+| Router (proxy) | apps/api/app/modules/guard/routers/proxy.py | 
+| Compliance packs | apps/api/app/modules/guard/skill_packs/ | 
+| Canvas UI | apps/web/ | 
+| Playbook DSL loader | apps/api/app/dsl/ | 
+| Playbook library | apps/api/playbooks/ (22 pre-built) | 
+| CLI | packages/conduct-cli/ | 
+
+20+ compliance packs ship out of the box: OWASP, SOC 2 CC7.3, HIPAA §164.312, PCI DSS 4.0, EU AI Act Art. 15/16, NIST AI RMF, ISO 42001, and framework-specific packs for Python, Node, and Terraform.
+开箱即用20+合规策略包：OWASP、SOC 2 CC7.3、HIPAA §164.312、PCI DSS 4.0、欧盟AI法案第15/16条、NIST AI RMF、ISO 42001，以及Python/Node/Terraform框架专属包。
+
+22 pre-built playbooks: Issue → PR, code review, incident response, prod deploy gate, CI/CD triage, security scanner triage, Slack digest, and more. Each is one YAML file; edit-and-run.
+22个预置工作流：Issue转PR、代码审查、事件响应、生产部署门禁、CI/CD分类、安全扫描分类、Slack摘要等。每个都是可即改即用的YAML文件。
+
+   Developer / agent                     Guard control plane
+   开发者/智能体端                      守卫控制平面
+   ─────────────────                     ───────────────────
+   Claude Code   ──┐                     ┌── Canvas UI (Next.js)
+   Cursor        ──┤   CLI hook  ────►   ├── FastAPI + policy engine
+   Copilot       ──┤   (cond_cli)        ├── Postgres (state, audit)
+   Codex         ──┘                     ├── Redis (workers, queues)
+                     ┌──── MCP  ────►    └── Hash chain (SHA-256)
+   Any SDK       ────┤
+   (Anthropic,       └── Router ────►    Upstream provider (Anthropic,
+    OpenAI,             /proxy/*         OpenAI, Perplexity, ...)
+    Perplexity)
+
+Guard checks fire at three chokepoints:
+守卫系统在三个关键点实施检测：
+- CLI hook — every Claude Code / Cursor / Copilot / Codex tool call.
+- CLI钩子：拦截所有Claude Code/Cursor/Copilot/Codex工具调用
+- MCP layer — every MCP tool invocation.
+- MCP层：管控每次MCP工具调用
+- Router — every LLM call by any SDK.
+- 路由代理：过滤所有SDK发起的LLM调用
+
+One policy, three enforcement surfaces.
+统一策略，三重执行面。
+
+部署选项：
+- Self-host with docker compose — the command above. Runs everything locally.
+- Docker compose本地部署：单条命令全量启动
+- Self-host on Kubernetes — deployment templates ship in issue #1149.
+- Kubernetes集群部署：模板见issue #1149
+- Hosted — conductai.ai. Free tier includes Discovery; paid tiers unlock enforcement + Router + hash-chain verification API.
+- 托管服务：免费版含发现模式，付费版开放策略执行+路由代理+哈希链验证API
+
+安全文档：
+- SECURITY.md — vulnerability reporting policy, scope, coordinated disclosure, and safe harbor.
+- 安全政策：漏洞报告流程、范围、协同披露及免责条款
+- Threat model — system context, trust boundaries, attacker goals, mitigations, and residual risks.
+- 威胁模型：系统上下文、信任边界、攻击目标、缓解措施及剩余风险
+- Policy decision contract — guard_check decision semantics and fail-mode behavior.
+- 策略决策契约：guard_check语义定义及故障模式行为
+- Audit log verification — independent prev_hash /entry_hash chain verification procedure and example script.
+- 审计日志验证：独立验证脚本及哈希链校验流程示例
+- API versioning — pr
+- API版本控制策略（未完）
