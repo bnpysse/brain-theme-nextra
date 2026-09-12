@@ -1007,6 +1007,7 @@ export default {
   "Raw-翻译-With-American-Characteristics": "With American Characteristics",
   "Raw-翻译-Windows-是-AI-PC-路上的绊脚石": "Windows 是 AI PC 路上的绊脚石",
   "Raw-翻译-Windows-On-ARM-原生应用少你可以试试这些改造方法": "Windows On ARM 原生应用少你可以试试这些改造方法",
+  "Raw-翻译-Will-There-Be-a-7G": "Will There Be a 7G",
   "Raw-翻译-Wikimedia-Foundation-Workers-Overwhelmingly": "Wikimedia Foundation Workers Overwhelmin...",
   "Raw-翻译-Wi-Fi-8-专注于提升可靠性": "Wi-Fi 8 专注于提升可靠性",
   "Raw-翻译-Wi-Fi-8-is-the-first-wireless-upgrade-in-ye": "Wi-Fi 8 is the first wireless upgrade in...",
