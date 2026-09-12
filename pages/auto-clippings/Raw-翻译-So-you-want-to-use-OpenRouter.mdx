@@ -1,0 +1,78 @@
+---
+title: "So you want to use OpenRouter_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：So you want to use OpenRouter?
+所以你想使用 OpenRouter？
+
+【文章正文】：
+So you want to use OpenRouter?
+所以你想使用 OpenRouter？
+
+One of OpenRouter's selling points is that it "handles fallbacks automatically and picks the most cost-effective option for each request", so you can call a single API endpoint for a model and get routed to the best available backend provider.
+OpenRouter 的一个卖点是它“自动处理回退并针对每个请求选择最具成本效益的选项”，因此你可以只调用一个模型对应的单一 API 端点，并被路由到最佳可用后端提供商。
+
+Mohamed Moustafa points out a whole set of ways that this can cause you problems. Different providers run different serving software with different optimizations and settings, which means that the same OpenRouter endpoint can serve model requests that behave in different ways.
+Mohamed Moustafa 指出了一系列由此可能给你带来问题的情况。不同提供商运行不同的服务软件，采用不同的优化和设置，这意味着同一个 OpenRouter 端点所提供的模型请求可能会表现出不同的行为。
+
+Some providers even lack vision capability for vision models, and the way the reasoning effort option is processed can differ as well.
+有些提供商甚至对视觉模型缺少视觉能力，推理努力选项的处理方式也可能存在差异。
+
+Thankfully you can control which provider is routed to using
+
+the provider.only option
+
+. The
+
+/endpoints method
+
+returns the list of available providers for a specific model ID.
+幸运的是，你可以使用
+
+provider.only 选项
+
+来控制路由到哪个提供商。通过
+
+/endpoints 方法
+
+可以返回某个特定模型 ID 的可用提供商列表。
+
+Via
+
+Hacker News
+
+Tags:
+
+ai
+
+,
+
+generative-ai
+
+,
+
+llms
+
+,
+
+openrouter
+Via
+
+Hacker News
+
+标签：
+
+ai
+
+，
+
+generative-ai
+
+，
+
+llms
+
+，
+
+openrouter
