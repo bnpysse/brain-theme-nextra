@@ -1,0 +1,69 @@
+---
+title: "Generating running routes with GPT-6 Astra and ChatGPT Work_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：Generating running routes with GPT-6 Astra and ChatGPT Work
+
+【文章正文】：
+Here's a neat thing I had
+
+ChatGPT Work
+
+with GPT-6 Astra (Max) do this morning:
+
+I live at &lt;my address&gt;. Figure out 5K and 10K running routes from me that loop from my house. Use OSM data.
+
+It worked for 27 minutes and produced exactly what I'd asked for, as both an embedded visualization and downloadable GPX file and GeoJSON files. Here's that 5K route:
+
+When I asked it how it had created the route, it replied:
+
+I used
+
+Nominatim to locate the address
+
+and
+
+Overpass to download local OpenStreetMap roads and trails
+
+, then calculated the loops locally.
+
+Frustratingly, the actual code it ran and exact details of what it did weren't visible to me in the ChatGPT UI. I see this lack of transparency is an anti-feature.
+
+As for displaying the map to me, that used the
+
+visualize skill
+
+. It created a file called
+
+/workspace/el-granada-5k-share.html
+
+to embed directly into the ChatGPT UI. Here's
+
+a copy of that HTML
+
+.
+
+Tags:
+
+gpt-6-astra
+
+,
+
+generative-ai
+
+,
+
+openai
+
+,
+
+chatgpt
+
+,
+
+ai
+
+,
+
+llms
