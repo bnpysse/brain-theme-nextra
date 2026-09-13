@@ -1075,6 +1075,7 @@ export default {
   "Raw-翻译-WebLLM-high-performance-in-browser-LLM-infe": "WebLLM high-performance in-browser LLM i...",
   "Raw-翻译-WebFPGA": "WebFPGA",
   "Raw-翻译-We-Tracked-a-Shipment-of-Rare-Books-It-Ende": "We Tracked a Shipment of Rare Books. It ...",
+  "Raw-翻译-Waymo-举报了两名携带幽灵枪的青少年乘客": "Waymo 举报了两名携带幽灵枪的青少年乘客",
   "Raw-翻译-Watch-Los-Angeles-get-built-one-building-at": "Watch Los Angeles get built, one buildin...",
   "Raw-翻译-Warp-builds-self-improving-agents-on-Claude": "Warp builds self-improving agents on Cla...",
   "Raw-翻译-Warning-Unexpected-large-on-demand-charges": "Warning Unexpected large on-demand charg...",
