@@ -1,0 +1,96 @@
+---
+title: "_nab138_iloader_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&lt;a href="https://iloader.app"&gt;
+  &lt;picture align="left" &gt;
+    &lt;source media="(prefers-color-scheme: dark)" srcset="/iloader.svg"&gt;
+    ![](/iloader-dark.svg)
+  &lt;/picture&gt;
+  
+  &lt;div id="user-content-toc"&gt;
+    &lt;ul style="list-style: none;"&gt;
+      &lt;summary&gt;
+        &lt;h1&gt;iloader&lt;/h1&gt;
+      &lt;/summary&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/a&gt;
+
+---
+
+[![Build iloader](https://img.shields.io/github/actions/workflow/status/nab138/iloader/build.yml?style=flat&logo=github&logoColor=white&label=Build%20iloader)](https://github.com/nab138/iloader/actions/workflows/build.yml) ![Downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fnab138%2F28258aff7e3f1d3a3084a21f4cff2e57%2Fraw%2Filoader_downloads.json&style=flat)
+
+Install SideStore (or other apps) and import your pairing file with ease
+
+**This repository and [iloader.app](https://iloader.app) are the only official ways to download iloader. There is also an unofficial [Homebrew cask](https://formulae.brew.sh/cask/iloader), an unofficial [AUR package](https://aur.archlinux.org/packages/iloader-bin), and an unofficial [Fedora COPR repository](https://copr.fedorainfracloud.org/coprs/anudeepd/iloader) maintained by the community. Do not download from any other sources or websites.**
+
+![iloader0](https://github.com/user-attachments/assets/93cd135d-6d89-46ee-9b9f-12c596806911)
+
+## How to use
+
+- Install usbmuxd for your platform
+  - Windows: [iTunes](https://apple.co/ms)
+  - macOS: Included
+  - Linux: Potentially included, if not, install via your package manager
+- Install the latest version for your platform from the [releases](https://github.com/nab138/iloader/releases)
+  - NixOS: Use the flake `github:nab138/iloader`
+- Plug in your iDevice to your computer
+- Open the app
+- Sign into your Apple ID
+- Select your action (e.g. install SideStore)
+
+## Features
+
+- Install SideStore (or LiveContainer + SideStore), import certificate and place rppairing+lockdown pairing files automatically
+- Import any IPA
+- Intelligent error suggestions to help resolve common issues
+- Manage pairing files in apps like StikDebug, SideStore, Protokolle, etc
+- See and revoke development certificates & app ids
+
+## Troubleshooting
+
+- If you are unable to solve an issue on your own, copy the full error message and ask on the [idevice Discord server](https://discord.gg/EA6yVgydBz) or [open an issue](https://github.com/nab138/iloader/issues).
+- You can view app logs with the "View Logs." If nothing is showing up, change the log level to "Debug."
+- If those logs aren't helpful, logs with additional are stored in the following locations:
+  - Windows: `%APPDATA%\me.nabdev.iloader\logs`
+  - macOS: `~/Library/Application Support/me.nabdev.iloader/logs`
+  - Linux: `~/.local/share/me.nabdev.iloader/logs/`
+
+## Translating
+
+iloader needs localization! If you speak another language and notice iloader does not support it or has mistakes, please consider contributing.
+
+To update/edit an existing language, make a PR modifying `src/locales/&lt;lang&gt;.json`.
+
+To add a new language, add your language to `src/i18next.ts`, and in `src/locales` copy `en.json` to a new file titled `&lt;langcode&gt;.json` and update the strings.
+
+**i18next.ts:**
+
+```ts
+const languages = [
+  ["en", "English"],
+  ["es", "Español"],
+  // Your language here...
+] as const;
+```
+
+You can also add your name to the translators section of the README.
+
+Thank you for translating!
+
+## Building from source
+
+1. Install [bun](https://bun.sh) (or [Node.js](https://nodejs.org)) and [Rust](https://www.rust-lang.org/tools/install)
+2. Clone the repository and `cd` into it
+3. Run `bun i` (or `npm i`)
+
+For development with hot reload: `bun tauri dev` (or `npm run tauri dev`)
+Make a production build: `bun tauri build` (or `npm run tauri build`)
+
+## Credits
+
+- Icon made by [Transistor](https://github.com/transistor-exe)
+- UI improved by [StephenDev0](https://github.com/StephenDev0)
+- [idevice](https:
