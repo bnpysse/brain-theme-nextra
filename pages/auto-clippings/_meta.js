@@ -1534,6 +1534,7 @@ export default {
   "Raw-翻译-IFA-2026-现场：下一代穿戴设备的本质，是把录音笔和摄像头戴在身上": "IFA 2026 现场：下一代穿戴设备的本质，是把录音笔和摄像头戴在身上",
   "Raw-翻译-IBM-推出双指令集处理器": "IBM 推出双指令集处理器",
   "Raw-翻译-Im-sorry-youre-not-going-to-die-from-an-AI": "Im sorry, youre not going to die from an...",
+  "Raw-翻译-Im-being-cyberattacked-by-Tesla-Inc": "Im being cyberattacked by Tesla, Inc",
   "Raw-翻译-I-wrote-an-AI-textbook-—-how-long-until-AI": "I wrote an AI textbook — how long until ...",
   "Raw-翻译-I-turned-my-security-cameras-into-an-automa": "I turned my security cameras into an aut...",
   "Raw-翻译-I-think-I-hate-the-internet": "I think I hate the internet",
