@@ -1834,6 +1834,7 @@ export default {
   "Raw-翻译-Americas-Electricity-Gap": "Americas Electricity Gap",
   "Raw-翻译-America-is-still-beating-China-in-the-AI-ra": "America is still beating China in the AI...",
   "Raw-翻译-All-You-Need-To-Know-About-Warsh": "All You Need To Know About Warsh",
+  "Raw-翻译-Aligned-to-Whom": "Aligned to Whom",
   "Raw-翻译-Align-AI-and-Mathematics–To-Something-Else": "Align AI and Mathematics–To Something El...",
   "Raw-翻译-Algorithmic-Rent-Pricing-Litigation-Expands": "Algorithmic Rent-Pricing Litigation Expa...",
   "Raw-翻译-Alberta-Canada-slaps-punitive-tax-on-solar": "Alberta Canada slaps punitive tax on sol...",
