@@ -1173,6 +1173,7 @@ export default {
   "Raw-翻译-Steam-在一周内上架了逾-700-款游戏，大部分无人问津": "Steam 在一周内上架了逾 700 款游戏，大部分无人问津",
   "Raw-翻译-Statichosteu-–-100-European-static-site-hos": "Statichost.eu – 100 European static site...",
   "Raw-翻译-Starman-Holding-以-285-亿美元现金收购-GoPro": "Starman Holding 以 2.85 亿美元现金收购 GoPro",
+  "Raw-翻译-StarCraft-returns-in-2030-as-an-open-world": "StarCraft returns in 2030 as an open-wor...",
   "Raw-翻译-Sovereign-Tech-Agency-invests-€500k-in-Flat": "Sovereign Tech Agency invests €500k in F...",
   "Raw-翻译-South-Park-creators-rename-show-South-Ameri": "South Park creators rename show South Am...",
   "Raw-翻译-Solving-the-Jane-Street-Reverse-Engineering": "Solving the Jane Street Reverse Engineer...",
