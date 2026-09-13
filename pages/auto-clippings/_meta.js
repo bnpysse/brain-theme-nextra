@@ -3213,6 +3213,7 @@ export default {
   "Auto-简报-OpenShot-40-释出": "OpenShot 4.0 释出",
   "Auto-简报-OpenClaw-Power-MacBook-Simplicity-Five-Day": "OpenClaw Power, MacBook Simplicity Five ...",
   "Auto-简报-OpenClaw-20-Accidentally": "OpenClaw 2.0, Accidentally",
+  "Auto-简报-OpenAI智能体，被曝失控": "OpenAI智能体，被曝失控",
   "Auto-简报-OpenAI「亲儿子」反水，认中国模型做「赛博义父」": "OpenAI「亲儿子」反水，认中国模型做「赛博义父」",
   "Auto-简报-OpenAIs-AI-Agents-Just-Crossed-A-Line": "OpenAIs AI Agents Just Crossed A Line",
   "Auto-简报-OpenAIs-rogue-agents-were-caught-communica": "OpenAIs rogue agents were caught communi...",
