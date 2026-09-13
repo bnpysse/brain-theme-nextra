@@ -3034,6 +3034,7 @@ export default {
   "Auto-简报-Steam-在一周内上架了逾-700-款游戏，大部分无人问津": "Steam 在一周内上架了逾 700 款游戏，大部分无人问津",
   "Auto-简报-Statichosteu-–-100-European-static-site-ho": "Statichost.eu – 100 European static site...",
   "Auto-简报-Starman-Holding-以-285-亿美元现金收购-GoPro": "Starman Holding 以 2.85 亿美元现金收购 GoPro",
+  "Auto-简报-StarCraft-returns-in-2030-as-an-open-world": "StarCraft returns in 2030 as an open-wor...",
   "Auto-简报-Stagflation-Explained": "Stagflation Explained",
   "Auto-简报-Sovereign-Tech-Agency-invests-€500k-in-Fla": "Sovereign Tech Agency invests €500k in F...",
   "Auto-简报-Solving-the-Jane-Street-Reverse-Engineerin": "Solving the Jane Street Reverse Engineer...",
