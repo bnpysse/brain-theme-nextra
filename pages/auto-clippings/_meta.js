@@ -1473,6 +1473,7 @@ export default {
   "Raw-翻译-Mercator-↔-Equal-Earth": "Mercator ↔ Equal Earth",
   "Raw-翻译-Maîtres-Chez-Nous": "Maîtres Chez Nous",
   "Raw-翻译-Maybe-We-Shouldnt-Be-Reviewing-All-This-Cod": "Maybe We Shouldnt Be Reviewing All This ...",
+  "Raw-翻译-Matt-Mullenweg-据报道恢复了对-Automattic-的控制": "Matt Mullenweg 据报道恢复了对 Automattic 的控制",
   "Raw-翻译-Matt-Mullenweg-tells-Automattic-staff-in-Sl": "Matt Mullenweg tells Automattic staff in...",
   "Raw-翻译-Matrox-Graphics-for-Professionals": "Matrox Graphics for Professionals",
   "Raw-翻译-Mathematicians-want-proof-OpenAI-didnt-use": "Mathematicians want proof OpenAI didnt u...",
