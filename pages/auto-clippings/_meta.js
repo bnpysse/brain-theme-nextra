@@ -1409,6 +1409,7 @@ export default {
   "Raw-翻译-Planet-Labs-Open-Satellite-Feed": "Planet Labs Open Satellite Feed",
   "Raw-翻译-Pixel-11-取消了对硬件-MTE-的支持": "Pixel 11 取消了对硬件 MTE 的支持",
   "Raw-翻译-Pitchfork0分警告：音乐作者性正在被AI淹没": "Pitchfork0分警告：音乐作者性正在被AI淹没",
+  "Raw-翻译-Pion-an-agent-designed-to-run-any-company-a": "Pion, an agent designed to run any compa...",
   "Raw-翻译-Pgbot-A-59-MB-read-only-Postgres-tool-for-h": "Pgbot A 5.9 MB read-only Postgres tool f...",
   "Raw-翻译-PayPal-Declined": "PayPal, Declined",
   "Raw-翻译-PaintNET-实验性支持-WineLinux": "Paint.NET 实验性支持 WineLinux",
