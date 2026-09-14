@@ -1,0 +1,166 @@
+---
+title: "_microsoft_markitdown_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+# MarkItDown
+
+[![PyPI](https://img.shields.io/pypi/v/markitdown.svg)](https://pypi.org/project/markitdown/)
+![PyPI - Downloads](https://img.shields.io/pypi/dd/markitdown)
+
+&gt; [!IMPORTANT]
+&gt; MarkItDown performs I/O with the privileges of the current process. Like open() or requests.get(), it will access resources that the process itself can access. Sanitize your inputs in untrusted environments, and call the narrowest `convert_*` function needed for your use case (e.g., `convert_stream()`, or `convert_local()`). See the [Security Considerations](#security-considerations) section of the documentation for more information.
+
+&gt; [!重要提示]
+&gt; MarkItDown以当前进程的权限执行I/O操作。与open()或requests.get()类似，它将访问进程本身能够访问的资源。在不可信环境中请对输入进行消毒处理，并根据使用场景调用最精确的`convert_*`函数（例如`convert_stream()`或`convert_local()`）。更多信息请参阅文档中的[安全注意事项](#security-considerations)章节。
+
+MarkItDown is a lightweight Python utility for converting various files to Markdown for use with LLMs and related text analysis pipelines. To this end, it is most comparable to [textract](https://github.com/deanmalmgren/textract), but with a focus on preserving important document structure and content as Markdown (including: headings, lists, tables, links, etc.) While the output is often reasonably presentable and human-friendly, it is meant to be consumed by text analysis tools -- and may not be the best option for high-fidelity document conversions for human consumption.
+
+MarkItDown是一款轻量级Python工具，用于将各类文件转换为Markdown格式以供LLM及相关文本分析管道使用。其功能与[textract](https://github.com/deanmalmgren/textract)最为相似，但更注重将重要文档结构和内容保留为Markdown格式（包括：标题、列表、表格、链接等）。虽然输出结果通常具备良好的可读性，但主要面向文本分析工具——可能不适合需要高保真文档转换的人类阅读场景。
+
+MarkItDown currently supports the conversion from:
+
+MarkItDown当前支持以下格式转换：
+
+- PDF
+- PowerPoint
+- Word
+- Excel
+- Images (EXIF metadata and OCR)
+- 图像（EXIF元数据和OCR识别）
+- Audio (EXIF metadata and speech transcription)
+- 音频（EXIF元数据和语音转录）
+- HTML
+- Text-based formats (CSV, JSON, XML)
+- 文本格式（CSV、JSON、XML）
+- ZIP files (iterates over contents)
+- ZIP压缩文件（遍历内容）
+- YouTube URLs
+- YouTube链接
+- EPubs
+- 电子书
+- ... and more!
+- ...以及更多！
+
+## Why Markdown?
+
+## 为何选择Markdown？
+
+Markdown is extremely close to plain text, with minimal markup or formatting, but still
+provides a way to represent important document structure. Mainstream LLMs, such as
+OpenAI's GPT-4o, natively "_speak_" Markdown, and often incorporate Markdown into their
+responses unprompted. This suggests that they have been trained on vast amounts of
+Markdown-formatted text, and understand it well. As a side benefit, Markdown conventions
+are also highly token-efficient.
+
+Markdown极其接近纯文本，具有最简化的标记或格式，但仍能表现重要文档结构。主流LLM（如OpenAI的GPT-4o）原生"理解"Markdown，并经常在响应中自发使用Markdown格式。这表明它们已在海量Markdown格式文本上进行训练，并具备良好的理解能力。作为额外优势，Markdown规范还具有极高的token效率。
+
+## Prerequisites
+## 先决条件
+MarkItDown requires Python 3.10 or higher. It is recommended to use a virtual environment to avoid dependency conflicts.
+
+MarkItDown需要Python 3.10或更高版本。建议使用虚拟环境以避免依赖冲突。
+
+With the standard Python installation, you can create and activate a virtual environment using the following commands:
+
+使用标准Python安装时，可通过以下命令创建并激活虚拟环境：
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+If using `uv`, you can create a virtual environment with:
+
+若使用`uv`，可通过以下命令创建虚拟环境：
+
+```bash
+uv venv --python=3.12 .venv
+source .venv/bin/activate
+# NOTE: Be sure to use 'uv pip install' rather than just 'pip install' to install packages in this virtual environment
+# 注意：在此虚拟环境中务必使用'uv pip install'而非单纯'pip install'安装包
+```
+
+If you are using Anaconda, you can create a virtual environment with:
+
+若使用Anaconda，可通过以下命令创建虚拟环境：
+
+```bash
+conda create -n markitdown python=3.12
+conda activate markitdown
+```
+
+## Installation
+
+## 安装
+
+To install MarkItDown, use pip: `pip install 'markitdown[all]'`. Alternatively, you can install it from the source:
+
+使用pip安装MarkItDown：`pip install 'markitdown[all]'`。亦可从源码安装：
+
+```bash
+git clone git@github.com:microsoft/markitdown.git
+cd markitdown
+pip install -e 'packages/markitdown[all]'
+```
+
+## Usage
+
+## 使用方法
+
+### Command-Line
+
+### 命令行
+
+```bash
+markitdown path-to-file.pdf > document.md
+```
+
+Or use `-o` to specify the output file:
+
+或使用`-o`指定输出文件：
+
+```bash
+markitdown path-to-file.pdf -o document.md
+```
+
+You can also pipe content:
+
+亦可使用管道传输内容：
+
+```bash
+cat path-to-file.pdf | markitdown
+```
+
+### Optional Dependencies
+### 可选依赖
+MarkItDown has optional dependencies for activating various file formats. Earlier in this document, we installed all optional dependencies with the `[all]` option. However, you can also install them individually for more control. For example:
+
+MarkItDown包含用于激活不同文件格式的可选依赖。前文我们使用`[all]`选项安装了所有可选依赖，但也可单独安装以获得更精细控制。例如：
+
+```bash
+pip install 'markitdown[pdf, docx, pptx]'
+```
+
+will install only the dependencies for PDF, DOCX, and PPTX files.
+
+将仅安装PDF、DOCX和PPTX文件的依赖项。
+
+At the moment, the following optional dependencies are available:
+
+当前可用的可选依赖包括：
+
+* `[all]` Installs all optional dependencies
+* `[all]` 安装所有可选依赖
+* `[pptx]` Installs dependencies for PowerPoint files
+* `[pptx]` 安装PowerPoint文件依赖
+* `[docx]` Installs dependencies for Word files
+* `[docx]` 安装Word文件依赖
+* `[xlsx]` Installs dependencies for Excel files
+* `[xlsx]` 安装Excel文件依赖
+* `[xls]` Installs dependencies for older Excel files
+* `[xls]` 安装旧版Excel文件依赖
+* `[pdf]` Installs dependencies for PDF files
+* `[pdf]` 安装PDF文件依赖
+* `[outlook]` Installs dependencies for Ou
+* `[outlook]` 安装Outlook文件依赖
