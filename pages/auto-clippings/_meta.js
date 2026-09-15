@@ -1915,6 +1915,7 @@ export default {
   "Raw-翻译-Charted-How-Global-Trade-Has-Changed-2000-2": "Charted How Global Trade Has Changed 200...",
   "Raw-翻译-Charted-Global-Trade-by-Continent-and-Count": "Charted Global Trade by Continent and Co...",
   "Raw-翻译-Cerebrass-Next-Generation-CS-4-Fast-Just-Go": "Cerebrass Next Generation CS-4 Fast Just...",
+  "Raw-翻译-Cartesian-–-AI-3D-Modeling-for-Design": "Cartesian – AI 3D Modeling for Design",
   "Raw-翻译-Carbon-aware-electricity-pricing-measured-d": "Carbon-aware electricity pricing, measur...",
   "Raw-翻译-Cancer-Related-Mortality-Among-US-Pilots-an": "Cancer-Related Mortality Among US Pilots...",
   "Raw-翻译-Canada-suspends-trade-negotiations-with-USA": "Canada suspends trade negotiations with ...",
