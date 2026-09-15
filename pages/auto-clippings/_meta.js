@@ -1061,6 +1061,7 @@ export default {
   "Raw-翻译-iPhone-18-和-Duo-发布会上，Apple-没告诉你的那些事": "iPhone 18 和 Duo 发布会上，Apple 没告诉你的那些事",
   "Raw-翻译-iPhone-18-Pro-发布速览：「面子」变化不大，「里子」全面升级": "iPhone 18 Pro 发布速览：「面子」变化不大，「里子」全面升级",
   "Raw-翻译-iOS开放生态是中国AI参与国际竞争的基础设施": "iOS开放生态是中国AI参与国际竞争的基础设施",
+  "Raw-翻译-iOS-27、MacOS-27-正式发布；豆包手机助手消费者版亮相；李想：「大车」趋势": "iOS 27、MacOS 27 正式发布；豆包手机助手消费者版亮相；李想：「大车...",
   "Raw-翻译-iOS-27-iPadOS-27-and-macOS-27": "iOS 27, iPadOS 27, and macOS 27",
   "Raw-翻译-iCloud-Hide-My-Email-addresses-will-remain": "iCloud Hide My Email addresses will rema...",
   "Raw-翻译-hdiutil-is-deprecated-in-macOS-27-Golden-Ga": "hdiutil is deprecated in macOS 27 Golden...",
