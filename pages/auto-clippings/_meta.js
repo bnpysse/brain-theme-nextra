@@ -1838,6 +1838,7 @@ export default {
   "Raw-翻译-Fable-51-Enterprise-Frontier-Safeguards": "Fable 5.1, Enterprise Frontier Safeguard...",
   "Raw-翻译-FICOs-monopoly-already-left-in-2025": "FICOs monopoly already left in 2025",
   "Raw-翻译-F-Droid-考虑采用与-Debian-相同的-AI-政策": "F-Droid 考虑采用与 Debian 相同的 AI 政策",
+  "Raw-翻译-F-Droid-上的应用有多少是在-AI-帮助下编写的": "F-Droid 上的应用有多少是在 AI 帮助下编写的",
   "Raw-翻译-Excel-AI-辅助工作流横评：数据分析高手还是照葫芦画瓢": "Excel AI 辅助工作流横评：数据分析高手还是照葫芦画瓢",
   "Raw-翻译-Ex-FTC-boss-Khan-break-out-the-handcuffs-fo": "Ex-FTC boss Khan break out the handcuffs...",
   "Raw-翻译-Everyone-is-Reading-Lonesome-Dove": "Everyone is Reading Lonesome Dove",
