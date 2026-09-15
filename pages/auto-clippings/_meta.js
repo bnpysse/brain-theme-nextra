@@ -1949,6 +1949,7 @@ export default {
   "Raw-翻译-B面具身智能：机器人烧钱，数采公司躺赚": "B面具身智能：机器人烧钱，数采公司躺赚",
   "Raw-翻译-Burrys-Tragic-Algebra-the-NASDAQ-100-keeps": "Burrys Tragic Algebra the NASDAQ-100 kee...",
   "Raw-翻译-Building-an-AI-Text-Detector-From-Scratch": "Building an AI Text Detector From Scratc...",
+  "Raw-翻译-Building-a-Linux-GPU-Driver-for-the-M4-Mac": "Building a Linux GPU Driver for the M4 M...",
   "Raw-翻译-Build-your-own-company-brain-the-enterprise": "Build your own company brain the enterpr...",
   "Raw-翻译-Bug-Blindness": "Bug Blindness",
   "Raw-翻译-Brits-would-quite-like-their-private-messag": "Brits would quite like their private mes...",
