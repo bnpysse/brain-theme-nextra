@@ -1,6 +1,7 @@
 export default {
   "Raw-逐字稿-【小Lin求职100问】Data-Analyst和Quant的区别在哪儿Data-A": "Raw_逐字稿_【小Lin求职100问】Data Analyst和Quant的区...",
   "Raw-逐字稿-Why-Wall-Street-is-Ignoring-Big-Techs-Debt": "Raw_逐字稿_Why Wall Street is Ignoring Big ...",
+  "Raw-逐字稿-Why-Some-DIY-Investors-Hire-an-Advisor-Lat": "Raw_逐字稿_Why Some DIY Investors Hire an A...",
   "Raw-逐字稿-Why-Bad-Advisors-Keep-Getting-Rehired": "Raw_逐字稿_Why Bad Advisors Keep Getting Re...",
   "Raw-逐字稿-We-Need-To-Talk-About-Leopold": "Raw_逐字稿_We Need To Talk About Leopold",
   "Raw-逐字稿-WHAT-IS-TRANSCENDENTAL-MEDITATION-Ray-Dali": "Raw_逐字稿_WHAT IS TRANSCENDENTAL MEDITATIO...",
