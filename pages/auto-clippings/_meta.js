@@ -1937,6 +1937,7 @@ export default {
   "Raw-翻译-Canada-suspends-trade-negotiations-with-USA": "Canada suspends trade negotiations with ...",
   "Raw-翻译-Can-guitar-frets-perform-multiplication": "Can guitar frets perform multiplication",
   "Raw-翻译-Can-Taiwan-Build-Drones": "Can Taiwan Build Drones",
+  "Raw-翻译-Can-Skills-Learned-in-Games-Transfer-to-Rea": "Can Skills Learned in Games Transfer to ...",
   "Raw-翻译-Can-AI-design-circuit-boards-yet": "Can AI design circuit boards yet",
   "Raw-翻译-California-lawmakers-unanimously-pass-Linux": "California lawmakers unanimously pass Li...",
   "Raw-翻译-California-Brown-Pelican": "California Brown Pelican",
