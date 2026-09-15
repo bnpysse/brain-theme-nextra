@@ -1,0 +1,151 @@
+---
+title: "OKF Agent Memory – Git-native persistent memory for AI codin_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：OKF Agent Memory – Git-native persistent memory for AI coding agents  
+【文章标题】：OKF智能体记忆——面向AI编程智能体的Git原生持久化记忆  
+
+【文章正文】：  
+A Domain-Neutral, Git-Native Persistent Project Memory for AI Agents based on the Open Knowledge Format (OKF) v0.2.  
+基于开放知识格式(OKF)v0.2的领域中立、Git原生AI智能体持久化项目记忆  
+
+Conversations with AI agents reset when context windows close. Valuable architectural decisions, domain discoveries, and operational facts are lost unless stored persistently.  
+当上下文窗口关闭时，与AI智能体的对话会重置。除非持久化存储，否则宝贵的架构决策、领域发现和操作事实都将丢失。  
+
+OKF Agent Memory provides a standardized, vendor-neutral memory layer that lives directly in your repository (knowledge/) as plain Markdown files with YAML frontmatter. It bridges the gap between unstructured ad-hoc markdown files (CLAUDE.md, AGENTS.md) and complex, black-box vector databases.  
+OKF智能体记忆提供标准化、厂商中立的记忆层，以带YAML前言的纯Markdown文件形式直接存储于代码库(knowledge/)中。它填补了非结构化临时Markdown文件(CLAUDE.md, AGENTS.md)与复杂黑盒向量数据库之间的空白。  
+
+flowchart TD  
+    L1["1. OKF v0.2 Specification  
+(Normative Markdown & YAML Format)"]  
+    L2["2. Agent Memory Convention  
+(Behavioral Rules: Search, Review, Trust)"]  
+    L3["3. Agent Skill  
+(LLM Prompts & Operational Workflows)"]  
+    L4["4. Tooling Layer: Go Library & CLI  
+(Deterministic Parsing, Validation, Search, MCP)"]  
+    L5["5. Project Knowledge Corpus  
+(knowledge/ OKF Bundle)"]  
+    L1 --&gt; L2  
+    L2 --&gt; L3  
+    L3 --&gt; L4  
+    L4 --&gt; L5  
+流程图 TD  
+    L1["1. OKF v0.2规范  
+(标准Markdown & YAML格式)"]  
+    L2["2. 智能体记忆约定  
+(行为规则：搜索、审查、信任)"]  
+    L3["3. 智能体技能  
+(LLM提示词与操作工作流)"]  
+    L4["4. 工具层：Go库&CLI  
+(确定性解析、验证、搜索、MCP)"]  
+    L5["5. 项目知识库  
+(knowledge/ OKF包)"]  
+    L1 --&gt; L2  
+    L2 --&gt; L3  
+    L3 --&gt; L4  
+    L4 --&gt; L5  
+
+- Blazing Fast Performance (&lt;300µs Search, ~4ms Graph Validation): In-memory BM25 retrieval and bundle validation execute in microseconds without VM spin-up or network roundtrips.  
+- 极致性能(&lt;300微秒搜索，~4ms图验证)：内存级BM25检索和包验证在微秒级完成，无需虚拟机启动或网络往返  
+
+- 100% Git-Native & Zero Vendor Lock-in: Everything is version-controlled plain text. Inspect, audit, and review your agent's memory using standard git diff and git log. No external database required.  
+- 100% Git原生&零厂商锁定：所有内容均为版本控制的纯文本。使用标准git diff和git log检查、审计智能体记忆，无需外部数据库  
+
+- Zero API Costs for Memory Retrieval: Local lexical BM25 indexing eliminates recurring vector embedding API costs and network roundtrips.  
+- 记忆检索零API成本：本地词法BM25索引消除向量嵌入API的重复成本和网络往返  
+
+- Built on Google OKF v0.2: Uses the open standard format for agent knowledge with full support for provenance (sources), trust tiers (generated vs.verified), and lifecycle metadata (status,stale_after).  
+- 基于Google OKF v0.2：采用开放标准格式存储智能体知识，完整支持溯源(来源)、信任等级(生成vs验证)和生命周期元数据(状态，过期时间)  
+
+- Solves Context Bloat & Memory Rot: Employs Progressive Disclosure (hierarchical index.md files and link graphs) so agents only load the exact concepts they need.  
+- 解决上下文膨胀&记忆腐化：采用渐进式披露(层级化index.md文件和链接图)，确保智能体仅加载所需概念  
+
+- Search-Before-Write Principle: Mandates querying existing memory before authoring, preventing concept duplication and hallucinated divergence.  
+- 写前搜索原则：强制在创作前查询现有记忆，防止概念重复和幻觉偏差  
+
+- Zero-Dependency Go Toolchain: Single binary with zero external dependencies, sub-5ms CLI startup time, and a built-in Model Context Protocol (MCP) server (okf mcp).  
+- 零依赖Go工具链：单一二进制无外部依赖，CLI启动时间&lt;5ms，内置模型上下文协议(MCP)服务器(okf mcp)  
+
+- Truly Domain-Neutral: Designed for Software Engineering, Coaching, Scientific Research, Literature Reviews, and Operations.  
+- 真正领域中立：适用于软件工程、教练辅导、科研、文献综述和运维  
+
+Built in Go with zero external dependencies, okf is engineered for high-frequency agent tool calling loops:  
+采用Go语言零依赖构建，专为高频智能体工具调用循环设计：  
+
+| Benchmark Metric | Python / Vector DB Runtimes (Mem0, Letta) | Deno / Node.js Tooling | OKF Agent Memory (Go) |   
+|---|---|---|---|  
+| 基准指标 | Python/向量数据库运行时(Mem0, Letta) | Deno/Node.js工具链 | OKF智能体记忆(Go) |  
+| Concept Search Latency | 150ms – 800ms (Embedding API + Vector DB) | 40ms – 120ms | &lt; 300 µs (Microseconds, In-Memory BM25) |   
+| 概念搜索延迟 | 150-800ms(嵌入API+向量数据库) | 40-120ms | &lt;300微秒(内存BM25) |  
+| Full Corpus Parse & Graph Validation | 200ms – 1.5s | 80ms – 250ms | ~4.0 ms (50+ concepts, bidirectional graph) |   
+| 全库解析&图验证 | 200ms-1.5s | 80-250ms | ~4.0ms(50+概念双向图) |  
+| Process Cold-Start Overhead | 250ms – 600ms (Python VM boot) | 80ms – 180ms (V8 / Deno boot) | &lt; 4 ms (Compiled Single Binary) |   
+| 进程冷启动开销 | 250-600ms(Python虚拟机启动) | 80-180ms(V8/Deno启动) | &lt;4ms(编译单二进制) |  
+| Retrieval Cost per 1,000 Queries | ~$0.10 – $0.50 (Embedding tokens) | $0.00 | $0.00 (Zero API cost, fully local) |   
+| 千次查询检索成本 | ~$0.10-$0.50(嵌入token) | $0.00 | $0.00(零API成本，完全本地) |  
+| Memory Footprint (RSS) | ~120 MB – 350 MB | ~60 MB – 140 MB | &lt; 15 MB |   
+| 内存占用(RSS) | ~120-350MB | ~60-140MB | &lt;15MB |  
+
+Tip  
+提示  
+Reproduce Locally with your own LLM: We provide an automated benchmark runner in pure Go to verify Time-To-First-Token (TTFT) speedups and -80% token reduction on your local hardware (LM Studio / Ollama with Gemma, Qwen, Llama). Run make benchmark or explore the Progressive Disclosure Benchmark Suite.  
+使用自有LLM本地复现：我们提供纯Go自动化基准测试工具，可在本地硬件(LM Studio/Ollama运行Gemma/Qwen/Llama)验证首token时间加速和-80%token消耗。运行make benchmark或探索渐进式披露基准套件  
+
+Clone the repository and compile the standalone okf executable:  
+克隆仓库并编译独立okf可执行文件：  
+make build  
+This generates the standalone binary at bin/okf.  
+将在bin/okf生成独立二进制文件  
+
+# Validate bundle conformance, graph connectivity, and description drift  
+# 验证包合规性、图连通性和描述漂移  
+./bin/okf validate knowledge --strict --drift  
+
+# Search concepts via in-memory BM25 scoring  
+# 通过内存BM25评分搜索概念  
+./bin/okf search "architecture layers" knowledge  
+
+# Inspect a concept and its relationships (with --json support)  
+# 检查概念及其关联关系(支持--json格式)  
+./bin/okf show architecture/layers knowledge --json  
+
+# Create a new concept with automated log.md and index.md bookkeeping  
+# 创建新概念并自动维护log.md和index.md  
+./bin/okf create decisions/auth-flow knowledge \  
+  --type Decision \  
+  --title "OAuth2 Authorization Flow" \  
+  --desc "Standardized on PKCE for client authentication."  
+
+# Update an existing concept  
+# 更新现有概念  
+./bin/okf update decisions/auth-flow knowledge \  
+  --desc "Updated OAuth2 PKCE token refresh interval."  
+
+# Bootstrap full agent memory stack into any target project  
+# 将完整智能体记忆栈初始化为目标项目  
+./bin/okf bootstrap /path/to/project --name "My Project"  
+
+# Initialize only a bare OKF bundle in any directory  
+# 仅在任何目录初始化基础OKF包  
+./bin/okf init my-project/knowledge  
+
+Scaffold the complete OKF Agent Memory architecture into any new or existing repository with a single command:  
+通过单条命令为任何新/现有代码库搭建完整OKF智能体记忆架构：  
+
+# Bootstrap full memory stack into target project  
+# 将完整记忆栈初始化为目标项目  
+./bin/okf bootstrap /path/to/my-project --name "My Service"  
+
+This automatically sets up:  
+自动设置以下内容：  
+- knowledge/ — OKF v0.2 compliant persistent memory bundle (index.md ,log.md )  
+- knowledge/ — 符合OKF v0.2的持久化记忆包(index.md, log.md)  
+- .agents/skills/okf-memory/ — Embedded agent skill defi  
+- .agents/skills/okf-memory/ — 嵌入式智能体技能定义
+
+## 🔗 知识库双向关联
+- [Headlong A Microharness for Persistent Agents_全翻译](/auto-clippings/Auto-简报-Headlong-A-Microharness-for-Persistent-Age)
+- [Show HN Screen memory without screenshots, just text to Mark_简报](/auto-clippings/Auto-简报-Show-HN-Screen-memory-without-screenshots)
+- [Headlong A Microharness for Persistent Agents_简报](/auto-clippings/Auto-简报-Headlong-A-Microharness-for-Persistent-Age)
