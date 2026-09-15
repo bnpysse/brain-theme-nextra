@@ -1069,6 +1069,7 @@ export default {
   "Raw-翻译-llm-033": "llm 0.33",
   "Raw-翻译-llm-0321": "llm 0.32.1",
   "Raw-翻译-iPhone折叠了，-黄牛们觉得自己又行了": "iPhone折叠了， 黄牛们觉得自己又行了",
+  "Raw-翻译-iPhone-的垃圾时间结束了吗": "iPhone 的垃圾时间结束了吗",
   "Raw-翻译-iPhone-折叠版早期产能严重受限": "iPhone 折叠版早期产能严重受限",
   "Raw-翻译-iPhone-Duo入局后，折叠屏产业链的利润、良率与议价权重构": "iPhone Duo入局后，折叠屏产业链的利润、良率与议价权重构",
   "Raw-翻译-iPhone-Duo": "iPhone Duo",
