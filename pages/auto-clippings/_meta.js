@@ -1304,6 +1304,7 @@ export default {
   "Raw-翻译-Show-HN-Markdown-Viewer-and-Editor": "Show HN Markdown Viewer and Editor",
   "Raw-翻译-Show-HN-Make-your-logo-extra-bright-on-HDR": "Show HN Make your logo extra bright on H...",
   "Raw-翻译-Show-HN-Mador-–-Make-any-DOM-reactive-with": "Show HN Mador – Make any DOM reactive wi...",
+  "Raw-翻译-Show-HN-Macros-with-a-Behringer-FCB1010-MID": "Show HN Macros with a Behringer FCB1010 ...",
   "Raw-翻译-Show-HN-Keen-Bean-–-Mac-meeting-notes-that": "Show HN Keen Bean – Mac meeting notes th...",
   "Raw-翻译-Show-HN-Kadō-–-open-source-habit-tracker-wi": "Show HN Kadō – open-source habit tracker...",
   "Raw-翻译-Show-HN-I-made-a-retirement-simulator-125-y": "Show HN I made a retirement simulator 12...",
