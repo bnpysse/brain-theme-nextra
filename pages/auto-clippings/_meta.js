@@ -1994,6 +1994,7 @@ export default {
   "Raw-翻译-AI写作：关注风向有何转变": "AI写作：关注风向有何转变",
   "Raw-翻译-AI内容启示录：写在红果碾压爱优腾芒之后": "AI内容启示录：写在红果碾压爱优腾芒之后",
   "Raw-翻译-AI代笔风潮之下的讨论和思考（上）": "AI代笔风潮之下的讨论和思考（上）",
+  "Raw-翻译-AI不是CIO项目，而是CEO的生存工程": "AI不是CIO项目，而是CEO的生存工程",
   "Raw-翻译-AI不再只买教材，开始给自己找线人了": "AI不再只买教材，开始给自己找线人了",
   "Raw-翻译-AI「性轉」視頻風靡中國網絡：一場「-新文化運動」的覺醒與侷限": "AI「性轉」視頻風靡中國網絡：一場「 新文化運動」的覺醒與侷限",
   "Raw-翻译-AIs-third-era-the-rise-of-persistent-AI-cow": "AIs third era the rise of persistent AI ...",
