@@ -1619,6 +1619,7 @@ export default {
   "Raw-翻译-LG-智能电视会在待机状态下扫描家庭网络和记录麦克风音频": "LG 智能电视会在待机状态下扫描家庭网络和记录麦克风音频",
   "Raw-翻译-LG-强烈否认其监视电视用户": "LG 强烈否认其监视电视用户",
   "Raw-翻译-LG-responds-to-TV-spying-allegations": "LG responds to TV spying allegations",
+  "Raw-翻译-K型分化的本质：一场生产要素的重新定价": "K型分化的本质：一场生产要素的重新定价",
   "Raw-翻译-Kusama-Yayoi-Dies-at-97": "Kusama Yayoi Dies at 97",
   "Raw-翻译-Kumander-Linux-–-A-Linux-Distro-with-a-Wind": "Kumander Linux – A Linux Distro with a W...",
   "Raw-翻译-Koreas-Trillion-Dollar-Sovereign-AI-Investm": "Koreas Trillion-Dollar Sovereign AI Inve...",
