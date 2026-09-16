@@ -1907,6 +1907,7 @@ export default {
   "Raw-翻译-Fair-Work-Commission-condemns-plain-wrong-A": "Fair Work Commission condemns plain wron...",
   "Raw-翻译-Fable-51-Enterprise-Frontier-Safeguards": "Fable 5.1, Enterprise Frontier Safeguard...",
   "Raw-翻译-FICOs-monopoly-already-left-in-2025": "FICOs monopoly already left in 2025",
+  "Raw-翻译-FAST-发现极短周期、最轻双中子星系统": "FAST 发现极短周期、最轻双中子星系统",
   "Raw-翻译-F-Droid-考虑采用与-Debian-相同的-AI-政策": "F-Droid 考虑采用与 Debian 相同的 AI 政策",
   "Raw-翻译-F-Droid-上的应用有多少是在-AI-帮助下编写的": "F-Droid 上的应用有多少是在 AI 帮助下编写的",
   "Raw-翻译-Excel-AI-辅助工作流横评：数据分析高手还是照葫芦画瓢": "Excel AI 辅助工作流横评：数据分析高手还是照葫芦画瓢",
