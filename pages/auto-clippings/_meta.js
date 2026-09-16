@@ -2037,6 +2037,7 @@ export default {
   "Raw-翻译-Bug-Blindness": "Bug Blindness",
   "Raw-翻译-Brits-would-quite-like-their-private-messag": "Brits would quite like their private mes...",
   "Raw-翻译-Bringing-the-cybersecurity-capabilities-of": "Bringing the cybersecurity capabilities ...",
+  "Raw-翻译-Breaking-the-158-bit-Barrier-for-Ternary-LL": "Breaking the 1.58-bit Barrier for Ternar...",
   "Raw-翻译-Breaking-Claude-Code-Opus-5-Auto-Mode": "Breaking Claude Code Opus 5 Auto Mode",
   "Raw-翻译-Brave-声称其比竞争对手使用的系统资源更少页面加载速度更快": "Brave 声称其比竞争对手使用的系统资源更少页面加载速度更快",
   "Raw-翻译-Bot-Detection-Without-JavaScript-What-My-Bl": "Bot Detection Without JavaScript What My...",
