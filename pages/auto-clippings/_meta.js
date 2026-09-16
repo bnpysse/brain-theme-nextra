@@ -2119,6 +2119,7 @@ export default {
   "Raw-翻译-Agency-and-Agents": "Agency and Agents",
   "Raw-翻译-After-Math": "After Math",
   "Raw-翻译-Africas-Wild-Dogs-Are-the-Most-Hated-Carniv": "Africas Wild Dogs Are the Most Hated Car...",
+  "Raw-翻译-Accurate-Models-of-AMD-Matrix-Cores": "Accurate Models of AMD Matrix Cores",
   "Raw-翻译-AWS-称无法恢复中东部分可用区资源和数据的访问": "AWS 称无法恢复中东部分可用区资源和数据的访问",
   "Raw-翻译-AWS-Acquires-DuckDB": "AWS Acquires DuckDB",
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
