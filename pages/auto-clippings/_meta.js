@@ -1256,6 +1256,7 @@ export default {
   "Raw-翻译-Velastar：喜欢仰望星空的你，有了一个探索异星的新选择": "Velastar：喜欢仰望星空的你，有了一个探索异星的新选择",
   "Raw-翻译-Valve-诞生-30-周年": "Valve 诞生 30 周年",
   "Raw-翻译-Valve-要求澳大利亚玩家用信用卡验证年龄以访问-R18-游戏": "Valve 要求澳大利亚玩家用信用卡验证年龄以访问 R18 游戏",
+  "Raw-翻译-Value-Trap": "Value Trap",
   "Raw-翻译-Using-Local-Coding-Agents": "Using Local Coding Agents",
   "Raw-翻译-Using-Blender-with-coding-agents-on-macOS": "Using Blender with coding agents on macO...",
   "Raw-翻译-Usenet-rewind-archive-search-engine": "Usenet rewind archive search engine",
