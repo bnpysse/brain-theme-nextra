@@ -1606,6 +1606,7 @@ export default {
   "Raw-翻译-My-Feed-My-Way": "My Feed, My Way",
   "Raw-翻译-Music-Theory-for-the-21st-Century-Classroom": "Music Theory for the 21st-Century Classr...",
   "Raw-翻译-Multi-Agents-LLM-Financial-Trading-Framewor": "Multi-Agents LLM Financial Trading Frame...",
+  "Raw-翻译-Mozilla-报告称中国开放权重模型与美国前沿模型仅相差-44-个月": "Mozilla 报告称中国开放权重模型与美国前沿模型仅相差 4.4 个月",
   "Raw-翻译-Most-Neoclouds-Suck-At-Security": "Most Neoclouds Suck At Security",
   "Raw-翻译-More-than-just-code-review": "More than just code review",
   "Raw-翻译-More-than-half-of-adults-in-US-say-they-lac": "More than half of adults in U.S. say the...",
