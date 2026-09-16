@@ -1413,6 +1413,7 @@ export default {
   "Raw-翻译-Show-HN-HomeCat-–-Design-your-backyard-offi": "Show HN HomeCat – Design your backyard o...",
   "Raw-翻译-Show-HN-Hacker-News-without-AI": "Show HN Hacker News, without AI",
   "Raw-翻译-Show-HN-HN-Match-Maker-–-Matching-Who-Wants": "Show HN HN Match Maker – Matching Who Wa...",
+  "Raw-翻译-Show-HN-Give-your-AI-agents-access-to-Whats": "Show HN Give your AI agents access to Wh...",
   "Raw-翻译-Show-HN-GET-Together-–-A-social-network-whe": "Show HN GET Together – A social network ...",
   "Raw-翻译-Show-HN-Engrim-–-A-universal-local-first-SQ": "Show HN Engrim – A universal, local-firs...",
   "Raw-翻译-Show-HN-Conduct-open-source-guardrails-for": "Show HN Conduct, open-source guardrails ...",
