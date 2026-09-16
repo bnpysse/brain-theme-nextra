@@ -3680,6 +3680,7 @@ export default {
   "Auto-简报-My-First-Equity-Research-Report-on-Haleon": "My First Equity Research Report on Haleo...",
   "Auto-简报-My-Feed-My-Way": "My Feed, My Way",
   "Auto-简报-Music-Theory-for-the-21st-Century-Classroo": "Music Theory for the 21st-Century Classr...",
+  "Auto-简报-Muse-review-The-personal-AI-agent-that-get": "Muse review The personal AI agent that g...",
   "Auto-简报-Most-Neoclouds-Suck-At-Security": "Most Neoclouds Suck At Security",
   "Auto-简报-More-than-just-code-review": "More than just code review",
   "Auto-简报-More-than-half-of-adults-in-US-say-they-la": "More than half of adults in U.S. say the...",
