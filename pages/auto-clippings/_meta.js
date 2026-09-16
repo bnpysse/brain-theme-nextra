@@ -1611,6 +1611,7 @@ export default {
   "Raw-翻译-More-than-half-of-adults-in-US-say-they-lac": "More than half of adults in U.S. say the...",
   "Raw-翻译-Moon-2024": "Moon 2024",
   "Raw-翻译-ModelTalk-Pacing-the-Frontier": "ModelTalk Pacing the Frontier",
+  "Raw-翻译-Mistral-与-Mozilla-合作推出-Firefox-Smart-Window": "Mistral 与 Mozilla 合作推出 Firefox Smart Win...",
   "Raw-翻译-Mistral-raises-€3B-to-make-sovereign-open-w": "Mistral raises €3B to make sovereign, op...",
   "Raw-翻译-Mistral-X-Mozilla-Private-Multilingual-AI-B": "Mistral X Mozilla Private, Multilingual ...",
   "Raw-翻译-MiniMax还没跨过盈利关": "MiniMax还没跨过盈利关",
