@@ -1776,6 +1776,7 @@ export default {
   "Raw-翻译-How-software-engineering-is-changing-an-ess": "How software engineering is changing an ...",
   "Raw-翻译-How-much-of-HN-is-AI": "How much of HN is AI",
   "Raw-翻译-How-is-the-qmusage-quota-for-Grok-46-in-cur": "How is the qmusage quota for Grok 4.6 in...",
+  "Raw-翻译-How-good-are-frontier-models-at-physics": "How good are frontier models at physics",
   "Raw-翻译-How-accurate-have-Ed-Zitrons-AI-skeptic-pre": "How accurate have Ed Zitrons AI skeptic ...",
   "Raw-翻译-How-Zurich-Property-Prices-Compare-to-the-W": "How Zurich Property Prices Compare to th...",
   "Raw-翻译-How-Universities-Should-Prepare-Founders": "How Universities Should Prepare Founders",
