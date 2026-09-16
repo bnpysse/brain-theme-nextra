@@ -1605,6 +1605,7 @@ export default {
   "Raw-翻译-Moon-2024": "Moon 2024",
   "Raw-翻译-ModelTalk-Pacing-the-Frontier": "ModelTalk Pacing the Frontier",
   "Raw-翻译-Mistral-raises-€3B-to-make-sovereign-open-w": "Mistral raises €3B to make sovereign, op...",
+  "Raw-翻译-Mistral-X-Mozilla-Private-Multilingual-AI-B": "Mistral X Mozilla Private, Multilingual ...",
   "Raw-翻译-MiniMax还没跨过盈利关": "MiniMax还没跨过盈利关",
   "Raw-翻译-MiniMax翻了一百倍之后，它们投得更凶了": "MiniMax翻了一百倍之后，它们投得更凶了",
   "Raw-翻译-MiniMax开始靠别人赚钱": "MiniMax开始靠别人赚钱",
