@@ -1535,6 +1535,7 @@ export default {
   "Raw-翻译-PayPal-Declined": "PayPal, Declined",
   "Raw-翻译-PaintNET-实验性支持-WineLinux": "Paint.NET 实验性支持 WineLinux",
   "Raw-翻译-Pacing-the-Frontier-AIs-Digital-Limits-AI-C": "Pacing the Frontier, AIs Digital Limits,...",
+  "Raw-翻译-PS2-Fat-使用的安全芯片在时隔-26-年被破解": "PS2 Fat 使用的安全芯片在时隔 26 年被破解",
   "Raw-翻译-PRs-NOT-Welcome-How-Top-AI-Open-Source-Proj": "PRs NOT Welcome How Top AI Open Source P...",
   "Raw-翻译-PPWR-lands-another-blow-to-an-precarious-ta": "PPWR lands another blow to an precarious...",
   "Raw-翻译-P99-0-ms-autocomplete-for-240M-domain-names": "P99 0 ms autocomplete for 240M domain na...",
