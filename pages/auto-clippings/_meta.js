@@ -1956,6 +1956,7 @@ export default {
   "Raw-翻译-Digging-the-grave-of-my-skills-Hollywood-cr": "Digging the grave of my skills Hollywood...",
   "Raw-翻译-Diesel-prices-in-US-top-6-a-gallon-for-firs": "Diesel prices in U.S. top $6 a gallon fo...",
   "Raw-翻译-Devastated-father-says-his-9-year-old-son-s": "Devastated father says his 9-year-old so...",
+  "Raw-翻译-Denuvo-起诉黑客违反-DMCA-反规避条款": "Denuvo 起诉黑客违反 DMCA 反规避条款",
   "Raw-翻译-DeepSeek、千问、智谱轮番登场，PC-厂商终于等到了它们的弹药": "DeepSeek、千问、智谱轮番登场，PC 厂商终于等到了它们的弹药",
   "Raw-翻译-DeepSeek-周末用量统一低价收费；特斯拉-9-月-3-日首秀-Cybercab；": "DeepSeek 周末用量统一低价收费；特斯拉 9 月 3 日首秀 Cyberc...",
   "Raw-翻译-DeepSeek-v41-Flash": "DeepSeek v4.1 Flash",
