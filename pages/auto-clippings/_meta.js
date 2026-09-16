@@ -1614,6 +1614,7 @@ export default {
   "Raw-翻译-My-First-Equity-Research-Report-on-Haleon-H": "My First Equity Research Report on Haleo...",
   "Raw-翻译-My-Feed-My-Way": "My Feed, My Way",
   "Raw-翻译-Music-Theory-for-the-21st-Century-Classroom": "Music Theory for the 21st-Century Classr...",
+  "Raw-翻译-Muse-review-The-personal-AI-agent-that-gets": "Muse review The personal AI agent that g...",
   "Raw-翻译-Multi-Agents-LLM-Financial-Trading-Framewor": "Multi-Agents LLM Financial Trading Frame...",
   "Raw-翻译-Mozilla-报告称中国开放权重模型与美国前沿模型仅相差-44-个月": "Mozilla 报告称中国开放权重模型与美国前沿模型仅相差 4.4 个月",
   "Raw-翻译-Most-Neoclouds-Suck-At-Security": "Most Neoclouds Suck At Security",
