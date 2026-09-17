@@ -1642,6 +1642,7 @@ export default {
   "Raw-翻译-Never-Launch-Alone": "Never Launch Alone",
   "Raw-翻译-Netflix-to-Sell-Streaming-Services-Streamer": "Netflix to Sell Streaming Services, Stre...",
   "Raw-翻译-NetBSD-and-My-Life-2005": "NetBSD and My Life 2005",
+  "Raw-翻译-Neovim-have-a-800k-Bitcoin-donation-sitting": "Neovim have a ~$800k Bitcoin donation si...",
   "Raw-翻译-Neijuan": "Neijuan",
   "Raw-翻译-Negativland-Culture-Jamming-and-the-Art-of": "Negativland, Culture Jamming, and the Ar...",
   "Raw-翻译-Necessary-Inventions": "Necessary Inventions",
