@@ -1872,6 +1872,7 @@ export default {
   "Raw-翻译-Github-debpalash-VoiceStudio": "Github__debpalash_VoiceStudio",
   "Raw-翻译-Github-cursor-plugins": "Github__cursor_plugins",
   "Raw-翻译-Github-cordiverse-cordis": "Github__cordiverse_cordis",
+  "Raw-翻译-Github-cloudflare-security-audit-skill": "Github__cloudflare_security-audit-skill",
   "Raw-翻译-Github-cathrynlavery-diagram-design": "Github__cathrynlavery_diagram-design",
   "Raw-翻译-Github-bilawalsidhu-gods-eye-view": "Github__bilawalsidhu_gods-eye-view",
   "Raw-翻译-Github-basecamp-omarchy": "Github__basecamp_omarchy",
