@@ -2114,6 +2114,7 @@ export default {
   "Raw-翻译-Bot-Detection-Without-JavaScript-What-My-Bl": "Bot Detection Without JavaScript What My...",
   "Raw-翻译-Bootstrappable-Builds-How-and-Why": "Bootstrappable Builds How and Why",
   "Raw-翻译-Boot-a-Virtual-iPhone-via-Apples-Virtualiza": "Boot a Virtual iPhone via Apples Virtual...",
+  "Raw-翻译-Bonsai-2-27B-Near-Lossless-Compression-in-a": "Bonsai 2 27B Near-Lossless Compression i...",
   "Raw-翻译-Bodily-Oddities": "Bodily Oddities",
   "Raw-翻译-Bob-and-Van": "Bob and Van",
   "Raw-翻译-Better-Vector-Search-for-Long-Documents-Chu": "Better Vector Search for Long Documents ...",
