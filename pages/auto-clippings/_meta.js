@@ -1549,6 +1549,7 @@ export default {
   "Raw-翻译-Over-Target": "Over Target",
   "Raw-翻译-Other-Python-forums-Stack-Overflow": "Other Python forums - Stack Overflow",
   "Raw-翻译-Oracles-6am-layoff-emails-hit-staff-amid-ne": "Oracles 6am layoff emails hit staff amid...",
+  "Raw-翻译-OpenSpec-–-A-lightweight-and-configurable-A": "OpenSpec – A lightweight and configurabl...",
   "Raw-翻译-OpenShot-40-释出": "OpenShot 4.0 释出",
   "Raw-翻译-OpenClaw-Power-MacBook-Simplicity-Five-Days": "OpenClaw Power, MacBook Simplicity Five ...",
   "Raw-翻译-OpenClaw-20-Accidentally": "OpenClaw 2.0, Accidentally",
