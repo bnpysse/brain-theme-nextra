@@ -2287,6 +2287,7 @@ export default {
   "Raw-翻译-2798-万元起，泰钽-700-正式上市，越野-NOA-开上挂壁公路": "27.98 万元起，泰钽 700 正式上市，越野 NOA 开上挂壁公路",
   "Raw-翻译-275KB-language-agnostic-WebGPU-syntax-highl": "27.5KB language-agnostic WebGPU syntax h...",
   "Raw-翻译-2499-万元起、全系四激光雷达，启境-GX7-还准备了一件「午休神器」": "24.99 万元起、全系四激光雷达，启境 GX7 还准备了一件「午休神器」",
+  "Raw-翻译-23岁，10万用户，估值100亿美元：硅谷VC正在批量生产纸面独角兽": "23岁，10万用户，估值100亿美元：硅谷VC正在批量生产纸面独角兽",
   "Raw-翻译-23-low-regret-recommendations-for-AI-policy": "23 low-regret recommendations for AI pol...",
   "Raw-翻译-20年一遇，美欧日三大央行将同步加息": "20年一遇，美欧日三大央行将同步加息",
   "Raw-翻译-2026年暑期档：乱纪元里的新活法": "2026年暑期档：乱纪元里的新活法",
