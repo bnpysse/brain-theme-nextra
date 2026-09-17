@@ -1803,6 +1803,7 @@ export default {
   "Raw-翻译-I-think-I-hate-the-internet": "I think I hate the internet",
   "Raw-翻译-I-tested-Grok-Bot-Grok-46-and-Cursor-Origin": "I tested Grok Bot, Grok 4.6, and Cursor ...",
   "Raw-翻译-I-spent-20000-on-Devin-in-a-month-Heres-wha": "I spent $20,000 on Devin in a month. Her...",
+  "Raw-翻译-I-had-Gemini-train-its-own-replacement-for": "I had Gemini train its own replacement f...",
   "Raw-翻译-I-got-tired-of-Cursor-usage-extensions-aski": "I got tired of Cursor usage extensions a...",
   "Raw-翻译-I-gave-Qwen-38-27B-a-reverse-engineering-jo": "I gave Qwen 3.8 27B a reverse-engineerin...",
   "Raw-翻译-I-didnt-sign-the-Fields-medallists-letter": "I didnt sign the Fields medallists lette...",
