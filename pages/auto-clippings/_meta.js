@@ -1502,6 +1502,7 @@ export default {
   "Raw-翻译-Run-macOS-Software-on-Linux": "Run macOS Software on Linux",
   "Raw-翻译-Run-It-Hot-Yet-Again": "Run It Hot, Yet Again",
   "Raw-翻译-Roundup-87-Technology-BAD": "Roundup 87 Technology BAD",
+  "Raw-翻译-Roman-太空望远镜有足够的燃料可服役-22-年": "Roman 太空望远镜有足够的燃料可服役 22 年",
   "Raw-翻译-Rockstar-向微软和-Discord-发去法庭传票以识别-GTA6-泄密者身份": "Rockstar 向微软和 Discord 发去法庭传票以识别 GTA6 泄密者...",
   "Raw-翻译-Roblox-RBLX-Schlep-and-the-Streisand-Effect": "Roblox RBLX Schlep and the Streisand Eff...",
   "Raw-翻译-Revolut-confirms-customer-data-breach-throu": "Revolut confirms customer data breach th...",
