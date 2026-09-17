@@ -1738,6 +1738,7 @@ export default {
   "Raw-翻译-Kids-These-Days": "Kids These Days",
   "Raw-翻译-Keep市值暴跌": "Keep市值暴跌",
   "Raw-翻译-Just-a-rumour-of-a-bug-is-enough-to-find-a": "Just a rumour of a bug is enough to find...",
+  "Raw-翻译-Jev-Ultrafast-A-browser-agent-with-a-dynami": "Jev Ultrafast A browser agent with a dyn...",
   "Raw-翻译-Jev-New-frontier-model-40-400x-cheaper-and": "Jev New frontier model 40-400x cheaper a...",
   "Raw-翻译-Jean-Pierre-Serre-is-100-years-old-today": "Jean-Pierre Serre is 100 years old today",
   "Raw-翻译-Japanese-polka-dot-artist-Yayoi-Kusama-dies": "Japanese polka dot artist Yayoi Kusama d...",
