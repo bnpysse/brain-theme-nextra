@@ -37,6 +37,7 @@ export default {
   "Raw-逐字稿-DeepSeeks-AI-Just-Learned-To-Upgrade-Itsel": "Raw_逐字稿_DeepSeeks AI Just Learned To Upg...",
   "Raw-逐字稿-DeepSeek-is-back-and-Silicon-Valley-is-ter": "Raw_逐字稿_DeepSeek is back... and Silicon ...",
   "Raw-逐字稿-DeepSeek-Just-Made-Closed-AI-Look-Ridiculo": "Raw_逐字稿_DeepSeek Just Made Closed AI Loo...",
+  "Raw-逐字稿-Claude-Is-Now-Leaving-Invisible-Fingerprin": "Raw_逐字稿_Claude Is Now Leaving Invisible ...",
   "Raw-逐字稿-Claude-Fable-AI-Is-Much-Stranger-Than-The": "Raw_逐字稿_Claude Fable AI Is Much Stranger...",
   "Raw-逐字稿-Claude-AI-Failed-650-Times…Then-Beat-The-H": "Raw_逐字稿_Claude AI Failed 650 Times…Then ...",
   "Raw-逐字稿-Canada-US-Trade-Deal-Falls-Apart": "Raw_逐字稿_Canada-US Trade Deal Falls Apart",
