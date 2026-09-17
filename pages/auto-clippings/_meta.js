@@ -2091,6 +2091,7 @@ export default {
   "Raw-翻译-Boot-a-Virtual-iPhone-via-Apples-Virtualiza": "Boot a Virtual iPhone via Apples Virtual...",
   "Raw-翻译-Bodily-Oddities": "Bodily Oddities",
   "Raw-翻译-Bob-and-Van": "Bob and Van",
+  "Raw-翻译-Better-Vector-Search-for-Long-Documents-Chu": "Better Vector Search for Long Documents ...",
   "Raw-翻译-Better-AI-code-comment-detector": "Better AI code comment detector",
   "Raw-翻译-Benjamin-Franklins-Alter-Egos-Gave-Him-the": "Benjamin Franklins Alter Egos Gave Him t...",
   "Raw-翻译-Belgian-car-salesman-becomes-prince-after-D": "Belgian car salesman becomes prince afte...",
