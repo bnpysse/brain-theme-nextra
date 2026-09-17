@@ -2071,6 +2071,7 @@ export default {
   "Raw-翻译-Cartesian-–-AI-3D-Modeling-for-Design": "Cartesian – AI 3D Modeling for Design",
   "Raw-翻译-Carbon-aware-electricity-pricing-measured-d": "Carbon-aware electricity pricing, measur...",
   "Raw-翻译-Cancer-Related-Mortality-Among-US-Pilots-an": "Cancer-Related Mortality Among US Pilots...",
+  "Raw-翻译-Canada-welcomes-EU-proposal-to-become-assoc": "Canada welcomes EU proposal to become as...",
   "Raw-翻译-Canada-suspends-trade-negotiations-with-USA": "Canada suspends trade negotiations with ...",
   "Raw-翻译-Can-guitar-frets-perform-multiplication": "Can guitar frets perform multiplication",
   "Raw-翻译-Can-Taiwan-Build-Drones": "Can Taiwan Build Drones",
