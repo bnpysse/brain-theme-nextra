@@ -1,0 +1,59 @@
+---
+title: "_multimodal-art-projection_YuE_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&gt; Looking for the original YuE? Its code, documentation, and license are preserved on the **[YuE-v1 branch](https://github.com/multimodal-art-projection/YuE/tree/YuE-v1)**.
+
+&lt;p align="center"&gt;
+  ![YuE](assets/logo.png)
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;picture&gt;
+    &lt;source media="(max-width: 600px)" srcset="assets/institutions-mobile.svg" /&gt;
+    ![HKUST, M·A·P, Tokenwave.AI, NYU, Stanford, MBZUAI, NOIZ, and ACE Studio](assets/institutions.svg)
+  &lt;/picture&gt;
+&lt;/p&gt;
+
+&lt;h1 align="center"&gt;YuE2: Unifying Symbolic and Audio Music Generation at Frontier Quality&lt;/h1&gt;
+
+&lt;p align="center"&gt;**Compose in symbols. Create in sound.**&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;a href="https://map-yue2.github.io/"&gt;🎧 Demos&lt;/a&gt; ·
+  &lt;a href="https://huggingface.co/m-a-p/YuE2-3B"&gt;🤗 YuE2&lt;/a&gt; ·
+  &lt;a href="#quick-start"&gt;🚀 Quick start&lt;/a&gt; ·
+  &lt;a href="#agent-skill"&gt;🤖 Agent skill&lt;/a&gt; ·
+  &lt;a href="#benchmarks"&gt;📊 Benchmarks&lt;/a&gt; ·
+  &lt;a href="https://huggingface.co/m-a-p/MERT-v2-FullSong"&gt;🤗 MERT2&lt;/a&gt; ·
+  &lt;a href="https://huggingface.co/m-a-p/SheetSage2"&gt;🤗 SheetSage2&lt;/a&gt; ·
+  &lt;a href="https://huggingface.co/datasets/m-a-p/WildSongBench"&gt;🤗 WSB&lt;/a&gt; ·
+  &lt;a href="https://github.com/multimodal-art-projection/YuE/releases/tag/yue2-v0.1.6"&gt;📦 Release&lt;/a&gt; ·
+  &lt;a href="https://discord.gg/ssAyWMnMzu"&gt;![Join us on Discord](https://img.shields.io/discord/842440537755353128?color=5865F2&amp;logo=discord&amp;logoColor=white&amp;label=Discord&amp;style=flat-square)&lt;/a&gt;
+&lt;/p&gt;
+
+**YuE2 brings frontier song quality to music generation with an editable composition.** Give it lyrics and a style prompt: it writes a melody-and-chord plan, then realizes that plan as a complete song with vocals and accompaniment.
+
+- **Frontier quality.** YuE2 is competitive with Suno v5/v6 on WildSongBench. YuE2 (best-of-8) achieves **6.9632 SongBench Avg**, the highest observed mean among all evaluated settings.
+- **White-box music generation through symbolic planning.** Read, play, and change the composition before rendering it. Melody and chords become explicit controls that a person or an agent can inspect and edit.
+- **Zero-shot covers and agentic editing.** Reimagine a transcribed song in a new style, or refine a song through a conversation about its score, arrangement, and lyrics—all with the same generation checkpoint.
+
+[![YuE2 song quality and text alignment on WildSongBench](assets/frontier-teaser.png)](https://map-yue2.github.io/#model-overview)
+
+*192 WildSongBench prompts. Both YuE2 settings use symbolic planning. Bo8 = best-of-8. The axes are normalized comparison indices; bubble area represents AudioBox production quality. [Scores and evaluation protocol](docs/benchmarks.md). [Vector PDF](assets/frontier-teaser.pdf) · [SVG](assets/frontier-teaser.svg).*
+
+## Hear what you can make
+
+| Create | Cover | Edit with an agent |
+|---|---|---|
+| Lyrics + style → score → full song | Source recording → melody score → a new interpretation | Musical feedback → score, style, or lyric revisions → a new recording |
+| [Listen and inspect the score](https://map-yue2.github.io/#abc-cot-gen) | [Hear zero-shot covers](https://map-yue2.github.io/#cover) | [Follow an editing conversation](https://map-yue2.github.io/#agentic-music-editing) |
+
+The agentic demo follows **The Last Train through 9 steps and 14 versions**, from Mandarin pop to English jazz with new harmony and a saxophone solo. Listen to each version and inspect its conversation, score, prompt, and lyrics.
+
+## How it works
+
+![YuE2 architecture: style and lyrics become an editable score, semantic music tokens, acoustic latents, and audio](assets/architecture.png)
+
+One **AR–NAR Mixture-of-Transformers** backbone predicts the score and semantic tokens autoregressively, then generates acoustic latents with flow matching. A VAE decodes those latents into stereo audio. Creation, covering, and editing differ in where the score comes from: YuE2, a transcribed recording, or an edited compos
