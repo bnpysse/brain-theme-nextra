@@ -2234,6 +2234,7 @@ export default {
   "Raw-翻译-An-Interview-with-OpenAI-President-Greg-Bro": "An Interview with OpenAI President Greg ...",
   "Raw-翻译-An-Interview-with-Joanna-Stern-About-the-iP": "An Interview with Joanna Stern About the...",
   "Raw-翻译-An-Ex-SpaceX-Engineer-on-Elon-Musk-Starship": "An Ex-SpaceX Engineer on Elon Musk, Star...",
+  "Raw-翻译-An-Empirical-Study-of-Harness-Design-for-Co": "An Empirical Study of Harness Design for...",
   "Raw-翻译-An-American-Engineer-in-China": "An American Engineer in China",
   "Raw-翻译-Americas-Most-Spoken-Languages-Besides-Engl": "Americas Most-Spoken Languages Besides E...",
   "Raw-翻译-Americas-Most-Popular-Car-Colors-1996-vs-20": "Americas Most Popular Car Colors, 1996 v...",
