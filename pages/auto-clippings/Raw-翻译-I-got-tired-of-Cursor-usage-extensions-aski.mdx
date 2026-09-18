@@ -1,0 +1,53 @@
+---
+title: "I got tired of Cursor usage extensions asking for my session_全翻译"
+tags: ["Reddit_全文翻译", "r_CursorAI"]
+---
+
+【帖子标题】：I got tired of Cursor usage extensions asking for my session token, so I made a different approach  
+【帖子标题】：受够了那些索要我会话令牌的Cursor使用统计插件，于是我另辟蹊径  
+
+【帖子正文】：  
+I was looking for a simple way to see my Cursor usage in the status bar and tried a few of the existing extensions.  
+我本想找个简单方法在状态栏查看Cursor使用情况，尝试了几款现有插件。  
+
+What bothered me was that some of them required opening DevTools on  
+让我困扰的是有些插件要求用户在  
+
+cursor.com  
+cursor.com  
+
+, finding  
+网站上打开开发者工具，找到  
+
+WorkosCursorSessionToken  
+WorkosCursorSessionToken  
+
+, and pasting it into the extension settings. I wasn't particularly comfortable handing my session token to an extension like that.  
+并粘贴到插件设置里。我对这样把自己的会话令牌交给插件感到不安。  
+
+So I ended up making a small extension for myself that uses the existing Cursor session instead.  
+最终我自己做了个小插件，直接复用现有Cursor会话。  
+
+It shows something like:  
+显示效果类似这样：  
+
+Cursor 42% · Other 18% · On-d $4.20  
+Cursor 42% · 其他18% · 按需$4.20  
+
+Cursor = Auto/Composer usage, Other = API model usage, and On-d is on-demand spending.  
+Cursor指自动/编辑器用量，其他是API模型用量，按需显示消费金额。  
+
+I put the code on GitHub in case anyone wants to look at how it works. It's unofficial and could obviously break if Cursor changes something on their side.  
+代码已放GitHub供参考。这是非官方插件，若Cursor调整接口可能会失效。  
+
+GitHub: [  
+GitHub：[  
+
+https://github.com/rijojoy/cursor-usage-split]  
+https://github.com/rijojoy/cursor-usage-split]  
+
+Open VSX: [  
+Open VSX：[  
+
+https://open-vsx.org/extension/rijojoy/cursor-usage-split]  
+https://open-vsx.org/extension/rijojoy/cursor-usage-split]
