@@ -2325,6 +2325,7 @@ export default {
   "Raw-翻译-90万一集的AI长剧，如何炸出芒果130亿市值": "90万一集的AI长剧，如何炸出芒果130亿市值",
   "Raw-翻译-99元AI洗头、499元AI按摩…体验完深圳5款AI大保健，我碎了": "9.9元AI洗头、49.9元AI按摩…体验完深圳5款AI大保健，我碎了",
   "Raw-翻译-9-Mothers-YC-P26-Is-Hiring-in-Austin-TX": "9 Mothers YC P26 Is Hiring in Austin, TX",
+  "Raw-翻译-8月音乐精选：有限的生命里，要听得再任性一点": "8月音乐精选：有限的生命里，要听得再任性一点",
   "Raw-翻译-87页合同背后的半年等待：私募新规要保护什么": "87页合同背后的半年等待：私募新规要保护什么",
   "Raw-翻译-8000万养宠人，见证它经济从狂热到崩塌": "8000万养宠人，见证它经济从狂热到崩塌",
   "Raw-翻译-8-uncensored-Qwen-38-27B-variants-one-base": "8 uncensored Qwen 3.8 27B variants, one ...",
