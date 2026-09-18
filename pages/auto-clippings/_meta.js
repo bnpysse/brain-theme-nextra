@@ -2293,6 +2293,7 @@ export default {
   "Raw-翻译-AIs-third-era-the-rise-of-persistent-AI-cow": "AIs third era the rise of persistent AI ...",
   "Raw-翻译-AI-Tools-and-Transformation": "AI, Tools and Transformation",
   "Raw-翻译-AI-降低了创造的门槛，B-站则想放大创造的回声": "AI 降低了创造的门槛，B 站则想放大创造的回声",
+  "Raw-翻译-AI-硬件创业者，疯狂涌入手机的背面": "AI 硬件创业者，疯狂涌入手机的背面",
   "Raw-翻译-AI-真正的进化史：今天的一切，究竟是谁铺出来的": "AI 真正的进化史：今天的一切，究竟是谁铺出来的",
   "Raw-翻译-AI-没有逃出沙箱，它只是用了我们主动给它的能力": "AI 没有逃出沙箱，它只是用了我们主动给它的能力",
   "Raw-翻译-AI-正把文化变成黑暗森林：谁先暴露想法，谁先被狩猎": "AI 正把文化变成黑暗森林：谁先暴露想法，谁先被狩猎",
