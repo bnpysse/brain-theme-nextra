@@ -1868,6 +1868,7 @@ export default {
   "Raw-翻译-I-had-Gemini-train-its-own-replacement-for": "I had Gemini train its own replacement f...",
   "Raw-翻译-I-got-tired-of-Cursor-usage-extensions-aski": "I got tired of Cursor usage extensions a...",
   "Raw-翻译-I-gave-Qwen-38-27B-a-reverse-engineering-jo": "I gave Qwen 3.8 27B a reverse-engineerin...",
+  "Raw-翻译-I-dont-like-passkeys": "I dont like passkeys",
   "Raw-翻译-I-didnt-sign-the-Fields-medallists-letter": "I didnt sign the Fields medallists lette...",
   "Raw-翻译-I-compiled-Dooms-renderer-into-a-21B-parame": "I compiled Dooms renderer into a 21B-par...",
   "Raw-翻译-I-built-a-local-first-hybrid-router-for-AI": "I built a local-first hybrid router for ...",
