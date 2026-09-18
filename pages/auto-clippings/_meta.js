@@ -1389,6 +1389,7 @@ export default {
   "Raw-翻译-Three-schoolgirls-in-Kinsale-pulled-up-a-pe": "Three schoolgirls in Kinsale pulled up a...",
   "Raw-翻译-Thomson-Reuters-Launches-Its-Own-Frontier-M": "Thomson Reuters Launches Its Own Frontie...",
   "Raw-翻译-This-is-a-great-sub-regardless-of-what-comp": "This is a great sub, regardless of what ...",
+  "Raw-翻译-Theres-no-point-at-which-turning-your-brain": "Theres no point at which turning your br...",
   "Raw-翻译-Theres-No-Limit-to-How-Bad-Code-Can-Get": "Theres No Limit to How Bad Code Can Get",
   "Raw-翻译-The-wayfinder-Skill-Navigating-the-Fog-of-W": "The wayfinder Skill Navigating the Fog o...",
   "Raw-翻译-The-twilight-of-the-chatbots": "The twilight of the chatbots",
