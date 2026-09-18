@@ -1,0 +1,91 @@
+---
+title: "There s No Limit to How Bad Code Can Get_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：There's No Limit to How Bad Code Can Get  
+代码质量的堕落永无止境  
+
+【文章正文】：  
+My comment  
+我的评论  
+
+on  
+关于  
+
+There's No Limit to How Bad Code Can Get  
+《代码质量的堕落永无止境》  
+
+— Lobste.rs.  
+—— Lobste.rs 网站  
+
+[In reply to a comment about burning it down to start from scratch when technical debt becomes overwhelming]  
+[针对"当技术债务积重难返时就应推倒重来"的评论回复]  
+
+In my experience it's  
+根据我的经验  
+
+so rare  
+这种情况极少  
+
+for that to work.  
+能真正奏效  
+
+You announce the old thing is irrecoverably drowning in tech debt. You spin up a team to rewrite it from scratch. Work begins.  
+你宣布旧系统已深陷技术债务无法挽救，组建团队从头重写，工程就此启动。  
+
+Meanwhile the old thing remains a moving target: it's running the core business, so changes are still necessary. The developers working on it know that it's going to be made obsolete by the new thing soon, so they don't have any incentive to go beyond the smallest effort possible to add the new features. Technical debt continues to mount.  
+然而旧系统仍是移动靶标：它支撑着核心业务，变更需求持续不断。维护它的开发者知道它即将被新系统取代，因此只愿用最小精力实现新功能。技术债务持续堆积。  
+
+Meanwhile, the team working on the new thing are ambitious and probably a little naive. They start out at a great pace - it's greenfield after all - but as time progresses it becomes apparent that nobody fully understands the behavior and scope of the thing they are replacing. If it was well documented and tested it wouldn't  
+与此同时，新系统团队雄心勃勃却略显天真。初期进展神速——毕竟是全新项目——但随着时间推移，越来越明显没人真正理解被替代系统的行为逻辑和边界范围。毕竟若旧系统真有完善文档和测试...  
+
+need  
+也就不至于  
+
+to be replaced, after all...  
+需要被替换...  
+
+After months (or even years) without delivering value, the pressure is on to "ship it", so the new system is launched to handle a subset of what the old system handled - or often for some new feature that was too hard to build with the now mostly unmaintained old system.  
+经过数月（甚至数年）毫无产出的开发后，在"必须交付"的压力下，新系统只能处理旧系统功能的子集就仓促上线——或者更常见的是用来实现那些在缺乏维护的旧系统上难以开发的新功能。  
+
+... so now you have TWO systems in production - the janky old system that nobody wants to touch, and a new system which handles just a few production features and is 80% inactive code that is meant to replace the old system, eventually.  
+...于是你现在拥有两套生产系统：无人愿碰的破旧老系统，以及仅支撑少量生产功能、80%代码处于休眠状态的新系统——理论上它终将取代旧系统。  
+
+If you're  
+如果你  
+
+really lucky  
+足够幸运  
+
+the company won't have lost patience with the new system and will allow that work to continue. The longer this all takes, and the longer the old system stays in production and stubbornly continues to work, the higher the risk that "priorities have changed" and the new system total replacement work is abandoned, leaving you with two systems where you used to have one.  
+公司尚未对新系统失去耐心并允许继续开发。但耗时越久，旧系统在生产环境坚挺运行的时间越长，"优先级调整"的风险就越高——最终新系统的全面替代工作被放弃，你从一套系统变成了两套。  
+
+The best article I've read about completing this process responsibly is  
+关于如何负责任地完成此类迁移，我读过最棒的文章是  
+
+Migrations: the sole scalable fix to tech debt  
+《迁移：技术债务唯一可扩展的解决方案》  
+
+by Will Larson.  
+作者 Will Larson  
+
+If I run into a situation like this in the future, my strong recommendation will be to shore up the old system with as much automated testing as possible and then seeing if targeted refactors can get it to the desired shape. My hunch is that in many cases that will have a much higher chance of success than the siren call of a greenfield replacement.  
+今后若再遇此类情况，我会强烈建议：先用自动化测试巩固旧系统，再尝试通过针对性重构达成目标。直觉告诉我，这种方式成功率远高于推倒重来的诱惑。  
+
+Tags:  
+标签：  
+
+migrations  
+迁移  
+
+,  
+、  
+
+technical-debt  
+技术债务
+
+## 🔗 知识库双向关联
+- [当亲手写代码开始被叫作“古法编程”_全翻译](/auto-clippings/Raw-翻译-当亲手写代码开始被叫作古法编程)
+- [当亲手写代码开始被叫作“古法编程”_简报](/auto-clippings/Auto-简报-当亲手写代码开始被叫作古法编程)
+- [当亲手写代码开始被叫作“古法编程”_全翻译](/auto-clippings/Raw-翻译-当亲手写代码开始被叫作古法编程)

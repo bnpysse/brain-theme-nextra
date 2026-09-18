@@ -1,0 +1,277 @@
+---
+title: "The Pulse Quitting Spotify Podcasts over reliability_全翻译"
+tags: ["大咖视点_全文翻译", "The_Pragmatic_Engineer_(顶级软件工程师)"]
+---
+
+【文章标题】：
+The Pulse: Quitting Spotify Podcasts over reliability
+The Pulse：因可靠性问题退出Spotify播客
+
+【文章正文】：
+Hi, this is Gergely with a bonus, free issue of the Pragmatic Engineer Newsletter. In every issue, I cover Big Tech and startups through the lens of senior engineers and engineering leaders. Today, we cover one out of four topics of last week's The Pulse issue. Full subscribers received the article below seven days ago. If you’ve been forwarded this email, you can subscribe here.
+
+你好，我是Gergely，这是《Pragmatic Engineer Newsletter》的一期额外免费内容。在每一期中，我都会从资深工程师和工程领导者的视角报道大科技公司和初创企业。今天，我们报道上周《The Pulse》的四个主题之一。完整订阅者在七天前就收到了下面的文章。如果你是通过转发收到这封邮件的，你可以在此订阅。
+
+You can no longer watch The Pragmatic Engineer Podcast as video in the Spotify app (only as audio) because I have quit publishing video on that streaming platform. This comes after I decided that reliability takes a back seat within that team – and across much of Spotify. Unlike on other platforms such as YouTube, Apple Podcasts, and Substack, I’ve recently encountered a series of reliability issues around Spotify being unable to process video episodes. Even though I enjoyed a direct link with the Podcasts team there, things haven’t improved.
+
+你无法再在Spotify应用中将《The Pragmatic Engineer Podcast》作为视频观看（只能作为音频），因为我已经停止在该流媒体平台上发布视频。这是因为我认为可靠性在那个团队中——以及Spotify的大部分部门中——被放在了次要位置。与其他平台如YouTube、Apple Podcasts和Substack不同，我最近遇到了一系列与Spotify无法处理视频剧集相关的可靠性问题。尽管我与那里的播客团队有直接联系，但情况并未改善。
+
+So from now, I will no longer be publishing video episodes on Spotify. You can find videos of my in-depth chats with guests only on YouTube.
+
+因此，从现在起，我将不再在Spotify上发布视频剧集。你只能在YouTube上找到我与嘉宾深度对话的视频。
+
+Apologies for any inconvenience this change causes!
+
+对于这一变化带来的不便，我深表歉意！
+
+Audio episodes of the podcast can still be found on Spotify via the RSS podcast feed hosted on Substack.
+
+播客的音频剧集仍然可以通过托管在Substack上的RSS播客源在Spotify上找到。
+
+Honestly, the decision to quit the streaming giant wasn’t hard, and I reckon there’s a point here about the risk of deprioritizing reliable operations at major companies in order to push on things like AI adoption, as Spotify seems to be doing.
+
+说实话，离开这家流媒体巨头的决定并不难，而且我认为这里有一个值得注意的点：为了推动AI采用等事情，大型公司可能会降低可靠运营的优先级，而Spotify似乎正是如此。
+
+Some context: for the first two years of The Pragmatic Engineer Podcast, it was published on three podcast platforms:
+
+- Substack’s podcast platform (audio): this is where the “master” RSS feed is served to the likes of Apple Podcasts, the web, Overcast, Pocket Casts, etc
+
+- YouTube (video): video episodes uploaded individually
+
+- Spotify (video + audio): every video episode was uploaded individually and then served as video or audio episodes from the platform.
+
+一些背景：在《The Pragmatic Engineer Podcast》的最初两年里，它发布在三个播客平台上：
+
+- Substack的播客平台（音频）：这是“主”RSS源提供给Apple Podcasts、网页、Overcast、Pocket Casts等的地方。
+
+- YouTube（视频）：单独上传视频剧集
+
+- Spotify（视频+音频）：每个视频剧集单独上传，然后从平台以视频或音频剧集的形式提供。
+
+As someone hosting a podcast, there are good reasons to bother doing three separate uploads:
+
+- Most podcast platforms don’t support video.
+
+- There will always be a need for a platform that serves the master RSS feed for audio versions while the video ones are elsewhere.
+
+- YouTube doesn’t integrate with anything.
+
+- YouTube is the leader in video podcast distribution, and uploading there directly makes sense.
+
+- I had a direct line to the Spotify team, which was a big plus.
+
+作为一个播客主持人，费心做三次单独上传是有充分理由的：
+
+- 大多数播客平台不支持视频。
+
+- 始终需要一个平台来提供音频版本的主RSS源，而视频版本则放在其他地方。
+
+- YouTube不与任何东西集成。
+
+- YouTube是视频播客分发领域的领导者，直接上传到那里很有意义。
+
+- 我与Spotify团队有直接联系，这是一个很大的加分项。
+
+Starting out the podcast, I had the unusual privilege of contact with the podcasts team, thanks to the newsletter gaining a decently-size audience. I was persuaded to take the plunge with them.
+
+在播客起步阶段，由于新闻通讯获得了相当规模的受众，我拥有了与播客团队接触的不寻常特权。我被说服与他们一起冒险。
+
+For eighteen months, nothing *major* went wrong. The admin portal for podcast publishers (called ‘Spotify Creators’) was pretty wonky; it gave intermittent errors, and was unable to remember me when I signed in, so, each Wednesday, I’d have to sign in with a code sent to my email to publish an episode.
+
+在十八个月里，没有发生什么*重大*问题。播客发布者的管理门户（称为“Spotify Creators”）相当不稳定；它会出现间歇性错误，并且在我登录时无法记住我，所以每周三，我都必须使用发送到我邮箱的代码登录才能发布剧集。
+
+But overall, things worked, until it all went suddenly downhill…
+
+但总的来说，一切还算正常，直到突然急转直下……
+
+Unable to publish Spotify podcast episodes 3 out of 5 weeks
+
+五周中有三周无法在Spotify上发布播客剧集
+
+From late May, I did not include links to Spotify on new episode announcements because their podcasts product or platform seemingly had outages every time one published on Wednesdays at around 9am PST / 12pm EST / 6pm EU time.
+
+从5月下旬开始，我在新剧集公告中不再包含Spotify链接，因为他们的播客产品或平台似乎每次在太平洋时间上午9点/东部时间中午12点/欧洲时间下午6点左右发布时都会出现故障。
+
+Outage #1 (20 May): podcast publishing broke, my episode would not process on Spotify for 2+ hours. When uploading a video file to Spotify, there’s a processing pipeline that runs to create chunks of the podcast in different video and audio formats. This pipeline appeared to stop running, meaning new episodes were not published.
+
+故障#1（5月20日）：播客发布中断，我的剧集在Spotify上超过2小时无法处理。当向Spotify上传视频文件时，会运行一个处理管道，以创建不同视频和音频格式的播客片段。这个管道似乎停止运行了，这意味着新剧集无法发布。
+
+It was not just the publishing that broke: the Creator portal looked absurd, with NaN% values everywhere, during the outage:
+
+不仅仅是发布中断：在故障期间，Creator门户看起来荒谬至极，到处都是NaN%的值：
+
+During outage #1
+
+在故障#1期间
+
+I emailed the Spotify team to alert them about the outage and also complained online. I got a response, confirming the outage and pledging to do better:
+
+我给Spotify团队发了邮件，提醒他们这次故障，并在网上抱怨了一番。我得到了回应，确认了故障，并承诺会做得更好：
+
+&gt; “The issue was in one of our podcast publishing metadata pipelines. A small subset of episodes completed normal media processing but then missed a downstream publish update because a newly introduced validation signal was not correctly wired into the logic that wakes up the publishing path. In simpler terms: the episode could become eligible to publish, but the final propagation step was not reliably triggered for that class of episodes.
+&gt;
+&gt; We identified the root cause, deployed a fix, and reprocessed the affected episodes with all-clear called early this morning. We’re also tightening the system so that fields used for publishing eligibility cannot be added without also triggering the relevant downstream updates.
+&gt;
+&gt; Separately, we’re reviewing how partial creator-impacting publishing delays are surfaced, because even when this is not a broad platform outage, it is still a bad experience for publishers like yourself.
+&gt;
+&gt; Apologies again that you hit this. It was a real bug, not a wide outage, but it hit some of our most relevant creators.”
+
+&gt; “问题出在我们的一个播客发布元数据管道中。一小部分剧集完成了正常的媒体处理，但随后错过了下游发布更新，因为一个新引入的验证信号没有正确连接到唤醒发布路径的逻辑中。简而言之：剧集可能变得有资格发布，但最终传播步骤未能可靠地触发这一类剧集。
+&gt;
+&gt; 我们找到了根本原因，部署了修复，并重新处理了受影响的剧集，今天凌晨已宣布一切正常。我们还在收紧系统，这样用于发布资格的字段就不会在不触发相关下游更新的情况下被添加。
+&gt;
+&gt; 另外，我们正在审查如何呈现部分影响创作者的发布延迟，因为即使这不是广泛的平台故障，对于像您这样的发布者来说，这仍然是一种糟糕的体验。
+&gt;
+&gt; 再次为您的遭遇道歉。这是一个真正的bug，而不是大面积故障，但它影响了一些我们最相关的创作者。”
+
+Outage #2 (17 June): Spotify down.
+
+故障#2（6月17日）：Spotify宕机。
+
+Four weeks later, when attempting to publish a video episode, all of Spotify went down for many users, including myself.
+
+四周后，当我试图发布一个视频剧集时，Spotify对许多用户（包括我自己）来说完全宕机了。
+
+Spotify’s web player on 17 June
+
+6月17日的Spotify网页播放器
+
+Spotify does not maintain a status page, so it’s impossible to tell how widespread the outage was. I didn’t include a Spotify link in that week’s announcement either.
+
+Spotify没有维护状态页面，因此无法判断这次故障的范围有多大。那一周的公告中，我也没有包含Spotify链接。
+
+Outage #3 (24 June): podcast publishing broke – again.
+
+故障#3（6月24日）：播客发布再次中断。
+
+Outage #3 in five weeks; deja vu. This time, it was episode publishing not working, yet again. After waiting two hours for the episode to publish on Spotify, I yet again sent out the announcement with no Spotify link.
+
+五周内的第三次故障；似曾相识。这次，又是剧集发布无法工作。在等待剧集在Spotify上发布两小时后，我再次发出了没有Spotify链接的公告。
+
+I also emailed the Spotify Podcasts team, who confirmed the outage. I said I was considering stopping publishing video episodes, and to switch to audio-only publishing (which means pointing Spotify to my master RSS feed.) I said that an apology was appreciated but it wasn’t enough to make it worth publishing video episodes there.
+
+我还给Spotify播客团队发了邮件，他们确认了故障。我说我正在考虑停止发布视频剧集，转而只发布音频（这意味着将Spotify指向我的主RSS源）。我说道歉值得感谢，但这不足以让在那里发布视频剧集变得值得。
+
+I also asked for the incident review because I had the feeling that reliability was not all that important on this podcast product.
+
+我还要求进行事故审查，因为我觉得在这个播客产品中，可靠性并不是那么重要。
+
+For the first outage I got a vague description of what happened, and promises of improvements that were never done – e.g. during this second outage, there was no improved communications to creators, which I was told would happen, after outage #1.
+
+对于第一次故障，我得到了一个模糊的描述，以及从未兑现的改进承诺——例如，在第二次故障期间，没有向创作者提供改进的沟通，而我在第一次故障后被告知会有。
+
+Internally, Spotify’s team surely conducted an incident review as per usual, so I figured I’d hear back in about two weeks’ time, and assumed a reply would be forthcoming because I’d made clear I was ready to leave Spotify Podcasts if reliability didn’t improve.
+
+在内部，Spotify的团队肯定像往常一样进行了事故审查，所以我想大约两周后会有回音，并且假设会得到回复，因为我已经明确表示，如果可靠性不改善，我准备离开Spotify播客。
+
+No incident review three weeks later, so I quit Spotify
+
+三周后没有事故审查，所以我离开了Spotify
+
+The incident review had never arrived as promised by three weeks later, even though there had been time for it to be completed. It was yet another sign of a platform that has become unreliable. Also, the creator portal occasionally threw up this error:
+
+三周后，承诺的事故审查从未到来，尽管有时间完成。这再次表明该平台已变得不可靠。此外，创作者门户偶尔会抛出这个错误：
+
+Spotify’s creator portal on 16 July
+
+7月16日的Spotify创作者门户
+
+I checked my Spotify stats: stream plays had been trending downwards unsurprisingly, given the ongoing outages, while the other podcast platforms didn’t show the decline.
+
+我查看了我的Spotify统计数据：流媒体播放量一直在下降，这并不令人意外，因为故障持续发生，而其他播客平台没有出现下降。
+
+It made me decide “enough is enough” and to move off Spotify.
+
+这让我决定“够了就是够了”，然后离开Spotify。
+
+Staying on their platform depended on seeing an incident review, but they didn’t prioritize transparency, still had no status page, and nobody had built a feature for episode-processing status like YouTube has had for years. So, I pulled the plug and left:
+
+留在他们的平台上取决于能否看到事故审查，但他们没有优先考虑透明度，仍然没有状态页面，也没有人像YouTube多年来那样构建一个剧集处理状态的功能。所以，我拔掉插头离开了：
+
+Offboarding from Spotify’s (video) podcasts product
+
+从Spotify的（视频）播客产品中退出
+
+After I made the switch away from Spotify, the platform’s creators portal became buggier than ever, as in these examples:
+
+在我从Spotify切换出去后，该平台的创作者门户变得比以往任何时候都更容易出错，例如：
+
+My Creators page after I changed the source of my podcasts to the master RSS feed
+
+我将播客源改为主RSS源后的我的创作者页面
+
+Comments disappeared:
+
+评论消失了：
+
+My show had no comments, suddenly
+
+我的节目突然没有评论了
+
+… even though other parts of the UI showed dozens of comments:
+
+……尽管UI的其他部分显示了数十条评论：
+
+Zero comments, yet episodes with comments
+
+零评论，但剧集却有评论
+
+Episode links directed to 404 pages:
+
+剧集链接指向404页面：
+
+404 pages inside the Creator portal, when clicking links
+
+点击链接时，创作者门户内部出现404页面
+
+A day or two later, these issues disappeared: I assume no one had tested the flow of moving away from Spotify Podcasts to an RSS feed, and it’s why the experience was so poor.
+
+一两天后，这些问题消失了：我猜想没有人测试过从Spotify播客迁移到RSS源的过程，这就是体验如此糟糕的原因。
+
+Incident review finally published, but with a wrong timeline
+
+事故审查终于发布了，但时间线有误
+
+A few days after offboarding from Spotify, their team published the incident report for outage #3. Reading through it, something did not add up in the timeline:
+
+从Spotify退出几天后，他们的团队发布了故障#3的事故报告。通读之后，时间线有些不对劲：
+
+The original timeline published for the 24 June incident
+
+为6月24日事件发布的原始时间线
+
+My email account confirmed that I mailed the Spotify team at around 17:30 about the outage. So, after weeks of creating this report, why did the incident report downplay the fact that customers alerted the team before their own automated alerts fired?I complained to the Podcasts team, and to their credit, the incident report was updated:
+
+我的电子邮件账户确认，我在大约17:30给Spotify团队发了关于故障的邮件。那么，在花了数周时间编写这份报告之后，为什么事故报告要淡化客户在他们的自动警报触发之前就提醒团队这一事实？我向播客团队抱怨了这一点，值得称赞的是，事故报告得到了更新：
+
+The updated incident timeline
+
+更新后的事故时间线
+
+I didn’t like how high-level the report is, and how vague the promised improvements were. Specifically, this one:
+
+我不喜欢这份报告太过高层，而且承诺的改进也很模糊。具体来说，这一条：
+
+“During this incident, many creators learned something was wrong from their audiences before they heard anything from us. We are improving our processes and technical capabilities so creators get notified as soon as possible when things aren’t working.”
+
+“在这次事件中，许多创作者在从我们这里听到任何消息之前，先从他们的受众那里得知出了问题。我们正在改进我们的流程和技术能力，以便在事情不正常时尽快通知创作者。”
+
+Overall, I don’t regret the choice to leave, particularly when the focus of Spotify’s leadership is on AI, not reliability.
+
+总的来说，我不后悔离开的选择，尤其是当Spotify领导层的重点是AI而不是可靠性时。
+
+Does Spotify have “AI psychosis?”
+
+Spotify是否患有“AI精神病”？
+
+Previously, I used the term “AI psychosis” differently from the usual way of describing when someone starts believing everything an AI model tells them, however outlandish. I applied it to Meta’s rush to develop its own AI model at the cost of the reliability of its profitable business activities. This was based on Instagram’s most embarrassing-ever account takeover incident, which occurred when the team responsible for Instagram’s Trust & Safety was slashed. Soon after, AI-generated, AI-reviewed code caused the hacking of a former US president’s account.
+
+此前，我使用“AI精神病”一词的方式与通常的描述不同，通常是指某人开始相信AI模型告诉他们的一切，无论多么离奇。我将它应用于Meta急于开发自己的AI模型，却以牺牲其盈利业务活动的可靠性为代价。这是基于Instagram有史以来最尴尬的账户接管事件，该事件发生在负责Instagram信任与安全的团队被裁减之时。不久之后，AI生成、AI审查的代码导致一位美国前总统的账户被黑客入侵。
+
+At Spotify, it should have gone the other way. In March, I had the opportunity to meet its Head of Technology & Platforms, Tyson Singer, who said the company puts reliability far ahead of AI adoption, and doesn’t adopt AI for its own sake. So, it was somewhat surprising to read the summary below of a podcast Spotify did with Anthropic:
+
+在Spotify，情况本应相反。今年3月，我有机会会见了其技术与平台主管Tyson Singer，他说公司把可靠性远远放在AI采用之前，并且不会为了AI而采用AI。因此，读到下面Spotify与Anthropic所做播客的摘要，有些令人惊讶：
+
+“Spotify now ships 4,500 production deploys a day, and 73% of PRs are now AI-assisted.
+
+Niklas Gustavsson (VP of Engineering at Spotify) keeps 5 to 10 Claude sessions running in tmux, one per git worktree, agents working in the background. All of it inside a 20M+ line monorepo. He expected agents to struggle at that size, but it’
