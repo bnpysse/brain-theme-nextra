@@ -2137,6 +2137,7 @@ export default {
   "Raw-翻译-Claude-Monte-Carlo-Simulations": "Claude Monte-Carlo Simulations",
   "Raw-翻译-Claude-Fable-51-made-me-a-really-nice-anima": "Claude Fable 5.1 made me a really nice a...",
   "Raw-翻译-Claude-Cowork-and-chat-are-now-one-Claude": "Claude Cowork and chat are now one Claud...",
+  "Raw-翻译-Claude-Code-now-reads-AGENTSmd-if-there-is": "Claude Code now reads AGENTS.md if there...",
   "Raw-翻译-Clara-YC-P26-Is-Hiring-a-Growth-Engineer-to": "Clara YC P26 Is Hiring a Growth Engineer...",
   "Raw-翻译-City2Graph-A-Python-library-for-Heterogeneo": "City2Graph A Python library for Heteroge...",
   "Raw-翻译-Chrome-Deletes-the-Last-Manifest-V2-Extensi": "Chrome Deletes the Last Manifest V2 Exte...",
