@@ -1,0 +1,111 @@
+---
+title: "Setting up OpenCode with Ollama and sbx on Mac_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Setting up OpenCode with Ollama and sbx on Mac
+
+【文章正文】：
+Running Opencode with Ollama on mac.
+How to get started with running Ollama local models with Opencode and Docker Sandboxes.
+Viable local LLM development is here. With powerful models like Qwen 3.8 and Gemma4 we can now finally use these models to build out web applications. I'm using a Apple Macbook pro m5 48GB model. I think this is the sweet spot for local development as it allows you to run 30B models with a decent sized context.
+Why I use Ollama. To be frank it's just easy. It has mlx now, so it's fast on Apple silicon. It has a pretty good model directory. It is also very stable and won't crash.
+Why Opencode. Well, we need to start somewhere with this blog and opencode is a great harness.
+There is one other tool that I use, docker sandboxes aka sbx. I use frontier models at work which require us to sandbox our harnesses. I also, like to run my local models in containers as they can just as easily mess up your computer with a unwanted hallucination. 
+Installing the tools
+Install Docker Sandbox:
+brew trust docker/tap && brew install docker/tap/sbx
+Install Opencode:
+brew install anomalyco/tap/opencode
+Install Ollama:
+To install ollama, goto https://ollama.com/ and download and install the app.
+Installing the models
+For the models, we'll pull 2 models. First ensure ollama is running.
+Qwen 3.8 27B mxfp8 (32GB): This is a great workhorse model that will do most of your long running work and can run undisturbed for multiple hours within opencode.
+ollama pull qwen3.8:27b-mxfp8
+Gemma 4 31b mxfp8 (34GB): This is a great big dense model when you need something bigger.
+ollama pull gemma4:31b-mxfp8
+Note: If you don't have the 48GB Apple, you can pull the standard models: qwen3.8:27b-mlx and gemma4:31b-mlx . 
+Configuring your project
+For this setup, it requires you to setup a sbx kit for every project. A kit is a way to customise the sandbox. Create the following folders and files:
+./sbx-kit/files/home/.config/opencode-local.json
+./sbx-kit/spec.yaml
+spec.yaml
+schemaVersion: "2"
+kind: mixin
+name: local-ollama-opencode
+version: "0.1.0"
+displayName: Local Ollama for OpenCode
+description: Configure OpenCode in Docker Sandboxes to use Ollama running on the Mac host.
+requires:
+  agent: opencode
+environment:
+  variables:
+    OPENCODE_CONFIG: /home/agent/.config/opencode-local.json
+permissions:
+  network:
+    allow:
+      - localhost:11434
+      - localhost:5173
+      - localhost:4000
+agentInstructions:
+  content: |
+    Local Ollama runs on the host machine.
+    Default model:
+      qwen3.8:27b-mxfp8
+    Deep file analysis / reasoning:
+      gemma4:31b-mxfp8
+opencode-local.yaml
+&#123;
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama/gemma4:31b-mxfp8",
+  "small_model": "ollama/gemma4:31b-mxfp8",
+  "lsp": false,
+  "provider": &#123;
+    "ollama": &#123;
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Mac Ollama",
+      "options": &#123;
+        "baseURL": "http://host.docker.internal:11434/v1"
+      &#125;,
+      "models": &#123;
+        "qwen3.8:27b-mxfp8-64K": &#123;
+          "id": "qwen3.8:27b-mxfp8",
+          "name": "Qwen 3.8 27B MXFP8 [31 GB] [64K ctx]",
+          "limit": &#123;
+            "context": 65536,
+            "output": 8192
+          &#125;,
+          "variants": &#123;
+            "low": &#123;
+              "reasoningEffort": "low"
+            &#125;,
+            "medium": &#123;
+              "reasoningEffort": "medium"
+            &#125;,
+            "high": &#123;
+              "reasoningEffort": "high"
+            &#125;,
+            "xhigh": &#123;
+              "reasoningEffort": "xhigh"
+            &#125;
+          &#125;
+        &#125;,
+        "gemma4:31b-mxfp8": &#123;
+          "name": "Gemma 4 31B MXFP8 [33 → ~50 GB] [256K ctx]",
+          "limit": &#123;
+            "context": 262144,
+            "output": 8192
+          &#125;
+        &#125;
+      &#125;
+    &#125;
+  &#125;
+&#125;
+For the qwen model, we've limited the context to 64k, this will ensure your system dose not lock up when it runs out of memory. We also need 3GB for the sandbox.
+Run Opencode
+To run opencode, run the following:
+sbx run opencode --kit ./sbx-kit/
+This will start Opencode with Qwen selected. Ensure you change down to "low" effort via /models command.
+You should be good to go.
+Note: You will need to login into Docker to run sbx. This feature is not really liked by the development community but there is no way around it.
