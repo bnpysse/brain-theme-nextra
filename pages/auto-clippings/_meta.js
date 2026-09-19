@@ -4266,6 +4266,7 @@ export default {
   "Auto-简报-Github-debpalash-VoiceStudio": "Github__debpalash_VoiceStudio",
   "Auto-简报-Github-cursor-plugins": "Github__cursor_plugins",
   "Auto-简报-Github-cordiverse-cordis": "Github__cordiverse_cordis",
+  "Auto-简报-Github-cloudflare-security-audit-skill": "Github__cloudflare_security-audit-skill",
   "Auto-简报-Github-cathrynlavery-diagram-design": "Github__cathrynlavery_diagram-design",
   "Auto-简报-Github-bilawalsidhu-gods-eye-view": "Github__bilawalsidhu_gods-eye-view",
   "Auto-简报-Github-basecamp-omarchy": "Github__basecamp_omarchy",
