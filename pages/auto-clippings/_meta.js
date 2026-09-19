@@ -1913,6 +1913,7 @@ export default {
   "Raw-翻译-How-Trump-and-Xi-Can-Do-AI-Safety": "How Trump and Xi Can Do AI Safety",
   "Raw-翻译-How-To-Write-With-An-LLM": "How To Write With An LLM",
   "Raw-翻译-How-SaaS-startup-guys-get-first-100-custome": "How SaaS startup guys get first 100 cust...",
+  "Raw-翻译-How-OpenAI-Used-Its-Own-LLMs-to-Design-Its": "How OpenAI Used Its Own LLMs to Design I...",
   "Raw-翻译-How-I-turned-Claude-into-a-self-improving-P": "How I turned Claude into a self-improvin...",
   "Raw-翻译-How-Grok-Bot-designers-use-AI-agents-to-bui": "How Grok Bot designers use AI agents to ...",
   "Raw-翻译-How-Claude-Watermarks-AI-Generated-Text": "How Claude Watermarks AI-Generated Text",
