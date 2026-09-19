@@ -4279,6 +4279,7 @@ export default {
   "Auto-简报-Github-alsk1992-CloddsBot": "Github__alsk1992_CloddsBot",
   "Auto-简报-Github-alibaba-open-code-review": "Github__alibaba_open-code-review",
   "Auto-简报-Github-affaan-m-ECC": "Github__affaan-m_ECC",
+  "Auto-简报-Github-addyosmani-agent-skills": "Github__addyosmani_agent-skills",
   "Auto-简报-Github-abhigyanpatwari-GitNexus": "Github__abhigyanpatwari_GitNexus",
   "Auto-简报-Github-Wei-Shaw-sub2api": "Github__Wei-Shaw_sub2api",
   "Auto-简报-Github-Tencent-teamai-cli": "Github__Tencent_teamai-cli",
