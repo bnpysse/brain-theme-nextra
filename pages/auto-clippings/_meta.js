@@ -4410,6 +4410,7 @@ export default {
   "Auto-简报-Github-ayghri-i-have-adhd": "Github__ayghri_i-have-adhd",
   "Auto-简报-Github-asgeirtj-system-prompts-leaks": "Github__asgeirtj_system_prompts_leaks",
   "Auto-简报-Github-anthropics-skills": "Github__anthropics_skills",
+  "Auto-简报-Github-anthropics-financial-services": "Github__anthropics_financial-services",
   "Auto-简报-Github-anthropics-claude-plugins-official": "Github__anthropics_claude-plugins-offici...",
   "Auto-简报-Github-anthropics-claude-code": "Github__anthropics_claude-code",
   "Auto-简报-Github-alsk1992-CloddsBot": "Github__alsk1992_CloddsBot",
