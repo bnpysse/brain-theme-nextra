@@ -1,0 +1,154 @@
+---
+title: "让 Agent 读懂你的身体：数据获取篇_简报"
+tags: ["大咖视点_深度解读", "少数派_sspai_(数字工具与生产力思维)"]
+---
+
+# 精华简报：让 Agent 读懂你的身体——健康数据获取路径概览
+
+**来源**：少数派 sspai（数字工具与生产力思维）  
+**原文链接**：https://sspai.com/prime/story/how-to-obtain-data-for-agent-analysis  
+**文章类型**：技术与商业分析 / Newsletter  
+**说明**：本文基于所提供的中文正文撰写。原文在“Oura 认证”部分截断，未能完整覆盖作者计划中的全部七种获取路径，本简报仅覆盖可见的前四种方法，但对整体框架和核心权衡已有充分呈现。
+
+---
+
+## 一、核心议题
+
+作者以“健身平台期”为切入点，希望借助 AI Agent 持续获取和分析个人身体数据，从而定位问题所在。本文将需求拆分为三个子问题，并聚焦第一个：**如何让 AI Agent 方便、持续地拿到已经在记录的数据。**
+
+作者明确说明：受个人设备与精力限制，实测范围主要为 Apple Health 与 Oura，其余厂商路径来自公开资料。
+
+---
+
+## 二、核心框架：先判断数据在哪里
+
+作者将运动健康数据分为三层、三类来源，这是选择获取方式的基础。
+
+**三层数据：**
+
+1. **基础记录**：步数、心率、睡眠时段、运动轨迹等。
+2. **算法指标**：readiness、strain、resilience 等厂商计算后的复合指标。
+3. **手工记录**：饮食、训练感受、体成分、体检报告等。
+
+**三类来源：**
+
+1. **聚合平台**：Apple Health、Health Connect、Google Health。
+2. **厂商或专业 App**：Oura、Whoop、Garmin、Samsung Health、训记、Hevy 等。
+3. **报告或手工记录**：饮食、体检报告等，未必有稳定数字化入口。
+
+**关键判断：**  
+厂商通常会把部分第一、二层数据同步给聚合平台，但不会交出全部指标——尤其那些订阅制核心算法。因此用户应先问两个问题：
+
+- 数据是否已经进入聚合平台？
+- 平台中的字段是否足够？
+
+---
+
+## 三、四种获取路径
+
+### 方法一：直接在 AI 产品里使用
+
+**代表工具**：ChatGPT、Claude、国内蚂蚁阿福。
+
+- ChatGPT 与 Claude 在 iOS 端支持授权读取 Apple Health，可直接提问分析。
+- 功能受地区、账号、开放进度影响，通常美国先上线。
+- 国内用户可使用蚂蚁阿福，同样支持 Apple Health 接入，但功能相对基础，更侧重体检报告解读与 AI 问诊。
+
+**优点**：零配置，省心。  
+**局限**：适合临时查询，不适合长期积累、自由查询或更换模型。
+
+---
+
+### 方法二：使用现成连接器或中转服务
+
+**代表工具**：
+
+| 服务 | 说明 | 条件 |
+|------|------|------|
+| Strava | 官方 MCP 连接器，Agent 可直接读取 | 订阅用户 |
+| 训记 | 提供 API Skill，支持回写 | 买断用户 |
+| Hevy | Settings &gt; Developer 生成 API Key | Hevy Pro 订阅 |
+| Freddy | 健康数据中转服务器，多平台同步后通过 MCP/API 访问 | 首数据源免费，多源需订阅 |
+
+**优点**：配置省事，厂商已做好连接。  
+**限制**：数据需存储在第三方服务器；需确认读取字段、数据存放位置、停止订阅后能否完整导出。
+
+---
+
+### 方法三：从聚合平台持续导出
+
+这是作者最推荐的核心路径。聚合平台已集中多设备数据，从平台统一导出往往比逐个对接厂商更高效。
+
+#### 1. Apple Health
+
+Apple Health 生态完善，支持小米、Zepp、OPPO、佳明等设备同步，也可接入 Keep、Nike Run Club 等 App。三种具体实现：
+
+- **快捷指令**  
+  可直接读取 Apple Health，支持日期筛选与增量导出，可上传云端。现成方案：[apple-health-shortcuts-mcp](https://github.com/Aimee1129/apple-health-shortcuts-mcp)。门槛是需要一定动手配置。
+
+- **现成工具**  
+  - **Health Push**：简单小工具，导出 JSON。
+  - **Health Auto Export**：功能更完整，支持自动发送 REST API 或云存储，需高级版；国区不支持终身买断。
+
+- **自研 App**  
+  适合有 Mac、开发者账号和 iOS 开发基础的用户。可基于开源 SDK [open_wearables_ios_sdk](https://github.com/the-momentum/open_wearables_ios_sdk) 开发。注意免费签名有有效期限制。
+
+#### 2. Google Health 与 Health Connect
+
+先厘清概念：
+
+- **Google Health**：App + 云端服务，由 Fitbit 更名而来，Fitbit 与 Pixel Watch 数据直入，提供 Google Health API v4。
+- **Health Connect**：Android 系统层数据中转站，本地存储、管理授权，Android 14 起并入系统框架。
+- **Google Fit**：上一代产品，Fit API 支持到 2026 年底，App 逐步并入 Google Health。
+
+国内品牌国际版（小米、OPPO、vivo）及非国行三星通常支持写入 Health Connect。现成工具有 **Health Sync**（导出网盘/服务器）、**Health Data Export**（导出 Google 表格并增量更新）。自研可用官方文档或 [open_wearables_android_sdk](https://github.com/the-momentum/open_wearables_android_sdk)，安装调试比 iOS 更灵活。
+
+---
+
+### 方法四：直接调用官方 API 或 SDK
+
+当聚合平台没有你需要的数据，必须回到数据源头。厂商 API 能直接读取原服务数据，适合自动更新。
+
+#### Google Health API
+
+- 通过 Google Cloud 项目 + OAuth 授权获取数据。
+- 个人自用可全程自助，超过 100 名用户才需安全审核。
+- 官方提供 [google-health-cli](https://github.com/Google-Health-API/google-health-cli)，覆盖 40+ 数据类型，输出 JSON/CSV/终端表格，且附有 Agent Skill 文件。
+
+#### Oura 与 Whoop
+
+- 硬件价格高、依赖订阅、生态封闭，但开发者接口对个人开放，前提是订阅有效。
+- 可在开发者中心注册应用，取得 client_id / client_secret，再让 AI Agent 协助搭建数据抓取、存储与分析程序。
+
+---
+
+## 四、文中可复用的提示词模板
+
+作者给出了两个高质量 prompt 模板，核心思路值得借鉴：**要求 AI 先阅读官方文档，不凭记忆推测；明确环境信息、目标、异常处理；分步执行、确认后再继续。**
+
+- **快捷指令配置 prompt**：包含环境（iPhone/iOS/Apple Watch/Cloudflare）、要导出的指标、最终目标（如每天睡醒同步睡眠数据）、如何处理迟到数据、重复记录、修改等。
+- **Oura 脚本 prompt**：要求先读 Oura 官方文档，写本地 python 脚本，定期拉取数据存入 SQLite，认证信息已在后台准备好。
+
+这种“文档驱动 + 环境声明 + 异常处理”的结构，能显著降低 AI 配置类任务中的幻觉风险。
+
+---
+
+## 五、分析师点评与选择建议
+
+**核心权衡**：省心数据接入 vs 数据控制权与可携带性。
+
+- 只想临时问答：直接使用 ChatGPT / Claude / 蚂蚁阿福。
+- 已有付费订阅：优先用官方 MCP / API 或连接器服务，成本低、见效快。
+- 长期积累、自控数据：聚合平台导出 + 快捷指令 / 云存储是较优解。
+- 开发者或深度用户：自研 App 或调用官方 API，自由度和自动化能力最高。
+
+**潜在风险与注意**：
+
+1. 健康数据高度分散，聚合平台虽便利，但第二层算法指标（如 readiness）往往保留在厂商手里，成为平台期分析的关键盲点。
+2. 订阅服务的连接器可能因停止订阅而无法继续导出历史数据。
+3. 地区限制明显：ChatGPT/Claude 的 Health 接入可能未对非美区开放；Health Auto Export 国区不支持终身买断。
+4. 原文未能展示全部七种路径，方法五至七（可能涉及手工记录、报告等）缺失，读者若需完整方案，建议阅读全文或关注后续篇。
+
+---
+
+**一句话总结**：让 Agent 读懂身体的关键，不是缺 AI 能力，而是先解决健康数据的可获取性与可携带性；聚合平台是基础，厂商 API 是深水区，自控数据是长期最优解。

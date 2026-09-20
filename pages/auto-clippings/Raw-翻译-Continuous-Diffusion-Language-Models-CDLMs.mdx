@@ -1,0 +1,110 @@
+---
+title: "Continuous Diffusion Language Models CDLM s_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Continuous Diffusion Language Models (CDLM's)
+【连续扩散语言模型（CDLM）】
+
+【文章正文】：
+A flurry of recent activity in the space of continuous diffusion models for language, after a few years of relative dormancy, suggests that this approach is making something of a comeback. 
+在经历数年相对沉寂后，语言连续扩散模型领域近期突然涌现大量研究活动，暗示着这种方法正在某种程度上的复兴。
+
+Fully discrete diffusion methods had largely supplanted earlier attempts to make continuous diffusion work for language, but the tide is starting to turn. 
+完全离散的扩散方法曾基本取代了早期让连续扩散适用于语言的尝试，但潮流正在开始转变。
+
+In this post, I want to take a closer look at what’s going on, and why it is happening now.
+本文中，我想深入探讨现状及其成因。
+
+The recent influx of new research in this space inspired me to write up some of my thoughts. 
+该领域最新涌现的研究促使我记录一些思考。
+
+I have written about diffusion language models before, so this mainly serves as an update to cover everything that’s happened since then. 
+我曾撰写过关于扩散语言模型的文章，因此本文主要是对后续进展的更新。
+
+This will be a fairly subjective account – other perspectives and dissenting opinions are very welcome in the comments and elsewhere! 
+这将是一份相当主观的记述——非常欢迎在评论区或其他地方提出不同观点！
+
+I’ll discuss some technical aspects of continuous diffusion for language later on, but first, some historical context.
+后文将讨论语言连续扩散的技术细节，但首先需要了解历史背景。
+
+Challenging the autoregressive hegemony
+挑战自回归的霸权地位
+
+Modern language models are, by and large, autoregressive: they generate sequences one token at a time. 
+现代语言模型大体都是自回归的：它们逐个标记生成序列。
+
+This is a natural decomposition of a difficult generation task into smaller, easier sequential steps. 
+这是将困难生成任务自然分解为更小、更简单的顺序步骤。
+
+All steps are instances of the same underlying task (predict a token given preceding tokens), which enables parameter sharing across the sequence dimension. 
+所有步骤都是相同基础任务（根据前面标记预测当前标记）的实例，这使得序列维度上的参数共享成为可能。
+
+In spite of this inherently sequential generative process, the Transformer architecture1 admits efficient parallel training across all sequence positions using teacher forcing2. 
+尽管生成过程本质上是顺序的，但Transformer架构1通过教师强制2实现了所有序列位置的高效并行训练。
+
+This has turned out to be an extremely scalable recipe3, which has brought us large language models (LLMs).
+这被证明是极具扩展性的方案3，由此诞生了大语言模型（LLM）。
+
+However, autoregression is not the only way to construct an iterative generative process for sequences. 
+然而，自回归并非构建序列迭代生成过程的唯一方式。
+
+Inspired by early successes in the audiovisual domain, researchers sought to apply diffusion to language generation instead. 
+受视听领域早期成功的启发，研究者转而尝试将扩散应用于语言生成。
+
+Rather than generating a sequence one element at a time, the generative process of diffusion models is defined by reversing a corruption process, which gradually destroys information. 
+扩散模型的生成过程不是逐个元素生成序列，而是通过逆转逐渐破坏信息的退化过程来定义。
+
+The canonical way to do this is to add Gaussian noise little by little, until it completely overpowers the signal. 
+标准做法是逐步添加高斯噪声，直至信号完全被掩盖。
+
+2021: early discrete diffusion models
+2021年：早期离散扩散模型
+
+After early successes in image generation in 20194 and 20205 6, the first attempts to apply this idea to language arrived in 2021, and involved replacing a continuous corruption process with a discrete one to enable modelling of categorical data: multinomial diffusion7, D3PM8 and SUNDAE9. 
+继20194和20205 6年在图像生成取得初步成功后，2021年首次出现将该思想应用于语言的尝试，通过离散化退化过程来实现类别数据建模：多项式扩散7、D3PM8和SUNDAE9。
+
+Back then, the dominance of autoregression was not as well-established as it is today: GPT-310 had turned some heads, but the ‘ChatGPT moment’ wouldn’t come until late 2022. 
+当时自回归的统治地位尚未像今天这般稳固：GPT-310虽引起关注，但"ChatGPT时刻"要到2022年底才出现。
+
+At the time, discrete diffusion seemed to address some real theoretical flaws in the autoregressive paradigm, like exposure bias due to teacher forcing and the relative difficulty of applying it to infilling and constrained generation tasks. 
+彼时离散扩散似乎解决了自回归范式的一些理论缺陷，如教师强制导致的曝光偏差，以及在填充和约束生成任务中应用的相对困难。
+
+Note that there had been some exploration of non-autoregressive and any-order autoregressive approaches in the preceding years11 12 (especially for machine translation13 14), but not yet from a diffusion perspective. 
+需注意的是，此前数年已有非自回归和任意顺序自回归方法的探索11 12（特别是机器翻译领域13 14），但尚未从扩散角度进行研究。
+
+2022: continuous diffusion for discrete data
+2022年：离散数据的连续扩散
+
+In 2022, several attempts to apply continuous diffusion to language modelling appeared, starting with Diffusion-LM15. 
+2022年出现了多个将连续扩散应用于语言建模的尝试，首推Diffusion-LM15。
+
+This approach addresses the incompatibility between categorical data and corruption with Gaussian noise in a different way: simply represent the discrete categories with continuous embedding vectors, which are perfectly amenable to Gaussian noise corruption. 
+该方法以不同思路解决类别数据与高斯噪声退化的不兼容问题：用连续嵌入向量表示离散类别，这些向量完全适合高斯噪声退化。
+
+That way, the Gaussian diffusion mechanism, which works so well for images, can be applied without any changes. 
+这样，对图像效果极佳的高斯扩散机制无需修改即可应用。
+
+Diffusion-LM touted the advantages of this alternative generative paradigm for controllable text generation in particular. 
+Diffusion-LM特别推崇这种替代生成范式在可控文本生成方面的优势。
+
+In the last few months of 2022, quite a few other papers using variations of this approach were published, including DiffuSeq16, SSD-LM17, Difformer18, SeqDiffuSeq19, GENIE20, LD4LG21 and also two papers that I worked on: self-conditioned embedding diffusion (SED)22 and continuous diffusion for categorical data (CDCD)23. 
+2022年最后几个月，多篇采用该方法变体的论文相继发表，包括DiffuSeq16、SSD-LM17、Difformer18、SeqDiffuSeq19、GENIE20、LD4LG21，以及我参与的两篇：自条件嵌入扩散(SED)22和类别数据连续扩散(CDCD)23。
+
+At the time, the allure of these continuous methods was that they could benefit from all the insights, tools and machinery that were being discovered and developed for continuous diffusion, as it completely took over audiovisual generation. 
+当时这些连续方法的吸引力在于，它们能受益于为连续扩散（因其完全主导视听生成领域）而开发和发现的所有洞见、工具及机制。
+
+For example, applying some of the sampling and distillation techniques developed for continuous diffusion models to discrete diffusion was often much less straightforward, or even downright impossible. 
+例如，将为连续扩散模型开发的采样和蒸馏技术应用于离散扩散通常不太直接，甚至完全不可行。
+
+Late 2023: the continuous extinction
+2023年末：连续方法的消亡
+
+Then, something interesting happened: after 2023, virtually all new research in this space used discrete diffusion, and continuous diffusion for language went extinct. 
+随后有趣的事情发生了：2023年后，该领域几乎所有新研究都采用离散扩散，语言连续扩散走向消亡。
+
+A diagram from a 2025 survey paper24 about diffusion language models clearly shows this:
+2025年一篇关于扩散语言模型的综述论文24中的图表清晰展现了这一点：
+
+New survey on diffusion language models: https://t.co/SHicf69gxV (via @NicolasPerezNi1). Covers pre/post-training, inference
+扩散语言模型新综述：https://t.co/SHicf69gxV（通过@NicolasPerezNi1）。涵盖训练前/后、推理
