@@ -4430,6 +4430,7 @@ export default {
   "Auto-简报-Github-Gitlawb-openclaude": "Github__Gitlawb_openclaude",
   "Auto-简报-Github-Flowseal-zapret-discord-youtube": "Github__Flowseal_zapret-discord-youtube",
   "Auto-简报-Github-DietrichGebert-ponytail": "Github__DietrichGebert_ponytail",
+  "Auto-简报-Github-BuilderIO-agent-native": "Github__BuilderIO_agent-native",
   "Auto-简报-Github-AprilNEA-OpenLogi": "Github__AprilNEA_OpenLogi",
   "Auto-简报-Github-Alishahryar1-free-claude-code": "Github__Alishahryar1_free-claude-code",
   "Auto-简报-Github-666ghj-MiroFish": "Github__666ghj_MiroFish",
