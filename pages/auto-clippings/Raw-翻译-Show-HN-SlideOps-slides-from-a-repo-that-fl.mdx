@@ -1,0 +1,117 @@
+---
+title: "Show HN SlideOps, slides from a repo that flag when they dri_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: SlideOps, slides from a repo that flag when they drift from the code  
+【文章标题】：Show HN：SlideOps - 当幻灯片内容与代码库发生偏离时自动标记  
+
+【文章正文】：  
+The demo deck is 17 slides about SlideOps, built by SlideOps: open the HTML or the PDF.  
+演示文档是由SlideOps制作的17页幻灯片，支持HTML或PDF格式打开。  
+
+Writing documentation isn't the bottleneck any more. Keeping it true is. The deck that said we run two database migrations still says two, a year after we started running ten 😅.  
+编写文档已不再是瓶颈，保持文档真实性才是。一年前写着"我们运行两次数据库迁移"的幻灯片，如今实际运行了十次却仍显示两次😅。  
+
+SlideOps is a pair of Agent Skills for Claude Code and compatible coding agents. It treats a generated document the way you'd treat generated code: it's built from a source, and it records which source it came from.  
+SlideOps是为Claude Code及兼容代码代理开发的双重Agent Skills。它像对待生成代码一样处理生成文档：记录原始来源并追踪内容出处。  
+
+The reasoning behind it is written up in Your documentation is a build artifact. Start treating it like one.  
+设计理念详见《你的文档就是构建产物》一文，建议像对待构建产物一样管理文档。  
+
+Press Esc in any deck for the overview grid.  
+在任何幻灯片界面按Esc键可唤出概览网格。  
+
+Claude Code. This repo is its own marketplace, so two lines are the whole setup, and it's the only install that keeps itself up to date:  
+Claude Code用户：该仓库自带插件市场，两行命令即可完成设置，且唯一支持自动更新：  
+```
+/plugin marketplace add glukicov/slideops  
+/plugin install slideops@slideops  
+```
+
+Codex, Copilot CLI, OpenCode, or a plain checkout:  
+Codex、Copilot CLI、OpenCode或常规安装：  
+```
+git clone https://github.com/glukicov/slideops && cd slideops  
+./install.sh  
+```
+
+All four agents read SKILL.md and nothing needs porting between them. For the symlink and snapshot installs, the per-agent table and how updates reach you, see docs/install.md.  
+所有四种代理都读取SKILL.md文件且无需适配。符号链接与快照安装方式、各代理支持表及更新机制详见docs/install.md。  
+
+Note  
+注意  
+Third-party marketplaces have auto-update off by default. Turn it on once in /plugin → Marketplaces, or new versions only arrive when you run /plugin marketplace update slideops by hand.  
+第三方插件市场默认关闭自动更新。需在/plugin→Marketplaces中启用，否则必须手动执行/plugin marketplace update slideops获取新版本。  
+
+Open a repository and say:  
+打开代码仓库并输入：  
+```
+/slideops  
+```
+
+SlideOps scans the repo first, then asks one compact set of questions: which topic (it proposes concrete candidates it found, each with a "why now"), audience, length, theme and extras. You get an outline to approve before it writes any HTML.  
+SlideOps会先扫描仓库，然后询问一组精简问题：主题（自动推荐具体选项并附"为何现在适用"说明）、受众、长度、主题风格和附加项。在生成HTML前会先提交大纲供确认。  
+
+If you already know what you want, skip the intake:  
+若已明确需求，可跳过问卷直接指定：  
+```
+/slideops --topic "Auth migration" --audience eng --length 15m --theme ledger-dark  
+```
+
+Months later, in the same repository:  
+数月后，在同一仓库中：  
+```
+/slideops --refresh  
+```
+
+The agent sweeps the deck folder and triages by status. It re-quotes whatever merely moved, and flags the slides whose claim might no longer hold. It repairs what drifted instead of regenerating the deck, so the pacing and narrative you signed off on the first time survive.  
+代理会扫描slides文件夹并按状态分类：自动更新仅位置变动的引用，标记可能失效的声明。采用差异修复而非全量重建，保留原始版本的节奏感和叙事结构。  
+
+Features  
+特性  
+- Freshness checking. scripts/check.py sweeps a whole docs/slides/ folder and reports which slides cite code that has changed, moved or vanished since the deck was built, then suggests the fix or hands an agent a JSON repair brief. No model, no network, no tokens: standard library Python, and it runs in milliseconds.  
+- 新鲜度检查：scripts/check.py扫描整个docs/slides/目录，报告引用代码发生变更/移动/删除的幻灯片，提供修复建议或生成JSON修复简报。纯Python标准库实现，毫秒级运行，无需模型/网络/令牌。  
+
+- One self-contained file per deck. No build step, no CDN, works offline, attaches to an email.  
+- 单文件独立部署：无需构建步骤/CDN，支持离线使用，可直接邮件发送。  
+
+- Navigation: arrow keys, click-to-advance, URL hash deep links, an Esc-toggled overview grid, and speaker notes on N (never visible in screenshots or exports).  
+- 导航功能：方向键控制、点击翻页、URL锚点深链接、Esc键切换概览网格、N键显示演讲者备注（截图/导出时自动隐藏）。  
+
+- 13 slide patterns: title, agenda, section divider, prose + cards, reference table, before/after code, annotated snippet (half and full width), flow diagram, lane comparison, image + caption, chat bubbles, closing.  
+- 13种幻灯片模板：标题页、议程、章节分隔、图文卡片、参考表、代码前后对比、注解片段（半宽/全宽）、流程图、泳道对比、图文说明、对话气泡、结束页。  
+
+- 4 themes, one block each. Every color derives from a single :root token block via color-mix(), so switching theme is one replacement: Ledger Light (default), Ledger Dark, Midnight, Graphite. Or point it at a brand's real CSS values and map those onto the token roles.  
+- 4种主题样式：每个主题仅需替换单个:root代码块（Ledger Light默认/Ledger Dark/Midnight/Graphite），所有颜色通过color-mix()从主令牌派生。支持接入品牌CSS值并映射到令牌角色。  
+
+- Mermaid diagrams pre-rendered to inline SVG at build time and themed from the deck's own tokens, so the deck stays dependency-free.  
+- Mermaid图表在构建时预渲染为内联SVG，并采用幻灯片自身令牌配色，保持零依赖。  
+
+- Verified PDF export. The companion skill renders the finished PDF back to images and checks the pages, because a PDF can have the right page count and still hand you blank images.  
+- 经过验证的PDF导出：配套技能将PDF重新渲染为图像进行校验，避免页数正确但内容空白的状况。  
+
+Documentation  
+文档  
+| Page | What's in it |  
+|---|---|  
+| 📦 Install | Every install path, all four agents, updating, requirements, what gets installed |  
+| 🔎 Freshness | Citations, the status table, the cost model, where to automate, the accuracy contract, what never reaches a slide |  
+| 🛠️ Development | Working on this repository: the gate, CI guards, generated artifacts, releasing |  
+| 📋 Changelog | What changed in each release |  
+
+| 页面 | 内容 |  
+|---|---|  
+| 📦 安装 | 所有安装路径、四种代理支持、更新机制、系统要求、安装内容说明 |  
+| 🔎 新鲜度 | 引用机制、状态表、成本模型、自动化节点、准确性契约、禁止上幻灯片的内容 |  
+| 🛠️ 开发 | 仓库贡献指南：门禁检查、CI防护、生成产物管理、发布流程 |  
+| 📋 更新日志 | 各版本变更记录 |  
+
+Inside the skill, skills/slideops/references/ holds the specifications the agent reads: freshness, automation, style, themes, diagrams and verification.  
+技能内部skills/slideops/references/目录存放代理读取的规范文件：新鲜度检查、自动化、样式、主题、图表及验证标准。  
+
+Prior art worth knowing: frontend-slides for visual-first theme selection, and presentation-skills for pioneering the render-then-look visual QA loop that SlideOps also relies on. What SlideOps adds is the Ops half: content grounded in a repository, and a cheap way to ask later whether it still holds.  
+相关先驱项目：frontend-slides（视觉优先的主题选择系统）和presentation-skills（开创了SlideOps所依赖的"渲染-检查"视觉QA循环）。SlideOps的创新在于运维层面：基于代码库的内容锚定机制，以及低成本的内容有效性验证。  
+
+MIT. See LICENSE. Use it, fork it, ship it commercially; attribution is the only condition. The decks you generate are your own content either way.  
+MIT开源协议。可自由使用、分叉、商用，仅需保留署名。生成的幻灯片内容所有权完全属于使用者。

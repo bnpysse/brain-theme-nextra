@@ -1,0 +1,107 @@
+---
+title: "I wrote an AI textbook — how long until AI can do it better_全翻译"
+tags: ["大咖视点_全文翻译", "Interconnects_(Nathan_Lambert_前沿强化学习与开源模型)"]
+---
+
+【文章标题】：I wrote an AI textbook — how long until AI can do it better?
+【文章标题】：我写了一本AI教科书——还要多久AI才能写得更好？
+
+There are a lot of criticisms of AI writing, but most of them are focused on more creative, high-voice writing like this blog. Those — including [my own piece](https://www.interconnects.ai/p/i-wrote-an-ai-textbook-how-long-until-ai-can-do-it-better) — often argue that it is because good writing is high-voice, has a point of view, has a deep human expression that needs to come across, and or a process of thinking that you peek into with the chosen words. As LLMs get more refined as tools, rather than conversational assistants, I think we are actually going backwards on our goals of having models produce inspiring writing.
+
+关于AI写作有很多批评，但大多数批评都集中在像本博客这样更具创造性、高度个人风格的写作上。这些批评——包括[我自己的文章](https://www.interconnects.ai/p/i-wrote-an-ai-textbook-how-long-until-ai-can-do-it-better)——常常认为，这是因为好的写作具有高度个人风格、有观点、需要传达深刻的人类表达，或者说是一种通过选词让你窥见的思考过程。随着LLM作为工具而非对话助手变得越来越精细，我认为我们实际上在让模型产生鼓舞人心的写作这一目标上正在倒退。
+
+On the other side of things is non-fiction writing. Filler, copy text was one of the genuinely useful abilities of an LLM (Sam Altman said so much about the early business of GPT-3 on a recent [podcast](https://www.latent.space/p/sam-altman)). It has seemed like any flaws here were mostly down to a general lack of intelligence in the models, or some other training issue, and all non-fiction and explanatory text would get obliterated by the rapid pace of progress eventually. Having worked with the models as a writing assistant over the last few years, they’ve gotten a bit better, but it’s worth reflecting on what’s holding them back.
+
+另一方面是非虚构类写作。填充性文字和复制文本是LLM真正有用的能力之一（Sam Altman在最近的[播客](https://www.latent.space/p/sam-altman)中谈到了GPT-3早期业务的很多情况）。似乎这里的任何缺陷主要归因于模型普遍缺乏智能，或其他训练问题，而且所有非虚构类和说明性文本最终都会被快速进步的步伐所淘汰。过去几年里，我一直在使用这些模型作为写作助手，它们变得好了一点，但值得反思是什么在阻碍它们。
+
+Models being stagnant in long-form, non-fiction writing should be alarming to those reliant on models autonomously solving grand, open science problems in the near future. The models today struggle to organize and compellingly present some of the most established science in their area. This seems like a natural prerequisite that we should expect the models to master before they can solve broad, open-ended problems on their own. Until this is solved, the progress of LLMs for science will look closer to solving low-hanging fruit and merging distant connections across fields, rather than any sort of revolutionary insight.
+
+模型在长篇非虚构写作上的停滞，对于那些依赖模型在不久的将来自主解决重大开放科学问题的人来说，应该敲响警钟。如今的模型难以组织并令人信服地呈现其领域内一些最成熟的科学内容。这似乎是一个自然的先决条件，我们应该期望模型在能够独立解决广泛、开放性问题之前掌握它。在这点解决之前，LLM在科学上的进展将更像是解决容易摘的果实和融合跨领域的遥远联系，而非任何革命性的洞见。
+
+This is a somewhat controversial take for someone who is very optimistic about AI’s progress, especially writing it on the day that Anthropic published a blog post on Claude making some progress on the famous [Riemann Hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis). Scientific problems have a vast breadth, and I don’t think current AI models have as much coverage as many think.
+
+对于一位对AI进展非常乐观的人来说，这是一个有点争议的观点，尤其是在Anthropic发布了一篇关于Claude在著名的[黎曼猜想](https://en.wikipedia.org/wiki/Riemann_hypothesis)上取得进展的博客文章当天写下这些话。科学问题极其广泛，我不认为当前的AI模型能像许多人想象的那样覆盖那么多。
+
+Organizing knowledge is a compression. This compression is needed to make insight. Today’s LLMs increase entropy in long-form non-fiction writing, and I don’t see how that can be stacked on top of itself endlessly. They’ll be reliant on humans acting as sort of guides.
+
+组织知识是一种压缩。这种压缩是产生洞见所必需的。如今的LLM在长篇非虚构写作中增加了熵，我看不出这如何能无限地自我叠加。它们将依赖人类作为某种引导。
+
+I am still very optimistic about translation from these narrow forms of science, like the extreme advancements we’ve seen in math, into consistent, broader progress — LLMs are the most powerful assistants scientists have ever used. I first need to explain how observing the models work on such grounded, low-level knowledge problems in writing makes me see a surprising lack of generalization.
+
+我仍然非常乐观地认为，从这些狭窄的科学领域（比如我们在数学中看到的极端进步）转化为一致的、更广泛的进展——LLM是科学家用过的最强大的助手。但我首先需要解释，观察模型在写作中处理这些扎实的、基础层面的知识问题时，如何让我看到一种令人惊讶的泛化能力缺乏。
+
+For more context, I just finished writing a post-training textbook, [Reinforcement Learning from Human Feedback](https://www.manning.com/books/reinforcement-learning-from-human-feedback) (buy on [Manning](https://www.manning.com/books/reinforcement-learning-from-human-feedback) or [Amazon](https://www.amazon.com/Reinforcement-Learning-Human-Feedback-Nathan/dp/1633438375)). I used LLMs in many ways to support this, from helping wrangle LaTeX formatting for equations, doing extensive copyediting, and creating diagrams for programming languages like TikZ (in LaTeX) or Python.
+
+为了提供更多背景，我刚刚完成了一本关于后训练的教科书《[从人类反馈中强化学习](https://www.manning.com/books/reinforcement-learning-from-human-feedback)》（可在[Manning](https://www.manning.com/books/reinforcement-learning-from-human-feedback)或[Amazon](https://www.amazon.com/Reinforcement-Learning-Human-Feedback-Nathan/dp/1633438375)购买）。我在很多方面使用了LLM来支持这项工作，从帮助处理方程的LaTeX格式，进行大量的编辑校对，到为TikZ（在LaTeX中）或Python等编程语言创建图表。
+
+Share
+
+分享
+
+Why have models stagnated in writing quality?
+
+为什么模型在写作质量上停滞不前？
+
+I would’ve expected *way* more progress on non-fiction writing from the models. I almost thought I would look dumb publishing a non-fiction book in 2026, given how things looked in 2024. Today, some of the most famous models on writing ability are pretty old, examples include OpenAI’s big GPT 4.5 and Moonshot’s Kimi K2. In and around these releases, the models have gone from okay to superhuman at other tasks like coding and mathematics. Maybe a closer, but still imperfect, comparison is how the models went from incapable to decent at search and research tasks. The pace of progress on most other skills is steep, but writing well feels orthogonal to most of them. I do not think writing is just ignored, but rather it’s challenging and lacks good training data to specifically intervene on it.
+
+我原本期望模型在非虚构写作上取得*更多*进展。鉴于2024年的情况，我差点以为2026年出版一本非虚构类书籍会让我看起来很愚蠢。如今，一些在写作能力上最著名的模型已经相当老了，例如OpenAI的大型GPT 4.5和Moonshot的Kimi K2。在这些发布前后，模型在编程和数学等其他任务上已经从还可以变成了超人水平。也许一个更接近但仍然不完美的比较是，模型在搜索和研究任务上如何从无能变成了不错。大多数其他技能的进步速度是陡峭的，但写好文章感觉与其中大多数技能是正交的。我不认为写作只是被忽视了，而是它具有挑战性，且缺乏良好的训练数据来专门干预。
+
+There is certainly some low-hanging fruit for making AI models better at writing — such as specialized harnesses like Claude Code, prompts, and training environments that make models spend a lot more inference tokens on the output, but I don’t think these will have a multiplicative impact on ability. Writing well is a very hard task! It’s a shame that we haven’t unlocked inference-time scaling for one of the great intellectual pursuits. Regardless, writing seems very different than what the models are good at.¹
+
+确实有一些容易摘的果实可以让AI模型更好地写作——比如像Claude Code这样的专门工具、提示词，以及让模型在输出上花费更多推理标记的训练环境，但我不认为这些会对能力产生倍增效应。写好文章是一项非常困难的任务！我们还没有为一项伟大的智力追求解锁推理时扩展，这很遗憾。无论如何，写作似乎与模型擅长的东西非常不同。¹
+
+Today, the models seem genuinely horrible at long-form technical writing. They can get a sentence right, but if you try and get them to write an entire chapter it’ll be a mix of sprinkled with confusing wording, muddled in its organization, and generally a bit off. They try to be too cute where they don’t need to be and in the process make random conceptual errors. The models in the near future will get much better at the small errors, especially as models get bigger — which allows them to hold more world knowledge — but I do not expect their ability to utilize it to transform.
+
+如今，模型在长篇技术写作上确实非常糟糕。它们能写对一句话，但如果你让它们写整个章节，就会是混乱措辞、组织混乱且总体上有点不对劲的混合体。它们在不需要的地方试图过于讨巧，并在此过程中犯下随机的概念错误。在不久的将来，模型在细小错误上会好得多，尤其是随着模型变大——这使它们能容纳更多的世界知识——但我不期望它们利用这些知识的能力会发生转变。
+
+For example, the GPT models have been incredible at finding typos and minor issues for a long time. I passed a near-final draft of my book as a PDF to GPT 5.5 Pro and it found deep, surprising minor typos across the manuscript that is 200-300 pages.
+
+例如，GPT模型长期以来在发现错别字和小问题方面表现出色。我把书接近定稿的PDF草稿交给GPT 5.5 Pro，它在这份200-300页的手稿中发现了深入、令人惊讶的小错别字。
+
+On the other hand, the Claude models have been much more useful as an editor. They have a lot more taste, tend to understand the mental model of the task better, and have more interesting suggestions to unstick the different forms of writer’s block.
+
+另一方面，Claude模型作为编辑要有用得多。它们更有品味，往往能更好地理解任务的思维模型，并能提供更有趣的建议来打破各种形式的写作瓶颈。
+
+The examples I’ve given above all have a sort of consistent theme. The models know how to check every unit of content, in this case usually a sentence or equation or figure, or make one, specific section where you are caught. With these skills, they don’t do a good job revisiting components and stringing them together as they make many additions on top of each other. It feels like a sort of irreducible compounding errors. We used to deal with these errors in math and code, but reflecting on it, RLVR has been a truly magical solution in reducing them.
+
+我上面给出的例子都有一种一致的主题。模型知道如何检查每个内容单元——在这里通常是句子、方程或图表——或者制作一个你被困住的特定部分。有了这些技能，它们却并不擅长重新审视各个组成部分并将它们串联起来，因为它们在彼此之上做了许多添加。这感觉像是一种不可约的复合错误。我们过去在数学和代码中处理过这些错误，但反思起来，RLVR在减少这些错误方面确实是一个神奇的解决方案。
+
+Interconnects AI is a reader-supported publication. Consider becoming a subscriber.
+
+Interconnects AI 是一份由读者支持的出版物。请考虑成为订阅者。
+
+Getting value out of current models as a writer
+
+作为写作者从当前模型中获得价值
+
+I’m willing to share that there are a few technical explanation sentences in my book that came from an AI model — well less than 1% — they’re there because I really loved them. I let myself consider including some AI tokens in the book, as it didn’t feel like cheating if I, as a true expert, felt that the sentence was what the reader needed. Especially in the editing process, where I had a very close eye on things and plenty of concern on if my book would ever be done with all the things I have going on, it was an extremely valuable path forward.
+
+我愿意分享，我的书中有一些技术解释句子来自AI模型——远不到1%——它们之所以在那里，是因为我真的很喜欢它们。我让自己考虑在书中加入一些AI生成的文本，因为如果我作为真正的专家觉得那句话正是读者需要的，那感觉就不像作弊。尤其是在编辑过程中，我密切注视着一切，并且非常担心在我手头有这么多事情的情况下，我的书能否完成，这是一个极其宝贵的推进方式。
+
+For example, I had a list of questions from my editor interspersed in a LaTeX file with a specific delimiter like `\editor{}`. I would have Claude Code navigate to each comment, print the context before and after, and let me know if it was an easy typo fix or something more nuanced. I would write a response — the text to insert — or ask Claude for suggestions before fixing it. Intellectually it is a very focusing process of editing, it was a fun way to improve the book. Sometimes phrases from Claude’s suggestions are what made it into the book.
+
+例如，我的编辑提出的一系列问题散布在LaTeX文件中，用特定的分隔符如`\editor{}`标记。我会让Claude Code导航到每条评论，打印前后的上下文，并告诉我这是简单的错别字修复还是更微妙的问题。我会写出回复——要插入的文本——或者在修复之前请Claude给出建议。从智力上讲，这是一个非常专注的编辑过程，也是一种改进这本书的有趣方式。有时Claude建议中的短语真的被写进了书里。
+
+It is definitely a slippery slope and when I accepted a few AI suggestions it was at the point where I was going through my second full-manuscript review. Emotionally the project felt completed but I had more work to do. Coming out of the textbook-writing process I so deeply appreciate the cut and dry rule I have for my writing on Interconnects to never use AI outputs in the content. It is way more fun to write in a way that is only you — high voice, valued so deeply for the process — but writing a standard reference is not really an activity known for being fun. I see why people turn AI tools into a crutch when most of their writing is just an output to fill space, rather than a means to an end. I am motivated to write voluminously to learn, to feel, and to express.
+
+这绝对是一个滑坡，当我接受了一些AI建议时，正是我在进行第二次全稿审阅的时候。情感上，项目感觉已经完成，但我还有更多工作要做。走出教科书写作过程后，我深深地感激我为Interconnects写作所定下的简明规则：绝不在内容中使用AI输出。以只有你自己的方式写作要有趣得多——高度个人风格，因过程而被深深珍视——但写一本标准参考书并不是一项以有趣著称的活动。当人们的大部分写作只是为了填补空间的输出，而不是达到目的的手段时，我理解为什么他们会把AI工具当作拐杖。我之所以有动力大量写作，是为了学习、感受和表达。
+
+I am working through similar balances in my scientific work too. AI models are great for repetitive pieces of the paper, like drafting a related work or background section that you know by heart, but using them for the abstract, introduction, experiments, or conclusion is a shame. Those are where the story and soul of the work is communicated — it’s where you learn what your research is really about.
+
+我在科学研究中也在努力平衡类似的问题。AI模型非常适合论文中重复性的部分，比如起草你已烂熟于心的相关工作或背景部分，但用它们来写摘要、引言、实验或结论则是一种遗憾。那些地方是传达工作故事和灵魂的地方——那是你了解自己研究真正意义的地方。
+
+I am confident I created a lot more net value by being able to have AI models create and check my non-fiction writing work. They make writing equations trivial, can help refactor the repository, port between languages, and many other things. At the beginning, it was very fun, until I was a bit worn down by the length of the publishing process, watching the field move on.
+
+我相信，通过让AI模型创建和检查我的非虚构写作工作，我创造了更多的净价值。它们使编写方程变得简单，可以帮助重构代码库、在不同语言之间移植，以及做许多其他事情。一开始，这非常有趣，直到出版过程的漫长让我有点疲惫，看着这个领域不断前进。
+
+For an example of why AI was crucial in this case, I had to maintain Markdown and LaTeX versions of my book simultaneously in two spots, as readers gave feedback on the web version and my Manning editorial team reviewed a forked copy. Without AI agents, syncing between the two of them would’ve easily taken me five times as long (and this task took tens of hours already).
+
+举一个为什么AI在这种情况下至关重要的例子：我必须在两个地方同时维护书籍的Markdown和LaTeX版本，因为读者在网络版本上提供反馈，而我的Manning编辑团队在审查一个分叉副本。如果没有AI代理，同步这两个版本的时间很容易是我实际花费的五倍（而这项任务已经花费了几十个小时）。
+
+Something intertwined with this story, which I stumbled upon when thinking about agents, is how your pace of understanding won’t increase by using agents. That understanding, in the form of intuition, taste, instinct, etc. is what will be valuable in the future. Using AI for non-fiction writing takes away from that progression. Doubly, if you weren’t already an expert you won’t be able to catch its flaws.
+
+与这个故事交织在一起的一件事情（我在思考代理时偶然发现的）是，使用代理不会提高你的理解速度。这种理解，以直觉、品味、本能等形式存在，在未来将是有价值的。使用AI进行非虚构写作会剥夺这种进步。再者，如果你还不是专家，你将无法发现它的缺陷。
+
+In my case, I felt such an urgency to dump the knowledge out of my brain onto the page that there were times that using the AI models was a worthy tool. Much of the motivation of my book was to have [a single reference](https://www.interconnects.ai/p/i-wrote-an-ai-textbook-how-long-until-ai-can-do-it-better) for important post-training methods like rejection sampling or character training, where very little exists on the web.
+
+就我而言，我感到
