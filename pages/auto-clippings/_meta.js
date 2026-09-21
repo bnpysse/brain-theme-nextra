@@ -1633,6 +1633,7 @@ export default {
   "Raw-翻译-Show-HN-OpenTIE-and-OpenXWA-Modern-Ports-of": "Show HN OpenTIE and OpenXWA, Modern Port...",
   "Raw-翻译-Show-HN-Open-Source-eInk-Bike-Computer": "Show HN Open-Source eInk Bike Computer",
   "Raw-翻译-Show-HN-Moadimio-–-A-scheduler-for-agents": "Show HN Moadim.io – A scheduler for agen...",
+  "Raw-翻译-Show-HN-Mini-AGI-–-Dynamic-continual-learni": "Show HN Mini-AGI – Dynamic continual lea...",
   "Raw-翻译-Show-HN-Markdown-Viewer-and-Editor": "Show HN Markdown Viewer and Editor",
   "Raw-翻译-Show-HN-Make-your-logo-extra-bright-on-HDR": "Show HN Make your logo extra bright on H...",
   "Raw-翻译-Show-HN-Mador-–-Make-any-DOM-reactive-with": "Show HN Mador – Make any DOM reactive wi...",
