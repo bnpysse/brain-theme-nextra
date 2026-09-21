@@ -2550,6 +2550,7 @@ export default {
   "Raw-翻译-AI-keeps-stubbornly-refusing-to-take-our-jo": "AI keeps stubbornly refusing to take our...",
   "Raw-翻译-AI-handles-incidents-engineers-lose-touch-w": "AI handles incidents, engineers lose tou...",
   "Raw-翻译-AI-for-Science最难学会的，是换一个问题": "AI for Science最难学会的，是换一个问题",
+  "Raw-翻译-AI-coding-has-made-CI-a-bottleneck-so-we-re": "AI coding has made CI a bottleneck, so w...",
   "Raw-翻译-AI-and-the-Destruction-of-the-Creative-Comm": "AI and the Destruction of the Creative C...",
   "Raw-翻译-AI-Safety-Is-Mostly-a-Sex-Cult": "AI Safety Is Mostly a Sex Cult",
   "Raw-翻译-AI-Got-Good-at-Language-Now-Its-Learning-th": "AI Got Good at Language. Now Its Learnin...",
