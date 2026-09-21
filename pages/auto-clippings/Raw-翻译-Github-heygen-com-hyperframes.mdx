@@ -1,0 +1,63 @@
+---
+title: "_heygen-com_hyperframes_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&lt;p align="center"&gt;
+  &lt;picture&gt;
+    &lt;source media="(prefers-color-scheme: dark)" srcset="docs/logo/dark.svg"&gt;
+    &lt;source media="(prefers-color-scheme: light)" srcset="docs/logo/light.svg"&gt;
+    ![HyperFrames](docs/logo/light.svg)
+  &lt;/picture&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;a href="https://www.npmjs.com/package/hyperframes"&gt;![npm版本](https://img.shields.io/npm/v/hyperframes.svg?style=flat)&lt;/a&gt;
+  &lt;a href="https://www.npmjs.com/package/hyperframes"&gt;![npm下载量](https://img.shields.io/npm/dm/hyperframes.svg?style=flat)&lt;/a&gt;
+  &lt;a href="LICENSE"&gt;![许可证](https://img.shields.io/badge/license-Apache%202.0-blue.svg)&lt;/a&gt;
+  &lt;a href="https://nodejs.org"&gt;![Node.js](https://img.shields.io/badge/node-%3E%3D22-brightgreen)&lt;/a&gt;
+  &lt;a href="https://discord.gg/EbK98HBPdk"&gt;![Discord](https://img.shields.io/badge/Discord-加入-5865F2?logo=discord&logoColor=white)&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;**编写HTML。渲染视频。专为智能体打造。**&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;a href="https://hyperframes.heygen.com/quickstart"&gt;快速开始&lt;/a&gt; |
+  &lt;a href="https://hyperframes.heygen.com/showcase"&gt;案例展示&lt;/a&gt; |
+  &lt;a href="https://www.hyperframes.dev/"&gt;演练场&lt;/a&gt; |
+  &lt;a href="https://hyperframes.heygen.com/catalog/blocks/data-chart"&gt;组件目录&lt;/a&gt; |
+  &lt;a href="https://hyperframes.heygen.com/introduction"&gt;文档&lt;/a&gt; |
+  &lt;a href="https://discord.gg/EbK98HBPdk"&gt;Discord&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  ![HyperFrames演示：左侧HTML代码实时转换为右侧渲染视频](docs/public/images/hyperframes-logo-motion-1280-trimmed.webp)
+&lt;/p&gt;
+
+HyperFrames是一个开源框架，可将HTML、CSS、媒体和可寻址动画转化为确定性MP4视频。可通过CLI本地使用，由AI编程智能体通过技能调用，或作为托管创作工作流背后的渲染核心。
+
+## 快速开始
+
+### 通过AI编程智能体
+
+安装HyperFrames技能后，描述您想要的视频：
+
+```bash
+npx skills add heygen-com/hyperframes
+```
+
+&gt; 选择器打开时无预选内容——您只需要**核心技能组**：`/hyperframes`路由器会按需安装每个创作流程。智能体和非交互式运行应改用`npx hyperframes skills update`——它仅安装核心集合，而`skills add --all`会安装仓库中每个`SKILL.md`文件——20个已发布技能加6个仓库内部技能（位于`.claude/skills`/`.agents/skills`下）。要获取完整发布集合请使用`npx hyperframes skills`。
+&gt;
+&gt; `skills add`解析skills.sh注册表数据，可能滞后`main`分支数小时。`npx hyperframes skills update`直接从当前`main`分支安装，当您需要最新技能副本时请使用此命令。
+
+尝试类似提示：
+
+&gt; 使用`/hyperframes`创建一个10秒产品介绍视频，包含淡入标题、背景视频和微妙背景音乐。
+
+这些技能会教导智能体HyperFrames生产循环：规划视频、编写有效HTML、连接可寻址动画、添加媒体、代码检查、预览和渲染。适用于Claude Code、Cursor、Gemini CLI、Codex等支持技能的编程智能体。
+
+## 技能
+
+HyperFrames提供20个按需加载的智能体技能。首先阅读`/hyperframes`——它是路由器和能力地图；为任何"制作一个..."请求（视频、演示文稿或组合端口）选择工作流，并指向下方领域技能。
+
+默认使用**核心集合**——路由器会按需安装每个创作流程。`npx hyperframes skills update`可随处精确安装该集合；交互式选择器(`npx skills add heygen-com/hyperframes`)将其列为"Core Skills"组，无预选内容。选择器仅限交互式使用——非交互式或未使用`--skill`的智能体运行会安装全部20个技能。使用`npx skills add heygen-com/hyperframes --all`刻意安装全部20个（跳过选择器），或`npx skills add heygen-com/hyperframes --skill &lt;名称&gt;`仅安装单个（裸

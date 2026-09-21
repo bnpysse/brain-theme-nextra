@@ -1,0 +1,84 @@
+---
+title: "What Zig felt like, coming from Rust_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：What Zig felt like, coming from Rust  
+从Rust转向Zig的体验  
+
+【文章正文】：  
+What Zig felt like, coming from Rust  
+从Rust转向Zig的体验  
+
+Intro  
+引言  
+I’ve spent the last 7 years as a Rust developer, working mostly on open source projects, and I’d like to think I’ve built a solid feel for the language and its ecosystem along the way. I gravitate toward the functional side of Rust like clean functions, expressive types, that sort of thing. But I’m always curious about other languages, and Zig has been on my radar for a while as a candidate C successor: lower-level, lighter-weight, and steadily earning its place among the languages people take seriously. I spent time with C earlier in my career, so the comparison always felt like it would be interesting to make.  
+过去七年我主要从事Rust开发，大部分时间都在参与开源项目，自认为对这个语言及其生态有了扎实的理解。我尤其偏爱Rust函数式编程的特性——简洁的函数、富有表现力的类型系统等等。但我始终对其他语言充满好奇，而Zig作为C语言的潜在继任者很早就引起了我的注意：它更底层、更轻量，正逐步赢得开发者社区的重视。由于早期职业经历中接触过C语言，这种对比显得格外有趣。  
+
+One caveat worth stating up front: my experience with Zig begins with this project. Some of the observations will look naive and obvious for the people who work with Zig on daily basis and some of the decisions I made along the way were almost certainly not the optimal ones, they were shaped more by habits carried over from Rust than by deep Zig idiom. That’s fine, everyone has to start somewhere, and in the meantime I’m leaning on whatever cross-language intuition I’ve built up over the years, for better or worse.  
+需要事先说明的是：这是我首次接触Zig的项目。对于日常使用Zig的开发者而言，某些观察可能显得幼稚而显而易见，而我在开发过程中做出的决定很可能并非最优解——这些决策更多受到Rust编程习惯的影响，而非基于对Zig特性的深刻理解。不过这很正常，万事总有开头，在此期间我只能依靠多年积累的跨语言直觉来应对，无论这种直觉是否可靠。  
+
+To make the comparison fair, I decided to reimplement something I’d already built in Rust, not a toy, but not a sprawling project either, and ideally something the community could actually use. I settled on JSONPath: a query language for JSON, specified in RFC 9535. The Rust version already existed (jsonpath-rust), and the goal was to bring the same thing to Zig: zig-jsonpath.  
+为了公平对比，我决定用Zig重写一个已有的Rust项目——既非玩具 demo，也非庞然大物，最好是社区真正需要的工具。最终选择了JSONPath：一种基于RFC 9535规范的JSON查询语言。Rust版本（jsonpath-rust）已经存在，而目标就是用Zig实现相同功能：zig-jsonpath。  
+
+IDE support  
+IDE支持  
+The first thing that caught me off guard — and honestly, who would’ve expected this to be the memorable part — was IDE support, or the near-total lack of it. I’d been using RustRover for Rust and various JetBrains flavors for other languages, and Zig, by comparison, offered little beyond syntax highlighting and basic autocompletion. It wasn’t exactly surprising, but it did force me back to basics: learning to work with the language largely from the command line. What started as a drawback turned into one of the more interesting parts of the experience. It turns out I’d simply forgotten how straightforward it can be to rely on bare CLI tooling.  
+最令我措手不及的（说实话谁能想到这会成为难忘的体验）是IDE支持——或者说几乎完全没有。我习惯用RustRover开发Rust项目，其他语言也多用JetBrains系列工具，而Zig除了语法高亮和基础自动补全外几乎别无他物。这虽不意外，却迫使我回归本质：主要通过命令行使用这门语言。这个起初看似缺点的情况，最终成了最有趣的体验之一——原来我已经忘记了仅依赖命令行工具可以如此简单直接。  
+
+The first real lesson here was build.zig, which handles this with surprising ease. I eventually settled on this setup:  
+第一个重要收获是build.zig文件，它以惊人的简洁处理了构建流程。最终我的配置如下：  
+
+```zig
+zig build test                                              # 运行所有测试
+zig build test -Dfilter="filter match function basic"       # 运行单个测试
+zig build test -Ddebug-query=true                           # 带调试信息的测试
+zig build compliance                                        # 合规性测试套件  
+zig build check                                             # 单元测试+合规性测试
+```
+
+Once you accept the terms, it’s genuinely refreshing to work with.  
+适应之后，这种工作方式反而令人神清气爽。  
+
+I have Zig to thank, in a roundabout way, for kicking off a bigger chain reaction, namely my move away from a full IDE toward a helix + alacritty + zellij setup.  
+某种程度上要感谢Zig引发连锁反应：让我从完整IDE转向了helix+alacritty+zellij的组合开发环境。  
+
+Flat structure  
+扁平化结构  
+With Rust, and most other languages, I’ve always spent a fair amount of time (going back and forth) trying to find the right balance between file size and folder depth. You’re free to fragment files and grow the folder hierarchy as deep as you like. Zig, it turned out, is fine with this too, but somehow doesn’t really encourage it (like C, which is no surprise for a low-level systems language).  
+在使用Rust和大多数其他语言时，我总需要反复权衡文件大小与目录深度。你可以自由拆分文件，构建任意深度的目录树。Zig其实也允许这样做，但某种程度上并不鼓励（这点与C语言类似，毕竟都是系统级语言）。  
+
+You can nest files and folders if you want, but doing so brings a bit of import friction, and the real question becomes: why bother? What do you actually gain in readability by splitting everything across more files and folders? In theory, better readability. In practice, when you collapse related things into one larger file, you can just slice it and navigate section by section instead and there’s a real benefit to having everything in one place.  
+虽然可以嵌套文件和文件夹，但这会带来导入阻力。核心问题在于：值得吗？通过拆分文件获得的"更好可读性"真的存在吗？实践中，将相关代码合并到单个大文件后，通过分段导航反而能获得"所有内容尽在掌握"的真实收益。  
+
+Mostly, Zig nudges you toward flat. If something needs a companion for a model, I just create a model_&lt;companion&gt; file next to it and move on.  
+Zig更倾向于扁平化结构。若某个模型需要配套文件，我直接创建相邻的model_&lt;配套&gt;文件即可继续。  
+
+I don’t think this scales to large projects, meaning at some point you need a real hierarchy but the threshold for needing one turned out to be much higher in Zig than I expected. In Rust, I tend to reach for folder structure early, almost by default. In Zig, I kept deferring it, and by the end of this project, I never needed it at all.  
+这种方式可能不适合大型项目（终究需要层级结构），但Zig的需求阈值远高于预期。用Rust时我会默认早早建立目录结构，而用Zig时这个需求被不断推迟——直到项目结束都未曾需要。  
+
+That contrast was useful beyond just Zig, because it made me reconsider, even in other languages, whether I’m organizing files because the project genuinely needs it, or out of habit. It’s also a pretty honest way to gauge how big a project actually is: if you can’t resist reaching for folders on day one,maybe it’s smaller than it feels.  
+这种对比的价值超越了Zig本身，它让我重新思考：在其他语言中创建目录结构，究竟是项目真实需求还是习惯使然？这也是衡量项目规模的诚实标准：如果开发首日就忍不住要建文件夹，或许它比感觉中更小。  
+
+Here’s the actual difference, side by side:  
+以下是直观对比：  
+
+Rust (src/):  
+Rust项目结构(src/)：  
+```
+src/
+├── lib.rs
+├── parser.rs
+├── parser/
+│   ├── errors.rs
+│   ├── macros.rs
+│   ├── model.rs
+│   ├── tests.rs
+│   └── grammar/
+│       └── json_path_9535.pest
+├── query.rs
+└── query/
+    ├── atom.rs
+    ├── comparable.rs
+    ├
+```

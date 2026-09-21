@@ -1,0 +1,89 @@
+---
+title: "Does the Sumerian King List Align with Paleoclimate Events_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Does the Sumerian King List Align with Paleoclimate Events?
+苏美尔王表与古气候事件存在关联吗？
+
+【文章正文】：
+Does the Sumerian King List Align With Paleoclimate Events?
+苏美尔王表是否与古气候事件相对应？
+
+Context
+背景说明
+The Sumerian King List starts with eight kings who ruled before the flood. Their reign lengths are enormous and unusually regular. Three examples are 28,800 years, 36,000 years, and 43,200 years. Most are integer multiples of 3,600, and all eight are multiples of 600. Their total is 241,200 years.
+苏美尔王表以洪水前的八位君主开篇。这些统治年限异常漫长且规律性惊人，例如28,800年、36,000年和43,200年。大多数是3,600的整数倍，八位君主的统治期均为600的倍数，总计达241,200年。
+
+The input sequence tested here is the ETCSL composite antediluvian list:
+本次分析的输入序列采用ETCSL综合版洪水前王表：
+| Order | King | Reign length | 
+|---|---|---|
+| 序号 | 君主 | 统治年限 |
+| 1 | Alulim | 28,800 years | 
+| 1 | 阿鲁利姆 | 28,800年 |
+| 2 | Alalgar | 36,000 years | 
+| 2 | 阿拉尔加 | 36,000年 |
+| 3 | Enmenluana | 43,200 years | 
+| 3 | 恩门鲁安纳 | 43,200年 |
+| 4 | Enmengalana | 28,800 years | 
+| 4 | 恩门加拉纳 | 28,800年 |
+| 5 | Dumuzid | 36,000 years | 
+| 5 | 杜姆兹德 | 36,000年 |
+| 6 | Ensipadzidana | 28,800 years | 
+| 6 | 恩西帕兹达纳 | 28,800年 |
+| 7 | Enmenduranna | 21,000 years | 
+| 7 | 恩门杜兰纳 | 21,000年 |
+| 8 | Ubara-Tutu | 18,600 years | 
+| 8 | 乌巴拉-图图 | 18,600年 |
+|  | Total | 241,200 years | 
+|  | 总计 | 241,200年 |
+
+The transliterations follow the composite text cited below. Like the post-flood sections of the King List, the antediluvian list is a textual tradition with variants, so the table is an analysis input rather than a claim about literal historical reigns.
+转写遵循下文引用的综合文本。与王表洪水后部分类似，洪水前名单存在不同文本传统，因此本表仅作为分析输入，不代表真实历史统治记录。
+
+One speculative interpretation treats these numbers as a distorted memory of prehistory. Under this hypothesis, the reign boundaries encode real climate shifts, eruptions, impacts, or sea-level changes. After rescaling and anchoring the list to a proposed flood date, the boundaries should coincide with dated events in the geological record.
+一种推测性解释认为这些数字是对史前时代的扭曲记忆。该假说认为统治分界点编码了真实的气候变迁、火山喷发、天体撞击或海平面变化。将王表按比例缩放并锚定到假定的洪水日期后，分界点应与地质记录中的年代事件吻合。
+
+Here, I test that idea with an exploratory analysis. The explorer rescales each chronology to a fixed 241.2 ka span, anchors one boundary, and compares the resulting dates with a catalog of Quaternary events. I use 11.6 ka BP, or about 11,600 years ago, as an analyst-chosen anchor near the Younger Dryas termination. The King List does not provide that date or suggest this paleoclimate interpretation.
+本文通过探索性分析验证该观点。分析工具将各年表缩放至固定的241.2千年跨度，锚定一个分界点后，将生成日期与第四纪事件目录比对。笔者选用新仙女木期结束附近的11.6千年前（约11,600年前）作为分析者设定的锚点。王表本身未提供该日期，也未暗示这种古气候解释。
+
+Finding matches is easy. With nine boundaries and freedom to change the anchor or bandwidth, chance alignments are common. The relevant question is whether the observed Sumerian reign order scores unusually high under a clearly defined null model.
+寻找匹配点很容易。由于存在九个分界点且可自由调整锚点或带宽，偶然对应很常见。核心问题在于：在明确定义的零模型下，观察到的苏美尔统治序列是否表现出异常高的匹配度。
+
+Results
+分析结果
+- In the primary paleoclimate catalog, the Sumerian sequence does not show a statistically significant alignment. At the fixed 11.6 ka anchor and a kernel bandwidth of Ï = 1.60 ka, the permutation p-value is 0.350. After adjustment for multiple comparisons, q = 0.622.
+- 在主古气候目录中，苏美尔序列未显示统计学显著关联。固定锚点11.6千年、核带宽Ï=1.60千年时，排列检验p值为0.350。经多重比较校正后q=0.622。
+- Expanding the analysis to all 103 usable catalog entries increases the number of apparent matches but does not change the conclusion. At the same bandwidth, the wide-catalog p-value is 0.148 and the adjusted q-value is 0.430.
+- 将分析扩展至103个可用目录条目后，表面匹配数增加但结论不变。相同带宽下，宽目录p值0.148，校正q值0.430。
+- The smallest raw p-value for the Sumerian sequence occurs in the catastrophic exploratory catalog at Ï = 1.60 ka: p = 0.021. This was the best result found in a larger exploratory search. After adjustment for all comparisons, q = 0.222, so the result does not support the hypothesis.
+- 苏美尔序列的最小原始p值出现在Ï=1.60千年的灾难性探索目录中：p=0.021。这是广泛探索中获得的最佳结果。经全比较校正后q=0.222，故结果不支持原假说。
+- As a secondary check, I also count how many events fall within a fixed distance of a boundary. The kernel score is the main measure because it gives less weight to events farther away instead of using an abrupt cutoff.
+- 作为二次检验，我还统计了固定距离内的事件数量。核评分是主要指标，因其对远处事件赋予较小权重，而非使用硬性截断值。
+
+What Would Count as Evidence?
+何为有效证据？
+A credible alignment would need to meet three conditions.
+可信的对应关系需满足三个条件：
+
+First, the text must determine which boundary to anchor. The Sumerian King List places the flood after the eighth reign, so I anchor the end of the antediluvian sequence. The text does not assign that boundary an absolute date. I use 11.6 ka BP as an analyst-chosen date near the Younger Dryas termination.
+其一，文本须明确锚定分界点。苏美尔王表将洪水置于第八位君主之后，故我锚定洪水前序列的终点。文本未赋予该分界点绝对年代，笔者选用新仙女木期结束附近的11.6千年前作为分析者设定日期。
+
+Second, the Sumerian sequence should look unusual next to other ancient chronologies. I compare it with a sequence derived from Biblical patriarchal ages, seven god and demigod reigns from the Manethonian fragment preserved in the Excerpta Latina Barbari, and the first eight listed Kish I rulers. These are examples for comparison, not independent statistical controls, and I do not test whether one chronology outperforms another. They show how readily unrelated ancient sequences can produce apparent matches under the same procedure.
+其二，苏美尔序列应相较于其他古代年表呈现特殊性。我将其与《圣经》族长年龄序列、拉丁文摘要中曼涅托残篇记载的七位神与半神统治期、以及基什第一王朝前八位统治者进行对比。这些是对照样本而非独立统计控制组，旨在展示无关古代序列用相同方法产生表面匹配的容易程度。
+
+Third, a credible result should remain significant after accounting for the tested chronologies, catalog tiers, and bandwidths. None does.
+其三，可信结果应在考虑测试年表、目录层级和带宽后仍保持显著性。当前无一满足该条件。
+
+Interactive Explorer
+交互式分析器
+Use the selectors below to switch chronology, catalog tier, and bandwidth. The primary paleoclimate catalog defines the main analysis. The wide and catastrophic catalogs provide exploratory sensitivity analyses. The fixed-anchor section uses p-values precomputed in Rust. The sliding-anchor section recomputes the anchor sweep in the browser.
+使用下方选择器切换年表、目录层级和带宽。主古气候目录定义核心分析，宽目录与灾难性目录提供探索性敏感度分析。固定锚点部分使用Rust预计算的p值，滑动锚点部分在浏览器中重新计算锚点扫描。
+
+How to Read the Numbers
+数据解读指南
+The main statistic is a Gaussian kernel proximity score:
+核心统计量为高斯核邻近评分：
+S = Σᵢ Σⱼ exp(-(tᵢ - bⱼ)² / 2σ²)
+其中tᵢ为事件日期，bⱼ为统治分界点。邻近事件贡献接近1分，远处事件贡献趋近于零。这避免了硬性截断的突变性——刚好在窗口内的事件计入而窗外事件不计的情况。
