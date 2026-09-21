@@ -2216,6 +2216,7 @@ export default {
   "Raw-翻译-GEFS-on-OpenBSD-A-Early-Preview": "GEFS on OpenBSD A Early Preview",
   "Raw-翻译-Function-Arguments-Are-Not-Function-Colors": "Function Arguments Are Not Function Colo...",
   "Raw-翻译-Fuck-it-make-it-anyway": "Fuck it, make it anyway",
+  "Raw-翻译-Frontier-Overhangs": "Frontier Overhangs",
   "Raw-翻译-From-Hookswitch-to-Grave": "From Hookswitch to Grave",
   "Raw-翻译-Friday-Daily-Thread-rPython-Meta-and-Free-T": "Friday Daily Thread rPython Meta and Fre...",
   "Raw-翻译-FreeCORE-TrueNAS-Core-–-Continued": "FreeCORE TrueNAS Core – Continued",
