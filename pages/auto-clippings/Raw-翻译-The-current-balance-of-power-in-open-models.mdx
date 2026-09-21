@@ -1,0 +1,47 @@
+---
+title: "The current balance of power in open models_全翻译"
+tags: ["大咖视点_全文翻译", "Interconnects_(Nathan_Lambert_前沿强化学习与开源模型)"]
+---
+
+【文章标题】：The current balance of power in open models  
+当前开源模型领域的实力格局  
+
+【文章正文】：  
+I was recently invited to brief a group of Congressional members and staff on the state of open-weight models in the lens of U.S.-China competition. I’m sharing my prepared remarks as a state of the union on open models that is accessible to a broader audience.  
+近期我受邀向美国国会议员及工作人员简要汇报中美竞争视角下的开源权重模型现状。现将这份面向大众的"开源模型国情咨文"分享如下。  
+
+Interconnects AI is a reader-supported publication. Consider becoming a subscriber.  
+《互联AI》是读者支持的出版物，欢迎订阅。  
+
+Recap: What is an open source v. open-weight vs. closed model?  
+概念回顾：开源模型、开放权重模型与闭源模型有何区别？  
+
+Open language models are AI models where their weights are publicly available for inspection or downstream use. These are most often contrasted to so-called "closed" AI models. Closed models offer access only through Application Programming Interfaces (APIs) that developers can use to directly query a model, like GPT-4 or Claude Opus 4.5, or through products, like ChatGPT and Claude Code.  
+开放语言模型是指权重参数可公开查看或下游使用的AI模型，通常与"闭源"模型形成对比。闭源模型仅通过API（如GPT-4或Claude Opus 4.5）或终端产品（如ChatGPT和Claude Code）提供访问权限。  
+
+Open language models primarily are bucketed into two categories, open-weight and open-source models. Open-weight models are the most common form, such as popular models like Meta’s Llama, Alibaba’s Qwen, Google’s Gemma, or DeepSeek’s models. These models are governed by licenses, governing documents dictating what is allowed with downstream use, and are often accompanied by inference code in libraries such as Transformers, VLLM, SGLANG, etc. Since about April 2025, Chinese AI companies have been the clear leader in open-weight models.  
+开放语言模型主要分为开放权重和完全开源两类。开放权重模型是最常见的形式（如Meta的Llama、阿里的Qwen、谷歌的Gemma或深度求索的模型），受许可证条款约束，通常附带Transformers/VLLM/SGLANG等推理代码库。自2025年4月起，中国AI公司已成为该领域的绝对引领者。  
+
+True "open-source" models are similar to these, as they include the weights, licenses, and inference code, but they also include the complete information needed to reproduce the model – the training code and training data. The most prominent open-source models have been built in the United States, led recently by the Allen Institute for AI’s Olmo models that I helped build in my recent 2.5 years there. The other prominent open-source models are also built by American non-profit organizations, including OpenAthena’s Marin models and EleutherAI’s Pythia models.  
+真正的"开源"模型除包含权重/许可证/推理代码外，还提供训练代码和训练数据等完整复现信息。美国在该领域保持优势，代表作品包括Allen研究所的Olmo系列（笔者曾参与开发）、OpenAthena的Marin和EleutherAI的Pythia等非营利机构成果。  
+
+Open-weight, open-source, and every other label for a model – including closed models primarily offered via an API – exist on a spectrum. For example, Nvidia’s Nemotron models are far more open than most open-weight models, releasing large quantities of their training data under permissive licenses, but they’re not fully open-source because they do not release all of the data. Closed models also exist on a spectrum based on what information the API reveals and the terms of use.  
+开放权重、完全开源及各类闭源API模型构成连续光谱。例如英伟达Nemotron虽公开大量训练数据（比多数开放权重模型更开放），但因未披露全部数据而不算完全开源。闭源模型也因API信息透明度与使用条款存在差异。  
+
+The state of competition between American and Chinese open-weight models (unit economics, technical capabilities, etc.)  
+中美开放权重模型竞争现状（单位经济效益/技术能力等）  
+
+We are living in a world where GLM-5.2 and Kimi K3, some of the latest, leading Chinese models, have enacted a step change in the commercial viability of open models — crossing a similar threshold in agentic capabilities that Anthropic’s Claude Code crossed in December of 2025.  
+当前GLM-5.2和Kimi K3等中国顶尖模型已实现开放模型商业可行性的阶跃式突破——其智能体能力达到Anthropic公司Claude Code在2025年12月突破的里程碑。  
+
+America was the early leader in open language models, primarily through Meta’s Llama models, which were used extensively across research and commercial tasks. Chinese open-weight models surpassed American open-weight models in these two key areas about 18 months ago. The simple metric showing this is Hugging Face Downloads, where China took the lead in July of 2025 primarily through the success of Alibaba’s Qwen models. I personally maintain tools to track this data, and since I first published the American Truly Open Models (ATOM) Project in August of 2025, China’s download lead has grown to about 1.6B – with a total of 3.2B downloads, twice that of America’s total.  
+美国早期凭借Meta的Llama系列主导开源模型领域，但中国开放权重模型在18个月前实现反超。Hugging Face下载量显示：阿里Qwen系列推动中国在2025年7月首次领先。根据笔者维护的追踪工具，自2025年8月《美国真正开源模型(ATOM)计划》发布以来，中国总下载量已达32亿次（领先美国16亿次），是美国的2倍。  
+
+On popular capabilities benchmarks, such as the Artificial Analysis Intelligence Index (AAII), the Chinese open-weight models have a clear lead over American counterparts. The top three Chinese models as of writing this on September 14, 2026 are Z.ai’s GLM-5.3 and GLM-5.3-Flash and Moonshot AI’s Kimi K3 with scores of 45, 42, and 44 respectively. By comparison, the leading American models are Thinking Machines’ Inkling and Inkling Small, both with a score of 26, and Nvidia’s Nemotron 3 Ultra, with a score of 23.  
+在AAII等主流基准测试中，中国模型优势显著。截至2026年9月14日，Z.ai的GLM-5.3/GLM-5.3-Flash和月之暗面的Kimi K3以45/42/44分包揽前三，而美国顶尖模型Thinking Machines的Inkling系列（26分）和英伟达Nemotron 3 Ultra（23分）差距明显。  
+
+The top American open models on the Artificial Analysis Index are behind 15 other Chinese made models.  
+AAII榜单中美国最优开源模型排名低于15个中国模型。  
+
+Together, Chinese open-weight models are approximately 2-5 months behind the closed American frontier, with the open-weight American models being approximately 6-9 months behind the likes of OpenAI and Anthropic. The Chinese labs are closest in tasks with clear user demand, such as agentic coding, and further behind on more op  
+综合来看：中国开放权重模型较美国闭源前沿落后2-5个月，而美国开放权重模型则落后OpenAI/Anthropic等6-9个月。中国团队在智能体编程等明确需求场景差距最小，在更开放...（原文截断）
