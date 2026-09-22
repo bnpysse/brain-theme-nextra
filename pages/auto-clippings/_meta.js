@@ -2730,6 +2730,7 @@ export default {
   "Raw-翻译-11年后，全网重审内娱名著《花少2》": "11年后，全网重审内娱名著《花少2》",
   "Raw-翻译-100亿美元爱马仕股份不见了": "100亿美元爱马仕股份不见了",
   "Raw-翻译-1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦": "1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦",
+  "Raw-翻译-1099-万元起日产新-N7-这次是真加量还降价": "10.99 万元起日产新 N7 这次是真加量还降价",
   "Raw-翻译-00-后维权的新思维": "00 后维权的新思维",
   "Raw-翻译-You-Can-See-Everything-Review-Nathan-Fielde": "You Can See Everything Review Nathan Fie...",
   "Raw-翻译-900M-paid-out-to-end-wind-farm-project-goin": "$900M paid out to end wind farm project ...",
