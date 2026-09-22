@@ -4956,6 +4956,7 @@ export default {
   "Auto-简报-Africas-Wild-Dogs-Are-the-Most-Hated-Carni": "Africas Wild Dogs Are the Most Hated Car...",
   "Auto-简报-AWS-Acquires-DuckDB": "AWS Acquires DuckDB",
   "Auto-简报-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
+  "Auto-简报-AMDs-random-number-generator-cant-generate": "AMDs random number generator cant genera...",
   "Auto-简报-AMD-加入万亿美元市值俱乐部": "AMD 加入万亿美元市值俱乐部",
   "Auto-简报-AMD-Based-FreeBSD-Desktop-Reloaded": "AMD Based FreeBSD Desktop Reloaded",
   "Auto-简报-AI飞速发展下，理科更无用还是文科更无用": "AI飞速发展下，理科更无用还是文科更无用",
