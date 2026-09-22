@@ -2534,6 +2534,7 @@ export default {
   "Raw-翻译-AWS-称无法恢复中东部分可用区资源和数据的访问": "AWS 称无法恢复中东部分可用区资源和数据的访问",
   "Raw-翻译-AWS-Acquires-DuckDB": "AWS Acquires DuckDB",
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
+  "Raw-翻译-AMDs-random-number-generator-cant-generate": "AMDs random number generator cant genera...",
   "Raw-翻译-AMD-加入万亿美元市值俱乐部": "AMD 加入万亿美元市值俱乐部",
   "Raw-翻译-AMD-Based-FreeBSD-Desktop-Reloaded": "AMD Based FreeBSD Desktop Reloaded",
   "Raw-翻译-AI飞速发展下，理科更无用还是文科更无用": "AI飞速发展下，理科更无用还是文科更无用",
