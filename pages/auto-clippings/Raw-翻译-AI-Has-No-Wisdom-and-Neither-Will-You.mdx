@@ -1,0 +1,64 @@
+---
+title: "AI Has No Wisdom and Neither Will You_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：AI没有智慧，你也不会有
+
+【文章正文】：
+AI Has No Wisdom and Neither Will You
+AI没有智慧，你也不会有
+
+In the past month alone I’ve heard these phrases:
+仅过去一个月，我就听到这些论调：
+- I haven’t written code since 2025;
+- 自2025年起我就没写过代码；
+- Code reviews are dead;
+- 代码审查已死；
+- People no longer read code.
+- 人们不再阅读代码。
+
+Certainly the industry is transforming, however, the people and organizations falling into the trap of no longer reading and writing code only do so at their peril.
+虽然行业正在转型，但那些陷入不再读写代码陷阱的个人和组织，终将自食恶果。
+
+Fact is, vibe-coded projects devolve over time into an unmaintainable mess. The reason is simple, yet hard to fix: code maintainability and good architecture don’t have good measurements that we can apply, because it takes months, years even, to notice the effects of bad architecture or of unmaintainable code.
+事实上，跟风编写的项目会逐渐沦为无法维护的烂摊子。原因很简单却难以修正：代码可维护性和优秀架构缺乏可量化的标准，因为糟糕架构或难以维护的代码往往需要数月甚至数年才会显现恶果。
+
+We can certainly define bad code: code that’s hard to read, hard to understand, hard to evolve for whatever the future throws our way. The kind of code in which changing one thing breaks the program in very non-deterministic ways, or breaks the logic somewhere else, far removed from your change, resembling the "butterfly effect". The kind of code where adding a feature means a serious undertaking due to changing code in multiple places and still forgetting to patch everything, thus getting inconsistencies. Code in which the invariants of the design aren’t clear, with its authors no longer being around to guard against violations and ensure some coherence. Code that is hard to test, requiring mocks and exposing implementation details, leading to fragile tests that end up preventing meaningful refactoring.
+我们可以这样定义糟糕代码：难以阅读、难以理解、难以应对未来需求的代码。修改其中一处就会以不可预测的方式破坏程序，或在远离修改点的地方引发逻辑错误，犹如"蝴蝶效应"的代码。添加新功能需要大动干戈修改多处，却仍会遗漏修补导致不一致的代码。设计原则模糊不清，原始作者已无法守护其完整性的代码。难以测试、需要大量mock并暴露实现细节，最终阻碍有效重构的脆弱测试代码。
+
+And yet, we know it as a fact that noticing bad code takes time. Months, years. Of course, the experienced software engineers have a nose that can detect code smells and can take action long before the bad effects can be observed.
+但我们必须承认，识别糟糕代码需要时间。数月，数年。当然，资深工程师拥有嗅出代码坏味道的直觉，能在问题显现前就采取行动。
+
+The proficient developers, the experts, rely on their intuition built with sweat and tears, working long hours trying to debug and fix production issues, swearing to never again be so foolish as to repeat past mistakes. It’s the kind of intuition that can’t really be made into a list of rigid rules, because everything is context-dependent. Experts are incompatible with the same rules and recipes that make beginners more productive. Experts don’t follow the rules, they make the rules.
+专业开发者们依靠血泪积累的直觉——那些熬夜调试线上问题并发誓不再重蹈覆辙的经历。这种直觉无法简化为刻板规则清单，因为一切都取决于具体情境。专家与提升新手效率的规则天然不相容，他们不遵循规则，他们制定规则。
+
+And so we have a problem…
+于是我们面临一个问题...
+
+For one, AI is not trained on what it means for code to be maintainable. For instance, any reinforcement learning done needs a reward signal that can be measured immediately, not in months or years. The AI learns rules from rulebooks meant for beginners. The AI notices patterns from code in the wild and let’s be honest, most code in the wild is pretty bad. There is no fitness function you can define for maintainable code, at least not one that we can discern, otherwise it would’ve been baked into our linters.
+首先，AI并未针对"代码可维护性"进行训练。强化学习需要即时反馈的奖励信号，而非数月数年的延迟。AI从面向初学者的规则手册学习，从现实代码中识别模式——坦白说，大多数现实代码都很糟糕。我们无法为可维护代码定义适应度函数，至少目前没有可辨别的标准，否则早该内置到代码检查工具里了。
+
+Have you noticed how terrible is the AI at "simplifying" code? Yes, the SOTA models. It can’t even define functions properly, choosing to split functions into smaller functions that are not actually reusable. Extracting a smaller function from a bigger function is a very bad choice if, to understand the bigger function, you have to also read the implementation of the extracted smaller function. Defining reusable and clarifying functions is an art form, an art that takes mastery. Most developers, being still "advanced beginners" in the Dreyfus model, are not able to define good, clarifying, reusable functions and neither does the AI currently.
+是否注意到AI在"简化"代码时的糟糕表现？即使是顶尖模型。它连合理定义函数都做不到，只会把函数拆分成实际上不可复用的碎片。如果理解大函数必须阅读被提取出的小函数实现，这种拆分就是糟糕的选择。定义清晰可复用的函数是门艺术，需要深厚功力。多数开发者仍处于德雷福斯模型中的"高级新手"阶段，无法定义优秀的清晰函数，当前AI同样做不到。
+
+This wouldn’t be so bad if people would still be in control and learn from those mistakes. But we are seeing a trend of people relying on AI to write, and even read code.
+如果人类仍能掌控并从错误中学习，情况还不至于太糟。但我们正目睹人们依赖AI编写甚至阅读代码的趋势。
+
+Those people will never reach mastery, because they no longer make choices, they no longer take responsibility for mistakes in coding and no longer learn from those mistakes. It’s the AI that’s making mistakes now, the AI doesn’t learn from those mistakes, and neither are the people relying on AI for coding.
+这些人永远无法达到精通，因为他们不再做选择，不再为编码错误负责，也不再从错误中学习。现在是AI在犯错，AI不会从错误中学习，依赖AI编码的人同样不会。
+
+Yikes!
+糟透了！
+
+Don’t get me wrong, I think LLMs are a great tool. I’m no Luddite, I’ve integrated AI in my everyday work, while actually teaching my colleagues what I’ve learned. I gladly use LLMs to take care of all the boring, soul-sucking shit we have to deal with. I’m also enjoying the efficiency benefits that I’m seeing. But at the end of the day, it’s just a tool, and like all other revolutions, its light will also fade; IMO, it already is, as right now tech news is frankly quite boring.
+别误会，我认为大语言模型是绝佳工具。我并非卢德分子，已在日常工作中整合AI，同时将经验传授同事。我很乐意用LLM处理那些枯燥耗神的琐事，也享受着效率提升。但归根结底它只是工具，如同所有技术革命，其光环终将褪色——在我看来已然开始，如今科技新闻实在乏味。
+
+People are actually terrible at making predictions. I believe the future will surprise all of us. But, I’m going to make a prediction of my own…
+人类其实极不擅长预测。我相信未来会让我们所有人惊讶。但我要做个自己的预言...
+
+In the future we will see more and more companies proudly boasting their "NO-AI" policy as a competitive advantage. And they will be right.
+未来会有越来越多企业将"禁用AI"作为竞争优势来标榜。而他们是对的。
+
+"But automated assembly lines are always more efficient" people say, except that the software industry is special, because we’ve always done automation at scale, everything we do is automation, LLMs are not the only means for it, and depending on context, it may actually be a distraction. "Coding isn’t...
+"但自动化流水线总是更高效"人们说。但软件行业特殊之处在于，我们本就大规模实施自动化，所有工作都是自动化，LLM并非唯一手段，在某些情境下反而是种干扰。"编码不是...
