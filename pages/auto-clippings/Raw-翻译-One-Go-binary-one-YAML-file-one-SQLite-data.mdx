@@ -1,0 +1,139 @@
+---
+title: "One Go binary, one YAML file, one SQLite database I wrote my_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：One Go binary, one YAML file, one SQLite database: I wrote my monitoring tool
+【文章标题】：一个 Go 二进制文件、一个 YAML 文件、一个 SQLite 数据库：我编写了自己的监控工具
+
+【文章正文】：
+【文章正文】：
+
+One Go binary, one YAML file, one SQLite database: why I wrote my own monitoring tool
+一个 Go 二进制文件、一个 YAML 文件、一个 SQLite 数据库：我为什么要编写自己的监控工具
+
+I needed to watch a fleet of heterogeneous services: HTTP endpoints, PostgreSQL databases, a few Oracle instances, Redis, Elasticsearch indexes that must stay fresh, machines that should answer ping, and some Prometheus metrics. And I needed to be told, on Telegram, by SMS, on Signal, when something goes down, and when it comes back.
+我需要监控一组异构服务：HTTP 端点、PostgreSQL 数据库、几个 Oracle 实例、Redis、必须保持更新的 Elasticsearch 索引、需要响应 ping 的机器，以及一些 Prometheus 指标。而且，当服务宕机或恢复时，我需要通过 Telegram、短信和 Signal 收到通知。
+
+The classic answer is a monitoring platform: Prometheus plus Alertmanager plus Grafana plus a handful of exporters, or a container running a Node.js app with a database. All great tools. But for a few dozen checks, I did not want to operate a second distributed system just to know whether the first one is up. And none of the lightweight options could query Oracle without me installing the Oracle client libraries somewhere.
+经典的解决方案是搭建一个监控平台：Prometheus 加上 Alertmanager 加上 Grafana 再加上一堆 exporter，或者跑一个带数据库的 Node.js 应用容器。这些都是很棒的工具。但对于区区几十个检查项，我不想为了确认第一套系统是否正常运行，而去运维第二套分布式系统。而且，现有的轻量级方案中，没有一个能在不安装 Oracle 客户端库的情况下查询 Oracle。
+
+So I wrote Gjallar: a KISS monitoring service. One static binary, one YAML config file, one SQLite file. A black-and-red status page with history, HTMX-refreshed. About 3,400 lines of Go. MIT licensed.
+于是我编写了 Gjallar：一个遵循 KISS 原则的监控服务。一个静态二进制文件、一个 YAML 配置文件、一个 SQLite 文件。一个带有历史记录、通过 HTMX 刷新的黑红配色状态页面。大约 3400 行 Go 代码。MIT 许可证。
+
+Zero CGO, on purpose
+刻意实现零 CGO
+
+The whole tool builds with CGO_ENABLED=0:
+整个工具在构建时设置了 CGO_ENABLED=0：
+
+CGO_ENABLED=0 go build -trimpath -ldflags "-s -w"
+CGO_ENABLED=0 go build -trimpath -ldflags "-s -w"
+
+That is only possible because every dependency that would traditionally bind to a C library has a pure-Go replacement nowadays, and they are excellent:
+这之所以可行，是因为如今所有传统上需要绑定 C 库的依赖都有了纯 Go 语言的替代方案，而且它们都非常出色：
+
+- pgx for PostgreSQL: no libpq;
+- go-ora for Oracle: no Oracle Instant Client, which alone justified the project. If you have ever deployed the Oracle client on a minimal box, you know;
+- pro-bing for ICMP echo, privileged or unprivileged;
+- modernc.org/sqlite for storage: SQLite transpiled to pure Go, no libsqlite3;
+- Redis needs no driver at all: the check speaks the protocol directly: TCP connect, optional AUTH ,PING , expect+PONG .
+- 用于 PostgreSQL 的 pgx：无需 libpq；
+- 用于 Oracle 的 go-ora：无需 Oracle Instant Client，仅这一点就足以证明该项目的价值。如果你曾在极简配置的机器上部署过 Oracle 客户端，你就会懂；
+- 用于 ICMP echo 的 pro-bing，支持特权或非特权模式；
+- 用于存储的 modernc.org/sqlite：将 SQLite 转译为纯 Go 代码，无需 libsqlite3；
+- Redis 完全不需要驱动：检查程序直接通过协议通信：TCP 连接，可选的 AUTH、PING，期望收到 +PONG。
+
+The result is a single self-contained binary (about 36 MB, most of it the SQLite and Oracle drivers) that cross-compiles from my laptop to any target with GOOS/GOARCH, and deploys with scp. No Docker, no package manager, no shared libraries, no "works on my machine".
+最终得到的是一个独立的单一二进制文件（约 36 MB，大部分是 SQLite 和 Oracle 驱动），可以通过 GOOS/GOARCH 从我的笔记本交叉编译到任何目标平台，并用 scp 部署。无需 Docker，无需包管理器，无需共享库，告别“在我的机器上能跑”的问题。
+
+A lock-free alert pipeline
+无锁告警管道
+
+Monitoring tools are naturally concurrent, every monitor waits on the network most of the time, and concurrency is where side projects usually grow their first mutex jungle. Gjallar has no locks around its state at all, because of how the pipeline is shaped:
+监控工具天生具有并发性，每个监控器大部分时间都在等待网络响应，而并发正是业余项目通常滋生出第一个“互斥锁丛林”的地方。Gjallar 的状态周围完全没有任何锁，这得益于其管道的架构设计：
+
+one goroutine per monitor ──▶ results channel ──▶ single consumer
+                                                  (state machine + SQLite writes)
+每个监控器一个 goroutine ──▶ 结果 channel ──▶ 单一消费者
+                                                  （状态机 + SQLite 写入）
+
+Each monitor runs its check loop in its own goroutine and sends check.Result values into a shared channel. A single consumer goroutine owns everything downstream: the up/down state machine, incident rows, and history writes. Since only one goroutine ever touches the state map and the database connection, there is nothing to lock, and SQLite, which dislikes concurrent writers, gets exactly one.
+每个监控器在自己的 goroutine 中运行检查循环，并将 check.Result 值发送到一个共享 channel 中。单一的消费者 goroutine 掌控下游的所有事务：up/down 状态机、事件记录行以及历史记录写入。由于始终只有一个 goroutine 会访问状态映射和数据库连接，因此无需任何锁，而不喜欢并发写入的 SQLite 也恰好只面对一个写入者。
+
+The per-monitor state is small and explicit:
+每个监控器的状态小巧且明确：
+
+type monitorState struct &#123;
+    down         bool
+    consecFails  int
+    downSince    time.Time
+    lastNotified time.Time
+    threshold    int           // consecutive failures before DOWN fires
+    realert      time.Duration // reminder interval while down; 0 = disabled
+    notifiers    []string
+&#125;
+type monitorState struct &#123;
+    down         bool
+    consecFails  int
+    downSince    time.Time
+    lastNotified time.Time
+    threshold    int           // 触发 DOWN 告警前的连续失败次数
+    realert      time.Duration // 宕机期间的提醒间隔；0 = 禁用
+    notifiers    []string
+&#125;
+
+Two design points earned their keep in production:
+有两个设计要点在生产环境中证明了其价值：
+
+- State survives restarts. At startup, each monitor's state is seeded from any open incident in SQLite. A restart while something is down neither re-fires the DOWN alert nor misses the recovery notification. Deploying a new version during an outage is a non-event.
+- Notifications are dispatched asynchronously. The consumer must never block: a slow SMTP server or a rate-limited Telegram API cannot back-pressure the whole pipeline. Sends go out in their own goroutines with a 15-second timeout.
+- Alerts fire after N consecutive failures, not on the first blip, no flapping noise, and an optional realert interval reminds you while an incident stays open.
+- 状态在重启后得以保留。启动时，每个监控器的状态会从 SQLite 中任何未解决的事件中初始化。在某个服务宕机时重启，既不会重复触发 DOWN 告警，也不会漏掉恢复通知。在故障期间部署新版本不会造成任何影响。
+- 通知异步分发。消费者绝不能阻塞：缓慢的 SMTP 服务器或受限的 Telegram API 不能对整个管道产生背压。发送操作在各自的 goroutine 中进行，并设有 15 秒的超时时间。
+- 告警在连续失败 N 次后触发，而不是在第一次出现波动时就触发，避免了抖动噪音，并且可选的重新提醒间隔会在事件持续未解决时不断提醒你。
+
+Configuration that respects operations
+贴合运维需求的配置
+
+Everything lives in one YAML file, with defaults, named notifiers, and monitor groups:
+所有配置都集中在一个 YAML 文件中，包含默认值、命名通知器和监控组：
+
+defaults:
+  interval: 60s
+  timeout: 10s
+  failure_threshold: 3
+  alerts: [ops-telegram]
+alerts:
+  ops-telegram:
+    url: "telegram://TOKEN@telegram?chats=123456789"
+monitors:
+  - name: app-db
+    type: postgres
+    dsn: "postgres://monitor:$&#123;PG_PASSWORD&#125;@db1:5432/app"
+    query: "SELECT count(*) FROM jobs WHERE status = 'stuck'"
+    rule: "== 0"
+defaults:
+  interval: 60s
+  timeout: 10s
+  failure_threshold: 3
+  alerts: [ops-telegram]
+alerts:
+  ops-telegram:
+    url: "telegram://TOKEN@telegram?chats=123456789"
+monitors:
+  - name: app-db
+    type: postgres
+    dsn: "postgres://monitor:$&#123;PG_PASSWORD&#125;@db1:5432/app"
+    query: "SELECT count(*) FROM jobs WHERE status = 'stuck'"
+    rule: "== 0"
+
+Three small features make it pleasant to operate:
+三个小特性让运维工作变得更加舒心：
+
+- Hot reload on SIGHUP: systemctl reload gjallar applies the new config, but only after it has been fully validated. A broken YAML keeps the running configuration alive and logs the error, instead of taking the monitoring down with it. Your watcher should be the last thing that dies from a typo.
+- $&#123;VAR&#125; environment expansion for secrets, with a clear startup failure if a referenced variable is undefined, and a bare$ (say, in a~ ^OPEN$ regex rule) left untouched.
+- 
+- 响应 SIGHUP 热重载：systemctl reload gjallar 会应用新配置，但前提是配置必须完全通过验证。损坏的 YAML 会保持当前运行配置不变并记录错误，而不是让监控系统随之崩溃。你的监控程序应该是最后一个因为拼写错误而挂掉的东西。
+- 针对敏感信息的 $&#123;VAR&#125; 环境变量展开，如果引用的变量未定义，会在启动时明确报错，而单独的 $（例如在 ~ ^OPEN$ 正则规则中）则保持原样不动。
+-
