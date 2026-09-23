@@ -1,0 +1,426 @@
+---
+title: "[AINews] Here are 6 Clones of Jev in 2 days_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：[AINews] 两天内出现6个Jev克隆体
+
+【文章正文】：
+We covered
+我们周三报道了
+
+Jev’s launch on Wednesday
+Jev的发布
+
+, and they have completely taken over the timeline, with 36M views of their launch video (by comparison,
+其发布视频在两天内就获得3600万次观看（相比之下
+
+OpenAI’s Navier Stokes
+OpenAI的Navier Stokes
+
+result got
+成果视频获得
+
+74M
+7400万
+
+views, and
+次观看，
+
+Anthropic’s Fable 5
+Anthropic的Fable 5
+
+got
+获得
+
+57M
+5700万
+
+views) in just two days.
+次观看）。
+
+It wasn’t open source
+由于未开源
+
+1
+（注1）
+
+, so it invited tons of speculation and great demos and
+，引发了大量猜测、精彩演示、
+
+examples
+案例、
+
+salty schmidhubers
+酸葡萄心理
+
+and
+以及
+
+bad takes
+拙劣解读
+
+, which of course only fed the hype.
+这些无疑助长了炒作热潮。
+
+Here’s a list. The best guesses are ModernBert and Diffusion:
+以下是克隆体清单，最接近原版的推测是ModernBert和Diffusion：
+
+Laya
+Laya
+
+: 421M params,
+：4.21亿参数，
+
+ModernBERT
+ModernBERT
+
+-large encoder with two added transformer layers that score user-supplied options, PPO over sequence embeddings to output turn-by-turn conversion trajectories (probabilities from 0.0 to 1.0).
+-large编码器附加两个Transformer层，用于对用户提供选项评分，通过序列嵌入的PPO算法输出逐步转化轨迹（概率值0.0至1.0）。
+
+salty that he did not get recognition; claims RLCD without justification
+因未获认可而抱怨；无依据地宣称采用RLCD技术
+
+confidence is entropy-based, not calibrated
+置信度基于熵值，未经校准
+
+DiffusionGemmaJev:
+DiffusionGemmaJev：
+
+tackling this from a Diffusion model basis.
+基于Diffusion模型架构
+
+Pretty close on benchmarks
+基准测试表现极为接近
+
+Bespoke Nimble
+Bespoke Nimble
+
+: LoRA finetune of Qwen3.5-9B, using contrastive data curation. (
+：基于Qwen3.5-9B的LoRA微调，采用对比数据筛选（
+
+close but sllightly lower on benchmarks
+基准测试稍逊一筹
+
+)
+）
+
+SemIf (fka OpenJev)
+SemIf（曾用名OpenJev）
+
+(
+（
+
+HF
+HF
+
+): 4B and 35B causal Qwen3.5 backbone with a tiny three-class NLI classifier on the last token.
+）：基于40亿和350亿参数Qwen3.5因果模型，在末词符添加小型三分类NLI分类器
+
+comparison vs Laya
+与Laya对比
+
+Jevlike
+Jevlike
+
+: 40K byte embedding lightweight option-attention model. Each candidate becomes a query that reads from a shared context representation, then receives a score.
+：4万字节嵌入的轻量级选项注意力模型，每个候选作为查询读取共享上下文表征后获得评分
+
+Kev-0.5B
+Kev-0.5B
+
+: LoRA adapter + a small readout head on top of Qwen2.5-0.5B.
+：在Qwen2.5-0.5B基础上添加LoRA适配器和小型读出头
+
+Of course, not enough people are talking about
+当然，鲜少有人讨论
+
+the data side, which is acknowledged to be 100% synthetic
+被公认为100%合成数据的数据层面
+
+.
+
+AI News for 9/17/2026-9/18/2026. We checked 12 subreddits,
+2026年9月17-18日AI新闻。我们检查了12个Reddit板块、
+
+544 Twitters
+544条推特
+
+and no further Discords.
+及部分Discord频道。
+
+AINews’ website
+AINews网站
+
+lets you search all past issues. As a reminder,
+支持往期内容检索。提醒：
+
+AINews is now a section of Latent Space
+AINews现属Latent Space栏目
+
+. You can
+您可
+
+opt in/out
+随时调整
+
+of email frequencies!
+邮件推送频率！
+
+AI Twitter Recap
+AI推特精选
+
+Decision Models, Routing, and the "Jev" Wave
+决策模型、路由与"Jev"浪潮
+
+Discriminative models broke out as a new systems primitive
+判别式模型崛起为新系统基元
+
+: The biggest technical conversation was around
+最大技术讨论围绕
+
+Jev
+Jev
+
+, a non-generative decision model being positioned as a fast "
+这款非生成式决策模型被定位为LLM的快速"
+
+System 1
+系统1
+
+" complement to LLMs.
+"补充。
+
+@ankrgyl
+@ankrgyl
+
+said it is now available as an eval model in Braintrust with
+称其已作为评估模型登陆Braintrust平台，
+
+~400x lower scoring cost
+评分成本降低约400倍
+
+versus prior setups, while
+相较原有方案；
+
+@gabepereyra
+@gabepereyra
+
+highlighted calibrated-probability use cases like routing, citation selection, escalation, and legal ops decisions. The more architectural take came from
+重点介绍路由、引文选择、升级和法律运营决策等校准概率用例。更架构化的观点来自
+
+@hxiao
+@hxiao
+
+, who argued Jev could pull tool calling, routing, and MCP-style decisions back from small generative LMs toward discriminative models;
+认为Jev可将工具调用、路由和MCP式决策从小型生成式LM拉回判别式模型；
+
+@signulll
+@signulll
+
+pushed the same idea further, framing this class as a near-zero-marginal-cost,
+进一步将该类模型定义为边际成本趋近零的
+
+on-device judgment layer
+设备端判断层
+
+for notifications, UI adaptation, and sensor-driven decisions.
+适用于通知、UI适配和传感器驱动决策。
+
+Open reproductions and ecosystem clones appeared immediately
+开源复现与生态克隆体立即涌现
+
+:
+
+@madiator
+@madiator
+
+released
+发布
+
+Bespoke Nimble
+Bespoke Nimble
+
+, an "open Jev" recipe built from a
+，基于
+
+LoRA fine-tune of Qwen3.5-9B
+Qwen3.5-9B的LoRA微调
+
+using
+采用
+
+synthetic contrastive data curation
+合成对比数据筛选
+
+and constrained decoding. On its curated eval, the base Qwen improved from
+及约束解码。在定制评估中，基础Qwen从
+
+66% to 90%
+66%提升至90%
+
+, versus
+，相较
+
+93% for Jev
+Jev的93%
+
+, with a reported
+，据称
+
+100ms on H100
+H100上100毫秒
+
+and local usability. At the smaller end,
+且支持本地运行。小规模端，
+
+@jaredpalmer
+@jaredpalmer
+
+released
+发布
+
+Kev-0.5B
+Kev-0.5B
+
+, a tiny Jev-like model based on
+，基于
+
+Qwen2.5-0.5B
+Qwen2.5-0.5B
+
+that can run on a MacBook Pro. The reaction split roughly along prior experience:
+的微型Jev类模型，可在MacBook Pro运行。反响按既往经验分化：
+
+@MParakhin
+@MParakhin
+
+noted post-ChatGPT users treated it like a revelation, while pre-GPT ML people were more puzzled by the hype. The substantive question raised by
+指出ChatGPT后用户视其为革命，而GPT前时代的ML从业者更困惑于炒作。
+
+@abacaj
+@abacaj
+
+is the right one: a lot of demos emphasized
+提出的实质问题切中要害：多数演示强调
+
+speed
+速度
+
+more than
+胜过
+
+quality
+质量
+
+, and there is still no standard benchmark for this category.
+且该类别仍缺乏标准基准。
+
+The first compelling integrations were in browser/computer-use workflows
+首批亮眼集成出现在浏览器/计算机使用工作流中
+
+:
+
+@levie
+@levie
+
+demoed Jev classifying Box incident reports into escalation paths;
+演示Jev将Box事件报告分类至升级路径；
+
+@ndrezn
+@ndrezn
+
+showed browser use with LangChain + Jev and found it strong on tasks like the Wikipedia game and structured "folding laundry" workflows;
+展示LangChain+Jev的浏览器应用，在维基百科游戏和结构化"叠衣服"工作流等任务表现优异；
+
+@cline
+@cline
+
+shipped a plugin giving Jev a browser in Cline.
+发布为Jev提供Cline浏览器支持的插件。
+
+@hwchase17
+@hwchase17
+
+explicitly called browser use the best Jev application he had seen so far. Net: this looks less like a chatbot story than a
+明确称浏览器应用是其迄今所见最佳Jev用例。总之：这更像是
+
+workflow control-plane
+工作流控制平面
+
+story.
+的故事。
+
+Agent Tooling, Coding Harnesses, and Claude Code Standards
+智能体工具、编码框架与Claude代码标准
+
+AGENTS.md gained real momentum as a cross-tool convention
+AGENTS.md作为跨工具规范真正兴起
+
+: The highest-signal product update here was
+最具信号价值的产品更新是
+
+@trq212
+@trq212
+
+announcing that
+宣布
+
+Claude Code v2.1.277
+Claude Code v2.1.277
+
+now checks for
+现会检查
+
+AGENTS.md
+AGENTS.md
+
+when no
+当不存在
+
+CLAUDE.md
+CLAUDE.md
+
+is present, with config-level toggle support. That effectively acknowledges AGENTS.md as an emerging standard rather than a one-tool convention, and
+时，并支持配置级切换。这实质认可AGENTS.md为新兴标准而非单一工具规范，
+
+@simonw
+@simonw
+
+immediately noted the practical payoff: fewer shim files that just point one format to the other.
+立即指出实际收益：减少仅作格式转换的垫片文件。
+
+Harness design is becoming a first-class variable in coding-agent performance and cost
+框架设计正成为编码智能体性能与成本的一级变量
+
+:
+
+@pidotdev
+@pidotdev
+
+highlighted the
+强调
+
+Harness Tax
+框架税
+
+analysis showing that a simple tool set—
+分析显示简单工具集——
+
+read, write, edit, bash
+读、写、编辑、bash
+
+—can reach the
+即可达到
+
+Pareto frontier
+帕累托前沿
+
+on benchmark performance while reducing unnecessary spending. Relatedly,
+的基准性能，同时减少不必要开支。相关地，
+
+@_akhaliq
+@_akhaliq
+
+pointed t
+指出...

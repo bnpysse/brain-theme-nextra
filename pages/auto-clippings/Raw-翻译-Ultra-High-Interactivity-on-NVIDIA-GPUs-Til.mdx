@@ -1,0 +1,198 @@
+---
+title: "Ultra-High Interactivity on NVIDIA GPUs - TileRT InferenceX_全翻译"
+tags: ["大咖视点_全文翻译", "SemiAnalysis_(全球半导体产业链与AI算力)"]
+---
+
+【文章标题】：Ultra-High Interactivity on NVIDIA GPUs? - TileRT InferenceX
+
+【中文标题】：NVIDIA GPU 上的超高交互性？——TileRT InferenceX
+
+【文章正文】：
+
+Premium-priced “fast modes” are proving that users will pay more for lower latency and faster tokens, potentially yielding higher gross margins. Frontier AI labs such as OpenAI are therefore evaluating purpose-built inference systems, including Cerebras and NVIDIA Groq LPUs that prioritize ultra-high interactivity over maximum batched throughput. Ultra-low latency matters most in interactive workloads, including real-time assistants, and full-duplex voice. OpenAI GPT‑Live, for example, can listen and speak simultaneously, making response delay immediately perceptible to the user, described as feeling like Ironman JARVIS.
+
+高溢价的“快速模式”正在证明，用户愿意为更低的延迟和更快的 Token 输出支付更多费用，从而可能带来更高的毛利率。因此，OpenAI 等前沿 AI 实验室正在评估专用推理系统，包括 Cerebras 和 NVIDIA Groq LPU，这些系统优先考虑超高交互性而非最大批量吞吐。超低延迟在交互式工作负载中最为重要，包括实时助手和全双工语音。例如，OpenAI GPT‑Live 可以同时听和说，使用户能立即感知到响应延迟，这种感觉被描述为像钢铁侠的 JARVIS。
+
+GPUs perform exceptionally well at high throughput and low-to-medium interactivity, but their architecture is less suited for ultra-low-latency inference. An 8-GPU HGX B200 server provides a theoretical HBM memory bandwidth of 64 TB/s of in aggregate. At batch size 1, GLM-5 at NVFP4 requires only approximately 21 GB of active-parameter traffic per generated token. The B200 HBM bandwidth roofline would therefore suggest up to 3,047 tokens/s/user without speculative decoding. In practice, GPUs come nowhere close to this limit.
+
+GPU 在高吞吐量和低到中等交互性方面表现异常出色，但其架构不太适合超低延迟推理。一台 8-GPU HGX B200 服务器提供总计 64 TB/s 的理论 HBM 内存带宽。在批大小为 1 时，采用 NVFP4 的 GLM-5 每个生成的 Token 仅需要约 21 GB 的活动参数流量。因此，B200 的 HBM 带宽上限意味着在没有投机解码的情况下，理论上可达 3,047 tokens/s/user。但在实践中，GPU 远未接近这一极限。
+
+The gap comes from latency rather than bandwidth. The traditional GPU programming model launches and synchronizes many individual kernels, whose setup and teardown overhead becomes significant at ultra-high levels of interactivity. While these latency costs are less visible at conventional serving speeds, even with CUDA graphs, they dominate as token latency approaches the sub-millisecond Time Per Output Token (TPOT) range.
+
+这一差距来自延迟而非带宽。传统的 GPU 编程模型会启动并同步许多独立的 Kernel，这些 Kernel 的建立和拆除开销在超高交互性下变得非常显著。虽然在常规服务速度下这些延迟成本不太明显，但即使使用 CUDA graphs，当 Token 延迟接近亚毫秒级每输出 Token 时间（TPOT）范围时，它们也会占据主导地位。
+
+Furthermore, although GPU memory bandwidth increases by roughly 2–3× each generation, memory latency has not improved at all.
+
+此外，尽管 GPU 内存带宽每代大约增加 2–3 倍，但内存延迟根本没有改善。
+
+While using alternative hardware is popular, there are ways to use GPUs to do this too. This is where TileRT’s persistent engine comes in. TileRT statically compiles the entire decode graph into a single persistent kernel on NVIDIA GPUs, maximizing overlap across computation, memory loads and stores, and communication.
+
+虽然使用替代硬件很流行，但也有办法利用 GPU 来实现这一点。这就是 TileRT 的持久化引擎（persistent engine）发挥作用的地方。TileRT 在 NVIDIA GPU 上将整个解码图静态编译为单个持久化 Kernel，从而最大化计算、内存加载与存储以及通信之间的重叠。
+
+On the InferenceX GLM5 FP8 744B benchmark on a single B200 decode server, tileRT has been verified to reach up to 500 tokens/s/user, approximately 3× faster than GB300 NVL72 running traditional inference engines. Iso-cost per output token, TileRT can achieve up to 2x faster interactivity than traditional engines.
+
+在单台 B200 解码服务器上的 InferenceX GLM5 FP8 744B 基准测试中，TileRT 已被验证可达到高达 500 tokens/s/user，比运行传统推理引擎的 GB300 NVL72 快约 3 倍。在每输出 Token 等成本（iso-cost）条件下，TileRT 的交互性比传统引擎快达 2 倍。
+
+We thank the TileRT maintainers for collaborating on TileRT InferenceX benchmarks and also in general thankful to the vLLM community for their amazing design on the V1 connector. TileRT comes from the same community maintainer organization that built the widely popular TileLang DSL.
+
+我们感谢 TileRT 维护者在 TileRT InferenceX 基准测试上的合作，同时也感谢 vLLM 社区在 V1 连接器上的出色设计。TileRT 来自构建了广受欢迎的 TileLang DSL 的同一个社区维护者组织。
+
+Subscribe now
+
+立即订阅
+
+With PD disaggregation inference technique, the hyperspecialized TileRT engine handles latency-sensitive decode while throughput-optimized engines such as vLLM and SGLang continuing to serving prefill. The TileRT decode engine is already being deployed in production at Xiaomi for MiMo V2.5 Pro UltraSpeed and ZAI with GLM 5.1 HighSpeed.
+
+借助 PD 分离推理技术，高度专业化的 TileRT 引擎负责处理对延迟敏感的解码，而 vLLM 和 SGLang 等吞吐优化引擎则继续服务预填充。TileRT 解码引擎已在小米的 MiMo V2.5 Pro UltraSpeed 和 ZAI 的 GLM 5.1 HighSpeed 中投入生产部署。
+
+In the article, we shall deep dive into the TileRT InferenceX results, what TileRT is, how it composes with the existing inference ecosystem along with the tradeoffs and challenges with TileRT.
+
+在本文中，我们将深入探讨 TileRT InferenceX 的结果、TileRT 是什么、它如何与现有推理生态系统协作，以及 TileRT 带来的权衡与挑战。
+
+We will also elaborate on the tradeoffs of using TileRT on standard GPUs vs. ultra low latency specialized chips like Nvidia Groq LPU, Cerebras and Sambanova, weighing in on if there is a potential for TileRT software running on GPUs to disrupt these specialist chips’ TAM.
+
+我们还将详细阐述在标准 GPU 上使用 TileRT 与使用 Nvidia Groq LPU、Cerebras 和 Sambanova 等超低延迟专用芯片之间的权衡，并评估在 GPU 上运行的 TileRT 软件是否有潜力颠覆这些专用芯片的 TAM（可寻址市场总量）。
+
+The SemiAnalysis Accelerator Model provides quarter by quarter estimates of Nvidia LPU30, LPU40, Cerebras WSE-3 & WSE-4 shipments and much more.
+
+SemiAnalysis Accelerator Model 按季度提供 Nvidia LPU30、LPU40、Cerebras WSE-3 和 WSE-4 出货量的估算，以及更多内容。
+
+InferenceX
+
+InferenceX
+
+InferenceX is our open-source, vendor-neutral, continuously updated AI inference benchmarking and research platform.
+
+InferenceX 是我们开源的、供应商中立的、持续更新的 AI 推理基准测试与研究平台。
+
+We measure leading models, inference frameworks, and hardware across the latency-throughput Pareto frontier, tracking how real-world inference performance and economics improve over time.
+
+我们测量领先模型、推理框架和硬件在延迟-吞吐量帕累托前沿上的表现，追踪真实世界推理性能和经济性如何随时间改善。
+
+Thanks for reading SemiAnalysis! This post is public so feel free to share it.
+
+感谢阅读 SemiAnalysis！本文是公开的，欢迎分享。
+
+Share
+
+分享
+
+Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer of compute from Google Cloud to Microsoft Azure to Oracle, to Meta and many more. Furthermore, it has the support of the ML community including from vLLM, LMCache, SGLang, PyTorch, Huggingface and the support of major labs like OpenAI, MiniMax, ZAI, Qwen, Moonshot Kimi, etc.
+
+我们的基准测试已被几乎所有主要计算买家广泛复现、验证和/或支持，从 Google Cloud 到 Microsoft Azure，到 Oracle，到 Meta 等等。此外，它还得到了 ML 社区的支持，包括 vLLM、LMCache、SGLang、PyTorch、Huggingface，以及 OpenAI、MiniMax、ZAI、Qwen、Moonshot Kimi 等主要实验室的支持。
+
+Source:
+
+来源：
+
+InferenceX
+
+InferenceX
+
+Star the InferenceX GitHub repository if you find the open-source benchmark and data useful!
+
+如果你觉得这个开源基准测试和数据有用，请为 InferenceX GitHub 仓库加星！
+
+.
+
+.
+
+As previously mentioned, Nvidia has committed to submitting verifiable Vera Rubin numbers to InferenceX. We will have Google TPUv7 results soon, and AMD has committed to MI455X UALoE72 this year too.
+
+如前所述，Nvidia 已承诺向 InferenceX 提交可验证的 Vera Rubin 数据。我们将很快获得 Google TPUv7 的结果，AMD 也已承诺今年提交 MI455X UALoE72 的数据。
+
+Source:
+
+来源：
+
+InferenceX GitHub
+
+InferenceX GitHub
+
+Throughput vs Interactivity Curve
+
+吞吐量与交互性曲线
+
+Every inference system must balance two competing goals.
+
+每个推理系统都必须在两个相互竞争的目标之间取得平衡。
+
+Interactivity (tok/s/user) measures how quickly a single user receives tokens, the inverse of time per output token (TPOT). It determines whether a response feels snappy or sluggish.
+
+交互性（tok/s/user）衡量单个用户接收 Token 的速度，即每个输出 Token 时间（TPOT）的倒数。它决定了响应是感觉灵敏还是迟缓。
+
+Throughput (tok/s/GPU) measures how many tokens the system produces in total across all users. It largely determines the cost per token.
+
+吞吐量（tok/s/GPU）衡量系统在所有用户中总共产生多少 Token。它很大程度上决定了每个 Token 的成本。
+
+Batching increases aggregate throughput by processing more requests together, but each user typically waits longer for each token. Small batches do the opposite: they improve per-user speed while reducing the amount of useful work each GPU completes in aggregate.
+
+批处理通过同时处理更多请求来增加总吞吐量，但每个用户通常需要为每个 Token 等待更长时间。小批量则相反：它们提高了单用户速度，但降低了每个 GPU 在总体上完成的有效工作量。
+
+A bus amortizes its cost across many passengers but makes each passenger wait for shared stops. A race car carries only one or two people and reaches the destination faster, but at much higher cost per passenger. Inference has the same trade-off: batching improves aggregate throughput and cost per token, while small batches improve per-user responsiveness. There is no one-size-fits-all operating point.
+
+公共汽车将成本分摊给许多乘客，但让每位乘客在共享站点等待。赛车只载一两个人，能更快到达目的地，但每位乘客的成本要高得多。推理也有同样的权衡：批处理提高了总吞吐量和每个 Token 的成本效率，而小批量提高了单用户响应速度。不存在一刀切的最佳运行点。
+
+In the configuration shown below, increasing interactivity from roughly 25 to 260 tokens/s/user reduces per-GPU throughput from about 5,900 to 200 tokens/s/GPU. That is roughly a 30× reduction in aggregate throughput for a 10× increase in per-user speed.
+
+在下面显示的配置中，将交互性从约 25 提高到 260 tokens/s/user，会使每 GPU 吞吐量从约 5,900 下降到 200 tokens/s/GPU。这相当于总吞吐量减少约 30 倍，而单用户速度提高 10 倍。
+
+Source:
+
+来源：
+
+SemiAnalysis
+
+SemiAnalysis
+
+TileRT results
+
+TileRT 结果
+
+As we describe in the next section, GPUs already perform well in high-throughput scenarios but struggle in high-interactivity ones. This weakness has created an entire market segment for dataflow chips. TileRT targets the same weakness and therefore focuses exclusively on high-interactivity operating points.
+
+正如我们在下一节所述，GPU 在高吞吐量场景中已经表现良好，但在高交互性场景中却力不从心。这一弱点为数据流芯片创造了整个细分市场。TileRT 瞄准的是同样的弱点，因此专门专注于高交互性运行点。
+
+SemiAnalysis is a reader-supported publication. To receive new posts and support our work, consider becoming a subscriber.
+
+SemiAnalysis 是一份由读者支持的出版物。要接收新文章并支持我们的工作，请考虑成为订阅者。
+
+TileRT on B200 is in a class of its own. For the 8k/1k input/output token scenario, TileRT reached 340 tokens/s/user on an eight-GPU B200 node. The fastest result in the current dataset was previously 181.4 tokens/s/user on GB300 NVL72 with NVFP4 and MTP, making TileRT 1.9× faster on this metric. Of course - this is on Batch Size 1, where all that extra trouble to set up the complicated copper backplane in the case of the GB300 NVL72 does not come into play at all in boosting interactivity.
+
+B200 上的 TileRT 独树一帜。在 8k/1k 输入/输出 Token 场景中，TileRT 在八 GPU B200 节点上达到了 340 tokens/s/user。当前数据集中此前的最高结果是 GB300 NVL72 使用 NVFP4 和 MTP 时的 181.4 tokens/s/user，TileRT 在此指标上快 1.9 倍。当然——这是在批大小为 1 的情况下，GB300 NVL72 为搭建复杂的铜背板所做的所有额外工作，在提升交互性方面根本不会发挥作用。
+
+Meanwhile, the fastest FP8 result was 113.6 tokens/s/user on B300 with MTP, making TileRT 3.0× faster at the same precision.
+
+与此同时，最快的 FP8 结果是 B300 使用 MTP 时的 113.6 tokens/s/user，TileRT 在相同精度下快 3.0 倍。
+
+Source: InferenceX
+
+来源：InferenceX
+
+At 1k/1k input/output, TileRT FP8 reached 494.2 tokens/s/user. That was 1.9× the best conventional result, at 256.3 tokens/s/user using FP4, and 3.6× the best conventional FP8 result, at 136.3 tokens/s/user. TileRT doesn’t yet have FP4 support, but it is already beating non TileRT FP4 implementations! The result is also notable because it comes from an eight-GPU B200 node rather than the 72-GPU NVLink scale-up domain of GB200 or GB300 NVL72. This comparison concerns per-user interactivity, not aggregate throughput or cost.
+
+在 1k/1k 输入/输出下，TileRT FP8 达到了 494.2 tokens/s/user。这是最佳传统结果（FP4 下 256.3 tokens/s/user）的 1.9 倍，是最佳传统 FP8 结果（136.3 tokens/s/user）的 3.6 倍。TileRT 尚不支持 FP4，但它已经击败了非 TileRT 的 FP4 实现！这一结果也值得注意，因为它来自八 GPU B200 节点，而不是 GB200 或 GB300 NVL72 的 72-GPU NVLink 扩展域。此比较涉及的是单用户交互性，而非总吞吐量或成本。
+
+Source: InferenceX
+
+来源：InferenceX
+
+Source: InferenceX
+
+来源：InferenceX
+
+However - there are always tradeoffs when it comes to inference! TileRT’s interactivity advantage comes with lower aggregate throughput. Conventional engines can amortize weight loads and fixed kernel costs across more users as concurrency rises. At 8K/1K input/output, the GB300 FP4+MTP point at concurrency 12 delivers approximately 240 total tokens/s/GPU while maintaining 154 tokens/s/user. TileRT delivers 160.4 total tokens/s/GPU while reaching 340 tokens/s/user.
+
+然而——推理总是有权衡！TileRT 的交互性优势伴随着较低的总吞吐量。随着并发度提高，传统引擎可以将权重加载和固定 Kernel 成本分摊给更多用户。在 8K/1K 输入/输出下，GB300 FP4+MTP 在并发 12 时提供约 240 总 tokens/s/GPU，同时保持 154 tokens/s/user。TileRT 提供 160.4 总 tokens/s/GPU，同时达到 340 tokens/s/user。
+
+The trade-off is therefore: TileRT provides much higher per-user speed, but the conventional GB300 point completes more aggregate work per GPU. TileRT as of publication also serves only one in-flight request per decode node, making this a deliberately specialized operating point rather than a general throughput configuration. Thus, with support only for a batch size of 1 user, TileRT is not just a race car, but it is more like a private rocket ship with room for just one passenger. Engineering TileRT to support more passengers might be possible, but it is an ambitious goal.
+
+因此，权衡在于：TileRT 提供了更高的单用户速度，但传统的 GB300 运行点每个 GPU 完成的总工作量更多。截至发布时，TileRT 每个解码节点仅服务一个在途请求，这使得它成为一个刻意专业化的运行点，而非通用吞吐配置。因此，由于仅支持 1 个用户的批大小，TileRT 不仅仅是赛车，更像是一艘只能容纳一名乘客的私人火箭飞船。通过工程努力让 TileRT 支持更多乘客或许可行，但这是一个雄心勃勃的目标。
+
+Star InferenceX GitHub
+
+为 InferenceX GitHub 加星
+
+For end-to-end latency, TileRT at FP8 outperforms the best previously recorded GLM-5.1 result by 4.5× at 1k/1k and 3.0× at 8k/1k. As expected, TileRT’s time to first token (TTFT) is good but not exceptional. The decisive advantage comes from the decode tail: 3.01 seconds, compared with 6.54 seconds for the best NVFP4 + MTP competitor and 18.18 seconds for MI355X.
+
+在端到端延迟方面，FP8 的 TileRT 在 1k/1k 下比此前最佳的 GLM-5.1 结果快 4.5 倍，在 8k/1k 下快 3.0 倍。正如预期，TileRT 的首 Token 时间（TTFT）不错但并不突出。决定性优势来自解码尾部：3.01 秒，而最佳 NVFP4 + M

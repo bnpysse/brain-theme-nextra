@@ -1,0 +1,45 @@
+---
+title: "Sovereign Tech Agency invests €500k in Flatpak_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：德国主权技术基金向Flatpak投入50万欧元
+
+【文章正文】：
+德国主权技术基金注资Flatpak公告
+我们激动地宣布，德国主权技术机构（Sovereign Tech Agency）通过其主权技术基金（STF）计划，向Flatpak的开发与维护投入508,640欧元重大资金。这项为期两年的计划由Modal联合发起，Para-Real Ltd.作为支持机构，将加速Flatpak发展为安全沙盒化的Linux桌面软件打包与分发平台。
+
+作为Fedora Silverblue、openSUSE Aeon、SteamOS和GNOME OS等镜像操作系统的核心应用分发方案，Flatpak已是GNOME、KDE和elementary等主流生态的首选格式。本次投资将通过扩展Flatpak功能，直接提升自由软件桌面生态的安全性、健壮性及整体用户体验。
+
+沙盒化程度现状
+尽管Flatpak是当前GNU/Linux最成熟的解决方案，其安全沙盒功能仍落后于Android/iOS等资金充裕的专有平台。现存技术限制包括：无法分离音频输出与麦克风权限，网络与VPN等关键领域仍缺乏专用门户接口。
+
+继2023/2024年GNOME STF项目取得重大进展后，由于平台级开发需要专业能力且Flatpak维护者资源有限，近年发展放缓。这阻碍了完全依赖Flatpak应用的安全镜像操作系统的普及。
+
+协作推进
+对Modal而言，强大的应用沙盒机制是打造能与现代移动平台竞争的自由软件操作系统的关键。凭借组织GNOME和systemd STF项目的经验，我们联合社区成员发起这项推动生态发展的新计划。
+
+技术实施由Sebastian和Adrian主导，Kateryna与Cade提供组织支持。Para-Real Ltd.作为支持机构的同时，我们期望通过投资培育长期社区能力：扩大技术人才储备，并为Flatpak项目建立更规范的结构框架。
+
+技术执行团队汇聚了2023/2024 GNOME STF项目的Philip Withnall、Julian Sparber和Dhanuka Warusadura，以及Zelda Ahmed、Ignacy Kuchciński、Hari Rana、Bazaar的Eva和GNOME资深设计师Sam Hewitt。项目将于未来数月启动，持续至2027年底。
+
+技术路线图
+主权技术基金委托的工作将填补沙盒化关键缺口，引入长期需求的基础设施，并保障常规维护：
+
+重点领域包括：
+新门户接口
+- 音频：为PipeWire实现静态套接字权限，WirePlumber设备访问策略，以及音频权限设置门户（如允许扬声器访问而不开放麦克风权限）
+- 网络：通过针对特定范围（主机/局域网/互联网）和端口的静态权限实现网络隔离，防止本地设备不必要暴露
+- VPN：参照Android/iOS API设计的新门户，使第三方VPN应用能管理系统级连接
+- 写作辅助：拼写检查门户实现系统级词典共享（即使沙盒环境下），并支持如Eloquent等应用接入提供语法修正等高级编辑建议
+- 密码自动填充：研究设计安全密码填充门户以取代当前不安全的NativeMessaging方案
+
+基础设施与维护
+- 权限声明：新静态权限系统便于应用商店审核功能，支持引入第三方无障碍工具等高级特性
+- 意图系统：应用声明服务的抽象框架，实现深层页面链接或原生处理特定网页URL
+- 门户维护：移植至libdex，增加集成测试，改进系统权限对话框
+
+持续关注
+随着设计实施推进，计划可能动态调整。欢迎通过Matrix频道#flatpak:matrix.org和#xdg-desktop-portals:matrix.org关注进展并与我们互动。
+
+敬请期待后续更新！
