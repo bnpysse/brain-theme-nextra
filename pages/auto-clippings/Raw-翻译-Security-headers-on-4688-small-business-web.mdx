@@ -1,0 +1,61 @@
+---
+title: "Security headers on 4,688 small-business websites 49.7 met n_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Security headers on 4,688 small-business websites: 49.7% met none of 7 criteria
+【文章标题】：4,688家小企业网站的安全标头分析：49.7%未满足7项标准中的任何一项
+
+【文章正文】：
+Security Headers on Directory-Listed U.S. Local-Business Websites
+【美国本地企业目录网站的安全标头现状】
+
+A 2026 study of 7,040 directory-listed U.S. local-business websites: which security headers they send, and which they get wrong.
+【2026年针对7,040家美国本地企业目录网站的研究：它们发送了哪些安全标头，又存在哪些错误配置】
+
+Why we looked
+【研究背景】
+RACKCRUNCH has a free Security Header Check. You give it a URL, it makes one request, and it tells you which response headers are set, which are set badly, and which are missing.
+【RACKCRUNCH提供免费的安全标头检测工具。用户输入URL后，系统会发起单次请求并反馈响应标头的设置情况，包括配置错误和缺失项】
+
+Checking one site at a time made us curious about the bigger picture. We didn't mean banks or big tech. We meant the plumber, the law office, the car lot, the pizza place: businesses that may lack dedicated web-security staff.
+【逐个检测网站引发了我们对整体情况的兴趣。我们关注的不是银行或科技巨头，而是水管工、律师事务所、车行、披萨店等可能没有专职网络安全人员的小微企业】
+
+We needed a list of those businesses, and there isn't a clean one. So we used the closest thing we could find: the public Curlie web directory, the human-edited successor to DMOZ. We drew 7,040 directory rows at random from its US local "Business and Economy" categories, as of the 2026-02-02 snapshot. They represent 7,022 unique initial registrable domains. Think of it as an SMB-oriented directory sample. We did not check how big any of these businesses are. Some will be larger than "small", and the directory tilts toward businesses established enough to get listed. When this report says "sites", it means these directory-listed sites, not every small business in the US.
+【由于缺乏现成的企业名录，我们采用最接近的公开资源——人工编辑的Curlie网络目录（DMOZ的继任者）。从2026年2月2日的快照中，随机抽取美国本地"商业与经济"类别的7,040条记录，对应7,022个独立可注册域名。该样本偏向已有一定规模的企业，报告中"网站"特指这些目录收录站点，非全美所有小微企业】
+
+On 2026-09-24 we ran two HTTPS request-chain scans of each sampled URL, following at most three redirects; all reported estimates come from the second scan. We read the response headers and never the pages themselves.
+【2026年9月24日，我们对每个样本URL进行两次HTTPS请求链扫描（最多追踪三次重定向），所有统计数据基于第二次扫描结果。我们仅分析响应标头，不读取页面内容】
+
+We expected low adoption. That is roughly what we got. The surprises came from how low, and from one number we had to take apart.
+【正如预期，采用率普遍偏低。但实际数据之低仍超出预期，其中某个数值需要特别剖析】
+
+Which headers sites send
+【网站发送的标头情况】
+5,642 of the 7,040 sampled rows gave us a usable HTTPS response. 4,701 of those were HTTP-200 responses, and they came from 4,688 unique final registrable domains. Those 4,688 domains are our principal base (called "dedup-200" in the data files): one HTTP-200 response per final registrable domain, from the second scan. The definitions box at the top of this report spells out every base. Every figure in this report is on that base unless it says otherwise.1
+【7,040个样本中有5,642个返回有效HTTPS响应，其中4,701个为HTTP-200响应，对应4,688个最终可注册域名。这4,688个域名构成主要分析基准（数据文件中标记为"dedup-200"），即第二次扫描中每个最终域名的单次HTTP-200响应】
+
+We started with the simplest question: which of seven study-defined explicit-header criteria does each site meet? These are criteria under our rubric, not a security grade, and a site can reasonably leave some of them out. Three need a word up front. A missing Referrer-Policy gets the browser's secure default, so we don't treat it as a failure; the point goes only to sites that set a secure value themselves. Permissions-Policy is still experimental and unevenly supported across browsers, and our criterion counts an explicit declaration, not protection gained. Cross-Origin-Opener-Policy depends on context: it matters most for sites that open pop-ups or handle cross-origin windows, and it can break sign-in and payment flows.
+【我们首先回答最基础的问题：每个网站满足七项研究定义的显式标头标准中的哪些？这些是分类标准而非安全评级，合理缺省某些标头是可以接受的。需特别说明三点：缺失Referrer-Policy会触发浏览器安全默认值，故不作为扣分项；Permissions-Policy仍处实验阶段且浏览器支持不均，我们仅统计显式声明；Cross-Origin-Opener-Policy需视场景而定——对弹窗或跨源窗口处理网站尤为重要，但可能破坏登录/支付流程】
+
+No explicit criterion in our rubric was near-universal.
+【所有标准均未接近普及】
+
+HSTS was the most commonly observed header, present on 43.8% of sites. The most commonly passed criterion in our seven-item rubric was X-Content-Type-Options: nosniff, at 39.7%; only 12.3% met our stronger HSTS criterion of at least one year plus includeSubDomains. We call that study-defined strong HSTS, and it is measured on the final response host only. If a site redirects to www, includeSubDomains there covers hosts under www, not the bare domain or sibling hosts such as shop. Of the 578 strong-HSTS passes, 260 (45.0%) came from a www final host, 316 from the bare domain and 2 from another subdomain. Thus, for nearly half of strong-HSTS passes, the observed policy was on a www host and does not establish coverage of the bare domain. 31.2% send a clickjacking header with a recognized restrictive value under our parser. 8.0% send an explicit non-wildcard Permissions-Policy declaration, and 1.1% send a recognized non-default Cross-Origin-Opener-Policy value.
+【HSTS是最常见的标头（43.8%网站配置）。七项标准中通过率最高的是X-Content-Type-Options: nosniff（39.7%），而符合更严格HSTS标准（至少一年有效期+includeSubDomains）的仅12.3%。我们称后者为"强HSTS"，且仅统计最终响应主机——若网站跳转至www子域，includeSubDomains仅覆盖www下主机，不包含根域或shop等同级子域。578个强HSTS案例中，260个(45.0%)来自www主机，316个来自根域，2个来自其他子域。因此近半数强HSTS配置未覆盖根域。31.2%网站发送了可识别的防点击劫持限制值标头，8.0%配置了显式非通配符Permissions-Policy声明，1.1%设置了非默认Cross-Origin-Opener-Policy值】
+
+86.6% of sites don't send a Referrer-Policy at all, and as above, that is less bad than it sounds. When the header is missing, modern browsers fall back to strict-origin-when-cross-origin, which is a sensible default. The more concerning cases are explicit weak legacy values.
+【86.6%网站完全不发送Referrer-Policy标头（如前所述，这比听起来要好——现代浏览器会回退到strict-origin-when-cross-origin的合理默认值）。更值得关注的是显式配置的弱历史值】
+
+And one site in five gives something away. 20.5% [19.3-21.7] of sites matched our version-token rule: a digit in any of Server, X-Powered-By, X-AspNet-Version or X-AspNetMvc-Version, such as Apache 2.4.x, Microsoft-IIS/10.0 or nginx 1.x. For 27 sites, the only leak was an ASP.NET version header. That can aid version-targeted reconnaissance, but it is a low-severity finding: hiding a version number patches nothing.
+【每五个网站就有一个存在信息泄露。20.5%[19.3-21.7]的网站符合版本标记规则：在Server、X-Powered-By、X-AspNet-Version或X-AspNetMvc-Version标头中包含数字（如Apache 2.4.x、Microsoft-IIS/10.0或nginx 1.x）。其中27个网站仅泄露ASP.NET版本标头。虽然这可能辅助版本定向侦查，但属于低危发现——隐藏版本号并不能修复漏洞】
+
+Here is the full table on the principal base. Intervals quantify sampling uncertainty under the stated sample model, not frame bias, parser misclassification, CDN variation, or selective platform attribution.
+【以下是主要基准的完整数据表。置信区间仅量化抽样模型下的不确定性，不包含框架偏差、解析器误分类、CDN差异或选择性平台归因】
+
+| Control (unique HTTP-200 domains, n=4,688) | Sites | Share | 95% CI | 
+|---|---|---|---|
+| HSTS present | 2,
+| 控制组（独立HTTP-200域名，n=4,688） | 网站数 | 占比 | 95%置信区间 |
+|---|---|---|---|
+| 存在HSTS | 2,
