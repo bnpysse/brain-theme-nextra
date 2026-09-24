@@ -1,0 +1,60 @@
+---
+title: "MCP was always a bad idea_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：MCP was always a bad idea?
+【文章标题】：MCP从来就是个糟糕的主意？
+
+【文章正文】：
+My comment
+我的评论
+
+on
+关于
+
+MCP was always a bad idea?
+"MCP从来就是个糟糕的主意？"
+
+— Hacker News.
+——黑客新闻
+
+This article entirely misses the value that MCP brings today.
+这篇文章完全忽视了MCP当今带来的价值。
+
+Sure, there's almost no reason to use MCPs if you are running a full-blown terminal agent (Claude Code, Codex, Meta Muse, OpenClaw etc) with unfettered internet access - just let it call APIs directly.
+确实，如果你运行的是一个功能完备的终端代理（如Claude Code、Codex、Meta Muse、OpenClaw等）并且拥有不受限制的网络访问权限，那么几乎没有任何理由使用MCP——直接让代理调用API即可。
+
+If you want to operate something that's less YOLO than that, you'll find yourself wanting:
+但如果你想运行一个不那么"莽撞"的系统，你会发现你需要：
+
+Control over exactly which external services it can access
+精确控制它可以访问哪些外部服务
+
+A way to handle authentication that doesn't allow the agent to directly access API keys
+一种处理认证的方式，不允许代理直接访问API密钥
+
+A sensible UI to allow users to connect and authenticate further services
+一个合理的用户界面，允许用户连接和认证更多服务
+
+Strong audit logging for what's going on
+强大的审计日志记录功能
+
+MCP makes all of that so much easier to provide.
+MCP让所有这些功能的实现变得容易得多。
+
+Thinking MCP is obsolete because full coding agents don't need it misses out on all of the other things we might want to build.
+认为MCP已经过时，因为完整的编码代理不需要它，这让我们错过了所有其他我们可能想要构建的东西。
+
+Tags:
+标签：
+
+hacker-news
+黑客新闻
+
+,
+
+,
+
+model-context-protocol
+模型上下文协议

@@ -1,0 +1,42 @@
+---
+title: "Built an open-source local proxy to stop coding agents from_全翻译"
+tags: ["Reddit_全文翻译", "r_CursorAI"]
+---
+
+【帖子标题】：Built an open-source local proxy to stop coding agents from leaking AWS keys and burning tokens
+【翻译标题】：开源本地代理工具：防止编程助手泄露AWS密钥和滥用Token
+
+【帖子正文】：
+Hey everyone,
+大家好，
+
+Like many of you, I pair program with AI daily, but I noticed two annoying problems:
+和许多人一样，我每天都会用AI结对编程，但发现了两个棘手问题：
+
+Accidental secret leakage: Pasting code or having agents read files often transmits AWS keys, GitHub tokens, or database passwords straight to cloud LLM providers.
+意外密钥泄露：粘贴代码或让AI读取文件时，经常会把AWS密钥、GitHub令牌或数据库密码直接传给云端LLM服务商。
+
+Redundant API spend: Agentic loops constantly re-send massive context windows that are 95% identical, running up huge bills.
+冗余API开销：智能代理循环不断重复发送95%内容相同的超大上下文窗口，导致账单激增。
+
+I built an open-source tool called ContextShield (MIT):
+我开发了一个叫ContextShield的开源工具（MIT协议）：
+
+- Sits on http://localhost:8080 between your IDE and OpenAI/Anthropic (just point your baseURL to it).
+- 在IDE和OpenAI/Anthropic之间运行（地址为http://localhost:8080，只需将baseURL指向它）
+
+- Uses Shannon entropy + regex to intercept and redact secrets in flight before they leave your machine.
+- 采用香农熵+正则表达式技术，在敏感信息离开本地前实时拦截脱敏
+
+- Two-tier cache (L1 LRU + L2 SQLite) that returns identical prompts in &lt; 5ms.
+- 双层缓存（L1 LRU + L2 SQLite），相同提示词响应时间&lt;5毫秒
+
+- Zero-copy SSE streaming so you don't lose any streaming speed.
+- 零拷贝SSE流传输，保持完整流式响应速度
+
+GitHub & Releases (includes a standalone .exe launcher):
+GitHub发布页（含独立.exe启动器）：
+https://github.com/NurLucas/context-shield
+
+Let me know what you think or what features you'd like added!
+欢迎反馈建议或功能需求！

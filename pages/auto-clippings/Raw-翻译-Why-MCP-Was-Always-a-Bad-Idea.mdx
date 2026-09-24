@@ -1,0 +1,85 @@
+---
+title: "Why MCP Was Always a Bad Idea_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Why MCP Was Always a Bad Idea  
+【文章标题】：为什么MCP从一开始就是个糟糕的主意  
+
+【文章正文】：  
+Why MCP Was Always a Bad Idea  
+为什么MCP从一开始就是个糟糕的主意  
+
+Recently I went to an all-day event centered around the latest and greatest in the MCP world. While all of the presenters were awesome and seemed to be passionate about the work they were doing, I’m honestly tired of MCP. It’s a horrible protocol built for a time when LLMs weren’t that smart, and we’ve outgrown it.  
+最近我参加了一个全天活动，主题围绕MCP领域的最新进展。虽然所有演讲者都很出色且充满热情，但我实在厌倦了MCP。这个诞生于大语言模型（LLM）尚未如此智能时代的协议早已过时，我们已不再需要它。  
+
+A Brief History  
+历史回溯  
+
+MCP was released in November 2024 by the Anthropic team as a protocol designed to help agents connect to external services and data sources.1 The models of the time were still relatively primitive, at least compared to what we have right now. We didn’t even have Claude Code back then, and general-purpose agentic workflows were far less reliable.  
+2024年11月，Anthropic团队发布MCP协议，旨在帮助智能体连接外部服务和数据源。当时的模型相对原始（相比现在），连Claude Code都尚未问世，通用型智能体工作流可靠性极低。  
+
+Users started to see the usefulness of giving their AI models access to external services. It enabled a level of productivity that we hadn’t seen before. We saw an explosion in MCP adoption, coinciding with a similar, if not more explosive, growth in LLM adoption across the economy.  
+用户逐渐意识到让AI模型接入外部服务的价值，这带来了前所未有的生产力提升。MCP的采用率呈爆炸式增长，与此同时LLM在各行业的应用也出现了同等（甚至更甚）的迅猛发展。  
+
+Over time, MCP continued to evolve under Anthropic’s stewardship before it was eventually donated to the Agentic AI Foundation, under the Linux Foundation, in 2025.2  
+在Anthropic的管理下，MCP持续演进，最终于2025年被捐赠给Linux基金会旗下的Agentic AI基金会。  
+
+The MCP Industrial Complex  
+MCP产业复合体  
+
+With the huge growth in adoption, users started to add many MCP servers to their setups, and they started running into the context bloat issue. Each server would come with multiple tools, each with its own schema, which started to overload the context of all of these models.  
+随着采用率激增，用户开始部署大量MCP服务器，随之遭遇上下文膨胀问题——每个服务器搭载多个工具（各具独立模式），最终导致所有模型上下文过载。  
+
+Harness developers found many tricks around this, including generic search/execute patterns now offered by platforms like Composio, MintMCP, and Pipedream. They all effectively solve the problem of having one place to put your credentials for the various external services and give your agent a minimal set of tools (to reduce context bloat) that it can use to access them. I want to make clear that this is a good thing, for the short term.  
+平台开发者们（如Composio/MintMCP/Pipedream）通过通用搜索/执行模式等方案缓解问题：集中存储各服务凭证，为智能体提供最小化工具集以减少上下文膨胀。必须承认，这在短期内是有效方案。  
+
+With all the stuff we’ve built around MCP, what we didn’t take into account, or maybe have ignored, is the models getting better. We now have whole systems dedicated to monitoring MCP servers, making sure the responses are good, making sure that agents are able to easily access the tools, figuring out schemas, and determining what we need to give agents so that they can make the right call at the right time.  
+我们在MCP上构建了整套生态，却忽略了模型本身的进化。如今我们部署了完整系统来监控MCP服务器、确保响应质量、优化工具访问、解析模式结构——只为让智能体在正确时机做出正确决策。  
+
+Surprise, Surprise, the Big Labs Were Right  
+意料之中：大实验室的远见  
+
+The models got better. They are now able to execute code on a computer, reason about large codebases, and generally act much more autonomously than ever before. A big part of that work was writing/running scripts for coding purposes. A side effect (though is it?) is that now they are good at calling APIs directly. They can write scripts, compose multiple different services, and call APIs they haven’t seen before, all in useful workflows with minimal intervention from the user side.  
+模型能力突飞猛进：可执行本地代码、推理大型代码库、自主性远超以往。它们通过编写/运行脚本掌握编程能力，而"副作用"是——现在它们已擅长直接调用API，能编写脚本整合多服务，甚至调用未见过的API，整个流程几乎无需人工干预。  
+
+LLMs have gotten so good at this, Cloudflare even launched Code Mode, a better way to use MCP by having LLMs compose the various calls into scripts that can be executed in a sandbox.3  
+LLM在此领域表现如此出色，以至于Cloudflare推出"代码模式"——让LLM将各类调用组合成沙盒可执行脚本，这本质上是MCP的优化用法。  
+
+But even better than that, the LLMs have figured out how to use the --help command to discover CLIs, so they no longer need MCP servers to access many services available through documented APIs or CLIs. Most remote-service MCP servers ultimately wrap APIs that already exist.  
+更妙的是，LLM已学会通过--help命令探索CLI工具，这意味着它们不再需要MCP服务器来访问那些已有文档化API/CLI的服务——毕竟多数MCP服务器只是对现有API的封装。  
+
+What Now?  
+现在怎么办？  
+
+We delete most of our MCP servers. That’s it. Agents with terminal access can replace most MCP servers and often are more capable There are still some issues, like CLIs returning machine-readable responses (JSON/XML, etc.), which tend to be very verbose and heavy on token usage, but we have ways to fix this.  
+答案很简单：删除大部分MCP服务器。拥有终端访问权限的智能体不仅能取代多数MCP服务器，且能力更强。虽然还存在CLI返回机器可读响应（JSON/XML等）导致token消耗过大的问题，但我们有解决方案。  
+
+Much of the alternative already exists: documented HTTP APIs, standard content协商, and mature authentication mechanisms.  
+替代方案已然成熟：文档化的HTTP API、标准内容协商机制、完善的认证体系。  
+
+We should start to standardize how agents use HTTP APIs directly. For example, agent clients could attach headers to identify themselves as agents, and servers could automatically send them response data as Markdown or text instead of HTML or verbose JSON.  
+我们应开始标准化智能体直接使用HTTP API的方式。例如：智能体客户端可通过标头声明身份，服务端则自动返回Markdown/文本格式响应（而非HTML/冗长JSON）。  
+
+Some Real Examples  
+实例佐证  
+
+- The Accept Markdown Header  
+- 接受Markdown标头  
+
+A growing number of LLM-friendly servers, especially text-heavy sites like documentation sites, honor the Accept: text/markdown header. These servers can automatically send a rendered Markdown file instead of the HTML response they would usually send. The media type itself is standardized, and using it for agent-oriented content negotiation is gaining adoption.  
+越来越多LLM友好型服务器（尤其是文档类站点）支持Accept: text/markdown标头，直接返回渲染好的Markdown而非HTML。这种标准化媒体类型正逐渐成为智能体内容协商的新规范。  
+
+- Documentation Sites Using the Accept-Language Header  
+- 文档站点使用Accept-Language标头  
+
+Recently, a Vercel engineer called on harnesses to send the programming language the client prefers, so documentation sites can serve more specific examples. For example, adding Python could prioritize docs for the Python SDK instead of sending something generic. Tobi Lutke of Shopify liked it so much that it now ships in Shopify docs.  
+Vercel工程师提议客户端发送偏好的编程语言标头，使文档站点能返回针对性示例（如Python开发者优先获取Python SDK文档）。Shopify创始人Tobi Lutke对此大为赞赏，现已将其纳入Shopify文档系统。  
+
+Tobi Lutke (@tobi): Great idea. Will support this on Shopify docs.  
+Tobi Lutke (@tobi): 绝妙的主意。Shopify文档将支持此功能。  
+
+Closing Thoughts  
+结语  
+
+（注：原文结尾部分未完整提供，此处保持开放结构）

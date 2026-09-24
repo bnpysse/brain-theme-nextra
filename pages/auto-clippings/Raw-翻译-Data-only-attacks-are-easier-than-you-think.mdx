@@ -1,0 +1,53 @@
+---
+title: "Data-only attacks are easier than you think 2024_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Data-only attacks are easier than you think (2024)
+【文章标题】：纯数据攻击比想象中更简单（2024）
+
+【文章正文】：
+Data-only attacks, those that do not affect a program’s control flow, have long been considered too sophisticated and niche to pose a practical threat. With our research, however, we have built a tool that automatically generates them with surprising ease. We explain how such attacks work, and why our tool, Einstein, calls upon both researchers and vendors alike to rethink their mitigation strategies.
+纯数据攻击（即不影响程序控制流的攻击方式）长期以来被认为过于复杂和小众，难以构成实际威胁。但通过我们的研究，我们开发了一个能轻松自动生成此类攻击的工具。本文将解释这类攻击的工作原理，以及为何我们的工具"爱因斯坦"呼吁研究人员和厂商重新思考防御策略。
+
+Suppose you are a hacker and you just found a bug that allows you to overwrite data in a victim program. Such a scenario is not uncommon: Microsoft, Google, and Mozilla report that about 70% of their security bugs are indeed such memory safety bugs [1, 2, 3]. The question then becomes, as a hacker, how do you weaponize this bug into a real exploit?
+假设你是一名黑客，刚发现一个可以覆写目标程序数据的漏洞。这种情况并不罕见：微软、谷歌和Mozilla报告显示，约70%的安全漏洞确实属于这类内存安全问题[1,2,3]。那么作为黑客，如何将这类漏洞武器化为实际攻击？
+
+In the past, it would have been relatively straightforward: you could, for example, use the bug to conduct a control-flow hijacking attack, overwriting code pointers in the program [4], forcing it to execute your own malicious code. However, due to decades of research (resulting in defenses such as DEP, CFI, CPI, etc.), it is now very difficult to divert a program’s control flow away from the code that it intends to execute. Hence, weaponizing the bug in such a way is now often infeasible in practice.
+过去这相对简单：例如可以通过漏洞实施控制流劫持攻击，覆写程序中的代码指针[4]，迫使其执行恶意代码。但由于数十年研究产生的防御措施（如DEP、CFI、CPI等），如今要改变程序预期执行的控制流已非常困难。因此这种武器化方式在实践中往往不可行。
+
+In our recently published paper at USENIX Security 2024 [5], we present a practical approach to an entirely different method of exploitation: letting the program execute all of its intended code (e.g., any benign functions, system calls, etc.), but with malicious data. These so-called data-only attacks have been known for quite some time [6], but were assumed to be too application-specific or complex to pose any practical threat [7]. In our work, we show that such assumptions are not justified. In particular, we implemented a scalable and automated solution, Einstein, that demonstrates that building data-only attacks is easy — well within reach of low-effort attackers. In this article, we will discuss the insights that allow Einstein to automatically generate such exploits with surprising ease, and the implications of our findings on software vendors.
+在我们发表于USENIX Security 2024的论文[5]中，我们提出了一种完全不同的攻击方法：让程序执行所有预期代码（如良性函数、系统调用等），但使用恶意数据。这类所谓的纯数据攻击虽早有记载[6]，但被认为过于特定于应用程序或过于复杂而难以构成实际威胁[7]。我们的研究表明这些假设并不成立。我们实现的自动化可扩展解决方案"爱因斯坦"证明，构建纯数据攻击非常容易——即使是低水平攻击者也能轻松实现。本文将讨论爱因斯坦能轻松自动生成攻击的技术原理，以及我们的发现对软件厂商的影响。
+
+Let us first walk through one of the classic data-only attacks described in the literature, which exploits a victim web server [6] (simplified for clarity). At start up, the server reads its configuration file to initialize its data. One such configuration option is the CGI-BIN path, which is the directory it uses to execute external programs. In our example, the server sets its cgi_bin_path variable to "/usr/local/server/cgi-bin". We assume that the server has a program in its CGI-BIN directory, sort_script, that a client can use to sort numbers. Moreover, the server has a memory safety bug that allows a malicious client to overflow some buffer and overwrite, for instance, the contents of the cgi_bin_path variable to "/bin":
+首先让我们分析文献中描述的一个经典纯数据攻击案例[6]（已简化以便理解）。该攻击利用了一个Web服务器的漏洞：服务器启动时会读取配置文件初始化数据，其中一个配置项是CGI-BIN路径（用于执行外部程序的目录）。在我们的示例中，服务器将cgi_bin_path变量设置为"/usr/local/server/cgi-bin"。假设该目录下有个sort_script程序可供客户端排序数字。同时服务器存在内存安全漏洞，允许恶意客户端通过缓冲区溢出等方式将cgi_bin_path变量覆写为"/bin"。
+
+Of course, the low-level details of the memory safety bug could differ from this (e.g., it could be a use-after-free rather than a buffer overflow), but nonetheless, the question arises: how could an attacker weaponize such a bug? To answer this question, we will show first how the server interacts with a benign client, then how it interacts with a malicious client:
+当然，内存安全漏洞的具体细节可能有所不同（如可能是释放后使用而非缓冲区溢出），但核心问题是：攻击者如何利用这类漏洞？为解答这个问题，我们先展示服务器与正常客户端的交互，再展示与恶意客户端的交互。
+
+After the server initializes (Fig. 2a), it begins processing requests. A benign client interacts with it as follows (Fig. 2b):
+- ➊ The client sends a "POST sort-script" request with the unsorted numbers "2 1 3" in the request body.
+- ➋ The server concatenates the CGI-BIN path and the request’s path to determine the program to be executed, "/usr/local/server/cgi-bin/sort-script".
+- ➌ The server executes the program, i.e., the sort script, and passes in "2 1 3" as its input. It does so by invoking the execve system call, which instructs the operating system to run the script on behalf of the server.
+- ➍ The script sorts the numbers and outputs "1 2 3", which the server forwards to the client in its HTTP response.
+服务器初始化后（图2a）开始处理请求。正常客户端的交互如下（图2b）：
+- ➊ 客户端发送"POST sort-script"请求，请求体包含未排序数字"2 1 3"
+- ➋ 服务器拼接CGI-BIN路径和请求路径，确定待执行程序为"/usr/local/server/cgi-bin/sort-script"
+- ➌ 服务器通过execve系统调用执行排序脚本，传入"2 1 3"作为输入
+- ➍ 脚本排序后输出"1 2 3"，服务器通过HTTP响应返回给客户端
+
+Let us now sketch how a malicious client could exploit this (Fig. 2c):
+- ➎ The client exploits the bug to set the cgi_bin_path to the string "/bin" (Fig. 1).
+- ➏ The client sends a "POST /sh" request with "touch /tmp/attacker-was-here" in the request body.
+- ➐ The server concatenates the CGI-BIN path and the request’s path to determine the program to be executed, "/bin/sh".
+- ➑ The server executes the program, i.e., the system shell, and passes in "touch /tmp/attacker-was-here" as its input. It does so by invoking the execve system call, which instructs the operating system to run the shell on behalf of the server.
+- ➒ The shell creates the file /tmp/attacker-was-here.
+现在展示恶意客户端的攻击过程（图2c）：
+- ➎ 客户端利用漏洞将cgi_bin_path设置为"/bin"（图1）
+- ➏ 客户端发送"POST /sh"请求，请求体包含"touch /tmp/attacker-was-here"
+- ➐ 服务器拼接路径后确定执行程序为"/bin/sh"
+- ➑ 服务器通过execve调用执行系统shell，传入"touch /tmp/attacker-was-here"作为输入
+- ➒ shell创建文件/tmp/attacker-was-here
+
+First, the victim server does not execute any malicious code provided by the client; all harmful actions are triggered by malicious data. The attack effectively modifies only the arguments of the execve syscall. Other than that, the benign and malicious executions are equivalent — when handling a requ
+首先，受害服务器并未执行客户端提供的任何恶意代码，所有有害操作都由恶意数据触发。该攻击实际上只修改了execve系统调用的参数。除此之外，正常和恶意执行过程完全等价——在处理请求...

@@ -1,0 +1,93 @@
+---
+title: "Saving 100 terabytes of memory by optimizing 1.1.1.1 s DNS c_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：通过优化1.1.1.1的DNS缓存节省100TB内存
+
+【文章正文】：
+How we saved 100 terabytes of memory by optimizing 1.1.1.1's DNS cache
+我们如何通过优化1.1.1.1的DNS缓存节省100TB内存
+
+Big Pineapple, the platform behind 1.1.1.1, Gateway DNS, DNS Firewall, AS112, and several other Cloudflare DNS services, stores over 250 billion DNS cache entries at any given time. At that scale, wasting a single byte per entry costs more than 250 gigabytes of memory across our fleet.
+作为1.1.1.1、Gateway DNS、DNS防火墙、AS112等Cloudflare DNS服务的底层平台，Big Pineapple系统在任何时刻都存储着超过2500亿条DNS缓存记录。在这个规模下，每条记录浪费1字节就意味着整个系统损失超过250GB内存。
+
+Five successive changes to how cache entries are stored in memory cut the per-entry footprint by over 50%. Across our fleet, these changes freed up roughly 100 terabytes of memory, equivalent to the amount of RAM in 130 of our Gen 13 servers. The cache also got faster. Insert throughput rose 43% and lookup latency dropped 19%, as fewer allocations and better memory locality meant we did not trade speed for space.
+通过五项连续的内存存储优化，我们将单条缓存记录的内存占用减少了50%以上。在整个系统中，这些改动释放了约100TB内存，相当于130台第13代服务器的内存总量。缓存性能反而得到提升：插入吞吐量提高43%，查找延迟降低19%——更少的内存分配和更好的局部性意味着我们没有用速度换取空间。
+
+What we cache
+我们的缓存机制
+
+On cold start, Big Pineapple starts out with an empty cache. As DNS queries arrive, the cache fills until it hits its maximum entry count, at which point we evict older or less popular items to make room.
+冷启动时，Big Pineapple从空缓存开始运行。随着DNS查询到来，缓存逐渐填满直至达到最大条目数，此时我们会淘汰较旧或较不流行的条目腾出空间。
+
+The exact cache size varies by data center. When EDNS Client Subnet (ECS) is in use, authoritative servers return different answers depending on the client's network, so we cache multiple versions of the same query. This increases both the number of entries and the memory each one consumes, making the optimizations in this post especially impactful for ECS-heavy locations.
+具体缓存大小因数据中心而异。当使用EDNS客户端子网(ECS)时，权威服务器会根据客户端网络返回不同应答，因此我们需要缓存同一查询的多个版本。这不仅增加了条目数量，也增大了单条内存消耗，使得本文的优化对ECS密集区域尤为关键。
+
+Each item in the cache is a key-value pair. The key identifies what was queried:
+缓存中每个条目都是键值对。键结构标识查询内容：
+pub struct CacheKey &#123;
+    qname: Name,
+    qtype: Rtype,
+    authenticated: bool,
+    tag: Vec&lt;u8&gt;,
+&#125;
+
+The value stores the DNS response itself: the answer, authority, and additional record sections, along with metadata like the creation time, a hit counter, and the Time-to-Live (TTL).
+值结构存储DNS响应本身：应答区、权威区、附加记录区，以及创建时间、命中计数和TTL等元数据：
+pub struct CacheEntry &#123;
+    timestamp: UnixTimeStamp,
+    pub inception: Instant,
+    pub ttl: Ttl,
+    pub hits: u32,
+    pub answers: Vec&lt;Record&gt;,
+    pub authority: Vec&lt;Record&gt;,
+    pub additional: Vec&lt;Record&gt;,
+    pub errors: Vec&lt;ExtendedError&gt;,
+    ...
+&#125;
+
+Both structs have room for improvement. Several fields use types that carry overhead we don't need once the entry is stored.
+这两个结构体都有优化空间。某些字段使用的类型会带来存储后不再需要的开销。
+
+Benchmarking memory usage
+内存使用基准测试
+
+To measure the impact of each change, we benchmark by filling the cache with randomly generated entries that roughly match the traffic distribution we see in production: 56% A records, 25% AAAA, and 19% TXT. Each entry contains between one and four records.
+为衡量每次改动的影响，我们用模拟生产流量分布（56%A记录、25%AAAA记录、19%TXT记录）的随机条目填充缓存进行测试。每条记录包含1-4个资源记录。
+
+TXT records serve as a stand-in for all non-A/AAAA record types in the benchmark. Their size is randomized between 64 and 224 bytes, close to the average response size we see for variable-length record types.
+测试中TXT记录代表所有非A/AAAA记录类型。其大小随机分布在64-224字节之间，接近变长记录类型的平均响应大小。
+
+We track memory usage using a custom allocator that wraps Rust's System allocator and records the number and size of allocations per cache entry. Alongside memory, we measure insert throughput and lookup latency across the full cache flow to make sure memory savings don't come at the cost of performance.
+我们通过封装Rust系统分配器的自定义分配器跟踪内存使用，记录每个缓存条目的分配次数和大小。除内存外，我们还测量完整缓存流程的插入吞吐量和查找延迟，确保内存优化不以性能为代价。
+
+These inputs approximate production rather than reproduce it exactly. Process memory also depends on traffic mix, cache occupancy, allocator state, and memory used outside the cache. We therefore measured resident memory across production instances during the rollout.
+这些输入近似而非完全复现生产环境。进程内存还取决于流量组合、缓存占用率、分配器状态和缓存外内存使用。因此我们在部署过程中测量了生产实例的常驻内存。
+
+The cost of capacity
+容量字段的代价
+
+Vec&lt;T&gt; stores three fields: a pointer to heap-allocated data, the current length, and the total capacity. When you push an item, Vec checks whether the length exceeds the capacity and reallocates if needed. If there's room, it just appends the item and increments the length.
+Vec&lt;T&gt;存储三个字段：堆数据指针、当前长度和总容量。当添加元素时，Vec会检查长度是否超过容量并在必要时重新分配。若有空间则直接追加元素并增加长度。
+
+Once we store a DNS response in the cache, however, we never modify it again. The capacity field serves no purpose, but still costs 8 bytes per Vec. The over-allocated heap space is wasted as well, as a Vec with capacity for eight items but only five stored leaves three slots unused on the heap.
+然而DNS响应存入缓存后就不再修改。容量字段失去作用，但每个Vec仍消耗8字节。过度分配的堆空间也被浪费——容量为8但只存5个元素的Vec会在堆上留下3个未使用位置。
+
+Using Box&lt;[T]&gt; solves both problems. It can't grow after creation, so it doesn't need a capacity field or reserve space for future elements. The same applies to String, which also carries a capacity field. Box&lt;str&gt; drops it.
+使用Box&lt;[T]&gt;可解决这两个问题。因其创建后不可扩展，故不需要容量字段或为未来元素预留空间。同理，带有容量字段的String也可用Box&lt;str&gt;替代。
+
+Each cache entry stores 8 Vec and String fields. Replacing them with Box&lt;[T]&gt; and Box&lt;str&gt; saves 8 bytes per field, 64 bytes per entry. It also eliminates the excess heap memory that Vec reserves for future growth. The combined savings add up to over 15 terabytes with over 250 billion cache entries.
+每个缓存条目包含8个Vec和String字段。用Box&lt;[T]&gt;和Box&lt;str&gt;替换后，每个字段节省8字节，单条记录节省64字节。同时消除了Vec为增长预留的多余堆内存。在2500亿条记录规模下，合计节省超过15TB内存。
+
+Fewer lists, fewer pointers
+更少的列表与指针
+
+Rather than storing the answer, authority, and additional sections in separate lists, we can store a single list with offsets to the start of each section. Since DNS record counts per section fit in a u16, we can use a u16 (2 bytes) for each offset, compared to the 8-byte pointer and 8-byte length that each separate Box&lt;[T]&gt; requires.
+不同于将应答区、权威区和附加区存在独立列表，我们可以存储单个列表并使用偏移量标识各区起始位置。由于每区DNS记录数可用u16表示，每个偏移量只需2字节，相比独立Box&lt;[T]&gt;所需的8字节指针和8字节长度更为节省。
+
+This removes two lists, each with an 8-byte pointer and 8-byte length, and replaces them with two 2-byte offsets, saving 28 bytes per entry.
+这移除了两个列表（各含8字节指针和8字节长度），代之以两个2字节偏移量，单条记录节省28字节。
+
+These savings do not always map directly to the number of bytes removed from individual fields. Rust in
+这些节省并不总是直接对应单个字段移除的字节数。Rust的...
