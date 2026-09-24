@@ -2425,6 +2425,7 @@ export default {
   "Raw-翻译-Github-TauricResearch-TradingAgents": "Github__TauricResearch_TradingAgents",
   "Raw-翻译-Github-THU-MAIC-OpenMAIC": "Github__THU-MAIC_OpenMAIC",
   "Raw-翻译-Github-Open-Dev-Society-OpenStock": "Github__Open-Dev-Society_OpenStock",
+  "Raw-翻译-Github-NVIDIA-Model-Optimizer": "Github__NVIDIA_Model-Optimizer",
   "Raw-翻译-Github-MoonTechLab-LunaTV": "Github__MoonTechLab_LunaTV",
   "Raw-翻译-Github-Lakr233-vphone-cli": "Github__Lakr233_vphone-cli",
   "Raw-翻译-Github-K-Dense-AI-scientific-agent-skills": "Github__K-Dense-AI_scientific-agent-skil...",
