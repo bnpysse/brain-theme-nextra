@@ -1,0 +1,98 @@
+---
+title: "Engrams Embedding Entendre Codesign for Efficient DRAMSSD Of_全翻译"
+tags: ["大咖视点_全文翻译", "SemiAnalysis_(全球半导体产业链与AI算力)"]
+---
+
+【文章标题】：Engrams Embedding Entendre: Codesign for Efficient DRAM/SSD Offloading  
+【文章标题】：记忆印痕嵌入双关：面向高效DRAM/SSD卸载的协同设计  
+
+【文章正文】：  
+Engram extends standard token embeddings with learned multi-token lookups. Recurring local patterns retrieve vectors directly, reducing the need to reconstruct them through attention and feed-forward layers.  
+记忆印痕通过学习的多令牌查找扩展了标准令牌嵌入。重复出现的局部模式直接检索向量，减少了通过注意力层和前馈层重构的需求。  
+
+With Engram model architecture optimization, it allows for lower HBM capacity to be needed for models at the same quality.  
+通过记忆印痕模型架构优化，可在保持相同模型质量的前提下降低对HBM容量的需求。  
+
+This does not mean there won’t be an insane demand for HBM but it just means that model architecture will continue to innovate around constraints.  
+这并不意味着HBM需求会减少，而是表明模型架构将持续围绕硬件限制进行创新。  
+
+This model architecture design is naturally codesigned for parameter offloading: each token accesses a few embedding rows whose addresses depend on token IDs, not hidden states. The runtime can prefetch those rows from host DRAM while earlier layers compute, keeping the table outside HBM without transferring entire weight matrices.  
+该架构天然适配参数卸载设计：每个令牌访问的嵌入行地址仅依赖令牌ID而非隐藏状态。运行时可在前层计算时从主机DRAM预取数据，无需转移整个权重矩阵即可将表保留在HBM之外。  
+
+Our Memory model contains our latest estimates of quarter by quarter HBM, DRAM, & NAND supply and demand.  
+我们的内存模型包含HBM、DRAM和NAND最新分季度供需预测。  
+
+Source: SemiAnalysis  
+来源：SemiAnalysis  
+
+Offloading frees HBM for model weights and KV cache, potentially supporting larger batches or more concurrent sessions. When DRAM becomes the next constraint, NVMe offers another tier. Recommendation systems already cache frequently or recently accessed embedding rows in faster memory while backing colder rows with SSDs.  
+卸载机制为模型权重和KV缓存释放HBM空间，可能支持更大批次或更高并发。当DRAM成为下一瓶颈时，NVMe可提供额外层级。推荐系统早已将高频/近期访问的嵌入行缓存于快速内存，同时用SSD存储冷数据。  
+
+After NVIDIA roadmap had to change due to massively despec’ing Rubin Ultra from 1024GB to now ~200GB of HBM per chip, model architecture optimizations like emgram maybe helpful.  
+在英伟达因Rubin Ultra的HBM规格从1024GB大幅降至200GB/芯片而调整路线图后，记忆印痕等架构优化可能更具价值。  
+
+Our DeepSeek-V4.1-Flash configuration uses roughly 189 GiB of memory for Engram. We replace it with a memory-mapped (mmap) file and measure serving performance with offload to SSD.  
+我们的DeepSeek-V4.1-Flash配置中记忆印痕约占189GiB内存。我们改用内存映射文件并测量了卸载至SSD的推理性能。  
+
+Later on in our report, we will show our Engram offloading experiments along with the official InferenceX agentic inference serving results on Engram models like DeepSeekv4.1 Flash across all 6 NVIDIA GPU SKUs along with MI355X.  
+报告后续将展示记忆印痕卸载实验，以及DeepSeekv4.1 Flash等模型在6款英伟达GPU和MI355X上的InferenceX智能体推理服务结果。  
+
+Unsurprisingly, the CUDA Moat is still mogging MI355X on the ultra popular DeepSeekV4.1 Flash model.  
+不出所料，在爆款模型DeepSeekV4.1 Flash上，CUDA护城河仍对MI355X形成碾压优势。  
+
+We also show how even on high capacity HBM SKUs, offloading emgrams to DRAM could result in even better performance for most of the pareto than keeping the emgram in HBM.  
+我们还将证明：即便在高容量HBM型号上，对多数帕累托最优场景而言，将记忆印痕卸载至DRAM反而比保留在HBM中性能更优。  
+
+Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer of compute from Google Cloud to Microsoft Azure to Oracle, to Meta and many more. Furthermore, it has the support of the ML community including from vLLM, LMCache, SGLang, PyTorch, Huggingface and the support of major labs like OpenAI, MiniMax, ZAI, Qwen, Moonshot Kimi, etc.  
+我们的基准测试已被谷歌云、微软Azure、甲骨文、Meta等几乎所有主要算力采购方复现/验证/支持，并获vLLM、LMCache、SGLang、PyTorch、Huggingface等ML社区及OpenAI、MiniMax、ZAI、Qwen、月之暗面Kimi等顶级实验室背书。  
+
+Source: InferenceX  
+来源：InferenceX  
+
+Star the InferenceX GitHub repository if you find the open-source benchmark and data useful!  
+若认为开源基准测试和数据有价值，请为InferenceX GitHub仓库加星！  
+
+InferenceX is the only inference benchmark in the world to have TPUv7, Jalapeño, Nvidia Rubin NVL72, AMD, and soon, SambaNova and Trainium. Due to how realistic AgentX scenario is to real world agentic inference workloads, AMD has committed to collaborating on MI455X UALoE72 too.  
+InferenceX是唯一涵盖TPUv7、Jalapeño、英伟达Rubin NVL72、AMD（即将支持SambaNova和Trainium）的推理基准。因AgentX场景高度契合真实智能体推理负载，AMD已承诺就MI455X UALoE72展开合作。  
+
+Source: SemiAnalysis  
+来源：SemiAnalysis  
+
+Engram Benefits  
+记忆印痕优势  
+
+DeepSeek did not release the original paper’s two trained Engram models. We replicated its setup on fineweb-edu using the released code and training hyperparameters, at an estimated 6E18 FLOPs per run. We observed the same U-shape scaling:  
+深度求索未公开论文中的两个训练好的记忆印痕模型。我们使用开源代码和训练超参在fineweb-edu复现实验（单次运行约6E18 FLOPs），观察到相同的U型扩展规律：  
+
+Source: SemiAnalysis  
+来源：SemiAnalysis  
+
+Engram improved performance over pure MoE baselines. We also reproduced DeepSeek’s results, where earlier-layer representations with Engram resembled those of later layers.  
+记忆印痕较纯MoE基线提升性能。我们复现了深度求索的结果：使用记忆印痕时，浅层表征与深层表征相似度更高。  
+
+Source: SemiAnalysis  
+来源：SemiAnalysis  
+
+What is Being Memorized?  
+模型记忆了什么？  
+
+Like the original Engram paper, it is possible to probe Engram’s gate scores to see what n-grams DeepSeek-V4.1-Flash makes the most use of. Our gate scan finds names, code fragments, relational phrasing, and boilerplate. These examples prioritize interesting-ness over gate strength.  
+如原论文所述，可通过门控分数分析DeepSeek-V4.1-Flash最常使用的n-gram。我们的扫描发现姓名、代码片段、关系短语和模板文本。这些示例优先展示趣味性而非门控强度。  
+
+One unexpected result was Wright : Ace Attorney.  
+出人意料的结果包括《逆转裁判》中的"成步堂"（Wright）。  
+
+Source: SemiAnalysis  
+来源：SemiAnalysis  
+
+These examples suggest learned memory optimizes the training objective, not a judgment of which facts deserve storage. Licenses, bibliography fragments, API scaffolding, and website furniture can provide prediction shortcuts, so the value of additional Engram capacity may depend on what survives data preparation. This does not show that table capacity is "wasted": the evaluation-corpus scan establishes neither training exposure nor the capacity occupied by each category.  
+这些案例表明学习到的记忆服务于训练目标，而非判断哪些信息值得存储。许可证、参考文献片段、API框架和网页模板能提供预测捷径，因此额外记忆容量的价值取决于数据预处理后的幸存内容。这并非表明表容量被"浪费"：评估语料扫描既不能确认训练曝光度，也无法确定每类内容所占容量。  
+
+For offloading, strong gates do not identify cache-hot rows. Low gates do not automatically save reads either: computing the gate requires the retrieved key and undoes the performance gain of a fused kernel. Skipping reads would require a separate usefulness predictor before retrieval.  
+就卸载而言，强门控不意味着缓存热行。弱门控也不会自动节省读取：计算门控需检索键值，反而抵消融合内核的性能收益。跳过读取需在检索前单独预测有用性。  
+
+Removing Engram  
+移除记忆印痕  
+
+In the original paper’s inference-time ablation, factual-knowledge benchmarks retained just 29–44% of their original performance, while reading comprehension retained 81–93%. This is due to the training–inference mismatch. The resulting degradation therefore measures this trained model’s dependence on Engram, not the p  
+原论文的推理阶段消融实验中，事实知识基准仅保留29-44%性能，而阅读理解保留81-93%。这是训练-推理失配所致。因此性能下降衡量的是该训练模型对记忆印痕的依赖程度，而非...
