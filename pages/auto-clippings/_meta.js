@@ -2379,6 +2379,7 @@ export default {
   "Raw-翻译-Github-tech-leads-club-agent-skills": "Github__tech-leads-club_agent-skills",
   "Raw-翻译-Github-tailscale-tailcat": "Github__tailscale_tailcat",
   "Raw-翻译-Github-smicallef-spiderfoot": "Github__smicallef_spiderfoot",
+  "Raw-翻译-Github-rohitg00-ai-engineering-from-scratch": "Github__rohitg00_ai-engineering-from-scr...",
   "Raw-翻译-Github-p-e-w-heretic": "Github__p-e-w_heretic",
   "Raw-翻译-Github-openai-skills": "Github__openai_skills",
   "Raw-翻译-Github-openai-codex": "Github__openai_codex",
