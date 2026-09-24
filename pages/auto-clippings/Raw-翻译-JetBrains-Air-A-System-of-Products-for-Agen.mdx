@@ -1,0 +1,76 @@
+---
+title: "JetBrains Air A System of Products for Agentic Software Deve_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：JetBrains Air：面向智能体软件开发的产品体系
+
+【文章正文】：
+JetBrains Air: Building a System of Products for Agentic Software Development
+JetBrains Air：构建面向智能体软件开发的产品体系
+
+AI can produce code. Organizations still have to produce software. Agentic development is changing how software gets made, but it hasn’t changed what it costs to be wrong.
+AI能生成代码，但组织仍需生产软件。智能体开发正在改变软件的构建方式，但试错成本依然存在。
+
+Six months ago, we began publicly experimenting with agentic development environments. Around the same time, we introduced JetBrains Central as an open control and execution system for agent-driven development. We subsequently began rolling out JetBrains Central CLI, shared context, cloud agents, automations, governance, and AI cost controls for teams and organizations.
+半年前，我们开始公开试验智能体开发环境。同期推出了JetBrains Central——面向智能体驱动开发的开放控制系统。随后陆续发布了CLI工具、共享上下文、云智能体、自动化流程、治理方案和团队级AI成本管控功能。
+
+Today, we are bringing this work together as JetBrains Air: an open, coherent system of products for developers, teams, and organizations, inside and beyond JetBrains IDEs. It is multi-surface and multi-service. Each product solves a distinct problem, but the products work better together.
+如今我们将这些成果整合为JetBrains Air：一套面向开发者、团队和组织的开放产品体系，既服务于IDE内部也延伸至外部环境。这是多界面、多服务的系统，各产品既解决特定问题，又能协同增效。
+
+JetBrains Air marks a significant expansion in what JetBrains is building for. For 26 years, we have focused primarily on the individual developer workbench. Now, we are building for the wider system through which agentic work is initiated, executed, coordinated, reviewed, and governed.
+JetBrains Air标志着我们的重大转型。26年来我们始终聚焦开发者工作台，现在我们要构建支撑智能体工作发起、执行、协调、审查和治理的广义系统。
+
+The IDE remains important to JetBrains’ future. The era in which the whole software development system can be contained in one window is ending. As part of our continued investment, we are now bringing the foundational agentic experience into JetBrains IDEs, giving professional developers an environment where they can work effectively with agents while understanding, changing, and verifying the resulting code. JetBrains Air connects the wider system developing around it.
+IDE仍是JetBrains的核心，但单窗口承载整个开发系统的时代正在终结。我们将基础智能体体验融入IDE，让开发者能高效协同智能体工作，同时理解、修改和验证生成代码。JetBrains Air将连接外围发展的生态系统。
+
+That system is based on a core belief that the future of agentic development will be multi-vendor. No single model, agent, or service will be right for every developer, team, or task.
+该体系基于核心信念：智能体开发未来必定是多供应商的。没有任何单一模型、智能体或服务能适配所有开发者、团队或任务。
+
+From one product to an open system of products
+从单一产品到开放产品体系
+
+This strategic shift has a practical consequence: JetBrains Air cannot be just another agent or development environment. It must connect products for individual work, team coordination, organizational control, context, and process automation – and remain open to the tools and agents developers choose, including those JetBrains does not build.
+战略转型带来实际要求：JetBrains Air不能只是又一个智能体或开发环境。它必须连通支持个人工作、团队协作、组织管控、上下文及流程自动化的产品，并保持对第三方工具/智能体的开放。
+
+JetBrains Air includes products that are available today alongside others that will be introduced as the system develops:
+JetBrains Air包含现有产品及持续演进的新组件：
+
+- Air in JetBrains IDEs – a complete agentic development experience for directing and orchestrating agents and verifying their work inside JetBrains IDEs.
+- IDE内嵌Air：完整的智能体开发体验，支持在IDE内指挥、协调智能体并验证其产出
+
+- Air Teams – a new way to coordinate and automate software-delivery workflows involving developers and autonomous agents.
+- Air Teams：协调开发者与自主智能体的新型软件交付工作流自动化方案
+
+- Air Governance (formerly JetBrains Central) – organizational policy, visibility, auditability, cost management, and accountability for AI-assisted and agent-driven development.
+- Air治理（原JetBrains Central）：为AI辅助和智能体驱动开发提供组织策略、可视化、可审计性、成本管理及问责制
+
+Junie is JetBrains’ coding agent for professional software development. It will be supported across all Air surfaces.
+Junie是我们面向专业开发的编程智能体，将获得全平台支持。
+
+Air in JetBrains IDEs gives developers the environment to direct agents and verify their output using JetBrains’ code intelligence. Air Teams turns individual agent activity into coordinated team workflows. Air Governance makes that activity visible, governable, and accountable across the organization.
+IDE内嵌Air提供指挥智能体及验证输出的环境，Air Teams将个体智能体活动转化为协同工作流，Air Governance实现全组织范围内的可视化、可管控和可追溯。
+
+But an open system cannot stop at JetBrains’ own products. The Agent Client Protocol (ACP) standardizes the connection between an IDE and an agent’s full harness, including its planning, logic, tools, model routing, and observability. Through the ACP Registry, developers can discover and run a growing range of compatible agents while continuing to work inside JetBrains IDEs.
+开放体系不止于自有产品。Agent Client Protocol(ACP)标准化了IDE与智能体全套能力（包括规划、逻辑、工具、模型路由和可观测性）的连接。通过ACP注册中心，开发者可在IDE内发现和运行日益丰富的兼容智能体。
+
+Air Governance is designed to extend visibility and cost governance across providers and the different tools through which agentic work takes place. This means developers can choose the agent, model, or service suited to the task without forcing the organization to give up context, visibility, or control.
+Air治理旨在跨供应商和工具实现可视化与成本管控，使开发者能自由选择适合任务的智能体/模型/服务，同时保障组织的上下文、可见性和控制权。
+
+Together, the Air products allow work to move between developers, agents, tools, and environments without losing the context and controls surrounding it.
+Air产品组合确保工作能在开发者、智能体、工具和环境间无缝流转，同时保持上下文和管控。
+
+Individual adoption has moved faster than organizational infrastructure
+个体应用速度超越组织基建
+
+Since March, our products have progressed significantly, but so has our understanding of what agentic development requires.
+三月以来产品快速迭代，我们对智能体开发需求的理解也持续深化。
+
+Developers have been adopting agents faster than organizations can build the infrastructure around them. Agent capabilities have advanced, and different models and agents have proven useful for different tasks. However, the context, coordination, governance, and cost management surrounding them have not kept pace.
+开发者采用智能体的速度远超组织配套建设。虽然智能体能力显著提升，不同模型/智能体各有所长，但上下文管理、协作机制、治理方案和成本控制未能同步发展。
+
+For many developers, agents are already delivering practical value. At the organizational level, the economics are much harder to prove. The costs surface elsewhere – in review, rework, security, infrastructure, and spend.
+对许多开发者，智能体已创造实际价值。但组织层面经济性更难验证，成本往往转嫁到审查、返工、安全、基础设施和支出等环节。
+
+Which agents can access company code? Where can data go? Which output requires human r
+哪些智能体可访问公司代码？数据流向何处？哪些输出需要人工...(此处原文截断)

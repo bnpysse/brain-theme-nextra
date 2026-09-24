@@ -1,0 +1,61 @@
+---
+title: "We ve Turned Starlink into a Planetary Barometer_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：We've Turned Starlink into a Planetary Barometer  
+【文章标题】：我们将星链变成了行星气压计  
+
+【文章正文】：  
+Starlink has many downsides. The megaconstellation interferes with astronomy, pollutes the atmosphere with metallic re-entry debris, and has pushed Low Earth Orbit to the brink of the Kessler Syndrome.  
+星链存在诸多弊端。这个巨型卫星星座干扰天文观测，金属再入碎片污染大气层，并将近地轨道推向凯斯勒综合征的边缘。  
+
+On the other hand, it makes a terrific barometer.  
+但另一方面，它却成为了绝佳的气压计。  
+
+Earth is absolutely surrounded by Starlink satellites. More than 11,000 of them are circling our planet right now. Without exception, they all skim the outermost layers of our atmosphere, and so they experience aerodynamic drag. Drag pulls them down, and they have to fight back with thrusters. This makes them ad hoc detectors of air pressure. Every day, we read those detectors and boil the result down to one number: the sink rate.  
+地球正被星链卫星完全包围。目前有超过11,000颗卫星绕地球运行。无一例外，它们都掠过大气层最外层，因此会经历空气动力阻力。阻力将它们向下拉扯，它们必须用推进器反推。这使它们成为临时气压探测器。每天我们读取这些探测器数据，并将结果浓缩为一个数字：沉降速率。  
+
+The sink rate is the answer to a simple question. If a typical Starlink at 480 km switched off its thrusters today, how many meters of altitude would it lose in a day? A value of, say, 30 m/day means it would sink 30 meters. Why 480 km? Because that's where most Starlinks are.  
+沉降速率回答了一个简单问题：如果一颗480公里高度的典型星链卫星今天关闭推进器，它一天会损失多少米高度？例如30米/天的数值意味着它会沉降30米。为什么是480公里？因为这是大多数星链卫星的轨道高度。  
+
+The number changes every day in response to solar activity. In 2026 it has ranged from 19.7 m/day on Aug. 10th, the quietest air of the year, to 127.6 m/day on Jan. 20th, during the year's biggest geomagnetic storm. That's a factor of six. The satellites didn't change; the air did.  
+这个数字每天随太阳活动而变化。2026年其数值范围从8月10日（全年大气最平静时）的19.7米/天，到1月20日（年度最强地磁暴期间）的127.6米/天，相差六倍。卫星没有改变，改变的是大气。  
+
+Here's a way to feel the numbers. At 40 m/day, a dead satellite at 480 km would take roughly four years to fall out of orbit. At the January storm rate it would come down in a little over one year. These are paces, not forecasts, because the air never stays the same for a year. But they show why space weather matters to anyone who owns a satellite.  
+用具体例子感受这些数字：在40米/天的速率下，480公里高度的失效卫星需要约四年脱离轨道；而按1月风暴速率只需一年多。这些是即时速率而非预测，因为大气状态从不会全年不变。但它们说明了太空天气对卫星拥有者的重要性。  
+
+Strictly speaking, drag measures the density of the air, not its pressure. We call it a barometer anyway. When the upper atmosphere heats up, pressure and density rise together, and "densitometer" is not a word anyone wants to read.  
+严格来说，阻力测量的是空气密度而非气压。但我们仍称其为气压计。当高层大气受热时，气压与密度同步上升，而"密度计"这个词没人愿意读。  
+
+The year opened with a bang. On Jan. 19-21 a G4 geomagnetic storm (Kp 9-, Ap 144 on the 20th) heated the thermosphere and the sink rate jumped to 127.6 m/day, about five times the quiet-day floor. It took two weeks for the air to settle down. Smaller storms in March (G3 on the 22nd), April, May, June and July (G3 on the 4th) each produced a sharp spike. Storms weaker than about Ap 45 are buried in the background.  
+这一年开局震撼。1月19-21日的G4级地磁暴（20日Kp指数9-，Ap指数144）加热了热层，沉降速率飙升至127.6米/天，约为平静日基准值的五倍。大气用了两周才恢复平静。3月（22日G3级）、4月、5月、6月和7月（4日G3级）的较小风暴均造成剧烈峰值。Ap指数低于45的风暴则湮没在背景值中。  
+
+Then came summer. As Solar Cycle 25 continued its decline, the air thinned to the year's minimum on Aug. 10th. Starlinks were sinking only 19.7 meters a day.  
+随后夏季来临。随着第25太阳活动周期持续衰减，8月10日大气密度降至年度最低值，星链卫星每日仅沉降19.7米。  
+
+Look closely at the orange bands. Each one marks a stretch of days when the Starlink fleet's median altitude sagged by more than 8 m/day or rebounded by more than 10 m/day. That's SpaceX fighting back. There were eight such episodes in 2026, and every one of them sits on or just after a spike in Ap. We didn't feed the storm calendar into the software. The maneuvers found it on their own.  
+注意观察橙色波段。每个波段标志着星链舰队中位高度日降幅超8米或日增幅超10米的连续时段。这是SpaceX在进行轨道维持。2026年共出现八次此类事件，每次都与Ap指数峰值同步或紧随其后。我们并未向软件输入风暴日历，是机动操作自行识别了这些事件。  
+
+Monitoring is easy, because someone else does the hard part. Using radar, the US Space Force's 18th Space Defense Squadron tracks every object in orbit and, two or three times a day, publishes fresh orbital elements (also known as "TLEs") for each one. They are distributed through Space-Track and CelesTrak.  
+监测工作很轻松，因为困难部分已由他人完成。美国太空军第18太空防御中队用雷达追踪每颗在轨物体，每天发布两到三次最新轨道根数（即TLE数据），通过Space-Track和CelesTrak平台分发。  
+
+Buried in each TLE is a drag term, called B* ("B-star"). Here's the trick: the orbit model that reads a TLE assumes a fixed atmosphere. When the real atmosphere swells, the satellite slows down more than the model expects, and the fitted B* has to grow to keep the orbit matching the tracking. B* is where the air density ends up.  
+每个TLE中都藏着一个名为B*（"B星"）的阻力项。关键在于：读取TLE的轨道模型假设大气固定。当实际大气膨胀时，卫星减速程度超出模型预期，拟合的B*必须增大以保持轨道与追踪数据匹配。B*就是空气密度的最终体现。  
+
+Any one satellite's B* is noisy. The fits are blurred over one to three days, and station-keeping burns corrupt them. So we never trust a single satellite. We follow a fixed sample of 1,000 Starlinks launched before 2026, and for each one we compare today's B* to that satellite's own quiet-air floor. Then we take the median across the whole cohort. The median of hundreds of satellites is the instrument. The noise of any one of them falls away.  
+单颗卫星的B*数据存在噪声。拟合过程会模糊一到三天的数据，且轨道维持点火会干扰结果。因此我们从不采信单颗卫星。我们追踪2026年前发射的1,000颗星链固定样本，对每颗卫星比较当日B*与其自身平静大气基准值，然后取整个群体的中位数。数百颗卫星的中位数就是我们的测量工具，个体噪声由此消除。  
+
+That gives a ratio: how many times denser the air is today than on a quiet day. One calibration constant turns it into meters per day, and the Planet Labs Doves supplied it. In a quiet week of May 2026 their measured fall, scaled to 480 km, fixed the value at 35.7 m/day per unit of the index. Then came the check. During the January storm week, the Doves' actual decay rose 2.74-fold and the Starlink index rose 2.71-fold. Two independent methods agreed to one percent.  
+由此得到比率：今日空气密度是平静日的多少倍。通过一个校准常数可转换为米/天单位，该常数由Planet Labs的Dove卫星提供。2026年5月某平静周期间，Dove卫星实测衰减值经480公里高度标定后，确定该常数为每指数单位35.7米/天。随后验证显示：1月风暴周期间，Dove卫星实际衰减增加2.74倍，星链指数增加2.71倍。两种独立方法差异仅1%。  
+
+Every morning we fetch the newest TLEs, compute the day's value, and post it in the SATELLITE DRAG box on the home page. TLEs are typically a day old, so the number describes yesterday's air.  
+每天早晨我们获取最新TLE数据，计算当日数值，并发布在主页的"卫星阻力"框里。TLE通常有一天的延迟，因此这个数字描述的是昨天的大气状况。  
+
+Starlinks aren't the only ones we're tracking. We monitor three other independent constellations: Planet Labs' SuperDoves (107), Amazon's Kuiper satellites (391), and Eutelsat's OneWeb satellites (651). Each one answers a different question.  
+星链并非我们追踪的唯一星座。我们还监测另外三个独立星座：Planet Labs的SuperDove卫星（107颗）、亚马逊的柯伊伯卫星（391颗）和欧洲通信卫星公司的OneWeb卫星（651颗）。每个星座解答不同的问题。  
+
+The SuperDoves, orbiting at 400-500 km, have no thrusters at all. They cannot fight the atmosphere, so they really do sink. Their measured descent...  
+SuperDove卫星在400-500公里轨道运行，完全没有推进器。它们无法对抗大气阻力，因此确实在持续下降。它们实测的下降速率...  
+
+（注：原文在此处中断，后续内容缺失）
