@@ -4436,6 +4436,7 @@ export default {
   "Auto-简报-This-Small-AI-Will-Change-Everything": "This Small AI Will Change Everything",
   "Auto-简报-This-Free-AI-Just-Caught-The-Billion-Dolla": "This Free AI Just Caught The Billion Dol...",
   "Auto-简报-This-Digital-Radio-Gets-Messages-to-the-Wo": "This Digital Radio Gets Messages to the ...",
+  "Auto-简报-These-Data-Centers-Could-Use-More-Power-Th": "These Data Centers Could Use More Power ...",
   "Auto-简报-Theres-No-Limit-to-How-Bad-Code-Can-Get": "Theres No Limit to How Bad Code Can Get",
   "Auto-简报-The-wayfinder-Skill-Navigating-the-Fog-of": "The wayfinder Skill Navigating the Fog o...",
   "Auto-简报-The-twilight-of-the-chatbots": "The twilight of the chatbots",
