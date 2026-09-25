@@ -1,0 +1,83 @@
+---
+title: "Show HN Agentic CUDA Kernel Optimizer_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: Agentic CUDA Kernel Optimizer
+【文章标题】：展示HN：自主式CUDA内核优化器
+
+【文章正文】：
+An agentic CUDA kernel optimizer that turns workload descriptions into GPU implementations through an automated cycle of code generation, correctness checks, benchmarking, and refinement. Powered by LangGraph, the agent explores kernel implementations and launch configurations, queries GPU properties, and can research NVIDIA documentation for optimization guidance and inspect Nsight Compute counters to inform its next experiment. Each experiment is recorded, and the fastest validated implementation is retained.
+【文章正文】：这是一个自主式CUDA内核优化器，通过代码生成、正确性检查、基准测试和优化的自动化循环，将工作负载描述转化为GPU实现。该代理由LangGraph驱动，能够探索内核实现和启动配置，查询GPU属性，并可以研究NVIDIA文档以获取优化指导，检查Nsight Compute计数器以指导其下一次实验。每次实验都会被记录，最快经过验证的实现会被保留。
+
+The model can change both kernel code and per-case launch configurations. A standalone C++ harness compiles kernels with NVRTC, launches them through the CUDA Driver API, and saves outputs. Python handles comparison and candidate selection.
+该模型可以更改内核代码和每个案例的启动配置。一个独立的C++工具使用NVRTC编译内核，通过CUDA Driver API启动它们，并保存输出。Python负责比较和候选选择。
+
+- Load or generate a signature, input cases, reference kernel, and initial kernel.
+- 加载或生成签名、输入案例、参考内核和初始内核。
+- Run the reference and evaluate the initial implementation.
+- 运行参考内核并评估初始实现。
+- Propose a change, compile it, compare outputs with NumPy, and measure kernel latency.
+- 提出更改，编译它，使用NumPy比较输出，并测量内核延迟。
+- Feed results back into the next attempt; repair invalid candidates within the iteration budget.
+- 将结果反馈到下一次尝试；在迭代预算内修复无效候选。
+- Save the fastest validated candidate, execution history, and a timing heatmap.
+- 保存最快经过验证的候选、执行历史记录和时序热图。
+
+Every case must pass validation. Ranking uses the geometric mean of latency across performance cases; small correctness cases do not affect the score. Timing defaults to 10 warmup launches and 100 measured launches using CUDA events. Compilation time and profiler replay timings are excluded from ranking.
+每个案例都必须通过验证。排名使用性能案例延迟的几何平均值；小的正确性案例不影响分数。时序默认使用CUDA事件进行10次预热启动和100次测量启动。编译时间和分析器重放时序不计入排名。
+
+Developed on Windows with an RTX 3060 Laptop GPU. Requires Python 3.12+, an NVIDIA GPU and compatible CUDA Toolkit/driver, CMake 3.24+, a C++17 compiler, and an OpenAI API key. The build commands below use Visual Studio 2026 with the C++ tools installed.
+在Windows上使用RTX 3060笔记本电脑GPU开发。需要Python 3.12+、NVIDIA GPU和兼容的CUDA Toolkit/驱动程序、CMake 3.24+、C++17编译器和OpenAI API密钥。以下构建命令使用安装了C++工具的Visual Studio 2026。
+
+From the repository root:
+从仓库根目录执行：
+
+python -m venv .venv
+.venv\Scripts\python -m pip install -r optimizer_agent/requirements.txt
+cmake -S cuda_test_harness -B cuda_test_harness/build -DCMAKE_BUILD_TYPE=Release
+cmake --build cuda_test_harness/build --parallel
+
+Create a .env file in the repository root:
+在仓库根目录创建.env文件：
+
+OPENAI_API_KEY=your-key-here
+.venv\Scripts\python optimizer_agent/optimizer_agent.py --description "Single-precision GEMM with rectangular matrices." --max-iterations 7
+
+The default model is gpt-5-mini with medium reasoning effort. API usage is billed to your account. Use -h for all options, or --config optimizer_agent/example.json for the included configuration example.
+默认模型是gpt-5-mini，具有中等推理能力。API使用费用计入您的账户。使用-h查看所有选项，或使用--config optimizer_agent/example.json加载包含的配置示例。
+
+Supply your own workload components with --signature, --reference, --initial-kernel, and --input-cases. Omitted components are inferred or generated. To continue from an earlier run using its saved inputs:
+使用--signature、--reference、--initial-kernel和--input-cases提供您自己的工作负载组件。省略的组件会被推断或生成。要使用之前运行的保存输入继续：
+
+.venv\Scripts\python optimizer_agent/optimizer_agent.py --description "Single-precision GEMM with rectangular matrices." --input-cases results/run-001/input_cases.json --reference results/run-001/reference.cu --initial-kernel results/run-001/best.cu --max-iterations 7
+
+This example assumes the earlier run generated reference.cu; supplied references are saved as supplied-reference.cu. Input manifests retain paths to their binary data, so keep those files available.
+此示例假设之前的运行生成了reference.cu；提供的参考会保存为supplied-reference.cu。输入清单保留其二进制数据的路径，因此请确保这些文件可用。
+
+Optional flags:
+可选标志：
+- --use-nsight : profile a performance case after each valid candidate and expose profiler tools to the model. Requires Nsight Compute and permission to access GPU performance counters.
+- --use-nsight：在每个有效候选后分析性能案例，并向模型公开分析器工具。需要Nsight Compute和访问GPU性能计数器的权限。
+- --nvidia-research : retrieve NVIDIA guidance before generating kernels.
+- --nvidia-research：在生成内核之前检索NVIDIA的指导。
+
+Float32 GEMM on an RTX 3060 Laptop GPU, with NVIDIA research and Nsight Compute enabled.
+在RTX 3060笔记本电脑GPU上启用NVIDIA研究和Nsight Compute的Float32 GEMM。
+
+| Run 022 | Run 023 | 
+|---|---|
+| Optimizing the generated starting kernel. | Continuing from run 022's best kernel with the same inputs and reference. | 
+| 优化生成的起始内核。 | 使用相同的输入和参考从运行022的最佳内核继续。 |
+
+Each session gets a directory under results/run-NNN/ containing kernel sources, requests, input/output data, model/tool responses, history.json, and summary.json. Successful runs export best.cu, per-case replay requests, and heatmap.png/heatmap.svg. Nsight reports are saved when profiling is enabled.
+每个会话在results/run-NNN/下获得一个目录，包含内核源文件、请求、输入/输出数据、模型/工具响应、history.json和summary.json。成功的运行会导出best.cu、每个案例的重放请求以及heatmap.png/heatmap.svg。启用分析时会保存Nsight报告。
+
+This is an experimental optimizer for individual kernels. Passing supplied cases does not prove general correctness, and a generated reference is not an independent correctness oracle. Improvements are workload-dependent; no comparison against cuBLAS or other vendor libraries is currently included. Keep the GPU otherwise idle when comparing timings.
+这是一个针对单个内核的实验性优化器。通过提供的案例并不能证明普遍正确性，生成的参考也不是独立的正确性验证工具。改进取决于工作负载；目前未包含与cuBLAS或其他供应商库的比较。在比较时序时，请保持GPU空闲。
+
+Generated input scripts execute locally as Python subprocesses without a sandbox. Generated CUDA kernels also run on the local GPU.
+生成的输入脚本在本地作为Python子进程执行，没有沙箱。生成的CUDA内核也在本地GPU上运行。
+
+The graph below is rendered from the compiled LangGraph workflow with Nsight profiling enabled. Dashed edges are conditional routes. Without --use-nsight, evaluation routes directly to the next attempt or finalization; NVIDIA research is skipped unless --nvidia-research is set.
+下图是从启用了Nsight分析的编译LangGraph工作流程渲染的。虚线边缘是条件路径。没有--use-night时，评估直接路由到下一次尝试或完成；除非设置了--nvidia-research，否则跳过NVIDIA研究。

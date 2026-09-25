@@ -1,0 +1,57 @@
+---
+title: "Code Scans_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Code Scans
+
+【文章正文】：
+Today we’re introducing Code Scans: a new way to turn broad engineering goals into concrete improvements across your codebase. Tell Devin what you want to achieve, and it helps you investigate what needs to change, evaluate the findings, and turn them into pull requests.
+Many engineering tasks start with a specific change. Others start with an outcome:
+- Improve SEO
+- Reduce maintenance overhead
+- Make your application compile faster
+These goals often stay on the backlog because the first step alone is a substantial project: investigating the codebase to figure out where to start. Additionally, identifying the opportunities is only half the work — someone still has to implement the changes, and many of them.
+Code Scans helps with both.
+Powered by Agentic MapReduce, the architecture we built for Devin Security Swarm, Code Scans breaks large investigations into focused batches, distributes them across parallel agents, and synthesizes their findings into one report. Devin then turns its findings into PRs ready to review.
+Teams testing Code Scans ahead of launch are already seeing results:
+To get started, type /scan in the Devin webapp, or read the docs.
+Start with a goal
+You don’t need to know which files to look at before starting a scan. Instead, you define what you’re looking for, and Devin works with you to turn that goal into a concrete codebase investigation.
+For example:
+Find unused code in our web app. Exclude generated files and test fixtures, and check for indirect references before recommending a removal.
+You can also bring your own criteria: a team’s coding standards, an accessibility checklist, or requirements for an upcoming migration. Devin helps establish what to inspect, what to skip, and what should count as a finding.
+Once you confirm the scope and settings, Devin runs the investigation and brings back a list of findings ordered by priority. From there, you can inspect the evidence, discuss the results with Devin, and ask it to open PRs for the issues you want to address.
+Improve Rust compilation time
+We asked Code Scans to speed up compilation in the Dioxus repository. Devin identified opportunities to streamline dependencies and build configuration, including making heavyweight CLI features opt-in rather than compiling them by default. After applying the changes locally, clean debug build time dropped from 58.6 seconds to 21.0 seconds—a 64% reduction across the 22 workspace crates tested.
+SEO Optimization
+We ran a scan for SEO issues across devin.ai and cognition.com. It surfaced 44 findings across the two repositories, and we shipped fixes over the following days. Comparing Ahrefs crawls before and after:
+- Ahrefs health score increased from 87 to 92 on devin.ai.
+- Slow pages decreased by 73% on devin.ai.
+- Missing image alt text was eliminated on cognition.com.
+Agentic MapReduce
+Code Scans is built on top of Agentic MapReduce, the architecture we built for Devin Security Swarm, to make codebase-wide investigations practical. It works in 4 phases:
+- Plan. Devin studies your repository and defines rules for identifying code relevant to your goal.
+- Shard. Those rules run across the codebase, and the matching code is divided into focused batches.
+- Map. Parallel Devin agents investigate each batch, reading surrounding code as needed and reporting their findings.
+- Reduce. A final agent combines the findings, removes duplicates, and prioritizes the results into one report.
+This keeps each agent’s context focused and directs the reasoning budget toward relevant code rather than repeated searching. This architecture also ensures completeness: every selected batch must be processed. Code Scans brings that same approach beyond security to the engineering goals you define.
+What would you scan for?
+Code Scans can investigate a wide range of engineering questions, using your codebase’s conventions and the criteria you provide. Here are some examples:
+| Scan | Goal | 
+|---|---|
+| Performance | Find slow paths, redundant computation, and missed caching opportunities that could make your application faster. | 
+| Database queries | Look for N+1 queries, unnecessary round trips, unbounded reads, and other inefficient or unreliable data-access patterns. | 
+| Test coverage | Identify important flows, edge cases, and failure paths that aren’t covered by tests. | 
+| Dead code | Find unused functions, modules, dependencies, and obsolete feature flags, with evidence for what can safely be removed. | 
+| Code quality | Look for duplicated logic, unnecessary complexity, better abstraction opportunities, and patterns that violate your team’s coding standards. | 
+| Cleanup | Identify redundant abstractions, excessive boilerplate, and code that can be simplified without changing behavior. | 
+| Telemetry | Find gaps in logging, metrics, and tracing that make failures difficult to diagnose or important behavior difficult to measure. | 
+| Accessibility | Look for missing labels, broken keyboard interactions, and other gaps against the WCAG criteria you specify. | 
+| Compliance | Investigate sensitive-data handling, audit trails, and retention logic against your organization’s regulatory requirements and policies. | 
+| Migration planning | Trace existing dependencies, end-to-end flows, and business logic to produce a plan for an upcoming migration. | 
+| SEO Optimization | Find code-level issues affecting search visibility, including missing or duplicated metadata, incorrect canonical URLs, indexing directives, and gaps in sitemaps or structured data. | 
+| Your own | Define a pattern you want Devin to look for throughout the codebase. | 
+The most useful scan might come from a question your team has been putting off because answering it meant looking everywhere.
+Type /scan in your Devin session, specify what you want to investigate, build the scope together, and start optimizing your codebase today.
+Try Code Scans at devin.ai and learn more in the Code Scans docs.

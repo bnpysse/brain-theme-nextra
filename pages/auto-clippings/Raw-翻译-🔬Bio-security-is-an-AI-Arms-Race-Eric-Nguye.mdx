@@ -1,0 +1,128 @@
+---
+title: "🔬Bio-security is an AI Arms Race - Eric Nguyen CEO, Radical_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：🔬生物安全是场AI军备竞赛 - Eric Nguyen（Radical Numerics首席执行官）
+
+【文章正文】：
+The OpenAI → Hugging Face attack has people asking "what else do we need to worry about?" and Anthropic's filters flag two things: cyber-security and biology. The natural question is: what about bio-security, then?
+OpenAI对Hugging Face的攻击事件让人们开始思考"我们还需要担忧什么？"，而Anthropic的过滤系统标出了两个重点：网络安全与生物安全。这就引出了核心问题：那么生物安全防御呢？
+
+Clem Delangue argues that cyber-warfare defensive capabilities need to be open and to keep pace with frontier models' attack capabilities
+Clem Delangue主张网络战防御能力必须保持开源，并与前沿模型的攻击能力同步发展
+
+Radical Numerics co-founder Eric Nguyen sat down with us and explained why the same models that increase biological capability can also keep defense from falling behind.
+Radical Numerics联合创始人Eric Nguyen向我们阐释：为何提升生物能力的模型同样能防止防御体系落后
+
+Building a virus from scratch
+从零构建病毒
+
+While he was at Stanford, Eric couldn't get traction on Genomic Language Models (GLMs) for a long time. Biologists didn't believe it would work, didn't think they could verify the output, and didn't see important applications beyond what they could already do. He kept pushing, eventually helping lead the development of Evo and contributing to Evo 2 at Arc Institute. Those models were later used by a separate Arc/Stanford team to
+在斯坦福期间，Eric长期无法推动基因组语言模型（GLMs）获得认可。生物学家们不相信其可行性，认为无法验证输出结果，也看不到超越现有技术的重要应用。他持续推动研究，最终主导开发了Arc研究所的Evo模型，并为Evo 2做出贡献。这些模型后来被Arc/斯坦福联合团队用于
+
+generate entire bacteriophage genomes that were synthesized into functional viruses
+生成完整的噬菌体基因组——这些基因组被合成了具有功能性的病毒
+!
+
+Long context unlocks biological intelligence
+长上下文解锁生物智能
+
+Early ChatGPT spit out poems and email, and early DNA language models like Evo and Evo-2 could build a genome from scratch. DNA is different, however, from natural language in that it has a very small alphabet (4 characters ACTG) and that its sequences are very long:
+早期ChatGPT能生成诗歌邮件，而Evo等初代DNA语言模型已实现从零构建基因组。但DNA与自然语言不同：其字母表仅含4个字符（ACTG），且序列极长——
+
+60K for an average human gene
+人类基因平均6万碱基
+
+long being up to 2.3M
+最长可达230万
+
+the whole human genome around 3B.
+整个人类基因组约30亿
+
+Innovation in long-context models
+长上下文模型的创新
+
+made this possible about 3 years ago (footnote: striped hyena), long before the frontier labs were building 1M+ context models.
+约三年前就已实现（参见条纹土狼模型），远早于前沿实验室开发百万级上下文模型
+
+Adapted from
+改编自
+
+Wikipedia: Genome Size
+维基百科《基因组大小》
+
+Now Eric and other AI x Bio luminaries
+如今Eric与AI+生物领域的先驱者们
+
+1
+注1
+
+have founded Radical Numerics to build and scale GLMs to tack a wide range of biological problems, extending well beyond generating DNA.
+创立Radical Numerics公司，规模化开发GLMs以解决广泛生物学问题，其应用远不止DNA生成
+
+Thinking in DNA
+DNA思维
+
+Their GLMs already do pretty well with RNA and protein because there are clear markers in the DNA sequence for genes (RNA sequences the perform many functions) and specific genes that encode proteins. This means that the models already generalize to multiple "languages," before even attempting to train in other modalities, such as 3d protein structure, epigenetics and natural language.
+他们的GLMs已能出色处理RNA和蛋白质——因为DNA序列中存在明确的基因标记（执行多种功能的RNA序列）和特定蛋白质编码基因。这意味着模型在尚未训练其他模态（如3D蛋白质结构、表观遗传学和自然语言）时，就已掌握多种"语言"
+
+If a model thinks in the DNA language, maybe it understands the imprint that environment left on different genomes as well? Perhaps the model has learned the functional relationship between different sequences, and could extrapolate to new sequences based on that?
+若模型以DNA语言思考，或许也能理解环境在不同基因组留下的印记？可能已掌握序列间的功能关联，并据此推断新序列？
+
+And so what we wanted to showcase was that if we show the model progressively better RNAs in a series of steps with its score, right? So you have like low scores first and then you gradually move up the chain. Can the model continue that trajectory on its own? And then in the final step, does it self optimize to a point where it's like the best score it can get? That was the experiment. Can we do that? And so we took a data set, a large data set of aptamers. We held out a portion of the best performing ones and we showed it only the lower ones, but then we ranked it, right? So we showcase lower scores with the RNA aptamers and then progressively got higher, and then ask the model to just like continue with that pattern. And it turns out it was able to recapitulate some of those higher scores that we had not shown it yet.
+我们想验证：若按分数分阶段展示逐步优化的RNA，模型能否自主延续这个趋势？最终能否自我优化至最高分？实验采用大型适配体数据集，隐藏最优样本仅展示低分样本并排序。当逐步展示从低到高的RNA适配体评分后，模型成功复现了部分未展示的高分结果
+
+So, voila: chain-of-thought, thinking in DNA!
+这就是：DNA思维中的思维链！
+
+The arms race
+军备竞赛
+
+But much as long-context inference, chain-of-though and multi-modal perception unlocked sophisticated reasoning in natural language LLMs, these capabilities in GLMs are enabling increasingly sophisticated "biological intelligence," and along with it, greater danger.
+正如长上下文推理、思维链和多模态感知解锁了自然语言LLMs的复杂推理，GLMs的这些能力正催生日益精密的"生物智能"，同时带来更大风险
+
+According to Eric, defense is currently losing this battle, but Radical Numerics argues to push the frontier harder!
+Eric认为防御方目前处于下风，但Radical Numerics主张更激进地突破边界！
+
+I won't spoil the details for you. In the episode we talk in detail about:
+具体细节请收听节目，我们深入探讨了：
+
+Biosecurity as an arms race — and how defense can keep up
+作为军备竞赛的生物安全——防御如何跟上节奏
+
+The genome as the imprint of the environment on DNA
+作为环境DNA印记的基因组
+
+Going truly multi-modal
+实现真正的多模态
+
+How chain-of-though works when you "think" in the language of DNA
+用DNA语言"思考"时的思维链机制
+
+1
+注1
+
+Eric Nguyen
+Eric Nguyen
+
+: Co-founder and CEO, holding a PhD in Bioengineering & AI from Stanford University. He previously helped develop large-scale genome language models like Evo and Evo 2
+联合创始人兼CEO，斯坦福大学生物工程与AI博士，曾参与开发Evo等大规模基因组语言模型
+
+Michael Poli
+Michael Poli
+
+: Chief AI Scientist, holding a Stanford PhD and a former founding scientist at Liquid AI.
+首席AI科学家，斯坦福博士，Liquid AI创始科学家
+
+Stefano Massaroli
+Stefano Massaroli
+
+: President, a former postdoc with Yoshua Bengio and a founding team member at Liquid AI.
+总裁，Yoshua Bengio博士后，Liquid AI创始成员
+
+Armin W. Thomas
+Armin W. Thomas
+
+: CTO, a former Stanford postdoc who worked with Chris Ré and was previously at Liquid AI.
+首席技术官，斯坦福博士后，曾与Chris Ré共事，前Liquid AI成员
