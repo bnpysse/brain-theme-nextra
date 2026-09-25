@@ -5156,6 +5156,7 @@ export default {
   "Auto-简报-Github-smicallef-spiderfoot": "Github__smicallef_spiderfoot",
   "Auto-简报-Github-rohitg00-ai-engineering-from-scratc": "Github__rohitg00_ai-engineering-from-scr...",
   "Auto-简报-Github-pascalorg-editor": "Github__pascalorg_editor",
+  "Auto-简报-Github-paperclipai-paperclip": "Github__paperclipai_paperclip",
   "Auto-简报-Github-p-e-w-heretic": "Github__p-e-w_heretic",
   "Auto-简报-Github-openai-skills": "Github__openai_skills",
   "Auto-简报-Github-openai-codex": "Github__openai_codex",
