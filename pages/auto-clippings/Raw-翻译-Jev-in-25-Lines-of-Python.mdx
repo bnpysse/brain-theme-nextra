@@ -1,0 +1,110 @@
+---
+title: "Jev in 25 Lines of Python_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Jev in 25 Lines of Python
+【文章标题】：25行Python代码实现Jev
+
+【文章正文】：
+Jev in 25 lines of Python
+25行Python代码实现Jev
+
+Everyone and their mom is talking about Jev. Jev this, Jev that. Everyone on Twitter is all over Jev, how it's the next frontier of large language models and the AI paradigm. We don’t really think so. So here's Jev in 25 lines of Python.
+现在所有人都在讨论Jev。推特上铺天盖地都是Jev将如何成为大语言模型和AI范式的新前沿。我们并不这么认为。所以这里用25行Python代码实现Jev。
+
+Load the model.
+加载模型
+
+# /// script
+# requires-python = "&gt;=3.12"
+# dependencies = ["huggingface-hub", "llama-cpp-python", "numpy"]
+# ///
+&#105;mport numpy
+from llama_cpp import Llama
+# Really, you can use any GGUF model from https://huggingface.co/models?library=gguf
+model = Llama.from_pretrained(
+    repo_id="Qwen/Qwen3-0.6B-GGUF",
+    filename="Qwen3-0.6B-Q8_0.gguf",
+    n_ctx=512,
+    logits_all=True,
+    verbose=False,
+)
+
+Load the prompt and define your choices.
+加载提示词并定义选项
+
+labels = ["A", "B", "C"]
+choices = ["Legitimate", "Spam", "Phishing"]
+email = "Payroll asks for your password on a non-company sign-in page."
+options = "\n".join(
+    f"&#123;label&#125;. &#123;choice&#125;" for label, choice in zip(labels, choices, strict=True)
+)
+prompt = f"""&lt;|im_start|&gt;system
+Choose one option.&lt;|im_end|&gt;
+&lt;|im_start|&gt;user
+Email: &#123;email&#125;\n\n&#123;options&#125;&lt;|im_end|&gt;
+&lt;|im_start|&gt;assistant
+&lt;think&gt;\n\n&lt;/think&gt;\n\n"""
+model.eval(tokens=model.tokenize(text=prompt.encode(), add_bos=False, special=True))
+
+Massage the logits into probabilities.
+将逻辑值转换为概率
+
+logits = model.scores[model.n_tokens - 1]
+token_ids = [model.tokenize(text=label.encode(), add_bos=False)[0] for label in labels]
+choice_logits = numpy.asarray([logits[token_id] for token_id in token_ids])
+logprobs = choice_logits - numpy.logaddexp.reduce(choice_logits)
+probabilities = numpy.exp(logprobs)
+for name, scores in (
+    ("Logits", choice_logits),
+    ("Log probabilities", logprobs),
+    ("Probabilities", probabilities),
+):
+    values = numpy.round(scores.astype(float), 3).tolist()
+    print(f"&#123;name&#125;:", dict(zip(choices, values, strict=True)))
+# Logits: &#123;'Legitimate': 26.254, 'Spam': 27.262, 'Phishing': 29.614&#125;
+# Log probabilities: &#123;'Legitimate': -3.482, 'Spam': -2.474, 'Phishing': -0.122&#125;
+# Probabilities: &#123;'Legitimate': 0.031, 'Spam': 0.084, 'Phishing': 0.885&#125;
+
+There. That’s Jev.
+看，这就是Jev
+
+But no, you don't understand Jev!
+但你不懂Jev！
+
+Yeah, we know.
+是的，我们懂
+
+- We don't call it a System One decision model.
+- 我们不称之为系统一决策模型
+- We didn’t call an API.
+- 我们没有调用API
+- We didn't create a bunch of synthetic data.
+- 没有创建合成数据
+- We didn't train a model with Reinforcement Learning for Calibrated Decisions (RLCD) to calibrate the decisions and probabilities (even though they are not always correct).
+- 没有使用强化学习校准决策(RLCD)来训练模型（尽管结果并不总是正确）
+
+But yes. This is Jev.
+但这就是Jev
+
+- It classifies: it gets a prompt with choices and outputs probabilities.
+- 它能分类：接收带选项的提示词并输出概率
+- It's fast.
+- 速度快
+- It's local.
+- 本地运行
+- You don't send your data anywhere else.
+- 数据不会外传
+
+And we like not sending your data anywhere else. Check out NobodyWho.
+我们喜欢数据不外传的特性。欢迎关注NobodyWho
+
+(note: this is a parody blog post, see these links for better/more complete open implementations of Jev: OpenJev, openjev-sglang, and OpenJev on DiffusionGemma.)
+(注：本文为 parody 博客文章，完整开源实现参见：OpenJev, openjev-sglang 和 DiffusionGemma上的OpenJev)
+
+Everything NobodyWho do is open-source, please leave a star on Github to support us ❤️
+NobodyWho所有项目均开源，请在Github上为我们点亮星星❤️
+
+Published Sep 22, 2026 by Duarte O.Carmo
+2026年9月22日 Duarte O.Carmo发布

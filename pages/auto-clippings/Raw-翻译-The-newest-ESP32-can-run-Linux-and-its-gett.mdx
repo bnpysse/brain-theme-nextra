@@ -1,0 +1,62 @@
+---
+title: "The newest ESP32 can run Linux and it s getting close to a R_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The newest ESP32 can run Linux and it's getting close to a Raspberry Pi  
+最新款ESP32可运行Linux系统 性能逼近树莓派  
+
+【文章正文】：  
+Espressif has a new ESP32, the ESP32-S31, and that ESP32 comes with a gigabit Ethernet MAC, a USB 2.0 High-Speed host controller, an SD card interface with two slots, and a camera input. It's a pretty standard set of features for a Linux single-board computer, but a rather strange list of things to find on a microcontroller.  
+乐鑫科技推出新款ESP32-S31芯片，集成千兆以太网MAC、USB 2.0高速主机控制器、双卡槽SD卡接口及摄像头输入。这些本是Linux单板计算机的标配功能，出现在微控制器上却显得不同寻常。  
+
+I've spent a lot of time with microcontrollers, and it's typical to find a couple of cores, a small amount of RAM, GPIO pins, and maybe Wi-Fi on one. Something more advanced typically uses a Raspberry Pi, yet the ESP32-S31 comes with a whole lot more than your typical microcontroller setup. Espressif has also made a big change to the CPU that makes it more like an SBC than ever.  
+传统微控制器通常配备双核、少量RAM、GPIO引脚和Wi-Fi模块，更复杂的任务往往需要树莓派。但ESP32-S31的配置远超常规微控制器，乐鑫对CPU的重大改造使其前所未有地接近单板计算机。  
+
+Peripherals already change how it looks  
+外设配置颠覆传统认知  
+
+It can do a whole lot more  
+功能实现全面升级  
+
+The biggest news about the ESP32-S31 is its networking capabilities, packing a 1000 Mbps Ethernet MAC and a big jump over the slower 100 Mbps found on the ESP32-P4. It uses an 8P8C connector (commonly referred to as RJ45) and has a PHY that utilizes the chip's RGMII interface. RGMII is specifically what enables gigabit; otherwise, it would use standard RMII.  
+该芯片最大亮点是网络功能：千兆以太网MAC相较ESP32-P4的百兆速率实现飞跃，采用8P8C（RJ45）接口并利用RGMII协议实现物理层通信——这正是千兆传输的关键，否则将降级为RMII标准。  
+
+On top of that, then, there's USB, but it's not "standard" USB. The S31 has a USB 2.0 High-Speed OTG controller, and it's a full-size Type-A socket that can supply 500 mA in host OTG mode. Alongside that sits an SDIO host controller with two slots, a DVP camera interface taking 8 to 16 bits, and a parallel LCD controller that supports up to 24-bit RGB as well as I8080 and MOTO6800 panels. There are two I2S controllers with hardware Bluetooth audio sync, fourteen capacitive touch channels, a CAN FD controller, and four MCPWM units.  
+其USB 2.0高速OTG控制器支持主机模式500mA供电，配套双卡槽SDIO主机控制器、8-16位DVP摄像头接口、24位RGB并行LCD控制器（兼容I8080/MOTO6800面板）。此外还配备：带蓝牙音频同步的I2S控制器×2、14通道电容触摸、CAN FD控制器及4组MCPWM单元。  
+
+Just from that list alone, it's clear that this is a new type of ESP32, and not one that we've really seen before. Wired networking? A USB host? Camera, display, audio? Everything here is more akin to an SBC than a microcontroller, but that's still not all.  
+仅从外设清单就能看出这是全新物种：有线网络、USB主机、摄像头、显示屏、音频等配置更接近单板计算机，但这还不是全部。  
+
+On the CPU side, there are two 32-bit RISC-V cores running at up to 320 MHz and a floating point unit on each, a 128-bit SIMD data path for one of them, and a separate 40 MHz low-power core, too. Each core gets 32KB of L1 instruction cache and they share 64KB of data cache. Memory gets even more interesting: the S31 supports up to 64 MB of PSRAM over a 250 MHz 8-bit DDR interface, and supports up to 256MB of flash, too. On the ESP32-S3 the PSRAM interface was shared with flash, making this a rather big step-up.  
+CPU部分搭载双核320MHz RISC-V处理器（均含浮点单元）+128位SIMD扩展+40MHz低功耗协核，每核32KB L1指令缓存+共享64KB数据缓存。内存支持250MHz 8位DDR接口的64MB PSRAM与256MB闪存——相较ESP32-S3的PSRAM/闪存共享接口是重大升级。  
+
+Espressif put a real MMU in the ESP32-S31  
+乐鑫为ESP32-S31植入真·MMU  
+
+Very different to the old "MMU"  
+彻底区别于旧式"MMU"  
+
+Espressif has been using the term "MMU" for quite a long time, including on the ESP32-S3 and the ESP32-P4. However, the MMU in that case was a block that maps external flash and PSRAM to address space, nowhere near the complexity of a modern MMU that can also do things like process isolation and page tables. As a result, when Espressif said the S31 has MMU support, it appeared to be more of the same.  
+虽然乐鑫早在ESP32-S3/P4就宣称支持MMU，但当时仅实现外部存储地址映射，远不具备现代MMU的进程隔离/页表等复杂功能。因此当S31发布MMU支持时，外界曾以为仍是旧方案。  
+
+However, there's a big difference this time around. In the S31's datasheet, Espressif says that the cores do "Sv32 two-level page-table address translation" and implement "Machine, Supervisor and User privilege modes." Sv32 is the actual RISC-V paging scheme, and having all three privilege modes is what enables a regular kernel to run in supervisor mode with firmware underneath it in machine mode. And this is how RISC-V-based Linux machines work.  
+但本次革新在于：手册明确标注支持Sv32二级页表转换，实现机器/监管/用户三模式特权级——这正是RISC-V标准分页机制，使得Linux内核能以监管模式运行，底层固件保持机器模式，完全符合RISC-V Linux设备的运作规范。  
+
+Unlike previous hacky attempts at getting Linux running on past ESP32 microcontrollers, the S31 has a lot more out of the box to natively support it. For starters, Espressif already published a Linux BSP back in August, built on Buildroot and U-Boot, and it includes a kernel, device tree, and root file system. Espressif says that it's "not yet recommended for production use," but the point is that it works.  
+相比以往在ESP32上运行Linux的勉强方案，S31提供原生支持：乐鑫8月就发布基于Buildroot/U-Boot的Linux板级支持包（含内核/设备树/根文件系统），虽声明"暂不建议商用"，但已具备完整运行能力。  
+
+That also hasn't stopped the community from iterating fast. One port sees Linux 6.18 running in supervisor mode, complete with working drivers for practically all of the hardware. There's another, based on Linux 7.1, that supports an 800x480 LCD panel connected, capable of showing a console. Being able to plug in a display, use wired Ethernet, and use a mouse and keyboard sound a lot more akin to an SBC than a microcontroller.  
+开发者社区进展神速：已有Linux 6.18版本在监管模式运行并驱动全部硬件；另基于Linux 7.1的移植版本支持800x480液晶屏显示终端。连接显示器、使用有线网络和键鼠的操作体验，已与单板计算机无异。  
+
+Memory is the biggest downfall  
+内存配置仍是硬伤  
+
+A lot less than would-be SBC competitors  
+远逊于同类单板机  
+
+The S31 starts to lag behind when looking at the RAM it carried: there's 512KB of SRAM on chip, and two variants are available with either 16MB or 32MB of in-package PSRAM. The maximum memory it can carry is 64MB, and there's no DRAM controller anywhere to be found. Compared to the likes of the Milk-V Duo S with its 512MB of RAM, you're reminded by the competition very quickly that the ESP32-S31 is a microcontroller.  
+其内存配置暴露短板：片上512KB SRAM+16/32MB封装PSRAM选项，最大支持64MB且无DRAM控制器。相较Milk-V Duo S等配备512MB内存的竞品，瞬间提醒我们ESP32-S31仍是微控制器。  
+
+This is exactly why those Linux builds execute the kernel from flash, in order to avoid spending precious PSRAM on it. As well, there's no GPU or NPU on-board, and while the ESP32-P4 has video encode...  
+这正是Linux系统选择从闪存运行内核的原因——避免消耗宝贵PSRAM。此外该芯片未配备GPU/NPU，而ESP32-P4具备视频编码...

@@ -1,0 +1,123 @@
+---
+title: "llm-typesafe 0.1a0_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：llm-typesafe 0.1a0
+
+【文章正文】：
+发布：
+
+llm-typesafe 0.1a0
+
+我为
+
+LLM
+
+构建了这个新插件，以添加对
+
+TypeSafe AI 的新 Jev 模型
+
+的支持。安装方法如下：
+
+llm install llm-typesafe
+
+然后设置一个 API 密钥（
+
+在此获取
+，等待名单似乎进展很快）：
+
+llm keys set typesafe
+# 粘贴密钥
+
+现在你可以像这样提问是/否 "noul" 问题：
+
+llm -m jev '请退还我上次的付款。' \
+  -s '这条消息是否明确要求退款？'
+
+输出：
+
+&#123;"type": "noul", "noul": 0.99&#125;
+
+或者像这样的选择题：
+
+cat message.txt
+
+|
+
+llm -m jev \
+  -s
+
+'
+
+应该由哪个团队处理这条消息？如果同时涉及账单和技术问题，请选择账单团队。
+
+'
+
+\
+  -o answer_type choice \
+  -o criteria
+
+'
+
+&#123;
+
+"billing":"费用、发票、付款或退款",
+
+"technical":"安装或使用产品时的问题",
+
+"other":"不符合以上任何类别"
+
+&#125;
+
+'
+
+或者像这样的评分题：
+
+cat report.txt
+
+|
+
+llm -m jev \
+  -s
+
+'
+
+报告中描述的问题可复现性如何？
+
+'
+
+\
+  -o answer_type score \
+  -o criteria
+
+'
+
+[
+
+"没有提供复现步骤",
+
+"提供了一些步骤，但缺少重要环节",
+
+"完整的步骤包含预期和实际结果"
+
+]
+
+'
+
+更多详情请参阅
+
+README
+
+。
+
+标签：
+
+projects
+（项目）
+,
+
+llm
+,
+
+jev

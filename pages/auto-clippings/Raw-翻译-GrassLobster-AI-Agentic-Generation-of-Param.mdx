@@ -1,0 +1,135 @@
+---
+title: "GrassLobster AI Agentic Generation of Parametric Geometry Wo_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：GrassLobster: AI Agentic Generation of Parametric Geometry Workflows
+
+【文章正文】：
+GrassLobster
+AI Agentic Generation of Parametric Geometry Workflows
+Personal project · Prototype 1 · Work in progress
+Experimental. Not yet validated for general use. Provided as is. More will follow.
+An idea becomes
+a workflow.
+GrassLobster connects the parametric world of Rhino and Grasshopper with an external AI agent of your choice. Describe your idea, shape it together, and keep changing the result.
+From intention to geometry
+What GrassLobster
+Does
+Imagine describing what you want to make — and getting a workflow you can keep changing.
+Building a parametric definition can take longer than exploring the idea itself. GrassLobster brings an AI agent into that work: from the first brief to a connected Grasshopper model.
+Start with an idea, not a perfect prompt
+Describe a building form, a timber structure or a pattern of elements. Your external agent asks about dimensions, rules, materials and what you want to control. It guides you through the decisions until the task is clear enough to build.
+Build the rules. Keep exploring.
+Once the approach is agreed, the agent builds the parametric workflow. Change the span, spacing or number of elements, and the related geometry updates. Ask for another variation or develop the project further.
+The value goes beyond executing CAD commands: you keep the logic that generates the geometry. The result can work like a small design tool made for your particular task.
+Your agent. Your design decisions.
+Work through a compatible external agent of your choice. It handles the implementation while you review the geometry and guide the design. The model stays visible and adjustable in Grasshopper.
+The architecture
+How It Works
+Behind the Scenes
+The geometric process stays visible to you. The same process is mirrored as text for the agent.
+Geometry Stations on the canvas
+GrassLobster Session Components organise the model into connected Geometry Stations. Each Station runs the code for a meaningful task. You see the sequence and dependencies without following every individual operation.
+A project might move through inputs, primary geometry, structural logic, secondary geometry and output. The structure follows the task. GrassLobster hides implementation complexity, not geometric logic.
+Mirrored logic and inputs
+Station definitions and executable code are mirrored in readable project files. The agent can locate the relevant logic, understand connected Stations and make targeted changes through the supported workflow.
+Supported input values are mirrored too. Dimensions, counts or spacing can be changed without rewriting the Station code; Grasshopper recalculates the related geometry.
+A folder with project context
+Agent Instructions guide how the agent asks questions and works with you. Domain knowledge adds prepared subject guidance, your own standards or material notes. Geometric references communicate shape through screenshots, studies or example models.
+References can come from chat or designated project folders. What the agent can use depends on its tools and the file format. This is project context, not an automatically indexed knowledge system.
+An agent that stays external
+The project is designed around interchangeable agents, with the necessary file and tool capabilities. It is not tied to one built-in model. As compatible agents improve at coding, planning and geometry reasoning, the same project structure can benefit.
+A path toward agentic optimization
+Where a model exposes measurable results, an agent could vary inputs, compare outcomes and refine toward a goal — for example, maintaining floor area while reducing material volume.
+This is a possible direction, not a built-in general-purpose optimizer. It depends on the model, available outputs and agent tools. Structural goals also require appropriate analysis methods.
+“I wanted to talk to my files.”
+After around twelve years with Grasshopper, Miro Bannwart began working with AI agents and wanted to bring that conversation into his parametric projects.
+Grasshopper already gave people a visual way to understand geometry. Agents needed a representation they could read and change. That led to text mirroring: keeping the geometric process on the canvas while giving the agent access to the same project through files.
+How to Use
+Start with
+what you have
+in mind.
+Bring an external agent — and a strong model
+GrassLobster needs a coding agent that can work with your project files and the required tools. Examples include OpenAI Codex and Claude Code; the project connection must be configured for the agent you use.
+For complex geometry, start with a strong reasoning and coding model. Model quality has made a substantial difference in Miro’s development trials.
+Development experience with models
+GrassLobster has mainly been tested with GPT-6 Astra, with good geometric results reported by Miro. GPT-5.6 Sol also ran workflows, but the resulting geometry was noticeably weaker in his trials. Local-model attempts have not worked successfully so far.
+These are project-specific development observations, not a controlled benchmark or a claim about every model. The prototype has not yet been validated for general use.
+Agent subscriptions and running costs
+Budget separately for the external agent. A paid plan is a practical starting point; longer or more demanding sessions may need a higher usage allowance.
+As of 17 September 2026, ChatGPT Plus and Claude Pro list monthly entry prices of US$20. Swiss checkout prices may differ. Check current model access and usage limits before subscribing; an entry plan does not guarantee access to the model recommended here.
+- 
+Start your projectWith GrassLobster installed, open Rhino and Grasshopper. Save your Grasshopper file and place the Agent Start component.
+- 
+Prepare your external agentUse Generate Agent Start Prompt and copy the prepared text into a compatible AI agent. Follow the guide on the canvas. The project’s Agent Instructions guide how the agent works with you.
+- 
+Let the agent develop the brief with youYou do not need a perfect technical prompt. Describe the idea; the agent asks about geometric rules, dependencies and adjustable parameters until there is enough information to proceed. Agree on a useful Station structure.
+- 
+Add relevant referencesShare shape references in chat or the designated project folder. Keep technical rules and your own domain knowledge in their separate reference area, so the agent can distinguish the intended form from the constraints that guide it.
+- 
+Follow the workflow as it growsOnce the approach is agreed, the agent builds connected Stations progressively. Follow their geometric roles and relationships on the canvas, then review the result.
+- 
+Adjust, compare and continueUse the main controls or their linked views beside each Station, or ask the agent to change supported mirrored inputs. Review the recalculated geometry and any available measurements before refining it further. When ready, deliberately run the prepared Bake workflow to create Rhino objects.
+Supported references and readback depend on the agent and project setup. A successful calculation still needs your design review; it is not structural verification.
+Experimental alpha
+Download
+GrassLobster.
+- Version
+- 0.1.0-alpha · Build 2.39.0
+- Platform
+- Windows x64 · Rhino 8
+- Publisher
+- Miro Bannwart
+- Package date
+Alpha · Experimental · Work in Progress. Provided as is. APIs and project formats are not stable; breaking changes are possible. Keep backups of your projects.
+This edition includes a compact Agent Start, shared preview transparency, local Bake variants and component guidance. The author has completed a successful modeling test with this build; a clean-machine installation test and client-specific integration checks remain outstanding.
+GrassLobster 0.1.0-alpha — Windows / Rhino 8
+ZIP · 4.8 MB · Plugin and file-service Bridge included
+Free private and commercial use, including commercial work created with GrassLobster, under the proprietary Alpha license. Rights to redistribute or exploit the plugin itself are restricted. This is not open-source software; read the full GrassLobster 0.1.0-alpha license (German). The same license is included as LICENSE.txt in the download.
+Installation on Windows
+Test environment: Rhino / Grasshopper 8.30 running on .NET 8, Windows x64. Rhino 7 and macOS are not supported by this package.
+- Close Rhino. Preserve your existing installation and projects; avoid duplicate GrassLobster installations.
+- Extract the ZIP. Copy the included GrassLobster folder, with all seven runtime files together, into %APPDATA%\Grasshopper\Libraries\ . Read INSTALL.md for details.
+- Open Rhino and Grasshopper. Save your GH file in a dedicated project folder, place Agent Start and use Generate Agent Start Prompt.
+- Follow the prompt with your external agent. MCP setup depends on that agent; the included Bridge needs a callable .NET 8 x64 dotnet. No separate Bridge download is needed.
+Rhino, .NET, external agents, models and accounts are not included. Ollama is required only for the optional Ollama components. Personal Hermes adapters are not included. Read the package instructions for client setup and current limitations.
+Workflows in practice
+Examples.
+Geometry studies by Miro Bannwart
+From architecture to objects: a few studies made with GrassLobster. Open each workflow to see how the geometry is organised on the Grasshopper canvas.
+Follow GrassLobster on Instagram
+Study 01
+A curved staircase
+A connected workflow for the stair path, body and railing — shown as geometry, adjustable inputs and a photorealistic visualization.
+Study 02
+Brutalist courtyard villa
+A parametric courtyard villa developed through three connected Geometry Stations, with adjustable building dimensions, facade openings and living-space parameters.
+Geometry, parameters & Grasshopper workflow
+Study 03
+Parametric timber bookshelf
+An adjustable bookshelf developed through two connected Geometry Stations, with controls for overall dimensions and compartment layout.
+Geometry, parameters & Grasshopper workflow
+Study 04
+Timber housing
+A residential study connecting the building, facade, balconies, roof and outdoor space in one workflow.
+More views & Grasshopper workflow
+Study 05
+A stepped timber frame
+A stepped structure organised through a building grid, primary frame and secondary beams.
+More views & Grasshopper workflow
+Study 06
+A Gothic church study
+Towers, windows, structure and architectural detail developed as connected geometric steps.
+More views & Grasshopper workflow
+Study 07
+Space shuttle study
+An orbiter, payload bay, robotic arm and satellite brought together in a modular geometry study.
+More views & Grasshopper workflow
+The developer
+About Me.
+Miro Bannwart.
+Carpenter and experimental architect exploring design through digital tools.
+My background combines carpentry, architecture and the ITECH programme at the University of Stuttgart. I work with computational design, complex timber geometry and digital fabrication, connecting material knowledge with new ways of designing.
+At Makiol Wiederkehr and Winkler Holzbiegewerk, I develop geometry and digital processes for timber projects. GrassLobster grows out of my long-standing work with Rhino and Grasshopper and my interest in working with AI agents.
+Developed through AI-assisted coding workflows with GPT and OpenAI Codex, GrassLobster remains a personal, experimental project.
