@@ -5716,6 +5716,7 @@ export default {
   "Auto-简报-AI-Can-Make-You-Suck-Faster-Too": "AI Can Make You Suck Faster Too",
   "Auto-简报-AADP-出现之后：AGENT-安全开始把能做和该做真正分开": "AADP 出现之后：AGENT 安全开始把能做和该做真正分开",
   "Auto-简报-A-walkable-ASCII-cyberpunk-city-in-one-HTM": "A walkable ASCII cyberpunk city in one H...",
+  "Auto-简报-A-single-function-Jev-like-wrapper-for-LLM": "A single function Jev-like wrapper for L...",
   "Auto-简报-A-shot-scraper-style-JSON-API-on-Bun-14s-n": "A shot-scraper-style JSON API on Bun 1.4...",
   "Auto-简报-A-preliminary-Qwen38-27B-model-card-is-liv": "A preliminary Qwen3.8-27B model card is ...",
   "Auto-简报-A-graphical-desktop-for-the-ZX-Spectrum": "A graphical desktop for the ZX Spectrum",
