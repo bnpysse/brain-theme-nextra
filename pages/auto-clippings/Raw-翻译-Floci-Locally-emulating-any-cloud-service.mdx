@@ -1,0 +1,91 @@
+---
+title: "Floci Locally emulating any cloud service_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Floci：本地模拟任何云服务
+
+【文章正文】：
+Any cloud.
+任何云端服务。
+
+Locally.
+本地运行。
+
+Run AWS, Azure, GCP, and OCI locally in milliseconds: the fast, credential-free loop your team and its AI agents need to ship faster.
+毫秒级本地运行AWS、Azure、GCP和OCI：为您的团队及其AI智能体提供无需凭证的极速开发闭环。
+
+Each emulator is a standalone MIT-licensed binary. No auth tokens, no feature gates, no cloud account needed.
+每个模拟器都是独立的MIT协议二进制文件。无需认证令牌、功能开关或云账户。
+
+Drop-in replacement for LocalStack. Same port 4566, 119 services, native binary. Switch with zero code changes.
+完美替代LocalStack。相同4566端口，119项服务，原生二进制。零代码改动即可切换。
+
+Covers Blob, Queue, Table, Functions, App Config, Key Vault, Event Hubs and Service Bus. Native speed, MIT license, no Azure account needed.
+支持Blob/Queue/Table/Functions/App Config/Key Vault/Event Hubs/Service Bus。原生速度，MIT协议，无需Azure账户。
+
+Covers GCS, Pub/Sub, Firestore, Cloud Run, Cloud SQL, GKE and more. All 25 services on one port, native binary. MIT license, no GCP account needed.
+涵盖GCS/Pub/Sub/Firestore/Cloud Run/Cloud SQL/GKE等25项服务单端口原生运行。MIT协议，无需GCP账户。
+
+Covers Object Storage, Identity, Queue, Streaming, KMS, Vault and Functions. All 8 services on one port. MIT license, no Oracle Cloud account needed.
+支持对象存储/身份认证/队列/流处理/KMS/保险库/函数等8项服务单端口运行。MIT协议，无需Oracle云账户。
+
+Coding agents write cloud code faster than ever, but they can't safely run it against a real account. Point them at Floci instead: a local cloud to build, run, and verify against. Instant, free, and credential-free.
+编程智能体编写云代码比以往更快，但无法安全对接真实账户。改用Floci：可即时构建/运行/验证的本地云环境，免费且无需凭证。
+
+Agents connect with throwaway keys. No real cloud secrets in the agent's context or sandbox. Nothing to exfiltrate, nothing to bill.
+智能体使用临时密钥连接。上下文和沙箱中不存真实云密钥，无数据泄露风险，不会产生账单。
+
+24 ms cold start, 13 MiB idle. Agents spin up, test, and tear down inside the edit loop instead of waiting on round-trips to a remote account.
+24毫秒冷启动，13MB空闲内存。智能体在编辑循环内快速启停测试，无需等待远程账户往返。
+
+Lambda, RDS, Redis, and Kafka run for real, so code an agent verifies locally behaves the same in production. No mock-shaped false positives.
+Lambda/RDS/Redis/Kafka真实运行，确保智能体验证的代码在生产环境表现一致。无模拟器导致的误判。
+
+Let agents iterate aggressively. Worst case, they reset a local container, not your staging environment or your cloud bill.
+允许智能体激进迭代。最坏情况仅需重置本地容器，而非影响预发布环境或云账单。
+
+Works with every SDK, CLI, Terraform/OpenTofu module, and test runner your agents already use, with no special integration.
+兼容现有SDK/CLI/Terraform/OpenTofu模块/测试工具，无需特殊适配。
+
+Manage and explore every Floci emulator from a unified CLI or visual dashboard.
+通过统一CLI或可视化面板管理所有Floci模拟器。
+
+A unified command-line interface to start, stop, and inspect all Floci emulators. One install covers AWS, Azure, GCP, and OCI from a single tool.
+统一命令行界面启停/检查所有模拟器。单次安装即可管理AWS/Azure/GCP/OCI。
+
+A visual dashboard for all Floci cloud emulators. Browse resources, inspect data, and manage services across AWS, Azure, GCP, and OCI from one place.
+可视化面板集中浏览资源/检查数据/管理四大云服务。
+
+No gatekeeping. No pricing tiers. No surprises. A local cloud that starts in milliseconds and works everywhere.
+无门槛/无分级定价/无隐藏条款。毫秒启动的全平台本地云。
+
+Fork it, embed it, extend it. No "community edition" sunset, no enterprise feature flags. Every service is available to every developer, always.
+可自由分叉/嵌入/扩展。无"社区版"淘汰策略，无企业功能锁。所有开发者永久享有完整功能。
+
+Pull the Docker image and go. No sign-ups, no API keys, no telemetry. LocalStack started requiring an auth token in March 2026. Floci never will.
+拉取Docker镜像即用。无需注册/API密钥/遥测。LocalStack自2026年3月起需认证令牌，Floci永不设限。
+
+Compiled with GraalVM Mandrel. Starts in 24ms, idles at 13 MiB, fast enough for inner-loop iteration. Your CI, your laptop, and your AI agents will all thank you.
+GraalVM Mandrel编译。24ms启动/13MB闲置内存，满足内循环迭代。CI流水线/本地开发/AI智能体皆适用。
+
+Lambda runs in real Docker containers. RDS uses real PostgreSQL/MySQL. ElastiCache runs real Redis. 100% protocol fidelity, no surprises in production.
+Lambda运行于真实Docker容器，RDS采用真实PostgreSQL/MySQL，ElastiCache运行真实Redis。100%协议保真，生产环境零差异。
+
+From the inner loop to CI to the classroom — anywhere a real cloud account is too slow, too risky, or too expensive.
+从内循环开发到CI流水线再到教学场景——解决真实云账户的速度慢/风险高/成本大问题。
+
+Spin up the full stack inside every pipeline job. 24 ms startup adds nothing to the build, each job gets an isolated cloud, and teardown is free.
+每个流水线任务独立启动全栈。24ms启动零开销，任务间云环境隔离，销毁无成本。
+
+Build against S3, Pub/Sub, or Service Bus on your laptop — offline if you want. No shared dev account to trip over, no credentials to rotate.
+在笔记本离线开发S3/Pub/Sub/Service Bus应用。无共享开发账户冲突，无需轮换凭证。
+
+Apply Terraform, OpenTofu, or CloudFormation against localhost first. Catch typos, drift, and bad refactors before they ever touch a real account.
+先对localhost应用Terraform/OpenTofu/CloudFormation。在接触真实账户前捕获拼写错误/配置漂移/错误重构。
+
+Teach cloud services with zero billing risk. Every student runs the whole stack on their own machine — no accounts to provision, nothing to clean up.
+零账单风险的云服务教学。每个学生在本地运行完整技术栈——无需配置账户，无需清理资源。
+
+No account, no token. Pick your platform and go.
+无需账户，无需令牌。选择平台即刻启程。
