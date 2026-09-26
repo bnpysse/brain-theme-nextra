@@ -5288,6 +5288,7 @@ export default {
   "Auto-简报-Github-unslothai-unsloth": "Github__unslothai_unsloth",
   "Auto-简报-Github-tt-a1i-archify": "Github__tt-a1i_archify",
   "Auto-简报-Github-trycua-cua": "Github__trycua_cua",
+  "Auto-简报-Github-tensorflow-tensorflow": "Github__tensorflow_tensorflow",
   "Auto-简报-Github-tech-leads-club-agent-skills": "Github__tech-leads-club_agent-skills",
   "Auto-简报-Github-tailscale-tailcat": "Github__tailscale_tailcat",
   "Auto-简报-Github-smicallef-spiderfoot": "Github__smicallef_spiderfoot",
