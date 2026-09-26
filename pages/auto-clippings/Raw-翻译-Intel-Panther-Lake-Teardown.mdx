@@ -1,0 +1,128 @@
+---
+title: "Intel Panther Lake Teardown_全翻译"
+tags: ["大咖视点_全文翻译", "SemiAnalysis_(全球半导体产业链与AI算力)"]
+---
+
+【文章标题】：Intel Panther Lake 拆解分析
+
+【文章正文】：
+Panther Lake debuts the first commercial implementation of backside power delivery (BSPDN), introduces Intel’s first iteration of gate-all-around (GAA) transistors, and showcases their advanced packaging capabilities with its Foveros-S assembly. 
+Panther Lake首次实现了背面供电（BSPDN）的商业化应用，推出了英特尔首代全环绕栅极（GAA）晶体管，并通过其Foveros-S组装技术展示了先进的封装能力。
+
+With Panther Lake, Intel’s manufacturing arc has shifted from nebulous roadmaps to shipped silicon, a significant milestone on their long road back to competitive semiconductor manufacturing. 
+随着Panther Lake的问世，英特尔的制造进程已从模糊的技术路线图迈向量产芯片阶段，这是其重振半导体制造竞争力的重要里程碑。
+
+To evaluate the extent of Intel’s comeback, we tore down Panther Lake.
+为评估英特尔的技术复兴程度，我们对Panther Lake进行了深度拆解。
+
+Intel Core Ultra 7 365 (Panther Lake). Source: SemiAnalysis
+英特尔酷睿Ultra 7 365（Panther Lake）。来源：SemiAnalysis
+
+The SemiAnalysis STEEL teardown lab breaks down advanced datacenter and AI hardware. To learn more about our pipeline or to commission a teardown, contact 
+
+sales@semianalysis.com
+
+.
+SemiAnalysis STEEL拆解实验室专注于先进数据中心和AI硬件分析。如需了解我们的分析流程或委托拆解项目，请联系sales@semianalysis.com。
+
+WE’RE HIRING
+
+: Architecture, floorplan, packaging, manufacturing, and labs experts. Opportunities from system to transistor and everywhere in between. Check out our 
+
+Careers
+
+page.
+我们正在招聘：架构设计、版图规划、封装、制造和实验室专家。职位涵盖从系统到晶体管的全产业链。详见招聘页面。
+
+Our teardown traces 18A from its four-sheet RibbonFETs (Intel’s marketing name for GAAFETs) and gate stacks through contacts, frontside and backside wiring, and the bonded carrier. 
+我们的拆解从18A工艺的四层RibbonFET（英特尔对GAAFET的营销命名）和栅极堆栈开始，追踪了接触孔、正面/背面布线及载板接合的全流程。
+
+We explain how these material and integration choices improve gate control and reduce resistance, while adding capacitance, thermal resistance, and process complexity. 
+我们将解析这些材料和集成方案如何提升栅极控制、降低电阻，同时增加电容、热阻和工艺复杂度。
+
+Our measurements put Panther Lake’s 18A compute logic and TSMC N3E GPU logic at similar logic density. 
+测量数据显示，Panther Lake的18A计算逻辑与台积电N3E GPU逻辑具有相近的逻辑密度。
+
+However, 18A does not lead TSMC N3P, N2 or Samsung SF2 in peak density. 
+但18A在峰值密度上仍落后于台积电N3P、N2及三星SF2工艺。
+
+Panther Lake’s CPU cores are incremental updates, and the high-end GPU still uses TSMC N3E.
+Panther Lake的CPU核心属于渐进式升级，高端GPU仍采用台积电N3E工艺。
+
+X-ray of Intel Panther Lake package. Source: SemiAnalysis
+英特尔Panther Lake封装的X光影像。来源：SemiAnalysis
+
+Panther Lake assembles one compute tile, one GPU tile, and one I/O tile atop a passive base tile using Intel’s Foveros-S advanced packaging. 
+Panther Lake采用英特尔Foveros-S先进封装技术，在无源基础晶粒上集成计算晶粒、GPU晶粒和I/O晶粒各一枚。
+
+Both compute tile variants use Intel 18A. The Xe3 GPU options are a 4-core GT1 tile on Intel 3 and a larger 12-core GT2 tile on TSMC N3E. Both I/O tile variants use TSMC N6. [1], [2]
+两种计算晶粒均采用Intel 18A工艺。Xe3 GPU提供两个版本：基于Intel 3工艺的4核GT1晶粒，以及采用台积电N3E工艺的12核GT2大晶粒。I/O晶粒则统一使用台积电N6工艺。[1][2]
+
+Panther Lake configurations. PTL-U (3xx, left), PTL-H (3x6H, center), PTL-H with Arc B390/B370 (X-tier, 3x8H, right). Source: SemiAnalysis
+Panther Lake配置方案：PTL-U（3xx系列，左）、PTL-H（3x6H系列，中）、搭载Arc B390/B370的PTL-H（X-tier，3x8H系列，右）。来源：SemiAnalysis
+
+Our analysis centers on the PTL-U compute tile, both the 4-core and 12-core GPU tiles, as well as the 12-lane I/O tile.
+我们的分析聚焦于PTL-U计算晶粒、4核/12核GPU晶粒以及12通道I/O晶粒。
+
+PowerVia
+PowerVia技术解析
+
+In conventional chips, power and signal are routed through the same frontside metal stack towards the device frontend. 
+传统芯片中，供电与信号通过同一套正面金属堆栈传输至器件前端。
+
+Power rails consume scarce routing resources near the transistors, while tall via stacks carry VDD and VSS from the coarse upper wires to local rails. 
+电源轨会消耗晶体管附近宝贵的布线资源，而高层通孔堆栈则将VDD/VSS从粗粒度上层导线传导至本地电源轨。
+
+Backside power delivery (BSPD) moves the main power network behind the transistor layer, to the backside, separating it from frontside signal routing. 
+背面供电技术（BSPD）将主供电网络移至晶体管层背面，使其与正面信号布线分离。
+
+We covered BSPD and its impacts in 2024. [3], [4], [5] Intel’s BSPD implementation, branded as “PowerVia”, routes power through dedicated backside metals to nano-TSVs, which connect those rails to local source/drain (S/D) contacts.
+我们已在2024年详述BSPD技术及其影响[3][4][5]。英特尔将其实施方案命名为"PowerVia"，通过专用背面金属层和纳米硅通孔（nano-TSVs）将电源连接至本地源极/漏极（S/D）接触点。
+
+Schematic orientation of the retained carrier, devices and frontside/backside interconnects. Layer counts are illustrative; not to scale. Source: SemiAnalysis
+载板保留方案、器件及正/背面互连的示意图。层数仅为示意，非实际比例。来源：SemiAnalysis
+
+Implementing that separation requires Intel to build the interconnect stacks from both sides of the wafer. 
+实现这种分离需要英特尔从晶圆两侧构建互连堆栈。
+
+The frontside comprises the M0-M14 signal stack, while the backside comprises the BM0-BM5 power stack. M0 and BM0 are closest to the transistors.
+正面包含M0-M14信号堆栈，背面则包含BM0-BM5电源堆栈。其中M0和BM0最接近晶体管层。
+
+Generalized PowerVia process sequence and comparison of buried power rails, PowerVia and direct backside contact schemes. Integration details and layer counts are illustrative; the schematic is not to scale. Source: SemiAnalysis
+PowerVia工艺流程概览及埋入式电源轨、PowerVia与直接背面接触方案的对比。集成细节和层数仅为示意，非实际比例。来源：SemiAnalysis
+
+The nano-TSVs connect the two sides, but Intel patterns and etches each via from the front after forming the contacts. 
+纳米硅通孔连接晶圆两侧，但英特尔在形成接触孔后从正面进行图形化和刻蚀。
+
+A narrow via runs from the side of the contact deep into the silicon substrate. 
+狭窄的通孔从接触孔侧面延伸至硅衬底深处。
+
+Intel then completes the frontside signal metal stack, bonds the wafer to a carrier, flips it and removes the original substrate until the buried via tips are exposed. 
+随后英特尔完成正面信号金属堆栈，将晶圆接合至载板并翻转，通过去除原始衬底使埋入的通孔尖端暴露。
+
+The backside metal stack is then deposited directly on the revealed vias.
+背面金属堆栈直接沉积在暴露的通孔上。
+
+The nano-TSV and backside-via profiles taper in opposite directions because Intel forms them from opposite sides of the wafer. 
+纳米硅通孔与背面通孔的锥度方向相反，因其分别从晶圆两侧形成。
+
+The transistor structures form the FEOL. Local contacts and nano-TSVs connect them to the wiring. M0 begins the frontside interconnect stack.
+晶体管结构构成前段制程（FEOL），通过本地接触孔和纳米硅通孔连接至布线层。M0标志着正面互连堆栈的起点。
+
+The silicon carrier remains attached above the frontside interconnects. It supports the device wafer during substrate removal and backside processing and remains part of the finished chip’s thermal path.
+硅载板始终固定在正面互连层上方，在衬底去除和背面加工过程中支撑器件晶圆，并作为成品芯片散热路径的组成部分。
+
+PowerVia removes the main power distribution from the congested frontside metals, routing supply through shorter and wider backside wires. 
+PowerVia技术将主供电网络从拥挤的正面金属层转移，通过更短更宽的背面导线进行供电。
+
+Its lateral landing still occupies area in the standard cell, so it recovers less cell area than a direct backside contact. [3] 
+其横向连接仍会占用标准单元面积，因此比直接背面接触方案节省的单元面积更少。[3]
+
+Nano-TSVs beside the logic devices carry VDD or VSS from the backside power network, while signal connections continue upward through the frontside metals.
+逻辑器件旁的纳米硅通孔负责从背面供电网络传输VDD/VSS，而信号连接则继续通过正面金属层向上传输。
+
+Intel 18A RibbonFET and nano-TSV in XTEM (top) and EDS (bottom). Source: SemiAnalysis
+英特尔18A工艺RibbonFET与纳米硅通孔的XTEM（上）和EDS（下）图像。来源：SemiAnalysis
+
+Backside Interconnect
+背面互连
