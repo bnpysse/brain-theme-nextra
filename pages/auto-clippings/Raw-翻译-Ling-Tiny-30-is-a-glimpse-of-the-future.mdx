@@ -1,0 +1,36 @@
+---
+title: "Ling Tiny 3.0 is a glimpse of the future_全翻译"
+tags: ["Reddit_全文翻译", "r_LocalLLaMA"]
+---
+
+【帖子标题】：Ling Tiny 3.0 is a glimpse of the future  
+【帖子标题】：Ling Tiny 3.0是未来的一瞥  
+
+【帖子正文】：  
+I've been playing around with Ling 3.0 Tiny, which is an 8 billion parameter model (MoE, 1B active). And I've had a lot of poignant thoughts as a result. Just for fun, I got it running with llama.cpp on an old laptop. This is a laptop from 2017 with a 7th gen i5 and 8 gigs of RAM, like barely even usable for modern tasks. No VRAM, no GPU. Well, I got Pi running on it and asked it to make a script to scan the local network for all available models on llama.cpp servers. It started chugging along at about 10 tokens per second. And 20 minutes later, it was done.  
+【帖子正文】：  
+最近我在试用Ling 3.0 Tiny——一个80亿参数（混合专家模型，激活参数10亿）的模型，由此产生了许多深刻感悟。出于好玩，我在一台2017年的旧笔记本上用llama.cpp运行它。这台笔记本配备第七代i5处理器和8GB内存，几乎无法胜任现代任务，既没有显存也没有GPU。但当我运行Pi并让它编写脚本扫描本地网络中llama.cpp服务器上所有可用模型时，它开始以每秒约10个token的速度运转，20分钟后竟完成了任务。  
+
+It had several back and forth turns with writing code, running it, getting feedback and iterating.  
+它经历了多次编写代码、运行、获取反馈和迭代的过程。  
+
+It's a simple task, yes. But it's a task that would have taken me an hour or two to do in 2020.  
+这确实是个简单任务。但若在2020年，我自己完成可能需要一两个小时。  
+
+It's just incredible that such a potato hardware is actually accomplishing something useful on a reasonable timeline. One billion active parameters is so small that an old CPU can run at 10 tokens a second with basically no optimization effort. I.e. I just built llama.cpp and ran the first Q6 quant I found.  
+如此低配的硬件竟能在合理时间内完成有用任务，实在令人惊叹。10亿激活参数规模足够小，老旧CPU无需优化就能以每秒10个token运行——我只是编译了llama.cpp，然后随便跑了个Q6量化版本。  
+
+I guess my point is, do you remember that feeling a year or two ago when you looked down at your expensive GPU rig and thought, wow, the computer writes the code itself now? It actually feels like something, like it's intelligent somehow.  
+我想说的是，还记得一两年前你低头看着昂贵的GPU设备，心想"电脑居然能自己写代码了"的那种感觉吗？那种仿佛触及某种智能的震撼。  
+
+Well, now that's starting to happen for every potato casual computing device that's been made since 2015.  
+而现在，这种体验正开始出现在2015年后生产的任何低端计算设备上。  
+
+Obviously more expensive rigs will be always be much more power efficient and cost efficient and fast at producing tokens. So it may never be practical to actually use old potato hardware.  
+当然高端设备永远会在能效比、成本效益和生成速度上占优，老旧硬件可能永远不具备实际使用价值。  
+
+But maybe it will make sense. There are all kinds of things that a mildly intelligent computer could do in the background. So it may be a new beginning for edge intelligence. No new compute required. Just everything that already exists can suddenly start doing intelligent tasks. Not sure.  
+但也可能有新意义：具备基础智能的计算机能在后台处理各种事务。这或许会开启边缘智能的新纪元——无需新增算力，现有设备突然都能执行智能任务了，不过尚不确定。  
+
+I guess I'm just saying I'm amazed I've had that weird sensation when looking at my GPUs and feeling like there's something more than just bits in there, but for an old CPU. (no I don't think it's conscious. Not talking about that.)  
+我想表达的是，我惊讶于自己竟会对老旧CPU产生那种曾针对GPU的奇妙感受——仿佛其中跃动着超越二进制代码的存在（声明：并非指意识，别误会）。
