@@ -2948,6 +2948,7 @@ export default {
   "Raw-翻译-AI-Can-Make-You-Suck-Faster-Too": "AI Can Make You Suck Faster Too",
   "Raw-翻译-AADP-出现之后：AGENT-安全开始把能做和该做真正分开": "AADP 出现之后：AGENT 安全开始把能做和该做真正分开",
   "Raw-翻译-A-walkable-ASCII-cyberpunk-city-in-one-HTML": "A walkable ASCII cyberpunk city in one H...",
+  "Raw-翻译-A-single-function-Jev-like-wrapper-for-LLMs": "A single function Jev-like wrapper for L...",
   "Raw-翻译-A-single-firm-is-behind-OpenAI-Anthropic-an": "A single firm is behind OpenAI, Anthropi...",
   "Raw-翻译-A-shot-scraper-style-JSON-API-on-Bun-14s-ne": "A shot-scraper-style JSON API on Bun 1.4...",
   "Raw-翻译-A-preliminary-Qwen38-27B-model-card-is-live": "A preliminary Qwen3.8-27B model card is ...",
