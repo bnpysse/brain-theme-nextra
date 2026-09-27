@@ -1,0 +1,165 @@
+---
+title: "HomeBody A humanoid that explores, remembers, and acts on it_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：HomeBody: A humanoid that explores, remembers, and acts on its own  
+【文章标题】：HomeBody：一款具备自主探索、记忆与行动能力的人形机器人  
+
+【文章正文】：  
+A common approach to humanoid autonomy follows a three-part architecture: a System 2 VLM processes visual observations and instructions, a learned System 1 VLA produces commands, and a System 0 controller executes coordinated motion.  
+人形机器人自主性的常见架构分为三部分：系统2视觉语言模型（VLM）处理视觉观察与指令，学习型系统1视觉语言动作模型（VLA）生成命令，系统0控制器执行协调运动。  
+
+As frontier VLMs such as Astra become more capable, we ask whether a learned VLA is still needed between high-level reasoning and the robot’s skills. Can System 2 directly orchestrate a library of reusable motor skills?  
+随着Astra等前沿VLM能力提升，我们质疑在高级推理与机器人技能间是否仍需学习型VLA。系统2能否直接调度可复用运动技能库？  
+
+We present HomeBody, a system that equips frontier VLMs with persistent spatial memory and composable humanoid skills for long-horizon tasks. In a previously unseen kitchen, our system allows a Unitree G1 guided by GPT Astra to clean up across the room and retrieve a remembered object from an underspecified request, without environment-specific training data or additional policy learning.  
+我们推出HomeBody系统，为前沿VLM配备持久空间记忆与可组合人形技能，以执行长期任务。在陌生厨房中，该系统使GPT Astra引导的Unitree G1能清理房间各处，并根据模糊请求找回记忆物品，无需环境特定训练数据或额外策略学习。  
+
+A learned action pipeline connects a System 2 VLM to a System 1 VLA and a System 0 whole-body tracking controller. HomeBody replaces that chain with a plug-and-play VLM calling a composable skill library. Robot poses are illustrative.  
+传统学习型动作管道连接系统2 VLM、系统1 VLA与系统0全身追踪控制器。HomeBody用即插即用VLM调用可组合技能库取代该链条。机器人姿态仅为示意。  
+
+01  
+Long Horizon Humanoid Loco-Manipulation  
+01  
+长期人形移动操作  
+
+Long-horizon loco-manipulation takes a humanoid beyond what its ego view can show. To act across a room, it needs an internal spatial model that connects visible objects with remembered locations and helps resolve ambiguous requests. This context guides where to go, what to act on and how to sequence walking and manipulation. HomeBody combines that spatial memory with composable skills whose execution feedback lets the VLM revise its next decision when an action or transition fails.  
+长期移动操作使人形机器人突破第一视角限制。跨房间行动需建立内部空间模型，关联可见物体与记忆位置，并解决模糊请求。该上下文指导去向、操作对象及行走与操作的顺序。HomeBody将空间记忆与可组合技能结合，当动作或转换失败时，执行反馈让VLM修正后续决策。  
+
+01 Tidy the kitchen02 Retrieve the medicineMore coming soon!  
+01 整理厨房 02 取药品 更多功能即将上线！  
+
+←1 / 2→  
+←1 / 2→  
+
+Tidy the kitchen  
+整理厨房  
+
+Clean up all of the coffee bags and put them in the middle, and throw away all of the milk and orange juice cartons that have gone bad.  
+清理所有咖啡袋置于中央，丢弃变质牛奶与橙汁盒。  
+
+Cleaning the kitchen means deciding what to keep, what to throw away and how to move each object to the right place. HomeBody gathers the coffee bags on the island and discards the specified cartons, coordinating repeated trips, grasps and placements across the room. Its view changes with every move, so memory and action feedback help it track what is done and what still needs attention.  
+厨房清洁需决策物品留存、丢弃及归位方式。HomeBody将咖啡袋集中至中岛，丢弃指定包装盒，协调多次往返、抓取与放置。其视角随移动变化，记忆与动作反馈帮助追踪完成与待办事项。  
+
+Multi-object cleanup  
+多物体清理  
+
+Task sequencing  
+任务排序  
+
+Navigation + manipulation  
+导航+操作  
+
+Retrieve the medicine  
+取药品  
+
+I forgot my medicine, can you get it for me? Also throw out the bad carton while you are at it.  
+我忘了药品，能帮我取来吗？顺便丢弃坏掉的包装盒。  
+
+The medicine is initially out of view. HomeBody uses stored keyframes to locate the drawer, retrieves the medicine, hands it to the person, and then discards the carton. Across the room, it uses the right hand to grasp the drawer handle and open the drawer, then the left hand to discard the carton. Selecting between the two arms lets it access targets on both sides of the body.  
+药品初始不可见。HomeBody调用存储关键帧定位抽屉，取药递交给人类后丢弃包装盒。跨房间操作中，右手抓握抽屉把手开启，左手丢弃包装盒。双臂选择使其能触及身体两侧目标。  
+
+Occluded object  
+遮挡物体  
+
+Memory retrieval  
+记忆检索  
+
+Right-hand drawer opening  
+右手开抽屉  
+
+Left-hand carton disposal  
+左手弃盒  
+
+Left- and right-hand skills  
+左右手技能  
+
+02  
+How to Deploy  
+02  
+部署指南  
+
+Step 1. Explore  
+步骤1. 探索  
+
+First, we give the humanoid context about its role and let it explore an unseen environment. HomeBody collects 0.5× iPhone video, D435i camera observations, LiDAR scans with SLAM, joint poses and waypoints chosen by Astra. Exploration captures the room from the humanoid’s own viewpoint, grounding its spatial context in what it can see as it moves and interacts with the space. HomeBody retains this context when objects leave the ego view.  
+首先赋予人形机器人角色认知，让其探索陌生环境。HomeBody收集0.5倍速iPhone视频、D435i相机观测、SLAM激光雷达扫描、关节位姿及Astra选定路径点。探索从机器人第一视角捕获空间，通过移动与交互建立空间上下文。当物体离开视野时仍保留该上下文。  
+
+Exploration instruction  
+探索指令  
+
+You are a kitchen robot, please explore the space!  
+你是厨房机器人，请探索该空间！  
+
+HomeBody guides exploration of the kitchen, choosing useful viewpoints and saving observations for later tasks.  
+HomeBody引导厨房探索，选择有用视角并保存观测数据供后续任务使用。  
+
+Step 2. Real2Sim  
+步骤2. 实景转仿真  
+
+HomeBody uses Astra as its Real2Sim agent to build a digital twin in Isaac Sim [2] from the humanoid’s own collected data. This grounds its observations in a spatial model of the world, helping the high-level VLM reason about locations beyond the ego view. See what accurate Real2Sim reconstruction requires and how the reconstructions compare.  
+HomeBody以Astra作为实景转仿真代理，用机器人采集数据在Isaac Sim[2]中构建数字孪生。这将观测数据锚定于世界空间模型，帮助高级VLM推理视野外位置。了解精准实景转仿真的要求及重建效果对比。  
+
+Room overview & 3DMatched camera views  
+房间概览与3D匹配相机视图  
+
+FROM EXPLORATION TO A DIGITAL TWINWatch the video  
+从探索到数字孪生观看视频  
+
+Click to explore in 3D ↗Press F!  
+点击3D探索 ↗按F键！  
+
+Load the LiDAR and simulation to orbit, pan, and compare.  
+加载激光雷达与仿真数据进行环视、平移及对比。  
+
+LiDARSimulation  
+激光雷达仿真  
+
+OverviewKitchenTop-downFull screen  
+概览厨房俯视图全屏  
+
+Drag to orbit / scroll or pinch to zoom / right-drag to pan. Press F to fade between LiDAR and simulation. Focus the view for arrow-key orbit, + / − zoom, or Home to reset.  
+拖动环视/滚轮缩放/右键平移。按F键切换激光雷达与仿真视图。聚焦视图后用方向键环视、+/-缩放或Home键重置。  
+
+Grounding HomeBody’s Real2Sim agent in data from its own exploration, including SLAM geometry, ego views, joint states and waypoints, helps it build a geometrically, semantically and visually accurate digital twin for reasoning at deployment.  
+将HomeBody实景转仿真代理锚定于自主探索数据（含SLAM几何结构、第一视角、关节状态及路径点），可构建几何、语义与视觉精准的数字孪生体用于部署推理。  
+
+Matched camera views  
+匹配相机视图  
+
+&lt;1 / 5&gt;  
+&lt;1 / 5&gt;  
+
+SimulationG1 exploration iPhone view‹ ›  
+仿真G1探索iPhone视图‹ ›  
+
+Refrigerator wall  
+冰箱墙  
+
+SimulationG1 exploration iPhone view‹ ›  
+仿真G1探索iPhone视图‹ ›  
+
+Glass-corner sink  
+玻璃转角水槽  
+
+SimulationG1 exploration iPhone view‹ ›  
+仿真G1探索iPhone视图‹ ›  
+
+Island and kitchen  
+中岛与厨房  
+
+SimulationG1 exploration iPhone view‹ ›  
+仿真G1探索iPhone视图‹ ›  
+
+Room overview  
+房间概览  
+
+SimulationG1 exploration iPhone view‹ ›  
+仿真G1探索iPhone视图‹ ›  
+
+Second island  
+第二中岛  
+
+Drag the image divider to compare  
+拖动分割线对比
