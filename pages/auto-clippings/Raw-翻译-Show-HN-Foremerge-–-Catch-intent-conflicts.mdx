@@ -1,0 +1,120 @@
+---
+title: "Show HN Foremerge – Catch intent conflicts between parallel_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: Foremerge – Catch intent conflicts between parallel coding agents  
+【文章标题】：展示HN：Foremerge——捕捉并行编程智能体间的意图冲突  
+
+【文章正文】：  
+Foremerge is the open-source coordination protocol for coding agents, built above Git. Agents keep isolated worktrees while sharing intent, semantic claims, dependencies, provisional ChangeSets, decisions, validation, and provenance.  
+【文章正文】：  
+Foremerge是构建于Git之上的开源编程智能体协调协议。智能体在保持独立工作树的同时，共享意图、语义声明、依赖关系、临时变更集、决策、验证和溯源信息。  
+
+| Tell your agent to install | → | Done | → | See collisions before they land |   
+|---|---|---|---|---|  
+| 告诉你的智能体安装 | → | 完成 | → | 在代码落地前发现冲突 |  
+
+| Paste one line into Claude Code, Codex, or Cursor |  | It installs Foremerge and wires itself up |  | Every agent sees what the others are about to change, even in separate worktrees |   
+| 向Claude Code/Codex/Cursor粘贴一行命令 |  | 自动安装并配置Foremerge |  | 所有智能体都能看到彼此的待变更内容——即使身处不同工作树 |  
+
+Status: Foremerge 0.5.0 is a pre-1.0, local-first MVP. The CLI, JSON API,  
+MCP server, SQLite store, deterministic conflict detector, and  
+verification-gated lifecycle are implemented. Public schemas may still  
+change. Published benchmark results do not yet exist, and coordination  
+between machines is outside this project's scope.  
+当前状态：Foremerge 0.5.0是1.0版之前的本地优先最小可行产品。已实现CLI、JSON API、MCP服务器、SQLite存储、确定性冲突检测器和验证门控生命周期。公共模式仍可能变更。尚未发布基准测试结果，跨机器协调不在本项目范围内。  
+
+Say you have two AI agents working on the same project at the same time. Each one gets its own copy of the code, so they never fight over files. Both finish. Both look correct. Then you find they undid each other's work.  
+假设有两个AI智能体同时处理同一项目。它们各自持有代码副本，因此不会争夺文件。两者都完成任务且看似正确。但最终你会发现它们互相抵消了对方的工作成果。  
+
+Git cannot warn you about that, because Git compares text and not intent. It  
+will stop you when two agents edit the same part of the same file. What it  
+cannot see is two edits that are each perfectly reasonable on their own and  
+land in different files. If one agent moves every caller onto a new  
+StripePaymentService while another adds PayPal support to the old  
+PaymentService, nothing overlaps, so Git merges both without complaint and  
+the PayPal work is left stranded on a class nothing calls any more.  
+Git无法预警这种情况，因为它对比文本而非意图。当两个智能体修改同一文件的相同部分时Git会阻止，但它察觉不到那些各自合理却分散在不同文件的修改。例如：一个智能体将所有调用迁移到新StripePaymentService，而另一个为旧PaymentService添加PayPal支持——由于没有重叠，Git会静默合并两者，导致PayPal功能被遗弃在无人调用的类中。  
+
+Foremerge fixes this by having agents announce what they are about to do, before they do it.  
+Foremerge通过要求智能体预先声明意图来解决此问题：  
+
+- Each agent says what it is about to touch. Not the code, just the  
+target, like "I am going to change the sendEmail function."  
+- 每个智能体声明即将修改的目标（而非具体代码），例如"我将修改sendEmail函数"  
+
+- Every agent reads from one shared list. It is a small database inside  
+your project's .git folder, so every agent on your machine sees the same  
+picture, whether it is Claude, Codex, or Cursor.  
+- 所有智能体读取同一共享清单（存储在项目.git文件夹的小型数据库中），因此同一机器上的Claude/Codex/Cursor等智能体都能获得统一视图  
+
+- If two plans collide, you hear about it right away. Foremerge names the two agents, explains why their plans clash, and suggests how to split the work. Both worktrees are still clean at that point, so no work has to be thrown away.  
+- 当计划冲突时立即通知：Foremerge会指出冲突双方、解释原因并提供任务拆分建议。此时工作树仍保持干净，无需丢弃任何工作成果  
+
+Think of it as a shared whiteboard. Before an agent starts, it writes down what it is about to work on, and it reads what everyone else already wrote.  
+可以将其视为共享白板——智能体开工前先登记工作内容，并查阅他人已登记事项。  
+
+Two things Foremerge deliberately does not do. It never locks a file or blocks an agent, because a single crashed agent would then stall the whole fleet, so the warnings are advisory and you stay in charge. And it never asks a model to judge conflicts, so the same inputs always produce the same answer.  
+Foremerge刻意不做两件事：绝不锁定文件或阻塞智能体（避免单个崩溃导致全局停滞，仅提供建议性警告）；也从不依赖模型判断冲突（确保相同输入永远获得相同结论）。  
+
+Agent A: Replace PaymentService with StripePaymentService  
+Agent B: Add PayPal support to PaymentService  
+智能体A：用StripePaymentService替换PaymentService  
+智能体B：为PaymentService添加PayPal支持  
+
+These agents can work in different trees without touching the same line. The plans still collide: one removes the extension point while the other depends on it.  
+虽然它们在不同工作树修改不同代码行，但计划仍存在冲突：一个移除扩展点，另一个却依赖该扩展点。  
+
+Both agents declare the same symbol:PaymentService scope, one saying it will  
+replace it and the other that it will extend it. Foremerge compares those  
+two declarations before either writes code, raises a HIGH advisory, and  
+suggests coordinating on a stable abstraction such as PaymentProvider. That  
+suggestion is explainable evidence, not an automatic architecture decision or a  
+hard lock.  
+两者都声明了PaymentService符号作用域（一个要替换，一个要扩展）。Foremerge在代码写入前比较声明，发出HIGH级别建议：推荐基于PaymentProvider等稳定抽象进行协调。该建议是可解释的证据，而非强制架构决策。  
+
+Because the operation is declared rather than read out of the summary, it does not matter how either agent phrased its plan. "Consolidate payments onto Stripe" and "Replace PaymentService with Stripe" reach the same verdict.  
+由于操作是声明而非解析自摘要，无论智能体如何表述计划（如"统一支付到Stripe"或"用Stripe替换PaymentService"），都能得出相同结论。  
+
+Git remains the durable repository. Foremerge supplies the missing shared awareness above it.  
+Git仍是持久化存储库，而Foremerge提供了其上缺失的共享感知层。  
+
+Rendered from the actual conflict fields captured by the 0.1.0  
+release-binary run in  
+examples/terminal-session.txt. The displayed  
+command uses the shown jq filter; output is abridged for readability.  
+以上内容渲染自0.1.0版本二进制在examples/terminal-session.txt中捕获的真实冲突字段。显示命令使用了指定的jq过滤器，输出经过精简以提高可读性。  
+
+Paste this into Claude Code, Codex, or Cursor from inside the repository you want to coordinate:  
+在需要协调的代码库中，向Claude Code/Codex/Cursor粘贴以下内容：  
+
+Set up Foremerge in this repository so we can coordinate parallel agents.  
+在本代码库中设置Foremerge以实现并行智能体协调：  
+
+1. Install it:      curl -fsSL https://foremerge.com/install.sh | sh  
+   安装：curl -fsSL https://foremerge.com/install.sh | sh  
+
+2. Initialize:      foremerge init  
+   初始化：foremerge init  
+
+3. Wire this client and any others in use: foremerge setup all  
+   配置当前及其他客户端：foremerge setup all  
+
+4. Register the check I should be validated against, for example:  
+                    foremerge checks set test -- cargo test --all-targets  
+   注册验证检查（示例）：foremerge checks set test -- cargo test --all-targets  
+
+5. Confirm:         foremerge doctor --client all  
+   确认：foremerge doctor --client all  
+
+Then read the Foremerge skill that step 3 installed for this client and follow  
+it from now on: publish your intent with semantic scopes before editing, claim  
+the scope, and check for conflicts before you start.  
+随后遵循第三步为该客户端安装的Foremerge技能：编辑前用语义作用域发布意图、声明作用域并预先检查冲突。  
+
+Adjust step 4 to whatever this repository's real test command is. Step 3 asks the client to enable an MCP server, so it will prompt you before doing so. The Codex registration is user level, but one registration serves every repository: start Codex inside the repository you want it to coordinate.  
+根据代码库实际测试命令调整第四步。第三步会要求客户端启用MCP服务器（需确认）。Codex注册是用户级操作（一次注册适用于所有代码库），但需在目标代码库内启动Codex以进行协调。  
+
+You need a rec  
+（原文截断）

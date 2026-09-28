@@ -1,0 +1,101 @@
+---
+title: "What languages are agent skills written in_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：What languages are agent skills written in?
+
+【文章标题】：代理技能是用什么语言编写的？
+
+【文章正文】：
+In the first quarter of 2026, 13.0% of newly written agent skills were in a language other than English, and one quarter later it was 16.3%. That is three points in three months across 255,068 skills, with confidence intervals nowhere near touching. For comparison, GitHub-wide non-English documentation took ten years to travel from 3.7% to 13.0%, so whatever is happening here is happening at a different speed entirely, and the most plausible explanation is that AI development has arrived somewhere other than San Francisco.
+
+2026年第一季度，新编写的代理技能中有13.0%使用英语以外的语言，而一个季度后这一比例为16.3%。这意味着在三个月内、在255,068项技能中上升了三个百分点，且置信区间远未相交。作为对比，GitHub全站非英语文档花了十年时间才从3.7%上升到13.0%，因此这里正在发生的事情完全以不同的速度进行，而最合理的解释是，AI开发已经抵达了旧金山以外的地方。
+
+Reviewing the data, it turns out that the claim is stronger than the obvious version of it, because English is not a proxy for American. GitHub's fastest-growing developer population by a wide margin is India, which writes in English, as do Nigeria and Singapore, so a language count cannot see any of them. The non-English share is therefore not a measure of how much of this ecosystem sits outside the United States. It is a floor beneath it, and everything below should be read that way.
+
+审视数据后会发现，这一论断比其表面版本更有力，因为英语并不能代表美国。GitHub上增长最快的开发者群体（遥遥领先）是印度，他们使用英语编写，尼日利亚和新加坡也是如此，因此语言统计无法看到他们中的任何一个。因此，非英语占比并不是衡量这个生态系统有多少位于美国之外的指标。它是一个下限，下文所有内容都应以此方式解读。
+
+For context, a skill is a SKILL.md file in a folder, holding instructions for an AI agent in plain prose, loaded when the agent judges the task relevant. Anthropic published the specification in October 2025, and it spreads the way a recipe spreads: somebody copies it. Nine months later there were 3.8 million of them across 282,200 public repositories, which is what the GitSkills dataset collects. Skills are strange as software, by which we mean the traditional kind, because this is one of the things AI has upended. They are written in human language and the runtime is a multilingual model, so there is no technical reason to write one in English: a developer in Shenzhen or São Paulo can state a procedure more precisely in their own language, and the agent will follow it. Whether it follows it as well is a better question, and much harder to answer than anything a file crawl can settle.
+
+作为背景，技能是文件夹中的一个SKILL.md文件，以平实的散文形式为AI代理保存指令，当代理判断任务相关时加载。Anthropic于2025年10月发布了该规范，它的传播方式就像菜谱的传播方式：有人复制它。九个月后，在282,200个公共仓库中已有380万个这样的文件，这正是GitSkills数据集所收集的内容。技能作为软件——我们指的是传统意义上的软件——是很奇怪的，因为这是AI颠覆的事物之一。它们用人类语言编写，运行时是一个多语言模型，因此没有技术理由必须用英语编写：深圳或圣保罗的开发者可以用自己的语言更精确地陈述流程，代理也会遵循。它是否同样遵循则是一个更好的问题，而且比文件爬取所能解决的任何问题都更难回答。
+
+the distribution
+
+分布情况
+
+| Language | Share of distinct skills | 
+|---|---|
+| English | 85.3% | 
+| Chinese | 6.2% | 
+| Japanese | 1.7% | 
+| German | 1.6% | 
+| Korean | 1.2% | 
+| Portuguese | 1.1% | 
+| Spanish | 0.9% | 
+| French | 0.4% | 
+
+| 语言 | 不同技能占比 | 
+|---|---|
+| 英语 | 85.3% | 
+| 中文 | 6.2% | 
+| 日语 | 1.7% | 
+| 德语 | 1.6% | 
+| 韩语 | 1.2% | 
+| 葡萄牙语 | 1.1% | 
+| 西班牙语 | 0.9% | 
+| 法语 | 0.4% | 
+
+So 14.3% of skills are not in English, and split by script the Chinese ones run 104,985 simplified against 9,112 traditional. The rows above do not quite sum to that, because 6,810 skills came back below our confidence floor and are counted as neither. The comparison worth making is against GitHub's own documentation instead of its issues or pull requests, and a 2026 ICSE study put repository documentation at 13.0% non-English, with Chinese at 3.3% of repositories. In aggregate that makes skills unremarkable, 14.3% against 13.0% being a dead heat. They are markedly more Chinese, though, 6.2% against 3.3%.
+
+因此，14.3%的技能不是英语，按文字系统划分，中文技能中有104,985项为简体，9,112项为繁体。上表各行加起来并不完全等于这个数字，因为有6,810项技能低于我们的置信度下限，被计为两者皆非。值得比较的是GitHub自身的文档，而不是其议题或拉取请求，2026年ICSE的一项研究将仓库文档的非英语比例定为13.0%，其中中文占仓库的3.3%。总体而言，这使技能显得并不特别，14.3%对13.0%几乎是并驾齐驱。不过，它们的中文占比明显更高，为6.2%对3.3%。
+
+why every published number disagrees
+
+为什么每个已发布数字都不一致
+
+Ours is not the only published figure, and the published figures do not agree with each other.
+
+我们的数字并非唯一已发布的数据，而且已发布的数据彼此并不一致。
+
+| Reported English share | Corpus | Method | 
+|---|---|---|
+| 65.0% | 557 healthcare skills, ClawHub (2605.02709) | not stated | 
+| 81.8% | 26,502 skills, ClawHub (2604.13064) | not stated | 
+| 85.3% | 1,870,299 distinct, GitHub (ours) | py3langid, conf &gt;= 0.80 | 
+| 92.6% | 133,149 skills, skills.sh (2607.01456) | fast-langdetect | 
+| 99.7% | English-seeded crawl (2606.03565) | seeded | 
+
+| 报告的英语占比 | 语料库 | 方法 | 
+|---|---|---|
+| 65.0% | 557个医疗保健技能，ClawHub (2605.02709) | 未说明 | 
+| 81.8% | 26,502个技能，ClawHub (2604.13064) | 未说明 | 
+| 85.3% | 1,870,299个不同技能，GitHub（我们的） | py3langid，置信度 &gt;= 0.80 | 
+| 92.6% | 133,149个技能，skills.sh (2607.01456) | fast-langdetect | 
+| 99.7% | 英语种子爬取 (2606.03565) | 种子筛选 | 
+
+These are not contradictions, they are five different populations: curated marketplaces skew English, domain slices skew toward wherever that domain happens to be active, and a crawl seeded with English queries will find English. The first candidate to rule out is us, because if our identifier simply saw less English than everyone else's then the whole comparison would be an artifact of tooling. So we ran both over the same documents, py3langid which we use and fast-langdetect which the 92.6% study used. They agree on 97.6% of documents, and their English shares sit +1.2 points apart against a gap of around seven. Quality screening looks like the next good candidate and leads nowhere either: if corpora that filter for valid front matter were quietly discarding non-English skills that would explain some of the spread, but non-English skills have slightly better front-matter validity, 88.1% against 86.6%, and filtering moves the English share only from 85.6% to 85.4%. What is left is where you looked. That generalises well past this dataset, so when someone tells you what "the AI ecosystem" looks like, the registry they scraped may hold more of the answer than anything else they say.
+
+这些并非矛盾，而是五个不同的总体：精选市场偏向英语，领域切片偏向该领域恰好活跃的地方，而以英语查询为种子进行的爬取会找到英语。首先要排除的是我们自己，因为如果我们的识别器看到的英语比别人的少，那么整个比较就只是工具造成的假象。因此，我们在相同的文档上同时运行了两种工具：我们使用的py3langid和那项92.6%研究使用的fast-langdetect。它们在97.6%的文档上达成一致，其英语占比相差+1.2个百分点，而差距约为七个百分点。质量筛选看起来是下一个合理的候选因素，但同样没有结果：如果过滤有效前置元数据的语料库悄悄丢弃了非英语技能，那可以解释部分差异，但非英语技能的前置元数据有效性略好，为88.1%对86.6%，而过滤仅使英语占比从85.6%变为85.4%。剩下的就是你查看的地方。这一点可以很好地推广到这个数据集之外，因此当有人告诉你“AI生态系统”是什么样子时，他们所抓取的注册表可能比他们所说的任何其他内容都更能说明问题。
+
+skills are getting less English
+
+技能正变得越来越非英语化
+
+Skills carry commit history, so each one has a creation date, and that turns a static pie chart into a trend.
+
+技能带有提交历史，因此每个技能都有创建日期，这就把静态饼图变成了趋势。
+
+| Quarter | Non-English share | 
+|---|---|
+| 2026 Q1 | 13.0% [12.8, 13.1] | 
+| 2026 Q2 | 16.3% [16.1, 16.4] | 
+
+| 季度 | 非英语占比 | 
+|---|---|
+| 2026年第一季度 | 13.0% [12.8, 13.1] | 
+| 2026年第二季度 | 16.3% [16.1, 16.4] | 
+
+Month by month the climb is not smooth, since February dips to 10.9% before Mar
+
+逐月来看，上升趋势并不平稳，因为2月份在3月之前下降到了10.9%

@@ -1,0 +1,28 @@
+---
+title: "Proof of Capture Apple Reference Image, but open source and_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Proof of Capture: Apple Reference Image, but open source and using steganography
+
+【文章正文】：
+Apple Reference Image, but open source and using steganography
+Apple introduced yesterday Apple Reference Image: a way to cryptographically prove a photo was actually taken by a camera, instead of AI generated.
+During my time at the Recurse Center this summer, Alex Hornstein and I (two camera lovers) built a camera with proof of capture.
+Prove what’s real at capture time
+Back in 2019 I was deploying ML fact-checking tools, and even in the Will-Smith-eating-spaghetti era it was obvious that generators outrun detectors. Detection is a losing race: every improvement in the detector is training signal for the next generator.
+Our approach flips the problem: instead of trying to detect what's fake after the fact, prove what's real at the moment of capture.
+The complexity of this is not at the technical level but in how to handle photo edits (should a cropped photo keep its signature?) and metadata: the moment you share an image, the EXIF gets stripped for privacy reasons, and any signature stored there is gone.
+Steganography and perceptual hashes
+For our camera we used steganography: an invisible watermark hidden in the image pixels themselves, containing a signed perceptual hash (a hash of what the photo looks like, not its exact bytes).
+Because nothing lives in the metadata, the signature survives compression and resizing. Our first version hid an exact SHA-256 hash in the last bit of each pixel, and any JPEG recompression destroyed it; the current one signs a pHash and spreads it across the whole image as a frequency-domain watermark (DWT + DCT), which survives WhatsApp-grade compression and still detects content edits.
+The ATECC608 chip
+The signing is handled by an ATECC608 cryptographic chip (self-soldered!) that holds a public key for verifying and a private one for signing.
+Once minted, the private key never leaves the chip: not even the owner can read it. And if you tamper with it, the chip locks itself.
+What Apple is doing
+Apple does something similar: the sensor signs every pixel at capture time. But instead of embedding the signature into the image, Private Cloud Compute develops it into a "digital negative" that lives next to your photo. Their verification flow is neither public nor clear yet.
+Something I don't like is that they're not using the existing open standard, C2PA, already used by Nikon, Sony, Leica and Adobe. And even though they're opening APIs so platforms can verify natively, the root of trust stays inside Apple's Private Cloud Compute. Apple... (sigh)
+To be fair...
+Neither Proof of Capture, Apple Reference Image nor C2PA fully solve the problem. For example, a screen attack still works: photograph a screen displaying an AI image and you get a signed photo of a fake. But it's always nice seeing big actors interested in addressing this problem.
+The project is open source. You can build your own for under $100.
+Closing with a printed photo from our Proof of Capture camera. Visit the Recurse Center to see this piece of art. If you look closely enough you may see the hidden signature.

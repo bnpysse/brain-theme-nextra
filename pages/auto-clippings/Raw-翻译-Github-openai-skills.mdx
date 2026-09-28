@@ -1,0 +1,53 @@
+---
+title: "_openai_skills_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&gt; [!IMPORTANT]
+&gt; **该代码库已弃用。** 如需获取最新的Codex技能和插件示例，请使用[OpenAI插件代码库](https://github.com/openai/plugins)。若想为Codex添加自定义技能，请遵循[构建插件](https://developers.openai.com/codex/plugins/build)指南，其中包含创建纯技能插件的说明。
+
+# 智能体技能
+
+Agent Skills（智能体技能）是由指令、脚本和资源组成的文件夹，AI智能体可发现并利用这些内容执行特定任务。一次编写，随处可用。
+
+Codex通过技能帮助团队和个人以可重复的方式打包特定任务能力。本代码库收录了可与Codex配合使用的技能目录。
+
+了解更多：
+- [在Codex中使用技能](https://developers.openai.com/codex/skills)
+- [在Codex创建自定义技能](https://developers.openai.com/codex/skills/create-skill)
+- [智能体技能开放标准](https://agentskills.io)
+
+## 安装技能
+
+位于[`.system`](skills/.system/)目录下的技能会自动安装到最新版Codex中。
+
+若要安装[精选](skills/.curated/)或[实验性](skills/.experimental/)技能，可在Codex内使用`$skill-installer`命令。
+
+精选技能可通过名称安装（默认指向`skills/.curated`目录）：
+
+```
+$skill-installer gh-address-comments
+```
+
+对于实验性技能，需指定技能文件夹。例如：
+
+```
+$skill-installer install the create-plan skill from the .experimental folder
+```
+
+或直接提供GitHub目录URL：
+
+```
+$skill-installer install https://github.com/openai/skills/tree/main/skills/.experimental/create-plan
+```
+
+安装技能后，请重启Codex以加载新技能。
+
+## 许可证
+
+每个技能的许可证文件可直接在其目录下的`LICENSE.txt`中查看。
+
+## 🔗 知识库双向关联
+- [Github__mattpocock_skills_全翻译](/auto-clippings/Raw-翻译-Github-mattpocock-skills)
+- [Github__mattpocock_skills_全翻译](/auto-clippings/Raw-翻译-Github-mattpocock-skills)
+- [Github__openai_codex_简报](/auto-clippings/Auto-简报-Github-openai-codex)

@@ -1,0 +1,91 @@
+---
+title: "Hacking OpenAI_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Hacking OpenAI  
+【文章标题】：入侵 OpenAI
+
+【文章正文】：  
+【文章正文】：
+
+Intro  
+简介
+
+On July 25, 2026, we chained two critical vulnerabilities to compromise multiple OpenAI employees’ ChatGPT accounts. With these accounts, we could then access internal OpenAI repositories, and potentially many other connectors.  
+2026年7月25日，我们串联利用两个严重漏洞，入侵了多名 OpenAI 员工的 ChatGPT 账户。通过这些账户，我们可以访问 OpenAI 的内部仓库，并可能访问许多其他连接器。
+
+To prove we had in fact gained the access we believed without allowing ourselves to learn any sensitive information, we used the employee’s Codex to open a PR #1186742 in OpenAI’s internal monorepo openai/openai.  
+为了证明我们确实获得了所认为的访问权限，同时又避免让自己接触任何敏感信息，我们使用该员工的 Codex 在 OpenAI 内部单体仓库 openai/openai 中提交了一个 PR #1186742。
+
+Until two months ago, any user or OpenAI employee logging into OpenAI’s own help forum (community.openai.com) could have had their ChatGPT and Codex accounts taken over. Since people can connect various services to Codex and ChatGPT, the scope of what we could theoretically access was huge, including GitHub, Slack and emails.  
+直到两个月前，任何登录 OpenAI 自家帮助论坛（community.openai.com）的用户或 OpenAI 员工，其 ChatGPT 和 Codex 账户都可能被接管。由于人们可以将各种服务连接到 Codex 和 ChatGPT，我们理论上可以访问的范围非常巨大，包括 GitHub、Slack 和电子邮件。
+
+The entire timeline from initial discovery to access to OpenAI repo access took place in less than 72 hours.  
+从最初发现到访问 OpenAI 仓库的整个过程发生在不到 72 小时内。
+
+We immediately reported the initial vulnerability to OpenAI and Discourse and worked with them to coordinate the patch. We appreciate their attention to detail and fast resolution of this issue. OpenAI also paid us a $6,500 bounty.  
+我们立即向 OpenAI 和 Discourse 报告了最初的漏洞，并与他们协调修补。我们非常感谢他们对细节的关注和快速解决此问题。OpenAI 还向我们支付了 6,500 美元的赏金。
+
+We provide a full timeline of the disclosure process here. The rest of the post details how we discovered the two vulnerabilities, how we used claude models, as well as our takeaways from this experience.  
+我们在此提供完整的披露流程时间线。本文其余部分将详细介绍我们如何发现这两个漏洞、如何使用 Claude 模型，以及我们从这次经历中获得的经验教训。
+
+- 05:00–06:00 UTCInitial Finding HacktronAI team obtained remote code execution (RCE) and administrative access to the Discourse environment hosted at community.openai.com .  
+- 05:00–06:00 UTC 初步发现：HacktronAI 团队获得了托管在 community.openai.com 的 Discourse 环境的远程代码执行（RCE）和管理员权限。
+
+- 08:00–10:00 UTCBugcrowd Submission After confirming the cross-product impact, the team coordinated internally on the responsible disclosure process and submitted a report through OpenAI’s Bug Bounty Program on Bugcrowd.  
+- 08:00–10:00 UTC Bugcrowd 提交：在确认跨产品影响后，团队内部协调了负责任的披露流程，并通过 OpenAI 在 Bugcrowd 上的漏洞赏金计划提交了报告。
+
+- 13:30–15:30 UTCOpenAI Employee Account Access & Proof of Concept To demonstrate the practical impact of the vulnerability, we created a harmless proof-of-concept pull request in OpenAI’s internal monorepo (link redacted at OpenAI’s request). We updated the existing Bugcrowd submission with these findings, reached out to friends at OpenAI on Twitter/X to notify them directly, and ceased all further testing at approximately 15:30 UTC.  
+- 13:30–15:30 UTC OpenAI 员工账户访问与概念验证：为了证明该漏洞的实际影响，我们在 OpenAI 内部单体仓库中创建了一个无害的概念验证拉取请求（链接应 OpenAI 要求隐去）。我们用这些发现更新了现有的 Bugcrowd 提交，通过 Twitter/X 联系了 OpenAI 的朋友以直接通知他们，并于大约 15:30 UTC 停止所有进一步测试。
+
+- 22:49:45 UTCOpenAI-Side Fix Confirmed OpenAI replied to the report confirming the issue had been fixed, roughly 14 hours after the initial submission.  
+- 22:49:45 UTC OpenAI 侧修复确认：OpenAI 回复了报告，确认问题已修复，距最初提交约 14 小时。
+
+- Discourse Reported via HackerOne We submitted a report to Discourse through its HackerOne program.  
+- 通过 HackerOne 报告 Discourse：我们通过其 HackerOne 计划向 Discourse 提交了报告。
+
+- Discourse Responded Discourse replied to the report on Sunday.  
+- Discourse 回应：Discourse 在周日回复了报告。
+
+- Discourse Fix Ready Discourse had a fix ready by Monday and added image-processing sandboxing as defense in depth.  
+- Discourse 修复就绪：Discourse 在周一前准备好了修复，并添加了图像处理沙箱作为纵深防御。
+
+- Discourse Advisory Published Discourse published GHSA-vhm9-85gw-x335 with patch and rebuild guidance.  
+- Discourse 发布公告：Discourse 发布了 GHSA-vhm9-85gw-x335，其中包含补丁和重建指南。
+
+- OpenAI Rewarded $6,500 Bounty and Marked Resolved OpenAI comment — To clarify the scope of that award: testing against the Discourse-hosted community.openai.com was explicitly excluded from our bug bounty program. The award recognizes the OpenAI-side finding, not the actions against Discourse.  
+- OpenAI 奖励 6,500 美元赏金并标记为已解决：OpenAI 评论——为了澄清该奖励的范围：针对由 Discourse 托管的 community.openai.com 的测试被明确排除在我们的漏洞赏金计划之外。该奖励认可的是 OpenAI 侧的发现，而不是针对 Discourse 的行为。
+
+Background  
+背景
+
+A few months ago, our team at Hacktron, led by Harsh Jaiswal alongside Mohan Pedhapati and Rahul Maini, began researching frontier AI companies to find security vulnerabilities. This led us to discover an SSO misconfiguration in OpenAI’s identity infrastructure and a libheif RCE in the community forum used by OpenAI.  
+几个月前，我们 Hacktron 团队在 Harsh Jaiswal 的带领下，与 Mohan Pedhapati 和 Rahul Maini 一起，开始研究前沿 AI 公司以寻找安全漏洞。这使我们发现了 OpenAI 身份基础设施中的 SSO 配置错误，以及 OpenAI 使用的社区论坛中的 libheif RCE。
+
+We’ve since  expanded the research into HEIF Heist, a multi-month investigation tracing libheif across Slack, Meta, GitHub Enterprise, Ruby on Rails, and Node.js frameworks such as Next.js, Astro, and Gatsby. A surprising amount of widely-used software depends on this one image-processing library.  
+此后，我们将研究扩展为 HEIF Heist，这是一项历时数月的调查，追踪 libheif 在 Slack、Meta、GitHub Enterprise、Ruby on Rails 以及 Next.js、Astro、Gatsby 等 Node.js 框架中的使用情况。令人惊讶的是，大量广泛使用的软件都依赖这一个图像处理库。
+
+If your application processes user-controlled images and accepts .heic/.heif/.avif images, it is highly likely it is affected. Please reach out to us at hello@hacktron.ai if you need any kind of assistance.  
+如果你的应用程序处理用户可控图像并接受 .heic/.heif/.avif 图像，那么它极有可能受到影响。如果你需要任何帮助，请通过 hello@hacktron.ai 联系我们。
+
+Hacking community.openai.com  
+入侵 community.openai.com
+
+Warning  
+警告
+
+Patch notice: If you self-host Discourse, rebuild your installation now. Older Docker images may contain a vulnerable libheif dependency that permits code execution through an image upload. Run git pull followed by ./launcher rebuild app from /var/discourse; a web-interface update alone may not replace the underlying image. Discourse-hosted customers have already been patched. See the security advisory.  
+补丁通知：如果你自托管 Discourse，请立即重建你的安装。旧版 Docker 镜像可能包含存在漏洞的 libheif 依赖，允许通过图像上传执行代码。在 /var/discourse 下运行 git pull，然后运行 ./launcher rebuild app；仅通过 Web 界面更新可能无法替换底层镜像。Discourse 托管的客户已打补丁。请参阅安全公告。
+
+OpenAI uses Discourse for their forum and allows “Sign in with OpenAI” through auth.openai.com. After getting a good understanding of OpenAI’s services and infrastructure, we had reason to believe that compromising the forum could create a path into broader OpenAI services through this identity flow. To test that hypothesis, we first needed remote code execution on an OpenAI service like the Discourse community forum.  
+OpenAI 使用 Discourse 作为其论坛，并允许通过 auth.openai.com 进行“使用 OpenAI 登录”。在充分了解 OpenAI 的服务和基础设施后，我们有理由相信，攻陷该论坛可能通过这一身份流程创建进入更广泛 OpenAI 服务的路径。为了验证这一假设，我们首先需要在 OpenAI 服务（如 Discourse 社区论坛）上实现远程代码执行。
+
+While the Discourse app itself is actually not an easy target (we have looked into it in the past), we thought we could go after a dependency.  
+虽然 Discourse 应用本身实际上并不是一个容易的目标（我们过去曾研究过），但我们认为可以针对其依赖项下手。
+
+Heap buffer overflow in libheif  
+libheif 中的堆缓冲区溢出
+
+On July 23, we started reviewing Discourse’s image-upload pipeline, and we found that HEIC and HEIF  
+7月23日，我们开始审查 Discourse 的图像上传流程，并发现 HEIC 和 HEIF

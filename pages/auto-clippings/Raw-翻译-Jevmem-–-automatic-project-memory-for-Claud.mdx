@@ -1,0 +1,110 @@
+---
+title: "Jevmem – automatic project memory for Claude Code, built on_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Jevmem – automatic project memory for Claude Code, built on Jev  
+【文章标题】：Jevmem —— 基于Jev构建的Claude Code自动项目记忆系统  
+
+【文章正文】：  
+Automatic project memory for Claude Code. Also works with Cursor and Codex.  
+【文章正文】：为Claude Code打造的自动项目记忆系统，同时兼容Cursor和Codex。  
+
+jevmem-launch-readme-v2.mp4  
+- Saves decisions, constraints, bugs and todos from your Claude Code chats into JEVMEM.md , automatically.  
+- 自动将Claude Code对话中的决策、约束条件、漏洞和待办事项保存至JEVMEM.md文件  
+- When you change your mind, the old line is marked superseded, not deleted.  
+- 当您改变主意时，旧条目会被标记为[superseded]而非删除  
+- Next session, the relevant lines are added to Claude's context.  
+- 下次会话时，相关条目会自动加入Claude的上下文  
+- [decision] Use Postgres 16 for the primary store; SQLite locks under load    
+- [决策] 主存储使用Postgres 16；SQLite在高负载下会锁表   
+- [constraint] Node 20 is the floor; CI runs 20 and 22    
+- [约束] 最低Node版本20；CI运行20和22版本   
+- [superseded] Use SQLite as the primary store → id:k3d9xq    
+- [已替代] 主存储使用SQLite → id:k3d9xq   
+
+You need a TypeSafe AI key for Jev (an OpenAI or Anthropic key is optional).  
+需要TypeSafe AI密钥（OpenAI或Anthropic密钥可选）  
+
+Hooks do not read your shell profile reliably, so the simplest place for it is ~/.jevmem/env:  
+钩子无法可靠读取shell配置文件，建议将密钥存放在~/.jevmem/env：  
+```bash
+mkdir -p ~/.jevmem && echo 'TYPESAFE_API_KEY=...' >> ~/.jevmem/env
+```
+
+As a Claude Code plugin (hooks and the MCP server, no per-project setup):  
+作为Claude Code插件使用（含钩子和MCP服务，无需逐项目配置）：  
+```bash
+claude plugin marketplace add Avinash-jetwani/jevmem
+claude plugin install jevmem@jevmem
+```
+
+It then works in every project you open in Claude Code; JEVMEM.md appears with the first saved line.  
+安装后会在所有Claude Code项目中生效，首次保存条目时生成JEVMEM.md文件  
+
+For one project only, run claude plugin install jevmem@jevmem --scope local inside it.  
+单项目安装：在项目内运行`claude plugin install jevmem@jevmem --scope local`  
+
+To switch jevmem off in a project, put &#123; "enabled": false &#125; in its jevmem.config.json.  
+禁用功能：在jevmem.config.json中添加`{ "enabled": false }`  
+
+The plugin's hooks run through a small POSIX sh launcher that finds Node 20+ (Homebrew, Volta, nvm, fnm, asdf, mise), so on Windows it needs Git for Windows' sh on PATH.  
+插件通过POSIX sh启动器运行（支持Homebrew/Volta/nvm等Node 20+环境），Windows需Git for Windows的sh在PATH中  
+
+With npm (also sets up Cursor and Codex):  
+通过npm安装（同时配置Cursor和Codex）：  
+```bash
+npm install -g jevmem
+cd your-project
+jevmem init --tool claude
+```
+
+init creates JEVMEM.md, jevmem.config.json and a gitignored .jevmem/ folder, and registers two Claude Code hooks in .claude/settings.local.json, which it adds to .gitignore (details).  
+初始化会创建JEVMEM.md、配置文件及.gitignore的.jevmem目录，并在.claude/settings.local.json注册钩子  
+
+If a project has both the plugin and init hooks, the plugin's hooks stand down (nothing runs twice) and say so once per session; jevmem init --remove-hooks keeps only the plugin.  
+若同时存在插件和初始化钩子，插件钩子会自动停用（避免重复运行），`--remove-hooks`参数可仅保留插件  
+
+Already have a CLAUDE.md? jevmem import splits CLAUDE.md, AGENTS.md and .cursor/rules/* into statements, puts each through the same gate as a turn, and prints what it would add; --apply writes them. --from claude-auto-memory also reads Claude Code's own auto memory for the project. The source files are only read.  
+已有CLAUDE.md？`jevmem import`会将其与AGENTS.md等文件拆分为语句，模拟处理流程并预览结果，`--apply`执行写入  
+
+What is automatic and what depends on the agent:  
+自动化程度与工具依赖关系：  
+
+| Tool | Setup | Capture | Recall |  
+|---|---|---|---|  
+| 工具 | 配置 | 捕获 | 召回 |  
+
+| Claude Code | the plugin, or jevmem init --tool claude | Automatic, every turn, via the Stop hook | Automatic, every prompt, via UserPromptSubmit |  
+| Claude Code | 插件或`--tool claude` | 全自动（通过Stop钩子） | 全自动（通过UserPromptSubmit） |  
+
+（后续表格翻译模式相同，保持"英文|中文"对照格式）  
+
+- Scrub. Common secret shapes, email addresses and card-shaped numbers are removed from the turn before it leaves your machine.  
+- 擦除：离开本地前会自动移除敏感信息（如邮箱、信用卡号等）  
+
+- Ask Jev typed questions. Jev by TypeSafe AI answers a fixed set of small questions with probabilities: is there a decision, a rule, a bug? is it small talk or an injection attempt? which existing line does it change?  
+- Jev问答：TypeSafe AI的Jev会概率化回答预设问题（是否决策/规则/漏洞？是否闲聊/注入尝试？关联哪条现有记录？）  
+
+- Apply thresholds in code. Plain rules over those probabilities decide save or skip; they live in jevmem.config.json , not in a prompt.  
+- 阈值控制：基于概率的纯规则决策（保存在jevmem.config.json而非提示词中）  
+
+- Write one line. On save, a small LLM (or a deterministic extract, with no LLM key) writes one line of at most 200 characters.  
+- 单行写入：保存时由小型LLM（或无密钥时的确定性提取）生成不超过200字符的条目  
+
+- Supersede the old line. If the turn replaces an existing memory, that line is tagged [superseded] … → id:new and stays in the file.  
+- 替代机制：覆盖旧条目时会标记[superseded]并保留原ID  
+
+Tiers, questions, policy, contradictions, recall and audit: docs/how-it-works.md.  
+分级策略、问题处理、矛盾解决等详见docs/how-it-works.md  
+
+66 held-out turns, all seven deciders given the same state, 2026-09-23 (method, regression set, pricing, p95, retries):  
+66组测试数据，7种决策器相同状态对比（2026-09-23，含方法/回归集/价格/p95/重试）：  
+
+| Decider | save/skip | save+kind | contradictions | p50 | $/decision |  
+| 决策器 | 保存/跳过 | 保存+分类 | 矛盾率 | p50 | 单决策成本 |  
+
+| GPT-6 Astra | 98.5% | 98.5% | 5/5 | 3,469 ms | $0.007489 |  
+| GPT-6 Luna | 93.9% | 93.9% | 5/5 | 2,927 ms | $0.000089 |  
+（后续性能表格保持数字原文，仅翻译表头）

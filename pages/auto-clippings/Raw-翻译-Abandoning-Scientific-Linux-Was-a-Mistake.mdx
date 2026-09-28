@@ -1,0 +1,81 @@
+---
+title: "Abandoning Scientific Linux Was a Mistake_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：放弃Scientific Linux是个错误
+
+【文章正文】：
+Abandoning Scientific Linux Was a Mistake
+放弃Scientific Linux是个错误
+
+A recent CERN announcement caught my attention. By the end of 2026, more than 2,200 industrial computers and embedded systems around CERN's accelerator complex are expected to be running Debian 13.
+最近欧洲核子研究中心(CERN)的一则公告引起了我的注意。到2026年底，CERN加速器综合体周围2200多台工业计算机和嵌入式系统将改用Debian 13系统。
+
+CERN is not abandoning the Red Hat ecosystem. AlmaLinux and RHEL remain the main supported Linux distributions across much of the organization; Debian support is currently limited to accelerator front-end systems.
+CERN并非要放弃Red Hat生态系统。AlmaLinux和RHEL仍是该机构大部分部门支持的主要Linux发行版；Debian支持目前仅限于加速器前端系统。
+
+Still, the move took me back to a decision made more than a decade ago: CERN and Fermilab's gradual abandonment of Scientific Linux. With hindsight, I think it was a mistake.
+但这个决定让我回想起十多年前的另一个决策：CERN和费米实验室逐步放弃Scientific Linux。事后看来，我认为这是个错误。
+
+Not because Scientific Linux was technically superior to CentOS, or because maintaining another Linux distribution was free. And not because CERN or Fermilab could somehow have controlled what Red Hat or IBM later chose to do.
+不是因为Scientific Linux在技术上优于CentOS，也不是因为维护另一个Linux发行版是免费的，更不是因为CERN或费米实验室能控制红帽或IBM后来的决策。
+
+The mistake was treating Scientific Linux mainly as duplicated engineering work. It was infrastructure.
+错误在于主要将Scientific Linux视为重复的工程工作。它其实是基础设施。
+
+What Scientific Linux was solving
+Scientific Linux解决了什么问题
+
+Scientific Linux grew out of a practical problem in High Energy Physics. Large experiments span laboratories, universities, computing centers, and countries. If one site builds against one version of glibc, another uses something slightly different, and a third runs an entirely different packaging environment, things become painful very quickly.
+Scientific Linux源于高能物理学中的一个实际问题。大型实验跨越实验室、大学、计算中心和国家。如果一个站点基于某个glibc版本构建，另一个使用略有差异的版本，第三个运行完全不同的打包环境，问题很快就会变得棘手。
+
+The scientific community also needed an unusual combination: a Linux distribution that would remain stable for years, work with enterprise software, be freely redistributable, and run across institutions without requiring a commercial license for every machine.
+科学界还需要一个特殊组合：一个能保持多年稳定、兼容企业软件、可自由再分发、能在各机构间运行且无需为每台机器购买商业许可的Linux发行版。
+
+Red Hat Enterprise Linux provided the stability and long lifecycle, and Red Hat published the source needed to rebuild it. Scientific Linux turned that source into a community resource. Fermilab announced the distribution in 2003, and CERN joined soon afterward. It eventually spread far beyond those two laboratories. Universities, research institutions, experiments, companies, and even systems aboard the International Space Station used it or distributions derived from it.
+红帽企业Linux(RHEL)提供了稳定性和长生命周期，且红帽公开了重建所需的源代码。Scientific Linux将这些源代码转化为社区资源。费米实验室于2003年宣布该发行版，CERN随后加入。最终其应用范围远超这两个实验室，大学、研究机构、实验项目、企业甚至国际空间站上的系统都在使用它或其衍生版本。
+
+Scientific Linux was never simply "RHEL with a different wallpaper." It gave the scientific community an institutionally independent implementation of the Enterprise Linux platform.
+Scientific Linux从来不只是"换了壁纸的RHEL"。它为科学界提供了机构独立的Enterprise Linux平台实现。
+
+Then CentOS looked like the obvious answer
+当时CentOS似乎是完美解决方案
+
+When Red Hat and CentOS joined forces in 2014, moving to CentOS looked perfectly reasonable. CentOS already offered what many Scientific Linux users wanted: a freely available Enterprise Linux rebuild backed by a much larger general-purpose community.
+2014年红帽与CentOS联手后，转向CentOS看起来完全合理。CentOS已提供许多Scientific Linux用户想要的功能：由更庞大的通用社区支持、可自由获取的企业Linux重建版。
+
+CERN began moving its next major release from Scientific Linux CERN to CERN CentOS 7. Scientific Linux 5 and 6 remained supported, but the future platform at CERN would be based on CentOS. The rationale was compelling. Why should CERN and Fermilab spend scarce engineering time rebuilding a Linux distribution when CentOS was already doing essentially the same work?
+CERN开始将其下一个主要版本从Scientific Linux CERN迁移到CERN CentOS 7。Scientific Linux 5和6仍获支持，但CERN的未来平台将基于CentOS。这个理由很有说服力——既然CentOS已经在做基本相同的工作，CERN和费米实验室为何还要耗费宝贵的工程时间重建Linux发行版？
+
+Why maintain an HEP-specific distribution when the scientific community could converge on a larger common platform? If Red Hat itself was supporting the CentOS project, that seemed to make the platform more sustainable, not less. In 2019, Fermilab took the argument to its logical conclusion or its literal "end." There would be no Scientific Linux 8. Fermilab would deploy CentOS 8 instead and work with CERN and other laboratories to improve CentOS for high-energy physics.
+当科学界可以汇聚到更大的通用平台时，为何还要维护专门针对高能物理的发行版？如果红帽本身支持CentOS项目，这似乎会让平台更具可持续性。2019年，费米实验室将这个论点推向了逻辑终点——不再推出Scientific Linux 8，转而部署CentOS 8，并与CERN等其他实验室合作优化面向高能物理的CentOS。
+
+Taken on its own, this was not an irrational decision. But it removed something that was hard to see on a spreadsheet: a credible exit.
+单就这个决定本身而言并非不理性。但它消除了电子表格上看不见的东西：可靠的退出机制。
+
+A distribution has option value
+发行版具有期权价值
+
+This is what I think we underestimated.
+这正是我们低估的地方。
+
+The cost of maintaining Scientific Linux was visible. People had to rebuild packages, test updates, maintain repositories, produce releases, handle security updates, and support users.
+维护Scientific Linux的成本是可见的。人们需要重建软件包、测试更新、维护仓库、发布版本、处理安全更新并支持用户。
+
+The benefit of an independent distribution was harder to quantify. As long as CentOS behaved exactly as CERN and Fermilab expected, Scientific Linux looked redundant. That is how redundancy always looks when nothing has failed yet.
+独立发行版的好处则难以量化。只要CentOS完全按照CERN和费米实验室的预期运行，Scientific Linux就显得多余。在系统尚未出问题时，冗余总是看起来如此。
+
+Scientific Linux gave the scientific community its own implementation of a RHEL-compatible computing environment. More importantly, it kept alive the people, processes, infrastructure, and institutional knowledge needed to maintain one.
+Scientific Linux为科学界提供了自主实现的RHEL兼容计算环境。更重要的是，它保留了维护这一环境所需的人才、流程、基础设施和制度知识。
+
+That capability had option value. You might not need to exercise the option this year, or even this decade. It becomes valuable when the assumptions underneath your primary platform change. Those assumptions changed surprisingly quickly.
+这种能力具有期权价值。你可能今年甚至这十年都不需要行使这个期权。但当基础平台的底层假设发生变化时，它就变得珍贵。而这些假设的变化速度快得惊人。
+
+[!NOTE]
+[!注意]
+CERN uses a similar argument to justify the FCC: the knowledge required to build large machines such as accelerators and detectors is valuable and must be preserved. If Europe does not build the next machine after the LHC, that expertise may be lost, the next large machine may be built in China, and Europe may lose its technological leadership in the field. The same argument applies to software infrastructure.
+CERN用类似论点论证未来环形对撞机(FCC)的必要性：建造加速器和探测器等大型设备的知识很有价值，必须保留。如果欧洲不在LHC之后建造下一代设备，这些专业知识可能会流失，下一代大型设备可能由中国建造，欧洲可能失去在该领域的技术领导地位。这个论点同样适用于软件基础设施。
+
+The CentOS assumpt
+关于CentOS的假

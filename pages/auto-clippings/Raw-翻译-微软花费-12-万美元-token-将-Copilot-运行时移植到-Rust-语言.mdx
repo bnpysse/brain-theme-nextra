@@ -1,0 +1,9 @@
+---
+title: "微软花费 12 万美元 token 将 Copilot 运行时移植到 Rust 语言_全翻译"
+tags: ["大咖视点_全文翻译", "Solidot_(奇客科技与极客资讯)"]
+---
+
+【文章标题】：微软花费 12 万美元 token 将 Copilot 运行时移植到 Rust 语言
+
+【文章正文】：
+微软利用使用 GPT-5.6 Sol 和 Claude Opus 4.8 的 AI 智能体、历时  14.5 周，花费 12 万美元 token 将 Copilot 运行时从 TypeScript 语言移植到 Rust 语言。该项目采用逐个更新运行时模块的方式执行，共进行了 135 次发布，平均每天提交约 1.3 个 Pull Request，最终将 43 万行 TypeScript 代码转换为 80 万行可用于生产的 Rust 代码。测试显示，原 TypeScript 代码每秒能完成 7.55 个生命周期（one-turn session lifecycles），而 Rust 代码每秒 120 个——意味着在特定工作负载下速度提升了 15.9 倍。包含 10 个客户端的智能体在 TypeScript 语言下消耗了 1383 MB 内存，而 Rust 语言版本仅消耗了 126 MB。Rust 版本将任务保持在进程内执行，无需像 TypeScript 版本那样启动外部后台进程完成任务。

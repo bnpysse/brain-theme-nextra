@@ -1,0 +1,90 @@
+---
+title: "I built a local-first hybrid router for AI Agent Skills sub-_全翻译"
+tags: ["Reddit_全文翻译", "r_CursorAI"]
+---
+
+【帖子标题】：I built a local-first hybrid router for AI Agent Skills (sub-20ms, zero tokens, runs on CPU)  
+【翻译标题】：我开发了一款面向AI智能体技能的本地区优先混合路由系统（20毫秒内响应·零token消耗·CPU运行）  
+
+【帖子正文】：  
+Hey everyone,  
+【翻译正文】：大家好，  
+
+If you use agentic workflows with custom skills or rules (Cursor rules, Claude Code slash commands, OpenCode, etc.), you have probably run into the routing trade-off:  
+【翻译】：如果你使用带有自定义技能或规则的智能体工作流（如Cursor规则、Claude Code斜杠命令、OpenCode等），很可能遇到过这种路由权衡：  
+
+Stuff every skill definition into the system prompt (destroys your context窗口 and degrades instruction-following).  
+【翻译】：要么把所有技能定义塞进系统提示（会挤爆上下文窗口并降低指令跟随效果）  
+
+Use an LLM router turn to classify the user prompt (costs money, wastes 1,000+ tokens, and adds 2+ seconds of network latency).  
+【翻译】：要么用LLM路由轮次分类用户提示（耗费资金、浪费1000+token、增加2秒以上网络延迟）  
+
+To solve this, I built *Routed*; an open-source, local-first hybrid router for agent skills that runs 100% offline on your CPU.  
+【翻译】：为此我开发了*Routed*——一个开源的、本地区优先的智能体技能混合路由系统，100%离线运行于你的CPU上。  
+
+GitHub: https://github.com/bshea-1/Routed  
+License: MIT  
+【翻译】：GitHub地址：https://github.com/bshea-1/Routed  
+许可证：MIT  
+
+**How it Works Under The Hood**  
+【翻译】**底层原理**  
+
+Routed indexes your installed skill directories and evaluates prompts through a 4-part hybrid scoring pipeline:  
+【翻译】：Routed会索引已安装的技能目录，并通过4部分混合评分管道评估提示：  
+
+* Dense Vector Embeddings (60%): Runs quantized ONNX models (Arctic Embed S / MiniLM) locally on CPU.  
+【翻译】：* 稠密向量嵌入（60%）：在CPU上本地运行量化ONNX模型（Arctic Embed S / MiniLM）  
+
+* Lexical BM25 (25%): Okapi BM25 for strict keyword relevance.  
+【翻译】：* 词法BM25（25%）：采用Okapi BM25算法实现严格关键词关联  
+
+* Exact / Alias Match (10%): Direct command and alias matching.  
+【翻译】：* 精确/别名匹配（10%）：直接命令与别名匹配  
+
+* Metadata (5%): Recency and usage heuristics.  
+【翻译】：* 元数据（5%）：基于时效性和使用频率的启发式规则  
+
+The entire lookup completes in under 20ms without sending a single byte of prompt data over the wire.  
+【翻译】：整个查找过程在20毫秒内完成，且不会通过网络传输任何提示数据。  
+
+**Supported Environments**  
+【翻译】**支持环境**  
+
+Routed auto-detects and injects adapters into:  
+【翻译】：Routed自动检测并注入适配器至以下平台：  
+
+Cursor, Claude Code, LM Studio, Ollama, Antigravity IDE, Windsurf, OpenCode, Continue, Codex, and I just dropped support for MCP Servers!!  
+【翻译】：Cursor、Claude Code、LM Studio、Ollama、Antigravity IDE、Windsurf、OpenCode、Continue、Codex，而且刚刚新增了对MCP服务器的支持！！  
+
+And although v1.0 dropped last night, I just shipped v1.1.0 with two major additions based on early feedback:  
+【翻译】：虽然v1.0昨晚才发布，但根据早期反馈我又推出了v1.1.0，包含两项重大更新：  
+
+**Model Context Protocol (MCP) Server** (`routed mcp`):  
+【翻译】**模型上下文协议(MCP)服务器**（`routed mcp`）：  
+
+Instead of loading 20+ tool schemas into your GPU's context窗口, your local model only sees a single `route_skill` tool. Routed executes on CPU, selects the exact skill needed, and injects only that schema on demand.  
+【翻译】：无需向GPU上下文窗口加载20+工具架构，本地模型只需处理单个`route_skill`工具。Routed在CPU执行，精准选择所需技能并按需注入对应架构。  
+
+**Native Multilingual Understanding**:  
+【翻译】**原生多语言理解**：  
+
+The embedding pipeline now natively understands input across 100+ languages (German, Spanish, French, Japanese, etc.) and automatically decomposes compound nouns (like German *Speicherleck*), mapping prompts directly to the correct skill without language tags or manual translation.  
+【翻译】：嵌入管道现原生支持100+种语言输入（德语、西班牙语、法语、日语等），并能自动分解复合名词（如德语*Speicherleck*），无需语言标签或人工翻译即可将提示直接映射到正确技能。  
+
+**Usage**  
+【翻译】**使用方式**  
+
+Inside your agent chat, you can just use `/route` to trigger the best skill(s) dynamically. It also handles compound intents (e.g., matching multiple skills when a prompt asks for two distinct tasks).  
+【翻译】：在智能体聊天界面中，只需输入`/route`即可动态触发最佳技能。还能处理复合意图（例如当提示要求两项不同任务时匹配多个技能）。  
+
+Pre-built binaries are available on GitHub Releases (macOS .pkg, Linux .deb, Windows .exe), or you can build it from source via Node.  
+【翻译】：GitHub Releases提供预编译二进制文件（macOS .pkg、Linux .deb、Windows .exe），也可通过Node从源码构建。  
+
+Check it out and let me know what you think or if there are other environments you would like added!  
+【翻译】：欢迎试用并告诉我你的想法，或者提出需要增加的其他环境支持！
+
+## 🔗 知识库双向关联
+- [Refined_Raw_翻译_The Pulse a new trend, smart model routing](/auto-clippings/Refined-Raw-翻译-The-Pulse-a-new-trend-smart-model-r)
+- [llm-openrouter 0.7_简报](/auto-clippings/Auto-简报-llm-openrouter-07)
+- [Refined_Raw_翻译_🎙️ How I AI ChatGPT Codex Voice  browser  Sit](/auto-clippings/Refined-Raw-翻译-🎙️-How-I-AI-ChatGPT-Codex-Voice-bro)

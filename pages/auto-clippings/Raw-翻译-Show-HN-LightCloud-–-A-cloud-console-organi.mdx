@@ -1,0 +1,117 @@
+---
+title: "Show HN LightCloud – A cloud console organised like file sys_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: LightCloud – A cloud console organised like file system
+【文章标题】：Show HN: LightCloud —— 一个像文件系统一样组织的云控制台
+
+【文章正文】：
+PROJECT-DEMO · PRODUCTION
+项目演示·生产环境
+
+Frontend
+前端
+global CDN
+全球CDN
+Deployed
+已部署
+
+Backend
+后端
+container
+容器
+1 instance · scales to 0
+1个实例·可缩容至0
+
+Postgres
+Postgres数据库
+10 GB · europe-west1
+10GB·欧洲西部1区
+Credentials wired
+凭证已配置
+
+Frontend, backend, and a database in one place.
+前端、后端和数据库集中一处。
+Static sites go to a global CDN. Containers scale to zero when idle. Postgres sits right next to them, provisioned from the same project.
+静态站点部署至全球CDN。容器闲置时可缩容至零。Postgres数据库就近部署，与它们同属一个项目。
+
+Deploy from Claude Code. One command to install.
+通过Claude Code部署。一条命令即可安装。
+Then ask "Deploy this project to Light Cloud." Claude signs you up if you have no account, asks two questions, and hands back a live URL. The same MCP server works in GitHub Copilot and Claude Desktop; the CLI does it from a shell.
+然后说"将此项目部署到Light Cloud"。若无账号Claude会帮你注册，仅需回答两个问题，即可获得实时URL。同一套MCP服务器兼容GitHub Copilot和Claude Desktop；CLI则通过命令行操作。
+
+claude mcp add light-cloud -- npx @light-cloud/mcp-server
+claude mcp add light-cloud -- npx @light-cloud/mcp-server
+
+Watch a push become a URL.
+见证代码推送变成可访问链接。
+
+One pipeline from commit to running service. Follow a deploy through Light Cloud — no YAML, no runners to babysit.
+从提交到运行服务的完整流水线。通过Light Cloud跟踪部署——无需YAML文件，无需维护运行器。
+
+Push01 / 05
+推送01/05
+git push origin main
+git push origin main
+
+Connect a repo once. Every push after that starts a build on its own.
+只需关联仓库一次。此后每次推送都会自动触发构建。
+
+a4f7c21 · Developer · main
+a4f7c21·开发者·main分支
+
+Push
+推送
+
+Build
+构建
+Framework detected
+检测到框架
+
+Light Cloud reads the repo, picks the builder, and builds the image or static bundle.
+Light Cloud读取仓库，选择构建器，并生成镜像或静态资源包。
+
+▸ next build — done in 42s
+▸ next构建——42秒完成
+
+Deploy
+部署
+Rolled out, history kept
+滚动发布，保留历史
+
+The build goes to Cloud Run or the global CDN. Commit, author, and logs stay with the deploy.
+构建产物会发布到Cloud Run或全球CDN。提交记录、作者信息和日志都与部署绑定。
+
+revision lc-042 · europe-west1
+版本lc-042·欧洲西部1区
+
+Live
+线上环境
+A URL for every branch
+每个分支都有专属URL
+
+Production gets the domain. Every branch and pull request gets its own preview link.
+生产环境使用主域名。每个分支和拉取请求都有专属预览链接。
+
+preview-42.light-cloud.io
+preview-42.light-cloud.io
+
+Scale to zero
+缩容至零
+Idle costs nothing
+闲置时不产生费用
+
+No traffic, no instances, no bill. The next request wakes it back up.
+没有流量时，没有实例，没有账单。下次请求时会立即唤醒。
+
+0 instances · $0.00/hr
+0个实例·0.00美元/小时
+
+From the Labs
+来自实验室
+Design cloud infrastructure on a canvas, preview the cost, and deploy to your own cloud accounts. ICE and its blocks and templates are free and PolyForm Noncommercial 1.0.0.
+在画布上设计云架构，预览成本，并部署到自己的云账户。ICE及其模块和模板均为免费，采用PolyForm Noncommercial 1.0.0许可证。
+
+Connect a repository, push, and watch it go live. Start free on the Hobby plan.
+关联仓库，推送代码，见证实时部署。从Hobby免费计划开始体验。

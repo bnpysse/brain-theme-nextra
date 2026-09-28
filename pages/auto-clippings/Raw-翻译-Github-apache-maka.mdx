@@ -1,0 +1,50 @@
+---
+title: "_apache_maka_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+
+
+&lt;h1 align="center"&gt;
+  ![Maka](apps/desktop/assets/app-icons/sky.png) Apache Maka (Incubating)
+&lt;/h1&gt;
+
+&lt;p align="center"&gt;&lt;sub&gt;Incubating at The Apache Software Foundation&lt;/sub&gt;&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;a href="https://github.com/apache/maka/stargazers"&gt;![GitHub stars](https://img.shields.io/github/stars/apache/maka?style=flat&label=%E2%98%85&color=4C8DFF)&lt;/a&gt;
+  &lt;a href="https://github.com/apache/maka/releases"&gt;![GitHub downloads](https://img.shields.io/github/downloads/apache/maka/total?style=flat&label=downloads&color=4C8DFF)&lt;/a&gt;
+  &lt;a href="./LICENSE"&gt;![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-4C8DFF?style=flat)&lt;/a&gt;
+  ![macOS Apple Silicon](https://img.shields.io/badge/macOS-arm64-4C8DFF?style=flat&logo=apple&logoColor=white)
+  ![Windows unsigned preview](https://img.shields.io/badge/Windows-preview-9BB8F0?style=flat&logo=windows&logoColor=white)
+  ![Linux not yet supported](https://img.shields.io/badge/Linux-soon-D0D4DA?style=flat&logo=linux&logoColor=6B7280)
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;a href="./README.zh-CN.md"&gt;![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-4C8DFF?style=flat)&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  **A local-first Agent workspace built for real work.**  
+
+  Maka inspects projects, runs tools under a sandbox boundary, and records
+  model messages and tool calls as recoverable execution facts — on your
+  machine, through one Runtime Host.
+&lt;/p&gt;
+
+![Maka — Your work. Your agent.](./.github/assets/maka-hero.en.png)
+
+&gt; [!NOTE]
+&gt; Apache Maka (Incubating) is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator PMC. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision-making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF. [DISCLAIMER-WIP](./DISCLAIMER-WIP) records the issues the project is currently aware of.
+
+&gt; [!IMPORTANT]
+&gt; Maka is under active development. The macOS Apple Silicon desktop build is an early public release; data formats, CLI commands, and experimental capabilities may still change.
+
+## Why Maka
+
+- **Your machine, your data.** Sessions, settings, and run records stay local by default. You bring the model: a cloud API, a local model, or a compatible gateway.
+- **The record is kept.** Model messages, tool calls, tool results, and how a turn ended are written down. The UI and the next model call are views of that record, not the only copy.
+- **Shorter context is not deleted history.** Maka can omit old tool output from the next prompt without throwing away the saved evidence.
+- **One place runs the agent.** Desktop, the terminal, and Maka evaluation all go through Runtime Host. Eval only owns the experiment and its scores.
+
+Read [Maka Backend Architecture](./ARC

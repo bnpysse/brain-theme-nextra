@@ -1,0 +1,116 @@
+---
+title: "Foundries vs Navigators Lowering the Cost of Science_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：铸造厂与导航员：降低科学研究的成本
+
+【文章正文】：
+What does the future of science look like in the world of AI? Anthropic has some
+在AI时代，科学的未来会是什么模样？Anthropic为科学设定了
+
+lofty goals for science
+宏伟目标
+
+and is even
+甚至
+
+opening a wet lab
+开设了湿实验室
+。与此同时，一场
+
+quiet transformation
+静默的革命
+
+1
+[注1]
+
+is happening all across AI x Science.
+正在AI与科学交汇处全面展开
+
+In this guest post,
+在这篇特邀文章中
+
+Adrian Sanborn
+Adrian Sanborn
+
+talks about the less flashy but more immediate ways he sees AI transforming front-line scientific research in his own company, Endura Therapeutics.
+探讨了AI在其公司Endura Therapeutics中改造前沿科学研究的那些不那么炫目却更立竿见影的方式
+
+Adrian did a CS PhD at Stanford and spent much of it running experiments at the bench, which makes him one of the rare people who can tell you what an LLM is doing to a codebase and to a wet lab. Enjoy!
+Adrian在斯坦福获得计算机科学博士学位，期间大部分时间都在实验室做实验，这使他成为少数能同时解读大语言模型对代码库和湿实验室影响的人物。请欣赏！
+
+Language models have transformed how software gets built. Writing code, wrangling data, and architecting systems now move at a speed unthinkable three years ago.
+语言模型彻底改变了软件开发方式。编写代码、处理数据和架构系统的速度，在三年前根本无法想象
+
+When the product is software and the result is verifiable, cheaper coding turns directly into more software and more builders.
+当产品是软件且结果可验证时，更低的编码成本直接转化为更多软件和更多开发者
+
+2
+[注2]
+
+But in science, everything is ultimately gated by physical experiments that take days or weeks to verify anything. Knowledge work around the experiment has become dramatically faster while AI has done little for the throughput of the experiment itself.
+但在科学领域，一切最终都受制于需要数天或数周验证的物理实验。围绕实验的知识工作已显著加速，而AI对实验本身的通量提升却贡献甚微
+
+Thinking got cheap and doing did not.
+思考变得廉价，行动却未然
+
+We think the biotech industry has adapted in two ways:
+我们认为生物科技行业通过两种方式适应：
+
+Foundries
+铸造厂
+
+shrink the cost of doing.
+降低行动成本
+
+They industrialize the measurement, using new technology to generate data an order of magnitude faster than before. Xaira, NewLimit, Octant, Tahoe, and Endura accomplish this with next-generation sequencing and multiplexing; Insitro, Eikon, and Noetik with high-throughput microscopy; Lila and Periodic Labs with physical automation, just to name a few. AI makes that data legible and predictive, but the differentiating asset is the experimental data itself.
+它们将测量工业化，用新技术以前所未有的速度生成数据。Xaira、NewLimit、Octant、Tahoe和Endura通过新一代测序与多重检测实现；Insitro、Eikon和Noetik借助高通量显微镜；Lila和Periodic Labs采用物理自动化——AI使数据可读且可预测，但真正的差异资产是实验数据本身
+
+Navigators
+导航员
+
+spend the surplus of thinking.
+消费思考盈余
+
+The AI models sit in the ordinary machinery of the company, driving better decisions and faster processes. They increasingly govern how the work is conducted, what tools get built, and which questions are worth an experiment. A proprietary model or a massive dataset are not required, only a willingness to evolve how the company works.
+AI模型融入企业日常机制，推动更优决策和更快流程。它们日益主导工作执行方式、工具开发方向以及值得实验的问题。无需专有模型或海量数据，只需改变企业运作方式的意愿
+
+Building a foundry is a genuine strategic commitment that takes capital, years, and a bet on a particular technology. Foundries are easy to see: the technology captures the imagination, the connection to AI is immediate, and there is always some new model or dataset to announce. Navigators are invisible by comparison because the gains are operational and nobody issues a press release about a path they decided against. But navigation is available to every company. The prominent change is happening at a few dozen companies, while the inconspicuous one is happening at all of them.
+建造铸造厂是真正的战略投入，需要资金、时间和对特定技术的押注。铸造厂显而易见：技术激发想象，与AI的联系直接，总有新模型或数据集发布。导航员则隐而不显，因其收益是运营性的，没人会为放弃的路径发新闻稿。但导航适用于每家企业。显著变革发生在几十家公司，而不起眼的变革正发生于所有企业
+
+Navigation runs fastest at early-stage startups, which have no legacy to shed: no history of software contracts, standardized processes, calcified org structure, or compliance regime. They are also under pressure to move fast with very little. When a better way to work appears, it simply becomes the new normal.
+导航在早期初创公司跑得最快，它们没有历史包袱：没有软件合约传统、标准化流程、僵化组织架构或合规制度。它们还面临用极少资源快速行动的压力。当更好的工作方式出现，直接就成为新常态
+
+The impact shows up everywhere. Experiments iterate faster when analysis takes an hour instead of a week. A category of software that would have been licensed for six figures becomes a one-day build. Disease programs get chosen from 500 candidates where a team could ordinarily evaluate five. Here’s what it looks like from the inside.
+影响无处不在：分析从一周缩短到一小时，实验迭代更快；原本需六位数授权的软件类别变成一日构建；疾病项目从通常只能评估5个的团队中选出500个候选。以下是内部视角
+
+Code now keeps pace with the science
+代码如今与科学同步
+
+There is a structural tension in experimental science that software engineering has no real equivalent for. In engineering, requirements that change every few weeks are a symptom of poor planning. In research, they are the objective. The purpose of an experiment is to learn something, and that learning changes what the next experiment should be.
+实验科学存在软件工程没有的结构性张力。在工程中，每几周变动的需求是规划不善的症状；在研究中，这却是目标。实验的目的是获取新知，而这些知识会改变下一个实验的设计
+
+3
+[注3]
+
+If an approach has not evolved in six months, it means nothing is being discovered.
+若方法六个月未演进，意味着毫无发现
+
+A new experiment’s protocol will evolve a dozen times in the first year, and every one of those changes propagates into the analysis. Each measurement has to be processed, normalized, and interpreted with code that tracks the experiment closely. Historically this analysis was done by a second person, creating a seam between the person who understands what the experiment is measuring and the person who understands what the code is doing. From this friction arises the tendency to propose fewer experimental changes to avoid analysis rework, which compounds into options left unexplored.
+新实验方案首年会修改十几次，每次变更都传导至分析端。每个测量都需用紧跟实验的代码处理、标准化和解读。传统上由第二人完成分析，造成理解实验测量者与理解代码者之间的断层。这种摩擦导致人们倾向减少实验变更以避免分析返工，最终累积成未探索的选项
+
+Now that writing code is fast, adapting the analysis to a modified protocol is an afternoon’s work rather than a project.
+既然编写代码变快，使分析适配修改后的方案只需半天而非一个项目周期
+
+The experiment is no longer constrained by the burden of changing the analysis pipeline.
+实验不再受分析流程变更的负担所限
+
+Experiments can be agile when flexibility is cheap and problems can be easily fixed; in other words,
+当灵活性成本低廉且问题易修正时，实验就能敏捷开展；换言之
+
+science gets to “move fast and break things.”
+科学得以"快速行动，打破陈规"
+
+The same shift also applies one layer up, to interpretation. An interactive visualization dashboard can now be built in minutes, do
+这种转变同样向上延伸至解读层。交互式可视化仪表盘现在几分钟就能建成
