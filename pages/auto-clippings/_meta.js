@@ -5651,6 +5651,7 @@ export default {
   "Auto-简报-Github-THU-MAIC-OpenMAIC": "Github__THU-MAIC_OpenMAIC",
   "Auto-简报-Github-Open-Dev-Society-OpenStock": "Github__Open-Dev-Society_OpenStock",
   "Auto-简报-Github-NousResearch-hermes-agent": "Github__NousResearch_hermes-agent",
+  "Auto-简报-Github-NawfalMotii79-PLFM-RADAR": "Github__NawfalMotii79_PLFM_RADAR",
   "Auto-简报-Github-MoonTechLab-LunaTV": "Github__MoonTechLab_LunaTV",
   "Auto-简报-Github-MadsLorentzen-ai-job-search": "Github__MadsLorentzen_ai-job-search",
   "Auto-简报-Github-Lakr233-vphone-cli": "Github__Lakr233_vphone-cli",
