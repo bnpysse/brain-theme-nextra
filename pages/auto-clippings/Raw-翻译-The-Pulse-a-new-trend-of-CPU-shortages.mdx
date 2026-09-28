@@ -1,0 +1,83 @@
+---
+title: "The Pulse a new trend of CPU shortages_全翻译"
+tags: ["大咖视点_全文翻译", "The_Pragmatic_Engineer_(顶级软件工程师)"]
+---
+
+【文章标题】：The Pulse: a new trend of CPU shortages  
+《行业脉搏：CPU短缺的新趋势》
+
+【文章正文】：  
+Hi, this is Gergely with a bonus, free issue of the Pragmatic Engineer Newsletter. In every issue, I cover Big Tech and startups through the lens of senior engineers and engineering leaders. Today, we cover one out of four topics from  
+大家好，我是Gergely，这是《实用工程师简报》的免费特刊。每期我都会通过资深工程师和技术主管的视角，解读科技巨头与初创企业的动态。今天我们将重访往期《行业脉搏》四大话题之一  
+
+a past issue of The Pulse  
+来自往期《行业脉搏》  
+
+. Full subscribers received the article below fourteen days ago. If you’ve been forwarded this email, you can  
+完整版订阅用户已在两周前收到下文。若您通过转发获取此邮件  
+
+subscribe here  
+可点击此处订阅  
+
+I was at dinner with a bunch of CTOs and Head of Infrastructure folks recently, and from the conversation it was clear that many companies are struggling to source CPUs in the current climate, and are coming to terms with the end of juicy discounts from cloud providers for machines in the new era of surging demand fueled by AI.  
+最近与多位CTO和基础设施负责人的晚餐谈话表明，在AI推动需求激增的新时代，许多企业正面临CPU采购困境，同时不得不接受云服务商机器折扣红利终结的现实。  
+
+The ‘memory crisis’ afflicting sectors like video gaming is well established and has been extensively covered in terms of shortages of GPUs, but now it seems like things are just as hard for businesses in need of CPUs from cloud providers.  
+游戏等行业遭遇的"显存危机"已广为人知，GPU短缺问题被大量报道。但如今从云服务商获取CPU的企业同样举步维艰。  
+
+In a sign of how things are changing, the disappearance of CPU spot pricing was mentioned at the table. Customers used to be able to pay up to 90% less than the standard price for CPUs, as cloud providers slashed CPU prices for machines that were lying dormant and unused. But that’s no longer the case. It seems that spot pricing has vanished because there’s no longer any lack of demand for CPUs – quite the opposite.  
+席间讨论的CPU竞价实例价格消失现象颇具象征意义。过去客户能以低于标准价90%的价格获取CPU，因为云服务商会大幅折价处理闲置机器。但如今这种情况不复存在——由于CPU需求激增（甚至供不应求），竞价定价模式已然消失。  
+
+I was surprised, but a lot of people chimed in; apparently, it’s now nearly impossible to get CPUs on spot instances without long-running connections with cloud providers. Also, reserving specific CPUs now needs to be done months in advance, and cloud providers will even turn down certain reservations because they don’t have enough CPUs or the right type of CPUs.  
+令人惊讶的是，多位与会者证实：若没有长期合作关系，现在几乎不可能通过竞价实例获取CPU。特定CPU型号的预订需提前数月完成，而云服务商甚至会因CPU库存不足或型号短缺拒绝预订请求。  
+
+Even big players struggle to reserve CPUs  
+巨头企业也难逃CPU荒  
+
+I have asked turbopuffer CEO Simon Eskildsen about their experience of CPU availability in the cloud, since turbopuffer, as a product, runs on CPUs, not GPUs. They operate in AWS, GCP, and Azure, so I asked how easy it is to get CPUs these days. Simon’s response:  
+就云端CPU供应情况，我咨询了专注CPU（非GPU）业务的turbopuffer公司CEO Simon Eskildsen。鉴于其业务覆盖AWS、GCP和Azure三大平台，我询问当前获取CPU的难易程度。Simon回答道：  
+
+“Getting CPUs is not easy anymore.  
+"如今获取CPU已非易事。  
+
+As Reinforcement Learning (RL) is becoming a large amount of the workloads: RL needs a lot of CPUs. So the labs are sucking up a lot of CPUs. During RL, they need to teach the models how to do things, like searching, and then they need the model to run software, which then takes CPUs to run.  
+由于强化学习(RL)正成为主要工作负载——该技术需要大量CPU资源。实验室正在吞噬海量CPU：RL训练既需要教导模型执行搜索等任务，又需要CPU来运行模型软件。  
+
+Then, outside of RL, agents need to do all kinds of very general purpose things on a CPU. So as the demand curve is shifting to general purpose agents, CPU demand is also going up.  
+此外，智能代理还需在CPU上处理各类通用任务。随着市场需求向通用型代理转移，CPU需求持续攀升。  
+
+Even the big companies are fighting each other for the right to get the CPU allocations.  
+即便巨头企业也在为CPU配额争得头破血流。  
+
+I would assume that it gets a lot worse before it gets better on the CPU side.”  
+预计CPU供应状况在好转前会进一步恶化。"  
+
+I was able to confirm what Simon said about larger companies struggling; a VP of Engineering at a large inference provider told me they are at the limit on how much GPU and CPU capacity they can buy from their cloud providers. They have cash to spend and want to rent more capacity, and are willing to accept the longest leases. Despite that, cloud providers tell them no more is available!  
+某大型推理服务商的工程副总裁向我证实了Simon的说法：其从云服务商处购买的GPU/CPU容量已达上限。尽管资金充足且愿签署长期租约，云服务商仍表示无法提供更多资源！  
+
+AI hogging CPUs  
+AI正在吞噬CPU资源  
+
+Katelyn Lesse, Head of Platform Engineering for Claude Platform, has  
+Claude平台工程负责人Katelyn Lesse曾撰文分析  
+
+written about  
+CPU需求激增的原因：  
+
+“In the past few years, AI-fueled demand has skyrocketed, and these few companies suddenly needed multiple years and tens of billions of dollars to actually add enough capacity. We ended up with 3 separate bottlenecks in factory capacity that AI is exacerbating. At TSMC, GPUs are competing with CPUs (and with Apple, Qualcomm, and Broadcom) for production lines. And at SK Hynix, Samsung, and Micron, HBM [High Bandwidth Memory] is competing with regular DRAM for wafers.  
+"过去几年AI驱动的需求暴涨，少数企业突然需要投入数年时间与数百亿美元来扩充产能。AI加剧了三大制造瓶颈：台积电生产线上GPU与CPU（及苹果/高通/博通芯片）争夺资源；SK海力士/三星/美光则面临HBM高带宽内存与常规DRAM的晶圆分配之争。  
+
+What we’ve ended up with is CPUs getting squeezed from both sides. AMD doesn’t own fabs [semiconductor fabrication plants], so its CPUs need to come out of TSMC’s constrained allocation. Intel does own fabs, but it’s been working through yield problems and is now pulling some of its capacity from PC chips in order to make more server chips. And CPUs need DRAM which has gotten more expensive because memory production has shifted toward HBM. Analysts are expecting CPU supply to add more comfortable headroom before memory does, but their expectation is that it’s still going to be multiple quarters away.”  
+最终CPU遭遇双重挤压：AMD依赖台积电的紧张产能分配；英特尔虽自有晶圆厂但受良率困扰，正将部分PC芯片产能转产服务器芯片。同时CPU所需的DRAM因产能转向HBM而涨价。分析师预计CPU供应改善将早于内存，但仍需数个季度。"  
+
+AI-fueled demand does increase CPU load, as shown in this graph from Uber, displaying the growth in agent requests over the past six months:  
+Uber的数据图表显示，过去六个月AI代理请求量增长九倍，印证了AI对CPU负载的拉动作用：  
+
+Ninefold increase in agentic requests over six months. Source:  
+六个月间代理请求激增九倍 数据来源：  
+
+Uber  
+Uber  
+
+Increasingly, “agent requests” not only generate code which is inference-heavy – and therefore needs GPUs – but they also run tools that compile the code, run tests, run linters, and all of this is CPU-heavy. At companies like Uber, Ramp, and others, AI agents no longer run on the dev’s local machine, but on a dedicated instance in the cloud. So, the compa  
+如今"代理请求"不仅生成需要GPU进行推理的代码，还需调用CPU密集型工具完成编译、测试、代码检查等流程。Uber、Ramp等企业已将AI代理从本地开发机迁移至云端专属实例，因此...

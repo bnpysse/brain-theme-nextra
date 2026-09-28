@@ -1,0 +1,65 @@
+---
+title: "How we made claude.ai 3x faster in two weeks_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：How we made claude.ai 3x faster in two weeks  
+【文章标题】：我们如何在两周内让claude.ai提速三倍  
+
+【文章正文】：  
+Once Claude can measure something, it can make it faster. So we kept finding more things to measure.  
+一旦Claude能测量某个指标，它就能优化该指标。因此我们不断寻找更多可测量的维度。  
+
+This August, we made the core user experience of claude.ai and the Claude desktop app about 3x faster in a two-week sprint. Users had been telling us it was slow, and they were right. We ran everything from a single Slack channel, with Claude in every thread.  
+今年八月，我们通过两周冲刺将claude.ai和Claude桌面应用的核心用户体验提速约三倍。用户曾反馈系统缓慢——他们是对的。我们通过单一Slack频道协调所有工作，每条讨论线程都有Claude参与。  
+
+We focused on four journeys that make up 95% of user activity. At the 75th percentile, time to a typeable page on a fresh load of claude.ai went from 3.1 seconds to 0.55, starting a new Claude Code session went from 0.8 seconds to 0.3, and loading a Claude Cowork cloud session went from 2.6 seconds to 0.73. In aggregate, we estimate that saves tens of thousands of user-hours of waiting every day.  
+我们聚焦占用户活动95%的四大场景：在75百分位值下，claude.ai冷启动至可输入页面时间从3.1秒降至0.55秒；新建Claude Code会话从0.8秒缩至0.3秒；加载Claude Cowork云会话从2.6秒减至0.73秒。综合估算每日为用户节省数万小时等待时间。  
+
+We used Claude Tag (beta), running an internal research model roughly comparable to Opus 5.5. Claude found bottlenecks, built benchmarks, shipped improvements, and watched every deploy. We steered by setting goals, making tradeoffs, and approving every change. With that approach, we merged more than three thousand changes without a single customer-facing incident or rollback. This post covers what we shipped, how we measured it, and the loop we built with Claude to do it safely.  
+我们采用内部研发的Claude Tag测试版（性能接近Opus 5.5模型）。Claude负责定位瓶颈、建立基准、部署优化并监控每次发布。人类团队通过目标设定、权衡决策和变更审批来把控方向。凭借这套方法，我们合并了三千多项变更，未发生任何面向客户的故障或回滚。本文详述具体优化、测量方法及与Claude构建的安全迭代闭环。  
+
+Before the sprint, we created a Slack channel with the following standing instructions:  
+冲刺开始前，我们创建了包含如下常驻指令的Slack频道：  
+
+@Claude Your job is to facilitate all things related to the performance of the claude.ai website and desktop app. Your responsibilities include monitoring deploys for performance regressions, assessing the accuracy and comprehensiveness of existing telemetry, maintaining well-curated observability dashboards, proactively implementing solutions for observed issues and low-hanging fruit, proposing performance project opportunities, and communicating with your human teammates. [â¦]  
+@Claude 你的职责是统筹claude.ai网站与桌面应用的性能优化。具体包括：监控版本发布的性能回退、评估现有埋点的准确性与完备性、维护精编的可观测性看板、主动解决已发现问题及低垂果实、提议性能优化项目、与人类队友保持沟通。[...]  
+
+The ultimate goal for this channel is for you to become as autonomous as possible, but today we know that isnât yet possible.  
+该频道的终极目标是让你实现最大自主性，但目前我们明白这尚不可行。  
+
+We asked Claude to analyze usage data through the Datadog MCP server. It identified the four highest-impact user journeys: launching the app, starting a conversation, loading an existing conversation, and sending a message. Between web and desktop, and across our products, those journeys came to thirteen distinct measurements. To establish baselines, we added instrumentation until they were directly comparable: each started with a user interaction, ended once the result was rendered, and disambiguated client and server work.  
+我们让Claude通过Datadog MCP服务器分析使用数据，识别出四大高影响力用户旅程：启动应用、开始对话、加载现有会话和发送消息。跨平台跨产品共衍生出13项独立指标。为确保基准可比性，我们添加埋点使所有测量都始于用户交互、止于结果渲染，并明确区分客户端与服务器工作。  
+
+We kicked off the sprint with a list of about twenty hand-picked projects, each targeting a specific journey. Claude estimated the impact of each project in milliseconds, and we aggregated those estimates to set our targets for the sprint. Some of the projects were fairly large, but we thought we could probably achieve most of them within two weeks.  
+冲刺启动时我们精选了约20个项目，每个针对特定旅程。Claude以毫秒为单位预估各项目影响，我们汇总预估设定了冲刺目标。部分项目规模较大，但认为两周内可完成多数。  
+
+We hit twelve of the thirteen targets by day three.  
+第三天就完成了13项目标中的12项。  
+
+The planned projects landed early. For faster launches, we baked a static composer into the HTML so users can type during React initialization, and precompiled a V8 code cache so the desktop shellâs main process doesnât recompile from scratch. For faster navigations, we kept the composer mounted between conversations, prefetched sessions when the user hovered over them, and cut sidebar re-renders by 90%.  
+规划项目提前落地：为加速启动，我们将静态编辑器直接写入HTML使用户在React初始化期间即可输入，并预编译V8代码缓存避免桌面壳主进程重复编译；为加速导航，我们保持对话间编辑器挂载状态，悬停预加载会话，侧边栏重渲染减少90%。  
+
+We had also left room for Claude to identify opportunities and propose new workstreams. Those workstreams quickly ramped into full projects of their own, which far exceeded our initial targets. So we set new targets, then looked for more things to measure:  
+我们预留空间让Claude自主发现机会并提出新工作流。这些工作流迅速发展为完整项目，远超初始目标。于是我们设立新目标，继续寻找可优化点：  
+
+@Claude weâve ended up funding nearly every project in the original projects list and more. letâs do a refresh [â¦] what have we not explored, what can we hill climb on, where is the most opportunity at this point? [â¦] i am open to WACKY ideas  
+@Claude 原项目清单几乎全部完成且超额。现在重启扫描[...]哪些领域尚未探索？哪些可以持续优化？当前最大机会点在哪？[...]我接受任何疯狂想法  
+
+From the start, we knew we wanted to iterate faster than our deploy cadence. Claude could work asynchronously for many hours, even overnight, and we wanted to let it validate its prototypes without waiting for field reads. To achieve that, we looked for other ways to measure performance in the lab.  
+最初我们就希望迭代速度超过部署频率。Claude可异步工作数小时甚至通宵，我们希望其能自主验证原型而无需等待生产数据。为此我们寻找实验室环境下的性能测量方法。  
+
+Sam found the first lead:  
+Sam发现了第一条线索：  
+
+Eleven minutes later, five threads were running, each focused on a different measurement: instruction counts, V8 call counts, React commits, style recalculations, and DOM mutations.  
+十一分钟后，五个线程并行运行，分别追踪指令数、V8调用数、React提交、样式重计算和DOM变更。  
+
+We treated every new benchmark with some skepticism. Each one had two jobs: first, a metric Claude could move in the lab; second, a guardrail in CI with a number that could only ratchet down. If a benchmark was flaky, or if it didnât actually correlate with user latency, we threw it out rather than let Claude climb the wrong hill.  
+我们对每个新基准持审慎态度。每个基准需满足：1)实验室可操作的指标 2)CI中只降不升的防护栏。若基准不稳定或与用户延迟无关，我们会弃用而非让Claude错误优化。  
+
+@Claude please prove that hill climbing against each of these can result in measurable wall clock perf wins. weâll unship the benches for any candidates that cannot prove that  
+@Claude 请证明针对每个基准的优化能带来可测量的实际性能提升。无法证实的候选基准将被移除  
+
+Wall-clock time is what users feel, but itâs noisy, and milliseconds are too flaky to use as a CI gate. Instruction counts were appeal  
+真实耗时是用户感知的标准，但存在噪声，毫秒级波动不宜作为CI关卡。指令计数则具备...

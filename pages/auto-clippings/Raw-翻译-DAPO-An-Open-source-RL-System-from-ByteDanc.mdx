@@ -1,0 +1,90 @@
+---
+title: "DAPO An Open-source RL System from ByteDance Seed and Tsingh_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：DAPO: An Open-source RL System from ByteDance Seed and Tsinghua AIR
+【文章标题】：DAPO：字节跳动Seed团队与清华AIR联合开源的强化学习系统
+
+【文章正文】：
+Important
+重要通知
+🔥 News!!!
+🔥 重磅消息！！！
+- [2025/05] We update the wandb training record of full DAPO and the checkpoint which achieved 50%+ on AIME 2024. We also provide instructions for evaluation on AIME 2024.
+- [2025/05] 我们更新了完整版DAPO在wandb的训练记录及在AIME 2024达到50%+得分的检查点，同时提供了AIME 2024评估指南。
+- [2025/03] We release the training record of an early version of DAPO (w/o Token-level PG Loss & Dynamic Sampling), achieving 44% on AIME 2024, in wandb.
+- [2025/03] 我们发布了早期版本DAPO（无Token级PG损失和动态采样）的训练记录，该版本在AIME 2024获得44%得分。
+
+We release a fully open-sourced system for large-scale LLM RL, including algorithm, code infrastructure, and dataset. The system achieves state-of-the-art large-scale LLM RL performance. We propose the Decoupled Clip and Dynamic sAmpling Policy Optimization (DAPO) algorithm. Through open-sourcing, we provide the broader research community and society with practical access to scalable reinforcement learning, enabling all to benefit from these advancements. Our system is based on the awesome verl framework. Thanks for their great work!
+我们开源了完整的大规模语言模型强化学习系统，包含算法、代码架构和数据集。该系统实现了最先进的大模型RL性能，提出了解耦裁剪与动态采样策略优化（DAPO）算法。通过开源，我们为研究社区和社会提供了可扩展强化学习的实践途径，让所有人都能受益于这些技术进步。本系统基于优秀的verl框架开发，感谢他们的杰出工作！
+
+🤗 If you have any questions about our paper, issues are welcomed and we could discuss there. Thank you!
+🤗 欢迎通过issues提交关于论文的任何问题，我们将在此讨论交流。感谢关注！
+
+🚀 DAPO achieves 50 points on AIME 2024 based on the Qwen2.5-32B base model, outperforming the previous SoTA DeepSeek-R1-Zero-Qwen-32B with 50% training steps.
+🚀 基于Qwen2.5-32B基座模型，DAPO在AIME 2024评测中获得50分，以50%的训练步数超越此前最佳模型DeepSeek-R1-Zero-Qwen-32B。
+
+- 
+Length stability and growth: The steady increase in response length allows for greater exploration, facilitating the model’s ability to learn more complex reasoning behaviors, ultimately contributing to training stability and performance improvement.
+- 
+生成长度稳定性与增长：响应长度的稳定增长支持更充分的探索，帮助模型学习更复杂的推理行为，最终提升训练稳定性和性能表现。
+
+- 
+Reward score stability: A stable increase in the reward signal indicates that the model is successfully fitting the training distribution, ensuring that the learning process remains robust and consistent without significant fluctuations.
+- 
+奖励分数稳定性：奖励信号的稳定增长表明模型成功拟合训练分布，确保学习过程保持强健一致，无显著波动。
+
+- 
+Entropy and mean probability trend: A controlled increase in entropy, after an initial decrease, ensures a healthy balance between exploration and exploitation, avoiding issues such as overfitting or excessive randomness, and promoting sustained model performance.
+- 
+熵值与平均概率趋势：熵值在初始下降后的受控增长，确保了探索与利用的健康平衡，避免过拟合或过度随机等问题，维持模型性能持续提升。
+
+We provide the model weights of DAPO-Qwen-32B, which is trained based on Qwen2.5-32B using the DAPO algorithm.
+我们提供了基于Qwen2.5-32B使用DAPO算法训练的DAPO-Qwen-32B模型权重。
+
+We recommend using conda to setup the environment:
+建议使用conda配置环境：
+conda create -n dapo python=3.10
+conda activate dapo
+pip3 install -r requirements.txt
+
+We provide the model inference code here:
+模型推理代码如下：
+&#105;mport torch
+from transformers import AutoTokenizer
+from vllm import SamplingParams, LLM
+examples = [
+    &#123;
+        "question": "Solve the following math problem step by step. The last line of your response should be of the form Answer: $Answer (without quotes) where $Answer is the answer to the problem.\n\nFind the largest possible real part of \\[(75+117i)z+\\frac&#123;96+144i&#125;&#123;z&#125;\\]where $z$ is a complex number with $|z|=4$.\n\nRemember to put your answer on its own line after \"Answer:\".",
+        "answer": "540"
+    &#125;,
+    &#123;
+        "question": "Solve the following math problem step by step. The last line of your response should be of the form Answer: $Answer (without quotes) where $Answer is the answer to the problem.\n\nEvery morning Aya goes for a $9$-kilometer-long walk and stops at a coffee shop afterwards. When she walks at a constant speed of $s$ kilometers per hour, the walk takes her 4 hours, including $t$ minutes spent in the coffee shop. When she walks $s+2$ kilometers per hour, the walk takes her 2 hours and 24 minutes, including $t$ minutes spent in the coffee shop. Suppose Aya walks at $s+\\frac&#123;1&#125;&#123;2&#125;$ kilometers per hour. Find the number of minutes the walk takes her, including the $t$ minutes spent in the coffee shop.\n\nRemember to put your answer on its own line after \"Answer:\".",
+        "answer": "204"
+    &#125;,
+    &#123;
+        "question": "Solve the following math problem step by step. The last line of your response should be of the form Answer: $Answer (without quotes) where $Answer is the answer to the problem.\n\nLet $\\mathcal&#123;B&#125;$ be the set of rectangular boxes with surface area $54$ and volume $23$. Let $r$ be the radius of the smallest sphere that can contain each of the rectangular boxes that are elements of $\\mathcal&#123;B&#125;$. The value of $r^2$ can be written as $\\frac&#123;p&#125;&#123;q&#125;$, where $p$ and $q$ are relatively prime positive integers. Find $p+q$.\n\nRemember to put your answer on its own line after \"Answer:\".",
+        "answer": "721"
+    &#125;
+]
+def main():
+    model = "BytedTsinghua-SIA/DAPO-Qwen-32B"
+    tokenzier = AutoTokenizer.from_pretrained(model)
+    llm = LLM(
+        model=model,
+        dtype=torch.bfloat16,
+        tensor_parallel_size=8,
+        gpu_memory_utilization=0.95
+    )
+    sampling_params = SamplingParams(
+        temperature=1.0,
+        top_p=0.7,
+        max_tokens=20480
+    )
+    for example in examples:
+        question = example["question"]
+        answer = example["answer"]
+        output = llm.generate(
+                    prompts=tokenzier.apply_chat_template(conversation=[&#123;"content": question, "role": "user"&#125;],
+                                                          add_generation_prompt=True,

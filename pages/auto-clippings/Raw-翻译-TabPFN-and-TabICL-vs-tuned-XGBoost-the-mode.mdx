@@ -1,0 +1,82 @@
+---
+title: "TabPFN and TabICL vs. tuned XGBoost the model that doesn t t_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：TabPFN and TabICL vs. tuned XGBoost: the model that doesn't train won 14/14
+TabPFN与TabICL对决调优XGBoost：无需训练的模型在14个数据集中全胜
+
+【文章正文】：
+TabPFN and TabICL against tuned XGBoost: the model that does not train won on fourteen tables out of fourteen
+TabPFN与TabICL对决调优XGBoost：这个无需训练的模型在全部14个数据表格中获胜
+
+The claim behind TabPFN and TabICL is that they predict on a table without ever training on it and still beat tuned boosting. I measured it on fourteen datasets from the Grinsztajn benchmark, with the same split and the same clock for everyone. The one that does not train wins, the advantage holds up to 32,000 rows instead of breaking, and the most-cited model can no longer be downloaded without an account.
+TabPFN和TabICL的核心主张是：它们能在未经训练的数据表上进行预测，且仍能击败调优的提升算法。我在Grinsztajn基准测试的14个数据集上进行了验证，采用相同的数据划分和计时标准。结果是无需训练的模型获胜，其优势在32,000行数据规模下依然保持，而当前引用量最高的模型现在需要注册账户才能下载。
+
+The claim has been going around for months and it is concrete enough to be measurable: a tabular foundation model predicts on a table without ever having trained on it and still beats tuned boosting.
+这个主张已流传数月且具备可验证性：表格基础模型能在未经训练的数据表上进行预测，并击败调优的提升算法。
+
+If that is true, half a decade of practice changes shape. Searching hyperparameters stops being a mandatory step and becomes a luxury that sometimes does not pay off.
+若该结论属实，过去五年的实践范式将被重塑。超参数搜索将不再是必要步骤，而变成有时得不偿失的奢侈操作。
+
+So I put it to the test on my own card, with fourteen datasets, four contenders and the same stopwatch for everyone.
+为此我使用个人显卡进行测试，选取14个数据集、4个竞争模型，并采用统一计时标准。
+
+What exactly these models do
+这些模型的运作原理
+
+A tabular foundation model is pretrained on millions of synthetic tables generated on purpose. When a new table arrives, it does not adjust a single weight: it receives the training rows as context and produces the predictions in one forward pass.
+表格基础模型通过数百万张特制合成表进行预训练。当新数据表输入时，它不调整任何权重：将训练行作为上下文，通过单次前向传播生成预测。
+
+It is the same in-context learning idea we already know from language models, moved from words to columns. That is why the verb "train" sits oddly: the code still calls it fit, but inside there is no gradient descent, there is a copy of data to the card.
+这与语言模型中的上下文学习理念相同，只是从词语领域转移到列数据领域。因此"训练"这个动词显得别扭：代码仍调用fit方法，但内部没有梯度下降过程，只是将数据拷贝到显卡。
+
+That also explains why the cost shows up where you do not expect it. Fitting is nearly free and prediction is what pays, exactly the reverse of a tree.
+这也解释了成本分布的异常：拟合过程近乎零成本，而预测阶段消耗资源，与传统树模型完全相反。
+
+Put that way it sounds abstract, so here is the full journey of one row: a request arrives with an empty cell, the model weighs it against everything that already happened, resolves it in one pass and returns a future. Pick any of the six cases I measured to see it with their real data:
+这样说可能抽象，以下是单行数据的完整处理流程：包含空值的请求到达，模型根据历史上下文权衡，单次处理并返回预测结果。可从实测的六个案例中任选查看：
+
+[以下为表格数据案例，保持原文格式不变]
+The request
+请求内容
+
+The context
+上下文
+
+A single pass
+单次处理
+
+The prediction
+预测结果
+
+A credit application arrives
+2 100 applications already settled · 10 columnsclf_num/credit.csv
+TabICL · nothing tuned · 0.8 s
+Will they repay?
+repaysdefaults
+AUC 0.8528
+credit
+
+[其余五个案例保持相同双语对照格式...]
+
+Default risk
+违约风险
+
+the foundation model wins
+基础模型胜出
+
+Banking's most repeated case: deciding who gets lent to.
+银行业最常见场景：贷款决策
+
+| dataset | size | TabICL | TabPFN | tuned XGB | 
+|---|---|---|---|---|
+| credit | 3000 × 10 | 0.7667 | 0.7578 | 0.7533 | 
+| heloc | 3000 × 22 | 0.7222 | 0.7300 | 0.7078 | 
+| default-of-credit | 3000 × 20 | 0.6956 | 0.6967 | 0.6944 | 
+
+All three datasets go to the foundation model. On heloc TabPFN takes 0.022 and TabICL 0.014: in credit risk that is not decoration.
+三个数据集均被基础模型攻克。在HELOC数据集上，TabPFN耗时0.022秒，TabICL耗时0.014秒——在风控领域，这种差距绝非装饰性差异。
+
+Context: clf_num/credit.csv from the inria-soda/tabular-benchmark suite, trimmed to 3,000 rows with seed 0 and split 70/30 with stratification.
+上下文：数据来自inria-soda/tabular-benchmark套件的clf_num/credit.csv，经种子0处理为3000行，并按70/30比例分层划分。

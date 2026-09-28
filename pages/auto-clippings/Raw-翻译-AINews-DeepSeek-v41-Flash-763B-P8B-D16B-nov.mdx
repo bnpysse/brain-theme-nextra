@@ -1,0 +1,447 @@
+---
+title: "[AINews] DeepSeek v4.1-Flash 763B-P8B-D16B novel causal Enco_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：[AINews] DeepSeek v4.1-Flash: 763B-P8B-D16B novel causal Encoder–Decoder architecture with vision marks the Return of the Whale
+
+【文章正文】：
+We are late to this but better than never. Have been busy finalizing the second
+
+AIE NYC
+
+, which is happening in one month.
+
+我们报道得有些晚，但总比没有好。我们最近一直忙于筹备第二届
+
+AIE NYC
+
+，它将于一个月后举行。
+
+Get your tix
+
+before prices go up - we will announce speakers from Bridgewater, Ramp, Coatue, Mastercard, Vanguard, Coinbase, Blackrock, Fidelity, Point72, Capital One, JPMC, Wells Fargo, Bloomberg, A24 (yes the movie studio) Labs, Two Sigma, Apollo Global, and more next week!
+
+在价格上涨前
+
+购买门票
+
+——我们将在下周公布来自 Bridgewater、Ramp、Coatue、Mastercard、Vanguard、Coinbase、Blackrock、Fidelity、Point72、Capital One、JPMC、Wells Fargo、Bloomberg、A24（没错，就是那家电影公司）Labs、Two Sigma、Apollo Global 等机构的演讲嘉宾！
+
+The way DeepSeek pursues their research agenda is nothing short of fascinating.
+
+DeepSeek 推进其研究议程的方式实在令人着迷。
+
+In between major DeepSeek versions, from v2 to v3 to v4, they have released intermediate papers with a hyperfocused architectural improvement and basically a 100% hit rate, from
+
+Math
+
+(esp
+
+GRPO
+
+)
+
+,
+
+Coder
+
+,
+
+and
+
+R1
+
+,
+
+not to mention more
+
+recent work on Manifold Constrained Hyperconnections and Compressed Sparse Attention
+
+. After the enormous attention in 1H2025 from the R1 paper, DeepSeek started laying low, and for about the past year, was happy to let peers like GLM and Kimi take the lead on Open Models.
+
+在 DeepSeek 主要版本之间，从 v2 到 v3 再到 v4，他们发布了一系列中间论文，每一篇都聚焦于高度专注的架构改进，而且几乎拥有 100% 的命中率，包括
+
+Math
+
+（尤其是
+
+GRPO
+
+）
+
+、
+
+Coder
+
+和
+
+R1
+
+，
+
+更不用说最近关于
+
+Manifold Constrained Hyperconnections 和 Compressed Sparse Attention
+
+的工作了。在 2025 年上半年 R1 论文引发巨大关注之后，DeepSeek 开始保持低调，在过去大约一年里，乐意让 GLM 和 Kimi 等同行在开放模型领域引领风潮。
+
+It looked dicey for a little bit, but
+
+true whalebros
+
+never wavered, and now DeepSeek are sending a weirdly mixed message by doing a completely new architecture,
+
+retiring V4 Pro
+
+and going all in on this new model, and yet only titling it v4.1 Flash, it seems to be a test of whether or not you know how to read through the basic headlines to understand true advances.
+
+有一段时间情况看起来不太妙，但
+
+真正的鲸友
+
+从未动摇。现在 DeepSeek 释放出了一个奇怪而混杂的信号：他们采用了全新的架构，
+
+退役了 V4 Pro
+
+并全力投入这个新模型，却只将其命名为 v4.1 Flash。这似乎是在考验你是否懂得透过表面标题去理解真正的进步。
+
+Yes,
+
+v4.1 Flash
+
+is technically behind other open models in some benchmarks. But that’s because we don’t yet have benchmarks that concisely capture what v4.1, and the broader research agenda of DeepSeek, is aiming for - the most creative and efficient use of context we have ever seen openly explained.
+
+是的，
+
+v4.1 Flash
+
+在某些基准测试中确实落后于其他开放模型。但那是因为我们还没有能够简洁捕捉 v4.1 以及 DeepSeek 更广泛研究议程所追求目标的基准——即我们所见过公开阐述的最具创造性、最高效的上下文利用方式。
+
+If you are the sort to only read model versions and benchmark headlines, you are exactly the type of superficial person that DeepSeek is looking to fool. The best way to understand DeepSeek’s enormous advance here is to look at Sebastian’s meme:
+
+如果你是那种只看模型版本和基准测试标题的人，那你正是 DeepSeek 想要迷惑的那种肤浅读者。要理解 DeepSeek 在此取得的巨大进步，最好的方式是看看 Sebastian 的那张梗图：
+
+Same model name, but hardly a 0.1 bump by anyone’s standards, and they even threw in vision without
+
+making you wait for a separate model
+
+. For a better visualization you can look at all the model innovations stacked up over time from the OG encoder-decoder architecture from
+
+Attention is All You Need:
+
+模型名字没变，但按任何人的标准来看，这都绝不只是 0.1 的小升级。他们甚至加入了视觉能力，而且没有
+
+让你等待单独的模型
+
+。为了更直观地理解，你可以看看从
+
+《Attention is All You Need》
+
+的原始编码器-解码器架构以来，随着时间推移所累积的所有模型创新：
+
+If you read
+
+our V4 Pro writeup
+
+and
+
+Engram
+
+you should be up to date on the basic architectural reading for DeepSeek as of April 2026, but what we are HUGE fans of is the prefill/decode separation introduced here, 8B in prefill (input tokens), 16B in decode (output tokens), causing our alphabet soup of “DeepSeek v4.1-Flash: 763B-P8B-D16B” if you extend the established notation for MoEs. That’s a sparsity of 1-2%, and if you read
+
+the DeepSeek v4.1 Flash tech report
+
+, combined with new tweaks like Sliding-Window Attention Bounded Replay, makes for a KV cache footprint up to 1/8 that of V4 Flash… which make it much better/faster/cheaper for long running agents:
+
+如果你读过
+
+我们的 V4 Pro 分析文章
+
+和
+
+Engram
+
+，你应该已经了解截至 2026 年 4 月 DeepSeek 的基础架构解读。但我们最为推崇的是这里引入的预填充/解码分离设计：预填充阶段（输入 token）为 8B，解码阶段（输出 token）为 16B。如果你扩展 MoE 既有的表示惯例，就会得到我们那一串字母汤式的命名：“DeepSeek v4.1-Flash: 763B-P8B-D16B”。这意味着稀疏度只有 1-2%。如果你阅读
+
+DeepSeek v4.1 Flash 技术报告
+
+，结合诸如 Sliding-Window Attention Bounded Replay 等新调整，其 KV 缓存占用可低至 V4 Flash 的 1/8……这让它在长时间运行的智能体场景中变得更好、更快、更便宜：
+
+We are so glad that DeepSeek is back publishing SOTA research. Our last highlight is their comments on post-training, where they largely seem to
+
+agree with Prof Jie Tang
+
+:
+
+我们非常高兴 DeepSeek 重新开始发布 SOTA 研究。我们最后一个亮点是他们对后训练的评论，他们似乎在很大程度上
+
+同意唐杰教授
+
+的观点：
+
+AI News for 9/9/2026-9/10/2026. We checked 12 subreddits,
+
+544 Twitters
+
+and no further Discords.
+
+AI 新闻，2026 年 9 月 9 日至 9 月 10 日。我们查看了 12 个 subreddit、
+
+544 个 Twitter
+
+，没有其他 Discord。
+
+AINews’ website
+
+lets you search all past issues. As a reminder,
+
+AINews is now a section of Latent Space
+
+. You can
+
+opt in/out
+
+of email frequencies!
+
+AINews 网站
+
+可以让你搜索所有往期内容。提醒一下，
+
+AINews 现在是 Latent Space 的一个板块
+
+。你可以
+
+选择订阅或退订
+
+邮件频率！
+
+AI Twitter Recap
+
+AI Twitter 回顾
+
+DeepSeek launched V4.1-Flash as a new open-weight flagship focused on extreme inference efficiency and low cost.
+
+DeepSeek 推出了 V4.1-Flash，作为一款新的开放权重旗舰模型，专注于极致推理效率和低成本。
+
+Independent benchmark account Artificial Analysis reported that DeepSeek V4.1 Flash surpasses DeepSeek V4 Pro 0813 despite being much cheaper, scoring
+
+40 on the Artificial Analysis Intelligence Index
+
+, just below GLM-5.3-Flash and above the latest V4 Pro, while being priced at
+
+$0.30 / 1M input tokens
+
+and
+
+$1.20 / 1M output tokens
+
+with
+
+cached input at $0.006 / 1M
+
+and an additional
+
+50% off-peak discount
+
+; they also describe it as a
+
+763B total-parameter
+
+model with
+
+8B active input
+
+and
+
+16B active output
+
+parameters,
+
+1M-token context
+
+, text+image input,
+
+MIT license
+
+, and US/API availability via DeepSeek first party
+
+独立基准测试账号 Artificial Analysis 报告称，DeepSeek V4.1 Flash 尽管便宜得多，却超越了 DeepSeek V4 Pro 0813，在
+
+Artificial Analysis 智能指数上得分 40
+
+，略低于 GLM-5.3-Flash，但高于最新的 V4 Pro。其定价为
+
+每 100 万输入 token 0.30 美元
+
+，
+
+每 100 万输出 token 1.20 美元
+
+，
+
+缓存输入每 100 万 token 0.006 美元
+
+，另有
+
+50% 非高峰折扣
+
+；他们还将其描述为
+
+总参数 763B
+
+的模型，具有
+
+8B 活跃输入参数
+
+和
+
+16B 活跃输出参数
+
+，
+
+100 万 token 上下文
+
+，支持文本+图像输入，
+
+MIT 许可证
+
+，并通过 DeepSeek 官方提供美国/API 使用
+
+@ArtificialAnlys
+
+,
+
+@ArtificialAnlys
+
+,
+
+@ArtificialAnlys
+
+Vals called it the new
+
+#1 open-weight model on the Vals Index
+
+, ahead of Kimi K3, at just
+
+$0.30 per test
+
+, the cheapest model in the open-weight top 10; they also note the eval ran with
+
+1M context
+
+,
+
+384 max output tokens
+
+,
+
+temperature 1
+
+, default top-p/top-k, and
+
+high reasoning effort
+
+Vals 称其为
+
+Vals Index 上新的 #1 开放权重模型
+
+，领先于 Kimi K3，每次测试仅需
+
+0.30 美元
+
+，是开放权重前十名中最便宜的模型；他们还指出，评测使用了
+
+100 万上下文
+
+、
+
+最大输出 384 token
+
+、
+
+temperature 1
+
+、默认 top-p/top-k，以及
+
+高推理努力
+
+@ValsAI
+
+,
+
+@ValsAI
+
+,
+
+@ValsAI
+
+Baseten shipped day-0 support and summarized the product positioning as
+
+smarter, faster, and more efficient than DeepSeek v4 Pro 0813
+
+, with
+
+text and vision
+
+,
+
+US-only
+
+,
+
+ZDR
+
+, and
+
+1M context
+
+Baseten 提供了上线首日支持，并将产品定位总结为
+
+比 DeepSeek v4 Pro 0813 更智能、更快、更高效
+
+，具备
+
+文本和视觉能力
+
+，
+
+仅限美国
+
+，
+
+ZDR
+
+，以及
+
+100 万上下文
+
+@baseten
+
+Ollama began rolling it out to
+
+Max and Team
+
+accounts, later expanding to
+
+Pro plan subscribers
+
+Ollama 开始向
+
+Max 和 Team
+
+账户推出，随后扩展到
+
+Pro 计划订阅用户
+
+@ollama
+
+,
+
+@ollama
+
+,
+
+@ollama
+
+Architecture and pa

@@ -1,0 +1,148 @@
+---
+title: "🎙️ How I AI Jev for beginners  I left Claude for months, Opu_全翻译"
+tags: ["大咖视点_全文翻译", "Lenny's_Newsletter_(产品与增长深度)"]
+---
+
+【文章标题】：🎙️ How I AI: Jev for beginners + I left Claude for months, Opus 5.5 brought me back + Opus 5.5 vs. GPT-6 Sol bench
+【文章标题】：🎙️ 我的AI之路：Jev入门指南 + 我为何离开Claude数月又因Opus 5.5回归 + Opus 5.5与GPT-6 Sol基准测试对比
+
+【文章正文】：
+Jev for beginners: how to use it and what to build
+Jev入门指南：使用技巧与应用场景
+
+Listen now on
+立即收听
+
+YouTube
+YouTube
+
+•
+•
+
+Spotify
+Spotify
+
+•
+•
+
+Apple Podcasts
+苹果播客
+
+Brought to you by:
+本期赞助：
+
+OpenArt
+OpenArt
+
+—An all-in-one AI creation platform for images, videos, music, audio, and more
+——集图像、视频、音乐、音频等创作于一体的人工智能平台
+
+In this solo episode, Claire tests Jev, TypeSafe AI’s new decision model that returns structured choices, scores, and probabilities instead of generated text. She uses it to analyze 1,700 pull requests for 9 cents, map her Claude and Codex usage, triage email, search 4,500 YouTube comments, and process 200,000 classifications for about $4. She also explains why Jev works best alongside a frontier model and how its speed and pricing make entirely new kinds of real-time apps and large-scale analysis practical.
+在本期单人节目中，Claire测试了TypeSafe AI的新型决策模型Jev——该模型不生成文本，而是返回结构化选项、评分和概率。她仅花费9美分分析了1,700个拉取请求，绘制了Claude和Codex使用图谱，分类邮件，搜索4,500条YouTube评论，并以约4美元处理了20万次分类。她还解释了为何Jev与前沿模型配合最佳，以及其速度和定价如何使全新实时应用与大规模分析成为可能。
+
+Biggest takeaways:
+核心发现：
+
+Jev is a decision model, not a language model, and that distinction can make many tasks dramatically cheaper.
+Jev是决策模型而非语言模型，这一区别可使多项任务成本大幅降低。
+
+Instead of generating text, it returns predefined values such as a category, score, or probability. Claire believes this covers roughly 90% of what many software workflows actually need, at 4 cents per million input tokens with no output-token fee.
+它不生成文本，而是返回预定义值（如类别/评分/概率）。Claire认为这覆盖了约90%的软件工作流需求，输入token仅需每百万4美分且无输出token费用。
+
+It cost Claire 9 cents to understand where two years of engineering work went.
+Claire仅花费9美分就厘清了两年工程工作的去向。
+
+She used Jev to compare 1,700 ChatPRD pull requests across 17,000 pairs, then had Gemini Flash Lite label the resulting clusters. In about two minutes, she learned that nearly 30% of the company’s engineering work had gone toward platform, security, and infrastructure.
+她用Jev对比1,700个ChatPRD拉取请求形成17,000组配对，再由Gemini Flash Lite标记聚类结果。两分钟内发现近30%工程人力投入平台/安全/基础设施。
+
+Some of the most useful analysis is already sitting on a local computer.
+最有价值的分析往往就在本地电脑里。
+
+Claude Code and Codex store past sessions locally, allowing Jev to classify them in minutes. Claire discovered that engineering had fallen from nearly 100% of her AI usage in January to less than 40% by September, with agents and media publishing filling the gap.
+Claude Code和Codex本地存储历史会话，Jev可快速分类。Claire发现工程类AI使用占比从1月的近100%降至9月不足40%，缺口由智能体和媒体出版填补。
+
+Jev becomes far more powerful when paired with a frontier model.
+Jev与前沿模型配合时威力倍增。
+
+Claire uses Jev to classify, cluster, filter, and route large datasets, then sends only the most important groups to GPT-6 Astra for deeper reasoning. For ChatPRD’s product insights graph, this approach processed 1,100 signals and completed 200,000 operations for about $4 on the Jev side.
+Claire先用Jev分类/聚类/过滤/路由大数据集，再将关键组发送至GPT-6 Astra深度推理。构建ChatPRD产品洞察图时，该方法处理1,100个信号完成20万次操作，Jev端仅花费约4美元。
+
+Jev’s pricing changes which ideas are worth building.
+Jev的定价重塑了创意价值评估。
+
+Because it returns small predefined values instead of generating long responses, TypeSafe charges nothing for output tokens. Claire spent less than $10 on Jev during the week, making classification workloads that would normally be expensive at scale feel almost free.
+因返回短小预定义值而非长文本，TypeSafe不收取输出token费用。Claire一周Jev花费不足10美元，使本应昂贵的大规模分类任务近乎免费。
+
+Jev makes real-time AI loops practical.
+Jev实现实时AI循环。
+
+Claire built a voice app that turns a spoken phrase into a color, matches it with a quote based on sentiment, and displays everything almost instantly. Jev made its decisions so quickly that the quote API became the slowest part of the workflow.
+Claire开发的语音应用能实时将口语转为颜色，匹配情感语录并即时显示。Jev决策极快，反使语录API成为工作流最慢环节。
+
+YouTube comment analysis is an immediate use case for any podcast team.
+YouTube评论分析是播客团队的现成用例。
+
+Claire classified 4,500 How I AI comments by sentiment, identified 58 containing episode ideas, and built a keyword search that scans the full dataset in under a second. The results showed strong demand for a Grok versus Muse comparison and an 80% positive response to the "Claude Code for product managers" episode.
+Claire对4,500条节目评论情感分类，识别58条选题建议，并构建秒级全数据集关键词搜索。结果显示观众强烈期待Grok与Muse对比，且"产品经理的Claude Code"获80%好评。
+
+The real skill is recognizing where a pipeline only needs a decision.
+真正的技巧是识别流程何时只需决策。
+
+Jev will not write documentation or design an interface, but it can sort, route, rank, and filter enormous datasets quickly and cheaply. Claire now asks one question before every build: Where does this workflow simply need to make a decision? That is where Jev belongs.
+Jev不撰写文档或设计界面，但能快速廉价地排序/路由/排名/过滤海量数据。Claire现在每个项目前都会问：这个工作流哪里只需做决策？那里就是Jev的用武之地。
+
+Blog and detailed workflow walkthroughs from this episode:
+本期博客与详细工作流解析：
+
+Jev: AI Data Analysis and Product Insights:
+Jev：AI数据分析与产品洞察
+
+https://www.chatprd.ai/how-i-ai/jev-ai-data-analysis-product-insights
+
+↳ Jev GitHub PR Analysis:
+↳ Jev的GitHub PR分析
+
+https://www.chatprd.ai/how-i-ai/workflows/jev-github-pr-analysis
+
+↳ Jev YouTube Comment Analysis:
+↳ Jev的YouTube评论分析
+
+https://www.chatprd.ai/how-i-ai/workflows/jev-youtube-comment-analysis
+
+↳ Jev Multi-Model Product Insights:
+↳ Jev多模型产品洞察
+
+https://www.chatprd.ai/how-i-ai/workflows/jev-multi-model-product-insights
+
+I left Claude for months. Opus 5.5 is why I’m back.
+我离开Claude数月之久，Opus 5.5让我回归。
+
+Listen now on
+立即收听
+
+YouTube
+YouTube
+
+•
+•
+
+Spotify
+Spotify
+
+•
+•
+
+Apple Podcasts
+苹果播客
+
+Claire tests Claude Opus 5.5 after months of leaving Claude out of her daily workflow. She puts it through long-running agentic tasks, frontend prototyping, writing, SVG illustration, computer use, and video editing to see where it earns a place back in her stack. She also shares why she is pairing it with Codex for cross-model code review, where Claude’s safety limits still get in the way, and which tasks remain firmly in Codex territory.
+Claire在数月未使用Claude后测试Opus 5.5版本。她通过长期代理任务、前端原型设计、写作、SVG插图、计算机使用和视频编辑等场景，评估其能否重返工具栈。她还分享为何将其与Codex配对进行跨模型代码审查，指出Claude的安全限制仍在哪些方面造成阻碍，以及哪些任务仍属Codex专属领域。
+
+Biggest takeaways:
+核心发现：
+
+A model’s personality can matter just as much as its intelligence.
+模型个性与智能同等重要。
+
+Claire stopped using Claude for months because its rambling, preachy, and overly verbose replies made it unpleasant to work with. Opus 5.5 is the first model in the family that no longer makes her blood boil, which is a meaningful improv
+Claire停用Claude数月，因其冗长说教式的回复令人不适。Opus 5.5是该系列首个不再让她血压升高的版本，这一改进意义重大

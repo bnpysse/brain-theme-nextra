@@ -1,0 +1,107 @@
+---
+title: "Why open source rocks – a new SM750 Silicon Motion GPU HDMI_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Why open source rocks – a new SM750 (Silicon Motion GPU) HDMI Driver  
+开源为何如此强大——全新SM750（矽统科技GPU）HDMI驱动  
+
+【文章正文】：  
+Push this card to real 2048-wide output or a software-scaled 2560x1080 ultrawide desktop, with bandwidth-saving colour conversion and update optimisations for smoother performance.  
+将该显卡推送至真正的2048宽度输出或软件缩放的2560x1080超宽桌面，通过节省带宽的色彩转换和更新优化实现更流畅的性能。  
+
+Linux display driver for the single-HDMI SE-DP750A-HDMI PCIe card.  
+适用于单HDMI接口SE-DP750A-HDMI PCIe显卡的Linux显示驱动。  
+
+Experimental: this driver is for one specific SM750 board. Optional modes can exceed published GPU or monitor clock limits and may produce no signal, distortion, or an unstable display. Keep SSH or another recovery route available when trying non-EDID modes.  
+实验性说明：本驱动仅针对特定SM750板卡。可选模式可能超出GPU或显示器标称时钟限制，导致无信号、画面失真或显示不稳定。尝试非EDID模式时请确保SSH或其他恢复途径可用。  
+
+The tested board is sold or marked as SE-DP750A-HDMI and has all of these:  
+测试板卡型号为SE-DP750A-HDMI且需满足以下全部特征：  
+- Silicon Motion SM750G10-AC , revision A1  
+  矽统科技SM750G10-AC芯片，修订版A1  
+- PCI ID 126f:0750  
+  PCI标识符126f:0750  
+- Silicon Image/Lattice SiI9024ACNU HDMI transmitter  
+  硅映/莱迪思SiI9024ACNU HDMI发射器  
+- 16 MiB display memory  
+  16MB显存  
+- One HDMI output  
+  单HDMI输出  
+
+The PCI ID alone is not enough. Other SM750 cards may use VGA, a different transmitter, or different GPIO wiring and are not currently supported.  
+仅PCI标识符不足以确认兼容性。其他SM750显卡可能采用VGA接口、不同发射器或GPIO布线，当前均不受支持。  
+
+Ubuntu 24.04 and Linux Mint 22 users can build a DKMS package locally:  
+Ubuntu 24.04与Linux Mint 22用户可本地构建DKMS包：  
+```bash
+sudo apt update  
+sudo apt install build-essential dkms linux-headers-$(uname -r) libdrm-dev git  
+git clone https://github.com/KodeMunkie/sm750hdmifb.git  
+cd sm750hdmifb  
+make check  
+./build-package.sh  
+sudo apt install ./dist/sm750hdmifb_0.5.5_all.deb  
+sudo reboot  
+```
+
+The reboot matters: it lets the package blacklist Linux's old sm750fb driver before it can claim the card. The package is named sm750hdmifb; the kernel module is sm750hdmidrm.ko so it cannot be confused with sm750fb.ko.  
+重启至关重要：它允许软件包在旧版sm750fb驱动占用显卡前将其列入黑名单。软件包名为sm750hdmifb，内核模块为sm750hdmidrm.ko，避免与sm750fb.ko混淆。  
+
+The driver is intended for Linux 6.17 and newer. DKMS deliberately refuses older kernels because the required DRM interfaces are not supported by this project. The source has compatibility paths for Linux 6.17 through the 6.x series and for Linux 7.0 onward. It currently builds and passes the full test suite against 6.17 and 7.0 Ubuntu kernels; the manual CI workflow also builds against Ubuntu 24.04's 6.17 kernel headers.  
+本驱动面向Linux 6.17及以上版本。DKMS会主动拒绝旧内核，因本项目不支持旧版DRM接口。源代码兼容Linux 6.17至6.x系列以及7.0+版本，当前已在Ubuntu 6.17与7.0内核通过完整测试套件，CI流程也针对Ubuntu 24.04的6.17内核头文件构建。  
+
+There is no fixed upper version cap, but future kernels can change internal DRM APIs. Because this is an out-of-tree driver, a new kernel version may require a source update even though it falls within the intended 6.17+ range.  
+虽无明确版本上限，但未来内核可能变更DRM内部API。由于这是树外驱动，即使新内核版本在6.17+范围内也可能需要源码更新。  
+
+Prebuilt packages, when available, are published under GitHub Releases. Building locally is recommended because DKMS compiles against the installed kernel headers.  
+预编译包将发布在GitHub Releases中。建议本地构建，因DKMS需基于已安装的内核头文件编译。  
+
+By default the driver:  
+驱动默认行为：  
+- Uses monitor EDID modes  
+  使用显示器EDID模式  
+- Uses dithered 16-bit RGB565 scanout  
+  采用抖动16位RGB565扫描输出  
+- Uses a hardware cursor  
+  启用硬件光标  
+- Coalesces updates on a worker  
+  在工作线程合并更新  
+- Uploads eight-row batches with DMA  
+  通过DMA批量上传八行数据  
+- Falls back safely if DMA fails  
+  DMA失败时安全回退  
+
+Applications still render in 32-bit colour. Immediately before upload, the driver converts changed screen regions to RGB565 and applies KodeMunkie's ordered dither with a 94% green-channel correction. This is the default because the SM750 framebuffer is reached over a PCIe 1.1 x1 link. At the higher resolutions that link cannot provide responsive full-screen 32-bit updates: XRGB8888 sends four bytes per output pixel, while RGB565 sends two. Dithered RGB565 therefore halves device-bound pixel traffic while preserving much of the apparent colour detail.  
+应用程序仍以32位色渲染。上传前驱动会将变更屏幕区域转为RGB565，并应用KodeMunkie有序抖动算法（含94%绿色通道校正）。此为默认方案，因SM750帧缓冲区通过PCIe 1.1 x1链路连接。高分辨率下该链路无法实现流畅的32位全屏更新：XRGB8888每像素传输4字节，而RGB565仅需2字节。抖动RGB565方案在保留大部分色彩细节的同时，将设备端像素流量减半。  
+
+Common kernel or GRUB options are:  
+常用内核/GRUB选项（为保持可读性省略sm750hdmidrm.前缀，例如GRUB中应输入sm750hdmidrm.enable_dma=0）：  
+
+| 选项与默认值 | 适用场景 | 效果与权衡 |  
+|---|---|---|  
+| scanout_format=rgb565-bbdither  
+默认: rgb565-bbdither | 无需修改（推荐默认） | 启用绿色校正的抖动16位扫描输出 |  
+| scanout_format=xrgb8888  
+默认: rgb565-bbdither | 仅需32位扫描输出时 | 禁用RGB565、抖动及绿色校正，上传流量翻倍，高分辨率可能卡顿 |  
+| scanout_format=rgb565  
+默认: rgb565-bbdither | 仅需纯RGB565时 | 禁用抖动和绿色校正，降低色彩质量 |  
+| dither_green_gain=94  
+默认: 94 | 无需修改（默认启用） | 启用抖动时的优化绿色校正 |  
+| dither_green_gain=100  
+默认: 94 | 需关闭绿色校正时 | 保持抖动但可能导致色彩偏绿 |  
+| enable_dma=1  
+默认: 1 | 无需修改（默认启用） | 已验证的八行DMA上传（含CPU自动回退） |  
+| enable_dma=0  
+默认: 1 | 需禁用DMA时 | 强制CPU上传，通常性能更低 |  
+| disable_hardware_cursor=1  
+默认: 0 | 需软件光标回退时 | 禁用硬件光标，可能降低光标响应性 |  
+| edid_only=0  
+默认: 1 | 需驱动目录和超宽模式时 | 危险：解除EDID模式与时钟限制，显示器可能不支持 |  
+| softscale_wide=1  
+默认: 0  
+需同时设置edid_only=0 | 需2464x1080或2560x1080分辨率时 | 危险/实验性：启用宽屏压缩，需显示器支持拉伸 |  
+| sharpen=1  
+默认: 0 | 超宽模式推荐启用 | 压缩后固定增加8%对比度锐化 |  
+| double_shadow=1  
+默认: 0 | 推荐避免冗余上传时 | 启用双重阴影缓冲（原文未完整） |

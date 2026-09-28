@@ -1,0 +1,106 @@
+---
+title: "Show HN Whiteboard YC W26 – An open-source IDE for thoughtfu_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: Whiteboard (YC W26) – An open-source IDE for thoughtful software design
+【文章标题】：展示HN：Whiteboard（YC W26）——专为深度软件设计打造的开源IDE
+
+【文章正文】：
+Whiteboard is an open-source desktop app where humans and agents can architect software together in a common workspace.
+Whiteboard是一款开源桌面应用，人类与智能体可以在共享工作空间中协同设计软件。
+
+Whiteboard plugs into the tools you already use - e.g. Claude Code, Codex, etc. – and gives your agent an SDK to draw on an in-app canvas to describe its work.
+它可接入您现有的工具（如Claude Code、Codex等），并为智能体提供SDK以便在应用内画布上绘制其工作内容。
+
+Here’s a 1 min demo video explaining more: https://www.youtube.com/watch?v=ChPn3ftULWE
+这是一段1分钟演示视频：https://www.youtube.com/watch?v=ChPn3ftULWE
+
+- Download Whiteboard and open the app.
+- 下载Whiteboard并打开应用
+- Connect Claude Code, Codex, or another coding agent from the welcome screen.
+- 在欢迎界面连接Claude Code、Codex或其他编程智能体
+- Ask your agent to review your current branch against up-to-date main and open the result in Whiteboard.
+- 让智能体对比最新主分支审查当前分支，并在Whiteboard中打开结果
+
+In our experience, Whiteboard works best with models like GPT-6 Luna and Claude Opus 5.5 for their intelligence, cost, and speed tradeoff.
+根据我们的经验，Whiteboard与GPT-6 Luna和Claude Opus 5.5等模型配合最佳，因其在智能、成本和速度间的平衡。
+
+Here are a few example prompts of how to use Whiteboard effectively. We are working hard to make sure the right choices are baked in by default to the system prompt - part of why this system is open source! - but in the meantime:
+以下是有效使用Whiteboard的示例指令。我们正努力将合理选择默认内置到系统提示中——这也是系统开源的原因之一！但现阶段：
+
+hey, this stack of commits is set up so i can get an [api] to do [objective]
+"嘿，这组提交是为了实现[目标]的[API]"
+i'd like to see:
+我想查看：
+- proposed api
+- 建议的API
+- examples
+- 示例
+- motivations for this (if available to you in context/in the repo)
+- 设计动机（如果上下文/代码库中有相关信息）
+and then we can dive into implementation + explaining how things worked.
+然后我们可以深入实现细节并解释工作原理
+
+cna you explain to me the telemetry changes form the newest posthog pr https://github.com/devdotfast/whiteboard/commit/4837e107946e27ebad50c282eb0f2585210d2a35 -- what are we tracking, how can we build good dashboards or product waterfalls from it? what do we do for hangs, errors, crashes etc... use whiteboard
+"能否解释最新PostHog PR中的遥测变更？我们在追踪哪些数据？如何据此构建优质仪表板或产品流程图？对于卡顿、错误、崩溃等情况我们如何处理？请使用Whiteboard说明"
+
+If you see anything you don't like, highlight it in your clipboard and give it your agent, and it can re-draw on the Whiteboard to suit your needs!
+若发现不满意之处，只需高亮内容并交给智能体，它就会在Whiteboard上重新绘制以满足需求！
+
+Pure HTML tools didn’t provide easy affordances to connect a spec or diagram to code; this is especially tricky since tradeoffs are often only discovered after a first pass at implementation. In Whiteboard, when you click on visualizations like a sequence diagram, an entity relationship diagram, or a quote from the agent’s trace, you can jump to the underlying code directly. When navigating code, you get keybindings and LSP support from VSCode out of the box.
+传统HTML工具难以将规范/图表与代码关联，这在实现过程中发现权衡取舍时尤为棘手。Whiteboard中点击序列图、实体关系图或智能体追踪片段时，可直接跳转底层代码。代码导航默认支持VSCode快捷键和LSP。
+
+Raw diff views can be very noisy, so we wrote a semantic, AST-aware diff viewer in Rust so you can only view the code changes which are relevant to you. We’ve set up some sane defaults: large added functions are summarized as pseudocode, and things like unit tests and documentation changes are collapsed / hidden. This is all customizable with a WASM-based plugin system.
+原生差异视图往往杂乱，因此我们用Rust开发了支持AST的语义化差异查看器，仅显示相关代码变更。预设合理默认值：新增大型函数以伪代码概括，单元测试和文档变更默认折叠/隐藏。这些均可通过WASM插件系统自定义。
+
+We found it difficult to reason about what set of decisions our agents made autonomously & how that impacts a change. So we built tools for agents to query and link their own traces on the Whiteboard, so you can visualize the requirements that you set, understand how they were implemented, and understand what decisions the agent made autonomously.
+我们发现难以推断智能体的自主决策及其影响，因此开发了工具让智能体在Whiteboard上查询并链接自身追踪记录，从而可视化需求设置、理解实现方式及智能体自主决策。
+
+Whiteboard is MIT-licensed and runs against your local checkouts. A hosted product for teams is planned, and everything will always remain self-hostable.
+Whiteboard采用MIT许可证，基于本地代码库运行。团队托管产品正在规划中，所有功能始终支持自托管。
+
+-
+You cannot currently edit files in Whiteboard. If this is something that you find yourself wanting to do, please file an issue!
+- 当前版本不支持文件编辑，如需此功能请提交issue
+
+-
+Working and browsing files across multiple repos in a single review isn't well supported.
+- 单次审查中跨多仓库操作文件的功能尚不完善
+
+-
+While you can share reviews between machines with the share button, updates made after a review is shared don't appear for others. You would need to re-share the review.
+- 虽然可通过分享按钮跨设备共享审查，但共享后的更新不会同步显示，需重新分享
+
+Contributions and feedback are welcome.
+欢迎贡献代码与反馈
+
+Read CONTRIBUTING.md for setup and the pull request workflow, and follow the Code of Conduct. Report vulnerabilities as described in SECURITY.md. Questions? Ask on Discord.
+请阅读CONTRIBUTING.md了解设置和PR流程，遵守行为准则。按SECURITY.md指南报告漏洞。问题咨询请至Discord。
+
+Whiteboard runs against local checkouts. Anonymous telemetry does not include your code, diffs, Whiteboard text, prompts, or model output. Read the privacy overview, inspect the complete telemetry reference, or turn telemetry off at any time.
+Whiteboard基于本地代码运行。匿名遥测不包含您的代码、差异、Whiteboard文本、提示或模型输出。可随时阅读隐私概览、查看完整遥测参考或关闭遥测。
+
+Whiteboard is available under the MIT License. The vendored Code -
+Whiteboard采用MIT许可证。内置的Code -
+
+OSS fork retains Microsoft's MIT license and third-party notices; see
+OSS分支保留微软的MIT许可证及第三方声明，详见
+apps/review-desktop/LICENSE and
+apps/review-desktop/LICENSE与
+apps/review-desktop/UPSTREAM.
+apps/review-desktop/UPSTREAM
+
+With everyone using dedicated agent TUIs and desktop apps, we only use our text editors for reviewing line-by-line diffs now, so we figured why not have a text editor meant for reviewing code. In that case, might as well start off with the most successful open source editor out there as a baseline.
+随着专用智能体TUI和桌面应用的普及，我们现仅用文本编辑器进行逐行差异审查，因此决定开发专为代码审查优化的编辑器。既然如此，不如以最成功的开源编辑器作为基础。
+
+We vendor Code OSS unlike other forks that maintain patches because coding agents have a hard time with patches and there's a lot of stuff from stock VS Code (i.e., ~45% of the codebase is Copilot these days 😬) that we don't need.
+我们直接内置Code OSS而非维护补丁分支，因为编程智能体难以处理补丁，且原生VS Code的许多组件（如今约45%代码库是Copilot😬）并非必需。
+
+We regularly monitor upstream Code OSS and merge in security/feature patches as they come in.
+我们定期监控上游Code OSS并及时合并安全/功能补丁。
+
+- https://www.geoffreylitt.com/2026/07/02/understanding-is-the-new-bottleneck — a great overview of the constraints of modern software engineering.
+- https://www.geoffreylitt.com/2026/07/02/understanding-is-the-new-bottleneck —— 对现代软件工程限制的精彩概述
+- https://maggieappleton.com/2025-08-vibe-legacy-code/
+- https://maggieappleton.com/2025-08-vibe-legacy-code/

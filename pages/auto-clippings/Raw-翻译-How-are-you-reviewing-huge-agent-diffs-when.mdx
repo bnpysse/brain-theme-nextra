@@ -1,0 +1,32 @@
+---
+title: "How are you reviewing huge agent diffs when multi-agent setu_全翻译"
+tags: ["Reddit_全文翻译", "r_CursorAI"]
+---
+
+【帖子标题】：How are you reviewing huge agent diffs when multi-agent setups are writing most of the code?
+在多智能体编写大部分代码时，你如何审查庞大的差异文件？
+
+【帖子正文】：
+Been thinking about this after some Amsterdam talks on agent workflows.
+在阿姆斯特丹参加完关于智能体工作流的讨论后，我一直在思考这个问题。
+
+Once you have agents that can plan, implement, and open a PR, writing gets cheaper. The hard part moves to the loop around them: what is done, who reviews, and how you stop babysitting every turn.
+当你的智能体能够规划、实现并提交PR（拉取请求）时，编写代码变得更容易了。难点转移到围绕它们的工作循环：哪些任务已完成、由谁审查、以及如何避免每次都要人工干预。
+
+Huge diffs are the sharp edge. A multi-thousand-line agent PR is not something you review the old way line by line. So the useful question becomes: what's the smallest unit of work, what's the definition of done for the agent, and what still needs a human before merge?
+庞大的差异文件是最棘手的问题。一个数千行的智能体PR不是你能用传统方式逐行审查的。因此关键问题变成：最小工作单元是什么？如何定义智能体的完成标准？以及在合并前哪些环节仍需人工参与？
+
+Curious how people here are actually shipping with multi-agent setups (plan / implement / review / fix), not just one long chat:
+很好奇大家如何实际运用多智能体协作（规划/实现/审查/修复），而非仅通过冗长对话：
+
+What's your loop today? One agent, or several with different jobs?
+你们当前的工作循环是怎样的？单一智能体，还是多个分工不同的智能体？
+
+How do you define done so the agent can keep going without you every 30 seconds?
+你们如何定义"完成"标准，使智能体无需每30秒就等待你的指令？
+
+When the diff is huge, what do you still review yourself vs hand to another agent (or to Cursor's review tools)?
+面对庞大差异文件时，哪些内容你会亲自审查，哪些会交给其他智能体（或Cursor的审查工具）？
+
+War stories from people shipping real PRs welcome.
+欢迎分享实际提交PR过程中的实战经验。
