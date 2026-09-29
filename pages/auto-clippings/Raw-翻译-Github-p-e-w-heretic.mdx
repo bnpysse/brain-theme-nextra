@@ -1,0 +1,37 @@
+---
+title: "_p-e-w_heretic_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+![Logo](https://github.com/user-attachments/assets/df5f2840-2f92-4991-aa57-252747d7182e)
+
+# Heretic：语言模型全自动去审查工具  
+  
+[![Discord](https://img.shields.io/discord/1447831134212984903?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/gdXc48gSyT) [![Matrix](https://img.shields.io/badge/Matrix-black?logo=matrix&style=for-the-badge)](https://matrix.to/#/#heretic:matrix.org) [![Follow us on Hugging Face](https://huggingface.co/datasets/huggingface/badges/resolve/main/follow-us-on-hf-md-dark.svg)](https://huggingface.co/heretic-org) [![Codeberg mirror](https://img.shields.io/badge/Codeberg%20mirror-black?logo=codeberg&style=for-the-badge)](https://codeberg.org/p-e-w/heretic)
+
+[![#1 Repository of the Day](https://trendshift.io/api/badge/repositories/20538)](https://trendshift.io/repositories/20538)
+
+Heretic是一个无需昂贵后训练即可移除基于Transformer语言模型审查机制（又称"安全对齐"）的工具。它结合了方向性消融（又称"消融清除"）的先进实现（[Arditi等人2024](https://arxiv.org/abs/2406.11717)、Lai 2025 ([1](https://huggingface.co/blog/grimjim/projected-abliteration)、[2](https://huggingface.co/blog/grimjim/norm-preserving-biprojected-abliteration)))与[Optuna](https://optuna.org/)驱动的TPE参数优化器。
+
+这种方法使Heretic能够**完全自动化**工作。Heretic通过共同最小化拒绝次数和与原始模型的KL散度来寻找高质量的消融清除参数，从而获得既去审查又尽可能保留原始模型智能的解禁模型。使用Heretic不需要理解Transformer内部原理——事实上，任何会运行命令行程序的人都能用它来解禁语言模型。
+
+Heretic支持大多数稠密模型，包括多模态模型、多种MoE架构，甚至Qwen3.5等混合模型。纯状态空间模型和其他某些研究架构尚不支持开箱即用。
+
+![Screenshot](https://github.com/user-attachments/assets/d71a5efa-d6be-4705-a817-63332afb2d15)
+
+&nbsp;
+
+在默认配置下无监督运行时，Heretic生成的解禁模型质量可媲美人类专家手动创建的消融清除模型：
+
+| 模型 | "有害"提示的拒绝率 | "无害"提示与原始模型的KL散度 |
+| :--- | ---: | ---: |
+| [google/gemma-3-12b-it](https://huggingface.co/google/gemma-3-12b-it) (原始) | 97/100 | 0 *(定义基准)* |
+| [mlabonne/gemma-3-12b-it-abliterated-v2](https://huggingface.co/mlabonne/gemma-3-12b-it-abliterated-v2) | 3/100 | 1.04 |
+| [huihui-ai/gemma-3-12b-it-abliterated](https://huggingface.co/huihui-ai/gemma-3-12b-it-abliterated) | 3/100 | 0.45 |
+| **[p-e-w/gemma-3-12b-it-heretic](https://huggingface.co/p-e-w/gemma-3-12b-it-heretic) (本工具)** | **3/100** | **0.16** |
+
+Heretic版本在无需人工干预的情况下实现了与其他消融清除相同的拒绝抑制水平，但KL散度显著更低，表明对原始模型能力的损害更小。*(您可以使用Heretic内置的评估功能复现这些数据，例如`heretic --model google/gemma-3-12b-it --evaluate-model p-e-w/gemma-3-12b-it-heretic`。注意具体数值可能因平台和硬件而异，上表数据基于RTX 5090上的PyTorch 2.8编译)*
+
+当然，数学指标和自动化基准测试从不能反映全貌，也无法替代人工评估。Heretic生成的模型获得了用户的高度认可（链接和重点为后加）：
+
+&gt; "原本持怀疑态度，但下载了[**GPT-OSS 20B Heretic**](https://huggingface.

@@ -1,0 +1,322 @@
+---
+title: "How Warp ships 2,000 PRs a month with AI factories  Zach Llo_全翻译"
+tags: ["大咖视点_全文翻译", "Lenny's_Newsletter_(产品与增长深度)"]
+---
+
+【文章标题】：How Warp ships 2,000 PRs a month with AI factories | Zach Lloyd (CEO, Warp)
+【文章标题】：Warp如何通过AI工厂每月交付2000个PR | Zach Lloyd（Warp CEO）
+
+【文章正文】：
+Zach Lloyd
+Zach Lloyd
+
+is the co-founder and CEO of Warp, an AI-powered terminal and software factory platform used by tens of thousands of engineers. Before Warp, he spent nearly a decade at Google, including time as a principal engineer on Google Sheets. He built Warp from the ground up as a modern, AI-native alternative to legacy terminals, and the team has since expanded into software factories: a full cloud-based system that takes an idea in Slack all the way through to a merged PR.
+是Warp的联合创始人兼CEO。Warp是一个由AI驱动的终端和软件工厂平台，被数万名工程师使用。在创立Warp之前，他在谷歌工作了近十年，期间曾担任Google Sheets的首席工程师。他将Warp从零开始打造为传统终端的现代化AI原生替代品，团队随后扩展至软件工厂领域：这是一个完整的云端系统，能将Slack中的创意一路推进至合并PR。
+
+Listen or watch on
+收听或观看平台：
+
+YouTube
+YouTube
+
+,
+
+Spotify
+Spotify
+
+, or
+或
+
+Apple Podcasts
+Apple Podcasts
+
+In this episode:
+本期内容：
+
+Why a software factory is more than a coding agent
+为什么软件工厂不仅仅是编码代理
+
+The public Slack → Linear → GitHub → QA workflow
+公开的Slack→Linear→GitHub→QA工作流
+
+Human interactions per PR as a signal of automation and throughput
+每次PR所需人工交互作为自动化与吞吐量的信号
+
+Why human review is still the bottleneck
+为何人工审核仍是瓶颈
+
+Scoring agent runs, finding failure modes, and self-improving agent workflows
+评估代理运行、发现故障模式及自我改进的代理工作流
+
+Replaying real tasks to choose model cost and quality tradeoffs
+通过重现实务任务选择模型成本与质量的平衡点
+
+CEO workflows with Figma MCP, Granola, and research agents
+CEO工作流：Figma MCP、Granola与研究代理
+
+Brought to you by:
+本期赞助商：
+
+DX
+DX
+
+—Engineering intelligence for the AI era
+——AI时代的工程智能平台
+
+OpenArt
+OpenArt
+
+—An all-in-one AI creation platform for images, videos, music, audio, and more
+——集图像/视频/音乐/音频等创作于一体的一站式AI平台
+
+In this episode, we cover:
+本期时间轴：
+
+(
+(
+00:00
+00:00
+
+) Intro
+) 开场
+
+(
+(
+02:35
+02:35
+
+) Warp’s AI software factory, Wilson
+) Warp的AI软件工厂Wilson
+
+(
+(
+09:23
+09:23
+
+) Automatic factory triggers
+) 自动化工厂触发器
+
+(
+(
+11:12
+11:12
+
+) The engineering leader dashboard Zach wishes he’d had
+) Zach理想中的工程领导者仪表盘
+
+(
+(
+15:18
+15:18
+
+) How code review is changing in an AI factory
+) AI工厂如何改变代码审查
+
+(
+(
+17:08
+17:08
+
+) Tracking cost per PR across model configs
+) 跨模型配置追踪单PR成本
+
+(
+(
+18:47
+18:47
+
+) Using LLM-as-a-judge to score every agent run
+) 使用LLM作为裁判评估每次代理运行
+
+(
+(
+20:02
+20:02
+
+) Catching redundant tests
+) 捕捉冗余测试
+
+(
+(
+22:19
+22:19
+
+) How the factory self-improves from failed runs
+) 工厂如何从失败运行中自我改进
+
+(
+(
+26:03
+26:03
+
+) Quick recap
+) 快速回顾
+
+(
+(
+28:33
+28:33
+
+) Building a cost-quality Pareto chart for model selection
+) 构建成本-质量帕累托图辅助模型选择
+
+(
+(
+31:35
+31:35
+
+) How Zach uses AI for non-technical CEO work
+) Zach如何将AI用于非技术性CEO工作
+
+(
+(
+32:10
+32:10
+
+) Figma MCP demo
+) Figma MCP演示
+
+(
+(
+35:43
+35:43
+
+) Granola MCP demo
+) Granola MCP演示
+
+(
+(
+36:41
+36:41
+
+) GOG CLI demo
+) GOG CLI演示
+
+(
+(
+38:20
+38:20
+
+) Thinking in parallel tasks instead of sequential ones
+) 从串行思维转向并行任务处理
+
+(
+(
+40:42
+40:42
+
+) Zach’s prompting strategy for factory tasks
+) Zach的工厂任务提示策略
+
+(
+(
+44:48
+44:48
+
+) Where to find Zach
+) Zach的联络方式
+
+Tools referenced:
+提及工具：
+
+• Warp (AI terminal and software factories):
+• Warp（AI终端与软件工厂）:
+
+https://warp.dev
+https://warp.dev
+
+• Warp Factories:
+• Warp工厂:
+
+https://warp.dev/factories
+https://warp.dev/factories
+
+• Linear (project and issue tracking):
+• Linear（项目与问题追踪）:
+
+https://linear.app
+https://linear.app
+
+• GitHub (version control and PR management):
+• GitHub（版本控制与PR管理）:
+
+https://github.com
+https://github.com
+
+• Slack (team communication and factory input layer):
+• Slack（团队沟通与工厂输入层）:
+
+https://slack.com
+https://slack.com
+
+• Sentry (crash reporting and automated issue triggers):
+• Sentry（崩溃报告与自动化问题触发）:
+
+https://sentry.io
+https://sentry.io
+
+• Figma (design, used via Figma MCP):
+• Figma（设计工具，通过Figma MCP使用）:
+
+https://figma.com
+https://figma.com
+
+• Granola (AI meeting notes and MCP integration):
+• Granola（AI会议记录与MCP集成）:
+
+https://granola.so
+https://granola.so
+
+• Grok Bot (fast inference, cost/quality trade-off):
+• Grok Bot（快速推理与成本/质量权衡）:
+
+https://x.ai/bot/guides/grok-bot-101
+https://x.ai/bot/guides/grok-bot-101
+
+Where to find
+联络方式：
+
+Zach:
+Zach：
+
+X:
+X：
+
+https://x.com/ZachLloydTweets
+https://x.com/ZachLloydTweets
+
+Where to find Claire:
+Claire联络方式：
+
+ChatPRD:
+ChatPRD：
+
+https://www.chatprd.ai/
+https://www.chatprd.ai/
+
+Website:
+个人网站：
+
+https://clairevo.com/
+https://clairevo.com/
+
+LinkedIn:
+LinkedIn：
+
+https://www.linkedin.com/in/clairevo/
+https://www.linkedin.com/in/clairevo/
+
+X:
+X：
+
+https://x.com/clairevo
+https://x.com/clairevo
+
+Production and marketing by
+制作与营销：
+
+https://penname.co/
+https://penname.co/
+
+. For inquiries about sponsoring the podcast, email jordan@penname.co.
+。播客赞助请联系jordan@penname.co

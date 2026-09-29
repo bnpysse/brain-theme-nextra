@@ -1,0 +1,75 @@
+---
+title: "The GitHub wiki is an anti-pattern_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The GitHub wiki is an anti-pattern  
+GitHub维基是一种反模式  
+
+【文章正文】：  
+The GitHub wiki is an anti-pattern  
+GitHub维基是一种反模式  
+
+The “should I use the wiki or a docs folder on GitHub?” discussion comes up every 6 months or so, and following Shawn Wang’s three strikes rule I thought it was about time I wrote something down about it.  
+"该用GitHub维基还是docs文件夹？"这个问题每隔半年就会被讨论一次。遵循Shawn Wang的三振出局法则，我认为是时候写下我的观点了。  
+
+The initial version of this post opened with “You can use the wiki or a docs folder for your GitHub project, both are valid choices” but as I wrote more, I realised that there is a single reason to use a wiki, and many more reasons not to use the wiki. So many in fact, that I consider using the wiki on GitHub is an anti-pattern.  
+本文初稿开头写道"你可以为GitHub项目选择维基或docs文件夹，两者都是有效选择"，但随着写作深入，我发现使用维基的理由只有一个，而不使用维基的理由却有很多。事实上理由如此充分，以至于我认为使用GitHub维基是一种反模式。  
+
+Let’s start with the benefits of using a wiki:  
+首先看看使用维基的优点：  
+
+- You can get to the wiki contents in a single click from anywhere in the repo  
+- 在仓库任意位置点击一次即可访问维基内容  
+
+- There is no 2.  
+- 没有第二条  
+
+Really, the only benefit that I’ve been able to find to using the wiki is that it’s always there.  
+说真的，我能找到使用维基的唯一好处就是它始终存在。  
+
+How about the reasons not to use the wiki?  
+那么不使用维基的理由呢？  
+
+- Documentation is versioned alongside your code when using the /docs folder. If you need to use an old version, the docs are easy to find  
+- 使用/docs文件夹时文档与代码同步版本控制。如需使用旧版本，文档易于查找  
+
+- The documentation isn’t available locally when someone clones your repo (you can clone the wiki separately, but this is a hidden feature)  
+- 克隆仓库时文档不会本地化（虽然可以单独克隆维基，但这是隐藏功能）  
+
+- Documentation edits get the same treatment as code. They get a full peer review through the pull request process  
+- 文档修改享受与代码同等待遇。通过PR流程获得完整同行评审  
+
+- You can use GitHub Actions to lint your docs using tools such as Vale  
+- 可以使用GitHub Actions配合Vale等工具检查文档规范  
+
+- People can work with tooling that they already know (e.g. vscode with spellcheck)  
+- 人们可以使用熟悉的工具（如带拼写检查的vscode）  
+
+- Wikis provide limited branding opportunities. They all look pretty much the same  
+- 维基的品牌展示机会有限。所有维基页面看起来都差不多  
+
+- The wiki doesn’t support image uploads, so you have to put images somewhere else anyway  
+- 维基不支持图片上传，因此你终究得把图片放在别处  
+
+Now that you’re sold on the idea of keeping docs alongside your code, how do you make it easy for people to view them?  
+既然你已经接受文档与代码共存的观点，如何让人们方便查阅呢？  
+
+- Add your docs to your repository in the /docs folder. Do not use thegh-pages branch as this prevents docs being versioned alongside code  
+- 将文档添加到仓库的/docs文件夹。不要使用gh-pages分支，这会阻碍文档与代码同步版本控制  
+
+- Set up a GitHub pages build to publish the docs  
+- 设置GitHub Pages构建发布文档  
+  - If you’re just getting started, I recommend using the just-the-docs theme and letting GitHub build and publish your docs  
+  - 如果是新手，推荐使用just-the-docs主题，让GitHub构建发布文档  
+  - If you prefer to build your own workflow (e.g. using Hugo), you can use this GitHub Action to publish the docs  
+  - 如果喜欢自定义工作流（如使用Hugo），可用这个GitHub Action发布文档  
+
+- Add a single wiki page directing people to the hosted documentation  
+- 添加一个维基页面引导用户访问托管文档  
+
+Using the /docs folder is the highest effort-to-reward ratio option whilst you’re building out a new product. At some point your docs will outgrow a single folder, and then all bets are off. You’ll want a separate repo with its own build process, pull request review guidelines and a whole host of other things. At that point people are already used to working with docs in a repository, and the migration from /docs to its own repo should be seamless for your contributors.  
+构建新产品时，使用/docs文件夹是投入产出比最高的选择。当文档规模超出单个文件夹容量时，情况就完全不同了。你会需要独立仓库及其构建流程、PR审查规范等一系列配套。届时人们已习惯在仓库中处理文档，从/docs迁移到独立仓库对贡献者来说应该是无缝的。  
+
+Whether you agree or disagree, I’d love to hear your thoughts on Twitter  
+无论赞同与否，欢迎在Twitter分享你的观点

@@ -1,0 +1,56 @@
+---
+title: "datasette-auth-github 1.0_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：datasette-auth-github 1.0
+【文章标题】：datasette-auth-github 1.0 版本发布
+
+【文章正文】：
+Release:
+发布说明：
+
+datasette-auth-github 1.0
+datasette-auth-github 1.0 版本
+
+I run this GitHub login plugin on the
+我在以下演示站点运行这个GitHub登录插件：
+
+agent.datasette.io
+agent.datasette.io
+
+demo site and I noticed that my authenticated sessions weren't lasting very long. It turned out that the plugin was setting cookies without a
+发现认证会话持续时间非常短。原因是插件设置的cookies缺少
+
+Max-Age
+Max-Age（有效期）
+
+parameter, so they were expiring at the end of a browser session (which in Mobile Safari seems to happen pretty often, independently of how you are using the app.)
+参数，导致cookies在浏览器会话结束时失效（在Mobile Safari中这种情况尤为常见，且与应用程序使用方式无关）。
+
+I fixed that in
+我在
+
+#80
+第80号提交
+
+and, since this plugin has been around for quite a while and is tested against both Datasette 0.65.x and Datasette 1.0ax, I decided to bump it up to a 1.0 release. I'm trying to get better at promoting stable plugins to 1.0.
+中修复了这个问题。鉴于该插件已稳定运行较长时间，并兼容Datasette 0.65.x和1.0ax版本，我决定将其升级为1.0正式版。我正在努力将稳定的插件及时升级到1.0版本。
+
+Tags:
+标签：
+
+github
+GitHub
+
+,
+,
+
+plugins
+插件
+
+,
+,
+
+datasette
+Datasette

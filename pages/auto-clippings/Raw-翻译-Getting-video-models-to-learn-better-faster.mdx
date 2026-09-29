@@ -1,0 +1,101 @@
+---
+title: "Getting video models to learn better, faster_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Getting video models to learn better, faster
+
+【文章标题】：让视频模型学得更好、更快
+
+【文章正文】：
+Image and video models have gotten a lot better over the last few years, even though the internals of these models haven't changed much since Stable Diffusion 3. In our experience, most of the gains are directly attributable to 3 flavors of data improvements:
+
+【文章正文】：过去几年里，图像和视频模型取得了长足的进步，尽管自Stable Diffusion 3以来，这些模型的内部架构并没有太大变化。根据我们的经验，大部分提升直接归功于三种数据改进方法：
+
+- Data Filtering & Rebalancing: Remove noisy data and resample your data strategically so your model learns more effectively
+
+- 数据过滤与重平衡：剔除噪声数据，并战略性地对数据进行重采样，从而使模型学习更高效
+
+- Data Annotation: Gather better annotations like richer captions, bounding boxes, and font details so that it's easier for your model to disambiguate visual concepts
+
+- 数据标注：收集更优质的标注，如更丰富的描述文本、边界框和字体细节，以便模型更轻松地消除视觉概念的歧义
+
+- Synthetic Data Generation: Finetune an ensemble of existing generative models to create training data for which there is little-to-no naturally occurring data (e.g. image editing / reference-conditioning for Nano-Banana style models)
+
+- 合成数据生成：微调现有生成模型的集成，以生成那些几乎没有或完全没有自然存在数据的训练数据（例如，针对Nano-Banana风格模型的图像编辑/参考条件生成）
+
+A couple of years ago, the prevailing wisdom across all generative models (be it text, image, audio) was to aggregate as much data as humanly possible for pre-training. Luckily, the field has gotten a lot smarter about this. If you throw a bunch of low-quality data (e.g. heavily compressed JPEGs) into pre-training, your model is going to waste a significant amount of its capacity learning how to mimic this slice of data. If you filter your dataset well, your model will have a lot easier time learning what you want it to learn.
+
+几年前，所有生成式模型（无论是文本、图像还是音频）领域的普遍共识是，在预训练阶段尽可能多地汇聚数据。幸运的是，如今该领域在这方面已经明智了许多。如果你把一堆低质量数据（例如高度压缩的JPEG图像）扔进预训练中，你的模型将会浪费大量能力去学习如何模仿这部分数据。如果你能很好地过滤数据集，模型就能更轻松地学习你期望它掌握的内容。
+
+We know this sounds obvious, but it's a lot harder to do in practice.
+
+我们知道这听起来像是废话，但在实践中却难得多。
+
+Today we're going to walk you through how our approach to data filtering has evolved since 2024. And, hopefully we'll save you from a couple of headaches if you end up training your own generative models down the line.
+
+今天，我们将带您了解自2024年以来我们的数据过滤方法是如何演进的。希望如果您未来打算训练自己的生成式模型，这些经验能帮您省去不少麻烦。
+
+[2024] Filtering on a budget — Traditional CV on CPUs
+
+[2024] 低成本过滤——基于CPU的传统计算机视觉
+
+On the first go around, we decided to push our raw dataset through old-school computer vision algorithms. This way we could get away with a cluster of cheap CPU instances instead of an unholy number of GPUs running a multimodal LLM.
+
+在第一次尝试时，我们决定用老派的计算机视觉算法来处理原始数据集。这样一来，我们只需使用一组廉价的CPU实例，而不必动用多得吓人的GPU来运行多模态大语言模型。
+
+Scene detection
+
+场景检测
+
+We need to filter down tens of billions of images and videos to create our pre-training dataset. Images don't really require any specific pre-processing, but raw videos do.
+
+我们需要从数百亿张图像和视频中筛选出预训练数据集。图像通常不需要任何特定的预处理，但原始视频则需要。
+
+Next time you watch a television show or movie, track how often the camera cuts. If you're watching something made in the last twenty years, more likely than not you'll see a cut every 5 seconds. When to cut and how to cut is an authorial decision, not something a generative video model should do arbitrarily. So, we need to slice n' dice our videos on shot boundaries into video clips before we can filter them down.
+
+下次你看电视节目或电影时，留意一下镜头切换的频率。如果你看的是过去二十年里制作的作品，大概率每5秒就会看到一个切换镜头。何时切换以及如何切换是创作者的决定，而不是生成式视频模型应该随意做的事情。因此，在进一步过滤之前，我们需要在镜头边界处将视频切割成一个个视频片段。
+
+With our cheapskate CPU-only agenda, we picked up PySceneDetect. At a high level it maintains a rolling window of K-frames and if the K+1 frame has significantly different image statistics, it categorizes the frame as a cut. There's no underlying machine learning model. It runs really fast but struggles with common transitions like dissolves, fades, and jitter cuts (which low key is a huge issue).
+
+本着只使用CPU的抠门原则，我们选择了PySceneDetect。从宏观上看，它维护一个K帧的滑动窗口，如果第K+1帧的图像统计特征与前K帧有显著差异，它就将该帧归类为切换点。其底层没有机器学习模型。它运行速度极快，但在处理叠化、淡入淡出和抖动切换等常见转场时表现吃力（这其实是个大问题）。
+
+Getting to know your data
+
+了解你的数据
+
+Whenever you get new data, you should spend a few days reviewing random samples, listing what you'd like to keep and what you'd like to throw out. Ideally, you take the time to draft an ontology of categories within "good" and "bad" and track the relative sizes of these categories.
+
+每当你获得新数据时，都应该花几天时间审查随机样本，列出你想保留和想丢弃的内容。理想情况下，你要花时间草拟一份“好”与“坏”类别的本体，并跟踪这些类别的相对规模。
+
+At some point during the data filtering process, your engineer brain will take over, and you'll spend way too much time tuning the knobs of your heuristics (or LLMs), chasing that "perfect" decision boundary. These notes are going to save you from yourself down the line. They'll give you the facts you'll need to talk yourself out of trying "one more idea", when the answer is clearly "no".
+
+在数据过滤过程中的某个节点，你的工程师思维会占据上风，你会花过多时间去微调启发式规则（或大语言模型）的参数，盲目追求那个“完美”的决策边界。这些笔记将在未来帮你避免钻牛角尖。当答案明显是“不行”时，它们能为你提供事实依据，让你打消再尝试“最后一个想法”的念头。
+
+Plus, understanding the shape of the data distribution will really help with dataset rebalancing. Certain categories are overrepresented in the natural distribution of all videos. We need to subsample and suppress this signal, otherwise it will dominate training and our model will struggle to learn the long-tail of people/places/things/actions that we need in order to generate anything.
+
+此外，了解数据分布的形态对数据集重平衡大有裨益。在某些类别中，所有视频的自然分布存在过度代表的情况。我们需要对这些信号进行欠采样和抑制，否则它们将主导训练过程，导致我们的模型难以学习生成长尾人物/地点/事物/动作，而这些正是生成任何内容所必需的。
+
+Sieving out the un-captionable
+
+筛除无法添加描述的内容
+
+Generative video models are primarily limited by what we can describe correctly and consistently in words. Text provides a pretty good scaffold to understand the visual world, but it's by no means the correct conditioning mechanism for all aspects of video generation. Details like camera trajectories in space-time and the nuances of an actor's performance are simply indescribable in natural language.
+
+生成式视频模型主要受限于我们能用文字准确、一致描述的内容。文本为理解视觉世界提供了一个相当不错的框架，但它绝不是视频生成所有方面的正确条件机制。诸如时空中的相机轨迹和演员表演的细微差别等细节，根本无法用自然语言来描述。
+
+For now, we need to filter out clips where the primary "thing" that makes the video clip interesting is un-captionable. Without a crystal clear text description, it's just noise to our text-to-video model.
+
+目前，我们需要过滤掉那些使视频片段变得有趣的主要“事物”无法用文字描述的片段。如果没有清晰明确的文本描述，这些内容对我们的文本到视频模型来说就只是噪声。
+
+Text-heavy
+
+文本密集型内容
+
+For example, we want to filter out text-heavy videos. It's still hard for LLMs to caption motion graphics that are constantly changing on screen. We don't want to waste capacity in our 2B parameter model learning motion graphics when it could be allocated instead to learning actions.
+
+例如，我们希望过滤掉文本密集的视频。对于屏幕上不断变化的动态图形，大语言模型目前仍难以生成准确的描述。我们不希望将20亿参数模型的能力浪费在学习动态图形上，而应将其分配给学习动作。
+
+To do
+
+待办事项

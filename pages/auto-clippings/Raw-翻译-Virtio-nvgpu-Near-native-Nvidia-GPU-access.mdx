@@ -1,0 +1,121 @@
+---
+title: "Virtio-nvgpu Near-native Nvidia GPU access inside a KVM gues_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Virtio-nvgpu：KVM虚拟机内近乎原生的NVIDIA GPU访问
+
+【文章正文】：
+Near-native NVIDIA GPU access inside a KVM guest. A guest renders within 2% of the machine it is running on, and costs the same CPU.
+KVM虚拟机内近乎原生的NVIDIA GPU访问。虚拟机渲染性能与宿主机差距在2%以内，且CPU消耗相同。
+
+virtio-nvgpu forwards NVIDIA kernel driver ioctls between a Linux guest and
+the host at the driver ABI level, bypassing API-level translation entirely.
+virtio-nvgpu在Linux虚拟机与宿主机之间直接转发NVIDIA内核驱动ioctl调用，完全绕过API层转换，直达驱动ABI层面。
+
+The guest runs NVIDIA's own user-mode drivers, unmodified — the same libraries,
+the same Vulkan and NVENC, talking to the same card.
+虚拟机运行未经修改的NVIDIA官方用户态驱动——相同的库文件、相同的Vulkan和NVENC编码器，直接与同一张显卡通信。
+
+The target is headless streaming: a compositor inside the VM renders, composites and encodes frames on the GPU, then sends compressed video out. The VM has no monitor, and the host keeps the card.
+目标实现无头流式传输：虚拟机内的合成器通过GPU渲染、合成并编码帧画面，然后输出压缩视频流。虚拟机无需显示器，宿主机保留显卡控制权。
+
+It works, and it has been measured. A Wayland client presents inside a
+guest, the capture layer encodes on the game's own device, and the H.264 comes
+out the other side — 618 frames that ffmpeg decodes without an error.
+实际测试表明：当Wayland客户端在虚拟机内运行时，捕获层在游戏设备上完成编码，输出的H.264视频流经ffmpeg解码618帧无差错。
+
+Measured on an RTX 3060 (driver 595.99.02), guest against the same host, bare metal, with an identical headless Vulkan load:
+在RTX 3060显卡（驱动595.99.02）上测试，对比虚拟机和宿主机原生环境运行相同无头Vulkan负载：
+
+| what the host takes for one frame | guest frame time |  | 
+|---|---|---|
+| 每帧宿主机耗时 | 虚拟机帧时间差异 | 备注 |
+| 39 ms | −0.4% | faster than bare metal, within noise | 
+| 39毫秒 | -0.4% | 比原生环境更快，处于误差范围内 |
+| 9.9 ms | −0.7% |  | 
+| 9.9毫秒 | -0.7% |  |
+| 2.0 ms | +1.7% |  | 
+| 2.0毫秒 | +1.7% |  |
+| 0.5 ms | +7.1% | a wake costs ~0.02 ms, and the frame is half of one | 
+| 0.5毫秒 | +7.1% | 唤醒耗时约0.02毫秒，而帧时间仅为其一半 |
+| 0.05 ms | +40.8% |  | 
+| 0.05毫秒 | +40.8% |  |
+
+Above about 2 ms a frame — which is every frame a game draws — a guest is within 2% of bare metal. Below that, the cost of waiting for the GPU starts to show against a frame that barely exists.
+对于2毫秒以上的帧（游戏绘制的典型帧），虚拟机性能与原生环境差距在2%以内。低于此阈值时，GPU等待成本开始显现。
+
+CPU is the other half of it, because a shared GPU is only worth sharing if the guests are cheap. Unpaced at ~100 fps for 12 s, one guest:
+CPU消耗是另一关键指标，因为只有虚拟机开销足够低时共享GPU才有价值。单个虚拟机以约100FPS无限制运行12秒：
+
+|  | CPU used | 
+|---|---|
+|  | CPU耗时 |
+| host, bare metal | 0.40 s | 
+| 宿主机原生环境 | 0.40秒 |
+| guest | 0.37 s | 
+| 虚拟机 | 0.37秒 |
+
+A guest costs what the host costs. Nothing is spent on forwarding in a render loop, because nothing is forwarded: NVIDIA's user-mode driver submits through memory it has mapped, and that memory is the host's. Over 813,691 frames the backend served 13,792 messages — one crossing per 59 frames, nearly all of it device setup.
+虚拟机CPU消耗与宿主机相当。渲染循环中无需转发开销，因为NVIDIA用户态驱动直接通过映射的内存提交指令——这些内存本就属于宿主机。在813,691帧渲染中，后端仅处理13,792条消息（平均每59帧1次通信），且绝大多数为设备初始化。
+
+Full method, raw runs and the things these numbers do not support:
+完整测试方法、原始数据及未验证场景见：
+BENCHMARKS.md.
+
+Four guests on one RTX 3060, the same load in each: 25.84, 26.49, 25.57, 25.79 fps — 103.7 together, against 102.9 for a single guest — with p50 frame times of 39.165, 39.164, 39.168 and 39.165 ms. The total does not move as guests are added, and the split is even to four decimal places.
+单张RTX 3060运行四个虚拟机（相同负载）：帧率分别为25.84、26.49、25.57、25.79 FPS（合计103.7，而单虚拟机为102.9），p50帧时间39.165、39.164、39.168和39.165毫秒。增加虚拟机数量时总性能不变，且分配精度达小数点后四位。
+
+All four render correctly at the same time, and four of them encode H.264 at once, each paced at exactly 60 Hz, with no NVENC session limit reached.
+四个虚拟机可同时正确渲染，且均能以精确60Hz频率进行H.264编码，未触及NVENC会话限制。
+
+Four is what was run, not a limit found.
+当前测试四个虚拟机仅为实际运行数量，而非技术上限。
+
+Measured on 595.99.02; an A2000 on 615.71.09 renders but is not benchmarked. ABI profiles shipped: 535.129.03, 580.178.04, 595.71.05, matched by range, with anything older than the first refused. Details below.
+测试基于驱动595.99.02；A2000显卡（驱动615.71.09）可运行但未基准测试。支持的ABI版本：535.129.03、580.178.04、595.71.05（按范围匹配），拒绝更旧版本。具体如下：
+
+- a guest enumerates the card — nvidia-smi reports real power and memory, and
+thedeviceUUID is the host's
+- 虚拟机可枚举显卡——nvidia-smi显示真实功耗和显存，deviceUUID与宿主机一致
+- Vulkan renders: vulkaninfo exits 0, offscreen draws are pixel-correct
+- Vulkan渲染：vulkaninfo返回0，离屏绘制像素级精确
+- a Wayland client presents through a compositor in the guest
+- Wayland客户端通过虚拟机内合成器呈现
+- NVENC through Vulkan Video, encoding on the client's own device
+- 通过Vulkan Video使用NVENC，在客户端设备上编码
+- imported buffers are the host's memory, mapped through a shared window
+- 导入的缓冲区属于宿主机内存，通过共享窗口映射
+- more than four guests, or guests doing anything heavier than vkcube at 720p. Four share the card evenly; eight has not been tried.
+- 超过四个虚拟机，或运行比720p vkcube更重负载的情况。四个虚拟机可均分显卡资源，八虚拟机尚未测试
+- two cards, two driver versions. RTX 3060 / 595.99.02 is where the numbers come from; an RTX A2000 / 615.71.09 has rendered but is not benchmarked.
+- 两张显卡两个驱动版本：数据来自RTX 3060/595.99.02，RTX A2000/615.71.09可运行但未基准测试
+- CUDA is forwarded but untested beyond enumeration; the jailer, per-version driver shares and the multi-tenant envelope are unbuilt.
+- CUDA已支持转发但仅测试枚举功能；隔离器、多版本驱动共享及多租户封装尚未实现
+
+Four components, three license zones. The split is deliberate: the guest half must be GPL to touch kernel symbols, the host half should be permissive so that other people can build on it, and the definitions both halves share must be includable from both.
+四个组件，三种许可证。设计考量：虚拟机端需GPL以访问内核符号，宿主机端采用宽松许可便于二次开发，共享定义文件需双方兼容。
+
+| directory | license | what it is | 
+|---|---|---|
+| 目录 | 许可证 | 说明 |
+| driver/ | GPL-2.0 | Guest kernel module. Registers /dev/nvidia* , forwards ioctl and mmap over the virtqueue. Deliberately not ABI-aware. | 
+| driver/ | GPL-2.0 | 虚拟机内核模块。注册/dev/nvidia*设备，通过virtqueue转发ioctl和mmap调用。刻意不感知ABI。 |
+| device/ | Apache-2.0 | The virtio device, as a Rust crate with no VMM in its dependency list. Every VMM concern is a trait. | 
+| device/ | Apache-2.0 | virtio设备（Rust库），不依赖特定VMM。所有VMM相关功能通过trait实现。 |
+| isolate/ | Apache-2.0 | A design note, not code yet. The sandboxed per-guest helper that will hold the real device FDs. Today the backend holds them itself, in the VMM's own process. | 
+| isolate/ | Apache-2.0 | 设计文档（尚未实现）。沙盒化单虚拟机助手，将持有真实设备文件描述符。当前后端在VMM进程中自行管理。 |
+| gen/ | — | Generated ABI tables. Checked in and reproducible. | 
+| gen/ | — | 生成的ABI表。已提交且可复现。 |
+| protocol/ | BSD-3-Clause OR GPL-2.0+ | Wire format and ABI definitions shared by both halves. Dual licensed so the GPL driver and the Apache crate can include the same headers. | 
+| protocol/ | BSD-3-Clause或GPL-2.0+ | 两端共享的传输格式和ABI定义。双重许可使GPL驱动和Apache库可包含相同头文件。 |
+
+The layout follows chromeos/virtio-media,
+which solves the same problem — one repository holding a GPL guest driver beside
+a permissively licensed, VMM-agnostic device crate.
+项目结构参考chromeos/virtio-media方案，解决相同问题——在同一个代码库中同时包含GPL虚拟机驱动和许可证宽松、VMM无关的设备库。
+
+device/ depends on no virtual machine monitor. A VMM adopts the device by
+implementing a small set of traits — descriptor chains as Read/Write, an
+event queue, guest memory mapping, host me
+device/不依赖任何虚拟机监控器。VMM通过实现少量trait来适配设备——将描述符链作为Read/Write、事件队列、客户机内存映射、宿主机...

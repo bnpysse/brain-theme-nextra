@@ -1,0 +1,127 @@
+---
+title: "Show HN Lossless-memory – a personal AI memory that never su_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: Lossless-memory – 一个永不总结的个人AI记忆系统
+
+【文章正文】：
+Lossless long-term memory for a personal AI — never summarize, keep every line, and put a timestamp on everything.
+为个人AI打造的无损长期记忆——永不总结、保留每句对话、为一切标注时间戳。
+
+Most long-term memory systems for AI do one of two things: they summarize conversations into compact notes, or they embed them and retrieve "similar" chunks. Both lose the thing that matters most to a person who talks to the same AI every day: what was actually said, and when.
+多数AI长期记忆系统采取两种方案：将对话总结为精简笔记，或将其嵌入向量后检索"相似"片段。这两种方式都丢失了每日与AI交谈者最在乎的东西：真实的对话内容和发生时间。
+
+This project takes the opposite position.
+本项目反其道而行之。
+
+- Keep every line. Raw conversation logs are stored in full. Nothing is summarized, ever. Summaries are a map; the log is the territory.
+- 保留每句对话。原始对话日志完整存储，永不总结。总结如同地图，日志才是疆域本身。
+
+- Timestamp everything. Every record — utterance, action, document chunk — carries a timestamp, and every index is built on top of that time axis. We call this the Temporal Backbone.
+- 为一切标注时间戳。每项记录（发言、动作、文档块）都携带时间戳，所有索引都基于这个时间轴构建。我们称之为"时间脊梁"。
+
+- Search by time first, words second. "Yesterday evening, about the budget" is a valid query. The time phrase narrows the range; the words rank within it. Results come back in chronological order, unsummarized, with their timestamps.
+- 时间优先，关键词次之。"昨晚关于预算的讨论"是有效查询。时间短语划定范围，关键词在范围内排序。结果按时间顺序返回，未经总结，附带原始时间戳。
+
+- Inject "where we are" every turn. A small index called LLL tells the model which topic the conversation is in right now, so identity and context survive context-window compaction and session boundaries.
+- 每轮对话注入"当前进度"。名为LLL的小型索引告知模型当前对话主题，使身份和语境能跨越上下文窗口压缩和会话边界。
+
+The design lineage goes back to December 2025 — the first ancestor of this system (a memory-inheritance tool for an earlier AI) ran that month, and a predecessor system carried the same ideas in daily use from January 2026. This implementation has been running every day since July 2026 for a single user, as the memory of one AI assistant, with raw logs reaching back to June 2026. It is small, boring, and it works. The failures along the way are documented too — see docs/lessons.md.
+该设计可追溯至2025年12月——系统的首个原型（早期AI的记忆继承工具）于当月运行，前身系统自2026年1月起在日常使用中贯彻相同理念。本实现自2026年7月起为单一用户每日运行，作为某AI助理的记忆系统，原始日志回溯至2026年6月。它小巧、平淡，但有效。过程中的失败也有记录——参见docs/lessons.md。
+
+It is:
+其特性包括：
+
+- A local, file-based long-term memory layer: JSONL logs + SQLite (FTS5 for exact search, sqlite-vec for semantic search).
+- 基于文件的本地长期记忆层：JSONL日志+SQLite（FTS5精确搜索，sqlite-vec语义搜索）
+
+- A single query entry point that understands time expressions and restricts the search range before ranking.
+- 支持时间表达式的统一查询入口，在排序前先限定时间范围
+
+- A "current position" index (LLL) designed to be injected into the model's context on every turn.
+- 每轮对话注入模型上下文的"当前位置"索引（LLL）
+
+- Designed for one person and one AI, running on one machine. No server, no cloud.
+- 为单用户单AI设计，单机运行。无需服务器或云端
+
+It is not:
+非目标包括：
+
+- A vector database wrapper. Semantic search is the last resort here, not the first.
+- 向量数据库封装。语义搜索是最后手段而非首选
+
+- A summarizer. There is deliberately no summarization step anywhere in the pipeline.
+- 总结工具。整个流程中刻意避免任何总结步骤
+
+- A benchmark-driven research system. There are no published benchmarks. What is here is a working implementation and its operating record.
+- 基准驱动的研究系统。无公开基准测试，只有可运行实现及其操作记录
+
+Every conversation turn is converted into a fixed seven-field record and appended to a per-day JSONL file:
+每轮对话转为固定七字段记录，追加到每日JSONL文件：
+
+ts        ISO-8601 timestamp (UTC)
+ts        ISO-8601时间戳（UTC）
+
+actor     who spoke (configurable names)
+actor     发言者（可配置名称）
+
+role      user | assistant | system
+role      用户 | 助理 | 系统
+
+type      text | action | meta
+type      文本 | 动作 | 元数据
+
+text      the content, verbatim
+text      原始内容
+
+model     model identifier, if known
+model     模型标识符（如已知）
+
+session   session identifier
+session   会话标识符
+
+The raw logs are the source of truth. Every index below can be deleted and rebuilt from them. Nothing else is required to survive.
+原始日志是唯一真相源。所有索引都可删除并据此重建，无需其他生存依赖。
+
+Time is not metadata here; it is the primary axis.
+时间在此非元数据，而是主维度。
+
+- The exact-match index (SQLite FTS5, bigram tokenized for Japanese and English) stores the timestamp alongside every row.
+- 精确匹配索引（SQLite FTS5，日英双语二元分词）每行都存储时间戳
+
+- The query parser understands time phrases — relative ones such as yesterday, last week, 3 days ago (currently Japanese only), and absolute dates such as 2026-07-19 (any language) — and converts them into a range before any ranking happens.
+- 查询解析器理解时间短语（相对表述如"昨天/上周/3天前"目前仅支持日语，绝对日期如"2026-07-19"支持所有语言），在排序前转为时间范围
+
+- If a time phrase is present, results are restricted to that range and returned in chronological order. Semantic search is only used when the exact index returns too little inside the range, and the fallback is reported honestly in the output header.
+- 存在时间短语时，结果限定在该范围并按时间排序。仅当精确索引结果过少时才启用语义搜索，且回退机制会在输出头如实标注
+
+The practical effect: the AI can answer "what did we decide last Tuesday night?" with the actual lines from last Tuesday night, in order, rather than a paraphrase of something similar from three weeks ago.
+实际效果：AI能用上周二晚上的原始对话（按序排列）回答"我们上周二晚上决定了什么？"，而非转述三周前的相似内容。
+
+LLL is a tiny index of topic markers: short, timestamped lines that record when the conversation moved to a new subject. It is injected into the model's context every turn.
+LLL是微型话题标记索引：记录对话主题切换时刻的简短时间戳条目，每轮对话注入模型上下文。
+
+Two rules make it work:
+两条规则保障其有效性：
+
+- The AI reads it; the human writes it. Priority colors and completion marks are set by the person, not by the model. The model never edits its own sense of "what matters."
+- AI只读，人类编写。优先级颜色和完成标记由人设定，模型永不修改自身的"重点认知"
+
+- It is cheap enough to inject every turn (well under a second to render), so the model always knows what the current thread is, even immediately after its context window was compacted.
+- 注入成本极低（渲染远少于一秒），即使上下文窗口刚压缩，模型也能立即知晓当前话题
+
+LLL is what lets a long-running assistant come back from a compaction and continue the conversation instead of starting over.
+LLL使得长期运行的助理能在上下文压缩后延续对话而非重启。
+
+ raw conversation logs (JSONL, per day)  ← source of truth, never summarized
+原始对话日志（每日JSONL）← 真相源，永不总结
+            │
+            ▼
+   ingest ──► 7-field records
+            │
+            ├──► index_exact   SQLite FTS5 + timestamps   (words + time)
+            ├──► index_vector  sqlite-vec embeddings       (meaning, last resort)
+            └──► state_index   LLL topic markers           (where are we now)
+                        │
+                        ▼

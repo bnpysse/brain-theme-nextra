@@ -1,0 +1,39 @@
+---
+title: "_NVIDIA_Model-Optimizer_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+&lt;div align="center"&gt;
+
+![Banner image](docs/source/assets/model-optimizer-banner.png)
+
+# NVIDIA 模型优化器
+
+[![文档](https://img.shields.io/badge/文档-最新版-brightgreen.svg?style=flat)](https://nvidia.github.io/Model-Optimizer)
+[![版本](https://img.shields.io/pypi/v/nvidia-modelopt?label=发行版)](https://pypi.org/project/nvidia-modelopt/)
+[![许可证](https://img.shields.io/badge/许可证-Apache%202.0-blue)](./LICENSE)
+
+[文档](https://nvidia.github.io/Model-Optimizer) |
+[路线图](https://github.com/NVIDIA/Model-Optimizer/issues/1699) |
+[公告博客](https://nvidia.github.io/Model-Optimizer/#announcements)
+
+&lt;/div&gt;
+
+______________________________________________________________________
+
+**NVIDIA模型优化器**（简称**Model Optimizer**或**ModelOpt**）是一个集成最先进模型优化[技术](#techniques)的库，包含量化、剪枝、神经架构搜索(NAS)、知识蒸馏、推测解码和稀疏化等加速模型的技术。
+
+**[输入]** 当前支持[Hugging Face](https://huggingface.co/)、[PyTorch](https://github.com/pytorch/pytorch)或[ONNX](https://github.com/onnx/onnx)格式的模型输入。
+
+**[优化]** 提供Python API让用户轻松组合上述优化技术，并导出优化后的量化检查点。该工具已与[NVIDIA Megatron-Bridge](https://github.com/NVIDIA-NeMo/Megatron-Bridge)、[Megatron-LM](https://github.com/NVIDIA/Megatron-LM)和[Hugging Face Accelerate](https://github.com/huggingface/accelerate)集成，支持训练所需的推理优化技术。
+
+**[部署导出]** 作为NVIDIA AI软件生态的无缝组成部分，生成的量化检查点可直接用于[SGLang](https://github.com/sgl-project/sglang)、[TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/quantization)、[TensorRT](https://github.com/NVIDIA/TensorRT)或[vLLM](https://github.com/vllm-project/vllm)等推理框架。统一的Hugging Face导出API现已支持transformers和diffusers模型。
+
+## 最新动态
+
+- [2026/09/16] [**Qwen3.6-35B-A3B模型的W4A4 NVFP4+QAD端到端教程**](./examples/megatron_bridge/tutorials/Qwen3.6-35B-A3B)：通过NVFP4 W4A4 PTQ与量化感知蒸馏，相比BF16实现1.30倍vLLM吞吐量提升，检查点体积缩小3.1倍，同时弥补W4A4精度损失
+- [2026/09/09] [博客：利用局部Hessian权重缩放提升NVFP4精度](https://nvidia.github.io/Model-Optimizer/announcements/local-hessian.html)
+- [2026/08/24] [博客：AutoQuantize：快速自动混合精度分配方案](https://nvidia.github.io/Model-Optimizer/announcements/autoquantize.html)
+- [2026/08/17] [博客：使用NVIDIA模型优化器开发Nemotron 3.5 Lightning NVFP4+QAD方案](https://developer.nvidia.com/blog/developing-nemotron-3-5-lightning-nvfp4-with-qad-using-nvidia-model-optimizer/)：了解量化感知蒸馏如何在激进NVFP4量化下恢复精度，同时减小模型体积并提升吞吐量
+- [2026/06/26] [博客：使用NVIDIA模型优化器创建Nemotron 3 Ultra NVFP4检查点](https://developer.nvidia.com/blog/creating-the-nvidia-nemotron-3-ultra-nvfp4-checkpoint-with-nvidia-model-optimizer/)：我们如何将550B参数的Nemotron 3 Ultra量化至NVFP4——在解码密集型推理中实现比GLM-5.1 754B FP4高5.9倍的吞吐量，同时保持BF16精度。[Hugging Face上的NVFP4检查点](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4)
+- [2026/05/27] [**Nemotron-3-Nano-30B-A3B端到端优化教程**](./examples/megatron_bridge/tutorials/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16)：剪枝+两阶段蒸馏+FP8量化实现2.6倍vLLM吞吐量提升和2.6倍内存压缩

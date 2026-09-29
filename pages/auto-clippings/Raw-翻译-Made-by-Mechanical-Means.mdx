@@ -1,0 +1,75 @@
+---
+title: "Made by Mechanical Means_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Made by Mechanical Means  
+【机械手段制造】  
+
+【文章正文】：  
+Made by mechanical means  
+机械手段制造  
+
+One notable difference between working on Claude and the other productivity tools I've touched is that feature requests are surprisingly not the #1 discussion topic. Instead, people want to know how I'm using Claude, how they should be using Claude, and whether there are any cool magic spells I can share.  
+与其他生产力工具不同，Claude最显著的差异在于功能需求并非首要讨论话题。人们更关注我如何使用Claude、他们该如何使用，以及我能否分享些神奇技巧。  
+
+In this post, I'd like to walk you through the process of redesigning my homepage without touching or running code or even using traditional Claude Code. No PRs were made, nor did I open GitHub. If you haven't seen the full end result, maybe check it out first.  
+本文将带你见证我如何在不碰代码、不用传统Claude Code的情况下完成主页改版。没有提交PR，甚至没打开GitHub。若未见过最终效果，建议先睹为快。  
+
+Roughly 60 threads worked, often in parallel, on my increasingly outrageous requests, which included creating a CGI parody of a Werner Herzog documentary in Blender and synthesizing soundtracks from scratch. Despite the complexity, a considerable amount of that orchestration happened on my phone rather than my computer - in fact, I didn't have to run any code locally. Claude worked entirely in the cloud.  
+约60个线程并行处理我愈发天马行空的需求：用Blender制作Werner Herzog纪录片CGI parody，从零合成原声带等。尽管复杂度高，大部分协调工作都在手机上完成——实际上我未在本地运行任何代码，Claude完全云端运作。  
+
+I'm writing this in late September 2026, and I suspect my workflow will look very different in six months. Even compared with the beginning of the year, I'm noticing a stark difference - my work is now a lot more creative, less bounded by the technologies I've mastered, and so much more visual and emotional. I've used Opus 5.5 for all the work.  
+本文写于2026年9月下旬，预计半年后工作流将截然不同。相较年初，变化已非常显著——工作更具创意，不再受限于已掌握技术，视觉与情感表达更丰富。全程使用Opus 5.5完成。  
+
+I started by creating a new Claude Project. Projects are becoming a layer that spans Chat, Cowork, and Code; you can think of them as sitting above domain-specific concepts. You talk to one Claude with the ability to spin off additional sessions, share files and memory between them, and supervise the entire fleet of Claudes to achieve goals.  
+首先创建Claude项目。项目正成为横跨Chat、Cowork和Code的层级，可视为高于领域特定概念的存在。你与一个Claude对话，它能派生更多会话，共享文件与记忆，并统筹所有Claude实现目标。  
+
+Earlier this year, I would have joked that I get a lot done by telling a bunch of Claudes to do work. Now, I've put one Claude in charge of each of my projects, and in turn, that Claude knows how to manage tasks, investigations, and threads. We're talking more about goals and less about how to achieve them.  
+年初我可能还会开玩笑说靠指挥一群Claude干活。如今每个项目由专属Claude负责，它懂得管理任务、调研和线程。我们更多讨论目标而非实现路径。  
+
+Every thread gets its own computer in the cloud, where it installs whatever it needs (Blender, FFmpeg, Playwright), checks its work with screenshots from a headless browser, and publishes a private preview page for me to click through. All threads share one folder of files and one memory. Claude is smart enough to write down decisions I made in memory and makes sure newly started threads follow them without me having to repeat myself.  
+每个线程拥有云端专属计算机，自主安装所需工具（Blender/FFmpeg/Playwright等），通过无头浏览器截图自查，并发布私有预览页供我浏览。所有线程共享文件目录和记忆库。Claude会智能记录决策，确保新线程自动遵循，无需我重复说明。  
+
+Brainstorming a new direction  
+头脑风暴新方向  
+
+I started the way I'd start with a design team: by dumping a bunch of inspiration on the table. Those included 90s rave posters, movies I liked, ads that spoke to me, photos I keep coming back to, even just concepts I like.  
+我沿用设计团队合作模式：先倾倒大量灵感素材。包括90年代锐舞海报、喜爱电影、触动我的广告、常回味的照片，甚至单纯喜欢的概念。  
+
+Ten threads explored those directions in parallel with very little guidance. One came up with portfolio directions for somebody who really likes camping in national parks; another imagined what an 80s Ghost in the Shell website would look like. Both, it turned out, felt a little overdone to me. I wanted to make something new, not just clone something already out there.  
+10个线程在极少指导下并行探索方向。一个为国家公园露营爱好者设计作品集方案，另一个构想80年代《攻壳机动队》网站。但两者都略显陈腐——我想创造新事物而非复制现有。  
+
+Whenever I liked a direction, I asked Claude to double down, get creative, and give me five more variations of the same direction.  
+每当中意某个方向，就让Claude深入挖掘，给出该方向的五种创意变体。  
+
+While most directions used HTML, Three.js, and other libraries to achieve some of my hopes and dreams, I pretty quickly found myself pushing Claude to use Blender. Claude doesn't click around Blender's interface, instead writing code and using Blender as a Python module. When I briefly considered turning my website into a cozy campsite, Claude promptly modeled one.  
+多数方案使用HTML/Three.js等库实现设想，但我很快转向要求Claude使用Blender。Claude不操作界面，而是编写代码将Blender作为Python模块调用。当我考虑将网站变成露营场景时，它迅速完成建模。  
+
+Given the direction of vintage technology I liked (Game Boys, record players, Walkmans, etc) and the task of coming up with a creative portfolio gallery, Claude eventually suggested VHS tapes.  
+基于我钟爱的复古科技（Game Boy/唱片机/Walkman等）和创意作品集需求，Claude最终提议采用VHS磁带方案。  
+
+Together, we combined Claude's idea (VHS tapes) with my own vision for the website, which included an interactive version of the kind of room a 90s German movie would give a journalist.  
+我们将Claude的VHS磁带创意与我设想结合——打造90年代德国电影中记者会出现的互动式房间。  
+
+Claude's second draft, including my directions about the room setup and encouragement to use Blender creatively, was shockingly good. The version I shipped took roughly 60 iterations, but the second draft, which arrived 39 minutes after my first brief, is already recognizably the room you see today.  
+包含房间布置指导和Blender创意要求的第二版惊艳无比。最终版本迭代约60次，但首轮简报39分钟后提交的二稿已具备现今房间的雏形。  
+
+Early on, Claude decided that the code should be modular, allowing threads to work on elements of the room in parallel. As an example, each tape is its own file that paints onto a 2D canvas.  
+早期Claude就决定采用模块化代码，允许多线程并行处理房间元素。例如每盘磁带都是独立文件，渲染在2D画布上。  
+
+&#101;xport default &#123;  
+  id: "notion",  
+  title: "Notion",  
+  years: "2023–2025",  
+  mount(&#123; canvas, ctx, width, height, audio &#125;) &#123;  
+    return &#123;  
+      frame(t, dt) &#123; /* draw one frame */ &#125;,  
+      input(event) &#123; /* play, stop, next, prev, click */ &#125;,  
+      stop() &#123; /* clean up */ &#125;,  
+    &#125;;  
+  &#125;,  
+&#125;;  
+
+After every iteration step, Claude published a new version of an artifact, a private web page where I could see the current version, both on my computer and my phone. I constantly asked for a few options, clicked through them, sent b...  
+每次迭代后，Claude都会发布新版成果——私有网页，方便我在电脑和手机上查看。我持续要求提供多个选项，点击浏览后发送批...

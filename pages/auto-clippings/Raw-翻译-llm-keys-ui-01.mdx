@@ -1,0 +1,66 @@
+---
+title: "llm-keys-ui 0.1_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：llm-keys-ui 0.1
+
+【文章正文】：
+Release:
+
+llm-keys-ui 0.1
+
+发布版本：
+llm-keys-ui 0.1
+
+This plugin solves a very specific problem.
+
+这个插件解决了一个非常具体的问题。
+
+I've started using
+Codex Remote
+to run coding agents on various machines while controlling them from my phone.
+
+我开始使用
+Codex Remote
+在多台机器上运行编码代理程序，同时通过手机控制它们。
+
+Sometimes I use those machines to hack on LLM projects, and occasionally that means I need to configure an API key.
+
+有时我会用这些机器来开发LLM项目，偶尔这意味着我需要配置API密钥。
+
+I don't like pasting API keys into agent sessions, so I wanted a way to get those keys onto a machine without pasting them into the ChatGPT app directly.
+
+我不喜欢将API密钥粘贴到代理会话中，所以我想要一种无需直接粘贴到ChatGPT应用就能将这些密钥传输到机器上的方法。
+
+With this plugin, I can tell Codex to run:
+uvx --with llm-keys-ui llm keys-ui --all
+
+通过这个插件，我可以让Codex运行：
+uvx --with llm-keys-ui llm keys-ui --all
+
+Then have it tell me the URL - including local network or Tailscale device IPs - for an interface to save additional API keys.
+
+然后让它告诉我URL（包括本地网络或Tailscale设备IP）以访问保存额外API密钥的界面。
+
+Then later it can use a command like
+llm keys get anthropic
+as part of a shell command when it needs to use a key.
+
+之后当需要使用密钥时，它可以执行类似
+llm keys get anthropic
+这样的命令作为shell命令的一部分。
+
+Tags:
+llm
+,
+coding-agents
+,
+codex
+
+标签：
+llm
+、
+coding-agents
+、
+codex

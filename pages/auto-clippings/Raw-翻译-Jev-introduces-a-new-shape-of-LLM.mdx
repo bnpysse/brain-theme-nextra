@@ -1,0 +1,83 @@
+---
+title: "Jev introduces a new shape of LLM_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Jev introduces a new shape of LLM
+【文章标题】：Jev推出新型大语言模型架构
+
+【文章正文】：
+Jev introduces a new shape of LLM—System One, aka Decision Models
+Jev推出新型大语言模型架构——System One（又称决策模型）
+21st September 2026
+2026年9月21日
+Last week TypeSafe AI unveiled Jev, their first example of a new category of model that they are calling "System One models" (I'm with Maggie Appleton, I think "decision models" is a better name for these). Jev is an interesting variant on the usual LLM format: it still accepts text inputs, but instead of text output it returns floating point numbers corresponding to categories, yes/no questions, ratings, and associated confidence scores.
+上周TypeSafe AI发布了Jev，这是他们称为"System One模型"的新型模型首例（我赞同Maggie Appleton的观点，认为"决策模型"是更贴切的命名）。Jev对传统LLM格式进行了有趣改良：仍接收文本输入，但输出改为对应分类的浮点数、是非题评分、等级评定及相关置信度分数。
+
+TypeSafe describe Jev like this:
+TypeSafe这样描述Jev：
+Think of Jev as a frontier-intelligence function call: unstructured state in, typed probabilistic decisions out.
+将Jev视作前沿智能函数调用：输入非结构化状态，输出类型化概率决策。
+
+It's also very fast, and really cheap. Regular LLMs are priced in terms of input and output tokens, with output generally charged at significantly higher rates. Jev charges only for input—output is free—and the input price of their first model is $0.042 per million tokens—cheaper even than OpenAI's GPT-5 Nano ($0.05/million).
+它速度极快且成本低廉。常规LLM按输入输出token计费，输出费用通常更高。Jev仅对输入收费（输出免费），首款模型输入价格仅每百万token 0.042美元——比OpenAI的GPT-5 Nano（0.05美元/百万）更便宜。
+
+Jev lets you ask questions about text or semi-structured data. You compose a "state" object containing a string, array of strings, or set of name-value pairs—this might describe an article, or a customer, or any other kind of record. You then send that to their API with one or more questions, and get a reply back for each.
+Jev支持对文本或半结构化数据提问。用户构建包含字符串、字符串数组或键值对的"状态"对象（可描述文章/客户等任何记录），通过API发送该对象及若干问题后，每个问题都会获得回复。
+
+You can ask three kinds of questions:
+可提问三种类型：
+- Yes/No questions, which Jev calls "Noul" questions—their CEO confirmed on Hacker News that this is short for Bernoulli, from the Bernoulli distribution. You pose a statement and get back a floating point number between 0 and 1 for how confident the model is that the statement is true.
+- 是非题（Jev称为"Noul"问题，CEO在Hacker News证实取自伯努利分布缩写）。提出陈述后获得0-1间的浮点数表示模型置信度。
+- Choice questions, where the model picks one from a set of provided options—actually a confidence score plus a probability distribution across all of the options.
+- 选择题：模型从给定选项中选择（实际输出置信度分数及各选项概率分布）。
+- Score questions, where you provide sequence of numeric levels with descriptions and it provides a floating point score somewhere along that range.
+- 评分题：提供带描述的数字等级序列，模型返回该范围内的浮点分数。
+
+The Jev API can accept a single document ("state") and as many questions as you can cram into the context window. Questions are evaluated in parallel, so sending many questions should take a similar time to sending just one.
+Jev API可接受单个文档（"状态"）及上下文窗口允许的任意数量问题。问题并行评估，因此批量提问与单个提问耗时相近。
+
+I think the decision model framing is useful for understanding where to use Jev. It's great for anything that can be expressed as a classification task—think spam detection, suggesting labels, prioritization and ranking.
+决策模型框架有助于理解Jev适用场景。它擅长处理可归类为分类任务的场景——如垃圾邮件检测、标签建议、优先级排序等。
+
+I've also been experimenting with it for search reranking, where you fetch 100 likely matches using an inexpensive algorithm like BM25, then have Jev score those 100 candidates for relevance against the original query.
+我尝试将其用于搜索重排序：先用BM25等廉价算法获取100个候选结果，再让Jev根据原始查询对候选结果进行相关性评分。
+
+Black boxes are back in fashion
+黑盒模型再度流行
+Something I've found a little uncomfortable about Jev is how it very much represents a regression even further towards black box machine learning systems.
+Jev令人稍感不安的是它更彻底地回归了机器学习黑盒系统。
+
+LLMs are black boxes already—you can ask them to justify their decisions, but you can't guarantee that what they say is useful or accurate.
+LLM本就是黑盒——虽可要求其解释决策，但无法保证解释的实用性或准确性。
+
+Jev doesn't even give you that: put in all the text you want, the only thing you're going to get back is a floating point number. If Jev marks something as spam, which content signals tipped it off?
+Jev连这点都不提供：输入任意文本后，仅能获得浮点数输出。若Jev将内容标记为垃圾信息，究竟是哪些特征触发了判定？
+
+This also means that concerns about bias should be front and center. I really hope nobody uses Jev to rank job applicants—that floating point number could conceal all manner of unseen bias baked into the models, and experimentally picking that bias apart is going to be a tricky business.
+这意味着偏见问题必须高度重视。衷心希望无人用Jev筛选求职者——那个浮点数可能隐藏模型内置的各种隐性偏见，而实验性拆解这些偏见将异常困难。
+
+(I tried one experiment where I had Jev score every city in the San Francisco Bay Area on a yes/no answer to whether they were a "Good city?"—it rated Cupertino top and East Palo Alto bottom. Huh.)
+（我做过实验：让Jev对旧金山湾区各城市回答"是否好城市"并评分——库比蒂诺最高，东帕罗奥图最低。嗯。）
+
+In practice, this all means that evals and structured experiments are even more important than they are for regular LLM projects. Thankfully, Jev is so cheap that running hundreds or even thousands of experimental prompts through it costs just a few cents.
+实践中，这意味着评估和结构化实验比常规LLM项目更重要。所幸Jev成本极低，运行数百甚至数千次实验提示仅需几美分。
+
+Unconventional uses for Jev
+Jev非常规用法
+It's been really fun watching the wider community come up with potential use-cases for Jev over the past few days. Here are some creative ones that caught my eye:
+过去几天观察社区挖掘Jev潜在用例非常有趣，以下是我注意到的一些创意应用：
+
+- jevchat by Kyle Pena turns Jev into a (terrible) chat model. "At every step it asks Jev one question: Given the user's question and the reply written so far, which symbol comes next?". ericpruitt on Hacker News: "It's the digital equivalent of Morty speaking with the death crystal".
+- Kyle Pena的jevchat将Jev改造成（糟糕的）聊天模型。"每步都向Jev提问：根据用户问题和当前回复，下一个符号是什么？"Hacker News用户ericpruitt评论："简直是Morty与死亡水晶对话的数字版"。
+
+- jev-leftpad by Fatih Kadir Akın implements left-pad with the prompt "How many spaces are needed before value to reach targetLength?" and a choice query allowing options from "0 spaces are needed" to "10 spaces are needed".
+- Fatih Kadir Akın的jev-leftpad用提示"value前需要多少空格才能达到targetLength？"实现左填充，选择查询选项从"需0空格"到"需10空格"。
+
+- jev-2048 by Andy Gayton uses Jev to play the 2048 sliding puzzle game.
+- Andy Gayton的jev-2048用Jev玩2048滑块游戏。
+
+Open weight recreations
+开源复现
+There's also been a flurry of projects attempting to create a model like Jev using on top of open weight models. Kev is one interesting example, using Qwen 3.5 to produce 0.8B, 4B, and 9B models. Here's the accompanying Hacker News thread, where som
+近期涌现众多基于开源模型构建类Jev模型的尝试。Kev是典型案例，使用Qwen 3.5训练出0.8B/4B/9B参数模型。相关Hacker News讨论帖中...（原文截断）

@@ -1,0 +1,173 @@
+---
+title: "One Month Without AI_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：One Month Without AI  
+【远离人工智能的一个月】  
+
+【文章正文】：  
+Several months ago, I decided that AI contributions were no longer welcome in a FOSS project I am building and maintaining - LibreWeddingPlanner.  
+几个月前，我决定在我构建和维护的自由开源软件项目LibreWeddingPlanner中不再接受AI生成的内容。  
+
+It’s not that it got a lot of contributions with AI — actually all contributions I’ve had are translations and feature requests — but I wanted to avoid future drama and have a position against AI.  
+并非因为AI贡献很多——实际上我收到的全是人工翻译和功能请求——而是我想避免未来可能出现的争议，并明确反对AI的立场。  
+
+However, although I was not using AI for my FOSS contributions, I kept using it at work.  
+然而，尽管我在开源贡献中不用AI，工作中却仍在依赖它。  
+
+In my workplace, as well as in many of my developer friends’, using AI to work is very, very common.  
+在我的工作环境和许多开发者朋友中，使用AI辅助工作极其普遍。  
+
+Not without a degree of shame, let me tell you about this experience, and how it was turning me dumber, lazy, and a worse developer.  
+带着些许羞愧，让我分享这段经历——它如何让我变得迟钝、懒惰，甚至更糟糕。  
+
+**The sweet start**  
+**甜蜜的开端**  
+
+A friend told me hey, you should try it, you feel so powerful.  
+朋友曾怂恿我："试试看，你会感觉无所不能。"  
+
+Once you start using it, you cannot stop. The tasks that took you days, you can have them in hours.  
+一旦开始就停不下来。过去耗时数日的任务，如今几小时就能完成。  
+
+No, we’re not talking about cocaine, although to some degree I consider the use of AI, an addiction.  
+这并非在描述可卡因，但某种程度上，AI使用确实像一种瘾。  
+
+I started enabling the enhanced autocomplete in vscode (or was it enabled automatically?), and downloading and using other code generation models just followed.  
+起初我只是启用了VSCode的增强自动补全（或是它自动启用的？），随后便一发不可收拾地下载各类代码生成模型。  
+
+When I was a child, I remember my parents saying be careful with the bad guys who offer candies at the school gate, those are not candies, those are drugs.  
+童年时父母警告过："小心校门口递糖果的坏人，那是毒品。"  
+
+When I was in my twenties, I’d pull their leg saying yeah, it’s like they give away the drugs now hum?  
+二十多岁时我还调侃："现在毒贩都免费派送了吧？"  
+
+Well, in my thirties I think they may very well do.  
+而三十岁的我发现，他们确实这么干了。  
+
+Once you start using AI coding agents, things spiral out of control very quickly.  
+一旦开始使用AI编程助手，事态会迅速失控。  
+
+At the start, you ask AI to implement a function for you, or to write tests for a certain piece of code.  
+最初你只是让AI实现某个函数，或为代码片段编写测试。  
+
+If you’ve been a TDD guy for a long time, you’re inclined to ask it to do the tests for you first, so that you can later write the code.  
+若你长期践行测试驱动开发，会习惯性先让AI写测试，再自己补全代码。  
+
+Except you don’t write the code anymore, you just ask AI to do it, and half of the purpose of TDD (not biasing the tests by how you’ve implemented the code) is gone.  
+直到某天你连代码都交给AI，TDD半数意义（避免实现方式影响测试设计）就此湮灭。  
+
+But you feel you go so fast that you start not caring.  
+但飞速进展的快感让你不再在意这些。  
+
+One day, I saw the agent was co-signing the commits I was making, and I ran to opt-out from that setting.  
+当发现AI助手在共同签署我的代码提交时，我慌忙关闭了这个设置。  
+
+Like, I wanted to pretend the code was my own. Gosh.  
+天啊，我竟想假装代码出自本人之手。  
+
+**Losing control**  
+**失控**  
+
+It would not be so bad if things had stopped there, but that’s not how most human brains work.  
+若到此为止倒也不坏，但人类大脑从不满足。  
+
+If you like something and you can have 2x, you’ll have it.  
+尝到甜头后，你会索求双倍。  
+
+I started pasting the whole Jira description of a ticket, and let AI implement it for me. Yay!! So powerful!!  
+后来我直接把Jira任务描述粘贴给AI让它实现。太棒了！！这力量感！！  
+
+Working on a codebase that was relatively new to me, I started losing control over which changes were really needed to fulfill the task.  
+面对陌生代码库时，我逐渐无法判断哪些修改真正必要。  
+
+I thought if the AI, which has read every line of code in the project says it’s needed, so be it.  
+既然AI读过每行代码，它说需要改那就改吧。  
+
+Control is an illusion.  
+控制力只是幻觉。  
+
+Other folks I’ve discussed this with agree that they don’t know 100% of what the code they are pushing to production actually does.  
+同行们也承认，他们并不完全清楚自己推送到生产环境的代码究竟做了什么。  
+
+I bet we not even 20%. Fucking scary.  
+恐怕连20%都不到。真他妈可怕。  
+
+But it also didn’t stop there.  
+但这还不是终点。  
+
+When I had a small task, I gave it to the AI, and in ~30 minutes I had a PR.  
+遇到小任务时，交给AI约30分钟就能生成PR。  
+
+What was I doing during those 30 minutes? Changing focus.  
+这半小时我在干嘛？切换注意力。  
+
+Soon I realized I could have not one, but multiple agents working on different tasks simultaneously, in multiple git worktrees.  
+很快我发展到用多个git工作树让多个AI并行处理不同任务。  
+
+Full power! Tokenmaxxing!  
+全力开动！Token榨取！  
+
+I connected the agents to Jira via ACLI (command-line interface) and just asked them “work on this jira ticket in a separate worktree”.  
+通过命令行将AI接入Jira，只需下令"在独立工作树处理这个Jira任务"。  
+
+And it would start working on it. I felt ecstatic.  
+它们即刻开工。我欣喜若狂。  
+
+When the task was not so small, you’d think I was working on it myself right? Hell, no.  
+遇到大任务时，你以为我会亲自动手？见鬼，才不。  
+
+I would of course ask AI to decompose it into smaller tasks, and work on them.  
+当然是让AI拆解成小任务再逐个处理。  
+
+AI would then give me a super convincing PR with a bunch of changes I didn’t quite understand.  
+AI随后提交的PR包含大量我半懂不懂的改动，却极具说服力。  
+
+How on Earth was I going to ask for a code review of those changes?  
+我该如何请同事评审这些代码？  
+
+What would my peers say? What was I going to say when they (more experienced, specially in that codebase) ask me why I did this or that?  
+他们会说什么？当经验更丰富的同事（尤其熟悉代码库的）问我为何如此实现时，我该怎么回答？  
+
+How was I going to admit it was all AI, and I was nothing but an AI shepherd?  
+难道要承认全是AI干的，我只是个放牧AI的牧羊人？  
+
+So I forced myself to understand the code.  
+于是被迫强行理解代码。  
+
+Not that I wanted to understand the architecture of the codebase, I wanted to avoid the humiliation of not knowing what the fuck I was doing.  
+并非真想搞懂代码架构，只是为避免"不知自己在干嘛"的羞辱。  
+
+At some point, I had so many AI agents working, that the focus change was too much for me.  
+某段时间，同时运作的AI助手多到让我难以应对注意力切换。  
+
+There were tasks I could have done in 20 minutes easily, that took 5 minutes of an AI agent, and then 2 days for me to review.  
+有些我20分钟就能轻松完成的任务，AI只需5分钟——但我得花两天评审。  
+
+Because there were so many other things.  
+因为还有其他无数事务。  
+
+And maybe AI and computers are good at context switching, but not me.  
+或许AI擅长上下文切换，但我不行。  
+
+I was exhausted.  
+精疲力尽。  
+
+Because if it was just about approving PRs that are perfectly written, it would be good.  
+若只需批准完美编写的PR倒还好。  
+
+But for each PR I had to look at the code, the tests, the style, give feedback, switch to something else, go back again, push, see if I have any PR comments, if CI passed, wait, now the linter complains.  
+但实际上每份PR都要检查代码、测试、风格，提意见，切换任务，返回修改，推送，查看评审意见，等CI通过，哦不，现在linter又报错了。  
+
+And it takes you 2 days to deliver something that could have been literally 1 hour single-focused.  
+最终耗费两天交付本可一小时专注完成的工作。  
+
+In my personal experience, multiplied AI performance is just an illusion.  
+亲身体验表明，AI的效能倍增只是幻象。  
+
+Multiplied frustration and exhaustion is guaranteed, though.  
+但挫折感与疲惫感倍增却是实打实的。  
+
+I think there was not a  
+（文章未完）

@@ -1,0 +1,59 @@
+---
+title: "Claude Session URL appended to commit messages and PR descri_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Claude Session URL appended to commit messages and PR descriptions by default
+【文章标题】：Claude默认在提交信息和PR描述中添加会话URL
+
+【文章正文】：
+Preflight Checklist
+【正文】：
+预检清单
+
+Problem Statement
+问题陈述
+Every commit message and PR description created by Claude Code automatically includes a session URL at the bottom (e.g. https://claude.ai/code/session_...). There is no opt-in prompt, no warning, and no mention of it during onboarding. Users only discover it after it's already polluting their git history.
+Claude Code创建的每个提交信息和PR描述底部都会自动包含一个会话URL（例如https://claude.ai/code/session_...）。没有选择加入提示，没有警告，在入门引导中也未提及。用户只有在它已经污染了git历史记录后才会发现。
+
+Proposed Solution
+建议解决方案
+Make the session URL attribution opt-in — don't include it unless the user explicitly enables it. A one-time prompt during onboarding ("Would you like to include a link back to this Claude session in commit messages?") would be the ideal UX.
+将会话URL归属设为选择加入——除非用户明确启用，否则不包含它。在入门引导时的一次性提示（"您希望在提交信息中包含返回此Claude会话的链接吗？"）将是最理想的用户体验。
+
+Alternative Solutions
+替代方案
+- 
+Keep it opt-out but make the setting discoverable — show it during first commit with a "Don't add this again" option
+- 
+保留为选择退出但使设置可见——在第一次提交时显示一个"不再添加"选项
+- 
+Remove it entirely and rely only on the existing Co-Authored-By: Claude trailer for attribution
+- 
+完全移除它，仅依赖现有的Co-Authored-By: Claude尾部进行归属
+
+Priority
+优先级
+Medium - Would be very helpful
+中等 - 会非常有帮助
+
+Feature Category
+功能类别
+Other
+其他
+
+Use Case Example
+用例示例
+A developer uses Claude Code to build a feature, commits the work, and opens a PR.
+开发者使用Claude Code构建一个功能，提交工作并打开一个PR。
+Their teammates and open source contributors see https://claude.ai/code/session_... at the bottom of every commit and PR description.
+他们的队友和开源贡献者在每个提交和PR描述的底部看到https://claude.ai/code/session_...。
+It looks unprofessional, clutters history, and the developer had no idea it was being added.
+这看起来不专业，污染了历史记录，而开发者并不知道它被添加了。
+
+Additional Context
+其他背景
+- The attribution.commit: "" setting in .claude/settings.json can suppress it, but it's completely undiscovered
+- .claude/settings.json中的attribution.commit: ""设置可以抑制它，但它完全未被发现
+- A commit-msg git hook can also strip it, but it doesn't always fire reliably in remote/cloud environments
+- 一个commit-msg git钩子也可以删除它，但它在远程/云环境中并不总是可靠触发

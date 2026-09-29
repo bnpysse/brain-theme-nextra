@@ -1,0 +1,323 @@
+---
+title: "The Pulse Bending Spoons  Acquisition Strategy_全翻译"
+tags: ["大咖视点_全文翻译", "The_Pragmatic_Engineer_(顶级软件工程师)"]
+---
+
+【文章标题】：The Pulse: Bending Spoons' Acquisition Strategy
+【文章标题】：脉搏：Bending Spoons的收购策略
+
+【文章正文】：
+
+Bending Spoons has
+
+announced
+
+buying Airtable for $1.285B in cash this week - which is less than the $1.4B in total funding Airtable has raised in the past, and well below the $11B valuation it had during its last fundraise in December 2021.
+
+Bending Spoons 已经
+
+宣布
+
+以 12.85 亿美元现金收购 Airtable——这低于 Airtable 过去融资总额 14 亿美元，也远低于其在 2021 年 12 月最后一次融资时的 110 亿美元估值。
+
+Selling to Bending Spoons is a company admitting defeat, and its inability or unwillingness to turn its business around, and wanting to get the highest possible cash for the business. Because this is what Bending Spoons is excellent at: they pay the highest cash value for a struggling business with a well-known brand, then take over operations, and operate the product with a fraction of the staff. They often let go most or all of the original team as they move over product operations to their in-house engineering team based in Italy and Europe.
+
+出售给 Bending Spoons 等于一家公司承认失败，承认自己无力或不愿扭转业务，并希望为业务获得尽可能高的现金。因为这正是 Bending Spoons 所擅长的：他们为陷入困境但拥有知名品牌的企业支付最高现金价值，然后接管运营，并以极少的员工团队来运营产品。他们通常会解雇大部分或全部原团队，因为产品运营会转移到位于意大利和欧洲的内部工程团队。
+
+Evernote: what happens when a new team takes over a legacy application
+
+Evernote：当新团队接管遗留应用时会发生什么
+
+And having talked with Bending Spoons' engineering team
+
+on the podcast
+
+: they have done impressive engineering work after a takeover, in the past! For example, upon acquiring Evernote, the Bending Spoons engineering team discovered that the note-taking service was running as a Java 11 monolith (!!), with user data sharded across 750
+
+manually
+
+provisioned virtual machines (!!!) on top of Google Cloud - in 2023! At a time when running cloud-native setups (managed databases, microservices) was common knowledge for years.
+
+而且，我曾与 Bending Spoons 的工程团队
+
+在播客中
+
+交流过：他们在接管后确实做了令人印象深刻的工程工作！例如，在收购 Evernote 后，Bending Spoons 的工程团队发现，这项笔记服务竟然运行在 Java 11 单体应用（!!）上，用户数据分片在 750 个
+
+手动
+
+配置的虚拟机上（!!!），并且托管在 Google Cloud 上——而这发生在 2023 年！当时，运行云原生架构（托管数据库、微服务）已经是多年的常识了。
+
+Evernote's existing setup was weirdly inefficient and operationally very heavy, with manual interventions needed to keep the service running. Needless to say, performance was poor because some VMs were regularly overloaded. Also, oncall was brutal!
+
+Evernote 的现有架构出奇地低效，运维负担极重，需要人工干预才能保持服务运行。不用说，性能也很差，因为一些虚拟机经常过载。而且，值班（oncall）也非常辛苦！
+
+The Bending Spoons engineering team rationalized the architecture:
+
+- Migrated user data sharded from the 750 manually provisioned VMs to a managed database
+
+- Split up the Java 11 monolith to microservices
+
+- Did all of the above without disrupting user experience
+
+- Improved performance of the backend by a wide margin
+
+- Reduced oncall load after finishing the migration to a cloud-native setup vs the previous manual provisioning setup
+
+- Did all the above in about 6 months.
+
+Bending Spoons 的工程团队对架构进行了合理化改造：
+
+- 将原本分片在 750 个手动配置虚拟机上的用户数据迁移到托管数据库
+
+- 将 Java 11 单体应用拆分为微服务
+
+- 在未影响用户体验的前提下完成了上述所有工作
+
+- 大幅提升了后端性能
+
+- 在完成向云原生架构的迁移后，与之前手动配置的方式相比，减少了值班（oncall）负担
+
+- 大约在 6 个月内完成了上述所有工作
+
+It's a fair question: would long would have the original Evernote engineering team have taken to do the same changes that made the service more reliable, more performant, and cheaper to operate? I would guess it would have taken them many years: in fact, if they did not make this change until 2023, who knows if they would have ever made these pretty rational changes? And so the "shock therapy" of Bending Spoons starting with a blank page, and a new team taking over operating the full product, with a laser focus on efficiency: well, this approach can be pretty efficient, as the Evernote example shows.
+
+这是一个合理的问题：原本的 Evernote 工程团队需要多长时间才能做出这些让服务更可靠、性能更高、运营成本更低的改变？我猜测他们可能需要很多年：事实上，如果他们直到 2023 年都没有做出这一改变，谁知道他们是否还会做出这些相当合理的改变？因此，Bending Spoons 的“休克疗法”从一张白纸开始，新团队接管整个产品运营，并高度聚焦效率：嗯，这种方法可以非常高效，正如 Evernote 的例子所展示的。
+
+You can listen to the full podcast episode I did with the Bending Spoons team:
+
+Twisting the rules of building software: Bending Spoons
+
+.
+
+你可以收听我与 Bending Spoons 团队合作的完整播客节目：
+
+打破软件开发规则：Bending Spoons
+
+.
+
+Price increases and the existing team let go: the two most typical complaints
+
+价格上涨和原有团队被解雇：两个最典型的抱怨
+
+Bending Spoons taking over an existing product has two major criticisms:
+
+Price increases.
+
+Evernote was the biggest example of price hikes: after Bending Spoons took over operating the product - and improving its performance - price hikes followed. Being Spoons kept investing in Evernote, adding new features (including AI ones), but customers paying $37/year for the Pro plan pre-2023 were charged $250/year
+
+by 2026
+
+. My take is that this is what happens when a product starts working a business maximizing profits: lots of customers will leave for competition, while others will pay more, valuing a more reliable service that gets more investment than before. Bending Spoons
+
+keeps improving
+
+Evernote since the acquisition, alongside the price increases. Clearly, the company is optimizing for maximizing revenue, not maximizing the number of customers, though.
+
+Layoffs
+
+. Bending Spoons let go most/all of the Evernote team in the US, briging operations in-house. This is part of the "usual" playbook of Bending Spoons: they buy products to operate them as efficiently as possible. The re-architecting example shows benefits of starting from scratch, and not needing to deal with internal resistance for changes that result in more efficient operations. Knowing that with a Bending Spoons acquisition, letting go of all the existing team is on the table is something that comes with selling to this company.
+
+Bending Spoons 接管现有产品主要受到两大批评：
+
+价格上涨。
+
+Evernote 是涨价最典型的例子：在 Bending Spoons 接管产品运营并提升其性能之后，涨价随之而来。Bending Spoons 持续投资 Evernote，添加新功能（包括 AI 功能），但 2023 年前支付每年 37 美元 Pro 计划的客户，到 2026 年却被收取每年 250 美元。我的看法是，当一个产品开始以企业利润最大化为目标时，就会发生这种情况：许多客户会转向竞争对手，而另一些客户则会支付更多费用，因为他们更看重比以往更可靠、获得更多投资的服务。Bending Spoons 自收购以来在涨价的同时
+
+持续改进
+
+Evernote。不过，很明显，公司优化的是收入最大化，而不是客户数量最大化。
+
+裁员。
+
+Bending Spoons 解雇了美国 Evernote 团队的大部分/全部成员，将运营转移到内部。这是 Bending Spoons“惯用”打法的一部分：他们购买产品是为了尽可能高效地运营。重新架构的例子表明，从零开始是有好处的，并且不需要应对内部对更高效运营变革的抵制。知道收购 Bending Spoons 意味着解雇所有现有团队是出售给这家公司的必然结果。
+
+With this, let me share my analysis of a past Bending Spoons acquisition: when they bought SteamYard from Hopin.
+
+在此，让我分享我对 Bending Spoons 过去一次收购的分析：当他们从 Hopin 手中收购 SteamYard 时。
+
+Below is the now un-paywalled excerpt from
+
+The Pulse #89: The end of Hopin
+
+,
+
+from April 2024, sent to paid The Pragmatic Engineer subscribers. If you'd like to get analysis like this in your inbox, weekly,
+
+subscribe to The Pragmatic Engineer
+
+.
+
+以下是来自《The Pulse #89：Hopin 的终结》的摘录，该文章现已解除付费墙，发布于 2024 年 4 月，发送给付费订阅者《The Pragmatic Engineer》。如果您希望每周在收件箱中收到此类分析，
+
+订阅 The Pragmatic Engineer
+
+.
+
+The End of Hopin
+
+Hopin 的终结
+
+It’s been a real rollercoaster ride for the virtual events provider:
+
+2019
+
+: founded with a mission to provide a solution for hosting virtual events.
+
+2020-2021:
+
+raised a total of $1B in funding during a seed round in Feb 2020, Series A in June, Series B in November, and then a Series C in March-June 2021. The company was valued at $7.75B and acquired several startups, the biggest of which was video streaming platform, StreamYard, for $250M.
+
+2022
+
+: layoffs in
+
+February
+
+, when Hopin was one of the early scaleups to do large cuts (12%), followed by more
+
+in July
+
+(29%), and
+
+November
+
+(17%)
+
+2023
+
+: Hopin
+
+sold
+
+its core event tech business to RingCentral for $50M. We
+
+analyzed this at the time.
+
+2024:
+
+Last month, Hopin’s UK entity entered liquidation. Insiders told me it was merely a restructure, with Hopin UK employees joining StreamYard. Basically, Hopin became the business it had purchased back in 2021.
+
+This week, Italian mobile app developer Bending Spoons
+
+acquired
+
+the remains of Hopin, which is basically the StreamYard product. All Hopin staff will soon be laid off.
+
+对于这家虚拟活动提供商来说，这真是一段跌宕起伏的旅程：
+
+2019
+
+：成立，使命是为举办虚拟活动提供解决方案。
+
+2020-2021
+
+：在 2020 年 2 月的种子轮、6 月的 A 轮、11 月的 B 轮以及 2021 年 3 月至 6 月的 C 轮中，共筹集了 10 亿美元资金。该公司估值达 77.5 亿美元，并收购了几家初创公司，其中最大的是以 2.5 亿美元收购的视频流媒体平台 StreamYard。
+
+2022
+
+：2 月份裁员，当时 Hopin 是早期进行大规模裁员（12%）的规模扩大公司之一，随后在 7 月（29%）和 11 月（17%）又进行了更多裁员。
+
+2023
+
+：Hopin 以 5000 万美元将其核心活动技术业务出售给 RingCentral。我们当时对此进行了分析。
+
+2024
+
+：上个月，Hopin 的英国实体进入清算。内部人士告诉我，这只是一次重组，Hopin 英国员工加入了 StreamYard。基本上，Hopin 变成了它在 2021 年收购的那家公司。
+
+本周，意大利移动应用开发商 Bending Spoons 收购了 Hopin 的剩余部分，基本上就是 StreamYard 产品。所有 Hopin 员工很快将被解雇。
+
+The Bending Spoons acquisitions strategy
+
+Bending Spoons 的收购策略
+
+Bending Spoons has previously acquired apps such as the notes app Evernote in 2022, events app Meetup in 2024, and video-recording app FiLMiC in 2022. Their approach to these acquisitions was the same each time:
+
+- Take over operating the product
+
+- Fire most staff immediately
+
+- Have some remaining staff hand over services, then fire them as well
+
+- Operate the app with a much smaller team and raise prices.
+
+- Profit!
+
+Bending Spoons 此前收购过一些应用，例如 2022 年的笔记应用 Evernote、2024 年的活动应用 Meetup，以及 2022 年的视频录制应用 FiLMiC。他们每次收购的方式都相同：
+
+- 接管产品运营
+
+- 立即解雇大部分员工
+
+- 让一些剩余员工交接服务，然后也解雇他们
+
+- 用更小的团队运营应用并提高价格。
+
+- 盈利！
+
+I talked with current Hopin employees for details on what will happen next, and if this model will be followed again. Unfortunately, it will.
+
+All existing Hopin staff will be let go, eventually.
+
+This affects around 80 staff working on StreamYard, and another 70 on other Hopin products, Streamable (video sharing) and Superwave (community platform.) I’m told severance packages are generous enough, at around 3-4 months’ salary.
+
+As with other Bending Spoon acquisitions, a subset of the team was requested by Bending Spoons to help with the transition (and then be let go afterwards.) Understandably, morale is very low for this reason, and the certainty that everyone will lose their jobs.
+
+我与 Hopin 现任员工讨论了接下来会发生什么，以及这种模式是否会被再次采用。不幸的是，会的。
+
+所有现有 Hopin 员工最终都会被解雇。
+
+这将影响大约 80 名从事 StreamYard 工作的员工，以及另外 70 名从事 Hopin 其他产品（Streamable（视频分享）和 Superwave（社区平台））的员工。我听说遣散费相当优厚，大约相当于 3-4 个月的工资。
+
+与其他 Bending Spoons 收购一样，Bending Spoons 要求一部分团队协助过渡（之后也会被解雇）。可以理解的是，由于这个原因，再加上每个人都会失业的确定性，士气非常低落。
+
+How much did StreamYard sell for?
+
+StreamYard 卖了多少？
+
+From talking with current employees, I gather that circa 95% of Hopin’s revenue comes from StreamYard, and not more than 5% from Streamable and Superwave. So the only valuable asset that this acquisition priced in is StreamYard.
+
+In 2021, Hopin paid $250M for it. Back then, the video streaming service generated about $40M in annual revenue. This has risen to about $70M per year and keeps growing in an increasingly crowded market. StreamYard was at around break even and can be easily made profitable, I’m told.
+
+A good question is whether Bending Spoons paid $250M or more for this asset. In 2023, RingCentral paid $50M for the “core” virtual events offering which was making $20M in annual recurring revenue (ARR) at the time, I’ve confirmed with insiders. However, ARR was falling steeply, and was forecast to hit $10-15M within a year. So RingCentral paid a 2.5x multiple for an asset losing revenue.
+
+StreamYard brings in $70M per year, and this is increasing. I’d assume the purchase price would be at least the same 2.5x multiplier, if not more. So there’s a fair chance this sale’s value is close to $200M.
+
+通过与现任员工交谈，我了解到 Hopin 约 95% 的收入来自 StreamYard，来自 Streamable 和 Superwave 的收入不超过 5%。因此，这次收购中唯一有价值的资产就是 StreamYard。
+
+2021 年，Hopin 为此支付了 2.5 亿美元。当时，该视频流媒体服务的年收入约为 4000 万美元。如今这一数字已增长到每年约 7000 万美元，并在日益拥挤的市场中持续增长。我听说 StreamYard 大致处于盈亏平衡点，并且很容易实现盈利。
+
+一个好问题是，Bending Spoons 是否为此资产支付了 2.5 亿美元或更多。2023 年，RingCentral 以 5000 万美元收购了“核心”虚拟活动产品，我向内部人士证实，该产品当时的年经常性收入（ARR）为 2000 万美元。然而，ARR 正在急剧下降，预计一年内将降至 1000 万至 1500 万美元。因此，RingCentral 为一项收入下滑的资产支付了 2.5 倍的倍数。
+
+StreamYard 每年带来 7000 万美元收入，而且还在增长。我假设收购价格至少是同样的 2.5 倍，甚至更高。所以这笔交易的价值很可能接近 2 亿美元。
+
+Why did Hopin sell to a buyer which wants to lay off everyone?
+
+为什么 Hopin 要把公司卖给一个想解雇所有人的买家？
+
+I have exclusively learned that StreamYard’s founders actually offered to Hopin’s board of directors to buy the company back, and operate independently, as before. This would’ve been a better outcome for employees, most of whom would surely have kept their jobs. Some of StreamYard’s staff knew of this plan and naturally supported it. The Bending Spoons sale has taken everyone by surprise.
+
+But why would Hopin choose a buyer that is guaranteed to sack existing staff? Well, the board might have had no real choice, due to Hopin having raised
+
+too much
+
+money.
+
+Hopin raised $1B in funding, during which it almost certainly offered board seats to investors including a16z, General Catalyst, Coatue, Northzone, Salesforce Ventures, Tiger Global, Accel, and others. It’s safe to assume investors control the board, and as Hopin will never live up to its $7.75B valuation, the board-level rationale has evidently been to maximize the amount of money clawed back.
+
+Of that $1B, here’s what’s left:
+
+- $50M from selling Hopin’s core business
+
+- Whatever StreamYard sells for
+
+- Residual cash left over from the fundraising
+
+The board serving investors’ interests
+
+had
+
+to shop around for the highest bidder, and minimize losses. I have to assume the decision on whether StreamYard’s founders could buy back their own company came down to whether or not someone else was offering more money for it. Unfortunately for Hopin’s staff (and fortunately for investors,) Bending Spoons probably offered more.
+
+我独家了解到，StreamYard 的创始人实际上曾向 Hopin 董事会提出回购公司，并像以前一样独立运营。这对员工来说会是更好的结果，大多数员工肯定能保住工作。一些

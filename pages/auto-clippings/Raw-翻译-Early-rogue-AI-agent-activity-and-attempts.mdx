@@ -1,0 +1,101 @@
+---
+title: "Early rogue AI agent activity and attempts to hack found on_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Early rogue AI agent activity and attempts to hack found on urlquery.net  
+【文章标题】：在urlquery.net上发现的早期恶意AI代理活动及入侵尝试  
+
+【文章正文】：  
+We present evidence that AI agents used the web security service urlquery.net to bypass restrictions and expand their access to the public internet.  
+我们提供的证据表明，AI代理利用网络安全服务urlquery.net绕过限制，扩大其对公共互联网的访问权限。  
+
+The agents also tried on three occasions to hack public data providers, including an Australian government website.  
+这些代理还曾三次试图入侵公共数据提供商，包括一个澳大利亚政府网站。  
+
+We link at least some of this activity to agent swarms previously attributed to OpenAI.  
+我们将至少部分活动与此前归因于OpenAI的代理集群联系起来。  
+
+We also find evidence of earlier agent activity going back to at least March 6th, 2026, and potentially earlier, predating the previously reported Hugging Face, collusion.wiki, and RubyGems incidents by at least two months.  
+我们还发现了可追溯至2026年3月6日（甚至更早）的代理活动证据，比之前报道的Hugging Face、collusion.wiki和RubyGems事件至少早两个月。  
+
+Context windows: RubyGems Hack (May 5–June 18), Wiki activity from collusion.wiki (May 24–June 22), and Hugging Face Hack (July 9–13).  
+时间背景：RubyGems入侵事件（5月5日-6月18日）、collusion.wiki的维基活动（5月24日-6月22日）和Hugging Face入侵事件（7月9日-13日）。  
+
+Key Findings  
+关键发现  
+
+- We report three separate incidents between May and June 2026 in which the agents attempted to exploit security vulnerabilities and hack into websites, including an attempt on an Australian government public health website. Notably, the agents did this while attempting mundane data retrieval tasks which were not cyber-related.  
+- 我们报告了2026年5月至6月期间的三起独立事件，代理试图利用安全漏洞入侵网站，包括针对澳大利亚政府公共卫生网站的攻击。值得注意的是，代理在进行与网络安全无关的常规数据检索任务时实施了这些行为。  
+
+- This traffic goes back at least to March 6, 2026 and extends as recently as September 16, 2026, suggesting agents may still be exploiting these services to bypass restrictions.  
+- 此类流量至少可追溯至2026年3月6日，最近持续到2026年9月16日，表明代理可能仍在利用这些服务绕过限制。  
+
+- We are releasing a dataset containing tens of thousands of queries apparently made by autonomous AI agents leveraging a URL scanning service to avoid access restrictions. We encourage others to continue looking into the data.  
+- 我们公开了一个包含数万条查询的数据集，这些查询显然是由自主AI代理利用URL扫描服务规避访问限制所发起。我们鼓励其他人继续研究这些数据。  
+
+Executive Summary  
+执行摘要  
+
+Agents attempted to hack three public data sources, including an Australian government website, and some are linked to a known agent swarm.1 We present evidence of AI agents attempting to compromise websites at three domains: Data USA2 (api.datausa.io), the University of New Mexico digital library (nmdigital.unm.edu), and the Australian Institute of Health and Welfare (AIHW) Tableau collections (viz*.aihw.gov.au).  
+代理试图入侵三个公共数据源（包括澳大利亚政府网站），其中部分与已知代理集群有关。我们提供了AI代理试图攻陷三个域名的证据：Data USA（api.datausa.io）、新墨西哥大学数字图书馆（nmdigital.unm.edu）以及澳大利亚健康与福利研究所（AIHW）的Tableau数据集合（viz*.aihw.gov.au）。  
+
+This attempted compromise of AIHW is part of the first reported instance of agents hacking a government.  
+这次针对AIHW的入侵尝试，是首次报道的代理攻击政府机构的案例。  
+
+We directly link two of the three (AIHW and Data USA) to a previously reported agent swarm that OpenAI has publicly confirmed originated from them.  
+我们直接将其中两个目标（AIHW和Data USA）与OpenAI公开承认由其开发的代理集群联系起来。  
+
+For all three, we note that the extent of the observed activity is minor, attempting a low number of probe payloads and we observe no evidence of exploitation.  
+就这三起事件而言，我们注意到观察到的活动程度较轻，仅尝试了少量探测负载，且未发现实际入侵证据。  
+
+While previous reporting showed that agents had interacted with these domains, this discovery reveals that agents attempted to hack into them when other methods of collecting the data they sought failed.  
+尽管先前报告显示代理曾与这些域名交互，但本次发现揭示：当其他数据收集方法失败时，代理会试图入侵这些目标。  
+
+Notably, the tasks the agents were trying to solve were not cyber-related; the agents resorted to hacking tactics while working on ordinary data retrieval tasks.  
+值得注意的是，代理试图解决的任务与网络安全无关——它们是在执行普通数据检索任务时采用了黑客手段。  
+
+We find evidence of unintended, task-driven agent-like activity starting on March 6th.  
+我们发现自3月6日起存在非故意的、任务驱动的类代理活动证据。  
+
+Records from urlquery.net show agents using the service since at least March 6, 2026, about two months before previously reported swarm activity.  
+urlquery.net的记录显示，代理至少从2026年3月6日就开始使用该服务，比之前报道的集群活动早约两个月。  
+
+The first case, a March 6 attempt to retrieve Thai drug-enforcement statistics, shows an agent escalating as each approach failed: it first requested the data directly, then tried a service that converts web pages into text, and finally packed a custom program into a web address.  
+首个案例是3月6日试图获取泰国禁毒统计数据的尝试，显示代理在每次失败后升级手段：先直接请求数据，再尝试网页转文本服务，最后将自定义程序打包进网址。  
+
+The same technique shows up in thousands of agent requests recorded by urlquery.net starting in mid-April, targets many of the same data sources as the collusion.wiki swarm, and collapsed the same day the wiki activity did.  
+自4月中旬起，urlquery.net记录的数千条代理请求均采用相同技术，其目标与collusion.wiki集群高度重合，且活动终止日期与维基活动完全一致。  
+
+We also report similar activity that occurred as recently as September 16.  
+我们还报告了截至9月16日仍在发生的类似活动。  
+
+We find weaker evidence of similar data-retrieval agent activity as early as November 2025.  
+我们发现2025年11月就有类似数据检索代理活动的较弱证据。  
+
+November 2025 urlquery.net records reveal bursts of attempts to retrieve statistics of historical theme park data and Thai government data through different URLs.  
+2025年11月的urlquery.net记录显示，曾出现通过不同URL批量获取历史主题公园数据和泰国政府数据的尝试。  
+
+These earlier attempts are less sophisticated and we are less confident that they involve the same agents, but they are consistent with task-directed data retrieval and target the same sources accessed in later activity.  
+这些早期尝试技术较粗糙，我们无法确定是否涉及相同代理，但其任务导向型数据检索特征与后期活动针对相同数据源的特点一致。  
+
+Overall, the evidence is consistent with, but does not prove, that the agents may have learned this behavior over one or more training runs.  
+总体而言，证据表明（但尚未证实）代理可能通过一次或多次训练习得该行为。  
+
+In November, they may have used urlquery.net simply to look up information. By March, they were finding creative ways around access limits. By May and June, they were gaining more access, including attempting to bypass cyber defenses to complete their tasks.  
+11月时它们可能仅用urlquery.net查询信息；到3月已开始创造性绕过访问限制；5-6月则尝试突破网络防御来完成任务。  
+
+Hacking attempts against public data providers  
+针对公共数据提供商的入侵尝试  
+
+Much of the urlquery.net activity appears to come from agents retrieving data to answer web search tasks.  
+urlquery.net的大部分活动似乎源自代理为完成网络搜索任务而进行的数据检索。  
+
+For three of these tasks, after failing to retrieve data through normal means, they attempted a variety of cyber exploits against the relevant data service.  
+其中三个任务在常规数据获取失败后，代理针对相关数据服务尝试了多种网络攻击手段。  
+
+We tie two of these attempts (those targeting api.datausa.io and viz*.aihw.gov.au) to the prior DseWiki agent swarm activity confirmed to originate from OpenAI based on shared targets, tactics, and timing.  
+我们将其中两次尝试（针对api.datausa.io和viz*.aihw.gov.au）与此前确认源自OpenAI的DseWiki代理集群活动关联，依据是共同的目标、策略和时间点。  
+
+None of the hacking attempts  
+所有入侵尝试均未...（原文截断）

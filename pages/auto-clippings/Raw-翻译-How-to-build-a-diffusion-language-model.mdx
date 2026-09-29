@@ -1,0 +1,53 @@
+---
+title: "How to build a diffusion language model_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：How to build a diffusion language model  
+【文章标题】：如何构建扩散语言模型  
+
+【文章正文】：  
+An introduction to diffusion language models and the research advances that underlie today's diffusion LLMs. We describe the building blocks of recent open-source models, starting from simple masking diffusion, and including techniques for iterative refinement, post-training, and variable-length generation. Material is adapted from workshop talks and lectures at ICLR 2026 and MLSS 2026.  
+本文介绍扩散语言模型及其支撑当今扩散大语言模型的研究进展。我们将从简单的掩码扩散开始，详述近期开源模型的构建模块，包括迭代优化、训练后处理和变长生成等技术。内容改编自ICLR 2026和MLSS 2026的研讨会演讲及讲座材料。  
+
+Two families of generative AI algorithms are widely used today. For continuous data such as images or video, the state-of-the-art approach is based on diffusion models. For discrete data such as text or code, the standard approach is instead autoregressive models. This article explores an alternative for discrete data, one built on the modern paradigm of diffusion.  
+当前生成式AI算法主要分为两类：处理图像/视频等连续数据时，最先进的方法是扩散模型；而处理文本/代码等离散数据时，标准方案是自回归模型。本文探索基于现代扩散范式的离散数据替代方案。  
+
+Mainstream language models are autoregressive: they generate tokens left-to-right, one at a time, each conditioned on the tokens before it. This approach is powerful, but it also has inherent limitations:  
+主流语言模型采用自回归方式：从左到右逐个生成token，每个token都受前面token制约。这种方法虽强大，但存在固有局限：  
+
+Diffusion models take a different approach. Rather than producing text one token at a time, they generate the whole sequence at once, starting from an initial guess and iteratively refining it over a number of steps. This unlocks several advantages: generation can trade off speed and quality by using fewer or more steps, mistakes can be corrected along the way, and every step attends to bidirectional context.  
+扩散模型采用不同范式：不是逐个生成token，而是从初始猜测出发，通过多步迭代一次性生成完整序列。这带来诸多优势：可通过调整步数平衡生成速度与质量、支持中途纠错，且每一步都能利用双向上下文。  
+
+Applying diffusion to language had long been an open problem. In 2024 the field reached a turning point, as diffusion models became competitive with autoregressive models on quality. By 2026, diffusion LLMs are a reality, with releases from leading industry labs — Mercury 2 (Inception Labs)  
+将扩散模型应用于语言领域曾长期是悬而未决的难题。2024年该领域迎来转折点，扩散模型在质量上开始比肩自回归模型。到2026年，随着Inception Labs等顶尖实验室发布Mercury 2等产品，扩散大语言模型已成为现实。  
+
+Before introducing diffusion for language, we start with a brief overview of Gaussian diffusion for image generation. We will then build up discrete diffusion by analogy.  
+在介绍语言扩散之前，我们先简要回顾图像生成中的高斯扩散原理，再通过类比构建离散扩散模型。  
+
+The central concept underlying diffusion models is denoising. Instead of painting an image in one shot, a diffusion model produces images step by step, starting from pure random noise and removing a little of it at every step until a coherent image emerges. Generating an image through many small steps turns out to be far simpler than producing it all at once, and this is what makes diffusion models so effective.  
+扩散模型的核心概念是去噪。不同于一次性绘制图像，扩散模型从纯随机噪声出发，通过逐步去除少量噪声生成图像。分多步生成图像比一次性生成简单得多，这正是扩散模型高效的原因。  
+
+How does a model learn to denoise? The trick is to teach it by showing examples of noise being gradually transformed into an image. Diffusion achieves this via two complementary processes. First, a forward process takes a clean source image and turns it into pure noise, one step at a time. Second, a reverse process learns to invert this transformation, turning pure noise back into an image; it is trained on the image-to-noise trajectories produced by the forward process.  
+模型如何学会去噪？关键在于通过噪声逐步转化为图像的示例进行训练。扩散模型通过两个互补过程实现：前向过程将干净图像逐步转化为纯噪声；逆向过程则学习逆转该转化，将噪声恢复为图像——它通过前向过程产生的图像-噪声轨迹进行训练。  
+
+The forward process takes a clean training image and produces a sequence of increasingly noisy images that trace a path from clean data to pure noise. It does this by mixing in a growing amount of random Gaussian noise at each step, until the image dissolves into pure static. This step requires no learning at all — we are simply adding noise — yet it is enormously useful, because it manufactures an endless supply of training data: examples of images being transformed into noise, and vice versa.  
+前向过程获取干净训练图像，生成从清晰数据到纯噪声的渐进序列。其通过在每一步混入递增的高斯噪声实现，直至图像完全变为随机噪点。该过程无需学习（仅是添加噪声），却能无限生成训练数据：既包含图像转噪声的示例，也隐含其逆过程。  
+
+The reverse process is where the actual learning happens. We train a model to transform noise into images by following the steps produced by the forward process in reverse.  
+真正的学习发生在逆向过程。我们训练模型通过反向执行前向过程步骤，将噪声转化为图像。  
+
+Concretely, given a noisy image, we train a machine learning model to separate the noise from the underlying image or, equivalently, to predict either the noise that was added or the clean image itself, since given the noisy input, knowing one determines the other. Once the model can do this, generation is simple: start from pure noise, ask the model to estimate and strip away a bit of it, and repeat. Each pass nudges the sample a little closer to something that looks like real data, until a clean image remains.  
+具体而言，给定含噪图像，我们训练模型分离噪声与底层图像（或预测添加的噪声/原始图像，因二者可相互推导）。掌握该能力后，生成过程变得简单：从纯噪声开始，让模型逐步估计并去除部分噪声，循环此过程。每次迭代都使样本更接近真实数据分布，最终得到清晰图像。  
+
+This forward/reverse recipe — corrupt data with noise, then learn to reverse the corruption one step at a time — is the blueprint for every diffusion model.  
+这种"噪声破坏数据→学习逐步逆转破坏"的前向/逆向配方，是所有扩散模型的通用蓝图。  
+
+The main obstacle in bringing diffusion to language is deciding what "noise" should mean for discrete tokens. For example, the noise used in classical diffusion is Gaussian, and adding continuous Gaussian noise to categorical variables is not well-defined. Below we introduce one simple yet effective approach that defines noise via masking. Our group popularized this approach  
+将扩散应用于语言的核心障碍在于如何定义离散token的"噪声"。经典扩散使用高斯噪声，但为分类变量添加连续高斯噪声缺乏明确定义。下文介绍通过掩码定义噪声的简易有效方法（本团队推广的方案）。  
+
+The easiest way to understand masked diffusion is as an unmasking transformer. We train the model by taking clean sequences, masking a random fraction of their tokens, and asking a bidirectional transformer to fill in the blanks. If you know BERT, this is essentially BERT with a randomized masking rate — but unlike BERT, the resulting model is generative. You can think of masked diffusion as a generative BERT.  
+理解掩码扩散最简单的方式是视其为"去掩码转换器"。我们通过以下方式训练模型：获取干净序列→随机掩码部分token→让双向转换器填补空缺。熟悉BERT的人可将其理解为采用随机掩码率的BERT——关键区别在于最终模型具备生成能力，可谓"生成式BERT"。  
+
+Once we trained the unmasking transformer, we can generate text by sta...  
+训练完成去掩码转换器后，我们可以通过...（生成文本）
