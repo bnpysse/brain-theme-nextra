@@ -1,0 +1,120 @@
+---
+title: "TclTk 9.1 Released_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Tcl/Tk 9.1 Released
+【文章标题】：Tcl/Tk 9.1 版本发布
+
+【文章正文】：
+|   Latest Release: Tcl/Tk 9.1.0 (Sep 29, 2026)    
+|   最新版本：Tcl/Tk 9.1.0（2026年9月29日）
+
+Tcl/Tk 9.1.0 is the current development work on Tcl and Tk, aiming toward stable releases in September 2026.  
+Tcl/Tk 9.1.0 是目前 Tcl 和 Tk 的开发版本，目标是在2026年9月发布稳定版。
+
+They add new features and interfaces to the foundation of Tcl/Tk 9.0.    
+该版本在 Tcl/Tk 9.0 的基础上新增了多项功能和接口。
+
+Download Tcl/Tk 9.1.0 Source Releases  
+下载 Tcl/Tk 9.1.0 源代码版本
+
+Highlights of Tcl 9.1  
+Tcl 9.1 亮点功能：
+
+New command unicode: Unicode normalization  
+新命令 unicode：Unicode 标准化
+
+New C routines Tcl_UtfToNormalized*: Unicode normalization  
+新增 C 函数 Tcl_UtfToNormalized*：Unicode 标准化
+
+New command timer: monotonic clock; microsecond resolution  
+新命令 timer：单调时钟，微秒级精度
+
+New command lfilter: select items from list  
+新命令 lfilter：从列表中筛选元素
+
+New command interp set: variable access in child interpreter  
+新命令 interp set：访问子解释器中的变量
+
+New subst options: -backslashes, -commands, -variables.  
+新增 subst 选项：-backslashes、-commands、-variables
+
+New switch options: -integer.  
+新增 switch 选项：-integer
+
+Many C99 math routines now available as expr functions.  
+众多 C99 数学函数现可作为 expr 函数使用
+
+Applications now required to call an initialization routine, either Tcl_FindExecutable or TclZipfs_AppHook.  
+应用程序现在需要调用初始化例程 Tcl_FindExecutable 或 TclZipfs_AppHook
+
+New C routine Tcl_IsEmpty.  
+新增 C 函数 Tcl_IsEmpty
+
+New C routine Tcl_GetEncodingNameForUser.  
+新增 C 函数 Tcl_GetEncodingNameForUser
+
+New C routine Tcl_AttemptCreateHashEntry.  
+新增 C 函数 Tcl_AttemptCreateHashEntry
+
+New C routines Tcl_ListObjRange, Tcl_ListObjRepeat, Tcl_ListObjReverse.  
+新增 C 函数 Tcl_ListObjRange、Tcl_ListObjRepeat、Tcl_ListObjReverse
+
+New C time API using long long in place of Tcl_Time  
+采用 long long 类型替代 Tcl_Time 的新版 C 时间 API
+
+Case-insensitive filesystem paths on macOS.  
+macOS 平台支持文件系统路径大小写不敏感
+
+auto_execok and exec search reform on Windows.  
+Windows 平台重构 auto_execok 和 exec 搜索机制
+
+Revised searches for script library and encodings.  
+改进了脚本库和编码文件的搜索逻辑
+
+Improved list internals for memory efficiency of large lists.  
+优化列表内部结构，提升大列表内存效率
+
+Extended support for 64-bit sizes.  
+扩展 64 位尺寸支持
+
+Highlights of Tk 9.1  
+Tk 9.1 亮点功能：
+
+Accessibility screen reader support.  
+支持无障碍屏幕阅读器
+
+Initial support for bidirectional text / RTL languages.  
+初步支持双向文本/从右至左语言
+
+New widget ttk::toggleswitch.  
+新增 ttk::toggleswitch 控件
+
+New command tk attribtable.  
+新增 tk attribtable 命令
+
+send command revised and improved on Aqua.  
+优化 Aqua 平台下的 send 命令
+
+Handling of negative screen distances.  
+支持负屏幕距离处理
+
+Extended states in ttk::treeview and ttk::notebook  
+扩展 ttk::treeview 和 ttk::notebook 的状态支持
+
+Improvements to Tk_CanvasTextInfo  
+改进 Tk_CanvasTextInfo 功能
+
+Rotated text on labels  
+标签支持旋转文本
+
+Limit message box and dialogs to physical screen width.  
+消息框和对话框宽度限制为物理屏幕尺寸
+
+Improved listbox selection colors.  
+优化列表框选中颜色
+
+Removed obsolete support for Windows XP appearances.  
+移除对 Windows XP 外观的过时支持
+|
