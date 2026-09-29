@@ -2008,6 +2008,7 @@ export default {
   "Raw-翻译-Tech-Needs-Humanists-More": "Tech Needs Humanists More",
   "Raw-翻译-Teaching-Everyone-to-Fish-for-Tokens": "Teaching Everyone to Fish for Tokens",
   "Raw-翻译-Tasklet-YC-P26-Is-Hiring-a-Customer-Success": "Tasklet YC P26 Is Hiring a Customer Succ...",
+  "Raw-翻译-Tank-Body-Problem": "Tank Body Problem",
   "Raw-翻译-Taiwans-Modern-Miracle": "Taiwans Modern Miracle",
   "Raw-翻译-Tailcat-Tailscale-Without-Tailscale-by-Tail": "Tailcat Tailscale Without Tailscale, by ...",
   "Raw-翻译-Tailcat-Secure-Tunnels-in-Seconds-Tailscale": "Tailcat Secure Tunnels in Seconds Tailsc...",
