@@ -1,0 +1,46 @@
+---
+title: "Show HN TurboGPT train 22KiB transformer in 13s_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: TurboGPT: train 22KiB transformer in 13s
+【文章标题】：Show HN: TurboGPT：13秒训练22KiB的Transformer模型
+
+【文章正文】：
+Tiny byte-level GPT training in CUDA C++. MIT.
+【文章正文】：基于CUDA C++的微型字节级GPT训练。MIT许可。
+
+Linux/NixOS:
+nix-build -o build/nix-result
+Linux/NixOS系统：
+nix-build -o build/nix-result
+
+Windows, Visual Studio 2022 C++ tools, and CUDA 13.4:
+.\build.ps1 -CudaArch 86
+Windows系统（需Visual Studio 2022 C++工具和CUDA 13.4）：
+.\build.ps1 -CudaArch 86
+
+CudaArch is the GPU compute capability from NVIDIA's CUDA GPU list.
+CudaArch参数对应NVIDIA CUDA GPU列表中的计算能力版本号。
+
+.\build\turbogpt.exe --data hn1g.txt --log-to runs/ctx4
+.\build\turbogpt.exe --data hn1g.txt --log-to runs/ctx4
+
+The run stores its checkpoint at
+runs/ctx4/ctx4.pt, containing model, optimizer, scheduler, and trainer state.
+程序运行时将检查点存储在：
+runs/ctx4/ctx4.pt，包含模型、优化器、调度器和训练器状态。
+
+Use --load CHECKPOINT.pt to resume it.
+使用--load CHECKPOINT.pt参数可恢复训练。
+
+runs/ctx4/report.json is derived from the log directory. Logs are TensorBoard-compatible:
+one report per batch, capped at 8Mi reports, and flushed with periodic or final checkpoints.
+runs/ctx4/report.json由日志目录生成。日志兼容TensorBoard：
+每批次生成一份报告，上限800万份，定期或最终检查点时刷新。
+
+- hn1g after 1.5G training tokens: 2.5295 BPB.
+- 在1.5G训练token后的hn1g数据集表现：2.5295 BPB（每字节位数）。
+
+python tests\verify.py
+python tests\verify.py
