@@ -1,0 +1,419 @@
+---
+title: "Language Models for Text Classification From Bag-of-Words to_全翻译"
+tags: ["大咖视点_全文翻译", "Ahead_of_AI_(Sebastian_Raschka_机器学习与大模型)"]
+---
+
+【文章标题】：Language Models for Text Classification: From Bag-of-Words to Jev
+
+【文章正文】：
+The recently released
+
+Jev
+
+AI model has been quite a cultural phenomenon in technical communities in the past 2 weeks.
+
+While Jev aims to classify things, it’s easy to dismiss Jev as “just a classifier,” and my own view of Jev has evolved quite a bit over the past few days. In particular, my thoughts went from “classifiers used to be my bread & butter; I can easily build this myself” (more on this later) to “wow, this actually works better than I thought.”
+
+Figure 1: Quick overview of the Jev API; more details on that later.
+
+Sure, the latest state-of-the-art GPT and open-weight LLMs can do the same kinds of classification tasks as Jev, while also being capable of much more general decision-making. But Jev’s advantage is that it can handle those classification tasks much faster and more cheaply.
+
+At the other end of the spectrum, for a narrow, well-defined problem, Jev probably won’t classify anything better, faster, or cheaper than a special-purpose classifier. But its selling point is that it is far more general than those task-specific models.
+
+So, what is the methodology behind Jev (based on an educated guess), what can it do, and why is it so popular? I aim to answer all of these later in this article. However, I thought starting with a brief history of language models for decision-making would be a great way to begin. And it hopefully helps demystify some of the hype and show what Jev does very well (”Jev is essentially a text classifier,” but “Jev is also not ‘just’ a text classifier.”)
+
+PS: I am not affiliated with Jev in any way. Also, I am not offered free access to Jev, and this is also not a product endorsement, just a technical article to offer some insights into the history of text classification to help you make sense of the recent hype.
+
+Since this is a long article,
+
+I recommend
+
+reading it in your browser
+
+,
+
+where you can access the table of contents menu on the left side.
+
+1. Language modeling and classification in the pre-transformer era
+
+For completeness, before we put Jev in context (no pun intended), I thought it made the most sense to start chronologically. In this section, I want to take a brief tour of applied text classification via naive Bayes, logistic regression, and the more classic (deep) neural networks before transformer-based models came along.
+
+1.1 Bag-of-words: naive Bayes, logistic regression, and XGBoost
+
+Back in the day, when I was a grad student 15 years ago, even though recurrent neural networks already existed (more on that later), text classification was usually done with a bag-of-words representation because it was straightforward and could get good results on moderately sized datasets.
+
+In short, we can think of the bag-of-words representation as a method that makes free-form text input of different lengths compatible with classic classifiers (naive Bayes, Logistic Regression, SVMs, Random Forest, XGBoost, to name a few), which expect a fixed-size input vector.
+
+Popular real-world applications include anything from news article classification to email spam filtering. And yes, allegedly even Gmail’s original spam filter used a Naive Bayes model with a bag-of-words representation.
+
+As a side note,
+
+I wrote about this
+
+approach exactly 12 years ago. It was one of the first things I shared on arXiv.
+
+Figure 2: An
+
+old tutorial
+
+of mine from 2014 that explains naive Bayes classifiers using a bag-of-words model.
+
+So, what exactly is this bag-of-words representation? It’s a way to convert free-form texts with different lengths, e.g.,
+
+Training example 1:
+
+“Zentropa is the most original movie I’ve seen in years. If you like unique thrillers that are influenced by film noir, then this is just the right cure for all of those Hollywood summer blockbusters clogging the theaters these days. Von Trier’s follow-ups like Breaking the Waves have gotten more acclaim, but this is really his best work.”
+
+Training example 2:
+
+“This film is just plain horrible. John Ritter doing pratt falls, 75% of the actors delivering their lines as if they were reading them from cue cards, poor editing, horrible sound mixing”
+
+Training example 3:
+
+“Zentropa has much in common with The Third Man, another noir-like film set among the rubble of postwar Europe.”
+
+into a fixed-size representation for the aforementioned “classic” classifiers. (The example above is an excerpt from the popular
+
+IMDb movie review classification dataset
+
+.)
+
+Figure 3: An illustration of a bag-of-words representation.
+
+A bag-of-words model starts by building the vocabulary, which consists of all unique words in the training set (optionally, one can get rid of so-called stopwords like “a” and “the”, which are words that carry little to no semantic meaning in most contexts).
+
+A bag-of-words representation results in these fixed-size inputs by assigning each word in a vocabulary its own position in a vector. We then count how often each word occurs in a document. For example, if we have a vocabulary of 50,000 unique words, it produces a fixed-size vector with 50,000 entries, regardless of whether the input consists of only ten words or 300k words. Note that most entries are zero because each document contains only a small subset of the vocabulary. (Instead of representing the raw counts, there are also normalization schemes like TF-IDF.)
+
+Then, once we have these word frequency vectors, we can train a classifier on a labeled training set, such as emails labeled as spam or non-spam. For example, a logistic regression model would then learn feature weights that correlate certain words (and word counts) with particular labels. For instance, certain words might increase the predicted spam probability, and others may decrease it.
+
+This approach is computationally cheap and can work well when particular words provide strong clues about the label. In a simple classification task such as spam classification, this is often enough to get quick, reasonably accurate results.
+
+But one of the biggest downsides of this approach is that, because of the nature of the bag-of-words representation, it loses word order. So, for example, “the dog bites the man” and “the man bites the dog” produce identical vectors despite describing different events.
+
+(There are some workarounds to preserve some local order by adding word pairs or longer sequences, called n-grams, as features, although this increases the vocabulary size.)
+
+Despite the shortcomings, I still think that a bag-of-words has its place in certain low-stakes applications because it’s so cheap, and a bag-of-words representation + logistic regression remains my go-to baseline for every text classification problem, since it’s so easy to implement.
+
+Figure 4: For those interested in building a simple logistic regression classifier, I have a tutorial up
+
+here
+
+. This model achieves 89.9% accuracy (on a balanced dataset).
+
+1.2 Deep neural networks for text classification
+
+The aforementioned bag-of-words model would also work with (simple) deep neural networks, like multilayer perceptrons. But the downside still is that we would lose the sentence structure and word order.
+
+However, more sophisticated neural network architectures avoid the bag-of-words workaround: convolutional neural networks (CNNs) and recurrent neural networks (RNNs), which can take word embeddings as input.
+
+1.2.1 Word embeddings
+
+First, before feeding the input texts into a model, we have to convert them into a suitable representation. One such representation is bag-of-words. Another is word embedding vectors. The difference is that a bag-of-words vector represents the entire text by counting how often each vocabulary word occurs, while a word embedding represents an individual word as a dense vector of learned numbers.
+
+Figure 5: Illustration of creating word embeddings.
+
+Word embeddings work similarly to embedding layers in LLMs, i.e., they convert input tokens into dense vectors. Embeddings can happen outside the model (e.g., two classic, popular methods for learning them are
+
+Word2Vec
+
+and
+
+GloVe
+
+), or the embedding layer can be part of the neural network architecture itself and be learned and tuned during model training.
+
+These classic embeddings are context-independent at lookup time. The word “bank”, for example, gets the same vector in “river bank” and “bank account” (as you may know, context can be handled via concepts like attention).
+
+For additional resources on embeddings, you may find the following ones helpful:
+
+Chapter 2: Working with Text Data
+
+(this is an LLM chapter but should give you the gist of embedding words or tokens; in LLM tokenizers, we split words into subword tokens; in Word2Vec, 1 word is usually 1 token.)
+
+Understanding the Difference Between Embedding Layers and Linear Layers
+
+(this is an illustration that shows when embedding vectors are mathematically equivalent to Linear layers and matrix multiplications.)
+
+1.2.2 Recurrent neural networks (RNNs)
+
+Since many of you are probably familiar with recurrent neural networks (RNNs), I will keep this section short. RNNs are a classic go-to neural network architecture for natural language processing, and popular  variants go back to the 1980s and early 1990s. Transformers, which were introduced in 2017 (and using the attention mechanisms that were first introduced in RNNs; see my
+
+Understanding Large Language Models
+
+for a brief timeline), then gradually replaced them in many NLP applications.
+
+RNNs read a sequence (like text) one word at a time. At each step, they combine the current word embedding (discussed in the previous section) with a hidden state from the previous step. We can think of the hidden state as a fixed-size vector that summarizes the text processed so far, so this makes word order matter, because rearranging the words changes the sequence of state updates.
+
+Figure 6: Illustration of an RNN classifier.
+
+Note that the figure above shows the RNN in the unrolled representation. I.e., the RNN reuses the same layer stack for each input, hence the term “recurrent”. And since it’s “recurrent”, the input text can have an arbitrary length. The figure below illustrates the “recurrence” with the unrolled representation side by side. Note that both show the identical architecture, it’s just a different visualization.
+
+Figure 7: Rolled and unrolled illustration of the same RNN.
+
+RNNs were notoriously hard to train, and there are important improvements to RNNs, like
+
+Long short-term memory
+
+(LSTM) networks, introduced in 1997, and
+
+gated recurrent units
+
+(GRUs), introduced in 2014, which use learned gates to control how information is retained and updated. (There is also the more recent
+
+xLSTM: Extended long short-term memory
+
+, introduced in 2024).
+
+Also, state-space models are inspired by this idea of a fixed-size hidden state updated sequentially, which is cheaper than transformer attention. However, the bottleneck is still how much information the hidden state can retain, and it still has to be processed sequentially. (Fun fact: attention was first developed for RNNs before the transformer architecture came along, but it’s a story for another time; I’ve written about it in my
+
+Understanding Large Language Models
+
+article.)
+
+The bottom line is that RNNs can be used to train text classifiers. Coming back to the IMDb movie review dataset, the bag-of-words classifier with logistic regression achieved about 89.9% accuracy (on a balanced dataset), while an LSTM RNN achieved only 85.66% accuracy. Yes, RNNs can be harder to train (stay tuned for the ULMFiT method below, which trains an RNN with much higher accuracy).
+
+Figure 8: A simple RNN with LSTM
+
+tutorial
+
+. This model achieves 85.66% accuracy (on a balanced dataset); the higher training accuracy indicates substantial overfitting.
+
+Note that this RNN was trained from scratch. A better approach is to pre-train the model on a larger dataset first, then fine-tune it on this target dataset (classically, we call this approach “transfer learning”).
+
+In the natural language processing domain, one of the most influential papers proposing this approach is
+
+ULMFiT
+
+(2018), which achieved an impressive 95.4% test accuracy on IMDb.
+
+Figure 9: Annotated figure from the
+
+ULMFiT
+
+paper.
+
+1.2.3 Convolutional neural networks (CNNs)
+
+You probably know convolutional neural networks (CNNs) from their use in computer vision. However, it is also possible, although historically less common, to use them for text.
+
+Figure 10: Illustration of a convolutional neural network (CNN) to classify images.
+
+As shown in the image classification example in the figure above, CNNs apply learned filters to image patches (windows). Similarly, in the natural language domain, we can apply learned filters to windows of adjacent word embeddings.
+
+Figure 11: A CNN for text classification, step by step. Only 1 filter (channel) for simplicity.
+
+As illustrated in the figure above, a convolutional filter with a window size of three uses the same weights for each adjacent group of three words. Then, as it slides over the inputs, it moves the filter one word at a time across “the movie had surprisingly good acting”. So, this gives four windows (ignoring padding for simplicity):
+
+1: “the movie had”
+
+2: “movie had surprisingly”
+
+3: “had surprisingly good”
+
+4: “surprisingly good acting”
+
+So, in the last layer, before the classification head, we can either flatten or global max pool the results before connecting it to the classification head. While flattening preserves all information, it would produce differently sized vectors depending on the text input length. (E.g., if “the movie had surprisingly good acting” were longer, we would have longer feature maps.) So, to make it input-length agnostic, global max-pooling would be a better option here.
+
+In short, we can visualize the text CNN as shown below.
+
+Figure 12: CNN for text classification with multiple filters (channels).
+
+Also, what’s nice is that the filter computations across positions can run in parallel, which avoids the step-by-step dependency of an RNN.
+
+For a quick comparison, on the aforementioned IMDb dataset, my experiments show that such a CNN gets about 90.07% accuracy (but note that this is highly architecture-dependent; for example, you may know from computer vision contexts that accuracies can vary widely). (E.g., the good old AlexNet had a ~62.5% top-1 accuracy on ImageNet, and a ConvNeXt V2-H gets 88.9%.)
+
+Figure 13: A CNN trained to classify IMDb movie reviews; it gets 90.07% accuracy on this balanced dataset. You can find the source code
+
+here
+
+.
+
+2. Transformers
+
+In 2017, the original transformer architecture was introduced in the
+
+Attention Is All You Need
+
+paper. Since this topic has been covered so extensively (by me and others), I will focus on the classification-relevant aspects. But for those interested in the attention mechanism and other architecture details, please see my related articles:
+
+The key point is that the original transformer architecture was an encoder-decoder setup used for language translation, but it can be easily adapted for text classification tasks, as I’ll illustrate in the following sections.
+
+Figure 14: The original transformer architecture from
+
+Attention Is All You Need
+
+.
+
+2.1 Encoder-style language models
+
+I remember all too well the first years after the original transformer architecture release. They were pretty much defined by the rivalry between two different approaches:
+
+Encoder-style models like BERT, primarily developed by Google;
+
+Decoder-style models like GPT, primarily developed by OpenAI.
+
+Encoder-style models were natural text classifiers, whereas GPT models could do zero- and few-shot classification as an emergent property, but their strength was more in generative tasks.
+
+But let’s start with encoder-style models and how to fine-tune and use them to classify text.
+
+One universal aspect of using transformers, whether encoder- or decoder-style, is that we work with models pre-trained on large text corpora, and, in addition to using them as zero- or few-shot classifiers, we can fine-tune them on the target dataset (similar to ULMFiT, as mentioned in the RNN section earlier).
+
+As shown in the figure excerpt from the
+
+BERT paper
+
+(2018) below, BERT-/encoder-style models have a classification token at the first position that we can conveniently fine-tune for this.
+
+Figure 15: Annotated figure from the original
+
+BERT paper
+
+.
+
+While BERT models are not nearly as popular as autoregressive GPT-style transformers, thankfully some people still update and modernize them occasionally. One recent example that is often my go-to for classification tasks is the 2024
+
+ModernBERT
+
+model.
+
+As shown below, on the IMDb movie reviews, ModernBERT gets approximately 95% accuracy with very little fine-tuning effort.
+
+Figure 16: Different LLMs fine-tuned to classify IMDb movie reviews; you can find the source code
+
+here
+
+. (I did very little hyperparameter tuning, and this can potentially be improved by 1-2% further; however, one of the points here is also that one can get really good results with pretty minimal effort.)
+
+2.2 Decoder-style LLMs
+
+LLMs like GPT are decoder-style, autoregressive transformers that are the center of all attention (no pun intended) for generating text and code.
+
+However, as I explained in chapter 6 of my
+
+Build A Large Language Model (From Scratch)
+
+book, as a gentle introduction to fine-tuning (before covering instruction fine-tuning), we can also repurpose these for text classification.
+
+Sure, we can also prompt an LLM directly, as shown in the screenshot below.
+
+Figure 17: Prompting an LLM to classify a movie review.
+
+However, if we want structured outputs and we have a specific target domain in mind, this is unnecessarily brittle and inefficient.
+
+Instead, we can replace the output layer with a leaner classification head, as illustrated below:
+
+Figure 18: Swapping the output layer of a GPT-style model with a leaner classification head.
+
+Now, fine-tuning has a few caveats. For instance, because of the autoregressive attention mask, we have to be careful about how we design fine-tuning so that the classification token has information about all other tokens in the sequence.
+
+Figure 19: Attention masks in BERT and GPT.
+
+If you are interested in further technical details, please see my recent end-to-end
+
+Building an AI Text Detector From Scratch
+
+article:
+
+Overall, though, the advantage of using GPT-style LLMs over e.g., BERT variants is that there are so many modern open-weight architectures out there to adopt. Anything between the small Qwen 3 0.6B models to the latest Kimi, GLM, or DeepSeek models. (Of course, using such &gt;1B parameter models for classification could be a bit overkill from an efficiency perspective, but hey, it’s possible.)
+
+Figure 20: On the aforementioned IMDb movie review dataset, a relatively small GPT-2 124M model gets approximately 92% accuracy; a larger and newer LLM (like a recent Qwen3 variant) would likely perform better.
+
+2.3 Encoder-decoder style architectures
+
+While the original transformer architecture (an encoder-decoder) was split into two paradigms, encoder-style models like BERT and decoder-style LLMs like GPT, there were also efforts to use encoder-decoder-style variants, with the most recent variant (somewhat unexpectedly) being
+
+DeepSeek V4.1 Flash
+
+. (However, in this case, it’s a causal encoder not a bidirectional one as in T5.)
+
+Keeping the focus on encoder-decoder architectures for classification, probably the most prominent candidate is Google’s 2019
+
+T5 (Text-to-Text Transfer Transformer)
+
+.
+
+Architecturally, the differences between T5 and the original transformer include updates to the architecture (as summarized below), as well as changes to training. The original transformer was trained to do language translation (in a supervised fashion); T5 uses pre-training on unlabeled text with span corruption, where the encoder receives text with missing spans and the decoder generates those missing spans.
+
+Figure 21: T5 architecture changes to the original transformer architecture. (The architecture drawing is taken from
+
+Attention Is All You Need
+
+.)
+
+Now, we can use T5 similar to the other RNN, CNN, and transformer approaches above, by adding a classification head.
+
+Additionally, we can also (train to) have the decoder output the class label prediction (like “positive” or “negative” in the IMDb movie review dataset case), similar to regular LLMs. Let’s call this approach text-to-text classification.
+
+While GPT-style LLMs are trained on massive amounts of text, they usually perform text-to-text classification well out of the box, as shown earlier (the figure below is inserted here again for convenience).
+
+Figure 22: Text-to-text classification with a GPT model.
+
+However, in the case of T5, it is common to further fine-tune the decoder to do well on these types of tasks in a given target domain.
+
+For T5, both approaches work. Here’s a summary:
+
+Figure 23: Classification head vs text-to-text approaches.
+
+3. Jev overview
+
+So far, we have seen that there are plenty of approaches to text classification, from traditional methods like logistic regression and naive Bayes with bag-of-words representations to prompting the latest frontier LLMs like GPT-6 or fine-tuning any open-weight LLM with a classification head (or text-to-text classification).
+
+At first, I (almost) dismissed it as “just a classifier,” something that I build routinely for classification tasks with natural language inputs (e.g., see my
+
+AI Detector article
+
+as a recent public example).
+
+3.1 Jev vs existing text-to-text classification
+
+Before continuing this discussion, though, let’s start with a quick Jev overview.
+
+Jev is a new model released by TypeSafe AI
+
+, which just came out of stealth a few weeks ago and got a lot of attention (at first, it seemed a bit bizarre because it looks just like a classifier).
+
+Jev is a proprietary model (although the release was followed by a huge number of quick open-source clones, but we will get to this later) that is relatively cheap to use and claims to be on par with GPT-5.6 Luna (for decision-making) while being orders of magnitude faster and cheaper:
+
+Figure 24: Benchmark from
+
+TypeSafe AI blog
+
+.
+
+Here, regarding GPT-Luna, think of this as the text-to-text classification approach discussed earlier.
+
+So why all this hype? I think it’s partly because of the nice API and that it performs so well on all kinds of tasks, so it doesn’t require custom fine-tuning.
+
+For example, I can use it to categorize support tickets/emails (I made a video version to show the response time):
+
+Or, I can have the same model play Tetris in real-time (here, I am using the Choice API):
+
+Maybe the best way to succinctly explain it (before getting into technical details) is as follows: Like ChatGPT in 2022 was exciting because it was a general-purpose chat model that could generate all kinds of texts, one of the reasons the tech community is excited about Jev is that it is the ChatGPT moment for classification, where it can cheaply classify all kinds of text inputs without having to fine-tune a custom classifier for each task.
+
+(As of this writing, there’s not much known about the architecture and exact training algorithm, except that one of the founders said it was trained via “Reinforcement Learning for Calibrated Decisions”, but more on that later.)
+
+3.2 The Jev API
+
+Over the past few years, we’ve gotten used to throwing bigger, better, and more expensive GPT-style LLMs at all kinds of problems, and for targeted decision-making or classification tasks, a cheap & fast approach like Jev may feel refreshing to most. Especially for one-off tasks where collecting training data and fine-tuning a custom ModernBERT sounds too tedious, we might just throw a Luna-like model at it.
+
+But on top of being popular for its versatility (that is, performing well on different target domains out of the box), Jev also has a relatively nice API which we can use via curl in the terminal or via its Python API.
+
+In short, there are three main API types illustrated below. Let’s start with the Choice API, which is convenient for multi-class classification.
+
+Figure 25: Jev’s Choice API. Use this for multi-class classification.
+
+Next is the Noul API, which is simpler and assigns a “yes” probability to a question.
+
+Figure 26: Jev’s Noul API. Use this for binary classification or multi-label classification (with multiple Noul questions).
+
+Lastly, the Score API assigns a score based on a rubric level (in the example below, 0, 1, 2).
+
+Figure 27: Jev’s Score API. Use this for ordinal classification.
+
+To sum it up, the different APIs and use cases are as follows.
+
+Figure 28: Jev API cheat sheet.
+
+3.3 Jev classifying IMDb
+
+To make these APIs more concrete, and to answer the question of how well Jev might do on the aforementioned IMDb dataset, we can run it with either the Ch
