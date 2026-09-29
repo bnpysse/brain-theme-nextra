@@ -1,0 +1,77 @@
+---
+title: "Why back propagation goes backward_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Why back propagation goes backward  
+【文章标题】：为什么反向传播是反向的  
+
+【文章正文】：  
+Why Backprop Goes Backward  
+为什么反向传播是反向的  
+
+Backprogation is an algorithm that computes the gradient of a neural network, but it may not be obvious why the algorithm uses a backward pass. The answer allows us to reconstruct backprop from first principles.  
+反向传播是计算神经网络梯度的算法，但该算法为何采用反向传递可能并不直观。这一问题的答案能让我们从第一性原理重构反向传播。  
+
+The usual explanation of backpropagation (Rumelhart et al., 1986), the algorithm used to train neural networks, is that it is propagating errors for each node backwards. But when I first learned about the algorithm, I had a question that I could not find answered directly: why does it have to go backwards? A neural network is just a composite function, and we know how to compute the derivatives of composite functions using the chain rule. Why don’t we just compute the gradient in a forward pass? I found that answering this question strengthened my understanding of backprop.  
+关于神经网络训练算法反向传播（Rumelhart等，1986）的常规解释是：它将每个节点的误差反向传播。但当我初次学习该算法时，有个问题始终找不到直接答案：为什么必须反向？神经网络不过是复合函数，而我们完全可以用链式法则计算复合函数的导数。为何不直接在前向传递中计算梯度？回答这个问题深化了我对反向传播的理解。  
+
+I will assume the reader broadly understands neural networks and gradient descent and even has some familiarity with backprop. I’ll first setup backprop with some useful concepts and notation and then explain why a forward propagation algorithm is supoptimal.  
+假设读者已大致理解神经网络、梯度下降，甚至对反向传播有所了解。我将首先用若干概念和符号建立反向传播框架，再解释为何前向传播算法是次优选择。  
+
+Setup  
+框架搭建  
+
+Recall that the goal of backprop is to efficiently compute for every weight in a neural network . To frame the problem, let’s reason about an arbitrary weight and node somewhere in :  
+需知反向传播的目标是为神经网络中每个权重高效计算梯度。为明确问题，让我们分析网络中任意权重和节点：  
+
+To be clear, the node refers to the output value of the node after passing the weighted sum of its inputs through an activation function , i.e.:  
+明确地说，节点指其输入加权和经激活函数后的输出值，即：  
+
+Note that in a typical diagram, , , and would all be a single node, denoted by the dashed line. In my mind, the most important observation needed to understand backprop is this: most of computing can be done locally at every node because of the chain rule:  
+注意在典型图示中，、、均由虚线表示为同一节点。我认为理解反向传播最关键的观察点是：由于链式法则，大部分计算可在每个节点本地完成：  
+
+We can compute analytically; it just depends on the definition of . And we know that . So at every node , if we knew , we could compute .  
+我们可以解析计算；它仅取决于的定义。且已知。因此在每个节点，若已知，就能计算。  
+
+The challenge with computing is that downstream nodes depend on the value of . Thankfully, the multivariable chain rule has the answer. Given a multivariable function in which each is a single variable function , the multivariable chain rule says:  
+计算的难点在于下游节点依赖的值。幸运的是，多元链式法则给出了答案。给定多元函数（其中每个为单变量函数），多元链式法则表述为：  
+
+So we can compute for any weight , meaning we have the necessary machinery to attempt to implement backprop in a forward rather than backward pass. Let’s see what happens.  
+因此我们可为任意权重计算，这意味着我们已具备尝试在前向而非反向传递中实现反向传播的工具。让我们看看会发生什么。  
+
+Repeated terms  
+重复项问题  
+
+We want a forward propagating algorithm that can compute the partial derivative for an arbitrary weight . We showed above that at node , this is equivalent to:  
+我们需要能计算任意权重偏导数的前向传播算法。前文已证明在节点处，这等价于：  
+
+Note that I’ve dropped the intermediate variable for ease of notation. To design our forward propagating algorithm, let’s formalize an important fact: in a directed computational graph in which node depends upon node , it is impossible to compute at any point before node :  
+为简化符号表示，此处省略中间变量。设计前向传播算法时，需明确一个重要事实：在节点依赖节点的有向计算图中，不可能在节点之前任何位置计算：  
+
+This claim should be obvious. If our computational graph represents a function , it is impossible to compute without access to and therefore .  
+这一论断应当显而易见。若计算图表示函数，则无法在未获得的情况下计算，因此也无法计算。  
+
+In our setup, for every downstream node that depends on a node , it is impossible to compute at node . Therefore, in order to compute , we must decompose the term using the multivariable chain rule and pass the other terms needed to compute forward to each node that depends on :  
+在我们的框架中，对于每个依赖节点的下游节点，无法在节点处计算。因此要计算，必须用多元链式法则分解该项，并将计算所需的其他项前向传递给每个依赖的节点：  
+
+We can see that such an algorithm blows up computationally because we’re forward propagating the same message many times over. For example, if we want to compute and where and are different weights in the same layer, we need to compute and separately, but all the other terms are repeated:  
+可见这种算法会导致计算量爆炸，因为相同信息被多次前向传播。例如要计算同一层中不同权重和的梯度，需分别计算和，但其他所有项都是重复的：  
+
+Here is a diagram of message passing the repeated terms:  
+下图展示重复项的消息传递过程：  
+
+I think the above diagram is the lynchpin in understanding why backprop goes backwards. This is the key insight: if we already had access to downstream terms, for example , then we could message pass those terms backwards to node in order to compute . Since each node is just passing its own local term, the backward pass could be done in linear time with respect to the number of nodes.  
+我认为上图是理解反向传播为何反向的关键。核心洞见在于：若能获取下游项（如），就能将这些项反向传递给节点以计算。由于每个节点仅传递其本地项，反向传递可在节点数量的线性时间内完成。  
+
+A backward pass  
+反向传递  
+
+I hope this explanation it clarifies how you might get to backprop from first principles trying to compute derivatives in a directed acyclic graph. On a given node that depends on a node , we simply message pass back to . The multivariable chain rule helps prove the correctness of backprop. For any node with downstream weights , if simply sums the backwardly propagating messages, it computes its desired derivative:  
+希望这一解释阐明了如何从计算有向无环图导数的第一性原理推导出反向传播。对于依赖节点的给定节点，我们只需将消息反向传递给。多元链式法则可证明反向传播的正确性——对任何具有下游权重的节点，若简单累加反向传播的消息，就能计算出所需导数：  
+
+Once you understand the main computational problem backprop solves, I think the standard explanation of backpropagating errors makes much more sense. This process is can be viewed as a solution to a kind of credit assignment problem: each node tells its upstream neighbors what they did wrong. But the reason the algorithm works this way is because a naive, forward propagating solution would have quadratic runtime in the number of nodes.  
+一旦理解反向传播解决的核心计算问题，就会觉得"反向传播误差"的标准解释合理得多。该过程可视为信用分配问题的解决方案：每个节点告诉上游邻居它们的错误所在。但算法如此设计的根本原因在于，朴素的前向传播解决方案会在节点数量上产生二次方时间复杂度。  
+
+- Rumelhart, D. E., Hinton, G. E., & Williams, R. J. (1986). Learning representations by back-propagating errors. Nature, 323(6088), 533.  
+- 鲁梅尔哈特, D. E., 辛顿, G. E., & 威廉姆斯, R. J. (1986). 通过反向传播误差学习表示. 自然, 323(6088), 533.
