@@ -2449,6 +2449,7 @@ export default {
   "Raw-翻译-Mapped-State-Income-Tax-Rates-in-2026": "Mapped State Income Tax Rates in 2026",
   "Raw-翻译-Mapped-Single-Income-Families-by-State": "Mapped Single-Income Families by State",
   "Raw-翻译-Mapped-How-Grocery-Costs-Compare-by-State-i": "Mapped How Grocery Costs Compare by Stat...",
+  "Raw-翻译-Manus-正式发布-20个人-AI-助手、云电脑、远程控制，Manus-想做-AI": "Manus 正式发布 2.0个人 AI 助手、云电脑、远程控制，Manus 想做...",
   "Raw-翻译-Malware-infects-Android-based-automotive-he": "Malware infects Android-based automotive...",
   "Raw-翻译-Make-Claude-your-assistant-in-excalidraw": "Make Claude your assistant in excalidraw",
   "Raw-翻译-Maiao-Gerrit-style-code-review-workflow-for": "Maiao Gerrit-style code review workflow ...",
