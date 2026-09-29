@@ -2946,6 +2946,7 @@ export default {
   "Raw-翻译-Claude-Monte-Carlo-Simulations": "Claude Monte-Carlo Simulations",
   "Raw-翻译-Claude-Fable-51-made-me-a-really-nice-anima": "Claude Fable 5.1 made me a really nice a...",
   "Raw-翻译-Claude-Cowork-and-chat-are-now-one-Claude": "Claude Cowork and chat are now one Claud...",
+  "Raw-翻译-Claude-Codes-Next-Era-—-Thariq-Shihipar-Ant": "Claude Codes Next Era — Thariq Shihipar,...",
   "Raw-翻译-Claude-Code-now-reads-AGENTSmd-if-there-is": "Claude Code now reads AGENTS.md if there...",
   "Raw-翻译-Claude-55-发布，性能直逼-Fable，还要卷价格": "Claude 5.5 发布，性能直逼 Fable，还要卷价格",
   "Raw-翻译-Classified-Estimates-Show-the-NSA-Is-Paying": "Classified Estimates Show the NSA Is Pay...",
