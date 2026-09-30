@@ -1,0 +1,763 @@
+---
+title: "[多模型] Learn the basics of Google Antigravity"
+tags: []
+---
+
+# [多模型] Learn the basics of Google Antigravity
+
+&gt; [!NOTE] 捕获元数据
+&gt; - **来源**: [Toutiao_Video](https://youtu.be/nTOVIGsqCuY?si=vy7Z_SiNPc-FjXRx)
+&gt; - **捕获时间**: `2026-08-18 00:25:10`
+
+## 📊 多模型综合分析报告
+
+### 🐳 火山引擎 DeepSeek-V4 总结
+# 深度提炼：Google Antigravity 基础介绍
+
+## 🎯 核心观点摘要
+
+- Google DeepMind 推出面向开发者的全新产品 **Antigravity**，将**编辑器、代理（Agent）管理器/编排系统、浏览器**三者整合在同一产品界面中。
+- 核心理念是“**代理辅助开发（Agent Assisted Development）**”：LLM 自动判断任务难易，简单任务自主完成，复杂或存疑任务会请求用户介入确认。
+- 通过**三种主要工作表面**（Agent 管理器、编辑器、内置浏览器）和**三类工件（Artifacts）**（任务列表、实施计划、演练报告）实现透明、可审核、可追踪的 AI 驱动开发流程。
+- 产品强调**并行多任务处理**、**上下文感知的代码编辑**、**自主浏览器测试**，以及与 Google 生态（日历、图像生成模型等）的深度集成。
+
+## 📌 关键脉络与论据
+
+1. **产品定位与三界面**
+   - **Agent 管理器**：跨工作区创建和管理代理的唯一窗口。
+   - **编辑器**：可通过 `Command+E` 或“打开编辑器”按钮随时进入，具备 Tab 自动补全、Agent 侧边栏等常规编辑器功能，支持人类接管代理任务（如从 90% 做到 100%）。
+   - **浏览器**：直接内嵌于 Chrome 的代理，可模拟点击、滚动，用于测试正在构建的产品，并把应用和文档的丰富上下文带入代理。
+
+2. **代理辅助开发模式（用户选择“自动”设置）**
+   - 对非常简单的事项，代理自动实现并在结束时返回结果。
+   - 对复杂或有疑问的事项，代理会请求用户查看代码库、回答问题，然后再执行。
+   - 在自动设置下，代理可在无需批准的情况下运行终端命令；若命令较敏感，仍会通知用户批准或拒绝。
+
+3. **三类核心工件（Artifacts）**
+   - **任务列表**：代理跟踪自身进度，用户可随时跟进。
+   - **实施计划**：在改动代码前生成，说明代理的研究结果和将要执行的操作，供用户审核。
+   - **演练报告**：任务结束时生成，说明完成了什么以及验证步骤（如截图、终端命令、单元测试、PR 描述等）。
+
+4. **完整工作流程示例（构建航班追踪应用）**
+   - 新建本地工作区“flight tracker”，要求构建 Next.js 应用：用户输入航班号，显示起飞/到达时间、时区、起降地点，先用 mock API。
+   - 代理运行 `create-next-app`，生成任务列表和实施计划；用户审核计划后，代理自动生成代码并启动 Dev 服务器。
+   - 代理通过浏览器扩展自主测试应用（如输入 American Airlines 123、测试无效状态），并生成截图/录屏供用户审阅。
+
+5. **并行任务与多线程工作**
+   - 用户可同时启动多个后台任务（如研究 Aviation Stack API、设计 Logo），同时在前台处理更复杂的任务。
+   - 代理研究 API 时会执行 Google 搜索、阅读文档，并利用用户提供的 API Key 实际运行 curl 获取样例数据，保证高置信度。
+
+6. **编辑器的上下文感知能力**
+   - 编辑器能基于代码库和先前检索的文档，自动建议替换 mock 数据为真实 API 数据，用户通过 Tab 键即可接受建议并迁移类型定义。
+   - 评论机制类似 Google Docs：用户可高亮文本留下评论，代理会在合适的停止点自动纳入考虑，无需用户实时监督。
+
+7. **Google 生态集成**
+   - 可直接访问 Nano Banana 等最新图像生成模型，生成 Logo 候选方案。
+   - 可让代理将航班信息生成 Google Calendar 链接，并在浏览器中实际测试点击跳转。
+
+8. **提交与收尾**
+   - 编辑器提供“生成提交信息”按钮，基于对话历史和文件内容生成上下文相关的 commit message，用户确认后即可提交。
+
+## 💡 核心洞察
+
+- **人机协作的新范式**：Antigravity 并非让代理完全自主，而是通过“自动+审核”的混合模式，让代理处理简单任务、人类关注复杂决策，并在关键节点通过实施计划和演练报告保持透明。
+- **工件即信任机制**：任务列表、实施计划、演练报告三类工件不仅是进度追踪工具，更是建立用户对代理信任的关键——让用户能验证代理做了什么、怎么做的。
+- **上下文一体化是核心竞争力**：编辑器、Agent 管理器、浏览器三者打通，加上代码库、文档、实时网络搜索、API 实测数据，使代理拥有极其丰富的上下文，从而做出更准确的决策。
+- **“评论式异步协作”降低监督成本**：用户可以在不打断代理的前提下留下待办评论，代理自主选择合适时机处理，实现真正的异步多线程人机协作。
+- **“多线程大脑”的工作方式**：用户可以同时并行推进多个代理任务（如研究 API + 设计 Logo），将自身注意力集中在更高价值的工作上，显著提升开发效率。
+- **从“写代码”到“验证交付”的闭环**：代理不仅生成代码，还能自动打开浏览器、操作界面、测试功能、生成录屏/截图证据，最终给出提交信息，覆盖了开发交付的完整闭环。
+
+---
+
+### 🔵 百炼 Qwen 3.8 Max 总结
+# 深度提炼：《Learn the basics of Google Antigravity》
+
+&gt; 说明：以下内容 100% 严格基于提供的【真实原文内容】进行整理与提炼；原文未提及的信息不作任何扩展、猜测或补充。
+
+---
+
+## 🎯 核心观点摘要
+
+- **Antigravity 是 Google DeepMind 面向开发者推出的全新产品**。原文明确称其为 “a brand new product by Google DeepMind built for developers”。
+
+- **它的核心定位不是单一编辑器，而是一个一体化开发产品表面**。原文提到它结合了 “editor、agent manager orchestration system、browser” 三类能力，即编辑器、Agent 管理/编排系统、浏览器都整合在同一个产品中。
+
+- **产品围绕 Agent 协助开发展开**。原文在 onboarding 中选择了 “agent assisted development”，即由 LLM 自动判断哪些任务可以直接执行，哪些任务需要用户关注或回答问题。
+
+- **Antigravity 强调开发者可以随时介入、接管或审查 Agent 的工作**。例如用户可以随时按 `Command E` 或点击 “Open in Editor” 进入编辑器，从 Agent 手中接管任务，把任务从 90% 推进到 100%。
+
+- **Artifacts 是 Antigravity 的关键机制**。Agent 会生成 Markdown 形式的 artifacts，用于追踪进度、做研究、输出发现。原文重点提到三类 artifact：  
+  1. **Task list**：任务列表，用于跟踪 Agent 的进度。  
+  2. **Implementation plan**：实现计划，说明 Agent 的研究结果和准备如何修改代码。  
+  3. **Walkthrough**：最终走查报告，说明 Agent 做了什么、如何验证结果。
+
+- **内置浏览器能力让 Agent 可以实际测试应用**。原文提到 Agent 可以通过 Chrome 集成打开浏览器、移动光标、点击、滚动，并测试开发者正在构建的产品。例如它会测试航班查询功能，并生成截图、录屏等验证材料。
+
+- **演示展示了一个完整开发闭环**：从创建 Next.js 航班查询应用，到使用 mock API，再到研究并接入 Aviation Stacks 真实 API、生成 logo/favicon、集成 Google Calendar、浏览器测试、最终生成 commit message 并提交代码。
+
+- **原文传达的新开发方式是：开发者更多承担审查、决策和验收角色，同时管理多个并行 Agent，通过 artifacts 与 AI 编辑器共同完成任务**。
+
+---
+
+## 📌 关键脉络与论据
+
+### 1. 产品开场：Antigravity 是一个一体化开发者产品
+
+原文一开始就介绍了 Antigravity 的产品定位：
+
+- 它是 **Google DeepMind 的全新开发者产品**。
+- 它结合了多个产品形态：
+  - **Editor**：编辑器。
+  - **Agent manager orchestration system**：Agent 管理/编排系统。
+  - **Browser**：浏览器。
+- 这些能力被整合进 “all in one product surface”，即同一个产品界面中。
+
+这一段奠定了整个视频/文章的核心：Antigravity 不是单纯的代码补全工具，而是试图把开发、Agent 管理、浏览器测试放在同一个工作台中。
+
+---
+
+### 2. Onboarding 与登录流程
+
+原文展示了首次使用流程：
+
+- 打开 Antigravity app。
+- 进入 onboarding。
+- 演示者选择 “default light mode”。
+- 点击 “Sign in with Google”。
+- 使用普通 Gmail 账号登录。
+- 登录后回到 Antigravity。
+
+这部分说明 Antigravity 的入门流程从 Google 账号登录开始，但原文没有提及定价、申请条件、平台限制或发布范围，因此不能推断这些信息。
+
+---
+
+### 3. 三个核心工作表面：Agent Manager、Editor、Browser
+
+原文明确提出 Antigravity 有三个主要 surfaces，即用户完成工作的三个主要界面。
+
+#### ① Agent Manager
+
+- 用于管理和创建 agents。
+- 可跨所有 workspaces 管理 agents。
+- 原文称 “there's one agent manager window”，即有一个统一的 Agent Manager 窗口。
+
+#### ② Editor
+
+- 当用户想进入代码、从 Agent 手中接管任务时使用。
+- 可随时按 `Command E` 或点击 “Open in Editor”。
+- 原文提到编辑器中包含：
+  - Tab autocomplete。
+  - Agent sidebar。
+  - 用户熟悉的编辑器产品能力。
+
+#### ③ Browser
+
+- 是一个新的产品能力。
+- 原文称它将 Agent 直接集成进 Chrome。
+- 用户可以提出类似 “test my feature” 的请求。
+- Agent Manager 或 Editor 可以生成浏览器，并在屏幕上点击、滚动，以测试用户正在构建的产品。
+
+这一部分构成 Antigravity 的基础框架：  
+**Agent Manager 负责管理 Agent，Editor 负责人工编码与接管，Browser 负责真实页面交互与验证。**
+
+---
+
+### 4. Agent-Assisted Development：Agent 自动判断何时需要用户介入
+
+在 onboarding 中，演示者选择了 “agent assisted development”。
+
+原文对此的解释是：
+
+- LLM 会自动判断某件事是否值得关注。
+- 如果任务非常简单，Agent 会自己执行，最后再回来汇报。
+- 如果任务更复杂，或者 Agent 有问题，它可能会请用户查看。
+- 它可能会要求用户回答一些它无法从代码库中弄清楚的问题。
+- 然后它再继续执行。
+
+这说明 Antigravity 的工作模式不是完全自动，也不是每一步都需要人工确认，而是由 Agent 判断任务复杂度与是否需要用户参与。
+
+---
+
+### 5. 创建第一个项目：Flight Tracker
+
+完成 onboarding 后，演示者开始第一个项目。
+
+关键步骤包括：
+
+- 左侧 sidebar 中添加新的 workspace。
+- 选择本地工作，而不是 SSH。
+- 点击 “Open folder”。
+- 创建一个新文件夹，命名为 `flight tracker`。
+- 目标是构建一个 flight tracker app。
+- 用户输入 flight number。
+- 应用会集成 Google Calendar，将航班信息直接加入日历。
+
+演示者给出的初始 prompt 是：
+
+- 构建一个 flight lookup Next.js web app。
+- 用户输入航班号。
+- 应用返回：
+  - start time
+  - time zone
+  - start location
+  - end location
+- 暂时使用 mock API。
+- Mock API 返回匹配航班列表。
+- 搜索结果展示在表单输入框下方。
+
+这部分说明 Antigravity 可以从自然语言需求直接启动一个具体项目。
+
+---
+
+### 6. Agent 权限与终端命令执行
+
+原文提到用户选择了自动设置，即 Agent 可以代表用户执行某些操作。
+
+关键信息：
+
+- Agent 能在用户不逐次批准的情况下运行 terminal commands。
+- 但如果命令更复杂，系统会通知用户批准或拒绝该请求。
+- 原文强调这是为了与用户建立信任。
+
+在演示中：
+
+- Agent 想运行 `create next app`。
+- 随后 Agent 开始在后台执行工作。
+- 用户可以随时查看进度。
+
+这表明 Antigravity 在自动化和用户控制之间设置了权限边界：简单操作可自动执行，复杂操作需要用户确认。
+
+---
+
+### 7. Artifacts：让 Agent 的工作可见、可追踪、可审查
+
+原文重点介绍了 Antigravity 的 artifacts 概念。
+
+- 右侧 sidebar 可查看 artifacts。
+- 该能力同时存在于 Editor 和 Agent Manager 中。
+- Agent 会生成 Markdown 文件。
+- 这些文件用于：
+  - 追踪 Agent 自己的进度。
+  - 做研究。
+  - 输出 findings。
+
+原文明确提到 Antigravity 的 Agent 被设计为与三类主要 artifacts 配合工作。
+
+#### ① Task list
+
+- Agent 用它维护自己的任务列表。
+- 用户可以跟随查看进度。
+
+#### ② Implementation plan
+
+- 在 Agent 实际修改代码前生成。
+- 包含 Agent 的研究结果。
+- 说明它准备做什么。
+- 相当于一个实现前报告或计划。
+
+#### ③ Walkthrough
+
+- 发生在 Agent 任务结束时。
+- 用于说明 Agent 做了什么。
+- 也会展示它采取了哪些验证步骤来证明任务完成。
+- 原文提到可能包含：
+  - screenshots
+  - terminal commands
+  - PR description
+  - 以及其他类似验证材料
+
+Artifacts 的作用是让 Agent 的工作过程不只是黑箱执行，而是可观察、可审阅、可验证。
+
+---
+
+### 8. Implementation Plan：Agent 先说明计划，再实现代码
+
+在 flight tracker 示例中：
+
+- Agent 完成了一些研究。
+- 随后打开 implementation plan。
+- 演示者查看计划内容。
+- 计划中提到：
+  - 组件结构。
+  - 样式。
+  - 如何验证工作是否正确。
+- 演示者认为计划看起来不错。
+- 之后 Agent 开始实现文件。
+- 它通过 task list 持续跟踪进度。
+- 用户可以选择继续观察，也可以离开一会儿再回来。
+
+这说明 Antigravity 的工作流中包含“先计划、后实现”的机制。
+
+---
+
+### 9. 浏览器自动化：Agent 可以自己测试刚写的代码
+
+代码生成完成后：
+
+- Agent 启动 dev server。
+- 用户可以在本地查看应用。
+- Agent 想启动浏览器。
+- 用户点击 setup。
+- 安装 Chrome extension。
+- 将扩展加入 Chrome。
+
+原文强调：
+
+- 因为有浏览器集成，Agent 可以自行测试它刚写的代码。
+- 演示中出现了蓝色小光标。
+- Agent 移动光标，实际测试应用。
+- 它输入 American Airlines flight 123。
+- 它也测试了无效状态。
+- 最后它会在 walkthrough report 中提供：
+  - screen recordings
+  - screenshot
+
+用户点击 review 后可以看到：
+
+- Agent 实现了哪些功能。
+- 它如何验证结果是否正确。
+
+这部分是 Antigravity 的关键差异点之一：Agent 不只生成代码，还能通过浏览器进行真实交互验证。
+
+---
+
+### 10. Home / Inbox：跨 Agents 与 Workspaces 查看进度
+
+原文将主页称为 inbox。
+
+它的作用包括：
+
+- 启动新的 conversations。
+- 查看所有 agents 的进度。
+- 查看不同 workspaces 的状态。
+
+这说明 Antigravity 的工作入口不仅是单个项目，还包括跨 Agent、跨项目的统一管理。
+
+---
+
+### 11. 并行任务：后台研究与前台设计同时进行
+
+原文展示了两个并行任务。
+
+演示者指出：
+
+- Antigravity 的优势之一是 Agent 可以在后台工作。
+- 用户可以同时在前台处理更复杂的任务。
+
+两个任务分别是：
+
+#### 任务一：研究真实航班数据 API
+
+用户要求：
+
+- 将应用接入真实航班数据。
+- 查找 Aviation Stacks API。
+- 演示者已有 API key。
+- 如果要用 curl 测试，要查文档。
+- 使用 curl responses 来获取接口结构。
+
+#### 任务二：为应用生成 logo / favicon
+
+用户要求：
+
+- 让应用更 polished。
+- 给应用一个 logo。
+- Agent 设计多个 logo mockups。
+- 风格包括：
+  - minimalist
+  - classic
+  - clearly a calendar
+  - 其他可能合适的风格
+- 用作 favicon。
+
+原文提到：
+
+- 作为 Google DeepMind ecosystem 的一部分，产品中可以直接访问 “nano banana” 和最新图像生成模型。
+- 因此 Agent 可以快速生成 logo。
+- 很快生成了四种不同类型的 logo。
+- 演示者选择了 classic aviation style。
+- 然后要求 Agent 将其作为 favicon 实现到项目中。
+- 同时要求更新 site title。
+
+这一部分体现了 Antigravity 支持多任务并行：一个 Agent 做 API 研究，另一个任务做视觉资产生成。
+
+---
+
+### 12. Pending Comment：用户可以在不打断 Agent 的情况下补充要求
+
+在更新 favicon 和 site title 时，原文提到：
+
+- 用户发送的是 pending comment。
+- 这意味着 Agent 会在对话中的合适停止点考虑该评论。
+- Agent 已经开始处理 favicon。
+- 但它也会把更新 site title 的要求纳入考虑。
+- 用户不需要一直盯着 Agent。
+- 可以离开、留下评论，之后再回来。
+- 原文称 Agent 足够智能，知道何时以及如何将该评论注入对话。
+
+这说明 Antigravity 支持非同步协作：用户可以补充指令，Agent 会在合适时机吸收这些新要求。
+
+---
+
+### 13. Aviation Stacks API 研究结果：Agent 通过搜索、阅读文档和 curl 请求建立可信度
+
+后台研究完成后：
+
+- Agent 生成 artifact 供用户 review。
+- 它研究了 Aviation Stacks API 能做什么。
+- 它研究了 API 返回的数据。
+- 用户可以滚动对话查看 Agent 如何得出结论。
+- Agent 做了 Google search。
+- 查找 Aviation Stacks API 是什么、文档 URL 是什么。
+- 它实际阅读相关页面并整理研究结果。
+- 因为用户提供了 API key，Agent 还能运行 curl requests。
+- 它获取 sample data。
+- 原文称这能让用户以很高信心和信任度确认结果是正确的。
+
+这部分说明 Agent 的研究不仅停留在文本总结，还能通过实际请求样本数据增强可信度。
+
+---
+
+### 14. 用户可像编辑 Google Doc 一样评论 Implementation Plan
+
+在查看 implementation plan 时：
+
+- 用户可以高亮文本。
+- 用户可以留下评论。
+- 演示者留下评论：
+  - 使用之前给到的 `.env.local` 中的 key。
+- 演示者继续查看其余内容。
+- 然后要求：
+  - 将该实现放在 utils folder 中。
+  - 以便后续应用到 route。
+  - 暂时不要修改 route。
+  - 不要提交。
+
+这说明 Antigravity 的计划审阅过程具有文档式协作特征：用户不是只能接受或拒绝，而是可以针对计划中的具体内容留下批注。
+
+---
+
+### 15. Favicon 更新完成：并行任务开始产出结果
+
+切换回 favicon 设计任务：
+
+- Agent 已更新 favicon。
+- 浏览器 tab 中可以看到新的 favicon。
+- 演示者提到可能之后需要移除白色背景。
+- 但这部分主要用于说明 Agent 可以并行工作。
+
+原文用 “multi threading our brain across these two different projects” 来形容这种状态：用户同时推进两个不同项目/任务。
+
+---
+
+### 16. Aviation Stacks 工具文件完成：Agent 创建 `aviationstack.ts`
+
+Agent 通知用户 ready for review。
+
+原文展示：
+
+- Agent 创建了新文件：`aviationstack.ts`。
+- 文件位于 utils folder。
+- Agent 使用了之前研究得到的信息，以确保实现正确。
+
+这表明 Agent 不仅完成研究，还能把研究结果转化为具体代码文件。
+
+---
+
+### 17. 进入 Editor：展示人工接管与 Tab Autocomplete
+
+演示者进入 Editor，展示编辑器能力。
+
+过程如下：
+
+- 找到 route 文件。
+- 看到原始生成中使用 mock flights 的逻辑。
+- 删除 mock 数据逻辑。
+- Editor 已经建议将 mock data 替换为 live data。
+- 用户按 Tab 接受建议。
+- 再按 Tab 包含 import。
+- 然后检查 UI 是否使用 API 的新类型声明，而不是 mock data。
+- 进入 `page.tsx`。
+- 修改数据结构。
+- 不再使用 mock API schema 中的 `flight`。
+- 改用 API 自身的数据结构：`aviation stack flight data`。
+
+原文还提到：
+
+- 因为 Agent 掌握代码库文件以及之前检索到的互联网文档，用户可以连续按 Tab，把 UI 中使用 mock data 的地方改成 API data。
+
+这一部分展示了 Antigravity 的人机协作方式：Agent 完成前期研究和工具文件后，用户也可以进入编辑器，通过 tab autocomplete 快速完成迁移。
+
+---
+
+### 18. 使用真实航班数据验证应用
+
+迁移完成后：
+
+- 回到浏览器。
+- 确认应用是否可以使用 live data。
+- 输入真实航班：American Airlines flight 100。
+- 原文显示该航班从 JFK 起飞，降落 Heathrow。
+- 应用看起来正常工作。
+
+这一步验证了从 mock API 到真实 API 的迁移成功。
+
+---
+
+### 19. 最终功能：集成 Google Calendar
+
+演示者提出最后需求：
+
+- 对每个 flight result：
+  - 让整个卡片可点击。
+  - 点击后打开 Google Calendar link。
+  - 链接中携带 flight information。
+  - 特别是 times 和 locations。
+- 要求 Agent 用 browser 测试。
+- 完成后展示 walkthrough。
+
+原文提到：
+
+- 这个任务也可以后台运行。
+- 但演示者选择实时观看。
+- Agent 会展示它正在思考什么。
+- 它显示：
+  - reviewing clickable items
+  - mapping flight data
+  - 读取相关文件
+- 然后实现 Google Calendar integration。
+- Agent 将工作分成 sections，便于用户理解。
+- 用户也可以进入 editor 查看更细节的步骤。
+
+随后：
+
+- Agent 完成任务。
+- 打开浏览器测试功能。
+- 当蓝色边框可见时，表示浏览器正在被 Agent 控制。
+- Agent 测试 American Airlines flight 100。
+- 移动光标并点击。
+- 最终成功将航班加入日历。
+
+最后：
+
+- Agent 生成 walkthrough。
+- 这是第三个也是最终的 artifact。
+- 它展示实现的功能。
+- 包括 Google Calendar integration。
+- 并说明已用 American Airlines flight 100 验证。
+
+用户随后也可以自己测试：
+
+- 输入 American Airlines flight 100。
+- 数据正确流动。
+- 生成了 calendar event。
+
+这部分完成了产品的最终用户价值：航班查询结果可以直接加入 Google Calendar。
+
+---
+
+### 20. 收尾：生成 Commit Message 并提交代码
+
+最后：
+
+- 回到 editor。
+- 提交代码。
+- Editor 中有一个按钮可以生成 commit message。
+- 原文称该功能是 context aware。
+- 它不仅使用文件，还使用 conversation history 来生成 commit message。
+- 演示者认为 commit message 看起来不错。
+- 然后提交代码。
+
+原文总结：
+
+- 他们在几分钟内从零构建了一个新应用。
+- 团队认为这是开发者完成工作的新方式：
+  - reviewing artifacts
+  - managing multiple agents
+  - getting tasks over the finish line with an AI powered editor
+
+---
+
+## 💡 核心洞察
+
+### 1. Antigravity 的核心不是“代码生成”，而是“开发流程编排”
+
+原文展示的重点并不是单纯让 Agent 写一个 Next.js 应用，而是把整个开发流程组织起来：
+
+- 创建 workspace。
+- 生成项目。
+- 运行终端命令。
+- 制定实现计划。
+- 跟踪任务列表。
+- 自动测试。
+- 并行研究。
+- 生成视觉资产。
+- 接入真实 API。
+- 用户接管编辑器。
+- 浏览器验证。
+- 生成 commit message。
+
+因此，Antigravity 在原文中呈现出的定位更接近一个 **Agent 驱动的开发工作台**，而不是单一代码补全工具。
+
+---
+
+### 2. “三个表面”构成了完整的人机协作闭环
+
+原文提出的三个 surfaces 各司其职：
+
+- **Agent Manager**：管理多个 Agent 和任务。
+- **Editor**：让人类开发者进入代码层，接管细节。
+- **Browser**：让 Agent 进入真实应用界面，执行点击、滚动、测试。
+
+这三者组合后形成闭环：
+
+&gt; Agent 可以规划和实现代码，用户可以进入编辑器修改，浏览器可以验证功能，Agent 再根据验证结果输出 walkthrough。
+
+这意味着 Antigravity 试图覆盖“提出需求—生成代码—运行测试—人工修正—验收提交”的完整链路。
+
+---
+
+### 3. Artifacts 是建立信任的关键机制
+
+原文中 artifacts 反复出现，并且承担不同角色：
+
+- **Task list**：让 Agent 的执行过程可追踪。
+- **Implementation plan**：让 Agent 在改代码前说明准备做什么。
+- **Walkthrough**：让 Agent 在任务完成后说明做了什么、如何验证。
+
+这说明 Antigravity 并不只追求自动执行，而是通过 artifacts 提供可观察性。用户不是只看最终代码，而是可以审阅 Agent 的计划、进度和验证证据。
+
+---
+
+### 4. Agent 自动化与用户控制并存
+
+原文展示了多种用户控制方式：
+
+- Agent 可自动执行简单任务。
+- 复杂终端命令会请求批准。
+- 用户可随时按 `Command E` 进入编辑器接管。
+- 用户可以对 implementation plan 高亮评论。
+- 用户可以发送 pending comment，让 Agent 在合适时机吸收新要求。
+- 用户可以自行修改代码，例如将 mock data 迁移为 live API data。
+
+这表明 Antigravity 的工作方式不是“完全交给 Agent”，也不是“每一步人工操作”，而是 **Agent 自主执行与用户随时介入并存**。
+
+---
+
+### 5. 浏览器集成让验证从“看代码”变成“看行为”
+
+原文中 Agent 不仅生成代码，还会：
+
+- 启动 dev server。
+- 打开浏览器。
+- 安装 Chrome extension。
+- 控制光标。
+- 点击屏幕。
+- 输入航班号。
+- 测试无效状态。
+- 测试 Google Calendar 集成。
+- 生成截图、录屏和 walkthrough。
+
+这意味着 Antigravity 的验证方式不局限于代码层面，而是进入真实产品交互层面。原文展示的关键转变是：Agent 不仅说“我完成了”，还试图证明“我测试过了”。
+
+---
+
+### 6. 并行 Agent 工作改变了开发者的注意力分配
+
+原文展示了两个任务同时进行：
+
+- 一个任务研究 Aviation Stacks API。
+- 另一个任务生成 logo/favicon。
+
+演示者还提到：
+
+- Agent 可以在后台工作。
+- 用户可以专注处理前台更复杂的任务。
+- 用户可以离开，留下评论，之后回来查看结果。
+
+这说明 Antigravity 试图让开发者从连续逐步操作转向 **多任务管理与关键节点审查**。
+
+---
+
+### 7. Agent 的可信度来自上下文、研究和真实数据验证
+
+在 Aviation Stacks API 示例中，Agent 的研究方式包括：
+
+- Google search。
+- 阅读文档页面。
+- 使用 API key。
+- 运行 curl requests。
+- 获取 sample data。
+- 生成研究 artifact。
+- 用户可以在 implementation plan 中评论和修正要求。
+
+这说明 Antigravity 强调 Agent 输出不是单纯模型生成，而是尽量结合：
+
+- 代码库上下文。
+- 对话历史。
+- 互联网文档。
+- 真实 API 响应。
+- 用户提供的密钥与约束。
+
+这种组合提高了原文所说的 “high confidence” 和 “high trust”。
+
+---
+
+### 8. 编辑器仍然重要：Agent 并不取消人工编码
+
+虽然 Antigravity 强调 Agent 自动执行，但原文专门展示了 Editor 的价值：
+
+- Tab autocomplete。
+- Agent sidebar。
+- 接受建议替换 mock data。
+- 自动包含 import。
+- 修改类型声明。
+- 根据代码库和文档上下文进行连续补全。
+- 生成 commit message。
+
+这说明在 Antigravity 的设计中，编辑器仍然是开发者深度介入的关键入口。Agent 可以完成大量前置和后台工作，但人工仍然可以在关键代码层进行细粒度控制。
+
+---
+
+### 9. Antigravity 展示的是一种“审阅—管理—验证”的新型开发者工作方式
+
+原文结尾总结：
+
+- 他们几分钟内从零构建了一个新应用。
+- 新工作方式包括：
+  - reviewing artifacts
+  - managing multiple agents
+  - getting tasks over the finish line with an AI powered editor
+
+因此，原文传达的核心理念是：开发者的角色从单纯编写代码，扩展到：
+
+- 审阅 Agent 的计划。
+- 管理多个 Agent。
+- 在关键节点介入编辑器。
+- 通过浏览器验证结果。
+- 通过 walkthrough 判断任务是否真正完成。
+
+---
+
+### 10. 原文未提及的内容不能推断
+
+虽然标题是 “Google Antigravity”，但原文只说明了它是 Google DeepMind 的新开发者产品。以下信息原文没有提及，因此不能推断为事实：
+
+- 是否已经公开发布。
+- 是否面向所有开发者开放。
+- 定价模式。
+- 支持哪些操作系统。
+- 是否仅限内部测试。
+- 使用哪个底层模型。
+- “nano banana” 的具体含义或产品身份。
+- 是否与其他 Google 产品深度集成到产品体系层面。
+- 未来路线图的具体内容。
+
+原文仅明确表示：团队正在研究下一步内容，并让用户期待未来更新。
+
+
+---
+
+## 🎙️ 语音转写原文
+
+Today I'm going to be giving you the first look at anti gravity, a brand new product by Google DeepMind built for developers. And it combines the best of all worlds. It's both an editor, an agent manager orchestration system and a browser, all in one product surface. So to start, we're going to open up the anti gravity app and we're going to go through the onboarding. So let's click next. Personally, I'm a light mode guy. So let's head over to default light mode and click that sign in with Google button. So you'll just use your normal gmail account, click sign in, and this will pop us back into anti gravity. All right, so now we're logged in. We're going to introduce you to a key concept of anti gravity, which is that there are three main surfaces on which you can get your work done. The the first one is called the agent manager. This is a place for you to manage and create agents across all of your workspaces there one agent manager window. Now, if you want to get into the code, if you want to take over from the agent, for example, and bring that task from 90% to 100%, you can at any Point Press command e or Press the open and editor button. And this will take you into the anti gravity editor, which has things like tab autocomplete, the agent sidebar, everything you've come to know and love inside of your editor products. And finally, there is a browser. This is a brand new offering that incorporates an agent directly inside of chrome. So you can ask questions like test my feature and the agent manager or the editor will spawn a browser and click on the screen, scroll on the screen to basically test the products that you're building. So this is a really, really powerful way to bring all that context, that rich context of applications and docs directly into the agent. So we're gonna na go with agent assisted development. What this means is the llm will automatically decide if something is worth our attention. If something is very, very easy, the agent will just go off and impleted and come back at the end. But for some things that are more complicated or if it has questions, it might ask us, Hey, why don't you take a look at this, answer a few questions about your code base that I couldn't figure out, and then go off and execute. So it's a different way of working. This is my preferred way. So now that we finished onboarding, let's go ahead and get started on our first project. You'll notice in the left side there is a sidebar, and we're going to go ahead and add a new workspace. We're going to be working locally instead of an ssh. So we'll Press open folder and let's create a new folder. We'll gocall it, flight tracker. And today we're gonna to be building a flight tracker app where a user can add their flight number and it will directly integrate with your Google calendaars to basically add that flight information to your calendar directly build me a flight lookup next js web app where the user can put in a flight number in the app gives you the start time and time, time zone, start location and end location of the flight. For now, use a mock api that returns a list of matching flights. Display the search results under the form input. So it's going to start and remember the setting that we chose for the agent to be making decisions on the user's behalf because we chose that auto setting. This means that the agent is capable of running terminal commands on our behalf without our approval. Now, if this command was something a bit more sophisticated, we want na build that trust with you as the user. And so we'll obviously notify you to approve or deny that specific request. So we'll go off. It looks like we wanted to run create next app, and the agent will now start doing work on your behalf in the background, but you can always check in on its progress. And one of the really, really cool features for angravity is this notion of artifacts. So if you click the right sidebar, and this is available both in the editor and the agent manager, you'll notice that the agent is putting together artifacts. These are markdown files for the agent to sort of track its own progress, do research and even generate findings. We see that the agent is keeping its own task list to keep track of its progress. And this is something that you can also follow along with. We have instrumented the anti gravity agent to work with three main artifacts. The first one is the task list, which you saw, and the other two are important for users to observe and approve. The first one is called an implementation plan, and this basically specs out some of the research the agent did, and it will give you a report of what it's going to do prior to actually going off and making changes to your code debase. And finally, there's a walkthrough, which happens at the end of an agent's task, and it will communicate what it did as well as some of the verification steps it took to sort of prove that it completed it. This might take the form of screenshots or terminal commands that it ran, or unit Teor hack, maybe even a pr description, things of that nature. And so it looks like our agent has done some research and we're now going to open up our implementation plan. And you'll see this looks pretty good. It's putting together some components. It's telling me a bit about the styling, some of the ways that it's gonna to verify that it did the work correctly. This all looks pretty good to me. So now it's going to go off and start implementing all these files, itkeep track of its progress in the task list, and you can follow along, or you could even go get a coffee and come back. It looks like the agent finished the code generation part. So now it's going to actually run the Dev server so that we can check this out locally. And it wants to launch the browser. So let's go ahead and Press setup. You'll Press install extension. So let's go ahead and add this to chrome. So what's really cool about antiti gravity is that because of this browser integration, it can actually test the code that it just wrote all on its own. So here we just generated a flight tracker, and now with that blue little cursor, it's moving its cursor around the screen to actually test our application. And in this case, it's adding in American Airlines flight 123, it's testing some invalid states, and it's basically going to deliver us a couple of screen recordings and a screenshot in our walkthrough report. So let's click review and we can see what it put together. It tells us a bit about the features that it implemented and importantly, how it verified that the results were actually correct. So let's head back to our home. We call this the inbox. This is where you can spin up new conversations and check in on your progress across all your different agents, across all your different workspaces. And so now we're going to start two parallel tasks. And the beauty of antigravity is that you can have the agent do work for you in the background while you focus on maybe a more complex task in the foreground. Let's have it do some research. So we want na hook this up to live flight data. So let's ask it to look up the aviation stacks api. I already have an api key. If you want to test with curls, look up the documentation and make sure you use the curl responses to get the interface. Let's make this app look a little bit more polished by giving it a logo. The beautiful part about being part of the Google DeepMind ecosystem is that we have direct access to nano banana and the latest image generation models directly inside of the product. So let's ask our agent design a few different mockups for a logo for our app. I want one that's more minimalist, one that's more classic, one that's clearly a calendar. And any others that you think might fit want to use this as the fabicon for our apple? So it's head back home. Oh, wow. It already looks like it's done with the logos. That was very, very quick and you'll see that it generated, let's see, four different types of logos. I really do like the look of this classic aviation style one. So let's tell the agent to implement this one inside of our project. I like the global flight tracker with aviation theme as this as my favicon. And I actually should probably tell it to update my site title as well since I think it's using whatever came out of the initial generation script. So let's go ahead and tell it to do that as well. And you'll see that we are sending it as a pending comment, which basically means the agent can take into consideration at some good stopping point in the conversation. So here, it already got started working on the favicon, but now it's also going to take into account that we want na change the site title and we didn't even need to babysit the agent. We could just leave it and leave some comments and come back and it takes it into account. It's smart enough to know when and how to inject this into our conversation. So we'll head back home and it looks like now our aviation stacks api research is already done, and it's written in artifact for us to review. And it's done all this research on what the aviation stacks api can do and what data it returns. And what's really cool is you can scroll through the conversation if you want more detail on how it arrived at this conclusion. And it did a Google search to basically figure out what is the aviation stack api, what is the docs url for this? And it went out and actually read those pages to put together this research. And I also love that because we gave it an api key, it's able to literally run the curl requests and get sample data so that we know with very, very high confidence and very high trust that this is correct. So this implementation plan looks pretty good. Let's actually tell it and leave it some comments. So just like a Google doc, you can highlight text, leave comments, and just say, use the key I gave you in the dot env dot local. We'll scroll through the rest and looks good to me. Implement this in a util folder so that I can apply it to the route. Don't change the route yet or submit. Great. Now let's hop book over to home. And now we're going to go check in on our design of the faviccons. It looks like it's updated our favicon. You'll see it now in the tab. We should probably remove the White background at some point, but you kind of get the idea it's able to do this work in parallel. So now we're sort of multi threading our brain across these two different projects, and you'll see that this aviation stacks api utiis almost done great. So our agent has notified us that it's ready for review, and it looks like it created this new file, aviation tionstack ts in our utils folder. And it looks like it used a lot of the research that it did before to make sure that this is correct. And let's now hop into the editor so that we can really, really use this new utiwe could ask the agent to do this, but I want na show you some of the features inside of the editor. We'll head over to where I think the route is and you'll see all this logic from mock flights that came out of the original generation. And we can go ahead and delete all this. The editor is already suggesting that we replace our mock data with our live data. So let's go ahead and Press tab to accept this suggestion. We're gonna to Press tab again, include the import. And now let's just make sure that the rest of our ui is using these new type declarations from the api as opposed to the mock data. So we'll go into page tsx and we'll to start poking around, looks like we'll need to change the shape of the data. So instead of flight, which is the mock api schema, we are going to use the one from the api itself. It's called aviation stack, flight data because the agent has contover all the files in your code base as well as the Internet documentation that we retrieved earlier. We can just tab, tab, tab and change all the instances in our ui of using the mock data to using the api data. Now that this migration is complete, let's head back over to the browser and just make sure that the app actually works with this new live data. So we'll type in a real flight. Looks like American Airlines flight 100 is taking off from jfk and landing in heathso. Our app seems to be working now. Let's put a bow on it. We want to be able to add this flight into our Google Calendar. Let's ask the agent to do this for us. For each flight result, make the entire card clickable to open a Google Calendar link with the flight information, notably the times and locations. Test this with a browser and show me a walkthrough when you are done. Again, we could let this task run in the background, but this product is really, really mind blowing sometimes time. So let's actually watch it side by side. The agent will also show you what it's thinking about while it's doing its work. So here it's saying reviewing clickable items, it's starting to map some of the flight data and now it's gonna to go off and read some of the files that are relevant for this conversation. It looks like it's implementing the Google Calendar integration. The agent divides things into sections, so it's a bit easier for the user to follow along. Of course, you can always get into the nitty gritty by going to the editor and showing all the steps. So it looks like it's done. And it's now going to the browser and actually testing this feature. So when the blue border is visible, this means the browser is under the agent's control. And here it's testing out American Airlines flight 100 and can move the cursor to click. And now you can see we are able to add this flight to our calendar. And now that the agent is done using the browser, it's going to put together a walkthrough. This is the third and final artifact to show us that it is indeed done with the task that we requested. And here you can see sort of some of the features that it implemented here, the Google Calendar integration, and that it verified using American Airlines flight 100. And let's head back over to a browser. We can try this feature ourselves. We'll come in here, put in American Airlines flight 100. Looks like data is flowing correctly. And Hey, it looks like it generated a calendar event for us. So let's head back over to our editor and let's commit this code. And there's a nice little button here to just generate a commit message. Again, this is context aware. So it's using your conversation history in addition to the files to come up with this commit message. This looks pretty good. Let's commit it. There you have it. We just built a new app from scratch in just a few minutes. And we believe that this is the new way for devs to get work done, reviewing artifacts, managing multiple agents and getting tasks over the finish line with an AI powered editor. The anti gravity team is already hard at work on what's next, so stay tuned for future updates. I'll catch you all on the next one.
