@@ -2548,6 +2548,7 @@ export default {
   "Raw-翻译-Linux-诞生-35-周年": "Linux 诞生 35 周年",
   "Raw-翻译-Linux-from-Scratch": "Linux from Scratch",
   "Raw-翻译-Linux-73-rc1-释出": "Linux 7.3-rc1 释出",
+  "Raw-翻译-LinkedIn-Larpmaxxing": "LinkedIn Larpmaxxing",
   "Raw-翻译-Lingodev-YC-F24-is-hiring-a-senior-content": "Lingo.dev YC F24 is hiring a senior cont...",
   "Raw-翻译-Ling-Tiny-30-is-a-glimpse-of-the-future": "Ling Tiny 3.0 is a glimpse of the future",
   "Raw-翻译-LibreOffice-268-释出": "LibreOffice 26.8 释出",
