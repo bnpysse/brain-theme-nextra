@@ -1,0 +1,222 @@
+---
+title: "The Evolution of the Agent Harness_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+The Evolution of the Agent Harness
+
+智能体挂载系统的演进
+
+Sometime around Christmas 2025, AI engineers noticed a change in agents. They started to work! It’s hard to pin down exactly why. Maybe we finally had holiday downtime to try the newest agents with the newest models. Maybe the models had crossed some
+
+capability threshold
+
+. Maybe
+
+the wrappers
+
+around the models had matured.
+
+2025年圣诞节前后，AI工程师注意到智能体发生了变化。它们开始工作了！很难确切指出原因。也许我们终于有了假期停工时间来试用最新的智能体和最新的模型。也许模型已经跨越了某个
+
+能力阈值
+
+。也许
+
+模型周围的封装层
+
+已经成熟。
+
+What I’ll argue in this post is that it was the confluence of the last two.
+
+The model and the harness improving together
+
+and then their curves of improvement crossing at the right moment. And that dynamic helps to explain what comes next: models keep absorbing the harness into their weights, engineers keep deleting what got absorbed, and
+
+what remains is a harness for human attention rather than for the model.
+
+我将在本文中论证，这是后两者的汇合。
+
+模型和挂载系统共同改进
+
+然后它们的改进曲线在恰当的时刻交叉。而这种动态有助于解释接下来会发生什么：模型不断将挂载系统吸收到其权重中，工程师不断删除被吸收的部分，而
+
+剩下的是一套面向人类注意力的挂载系统，而不是面向模型的。
+
+Lukasz Kaiser, one of the people who invented the Transformer, said on
+
+“Unsupervised Learning”
+
+in June:
+
+“The change last winter, last Christmas — it’s a little hard to pin down. I mean, the harness changed and a little post-training changed and then new pre-trained models came… but it felt like a
+
+big jump
+
+which is not that easy to pin down what did it.”
+
+Transformer的发明者之一卢卡什·凯泽（Lukasz Kaiser）在6月的
+
+“Unsupervised Learning”
+
+节目中说：
+
+“去年冬天、去年圣诞节的变化——有点难以确切指出。我的意思是，挂载系统变了，后训练也变了一点，然后新的预训练模型出现了……但感觉像是一次
+
+巨大飞跃
+
+，很难确切指出是什么造成的。”
+
+The answer to
+
+“What happened?”
+
+isn’t solely in the model weights. It’s in the system that grew up around the weights.
+
+The answer is in the agent harness.
+
+“发生了什么？”
+
+的答案不仅仅在模型权重中。它在围绕权重成长起来的系统中。
+
+答案就在智能体挂载系统中。
+
+Think back to November 2022, when ChatGPT was the most advanced AI tool. The only capability at its disposal was next-token prediction and some Reinforcement Learning from Human Feedback (RLHF) that allowed it to act like a helpful assistant. No tools, no search, and no reasoning.
+
+回想2022年11月，当时ChatGPT是最先进的AI工具。它唯一可用的能力是下一个词元预测和一些基于人类反馈的强化学习（RLHF），这使它能够表现得像一个乐于助人的助手。没有工具，没有搜索，也没有推理。
+
+The original ChatGPT was confined to its training data and the prompt you sent it. No more, no less.
+
+It was a brain in a vat.
+
+最初的ChatGPT被限制在它的训练数据和你发送给它的提示之内。不多不少。
+
+它是一个缸中之脑。
+
+The agent harness is a way for the LLM to
+
+break free from that confinement
+
+and interact with real digital information space.
+
+智能体挂载系统是让LLM
+
+摆脱那种限制
+
+并与真实数字信息空间交互的一种方式。
+
+What a Harness Actually Is
+
+挂载系统究竟是什么
+
+An agent harness is everything besides the model weights that makes the agent work.
+
+The environment, tools, context and guardrails that surround the model. Without the harness the model is a brain in a vat. It can take an epistemic action, but needs the harness to actuate that decision in real digital space.
+
+智能体挂载系统是除了模型权重之外，让智能体工作的一切。
+
+围绕模型的环境、工具、上下文和护栏。没有挂载系统，模型就是一个缸中之脑。它可以采取认知行动，但需要挂载系统在真实数字空间中执行那个决定。
+
+The harness is like giving the mind of the model a body.
+
+挂载系统就像给模型的心智一个身体。
+
+With the harness, the model can perceive (context), act (tools), persist information (memory and compaction), and enforce its boundaries (permissions and guardrails).
+
+有了挂载系统，模型可以感知（上下文）、行动（工具）、持久化信息（记忆和压缩），并强制执行其边界（权限和护栏）。
+
+Harness 1.0: The Past, “The Bolt-On Era”
+
+挂载系统1.0：过去，“外挂时代”
+
+Two curves run through the path of model / harness evolution.
+
+What the harness asks of the model, and what the model can deliver in practice.
+
+两条曲线贯穿模型/挂载系统的演进路径。
+
+挂载系统对模型的要求，以及模型在实践中能够交付的东西。
+
+The gap between these two curves is equal to the effectiveness of an agent, and the closing of that gap is what I’ll argue led to the tangible improvement in agents that Lukasz Kaiser referenced.
+
+这两条曲线之间的差距等于智能体的有效性，而差距的缩小正是我论证的、卢卡什·凯泽所提到的智能体切实改进的原因。
+
+Here’s how the gap closes, in stages:
+
+以下是差距如何分阶段缩小：
+
+ReAct, “The Harness on Paper”
+
+(October 2022):
+
+ReAct
+
+is a prompting technique to get models to reason through prompting. It’s the agentic loop on paper, external to the model weights. It defines the idea of an “agent loop” where a model reasons -&gt; acts -&gt; observes -&gt; repeats. Again,
+
+the ReAct loop exists only as a prompting method.
+
+ReAct，“纸面上的挂载系统”
+
+（2022年10月）：
+
+ReAct
+
+是一种提示技术，通过提示让模型进行推理。它是纸面上的智能体循环，位于模型权重之外。它定义了“智能体循环”的概念，即模型推理 -&gt; 行动 -&gt; 观察 -&gt; 重复。同样，
+
+ReAct循环仅作为一种提示方法存在。
+
+Prompting is the only reasoning method that exists at this time and no one calls it a “harness.” Toolformer (Meta, Feb. 2023), that same winter, hints that tool use could be trained in rather than prompted. It’s a bit like Alan Turing’s idea of the computer before it was instantiated in a physical substrate. A powerful idea that is only later made manifest. (ReAct predates ChatGPT by a month — October 2022 vs. November 2022). Both the curves are near zero at this point. The gap is small because
+
+we are just getting started
+
+.
+
+提示是当时唯一存在的推理方法，没有人称它为“挂载系统”。同年冬天的Toolformer（Meta，2023年2月）暗示，工具使用可以通过训练获得，而不是通过提示。这有点像艾伦·图灵关于计算机在物理基板中实例化之前的构想。一个强大的想法，只是后来才被实现。（ReAct比ChatGPT早一个月——2022年10月对2022年11月）。此时两条曲线都接近于零。差距很小，因为
+
+我们才刚刚开始
+
+。
+
+AutoGPT/BabyAGI, “Premature Autonomy”
+
+(Spring 2023): With AutoGPT/BabyAGI, the harness curve sprints ahead of the model capability curve. Both hand the model full autonomy, asking the model to act as an “autonomous employee,” but the models at this point are still little more than brittle next-token predictors.
+
+AutoGPT/BabyAGI，“过早的自主性”
+
+（2023年春季）：有了AutoGPT/BabyAGI，挂载系统曲线冲到了模型能力曲线前面。两者都赋予模型完全自主权，要求模型充当“自主员工”，但此时的模型仍然不过是脆弱的下一个词元预测器。
+
+A loop doesn’t add capability to a model.
+
+A loop amplifies the capability a model has, and below some threshold the loop amplifies errors rather than reliability. Consider the power of compounding in the negative: 95% reliability per-step over a 20-step task results in a ~36% average success rate. The harness hands the model an assignment it has no realistic chance of completing.
+
+循环不会给模型增加能力。
+
+循环放大模型已有的能力，而在某个阈值以下，循环放大的是错误而不是可靠性。考虑负向复利的力量：在20步任务中每步95%的可靠性，平均成功率约为36%。挂载系统交给模型一个它实际上没有机会完成的任务。
+
+This is where the gap is at its widest
+
+and the next 18 months are a reaction and attempt to close that gap.
+
+这是差距最大的地方
+
+而接下来的18个月是对此的反应和缩小差距的尝试。
+
+Cursor/Copilot, “Retreat to Human in the Loop”
+
+(2023 - 2024): The first AI-powered IDEs recognize the failure-mode of giving the model too much autonomy. They close the gap by pulling the harness curve down below the model curve.
+
+Cursor/Copilot，“退回到人在回路”
+
+（2023 - 2024）：第一批AI驱动的IDE认识到给予模型过多自主权的失败模式。它们通过将挂载系统曲线拉低到模型曲线以下来缩小差距。
+
+Don’t give the model the loop directly; give the human the loop
+
+and empower the human to orchestrate the loop while the model speeds the human up. The first version of Devin tries to hand the autonomy back to the model. A
+
+test from the team
+
+不要直接把循环交给模型；把循环交给人
+
+并赋予人编排循环的能力，同时模型加快人的速度。Devin的第一个版本试图将自主权交还给模型。一个
+
+来自团队的测试
