@@ -1,4 +1,5 @@
 export default {
+  "Daily-Summary-20261002": "Daily_Summary_20261002",
   "Daily-Summary-20261001": "Daily_Summary_20261001",
   "Daily-Summary-20260930": "Daily_Summary_20260930",
   "Daily-Summary-20260929": "Daily_Summary_20260929",
