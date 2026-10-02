@@ -5889,6 +5889,7 @@ export default {
   "Auto-简报-Markdown-SVG-upgrades": "Markdown SVG upgrades",
   "Auto-简报-Mapped-Which-Countries-Have-the-Most-Arabl": "Mapped Which Countries Have the Most Ara...",
   "Auto-简报-Mapped-Where-Young-Americans-Are-Buying-Ho": "Mapped Where Young Americans Are Buying ...",
+  "Auto-简报-Mapped-Where-US-Jobs-Are-Most-Exposed-to-A": "Mapped Where U.S. Jobs Are Most Exposed ...",
   "Auto-简报-Mapped-Where-Trump-Has-Traveled-in-His-Sec": "Mapped Where Trump Has Traveled in His S...",
   "Auto-简报-Mapped-Where-Homelessness-Rates-Are-Highes": "Mapped Where Homelessness Rates Are High...",
   "Auto-简报-Mapped-What-Every-Country-Exports-Most": "Mapped What Every Country Exports Most",
