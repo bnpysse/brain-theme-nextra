@@ -1,0 +1,418 @@
+---
+title: "Academia is for Ambition — Alex Zhang, MIT_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：Academia is for Ambition — Alex Zhang, MIT
+
+学术属于雄心壮志——麻省理工学院张亚历
+
+【文章正文】：
+
+Last call for regular tickets for
+
+AI Engineer NYC
+
+! As an exclusive for Latent Space subscribers, the first 30 of you can
+
+take a 30% off code
+
+if it helps - for new tickets only, no refunds! See you in 2 weeks!
+
+纽约AI工程师大会常规票最后召集！作为Latent Space订阅用户专属福利，前30位报名者可享7折优惠码（仅限新购票，不可退款）。两周后见！
+
+While we tend to cover industry on the pod, every so often we celebrate a clearly emerging superstar PhD. In
+
+2024
+
+we featured
+
+Shunyu Yao
+
+, who went on to build Operator at OpenAI and is now
+
+Chief AI Scientist of Tencent
+
+. In
+
+2025
+
+we featured
+
+Jack Morris
+
+, who went on to cofound
+
+Engram
+
+at
+
+$600m
+
+and is now a leading voice on
+
+continual learning
+
+.
+
+虽然我们播客通常聚焦产业界，但偶尔也会推介崭露头角的学术新星。2024年我们报道过后来创建OpenAI Operator、现任腾讯首席AI科学家的姚舜雨；2025年则介绍了联合创立估值6亿美元的Engram、现成为持续学习领域领军人物的杰克·莫里斯。
+
+This year we are proud to feature the work of
+
+Alex Zhang
+
+of MIT.
+
+今年我们很荣幸推介麻省理工学院张亚历的研究成果。
+
+From GPU kernels and
+
+KernelBench
+
+to
+
+Recursive Language Models
+
+,
+
+Mismanaged Geniuses
+
+, and massive multi-agent swarms,
+
+Alex Zhang
+
+is exploring how much capability we’re leaving on the table by wrapping increasingly powerful models in primitive systems.
+
+从GPU内核与KernelBench，到递归语言模型《被错管的天才》及大规模多智能体集群，张亚历正在探索：将日益强大的模型封装在原始系统中，究竟让我们损失了多少潜能。
+
+RLMs took over the timeline early this year:
+
+递归语言模型今年初引发热潮：
+
+and an RLM based harness was the first to ~solve ARC-AGI-3 before
+
+OpenAI’s Astra:
+
+基于RLM的框架更在OpenAI的Astra之前率先"解决"了ARC-AGI-3：
+
+and is even today, influencing new research that has
+
+more extreme
+
+implications than RLMs:
+
+至今仍在影响比RLMs更具颠覆性的新研究：
+
+We go deep on GPU Mode and AI-written kernels, research taste and why academics should take bets industry labs won’t, GEV and alternatives to the standard autoregressive language model, and the idea of harnesses as compositional generalizers. Alex explains RLMs, context offloading, programmatic subagent calling, Prime Agent, persistent subagents, and why the “language model” of the future may actually be an invisible swarm of agents underneath a simple interface. We also discuss OpenAI’s massive agent experiments, Kimi swarms, open-ended research at Sakana AI, speculative programmatic tool calling, capability overhang, Neuralese, and where Alex thinks the next big research opportunities may lie.
+
+我们深入探讨了GPU Mode与AI编写内核、研究品味的养成、学者为何应挑战工业实验室不敢涉足的领域、广义期望值及其对标准自回归语言模型的替代方案，以及作为组合泛化器的框架理念。张亚历详解了递归语言模型、上下文卸载、程序化子智能体调用、主智能体、持久化子智能体，以及为何未来的"语言模型"可能只是简单界面下不可见的智能体集群。我们还讨论了OpenAI的大规模智能体实验、Kimi集群、Sakana AI的开放式研究、推测性程序化工具调用、能力冗余、神经语，以及张亚历眼中的下一个重大研究机遇。
+
+We discuss:
+
+探讨内容包括：
+
+Why
+
+AI-generated GPU kernels
+
+still leave substantial room for human expertise
+
+为何AI生成的GPU内核仍需人类专家智慧
+
+How one expert insight can potentially replace enormous amounts of
+
+brute-force token search
+
+专家洞见如何替代海量暴力符号搜索
+
+Why PhD students should take
+
+research bets
+
+that initially look trivial, weird, or pointless
+
+博士生为何应投身看似琐碎、怪异或无价值的研究赌注
+
+What
+
+SWE-bench, RLMs, ReAct, and Quiet-STaR
+
+reveal about research taste
+
+SWE-bench等工具揭示的研究品味
+
+GEV and why a
+
+language model
+
+does not have to mean an autoregressive text-to-text decoder
+
+广义期望值为何颠覆自回归文本解码器的语言模型定义
+
+Why
+
+Claude Code, Codex, and Pi
+
+are structurally more similar than they look
+
+Claude Code等系统的深层结构相似性
+
+How
+
+harness design
+
+can improve compositional generalization across tasks and domains
+
+框架设计如何提升跨任务组合泛化能力
+
+RLMs:
+
+递归语言模型：
+
+context offloading, code execution, recursive subagents, and shared memory
+
+上下文卸载、代码执行、递归子智能体与共享内存
+
+Prime Agent, continual harnesses, and
+
+persistent agent-to-agent communication
+
+主智能体、持续框架与持久化智能体间通信
+
+Why the model you query in the future may secretly be an
+
+entire swarm or scaffold
+
+未来你查询的模型可能是隐藏的智能体集群
+
+OpenAI’s
+
+10,000-agent experiment, 130B output tokens, and ~$40M-equivalent
+
+problem solving
+
+OpenAI的万级智能体实验与价值4000万美元的问题求解
+
+Why much of an agent swarm may be
+
+wasted search
+
+— and why convergence is still hard
+
+智能体集群的搜索冗余与收敛难题
+
+Kimi versus OpenAI
+
+and different approaches to multi-agent systems
+
+Kimi与OpenAI的多智能体系统路径差异
+
+Open-endedness,
+
+Sakana AI
+
+, and finding hidden gems in enormous amounts of generated work
+
+开放式研究与海量生成作品中的价值发现
+
+Why current frontier models may already have a large
+
+capability overhang
+
+前沿模型可能存在的能力冗余
+
+Speculative programmatic tool calling
+
+and overlapping tool execution with generation
+
+推测性程序化工具调用与生成重叠执行
+
+Whether English, code, or an entirely new
+
+“Neuralese”
+
+constrains how models reason
+
+英语/代码/神经语对模型推理的约束
+
+AI for science
+
+, fast-moving benchmarks, and how Alex chooses what research problems to bet on
+
+科研AI、快速演进的基准测试与张亚历的研究选题策略
+
+Alex Zhang
+
+张亚历
+
+Website: alexzhang13.github.io
+
+个人网站
+
+X: @a1zhang
+
+推特账号
+
+Timestamps
+
+时间轴
+
+00:00:00
+
+Introduction
+
+开场
+
+00:00:49
+
+GPU Mode, KernelBench, and AI-Written Kernels
+
+GPU模式与AI编写内核
+
+00:07:38
+
+Human Expertise vs. Brute-Force AI Search
+
+人类专家与暴力搜索对比
+
+00:13:20
+
+Research Taste and Taking Big Bets
+
+研究品味与重大赌注
+
+00:19:28
+
+GEV and Rethinking the Language Model
+
+广义期望值与语言模型反思
+
+00:29:03
+
+Video Game Agents and the Harness Problem
+
+游戏智能体与框架问题
+
+00:31:01
+
+Why Claude Code, Codex, and Pi Are So Similar
+
+Claude Code等系统的相似性
+
+00:36:42
+
+Harnesses as Compositional Generalizers
+
+作为组合泛化器的框架
+
+00:44:24
+
+RLMs Explained
+
+递归语言模型详解
+
+00:52:01
+
+Prime Agent and Persistent Subagents
+
+主智能体与持久化子智能体
+
+00:57:41
+
+RLMs in the Wild
+
+现实中的递归语言模型
+
+01:00:30
+
+OpenAI Swarms and the Future of Language Models
+
+OpenAI集群与语言模型未来
+
+01:07:26
+
+Open-Endedness and Sakana AI
+
+开放式研究与Sakana AI
+
+01:15:52
+
+Kimi vs. OpenAI Agent Swarms
+
+Kimi与OpenAI智能体集群对比
+
+01:20:06
+
+Capability Overhang and Speculative Tool Calling
+
+能力冗余与推测性工具调用
+
+01:28:19
+
+Neuralese, Future Research, and AI for Science
+
+神经语、未来研究与科学AI
+
+Transcript
+
+对话实录
+
+Introduction: Alex Zhang, RLMs, and GPU Mode
+
+开场：张亚历与递归语言模型
+
+Swyx [00:00:00]:
+
+All right, we’re here in the studio with Alex Zhang, I guess most famously of, RLMs, but you have a few other affiliations. Welcome to the show.
+
+好的，今天我们演播室请到以递归语言模型闻名的张亚历，您还有其他研究领域。欢迎参加节目。
+
+Alex Zhang [00:00:12]:
+
+Yeah. Thank you for having me.
+
+谢谢邀请。
+
+Swyx [00:00:13]:
+
+Yeah. I guess GPU Mode as well?
+
+您也参与GPU Mode项目？
+
+Alex Zhang [00:00:15]:
+
+Yes, GPU Mode as well.
+
+是的，也包括GPU Mode。
+
+Swyx [00:00:16]:
+
+You were shepherded in by Mark Saroufim. Not everyone gets that kind of welcome.
+
+Mark Saroufim引荐了您，这种礼遇可不常见。
+
+Alex Zhang [00:00:19]:
+
+Yep. Yeah. Yeah. I’m very close to all the people in GPU Mode, so yeah
+
+没错。我与GPU Mode团队成员关系密切...
+
+Swyx [00:00:23]:
+
+Yeah
+
+嗯
+
+Alex Zhang [00:00:23]:
+
+We often end up working together in various capacities, like even beyond just GPU Mode itself, so.
+
+我们常以不同形式合作，甚至超越GPU Mode项目本身。
+
+## 🔗 知识库双向关联
+
+- [[Raw_翻译_[AINews] Andrew Ng gets into AI Engineering|Andrew Ng gets into AI Engineering_全翻译]]
+
+- [[Raw_翻译_[AINews] 10 worse, 100x cheaper, 10000x faster Why Simulatio|10 worse, 100x cheaper, 10000x faster Why Simulatio_全翻译]]
+
+- [AI for Science最难学会的，是换一个问题_全翻译](/auto-clippings/Raw-翻译-AI-for-Science最难学会的，是换一个问题)
