@@ -2294,6 +2294,7 @@ export default {
   "Raw-翻译-Show-HN-Pause-–-weekly-curated-11-coffee-ma": "Show HN Pause – weekly curated 11 coffee...",
   "Raw-翻译-Show-HN-OpenTIE-and-OpenXWA-Modern-Ports-of": "Show HN OpenTIE and OpenXWA, Modern Port...",
   "Raw-翻译-Show-HN-Open-Source-eInk-Bike-Computer": "Show HN Open-Source eInk Bike Computer",
+  "Raw-翻译-Show-HN-Offrun-–-manage-every-coding-agent": "Show HN Offrun – manage every coding age...",
   "Raw-翻译-Show-HN-Moadimio-–-A-scheduler-for-agents": "Show HN Moadim.io – A scheduler for agen...",
   "Raw-翻译-Show-HN-Mini-AGI-–-Dynamic-continual-learni": "Show HN Mini-AGI – Dynamic continual lea...",
   "Raw-翻译-Show-HN-Markdown-Viewer-and-Editor": "Show HN Markdown Viewer and Editor",
