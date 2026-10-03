@@ -2344,6 +2344,7 @@ export default {
   "Raw-翻译-Sex-AI-and-the-Apocalypse": "Sex, AI, and the Apocalypse",
   "Raw-翻译-Several-vulnerabilities-have-been-discovere": "Several vulnerabilities have been discov...",
   "Raw-翻译-Setting-up-OpenCode-with-Ollama-and-sbx-on": "Setting up OpenCode with Ollama and sbx ...",
+  "Raw-翻译-September-sponsors-only-newsletter": "September sponsors-only newsletter",
   "Raw-翻译-September-2026-The-world-today-as-seen-by-o": "September 2026 The world today, as seen ...",
   "Raw-翻译-Self-parking-car-using-genetic-algorithm-20": "Self-parking car using genetic algorithm...",
   "Raw-翻译-Self-generated-prompt-injections-in-compact": "Self-generated prompt injections in comp...",
