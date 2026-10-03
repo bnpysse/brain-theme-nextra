@@ -3030,6 +3030,7 @@ export default {
   "Raw-翻译-Github-Imbad0202-academic-research-skills": "Github__Imbad0202_academic-research-skil...",
   "Raw-翻译-Github-Gitlawb-openclaude": "Github__Gitlawb_openclaude",
   "Raw-翻译-Github-Flowseal-zapret-discord-youtube": "Github__Flowseal_zapret-discord-youtube",
+  "Raw-翻译-Github-Effect-TS-effect": "Github__Effect-TS_effect",
   "Raw-翻译-Github-DietrichGebert-ponytail": "Github__DietrichGebert_ponytail",
   "Raw-翻译-Github-AprilNEA-OpenLogi": "Github__AprilNEA_OpenLogi",
   "Raw-翻译-Github-666ghj-MiroFish": "Github__666ghj_MiroFish",
