@@ -8,6 +8,7 @@ export default {
   "Raw-逐字稿-Wealthy-People-Are-Hiding-in-Plain-Sight-f": "Raw_逐字稿_Wealthy People Are Hiding in Pla...",
   "Raw-逐字稿-We-Need-To-Talk-About-Leopold": "Raw_逐字稿_We Need To Talk About Leopold",
   "Raw-逐字稿-WHAT-IS-TRANSCENDENTAL-MEDITATION-Ray-Dali": "Raw_逐字稿_WHAT IS TRANSCENDENTAL MEDITATIO...",
+  "Raw-逐字稿-Turkeys-20-Billion-Fund-Collapse-Explained": "Raw_逐字稿_Turkeys $20 Billion Fund Collaps...",
   "Raw-逐字稿-Three-Tools-for-Evaluating-Talent-Ray-Dali": "Raw_逐字稿_Three Tools for Evaluating Talen...",
   "Raw-逐字稿-This-new-startup-can-query-anywhere-youve": "Raw_逐字稿_This new startup can query anywh...",
   "Raw-逐字稿-This-Small-AI-Will-Change-Everything": "Raw_逐字稿_This Small AI Will Change Everyt...",
