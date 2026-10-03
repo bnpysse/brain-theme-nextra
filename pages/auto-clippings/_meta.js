@@ -2500,6 +2500,7 @@ export default {
   "Raw-翻译-Photon-Emission-Guided-Laser-Fault-Injectio": "Photon-Emission-Guided Laser Fault Injec...",
   "Raw-翻译-Photo-Scrubber-—-local-face-blur-metadata-r": "Photo Scrubber — local face blur  metada...",
   "Raw-翻译-Pgbot-A-59-MB-read-only-Postgres-tool-for-h": "Pgbot A 5.9 MB read-only Postgres tool f...",
+  "Raw-翻译-Personal-Agent-和Coding-Agent-的本质区别。": "Personal Agent 和Coding Agent 的本质区别。",
   "Raw-翻译-PayPal-Declined": "PayPal, Declined",
   "Raw-翻译-Palantir-founder-purchases-large-swath-of-f": "Palantir founder purchases large swath o...",
   "Raw-翻译-PaintNET-实验性支持-WineLinux": "Paint.NET 实验性支持 WineLinux",
