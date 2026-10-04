@@ -2280,6 +2280,7 @@ export default {
   "Raw-翻译-Study-Young-users-9-to-18Y-ditch-Google-for": "Study Young users 9 to 18Y ditch Google ...",
   "Raw-翻译-Students-prefer-Gemini-over-ChatGPT-and-Cla": "Students prefer Gemini over ChatGPT and ...",
   "Raw-翻译-StreetComplete-on-iOS-is-now-in-public-beta": "StreetComplete on iOS is now in public b...",
+  "Raw-翻译-Straw-Clutching": "Straw Clutching",
   "Raw-翻译-Stopping-the-smart-TV-from-being-used-again": "Stopping the smart TV from being used ag...",
   "Raw-翻译-Stop-Just-Stop": "Stop, Just Stop",
   "Raw-翻译-Stop-spending-money-on-smaller-classes": "Stop spending money on smaller classes",
