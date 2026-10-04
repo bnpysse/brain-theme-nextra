@@ -3326,6 +3326,7 @@ export default {
   "Raw-翻译-Bonsai-2-27B-Near-Lossless-Compression-in-a": "Bonsai 2 27B Near-Lossless Compression i...",
   "Raw-翻译-Bodily-Oddities": "Bodily Oddities",
   "Raw-翻译-Bob-and-Van": "Bob and Van",
+  "Raw-翻译-Bob-Cringely-Has-Died": "Bob Cringely Has Died",
   "Raw-翻译-Bluesky-reply-bot-checker": "Bluesky reply bot checker",
   "Raw-翻译-Bitget-被盗走价值-3875-亿美元加密货币": "Bitget 被盗走价值 3.875 亿美元加密货币",
   "Raw-翻译-Bill-Gates-recently-bought-158B-of-this-tra": "Bill Gates recently bought $1.58B of thi...",
