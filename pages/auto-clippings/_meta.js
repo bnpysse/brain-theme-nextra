@@ -2133,6 +2133,7 @@ export default {
   "Raw-翻译-Two-American-Airlines-Flights-End-Up-with-t": "Two American Airlines Flights End Up wit...",
   "Raw-翻译-Tutoring-company-tells-parents-to-save-thei": "Tutoring company tells parents to save t...",
   "Raw-翻译-Turned-Cursor-token-burn-into-a-floating-de": "Turned Cursor token burn into a floating...",
+  "Raw-翻译-Turn-off-Apple-Intelligence-on-macOS-27-and": "Turn off Apple Intelligence on macOS 27 ...",
   "Raw-翻译-TurboKV-Insanely-fast-Rust-key-value-store": "TurboKV Insanely fast Rust key-value sto...",
   "Raw-翻译-Truemetrics-YC-S23-Is-Hiring-a-GTM-Founders": "Truemetrics YC S23 Is Hiring a GTM Found...",
   "Raw-翻译-True-Rate-of-Unemployment": "True Rate of Unemployment",
