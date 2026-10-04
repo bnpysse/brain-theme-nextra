@@ -3051,6 +3051,7 @@ export default {
   "Raw-翻译-Github-davila7-claude-code-templates": "Github__davila7_claude-code-templates",
   "Raw-翻译-Github-cursor-plugins": "Github__cursor_plugins",
   "Raw-翻译-Github-cs341-illinois-coursebook": "Github__cs341-illinois_coursebook",
+  "Raw-翻译-Github-coreyhaines31-marketingskills": "Github__coreyhaines31_marketingskills",
   "Raw-翻译-Github-cordiverse-cordis": "Github__cordiverse_cordis",
   "Raw-翻译-Github-cloudflare-security-audit-skill": "Github__cloudflare_security-audit-skill",
   "Raw-翻译-Github-cathrynlavery-diagram-design": "Github__cathrynlavery_diagram-design",
