@@ -2412,6 +2412,7 @@ export default {
   "Raw-翻译-Rust-on-the-JVM-now-passes-99-of-official-u": "Rust on the JVM now passes 99 of officia...",
   "Raw-翻译-Runways-WorldPrompt-and-the-Engineering-of": "Runways WorldPrompt and the Engineering ...",
   "Raw-翻译-Run-macOS-Software-on-Linux": "Run macOS Software on Linux",
+  "Raw-翻译-Run-Qwen-38-Flash-Next-125B-on-consumer-har": "Run Qwen 3.8 Flash Next 125B on consumer...",
   "Raw-翻译-Run-It-Hot-Yet-Again": "Run It Hot, Yet Again",
   "Raw-翻译-Roundup-89-It-isnt-X-its-Y": "Roundup 89 It isnt X, its Y",
   "Raw-翻译-Roundup-88-Is-it-time-to-panic-yet": "Roundup 88 Is it time to panic yet",
