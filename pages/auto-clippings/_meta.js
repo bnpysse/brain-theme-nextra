@@ -2564,6 +2564,7 @@ export default {
   "Raw-翻译-OpenAI的AI作弊被抓后，竟找DeepSeek、Kimi和通义千问来帮它评估作弊效": "OpenAI的AI作弊被抓后，竟找DeepSeek、Kimi和通义千问来帮它评估...",
   "Raw-翻译-OpenAI智能体，被曝失控": "OpenAI智能体，被曝失控",
   "Raw-翻译-OpenAI投资的公司正利用AI设计抗体：AI制药已成前沿实验室必选方向": "OpenAI投资的公司正利用AI设计抗体：AI制药已成前沿实验室必选方向",
+  "Raw-翻译-OpenAI元老的一封离职信，揭开了奥特曼最不想承认的真相": "OpenAI元老的一封离职信，揭开了奥特曼最不想承认的真相",
   "Raw-翻译-OpenAI「亲儿子」反水，认中国模型做「赛博义父」": "OpenAI「亲儿子」反水，认中国模型做「赛博义父」",
   "Raw-翻译-OpenAI、Anthropic、谷歌联手研究-AI-安全；微信员工辟谣-AI-助手小": "OpenAI、Anthropic、谷歌联手研究 AI 安全；微信员工辟谣 AI ...",
   "Raw-翻译-OpenAI、Anthropic-再次发出「AI-末日」警告；小米澎程今日全国交付；D": "OpenAI、Anthropic 再次发出「AI 末日」警告；小米澎程今日全国交...",
