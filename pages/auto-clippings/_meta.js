@@ -3265,6 +3265,7 @@ export default {
   "Raw-翻译-Claude-Fable-51-made-me-a-really-nice-anima": "Claude Fable 5.1 made me a really nice a...",
   "Raw-翻译-Claude-Cowork-and-chat-are-now-one-Claude": "Claude Cowork and chat are now one Claud...",
   "Raw-翻译-Claude-Codes-Next-Era-—-Thariq-Shihipar-Ant": "Claude Codes Next Era — Thariq Shihipar,...",
+  "Raw-翻译-Claude-Code-的「乐高」模式，让程序员彻底玩「上头」了": "Claude Code 的「乐高」模式，让程序员彻底玩「上头」了",
   "Raw-翻译-Claude-Code-now-reads-AGENTSmd-if-there-is": "Claude Code now reads AGENTS.md if there...",
   "Raw-翻译-Claude-Code-allows-cross-session-communicat": "Claude Code allows cross-session communi...",
   "Raw-翻译-Claude-55-发布，性能直逼-Fable，还要卷价格": "Claude 5.5 发布，性能直逼 Fable，还要卷价格",
