@@ -2360,6 +2360,7 @@ export default {
   "Raw-翻译-Show-HN-Algo-Trading-Skills-501-agent-skill": "Show HN Algo-Trading-Skills - 501 agent ...",
   "Raw-翻译-Show-HN-Agentic-CUDA-Kernel-Optimizer": "Show HN Agentic CUDA Kernel Optimizer",
   "Raw-翻译-Show-HN-AgentSight-–-eBPF-observability-for": "Show HN AgentSight – eBPF observability ...",
+  "Raw-翻译-Show-HN-AI-search-for-every-photo-and-every": "Show HN AI search for every photo and ev...",
   "Raw-翻译-Show-HN-A-game-about-fake-news-and-memes": "Show HN A game about fake news and memes",
   "Raw-翻译-Shimano-Bicycle-Museum-Review": "Shimano Bicycle Museum Review",
   "Raw-翻译-Shein香港上市首日股價下跌　期待已久的股市首秀表現疲弱": "Shein香港上市首日股價下跌　期待已久的股市首秀表現疲弱",
