@@ -5914,6 +5914,7 @@ export default {
   "Auto-简报-OpenAI的AI作弊被抓后，竟找DeepSeek、Kimi和通义千问来帮它评估作弊": "OpenAI的AI作弊被抓后，竟找DeepSeek、Kimi和通义千问来帮它评估...",
   "Auto-简报-OpenAI智能体，被曝失控": "OpenAI智能体，被曝失控",
   "Auto-简报-OpenAI投资的公司正利用AI设计抗体：AI制药已成前沿实验室必选方向": "OpenAI投资的公司正利用AI设计抗体：AI制药已成前沿实验室必选方向",
+  "Auto-简报-OpenAI元老的一封离职信，揭开了奥特曼最不想承认的真相": "OpenAI元老的一封离职信，揭开了奥特曼最不想承认的真相",
   "Auto-简报-OpenAI「亲儿子」反水，认中国模型做「赛博义父」": "OpenAI「亲儿子」反水，认中国模型做「赛博义父」",
   "Auto-简报-OpenAI主动报告欧盟的维基事件：智能体与监管落差": "OpenAI主动报告欧盟的维基事件：智能体与监管落差",
   "Auto-简报-OpenAIs-AI-Agents-Just-Crossed-A-Line": "OpenAIs AI Agents Just Crossed A Line",
