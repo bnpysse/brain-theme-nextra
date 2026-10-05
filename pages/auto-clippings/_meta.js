@@ -3754,6 +3754,7 @@ export default {
   "Raw-翻译-202633-The-CapEx-Train-Keeps-Rolling": "2026.33 The CapEx Train Keeps Rolling",
   "Raw-翻译-2026-烟灶选购指南": "2026 烟灶选购指南",
   "Raw-翻译-2026-年雨果奖公布": "2026 年雨果奖公布",
+  "Raw-翻译-2026-年诺贝尔生理学或医学奖授予了三位研究光遗传学的科学家": "2026 年诺贝尔生理学或医学奖授予了三位研究光遗传学的科学家",
   "Raw-翻译-2026-年拉斯克奖宣布": "2026 年拉斯克奖宣布",
   "Raw-翻译-2026-年-Ig-Nobel-宣布": "2026 年 Ig Nobel 宣布",
   "Raw-翻译-2026-in-LLMs-so-far": "2026 in LLMs so far",
