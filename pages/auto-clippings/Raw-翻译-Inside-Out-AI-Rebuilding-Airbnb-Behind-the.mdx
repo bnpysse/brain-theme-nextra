@@ -1,0 +1,330 @@
+---
+title: "Inside-Out AI Rebuilding Airbnb Behind the Scenes and Across_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：Inside-Out AI: Rebuilding Airbnb Behind the Scenes and Across the Guest Experience
+
+【文章标题】：由内而外的人工智能：Airbnb幕后改造与全方位宾客体验重塑
+
+【文章正文】：
+
+Prior to joining Airbnb as CTO in January,
+
+在1月加入Airbnb担任首席技术官之前，
+
+Ahmad Al-Dahle
+
+艾哈迈德·阿尔-达赫莱
+
+was head of generative AI at Meta and led the launch of its open source Llama models over 2023-2025. Now Al-Dahle is in charge of turning Airbnb into an “AI-native company”.
+
+曾担任Meta生成式人工智能负责人，并在2023-2025年主导了开源Llama模型的发布。如今他正致力于将Airbnb打造成"AI原生企业"。
+
+What that means in practice is
+
+具体实践体现在：
+
+using AI internally
+
+内部运用AI
+
+to speed up product development, then using those same capabilities to
+
+加速产品开发，再将相同能力用于
+
+transform the customer experience
+
+变革客户体验
+
+. We’re calling this
+
+我们称之为
+
+an “inside-out AI” approach
+
+"由内而外AI"策略
+
+and in this article we’ll dig into the details.
+
+本文将深入解析这一策略。
+
+An example of inside-out AI: Airbnb used a custom internal tool called Everest to help accelerate the launch of a new external service. (Diagram by Latent Space)
+
+典型案例：Airbnb使用内部工具Everest加速新外部服务上线（图表由Latent Space提供）
+
+Al-Dahle spoke with Latent Space about Airbnb’s AI transformation. We began by asking him why he made the shift from building frontier models at Meta to
+
+阿尔-达赫莱向Latent Space讲述Airbnb的AI转型。我们首先询问他为何从Meta的前沿模型构建转向
+
+deploying them at Airbnb
+
+Airbnb的实际部署
+
+.
+
+“Fundamentally, I like to chase where I believe
+
+"本质上，我热衷于追寻
+
+the hard frontiers live
+
+真正的技术前沿所在
+
+,” he replied, pun perhaps intended. “We kind of knew [at Meta] what the flywheel looks like, we understood how to improve the model capabilities, generation on generation.”
+
+他回答时或许带着双关，"在Meta时我们已经掌握飞轮效应，懂得如何迭代提升模型能力"。
+
+Al-Dahle’s tweet in January
+
+阿尔-达赫莱1月的推文
+
+on joining Airbnb from Meta
+
+关于从Meta加入Airbnb
+
+The next challenge, Al-Dahle thinks, is deploying models at scale. At Airbnb, his goals are to "
+
+阿尔-达赫莱认为，下一挑战是大规模模型部署。他在Airbnb的目标是"
+
+push people to work differently
+
+推动工作方式革新
+
+, because these tools are transforming how you work,” and to "
+
+因为这些工具正改变工作形态"，以及"
+
+take these systems and deploy them in production
+
+将系统投入生产环境
+
+, in creative ways that actually add value to a core user experience.”
+
+用创新方式为核心用户体验创造价值"
+
+Jumping to prototypes, code is the artifact
+
+快速原型开发时代，代码即产物
+
+From its launch in 2008, Airbnb has been considered
+
+自2008年创立以来，Airbnb始终被视为
+
+a technology company
+
+科技公司
+
+operating in the hospitality industry. The company went public in 2020 and now has a market capitalization of approximately
+
+在酒店业运营的科技企业。2020年上市后，目前市值约
+
+$93 billion
+
+930亿美元
+
+(at time of writing). So it’s a big operation to try and make “AI-native.”
+
+（截至发稿）。因此实现"AI原生"是项庞大工程。
+
+Al-Dahle reeled off a few statistics to show that Airbnb is AI-pilled now:
+
+阿尔-达赫莱列举数据证明Airbnb已深度AI化：
+
+60% of its code is now AI-authored
+
+60%代码由AI生成
+
+, it has
+
+公司
+
+shipped nearly 80% more features and improvements
+
+功能更新量提升近80%
+
+year over year, and
+
+同比，且
+
+pull-request throughput for the average engineer is up about 1.6x
+
+工程师平均PR处理量增长1.6倍
+
+.
+
+But how exactly has Airbnb done all this?
+
+如何实现这些突破？
+
+Firstly, he said it’s about
+
+首先在于
+
+changing the organizational process for software engineering
+
+重组软件工程流程
+
+. Traditionally, you might do product requirements, then design work in Figma, then engineering implementation, and eventually production testing. In the past, these would’ve required handoffs from one team to another. But now,
+
+传统流程需经历产品需求-Figma设计-工程实施-生产测试的团队接力，如今
+
+Airbnb has its product, design and engineering teams move directly to working with prototypes
+
+产品/设计/工程团队直接协作原型开发
+
+.
+
+“Breaking that time down is actually one of the biggest savings that a lot of traditional software companies have to make the leap to do,” said Al-Dahle. “And so we made that leap and it actually ended up adding a ton of tailwind to our product development process.”
+
+"压缩周期是传统软件企业必须突破的瓶颈，我们的变革为产品研发注入强劲动力"
+
+A byproduct of this change is that
+
+变革的副产品是
+
+teams deal directly with code
+
+团队直接处理代码
+
+, rather than dealing with "artifacts" like a product requirements document.
+
+而非需求文档等"中间产物"
+
+“We moved away from excessive artifact generation to
+
+"我们摒弃冗余产物，转向
+
+the code being the artifact that we reason upon, and prototypes
+
+以代码和原型作为决策依据
+
+,” he said.
+
+AI resolves roughly half of support tickets
+
+AI解决近半客服工单
+
+Al-Dahle told us that customer support was the first user-facing area that it introduced AI into. He described it as “the hardest problem to deploy,” because “the stakes and the consequences of a mistake are really high.”
+
+客服是AI落地的首个用户端场景，也是"部署难度最高的领域，因为错误代价极其昂贵"
+
+Roughly half of Airbnb’s support tickets are now resolved purely by AI
+
+目前近半客服工单由AI独立解决
+
+, said Al-Dahle (this is in line with the company’s
+
+（符合公司
+
+Q2 results
+
+Q2财报
+
+, which put the figure at nearly 45%).
+
+披露的45%数据）
+
+The key to this, he says, is using
+
+关键在于运用
+
+synthetic data
+
+合成数据
+
+to thoroughly test the system before taking it to production.
+
+在生产前充分测试系统
+
+“We start with: build a model, build the agent, and begin to
+
+"流程是：构建模型→创建代理→
+
+generate a battery of synthetic data
+
+生成系列合成数据
+
+before you ever go into production.”
+
+再进入生产环境"
+
+He notes that although agents handle about half of customer support queries, they are careful about
+
+虽然代理处理半数据询，但对
+
+what requires human assistance
+
+需人工介入的情况
+
+— with safety issues, for example.
+
+（如安全问题）仍保持谨慎
+
+“So while we solve 50% of the tickets, we’re actually deliberate about the tickets we don’t choose to solve yet [with agents].”
+
+"在解决50%工单的同时，我们审慎选择暂不交由代理处理的类型"
+
+Everest, Airbnb’s AI context graph
+
+AI知识图谱Everest
+
+Two
+
+两项
+
+Airbnb Services
+
+Airbnb服务
+
+projects you may not be familiar with yet are
+
+新项目包括
+
+grocery deliveries and airport pickups
+
+杂货配送与机场接送
+
+(the grocery service has just been
+
+（杂货服务近期已
+
+expanded to more cities
+
+扩展至更多城市
+
+). Both were launched earlier this year, thanks in part to Airbnb’s inside-out AI approach.
+
+），其快速上线得益于由内而外AI策略
+
+It was an
+
+内部组织知识图谱
+
+internal organizational context graph called Everest
+
+Everest
+
+that helped bring these products to market quickly. Al-Dahle said that Everest uses technologies such as LLMs, embeddings and AI-based retrieval to build and query the graph.
+
+加速产品上市。该图谱融合LLM、嵌入向量和AI检索技术
+
+He explained that the grocery delivery and airport pickup services are “kind of similar services — API integrations with partner services [external companies] that integrated onto our platform.”
+
+这两项服务本质都是"与外部合作伙伴的API集成"
+
+Airbnb’s new grocery delivery service
+
+Airbnb杂货配送服务
+
+The grocery service was built first, and learnings from it we
+
+杂货服务先行开发，其经验
+
+## 🔗 知识库双向关联
+
+- [The Future of AI in the Workplace  Special Episode Mike Sull_逐字稿](/auto-clippings/Raw-逐字稿-The-Future-of-AI-in-the-Workplace-Special)
+
+- [The Pulse Meta’s self-inflicted resignation-wave_全翻译](/auto-clippings/Raw-翻译-The-Pulse-Metas-self-inflicted-resignation)
+
+- [实测豆包工作：连上飞书后，Agent 终于像个同事了_全翻译](/auto-clippings/Raw-翻译-实测豆包工作：连上飞书后，Agent-终于像个同事了)

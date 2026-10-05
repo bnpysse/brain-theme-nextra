@@ -1,0 +1,48 @@
+---
+title: "_mvschwarz_openrig_全翻译"
+tags: ["Github_Trending", "全文翻译"]
+---
+
+# OpenRig
+
+[![npm 版本](https://img.shields.io/npm/v/@openrig/cli)](https://www.npmjs.com/package/@openrig/cli) [![npm 下载量](https://img.shields.io/npm/dw/@openrig/cli)](https://www.npmjs.com/package/@openrig/cli) [![许可证: Apache 2.0](https://img.shields.io/github/license/mvschwarz/openrig)](LICENSE) [![GitHub 星标](https://img.shields.io/github/stars/mvschwarz/openrig?style=social)](https://github.com/mvschwarz/openrig/stargazers)
+
+一个harness包裹模型，而rig则包裹你的harness。用YAML定义你的智能体团队，一条命令即可启动。让Claude Code和Codex在同一个rig中协同工作，作为统一系统进行管理。
+
+OpenRig将AI编程助手从一堆终端会话转变为持久化、有组织的团队。只需与领队智能体沟通预期目标，它就能协调跨团队专家，为你带来需要关注的结果和决策。从一个代码库和一个实用变更开始，保持团队工作内容和上下文在相同地址。
+
+**指南:** [新手指南](docs/reference/getting-started.md) · **遇到问题?** [帮助文档](docs/reference/help.md) · **疑问解答:** [问答区](https://github.com/mvschwarz/openrig/discussions/92) · **更新与演示:** [X平台@_feralmachine](https://x.com/_feralmachine)
+
+## 运行效果展示
+
+![OpenRig终端界面：以图表展示构建rig，座位运行状态表（含运行时、模型、上下文和状态），以及单个座位详情（真实录屏，10秒）](assets/readme/openrig-agents-working.gif)
+
+**从这里开始:** [首次使用引导](docs/reference/getting-started.md)：安装部署，在代码库中启动双智能体团队，获取首个审核通过的变更。
+
+今天不打算设置？获取后续教程和OpenRig更新 → https://openrig.dev/follow
+
+## 安装与首次运行
+
+需在macOS或Linux系统上安装Node.js 22/24和tmux。Apple芯片Mac请使用Node.js 22（[兼容性记录](docs/releases/v0.5.15.md#known-compatibility-limitation)）。暂不支持原生Windows系统，WSL2未经测试。启动rig会修改供应商钩子和工作区信任设置，执行以下命令前请阅读[OpenRig对系统的改动](#what-openrig-changes-on-your-machine)并备份相关文件。
+
+```bash
+
+npm install -g @openrig/cli
+
+rig setup --dry-run
+
+```
+
+若使用Bun安装，请执行`bun add -g @openrig/cli`。OpenRig仍需Node.js环境，故需同时安装Node.js 22。Bun可能会阻断本包的安装后脚本，此时[系统改动说明](#what-openrig-changes-on-your-machine)中提及的Node.js和SQLite检查不会在安装时运行。
+
+选择你已有的工作账号：**Claude Code、Codex或两者**。可复用现有明确选择，无需额外订阅。`rig setup --dry-run`预览完整设置流程，实际执行`rig setup`时会检查所有harness和cmux。该步骤对[供应商选择路径](docs/reference/getting-started.md#choose-your-providers)是可选的。
+
+首次启动时，智能体会询问：**"允许你的智能体无需重复确认即可执行OpenRig命令？"推荐选择"是"**，该授权涵盖所有`rig`命令（包括启停智能体和配置），默认作用于个人项目范围。选择"否"或不做选择将保留原设置。可通过"撤销本次设置添加的OpenRig命令权限"仅移除相关授权。
+
+请检查`tmux -V`并确保仅安装所选CLI工具：`claude --version`加`claude auth status`，或`codex --version`加`codex login status`。如需登录，执行`claude auth login`或`codex login`，不要安装或登录未选用的供应商。
+
+| 团队 | 入门配置 | 模型 |
+
+| --- | --- | --- |
+
+| 双Codex智能体
