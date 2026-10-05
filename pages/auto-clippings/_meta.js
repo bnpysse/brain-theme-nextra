@@ -3431,6 +3431,7 @@ export default {
   "Raw-翻译-Better-AI-code-comment-detector": "Better AI code comment detector",
   "Raw-翻译-Benjamin-Franklins-Alter-Egos-Gave-Him-the": "Benjamin Franklins Alter Egos Gave Him t...",
   "Raw-翻译-Belgian-car-salesman-becomes-prince-after-D": "Belgian car salesman becomes prince afte...",
+  "Raw-翻译-Beam-Reflections-501B-open-weight-model": "Beam Reflections 501B open-weight model",
   "Raw-翻译-Be-alert-targeted-attacks-on-prominent-Rust": "Be alert targeted attacks on prominent R...",
   "Raw-翻译-Base-Power-Company-Chapter-3": "Base Power Company Chapter 3",
   "Raw-翻译-A级景区密集摘牌，发生了什么": "A级景区密集摘牌，发生了什么",
