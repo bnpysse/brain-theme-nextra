@@ -3076,6 +3076,7 @@ export default {
   "Raw-翻译-Github-unslothai-unsloth": "Github__unslothai_unsloth",
   "Raw-翻译-Github-tt-a1i-archify": "Github__tt-a1i_archify",
   "Raw-翻译-Github-trycua-cua": "Github__trycua_cua",
+  "Raw-翻译-Github-thedotmack-claude-mem": "Github__thedotmack_claude-mem",
   "Raw-翻译-Github-tech-leads-club-agent-skills": "Github__tech-leads-club_agent-skills",
   "Raw-翻译-Github-tailscale-tailcat": "Github__tailscale_tailcat",
   "Raw-翻译-Github-smicallef-spiderfoot": "Github__smicallef_spiderfoot",
