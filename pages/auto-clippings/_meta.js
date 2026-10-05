@@ -3090,6 +3090,7 @@ export default {
   "Raw-翻译-Github-multimodal-art-projection-YuE": "Github__multimodal-art-projection_YuE",
   "Raw-翻译-Github-modular-modular": "Github__modular_modular",
   "Raw-翻译-Github-microsoft-markitdown": "Github__microsoft_markitdown",
+  "Raw-翻译-Github-michael-denyer-pstack-claude": "Github__michael-denyer_pstack-claude",
   "Raw-翻译-Github-melgarafael-DeskcommCRM": "Github__melgarafael_DeskcommCRM",
   "Raw-翻译-Github-megadose-holehe": "Github__megadose_holehe",
   "Raw-翻译-Github-mattpocock-skills": "Github__mattpocock_skills",
