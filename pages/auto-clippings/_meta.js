@@ -3606,6 +3606,7 @@ export default {
   "Raw-翻译-ADHD-autism-or-complex-trauma-pdf": "ADHD, autism or complex trauma [pdf]",
   "Raw-翻译-AADP-出现之后：AGENT-安全开始把能做和该做真正分开": "AADP 出现之后：AGENT 安全开始把能做和该做真正分开",
   "Raw-翻译-A-walkable-ASCII-cyberpunk-city-in-one-HTML": "A walkable ASCII cyberpunk city in one H...",
+  "Raw-翻译-A-tribute-to-one-of-the-best-games-on-the-A": "A tribute to one of the best games on th...",
   "Raw-翻译-A-single-function-Jev-like-wrapper-for-LLMs": "A single function Jev-like wrapper for L...",
   "Raw-翻译-A-single-firm-is-behind-OpenAI-Anthropic-an": "A single firm is behind OpenAI, Anthropi...",
   "Raw-翻译-A-shot-scraper-style-JSON-API-on-Bun-14s-ne": "A shot-scraper-style JSON API on Bun 1.4...",
