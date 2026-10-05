@@ -3628,6 +3628,7 @@ export default {
   "Raw-翻译-A-CVE-Dispute": "A CVE Dispute",
   "Raw-翻译-A-Brief-History-of-the-Bloomberg-Terminal": "A Brief History of the Bloomberg Termina...",
   "Raw-翻译-A-Brain-Too-Big-to-Carry-—-On-Device-vs-Dat": "A Brain Too Big to Carry — On-Device vs ...",
+  "Raw-翻译-A-40ms-Go-garbage-collector-pause-caused-by": "A 40ms Go garbage collector pause caused...",
   "Raw-翻译-A-386-PC-for-Your-RP2350": "A 386 PC for Your RP2350",
   "Raw-翻译-A-20-year-long-permanent-cookie-Americagov": "A 20-year-long permanent cookie America....",
   "Raw-翻译-9月数据来了，这波车市的真正逻辑大多数人没看懂": "9月数据来了，这波车市的真正逻辑大多数人没看懂",
