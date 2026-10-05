@@ -3411,6 +3411,7 @@ export default {
   "Raw-翻译-As-a-Language-Model-Chat-Template-Switches": "As a Language Model Chat Template Switch...",
   "Raw-翻译-Artificial-Analysis-Intelligence-Index-v42": "Artificial Analysis Intelligence Index v...",
   "Raw-翻译-Artie-YC-S23-Is-Hiring-Technical-AES": "Artie YC S23 Is Hiring Technical AES",
+  "Raw-翻译-ArtCraft-Apps-–-open-source-Adobe-compatibl": "ArtCraft Apps – open-source Adobe compat...",
   "Raw-翻译-Are-you-worried-about-a-potential-ban-of-Ch": "Are you worried about a potential ban of...",
   "Raw-翻译-Are-we-watching-the-US-go-bankrupt": "Are we watching the U.S. go bankrupt",
   "Raw-翻译-Are-Open-Models-Catching-Up": "Are Open Models Catching Up",
