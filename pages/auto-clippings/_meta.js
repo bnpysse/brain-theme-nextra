@@ -3537,6 +3537,7 @@ export default {
   "Raw-翻译-AMD-Based-FreeBSD-Desktop-Reloaded": "AMD Based FreeBSD Desktop Reloaded",
   "Raw-翻译-AMD-82-亿美元收购李飞飞-AI-创业公司；Manus-推出个人-AI-助手-CU": "AMD 82 亿美元收购李飞飞 AI 创业公司；Manus 推出个人 AI 助手...",
   "Raw-翻译-AMD-82-亿美元收购-World-Labs，买的不只是世界模型": "AMD 82 亿美元收购 World Labs，买的不只是世界模型",
+  "Raw-翻译-AI，为什么总在画美女": "AI，为什么总在画美女",
   "Raw-翻译-AI飞速发展下，理科更无用还是文科更无用": "AI飞速发展下，理科更无用还是文科更无用",
   "Raw-翻译-AI音乐的发展，会让未来的音乐发生什么样的变化": "AI音乐的发展，会让未来的音乐发生什么样的变化",
   "Raw-翻译-AI越火，手机、电脑越贵：一场被抢出来的涨价潮": "AI越火，手机、电脑越贵：一场被抢出来的涨价潮",
