@@ -1,0 +1,84 @@
+---
+title: "I made my iPhone a second GPU for my 24 GB MacBook Qwen 3.8_全翻译"
+tags: ["Reddit_全文翻译", "r_LocalLLaMA"]
+---
+
+【帖子标题】：I made my iPhone a second GPU for my 24 GB MacBook: Qwen 3.8 27B prefills 29–44% faster & my holds part of the CTX window.
+
+【帖子标题】：我把iPhone变成24GB MacBook的第二块GPU：Qwen 3.8 27B预填充速度提升29-44% 且可分担部分上下文窗口
+
+【帖子正文】：
+
+**DISCLAIMER** THE PREFILLING TPS SHOWN ON THE PHONE IS COMPUTED ONLY FOR THE LAYERS IT HOLDS. ALREADY FIXING IT TO SHOW END-TO-END PREFILL RATE. NUMBERS BELOW ARE ACCURATE FOR E2E PREFILL RATE.
+
+【免责声明】手机显示的预填充TPS仅针对其负责的层计算。已修正为显示端到端预填充速率。以下数字均为准确的端到端预填充速率。
+
+Every file or tool result my agent reads on a 24 GB M4 Pro MacBook is a wait, and 64k of 8-bit context is all that fits next to Qwen 3.8 27B (IQ4_XS), even with the wired limit raised to 20480. An iPhone 17 Pro Max was sitting in my pocket, so I figured what can I do to make use of this extra silicon.
+
+我的24GB M4 Pro MacBook代理读取每个文件或工具结果都需要等待，即便将线框限制提升至20480，在运行Qwen 3.8 27B（IQ4_XS）时也只能勉强容纳64k的8位上下文。口袋里的iPhone 17 Pro Max让我开始思考如何利用这块额外的芯片。
+
+Turns out a 10 Gb/s USB-C cable & some software is all you need. The Mac runs layers 1–40 of each 256-token batch and streams the activations to the phone. The phone runs layers 41–64 on its GPU while the Mac starts the next batch. The A19 Pro's GPU has matrix units (Metal 4 tensor ops), and they make the phone's half 2.4x faster than the same phone without them.
+
+实际上只需一根10Gb/s的USB-C电缆和特定软件。Mac处理每256个token批次的1-40层，并将激活值流式传输到手机。手机用GPU运行41-64层时，Mac已开始处理下一批次。A19 Pro的GPU搭载矩阵单元（Metal 4张量运算），使手机的处理速度比未使用时快2.4倍。
+
+Same build, phone off vs. on, prefilling a 2,000-token file into a saved agent session:
+
+相同构建下，关闭/开启手机时向已保存代理会话预填充2000个token文件的对比：
+
+8k context: Mac alone 132 tok/s → Mac + iPhone 177 tok/s (+35%) (measured two days earlier, same bench)
+
+16k context: Mac alone 109 tok/s → Mac + iPhone 157 tok/s (+44%)
+
+32k context: Mac alone 101 tok/s → Mac + iPhone 130 tok/s (+29%)
+
+48k context: Mac alone 87 tok/s → Mac + iPhone 113 tok/s (+30%)
+
+8k上下文：单Mac 132 token/秒 → Mac+iPhone 177 token/秒（+35%）（两天前同基准测试）
+
+16k上下文：单Mac 109 token/秒 → Mac+iPhone 157 token/秒（+44%）
+
+32k上下文：单Mac 101 token/秒 → Mac+iPhone 130 token/秒（+29%）
+
+48k上下文：单Mac 87 token/秒 → Mac+iPhone 113 token/秒（+30%）
+
+A fresh 27k-token agent session, cold: 245 s on stock llama.cpp, 228 s on my fork with the Mac alone, and 168 s with the phone.
+
+全新27k token代理会话冷启动：原版llama.cpp需245秒，单Mac运行我的分支需228秒，加入手机后仅需168秒。
+
+Past 64k the phone switches jobs. The oldest KV pages move to the phone and the Mac runs all 64 layers. For every attention layer, the phone computes attention over the old keys on its GPU, and the Mac merges that with its own part. While writing, the phone's Neural Engine takes part of that work too: each 16k-key page of old context is compiled into a Neural Engine model with the keys as its weights. At 140k that took writing from 279 to 176 ms per token compared with the phone's GPU alone.
+
+超过64k后手机转换任务。最旧的KV页移至手机，Mac运行全部64层。每个注意力层中，手机用GPU计算旧键的注意力，Mac将其与自身部分合并。生成时手机神经引擎也参与工作：每16k键的旧上下文页面会被编译为以键为权重的神经引擎模型。在140k上下文时，相比单用手机GPU，每token生成时间从279毫秒降至176毫秒。
+
+The server allocates 196k–229k of 8-bit context based on the phone's free memory; that's up to ~5.7 GB of KV cache living on the phone instead of the Mac, so the Mac's memory use stops growing at 64k. I've tested a growing session to 128k at 8-bit, with 3/3 planted facts recalled. Separately, at 140k in 4-bit, the run passed the gate with greedy output matching the Mac-only run for 32 generated tokens.
+
+服务器根据手机空闲内存分配196k-229k的8位上下文，最高约5.7GB的KV缓存驻留手机而非Mac，因此Mac内存使用在64k后不再增长。实测8位模式下可扩展至128k会话，3/3植入事实均被召回。另在4位140k测试中，生成结果通过验证门限，前32个token贪婪输出与单Mac运行一致。
+
+What it doesn't do: speed up writing below 64k. That's the Mac's job. My fork's kernels (SME2 on the M4 CPU and Metal fusions) plus DFlash2 speculative decoding take it from 11.3 tok/s on stock llama.cpp to 25 tok/s at about 30k context with medium thinking, phone or not. SME2 also adds up to 29% to prefill on the Mac alone. Past 64k the phone does share the writing (attention over the old keys), and without it the Mac would have to drop to 4-bit context to reach 128k. In real use I have seen upwards of 30 TPS at lower context.
+
+局限性：64k以下不加速生成（这是Mac的职责）。我的分支内核（M4 CPU的SME2和Metal融合）配合DFlash2推测解码，在30k中等复杂度上下文时，无论是否使用手机，生成速度从原版llama.cpp的11.3 token/秒提升至25 token/秒。单Mac运行时SME2还可额外提升预填充速度达29%。超过64k后手机确实分担生成任务（旧键注意力计算），否则Mac需降级至4位上下文才能达到128k。实际使用中在低上下文场景下可达30+ token/秒。
+
+The phone joins prefills over about 512 tokens. In one real session, that was 7 of 36 requests, but about 83% of the tokens read. Past 64k it holds the context and does the old-key attention, but it stops running layers 41–64 there for now; doing both is next. One request at a time.
+
+手机在超过512个token时加入预填充。某次真实会话中，这涉及36个请求中的7个，但覆盖约83%的读取token。超过64k后手机负责维护上下文和执行旧键注意力计算，但当前暂不运行41-64层——实现双重任务是下一步目标。目前仅支持单请求处理。
+
+I'm curious what this setup could do with newer model architectures. DeepSeek V4.1-Flash reports 890 bytes per token for its global KV cache and adds n-gram embedding tables (Engram). Qwen3.8-Flash-Next, the Qwen 4 architecture preview, has an n-gram lookup table too. Those aren't features of the 27B model I tested, and I haven't benchmarked either architecture here. The real gold is within the newer phones and models working together. With the A20 Pro in the iPhone 18 Pro Max, I bet there is a lot more for me to push.
+
+我期待这套方案在新模型架构上的表现。DeepSeek V4.1-Flash宣称其全局KV缓存为890字节/token并加入n-gram嵌入表（Engram）。Qwen 4架构预览版Qwen3.8-Flash-Next也有n-gram查找表。这些特性在我测试的27B模型中均未体现，目前也未进行基准测试。真正的潜力在于新款手机与模型的协同工作——搭载A20 Pro的iPhone 18 Pro Max必将带来更大突破空间。
+
+Code, setup and bench scripts:
+
+代码、设置与测试脚本：
+
+https://github.com/StayLameBro/backburner
+
+Still a lot of work to do but I built this with Opus 5.5. Happy to answer anything.
+
+虽仍有大量工作待完成，但本项目基于Opus 5.5构建。欢迎随时提问。
+
+## 🔗 知识库双向关联
+
+- [刚刚，新款 Mac mini 发布价格大涨2500元，苹果第一次为 AI 造电脑_全翻译](/auto-clippings/Raw-翻译-刚刚，新款-Mac-mini-发布价格大涨2500元，苹果第一次为-AI-造电脑)
+
+- [刚刚，新款 Mac mini 发布价格大涨2500元，苹果第一次为 AI 造电脑_简报](/auto-clippings/Auto-简报-刚刚，新款-Mac-mini-发布价格大涨2500元，苹果第一次为-AI-造电脑)
+
+- [刚刚，新款 Mac mini 发布价格大涨2500元，苹果第一次为 AI 造电脑_全翻译](/auto-clippings/Raw-翻译-刚刚，新款-Mac-mini-发布价格大涨2500元，苹果第一次为-AI-造电脑)
