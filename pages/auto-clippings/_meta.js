@@ -3111,6 +3111,7 @@ export default {
   "Raw-翻译-Github-cordiverse-cordis": "Github__cordiverse_cordis",
   "Raw-翻译-Github-cloudflare-security-audit-skill": "Github__cloudflare_security-audit-skill",
   "Raw-翻译-Github-cathrynlavery-diagram-design": "Github__cathrynlavery_diagram-design",
+  "Raw-翻译-Github-boykopovar-AnyPS5": "Github__boykopovar_AnyPS5",
   "Raw-翻译-Github-bilawalsidhu-gods-eye-view": "Github__bilawalsidhu_gods-eye-view",
   "Raw-翻译-Github-basecamp-omarchy": "Github__basecamp_omarchy",
   "Raw-翻译-Github-ayghri-i-have-adhd": "Github__ayghri_i-have-adhd",
