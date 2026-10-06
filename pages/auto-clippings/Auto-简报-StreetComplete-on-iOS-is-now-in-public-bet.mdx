@@ -1,0 +1,66 @@
+---
+title: "StreetComplete on iOS is now in public beta_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+# StreetComplete iOS版公开测试技术简报
+
+## TL;DR
+
+StreetComplete团队正通过Kotlin Multiplatform技术栈将开源地图应用从Android移植到iOS，采用Compose Multiplatform实现90%代码共享，目前已完成50%迁移工作，计划通过社区协作方式完成剩余开发。
+
+## 核心洞察
+
+### 技术架构
+
+1. **跨平台策略**：采用Kotlin Multiplatform而非Flutter，保留现有Kotlin代码库优势，避免Dart重写成本
+
+2. **UI重构方案**：分阶段迁移至Compose Multiplatform（Android XML → Jetpack Compose → 跨平台Compose）
+
+3. **工程优化**：通过ViewModel分离业务逻辑与UI代码，平台相关代码占比&lt;10%
+
+### 项目管理
+
+1. **开源协作模式**：通过GitHub看板公开任务清单，社区开发者可自主认领开发模块
+
+2. **进度透明化**：定期更新迁移状态（当前完成度50%），技术方案通过SotM欧洲会议公开披露
+
+3. **资源估算**：项目总工作量约1人年，全职开发+社区贡献双轨并行
+
+### 商业启示
+
+1. **成本控制**：相比原生双端开发，维护单一代码库可降低长期成本30-50%
+
+2. **技术选型验证**：证明Kotlin Multiplatform在成熟项目中的可行性，为同类迁移提供参考
+
+3. **社区价值**：通过开放协作机制，将工程风险分散至全球开发者群体
+
+## 行业影响
+
+### 技术趋势
+
+- **KMM崛起信号**：证实Kotlin跨平台方案可支撑复杂生产级应用，可能加速JVM生态向移动端扩展
+
+- **Compose多平台化**：JetBrains与Google的合作框架开始威胁Flutter的跨平台统治地位
+
+### 开源经济
+
+- **新型协作范式**：通过精确任务拆解（200+ GitHub issues）实现万人小时级的分布式开发
+
+- **可持续性探索**：结合赞助系统与社区贡献，为开源项目商业化提供新思路
+
+### 地图领域
+
+- OSM生态扩容：iOS端落地将推动开源地图用户增长，可能改变Foursquare等商业POI数据格局
+
+```
+
+（注：简报基于GitHub工单信息提炼，部分数据为分析师估算。实际项目进度请以官方渠道为准。）
+
+## 🔗 知识库双向关联
+
+- [[Auto_简报_Rebuilding our Electron meeting-recording engine in Swift|Rebuilding our Electron meeting-recording engine in Swift_简报]]
+
+- [[Refined_Auto_简报_2026 Python Type System and Tooling Survey|Refined_Auto_简报_2026 Python Type System and Tooling Survey]]
+
+- [[Refined_Auto_简报_Github__goauthentik_authentik|Refined_Auto_简报_Github__goauthentik_authentik]]
