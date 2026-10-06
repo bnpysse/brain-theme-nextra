@@ -2757,6 +2757,7 @@ export default {
   "Raw-翻译-NTSB-Preliminary-Report-Prime-Air-767-Runwa": "NTSB Preliminary Report Prime Air 767 Ru...",
   "Raw-翻译-NTSB-Issues-Investigative-Update-on-B-767-R": "NTSB Issues Investigative Update on B-76...",
   "Raw-翻译-NRC-issues-first-US-construction-permit-for": "NRC issues first U.S. construction permi...",
+  "Raw-翻译-NPD不是病，是综艺的KPI": "NPD不是病，是综艺的KPI",
   "Raw-翻译-NFLX-is-now-71-At-what-point-does-this-stop": "NFLX is now ~$71. At what point does thi...",
   "Raw-翻译-NEC-V20-CPU-A-bit-of-pep-for-an-XT": "NEC V20 CPU A bit of pep for an XT",
   "Raw-翻译-NASA-IBM-Lunar-Foundation-open-Source-Geosp": "NASA-IBM Lunar Foundation open-Source Ge...",
