@@ -1,0 +1,158 @@
+---
+title: "The Pulse RoR creator sparks new “death of coding by hand” d_全翻译"
+tags: ["大咖视点_全文翻译", "The_Pragmatic_Engineer_(顶级软件工程师)"]
+---
+
+【文章标题】：The Pulse: RoR creator sparks new “death of coding by hand” debate
+
+【文章标题】：《行业脉搏》：Ruby on Rails创始人再掀"手写代码消亡"论战
+
+【文章正文】：
+
+Before we start: if you happen to be in San Francisco on Thursday, 5 November, join me on the
+
+开场提醒：若您11月5日周四恰好在旧金山，欢迎参加我与
+
+System Update with The Pragmatic Engineer
+
+《务实工程师》栏目联合举办的
+
+event. This is an evening with OpenAI, Linear and DoorDash and myself, organized by Sentry. We get into what AI-augmented automations they’re running in prod, and how it’s going, in an off-the record (that is: not recorded!) and raw conversation. Seats are limited, and you can
+
+系统更新活动。这是由Sentry组织的闭门夜谈（即：不录音！），我们将与OpenAI、Linear和DoorDash展开坦诚对话，探讨他们正在生产环境运行的AI增强自动化实践及成效。席位有限，您可在此
+
+RSVP here
+
+预约报名。
+
+Hi, this is Gergely with a bonus, free issue of the Pragmatic Engineer Newsletter. In every issue, I cover Big Tech and startups through the lens of senior engineers and engineering leaders. Today, we cover one out of four topics from
+
+大家好，我是Gergely，这是《务实工程师通讯》的免费特刊。每期我都通过资深工程师和技术领袖的视角解读科技巨头与初创公司。今天我们选取上周
+
+the last week’s issue of The Pulse
+
+《行业脉搏》四大议题之一展开讨论。付费订阅用户七天前已收到下文完整内容。若这是转发邮件，您可在此
+
+subscribe here
+
+订阅。
+
+The creator of Ruby on Rails, David Heinemeier Hansson, caused quite a stir last week with comments in
+
+Ruby on Rails创始人David Heinemeier Hansson（DHH）上周在
+
+his Rails World keynote
+
+Rails世界大会主题演讲中抛出震撼观点，称其公司37signals已终结手写代码时代。
+
+This is a big deal because 37signals created Ruby on Rails, and they are known for their software craft there, especially when it comes to code quality. It’s also a business that’s 27 years old and is profitable. Despite that pedigree, DHH caused a stir among the dev community, saying:
+
+此事意义重大——37signals不仅是Ruby on Rails的缔造者，更以代码质量著称的软件工艺标杆。这家成立27年仍持续盈利的公司，其创始人的宣言在开发者社区引发轩然大波：
+
+“
+
+"
+
+At 37signals, a couple of weeks ago, we made the decision that it clearly means we’re done writing code by hand.
+
+两周前我们明确决定：37signals不再需要手写代码。
+
+We have gone pencils down on the idea that we were gonna write code by hand, as a normal course of business creating things.
+
+我们已搁置将手写代码作为常规业务创造手段的理念。
+
+Writing code by hand at 37signals is now an exceptional state. It is like seeing a bug in Sentry: something here went wrong; why was the agent not able to produce what we wanted? Okay, maybe for a little while, we’ll still get the old pencil out and dot it down for them, but then we fix the machine, we fix the factory, we get things going again. This is a recognition of what’s already happening.”
+
+如今手写代码在我们公司属于异常状态，就像Sentry里出现错误日志：说明某个环节出问题了——为何AI代理没能生成预期代码？或许我们仍会暂时手动修正，但最终要修复的是生产流程。这不过是对现状的正式承认。"
+
+DHH compared the maturation of AI tools into being highly capable at coding with the impact upon the craft of painting of the arrival of the camera:
+
+DHH将AI编码能力的成熟比作照相技术对绘画艺术的冲击：
+
+“On November 24th, 2025, we got the “Kodak Brownie” of our era. We got Opus 4.5. AI technology, accessible in a harness that many people could afford to use and experience for the first time what it’s like to create software in pairing with a new form of intelligence. This was the tipping point for me. There was everything before November 24th, and then there was everything after. This is going to be the date that history books going forward will mark as the inflection point for the age of agents.”
+
+"2025年11月24日，我们迎来了当代的'柯达布朗尼相机'——Opus 4.5。这款平价AI工具让大众首次体验与新型智能协作开发软件的震撼。这是我的认知转折点，历史教科书必将把这一天标记为智能代理时代的拐点。"
+
+He shared how 37signals has embraced a future where coding by hand is almost entirely absent:
+
+他分享了37signals拥抱"零手写代码"未来的具体实践：
+
+Embracing native mobile apps instead of web:
+
+转向原生移动应用开发：
+
+famously, 37signals is bearish on native iOS and Android apps and has built web versions instead. With AI, they are betting on native apps being much easier to be built with a small team and are already building new ones.
+
+这家以抵触iOS/Android原生应用著称的公司，过去坚持开发网页版。如今借助AI，他们正以小团队高效构建原生应用。
+
+Moving backend services to Rust, not Ruby
+
+后端服务改用Rust而非Ruby：
+
+: This is due to performance reasons and because agents write good enough Rust. That’s remarkable to hear from the creator of Ruby on Rails!
+
+既为性能考量，更因AI代理能编写合格的Rust代码——来自RoR创始人的表态令人惊叹！
+
+Ruby on Rails remains for web apps
+
+Ruby on Rails仍用于Web应用：
+
+: 37signals is not leaving RoR behind, but only because Ruby on Rails’ convention-over-configuration design makes it easy for agents to work with it.
+
+公司保留RoR仅因其"约定优于配置"的特性更适配AI代理协作。
+
+DHH closed by revealing that he no longer even thinks of himself as a professional programmer (emphasis mine):
+
+DHH结尾更重磅宣告（本人强调）：
+
+“I have retired from being a professional programmer. I think it was somewhere around 4 to 5 months ago, maybe March. I spent a quarter of a damn century chiseling code by hand and loving every moment of it. This is not something to look back upon with regret; this is something to look back upon with joy and accept that it is over.
+
+"我已从职业程序员身份退休。大约四五个月前（可能是三月），我结束了长达25年的手写代码生涯。这段充满热爱的时光值得欣喜回忆，但必须承认：它终结了。
+
+Writing code by hand is no longer an economically productive enterprise for the vast majority of programmers working at the vast majority of companies
+
+对绝大多数企业的绝大多数程序员而言，手写代码已不再具备经济价值。
+
+. On the other side of that is a new career as a professional maker of things, steering intelligence that was only available in science fiction up until a few moments ago.
+
+新时代的职业定位应是'智能驾驭者'——指挥那些不久前还只存在于科幻中的智能体进行创造。
+
+One of the things we’re gonna have to revisit is everything we think we know about software architecture. The main tool that we’ve used for a very long time is abstractions. Abstractions don’t make quite the same sense in the age of agents. The reason we did abstractions was in part not to repeat ourselves; well, now the price of repetition has gone to near zero.”
+
+我们必须重新审视软件架构认知。长期依赖的抽象思维在智能代理时代已不同往昔——当初为避免重复而抽象，如今重复的成本趋近于零。"
+
+It’s worth noting DHH’s keynote chose a spicy topic for a conference attended by engineers who are personally and professionally invested in the craft of building software!
+
+值得注意的是，DHH选择这个尖锐话题作为面向深耕软件工艺的工程师大会的主题演讲！
+
+Decline of coding by hand is long predicted
+
+手写代码的衰落早有预言
+
+In the first issue in The Pragmatic Engineer this year, on 6 January, I
+
+今年1月6日《务实工程师》创刊号中，我曾
+
+wrote
+
+撰文探讨：
+
+“
+
+"
+
+When AI writes almost all code, what happens to software engineering?
+
+当AI编写绝大多数代码时，软件工程将何去何从？
+
+No longer a hypothetical question, this is a
+
+这已不再是假设性问题..."
+
+## 🔗 知识库双向关联
+
+- [Raw_翻译_The Pulse a new trend, smart model routing](/auto-clippings/Raw-翻译-The-Pulse-a-new-trend-smart-model-routing)
+
+- [手艺还在，手工生产已不再是中心：程序员能力的三次上移_简报](/auto-clippings/Auto-简报-手艺还在，手工生产已不再是中心：程序员能力的三次上移)
+
+- [手艺还在，手工生产已不再是中心：程序员能力的三次上移_全翻译](/auto-clippings/Raw-翻译-手艺还在，手工生产已不再是中心：程序员能力的三次上移)

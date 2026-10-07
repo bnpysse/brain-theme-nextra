@@ -1,0 +1,85 @@
+---
+title: "Schemy Lisp En DOS_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+# SLED (Schemy Lisp en DOS) 技术简报
+
+## 核心概述
+SLED是一个精简的LISP方言实现，专为DOS环境设计，具有以下关键特性：
+- **谱系**：源自Kilo LISP，受Scheme启发但更简化
+- **定位**：被归类为"Ur-Lisp"（原始Lisp）
+- **运行环境**：原生支持FreeDOS/MS-DOS，兼容DOSBox系列模拟器
+- **设计哲学**：纯粹符号化处理，强调极简主义
+
+## 技术架构亮点
+
+### 数据类型系统
+1. **基础类型**：
+   - 点对(Pairs)：不可变的head-tail结构
+   - 原子(Atoms)：
+     * 符号(Symbols)：16字符限制的命名标识符
+     * 闭包(Closures)：函数对象
+     * 特殊符号(Special Symbols)：如nil等预定义符号
+
+2. **符号系统特色**：
+   - 严格的字符集限制（小写字母+数字+有限特殊字符）
+   - 大小写不敏感（自动转小写）
+   - 支持转义字符扩展符号表达力
+
+### 核心数据结构
+1. **列表实现**：
+   - 规范列表：以nil终止的点对链
+   - 非规范列表：非nil终止的异构结构
+   - 关联列表：键值对形式的特殊列表
+
+2. **数字模拟**：
+   - 采用计数法表示自然数（空列表=0，nil元素个数=数值）
+   - 类似冯·诺伊曼序数的实现方式
+   - 提供inc/dec/zero?等基本运算函数
+
+### 语言特性
+1. **求值模型**：
+   - 经典的"代码即数据"哲学
+   - 显式引用机制（quote/'语法）
+   - 严格求值策略
+
+2. **编程构造**：
+   - 基于lambda的特殊形式实现闭包
+   - 动态绑定机制（define）
+   - 精简的标准库设计
+
+## 技术价值分析
+
+### 复古计算意义
+- 为DOS复古计算场景提供现代LISP体验
+- 在资源受限环境（典型DOS系统内存&lt;640KB）实现语言解释器
+- 保留早期LISP语言设计精髓
+
+### 教学研究价值
+- 极简实现适合语言实现原理教学
+- 展示S表达式如何统一代码与数据
+- 演示基本函数式编程概念（闭包、递归等）
+
+### 工程启示
+- 展示如何在极端资源限制下设计实用系统
+- 类型系统的极简主义实现
+- 数字等常见概念的创新表示方法
+
+## 适用场景
+- DOS环境下的轻量级脚本需求
+- LISP语言教学与实验平台
+- 编程语言实现原理研究
+- 复古计算爱好者工具
+
+## 获取与使用
+- 项目主页：https://sled.neocities.org/
+- 支持环境：原生DOS或DOSBox系列模拟器
+- 文档包含完整的符号索引和标准库参考
+
+该项目的技术价值在于其极简主义设计和对早期计算环境的精准适配，为研究编程语言本质提供了干净的实验平台。
+
+## 🔗 知识库双向关联
+- [A Friendly Introduction to Racket_简报](/auto-clippings/Auto-简报-A-Friendly-Introduction-to-Racket)
+- [Headlong A Microharness for Persistent Agents_全翻译](/auto-clippings/Raw-翻译-Headlong-A-Microharness-for-Persistent-Agen)
+- [A Friendly Introduction to Racket_简报](/auto-clippings/Auto-简报-A-Friendly-Introduction-to-Racket)
