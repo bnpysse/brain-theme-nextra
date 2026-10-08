@@ -1,0 +1,74 @@
+---
+title: "Supabase Is Acquiring Turso_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Supabase Is Acquiring Turso
+
+【文章标题】：Supabase收购Turso
+
+【文章正文】：
+
+AI is enabling builders to create an immense amount of software. Today, agents are spinning up millions of databases to power the prototypes, explorations, dashboards, and apps they're building. This new pattern, at this massive scale, requires an evolution in database infrastructure. Turso is joining Supabase to build this evolution.
+
+人工智能正助力开发者创造海量软件。如今，智能体（agents）正启动数百万个数据库，为其构建的原型、探索项目、仪表盘和应用提供支持。这种大规模的新模式要求数据库基础设施的革新。Turso将加入Supabase共同推动这场变革。
+
+For existing users, nothing changes. Supabase will continue building around Postgres, while Turso will continue its work on SQLite. And together, we’re creating something new that will bring the Supabase experience to every agent.
+
+现有用户不受影响。Supabase将继续围绕Postgres发展，Turso则持续深耕SQLite。我们将携手打造新产品，让每个智能体都能获得Supabase的体验。
+
+Databases for agents#
+
+智能体的数据库#
+
+Supabase is already launching over one million databases per week. As agents build more software, we believe database demand will outpace the world’s current capacity to support them. So we need infrastructure that can scale to meet this growth and is suited to how we build with agents.
+
+Supabase每周已部署超100万个数据库。随着智能体开发更多软件，我们相信数据库需求将超越全球现有支持能力。因此需要可扩展的基础设施来适应这种增长，并匹配智能体的开发方式。
+
+Agents should be able to create a database as easily as creating a file, with just as little concern about cost. For smaller workloads, that shouldn’t require provisioning a dedicated machine every time. Databases should be cheap to create, available on demand, and have a clear path to production when needed.
+
+智能体应能像创建文件一样轻松创建数据库，且无需顾虑成本。对于轻量工作负载，不必每次都配置专用机器。数据库应具备低成本创建、按需可用、以及明确的投产路径等特性。
+
+SQLite is well suited to these small, on-demand workloads. Postgres is what you want as your application scales. We want builders to have the same developer experience from prototyping to production.
+
+SQLite非常适合这类轻量按需工作负载，而Postgres则是应用扩展时的理想选择。我们希望开发者从原型到生产都能获得一致的体验。
+
+Turso#
+
+Turso篇#
+
+Turso has built an architecture for exactly this pattern. They rebuilt SQLite in Rust and created a cloud platform where a single server can manage millions of databases, loading them when needed and suspending them when they’re not.
+
+Turso为此模式专门构建了架构：用Rust重写SQLite，并打造出可单服务器管理数百万数据库的云平台，实现按需加载与闲置暂停。
+
+This architecture makes it possible to provision a database for each agent on demand, whether on Turso Cloud or in customers’ own clouds, as Superhuman, Sauna.ai, CTO.new, and Mastra do.
+
+该架构使得为每个智能体按需配置数据库成为可能——无论是在Turso Cloud还是客户自有云上，正如Superhuman、Sauna.ai、CTO.new和Mastra等企业的实践。
+
+We share a vision for how infrastructure needs to evolve to support agentic AI. Turso will continue operating, with a clear path into the broader Supabase ecosystem as workloads grow.
+
+我们共同坚信基础设施需进化以支持AI智能体。Turso将继续运营，并随着工作负载增长明确融入更广阔的Supabase生态。
+
+Open source#
+
+开源篇#
+
+Turso and Supabase have a lot in common: a commitment to open source, a focus on developer experience, and an appetite to tackle hard infrastructure problems.
+
+Turso与Supabase志同道合：坚持开源、专注开发者体验、并热衷于解决基础设施难题。
+
+We’re excited to welcome Glauber Costa and Pekka Enberg to Supabase with the rest of the Turso team. Glauber will lead this agentic infrastructure effort.
+
+我们欣喜欢迎Glauber Costa、Pekka Enberg及Turso团队加入Supabase。Glauber将领导智能体基础设施建设。
+
+Our mission is to store the world’s data, and agents are going to create a lot more of it. This gets us closer to that goal.
+
+我们的使命是存储世界数据，而智能体将创造更多数据。此举让我们离目标更近一步。
+
+## 🔗 知识库双向关联
+
+- [Pgbot A 5.9 MB read-only Postgres tool for humans and agents_全翻译](/auto-clippings/Raw-翻译-Pgbot-A-59-MB-read-only-Postgres-tool-for-h)
+
+- [Pgbot A 5.9 MB read-only Postgres tool for humans and agents_全翻译](/auto-clippings/Raw-翻译-Pgbot-A-59-MB-read-only-Postgres-tool-for-h)
+
+- [SalesPatriot YC W25 Is Hiring Forward Deployed Engineers_简报](/auto-clippings/Auto-简报-SalesPatriot-YC-W25-Is-Hiring-Forward-Depl)
