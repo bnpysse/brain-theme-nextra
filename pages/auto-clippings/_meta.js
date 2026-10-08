@@ -3584,6 +3584,7 @@ export default {
   "Raw-翻译-App1｜下一节：教学工作紧张忙碌，下一节课从从容容": "App1｜下一节：教学工作紧张忙碌，下一节课从从容容",
   "Raw-翻译-App1｜ArkFlow：满足你的卡面收集癖，给信用卡做个卡面墙": "App1｜ArkFlow：满足你的卡面收集癖，给信用卡做个卡面墙",
   "Raw-翻译-App1-Coast：用十年经验，给记账这件事一个「终点」": "App1  Coast：用十年经验，给记账这件事一个「终点」",
+  "Raw-翻译-App-Store-生态规模五年翻倍，助力中国开发者走向全球": "App Store 生态规模五年翻倍，助力中国开发者走向全球",
   "Raw-翻译-Any-Nix-package-live-in-your-browser": "Any Nix package, live in your browser",
   "Raw-翻译-Any-Nix-package-live-in-the-browser": "Any Nix package, live in the browser",
   "Raw-翻译-Anti-Patterns-in-Software-Blogging": "Anti-Patterns in Software Blogging",
