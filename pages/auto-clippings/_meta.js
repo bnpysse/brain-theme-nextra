@@ -2053,6 +2053,7 @@ export default {
   "Raw-翻译-​艾可萨科技-王玮：航天商业下一步，太空数据中心-Founder-100": "​艾可萨科技 王玮：航天商业下一步，太空数据中心  Founder 100",
   "Raw-翻译-zai-orgGLM-53-·-Hugging-Face": "zai-orgGLM-5.3 · Hugging Face",
   "Raw-翻译-vivo-Buds-Clip-体验：42-小时续航的无感佩戴，音质好也舒服": "vivo Buds Clip 体验：42 小时续航的无感佩戴，音质好也舒服",
+  "Raw-翻译-ttok-10": "ttok 1.0",
   "Raw-翻译-ttok-04": "ttok 0.4",
   "Raw-翻译-smolmachines-smolvm-as-a-sandbox-for-untrus": "smolmachines  smolvm as a sandbox for un...",
   "Raw-翻译-shot-scraper-112": "shot-scraper 1.12",
