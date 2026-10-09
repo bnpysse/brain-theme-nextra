@@ -3731,6 +3731,7 @@ export default {
   "Raw-翻译-Abandoning-Scientific-Linux-Was-a-Mistake": "Abandoning Scientific Linux Was a Mistak...",
   "Raw-翻译-AWS-称无法恢复中东部分可用区资源和数据的访问": "AWS 称无法恢复中东部分可用区资源和数据的访问",
   "Raw-翻译-AWS-Acquires-DuckDB": "AWS Acquires DuckDB",
+  "Raw-翻译-ARTEX-从-GitHub-下架": "ARTEX 从 GitHub 下架",
   "Raw-翻译-AMD花82亿美元把李飞飞请进来，英特尔却哭晕在英伟达怀里": "AMD花82亿美元把李飞飞请进来，英特尔却哭晕在英伟达怀里",
   "Raw-翻译-AMDs-FP64-Boost-with-MI430X-Is-Even-Bigger": "AMDs FP64 Boost with MI430X Is Even Bigg...",
   "Raw-翻译-AMD82亿美元收购李飞飞WorldLab，为什么是现在买对了吗": "AMD82亿美元收购李飞飞WorldLab，为什么是现在买对了吗",
