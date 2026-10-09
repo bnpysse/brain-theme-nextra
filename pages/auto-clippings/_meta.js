@@ -32,6 +32,7 @@ export default {
   "Raw-逐字稿-RAY-DALIO-ON-THE-BOND-MARKET-WARNING-SIGNS": "Raw_逐字稿_RAY DALIO ON THE BOND MARKET WAR...",
   "Raw-逐字稿-RAY-DALIO-ON-THE-AI-BUBBLE": "Raw_逐字稿_RAY DALIO ON THE AI BUBBLE",
   "Raw-逐字稿-RAY-DALIO-EXPLAINS-WHAT-IS-CREDIT": "Raw_逐字稿_RAY DALIO EXPLAINS WHAT IS CREDI...",
+  "Raw-逐字稿-RAY-DALIO-EXPLAINS-THE-LONG-TERM-DEBT-CYCL": "Raw_逐字稿_RAY DALIO EXPLAINS THE LONG TERM...",
   "Raw-逐字稿-Powerful-AI-Is-Becoming-Almost-Free": "Raw_逐字稿_Powerful AI Is Becoming Almost F...",
   "Raw-逐字稿-PewDiePie-is-setting-AI-free-and-OpenAI-is": "Raw_逐字稿_PewDiePie is setting AI free... ...",
   "Raw-逐字稿-Past-the-Point-of-No-Return": "Raw_逐字稿_Past the Point of No Return",
