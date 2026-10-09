@@ -2489,6 +2489,7 @@ export default {
   "Raw-翻译-Starlink-ground-station-in-Poland-hit-by-fi": "Starlink ground station in Poland hit by...",
   "Raw-翻译-StarCraft-returns-in-2030-as-an-open-world": "StarCraft returns in 2030 as an open-wor...",
   "Raw-翻译-SpaceX、博通、甲骨文都在伸手要钱": "SpaceX、博通、甲骨文都在伸手要钱",
+  "Raw-翻译-SpaceX-呼吁在轨卫星加强协调": "SpaceX 呼吁在轨卫星加强协调",
   "Raw-翻译-Sovereign-Tech-Agency-invests-€500k-in-Flat": "Sovereign Tech Agency invests €500k in F...",
   "Raw-翻译-South-Park-creators-rename-show-South-Ameri": "South Park creators rename show South Am...",
   "Raw-翻译-Sousveillance": "Sousveillance",
