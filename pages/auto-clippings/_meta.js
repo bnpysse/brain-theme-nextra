@@ -3972,6 +3972,7 @@ export default {
   "Raw-翻译-2026国谈价格博弈全面前移，创新药估值迎来新变量": "2026国谈价格博弈全面前移，创新药估值迎来新变量",
   "Raw-翻译-2026台灣地方選舉：「九合一」為何重要選舉時程是什麼": "2026台灣地方選舉：「九合一」為何重要選舉時程是什麼",
   "Raw-翻译-2026中国能源主线": "2026中国能源主线",
+  "Raw-翻译-202641-Its-Not-You-Its-Me": "2026.41 Its Not You, Its Me",
   "Raw-翻译-202640-Dots-and-Question-Marks": "2026.40 Dots and Question Marks",
   "Raw-翻译-202639-Begun-the-Aggregator-Wars-Have": "2026.39 Begun, the Aggregator Wars Have",
   "Raw-翻译-202638-Doomforce": "2026.38 Doomforce",
