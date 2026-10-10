@@ -3113,6 +3113,7 @@ export default {
   "Raw-翻译-Kumander-Linux-–-A-Linux-Distro-with-a-Wind": "Kumander Linux – A Linux Distro with a W...",
   "Raw-翻译-Koreas-Trillion-Dollar-Sovereign-AI-Investm": "Koreas Trillion-Dollar Sovereign AI Inve...",
   "Raw-翻译-Korea-raises-data-breach-fines-to-10-of-rev": "Korea raises data breach fines to 10 of ...",
+  "Raw-翻译-Knuth-Reward-Check": "Knuth Reward Check",
   "Raw-翻译-Knowing-When-to-Stop-The-Art-of-Making-a-Lo": "Knowing When to Stop The Art of Making a...",
   "Raw-翻译-Kimi涨价、OpenAI降价：中国土AI冲击美国山大王": "Kimi涨价、OpenAI降价：中国土AI冲击美国山大王",
   "Raw-翻译-Kimi-启动IPO，赶在市场不再按梦想定价之前": "Kimi 启动IPO，赶在市场不再按梦想定价之前",
