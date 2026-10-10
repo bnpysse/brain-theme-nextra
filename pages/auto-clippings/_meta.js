@@ -2235,6 +2235,7 @@ export default {
   "Raw-翻译-Why-Dwarkesh-is-Wrong-about-Computer-Use-Ho": "Why Dwarkesh is Wrong about Computer Use...",
   "Raw-翻译-Why-Doesnt-Anyone-Want-to-Fix-One-of-Americ": "Why Doesnt Anyone Want to Fix One of Ame...",
   "Raw-翻译-Why-Chinas-AI-Bubble-Is-Also-Industrial-Pol": "Why Chinas AI Bubble Is Also Industrial ...",
+  "Raw-翻译-Why-AlphaFold-Didnt-Solve-Protein-Folding-—": "Why AlphaFold Didnt Solve Protein Foldin...",
   "Raw-翻译-Who-Makes-the-Worlds-Electronics": "Who Makes the Worlds Electronics",
   "Raw-翻译-Who-Controls-the-Critical-Minerals-Powering": "Who Controls the Critical Minerals Power...",
   "Raw-翻译-Which-tools-do-Claude-Codex-and-Cursor-choo": "Which tools do Claude, Codex and Cursor ...",
