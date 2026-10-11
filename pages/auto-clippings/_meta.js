@@ -3327,6 +3327,7 @@ export default {
   "Raw-翻译-Github-thedotmack-claude-mem": "Github__thedotmack_claude-mem",
   "Raw-翻译-Github-tech-leads-club-agent-skills": "Github__tech-leads-club_agent-skills",
   "Raw-翻译-Github-tailscale-tailcat": "Github__tailscale_tailcat",
+  "Raw-翻译-Github-storytold-artcraft": "Github__storytold_artcraft",
   "Raw-翻译-Github-smicallef-spiderfoot": "Github__smicallef_spiderfoot",
   "Raw-翻译-Github-rohitg00-ai-engineering-from-scratch": "Github__rohitg00_ai-engineering-from-scr...",
   "Raw-翻译-Github-pingdotgg-t3code": "Github__pingdotgg_t3code",
