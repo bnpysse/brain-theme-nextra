@@ -3337,6 +3337,7 @@ export default {
   "Raw-翻译-Github-nab138-iloader": "Github__nab138_iloader",
   "Raw-翻译-Github-mvschwarz-openrig": "Github__mvschwarz_openrig",
   "Raw-翻译-Github-multimodal-art-projection-YuE": "Github__multimodal-art-projection_YuE",
+  "Raw-翻译-Github-morluto-rea": "Github__morluto_rea",
   "Raw-翻译-Github-modular-modular": "Github__modular_modular",
   "Raw-翻译-Github-microsoft-markitdown": "Github__microsoft_markitdown",
   "Raw-翻译-Github-michael-denyer-pstack-claude": "Github__michael-denyer_pstack-claude",
