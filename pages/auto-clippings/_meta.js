@@ -2417,6 +2417,7 @@ export default {
   "Raw-翻译-Tims中国：成不了星巴克，也学不会瑞幸": "Tims中国：成不了星巴克，也学不会瑞幸",
   "Raw-翻译-TikTok與阿拉巴馬州和解：支付一億美元，限兒童使用時長、禁用美妝濾鏡": "TikTok與阿拉巴馬州和解：支付一億美元，限兒童使用時長、禁用美妝濾鏡",
   "Raw-翻译-TikTok-同意支付-4-亿美元和解美国儿童隐私诉讼": "TikTok 同意支付 4 亿美元和解美国儿童隐私诉讼",
+  "Raw-翻译-Ties-That-Bind": "Ties That Bind",
   "Raw-翻译-Three-schoolgirls-in-Kinsale-pulled-up-a-pe": "Three schoolgirls in Kinsale pulled up a...",
   "Raw-翻译-Thomson-Reuters-Launches-Its-Own-Frontier-M": "Thomson Reuters Launches Its Own Frontie...",
   "Raw-翻译-This-is-a-great-sub-regardless-of-what-comp": "This is a great sub, regardless of what ...",
