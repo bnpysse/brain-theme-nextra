@@ -4157,6 +4157,7 @@ export default {
   "Raw-翻译-100亿美元爱马仕股份不见了": "100亿美元爱马仕股份不见了",
   "Raw-翻译-1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦": "1000年平静期结束毁灭古代文明的哥吉拉级台风正在复甦",
   "Raw-翻译-1099-万元起日产新-N7-这次是真加量还降价": "10.99 万元起日产新 N7 这次是真加量还降价",
+  "Raw-翻译-10-Takeaways-from-Q3": "10 Takeaways from Q3",
   "Raw-翻译-10-Leadership-Behaviors-That-Drive-Team-Acc": "10 Leadership Behaviors That Drive Team ...",
   "Raw-翻译-0元购机，卒于2026": "0元购机，卒于2026",
   "Raw-翻译-00-后维权的新思维": "00 后维权的新思维",
