@@ -1,0 +1,24 @@
+---
+title: "City2Graph A Python library for Heterogeneous Graph Neural N_简报"
+tags: ["Reddit_热榜", "r_MachineLearning"]
+---
+
+### TL;DR
+City2Graph 是一个新发布的 Python 库，旨在将地理空间数据（建筑、街道、公交、OD 流等）自动转换为可用于异构图神经网络（Heterogeneous GNN）与空间分析的图结构，并支持与 PyTorch Geometric、NetworkX、rustworkx 等主流图计算生态无缝互操作。其配套论文已发表于《Computers, Environment and Urban Systems》，作者主张城市数据应建模为异构图而非扁平特征表，以更自然地表达城市系统中多类型实体及其复杂关系。
+
+### 核心观点与技术细节
+- **核心主张**：城市数据天然适合用异构图表示——不同实体（建筑、街道、公交站点、移动流）具有不同类型和关系，扁平特征表会丢失结构与空间语义。
+- **主要功能模块**：
+  - **形态学图**：从 OpenStreetMap / Overture Maps 构建建筑、街道、城市肌理的图。
+  - **交通图**：通过 DuckDB 加载 GTFS/GBFS 数据，将 GTFS 聚合为站点到站点的公交网络图。
+  - **移动性图**：将 OD 矩阵、迁移流、共享单车、行人计数等表示为加权空间图。
+  - **邻近性与连通性**：支持 KNN、Delaunay、Gilbert、Waxman 等图生成模型，以及 queen/rook 空间邻接；距离度量支持欧几里得、曼哈顿和网络距离。
+  - **异构图与元路径**：支持多种节点/边类型共存，并通过元路径自动派生跨类型关系。
+  - **多格式转换**：在 GeoDataFrame、NetworkX、rustworkx、PyTorch Geometric `Data`/`HeteroData` 之间往返转换，且保持几何与属性一致。
+- **易用性设计**：提供简洁 API，例如 `c2g.morphological_graph(buildings, segments)` 和 `c2g.gdf_to_pyg(nodes, edges)`，可直接进入 GNN 训练流程。
+- **论文与引用**：Sato et al. (2026), *Computers, Environment and Urban Systems*, 130, 102492。
+
+### 核心痛点
+- **城市数据建模鸿沟**：传统 GIS 数据以扁平表格存储，难以表达城市系统中多类型实体（建筑、道路、站点、人流）之间复杂、异质且动态的拓扑与空间关系。
+- **GNN 应用门槛高**：将地理空间数据转化为图神经网络可用的异构图格式需要大量手工预处理、坐标转换、拓扑构建与格式适配，过程繁琐且易出错。
+- **工具链断裂**：空间分析（GeoPandas）、图分析（NetworkX）和深度学习（PyTorch Geometric）各自为政，数据在不同库之间转换时常丢失几何信息或图结构一致性。City2Graph 通过统一抽象和往返转换机制解决该问题。

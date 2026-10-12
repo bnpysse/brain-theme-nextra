@@ -1,0 +1,520 @@
+---
+title: "China, the FCC, and the Logic of Transceivers_全翻译"
+tags: ["大咖视点_全文翻译", "ChinaTalk_(全球看中国科技与商业)"]
+---
+
+【文章标题】：China, the FCC, and the Logic of Transceivers
+
+【文章正文】：
+
+Quinn has joined the ChinaTalk team after studying semiconductor physics at Yale. Reach out to quinn@chinatalk.media to chat energy, BRI, robots, trade, industrial policy, or anything else!
+
+Over the past year, the FCC has released a series of restrictions on foreign-made hardware. First came drones, then routers, and then in July, inverters and robots. The newest devices to be considered are optical transceivers, which convert data into light and back within data centers. Following a
+
+Reuters
+
+report of a draft ban on new Chinese transceivers, markets responded as if it meant a straightforward substitution of supply, and American optics stocks rose while Chinese optics leaders fell.
+
+This swap is not that simple. The FCC’s cybersecurity logic is real but far narrower than the rule suggests. After explaining these gaps, I follow the transceiver supply chain from the module and the laser all the way down to the wafer and the metal it relies on. Chinese companies dominate the top of the stack but are reliant on Western companies in the middle. At the very bottom, Chinese control is ingrained, and the U.S.’s dependence on these basic materials will not be shifted by an FCC rule at the top of the stack.
+
+ChinaTalk is a reader-supported publication. To receive new posts and support my work, consider becoming a free or paid subscriber.
+
+The Rule
+
+On August 4,
+
+Reuters
+
+reported that the FCC was drafting a ban on import authorization for new models of Chinese optical transceivers to prevent Chinese firms from stealing data, installing malware, or disrupting service. Per the anonymous sources, officials want the rule published and effective by year end, though they cautioned the draft could still be modified or shelved. By the end of the week on August 7, Zhongji Innolight 中际旭创, the largest transceiver vendor globally, suffered a
+
+10-percent
+
+drop in its stock price, while Coherent, a leading American transceiver manufacturer, saw its stock price rise
+
+17 percent
+
+.
+
+The attention to transceivers did not come out of the blue. The FCC has basic
+
+authority
+
+over any devices that emit radio-frequency energy — including high-speed digital electronics like transceivers that radiate as a side effect — and a
+
+2021 law
+
+bars it from authorizing equipment on the Covered List. On July 22, the FCC adopted
+
+rules
+
+(
+
+published
+
+September 11, effective October 13) aiming to close the component loophole for authorization of devices with “logic-bearing hardware components,” including optical transceivers. But this prohibition only reaches components made by companies on the Covered List, which does not include the largest Chinese transceiver vendors. The FCC would either have to explicitly name those companies or implement the draft rule reported by
+
+Reuters
+
+to add transceivers to the Covered List as a category defined by production location, as it did for drones, routers, power
+
+inverters
+
+, and
+
+robots
+
+over the past year.
+
+On August 13, the Information Technology Industry Council (ITI), a trade association representing hyperscalers and optics companies, filed an
+
+ex parte notice
+
+explicitly urging the FCC to avoid adding optical transceivers or any foreign transceiver companies to the Covered List, emphasizing the impact of supply disruptions on data center build-out. No individual optics company, switch maker, or hyperscaler has filed
+
+comments
+
+arguing about transceivers (ET Docket 21-232, as of Sept. 21).
+
+1
+
+The template for an FCC rule on transceivers is public by way of precedent. When hardware was previously added to the Covered List, “foreign-produced” was
+
+defined
+
+by the Buy American test, and anything made outside the United States or without mostly domestic content is covered, with the DoW and DHS able to grant conditional approvals for individual producers on a time-bound plan to build in the U.S. The word “Chinese” would never have to appear in the rule. Innolight was included this year on the Pentagon’s Section
+
+1260H list
+
+of Chinese military companies, but the restrictions are fairly narrow and bind only the Pentagon.
+
+2
+
+The FCC rule would be the first measure on transceivers to reach the networks that hyperscalers build for commercial customers.
+
+The ITI concern and the national security question both hinge on what transceivers actually are. The conversion of electrical to optical signal requires precisely the kind of logic-bearing hardware component defined by the FCC.
+
+Inside the Box
+
+There’s a temptation to think of data centers as a bigger, faster version of your laptop — but as the size and speed scale, signal flowing through copper wire tends to blur, with one symbol interfering with the next. Imagine standing in an echoey room. If you speak too quickly, your words commingle with the echoes. Shouting does nothing, as the interference is a function of the rate at which you speak, not your volume.
+
+For long distances, data centers avoid copper’s loss mechanisms entirely, using optical fiber to transmit signals. But at modern data rates, an optical module draws
+
+roughly one hundred
+
+times more power than a one-meter passive
+
+copper cable
+
+. If you use fiber for short stretches, you are paying a power bill for reach you aren’t using. As Arista’s CEO said in a
+
+recent call
+
+, there exists a philosophy of “copper if you can, optics if you must.”
+
+Within racks, copper dominates. Between racks, fiber reigns supreme.
+
+3
+
+At their intersection sits our protagonist, the optical transceiver.
+
+A pluggable optical module connects on one end to the
+
+switch
+
+— the routing center for the rack’s GPUs — and on the opposite end to the fiber. Between, the module holds the requisite hardware for converting an electrical signal into an optical one, namely a laser and a digital signal processor (DSP). Each pluggable transceiver also contains a microcontroller unit (MCU) that controls the DSP, sets the laser, and talks to the switch.
+
+On the way back in, the incoming light is converted to a faint current by a photodetector and boosted into a signal that the DSP can read by a transimpedance amplifier (TIA). Along the way between the parts, the light is guided by lenses and filters, and isolators shield the laser from reflections. Innolight puts such passive optics at
+
+10 to 20 percent
+
+of a module’s total material cost.
+
+While the bulk of the module is built on a silicon substrate, silicon tends to release energy as heat rather than light, so the laser uses indium phosphide (InP), which can be tuned to an ideal wavelength for the optical fiber. As data rates increase, some modules have leveraged silicon photonics (SiPh), integrating waveguides, modulators, and photodetectors directly on the silicon chip. While the laser is still a separate InP component, it is now shared across several lanes, so the module only needs a handful rather than one per lane.
+
+In the distance between the switch and the faceplate that the module plugs into, the signal suffers significant loss that must be cleaned by the DSP, which consumes
+
+roughly half
+
+the module’s power budget. This loss is directly bypassed in some new architectures. In a near-packaged optics (NPO) system, the optical engine is
+
+soldered on the board
+
+just a few centimeters from the switch. In co-packaged optics (CPO) systems, the switch and optical engine are integrated into the same
+
+shared substrate
+
+with fewer, more powerful lasers housed in a separate plug-in module.
+
+4
+
+CPO and NPO, however, come at the cost of much more expensive servicing.
+
+How to Use an Optical Transceiver for Nefarious Ends
+
+Of the three harms officials described in the
+
+Reuters
+
+article — stealing data, pushing malware to the host, or disrupting service — the only one that’s actually plausible is service disruption.
+
+Claims that optical transceivers can be used for espionage are unfounded. Optical transceivers are neither a router nor a robot. A transceiver lies at the very bottom of the network, turning bits into light and light into bits blindly. And
+
+hyperscalers
+
+encrypt traffic before the data ever reaches the module.
+
+5
+
+Microsoft
+
+asserts that encryption “is on by default for all Azure traffic within a region or between regions.” The module has a small processor and some memory to run the firmware but, as
+
+Cignal AI
+
+put it, has no “external management connection.” A compromised module might be able to jumble up the bits that it transmits, but it could not read them, remember them, or send them anywhere. There is no path for China to extract American data or model weights via an optical transceiver. As the security expert I spoke with attested, transceivers are a poor tool for spying, and the spying argument is a sign that the person making it doesn’t understand how a data center is actually secured. For a module to push malware to the host, it would have to exploit a preexisting bug in the switch software that reads its memory, though this mechanism has never been documented for transceivers.
+
+Sabotage is possible, but there are no public confirmations of a hidden implant within commercial computing hardware. In 2018,
+
+Bloomberg
+
+alleged Chinese spy chips on Supermicro server boards, but this was denied by
+
+Apple
+
+,
+
+Amazon
+
+, and
+
+Supermicro
+
+, and
+
+DHS
+
+said it had “no reason to doubt” them. In its
+
+July fact sheet
+
+, the FCC names transceivers and warns that compromised components could “access, store, disrupt, and/or misroute U.S. communications” without citing any example. The absence of a public example isn’t disproof, but the public record contains no basis for the espionage claim specifically.
+
+The module’s
+
+controller
+
+is the microchip the FCC worries could be exploitable. The FCC fears that a controller with a subtle change in its integrated circuit could begin malicious activity after a rare event like a thermal spike. In silicon generally, the feasibility of a subtle hardware trojan was demonstrated in simulation by
+
+security researchers
+
+in 2013, and a later
+
+study
+
+built a trojan into a working chip that would “never be encountered by even the most diligent tester.” Neither study demonstrated viability in a transceiver.
+
+In addition to hardware trojans, there is the simpler risk of malevolent firmware. The
+
+industry standard
+
+governing communication between the switch and the modules includes commands for loading new firmware. It does not, however, contain any requirement that the module check that the firmware is genuine, nor is there any means for the switch to inspect the module’s code. The same standard lets either the switch or the module tune the signal. The practical default within data centers, according to a security analyst familiar with the industry, is to leave tuning to the module: tuning thousands of links by hand would be impractical, and the module knows its own laser, chips, and thermal drift far better than the switch does.
+
+6
+
+The switch can ask the module for its settings and how clean the signal is, but the answers come out of the module’s own memory, written by its firmware. The switch does count the transmission errors itself and would notice a link going bad, but it would have to take the module’s word for why. A signal that degrades, throws an error, or drops under load would look like an ordinary faulty module. No malicious transceiver firmware has been publicly documented.
+
+CPO systems move signal tuning to the switch, but the heat-sensitive laser is still in an external pluggable laser module with its own microcontroller running the maker’s firmware. Chinese supplier
+
+TFC
+
+builds the laser modules for Nvidia’s switches, and
+
+trade press
+
+reports that the lasers inside are Lumentum’s. Because this laser module acts as a continuous light source rather than processing data, a compromised one could dim or destabilize its lasers to take down the eight ports it feeds, but this is still a link-level outage and provides no data access.
+
+Compromised modules could not corrupt what a model computes, but they could drain compute by stalling training runs, while looking like nothing more than transceivers with a high failure rate. Any disruption would be bounded. A compromised module takes down its own links, but modules are hot-swappable and procurement policy means data centers get modules from multiple vendors. No attack of any kind has been documented in a transceiver, and only very narrow, uncoordinated service disruption is plausible — a thin predicate for an import ban.
+
+The Stack
+
+Espionage fears don’t align with the actual architecture of optical transceivers, but there need not be a backdoor for China to use the components as leverage. Final production is dominated by Chinese companies, but this is the layer Beijing can least afford to weaponize. China’s actual control is at the bottom of the stack.
+
+Across metrics, it is broadly agreed that Chinese vendors account for the
+
+majority
+
+of the optical transceiver market. While the product mix varies for each company, the inflection point over the last few years is clear.
+
+Chinese firms
+
+both control the majority of the market and are growing the fastest, with
+
+Innolight
+
+sitting on top of every ranking.
+
+In the plot above, I color Chinese companies based on the location of their headquarters, but the question of what “Chinese” means is not simple. Take, for example, Source Photonics, which is headquartered near Los Angeles but
+
+owned entirely
+
+by a firm based in Suzhou.
+
+The bigger problem of defining a Chinese transceiver lies in factory location. In its
+
+prospectus
+
+before listing on the Hong Kong stock exchange this year, Innolight disclosed that the vast majority of its transceiver manufacturing capacity is now in factories in Taiwan and Thailand rather than mainland China, the outgrowth of a
+
+2020 push
+
+to build capacity overseas to mitigate the uncertainty from a changing economic and trade environment (化解经贸环境变化带来的不确定性风险). Indeed, since 2024, Innolight’s mainland capacity has actually fallen while its overall capacity has grown. If Q1 2026 rates hold through the rest of the year, Innolight will have quadrupled its total capacity in just three years, carried entirely by factories outside of China.
+
+If the FCC follows the template of the previous rules, a foreign-produced test would hit American companies too. It would apply to Innolight’s Thai and Taiwanese plants but also initially affect Lumentum’s
+
+Thai
+
+plant, Coherent’s
+
+Malaysian
+
+assembly site, and Coherent’s factory in
+
+Fuzhou
+
+, leaving each to seek conditional approval plant by plant. Sparing them would take a true ownership test, naming specific companies to the Covered List and justifying each inclusion.
+
+Just below the assembly level, many of the passive optics that guide light through the module are Chinese. In 2019, Sumitomo Metal Mining, a Japanese company, established a new subsidiary in Shenzhen specifically to supply Chinese isolator companies, which control
+
+90 percent
+
+of global production.
+
+TFC
+
+is the top passive optical component supplier, making almost all its units in China and selling
+
+63 percent
+
+of its 2025 revenue to Fabrinet, the Thai contract manufacturer.
+
+Many of the direct security concerns cited by the FCC are tied to compromised Chinese MCUs, but, for the most part, the MCUs in transceivers are not Chinese. The MCU is an off-the-shelf part, sold by American, Japanese, and European companies. The predominant player here is STMicroelectronics, a Franco-Italian firm described by Chinese
+
+trade press
+
+as the default choice. The logic-bearing hardware component that the FCC is worried about may well be European, unless Chinese makers have quietly substituted domestic chips without saying so. Chinese transceiver companies have been remarkably silent in response to investor questions about MCU provenance.
+
+7
+
+Their silence is consistent with either answer.
+
+The majority of high-data-rate digital signal processors in transceivers are designed by American companies like Broadcom and Marvell and manufactured by
+
+third-party foundries
+
+in Taiwan including
+
+TSMC
+
+. Innolight confirmed in its
+
+2025 annual report
+
+that suppliers of electronic chips at 200G and above — including DSPs, laser drivers, and TIAs — are primarily located outside of China (电芯片包括DSP芯片、激光驱动器（LDD）、跨阻放大器（TIA）…，其中200G及以上速率的供应商主要在海外). Indeed, in the same filing, Innolight discloses that more than a third of everything it buys comes from a single, unnamed foreign supplier. The main listed TIA maker in China, Xiamen UX 优迅股份, has
+
+designed
+
+200G-per-lane parts, but none have entered production.
+
+The electro-absorption modulated lasers (EMLs) and continuous wave (CW) lasers used in high-speed transceivers are mostly American and Japanese. According to
+
+TrendForce
+
+, across both CW lasers and EML, Chinese producers held just 16 percent of production capacity in 2025, though this is concentrated in low power CW lasers used for SiPh, and Chinese firms are just starting to enter volume EML production this year. Innolight’s
+
+2025 annual report
+
+expressed Chinese laser shortcomings directly: EMLs at 200G per lane and above must still be imported, as domestic manufacturers can only supply volume at 100G and below (200G及以上速率的EML激光器目前仍需进口；100G及以下速率的EML激光器，目前国内已有部分厂商可实现批量供应). Photodetectors follow the same pattern. All major 200G vendors are
+
+American
+
+, and China’s Sanan
+
+reported
+
+in August that the optical chips for its 800G and 1.6T modules were still in sample testing.
+
+China’s dependence on Western lasers has decreased for current generations, as 800G and 1.6T transceivers often use silicon photonics systems and thus fewer InP lasers. Innolight’s 2026 Hong Kong stock exchange
+
+prospectus
+
+asserts, “in the three months ending March 31, 2026, products utilizing SiPh technology constitute approximately 70% of our high-speed product portfolio by revenue.” Chinese module manufacturers dominate the SiPh market. In the same prospectus, Innolight cites market research identifying them as “the largest global provider of SiPh-based optical transceivers by revenue in 2025.” Even so, at least part of Innolight’s photonic chip layer is fabbed by Israel-headquartered
+
+Tower Semiconductor
+
+. However, as the CEO of Lumentum attested in an
+
+earnings call
+
+this August, “silicon photonics is a viable solution at 1.6T… as we think about 3.2T, silicon photonics loses some of its advantages and we’d expect to see [traditional laser architectures] come back in a meaningful way.” And as
+
+Coherent’s CEO
+
+said, SiPh or not, “both require indium phosphide capacity.”
+
+Subscribe now
+
+Western capacity ownership does not equate to availability. Lasers are the scarcest optical component within the module. This shortage is mentioned in every single earnings call from the top three American transceiver companies from Q3 2025 to Q1 2026, with
+
+Applied Optoelectronics
+
+(AAOI) explicitly identifying “a shortage of indium phosphide laser manufacturing capacity across the industry” in a call this May. Laser production is constrained by fab capacity, and most high-speed lasers, along with many of the photodetectors, are grown on an indium phosphide wafer.
+
+These wafers are manufactured almost exclusively by
+
+three
+
+companies: two Japanese firms, Sumitomo Electric and JX Advanced Metals, and AXT, an American company headquartered in Fremont that manufactures exclusively in China. In February 2025, Beijing added indium phosphide and the two indium compounds used to grow chip layers to its
+
+&#101;xport control list
+
+. Indium gallium arsenide, the light-absorbing layer in InP photodetectors, has required a
+
+license
+
+since 2023. AXT’s Chinese subsidiary, Tongmei 同美, received
+
+no export permits
+
+at all until June 2025, and still has
+
+no export permits to the U.S
+
+., sealing AXT’s decade-long shift to China.
+
+Beijing cutting off AXT from the U.S. does not mean that the West is without substrate, as Sumitomo and JX control most of the remaining capacity. This June,
+
+JX
+
+announced a ¥120 billion (roughly US$750 million) capital program to expand capacity seven- to ten-fold. Whether this Japanese capacity can cover Western demand is unclear.
+
+Coherent, the largest American transceiver manufacturer, does not produce its own substrates, and its
+
+annual report
+
+lists InP among the raw materials it purchases, saying in a
+
+call
+
+this February that it has “multiple six-inch indium phosphide substrate suppliers” with enough supply locked in to support its current expansion. It has not named them, though
+
+Reuters
+
+reports that AXT, which makes its wafers in China, is a major supplier of Coherent, and the two companies signed a
+
+supply agreement
+
+in June.
+
+8
+
+Chinese export permits are granted by destination rather than by customer, and AXT has
+
+told investors
+
+that it is “getting permits pretty readily for U.S. customers based in other global regions” despite being
+
+“unable to estimate”
+
+when it can ship to the United States. Thus, Coherent’s laser fabs in
+
+Sweden and Switzerland
+
+can receive Chinese wafers while those in Texas cannot receive AXT wafers directly.
+
+Since the 2025 control, prices of six-inch InP wafers have risen
+
+250 percent
+
+, and Coherent’s CEO joined the business delegation accompanying Trump to China in May — in part, according to
+
+Reuters
+
+, to press for faster export licenses. That’s right,
+
+America’s largest transceiver company went to Beijing to ask for permission to ship another American company’s wafers to Texas.
+
+Newer architectures do nothing to loosen the dependence on InP supply, as lasers in CPO are fewer but more powerful, requiring a bigger piece of InP. AXT’s CEO
+
+told investors
+
+this summer that the shift to NPO and CPO “will continue to drive increasing demand for our material.”
+
+One layer deeper, the picture is even less rosy for the prospects of supply chain independence from China. Indium phosphide is produced from high-purity indium metal, and
+
+as of 2025
+
+, China refines 69 percent of global indium, though exports have dropped without any control on the metal itself. Substrate capacity can be stood up in Japan in a few years, but the metal is harder. Indium is a
+
+byproduct
+
+of zinc smelting, and while zinc is mined globally from Peru and Mexico to Australia,
+
+smelters outside of China often lack the economic incentive to recover indium from the sludge
+
+. The industrial dependency here is the same as the one China leveraged with the
+
+2023 gallium export control
+
+.
+
+Beijing could pull the trigger on indium
+
+at any moment
+
+,
+
+and the fact that it hasn’t shouldn’t be a reassurance. A formal control would provide economic incentive for Western smelters to recover indium. A lever is worth more held than pulled.
+
+Playing Jenga
+
+The transceiver stack is like a game of Jenga. Chinese firms, at home and in their factories in Thailand and Taiwan, dominate the top layers with final assembly and much of passive optics, but there are already American companies like Lumentum and Coherent at that level of the stack. Beijing cannot afford to pull out a block here, as a module export ban would hurt its own champions first. Europe’s controllers, U.S. signal processors, amplifier chips, and photodetectors, and U.S. and Japanese lasers sit at the middle of the tower for 200G lanes, with Chinese firms climbing the speed ladder towards them. The layer just below is wafer production — ruled by two Japanese companies and a firm that is nominally American but manufactures entirely in China. At the base lies Chinese indium metal.
+
+At the beginning of 2025, Beijing pulled one block when it limited InP wafer exports. The tower swayed but has stood thus far. The FCC has no writ over wafers or metal, as that is Commerce’s territory, but the rule must be judged by how it changes the dependencies — and a measure confined to the top layer cannot change a dependency at the bottom. A ban on Chinese modules would pull China’s highest and weakest block for it, while leaving the tower architecture below the same. And as any Jenga player knows, towers don’t fall from the top.
+
+If the Rule Lands
+
+With an FCC transceiver rule pushed through by the end of this year, exemptions will come quickly. Routers were listed on
+
+March 23
+
+, and by
+
+April 14,
+
+Netgear and Adtran received approvals, with
+
+Nokia
+
+and others following within weeks. Qualifying new module suppliers, however, will take months, and increasing domestic laser capacity will take years.
+
+The data center industry is in the midst of a major transition from 800G to 1.6T, the generation for Nvidia’s Vera Rubin systems that
+
+began production shipments in August
+
+. 1.6T optical transceivers are coming to the U.S. in two waves. The first has unfolded over the course of 2026 and is primarily Chinese. In June,
+
+Cignal AI
+
+forecast shipments of more than ten million 1.6T modules worldwide this year. The second, Western, wave should arrive in the last months of 2026 through mid 2027.
+
+Lumentum
+
+,
+
+Coherent
+
+, and
+
+AAOI
+
+all foreca

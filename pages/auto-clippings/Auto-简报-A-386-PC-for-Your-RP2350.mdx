@@ -1,0 +1,154 @@
+---
+title: "A 386 PC for Your RP2350_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+# 精华简报：A 386 PC for Your RP2350
+
+&gt; 来源：Hacker News Top / GitHub rh1tech/frank-386  
+&gt; 定位：让一块 RP2350 微控制器变身为一台可运行 DOS、Windows 3.x/95、Linux 的 i386 PC 模拟器。
+
+---
+
+## 一、项目概览
+
+**frank-386** 是一个基于 **RP2350（树莓派 Pico 2）** 的开源 i386 PC 模拟器固件，由 Tiny386 项目衍生而来。它通过集成 VGA/HDMI 输出、SD 卡存储、PS/2 或 USB 键鼠、NES 手柄及音频输出，将低成本微控制器打造成一台复古 x86 电脑。
+
+- 完整 i386 CPU 模拟，部分兼容 i486/i586，可选 x87 FPU
+- 最大支持 8MB RAM（依赖 8MB PSRAM）
+- 可启动 DOS、Windows 3.x、Windows 95、Linux 等操作系统
+
+---
+
+## 二、核心功能亮点
+
+| 模块 | 能力 |
+|------|------|
+| **图形** | VGA/HDMI 输出，支持文本模式及最高 640x480 图形 |
+| **音频** | AdLib OPL2、Sound Blaster 16、PC Speaker、Tandy、Covox、Disney Sound Source |
+| **存储** | SD 卡支持软盘、硬盘、CD-ROM 镜像；运行时热插拔 |
+| **输入** | PS/2 键盘鼠标、USB 键盘鼠标（原生 USB Host）、NES 手柄（可模拟鼠标） |
+| **管理** | Win+F12 磁盘管理器、Win+F11 设置菜单、Ctrl+Alt+Delete 复位 |
+
+- **磁盘热插拔**：无需重启即可更换软盘/硬盘/CD 镜像
+- **配置自动保存**：运行时修改会写回 `config.ini`
+
+---
+
+## 三、硬件支持与 GPIO 布局
+
+支持四类板卡及引脚布局：
+
+- **FRANK** —— 多功能开发板（带 VGA）
+- **Murmulator** —— 基于 RP Pico 2 的紧凑复古平台（M1/M2 变体）
+- **Olimex PICO-PC** —— Olimex RP2350 PC 板
+- **Waveshare RP2350-PiZero**
+- 通用：树莓派 Pico 2 + 外接 8MB PSRAM、VGA/HDMI、SD 模块、键盘
+
+**注意事项**：启用 USB HID 后，原生 USB 口专用于键鼠，USB 串口（CDC）禁用，调试需用 UART。
+
+项目提供了 M1、M2、PC、Z2 四种 GPIO 映射表，覆盖 SD 卡、PS/2、NES、音频等信号。
+
+---
+
+## 四、SD 卡目录结构与配置
+
+```
+SD Card Root/
+└── 386/
+    ├── config.ini      # 配置文件
+    ├── bios.bin        # SeaBIOS ROM（必需）
+    ├── vgabios.bin     # VGA BIOS ROM（必需）
+    ├── dos622.img      # 硬盘镜像
+    ├── boot.img        # 软盘镜像
+    └── ...             # 其他磁盘镜像
+```
+
+- 软盘镜像：标准 1.44MB（`dd if=/dev/zero of=floppy.img bs=512 count=2880`）
+- 硬盘镜像：最大 2GB raw 格式
+- CD-ROM：标准 ISO 9660
+
+**config.ini 示例**：
+```ini
+[pc]
+mem=8M
+bios=bios.bin
+vga_bios=vgabios.bin
+
+[frank-386]
+cpu_freq=504
+psram_freq=166
+```
+
+---
+
+## 五、快捷键与运行时设置
+
+| 快捷键 | 功能 |
+|--------|------|
+| **Win+F12** | 打开磁盘管理器 |
+| **Win+F11** | 打开设置菜单 |
+| **Ctrl+Alt+Delete** | 向客户机发送系统复位 |
+
+设置菜单可调：内存（1-8MB）、CPU 代（386/486/586）、FPU、声卡设备、鼠标开关、NES 鼠标模拟、RP2350 频率/电压、PSRAM/Flash 频率。所有更改保存至 `config.ini` 并重启生效。
+
+---
+
+## 六、构建与部署
+
+**依赖**：
+- Raspberry Pi Pico SDK 2.0+
+- ARM GCC 工具链
+- 设置 `PICO_SDK_PATH`
+
+**构建命令**：
+```bash
+git clone https://github.com/rh1tech/frank-386.git
+cd frank-386
+./build.sh                 # 默认 M2 板，378MHz，PS/2 键盘
+./build.sh -M1             # M1 板
+./build.sh --usb-hid       # USB 键盘
+./build.sh -b M1 -c 504 -p 166 --debug   # 自定义
+```
+
+**常用参数**：
+
+| 参数 | 说明 |
+|------|------|
+| `-b M1\|M2\|PC\|Z2` | 板卡布局，默认 M2 |
+| `-c 378\|504` | CPU 主频 MHz，默认 378 |
+| `-p 133\|166` | PSRAM 频率 MHz，默认 133 |
+| `--usb-hid` | 启用 USB 键盘（禁用 USB 串口） |
+| `--hdmi` | 强制 HDMI 输出 |
+| `--debug` | 详细调试日志 |
+
+对应 CMake 定义：`-DBOARD=...`、`-DCPU_SPEED=...` 等，便于集成到自定义构建流程。
+
+---
+
+## 七、技术与商业分析
+
+**技术价值**：
+- 在约 $5 的微控制器上实现 x86 实模式 PC 模拟，充分利用 RP2350 的 PSRAM 接口和可编程 I/O，体现了嵌入式系统与复古计算的巧妙结合。
+- 外设模拟丰富（声卡、鼠标、手柄、磁盘热插拔），可玩性高，适合复古软件体验。
+
+**适用场景**：
+- 复古游戏 / DOS 软件怀旧
+- 嵌入式项目展示
+- 计算机体系结构教学
+- 轻量级 x86 环境实验
+
+**商业潜力**：
+- 针对极客、创客和复古计算小众市场，可搭配配套开发板（FRANK、Murmulator 等）形成套件销售。
+- 开源社区驱动，易于二次开发，具备众筹或教育套件转化潜力。
+
+**风险与限制**：
+- RP2350（双核 Cortex-M33，约 150-300MHz）性能有限，运行 Windows 95 等系统可能较慢。
+- USB HID 与 USB 串口存在冲突，调试需额外 UART 连接。
+- 需要一定嵌入式构建经验，普通用户上手门槛略高。
+
+---
+
+## 八、结论
+
+**frank-386** 是一个完成度高、文档清晰的开源项目，将 RP2350 变身为可运行经典操作系统的 386 PC。它具备完整的输入输出、存储和音频模拟，硬件兼容性好，构建配置灵活，是复古计算爱好者和嵌入式开发者的理想实验平台。对于希望低成本体验 90 年代 PC 环境的用户，该项目提供了一个极具吸引力的解决方案。
