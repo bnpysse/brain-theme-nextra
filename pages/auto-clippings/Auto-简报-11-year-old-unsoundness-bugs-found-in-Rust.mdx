@@ -1,0 +1,104 @@
+---
+title: "11 year old unsoundness bugs found in Rust borrow checker_简报"
+tags: ["大咖视点_深度解读", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+# Rust Borrow Checker 11年未修复的unsoundness漏洞——精华简报
+
+## 核心摘要
+
+Rust语言borrow checker中发现了一个存在**长达11年**的unsoundness（不健全性）漏洞，允许程序绕过`'static`生命周期约束，导致**栈内存释放后使用（use-after-scope）**，可造成程序崩溃或未定义行为。该漏洞影响自Rust 1.4（2015年）以来的所有版本，目前已被标记为**P-high（高优先级）**。
+
+## 漏洞本质
+
+**根因**：结构体的协变（covariant）字段赋值可以绕过生命周期约束。
+
+**核心机制**：
+
+- 结构体`Q&lt;T: 'static&gt;`声明其泛型参数必须为`'static`类型
+
+- 但通过`q.0 = Some(&l)`赋值时，borrow checker**未正确检查**`&l`的生命周期是否满足`'static`约束
+
+- 在`Drop`实现中，非`'static`的引用被当作`'static`引用存储到全局静态变量中
+
+- 当栈变量`l`离开作用域后，悬垂引用仍可被访问
+
+## 漏洞触发示例
+
+```rust
+
+struct Q<T: 'static + Send>(Option<T>);
+
+impl<T: 'static + Send> Drop for Q<T> {
+
+fn drop(&mut self) {
+
+if let Some(t) = self.0.take() {
+
+KEPT.lock().unwrap().push(Box::new(t)); // 存储为'static
+
+}
+
+}
+
+}
+
+fn main() {
+
+{
+
+let l = String::from("hello");
+
+let mut q = Q(None);
+
+q.0 = Some(&l);  // 绕过'static检查
+
+}
+
+// 访问已释放的栈内存
+
+println!("{}", k[0].downcast_ref::<&'static String>().unwrap());
+
+}
+
+```
+
+## 影响范围
+
+| 维度 | 详情 |
+
+|------|------|
+
+| **影响版本** | Rust 1.4.0（2015年）至当前nightly，**11年未修复** |
+
+| **严重级别** | P-high（高优先级），标记为I-unsound（最严重bug类型） |
+
+| **实际危害** | 可导致use-after-scope、段错误、释放后使用，在ASAN下可稳定复现 |
+
+| **所属模块** | Borrow checker、Lifetimes、Variance、Destructors |
+
+## 社区反应与讨论要点
+
+1. **震惊情绪**：开发者表示“我的代码从1.18.0（2017年）就能编译，这怎么可能之前没被发现？”
+
+2. **多个变体**：社区已提交至少3种不同触发方式，包括闭包捕获、多生命周期参数等
+
+3. **关联问题**：可能与#128225相关，涉及更广泛的variance与drop check交互问题
+
+## 技术分析
+
+**根本原因**：Rust的drop check（析构检查）与variance（协变）规则之间存在**交互缺陷**。当结构体实现了`Drop`且其字段类型为协变时，编译器未能正确验证被赋值引用的生命周期是否满足泛型约束。
+
+**修复方向**：需要调整borrow checker对协变字段赋值的生命周期检查逻辑，特别是在涉及`Drop`实现时，确保`'static`约束不被绕过。
+
+## 关键启示
+
+1. **Rust安全保证并非绝对**：即使经过11年实战检验，类型系统仍可能存在深层缺陷
+
+2. **unsoundness的隐蔽性**：此类漏洞需要特定模式（Drop + 协变字段 + 泛型约束）才能触发，常规测试难以发现
+
+3. **对生产系统的影响**：依赖Rust内存安全保证的关键系统（如操作系统、区块链、嵌入式）需关注此漏洞的修复进展
+
+---
+
+*来源：[GitHub Issue #164250](https://github.com/rust-lang/rust/issues/164250)，2026年10月13日报告，当前状态：待修复，已标记P-high优先级。*
