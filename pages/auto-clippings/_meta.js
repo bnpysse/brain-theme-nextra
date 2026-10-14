@@ -3092,6 +3092,7 @@ export default {
   "Raw-翻译-OpenShot-40-释出": "OpenShot 4.0 释出",
   "Raw-翻译-OpenRouter-from-Seed-to-Stripe-—-with-OpenR": "OpenRouter from Seed to Stripe — with Op...",
   "Raw-翻译-OpenID-Foundation-Identity-Management-for-A": "OpenID Foundation Identity Management fo...",
+  "Raw-翻译-OpenCode-20": "OpenCode 2.0",
   "Raw-翻译-OpenClaw-Power-MacBook-Simplicity-Five-Days": "OpenClaw Power, MacBook Simplicity Five ...",
   "Raw-翻译-OpenClaw-20-Accidentally": "OpenClaw 2.0, Accidentally",
   "Raw-翻译-OpenAI，经历了最漫长的一天": "OpenAI，经历了最漫长的一天",
