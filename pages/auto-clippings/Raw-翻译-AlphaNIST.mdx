@@ -1,0 +1,170 @@
+---
+title: "AlphaNIST_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+AlphaNIST
+
+AlphaNIST
+
+From AlphaGo to AlphaZero, reinforcement learning produced strategies that surprised expert players. AlphaZero learned from experience at scale, without human demonstrations.
+
+从AlphaGo到AlphaZero，强化学习产生了令专家玩家惊讶的策略。AlphaZero在没有人类示范的情况下，从大规模经验中学习。
+
+AlphaNIST brings this philosophy to contact-rich, high-precision robotic assembly in simulation. An end-to-end policy learns how to complete the task, without prescribed manipulation stages.
+
+AlphaNIST将这一理念应用于仿真中接触丰富、高精度的机器人装配。一个端到端的策略学习如何完成任务，无需预设的操作阶段。
+
+The NIST board has twenty assembly tasks, with parts as small as 4 mm. Fitting one part can take several changes of grasp and orientation. Tight clearances leave little room for error: a tilted nut can jam or cross-thread.
+
+NIST板有二十个装配任务，零件小至4毫米。安装一个零件可能需要多次改变抓取和方向。紧密的间隙几乎没有误差余地：倾斜的螺母可能会卡住或错扣。
+
+With several parts, the robot also has to choose an order. An installed component may block the gripper’s next move.
+
+对于多个零件，机器人还必须选择顺序。已安装的组件可能会阻碍夹爪的下一步动作。
+
+Robots can be creative—if we give them room.
+
+机器人可以具有创造力——如果我们给它们空间。
+
+Trying to prescribe every maneuver means anticipating how the robot should respond as contacts and obstructions change. A two-finger gripper may also need solutions quite different from those that come naturally to a human hand.
+
+试图规定每一个动作意味着预测机器人应如何应对接触和障碍的变化。两指夹爪可能也需要与人类手部自然动作截然不同的解决方案。
+
+Perhaps the answer is to stop telling the robot how we think the task should be done, and let it learn how to get there. We give it a binary task reward for success and train it through vast amounts of diverse experience. That leaves room for the robot to discover solutions we might never have thought to teach.
+
+也许答案是停止告诉机器人我们认为任务应该如何完成，让它自己学习如何达成目标。我们给它一个二元任务奖励来表示成功，并通过大量多样化的经验进行训练。这为机器人发现我们可能从未想过要教的解决方案留出了空间。
+
+How the robot learns
+
+机器人如何学习
+
+Experience diversity: heterogeneous assets and initial states
+
+经验多样性：异构资产和初始状态
+
+One policy trains across twenty heterogeneous assemblies, starting from loose parts, in-hand grasps, and partial assemblies cached in simulation.
+
+一个策略在二十个异构装配上训练，从松散零件、手中抓取和仿真中缓存的局部装配开始。
+
+Near-complete starts let the robot practice finishing an assembly before it can solve the whole task. The cache supplies starting states, not demonstrations.
+
+接近完整的起始状态让机器人能够在解决整个任务之前练习完成装配。缓存提供起始状态，而非示范。
+
+Beta sampling favors starting states the policy solves about half the time, while giving every state a chance. Progress on one state can make another solvable; its sampling weight then changes with new outcomes.
+
+Beta采样偏好策略大约一半时间能解决的起始状态，同时给每个状态机会。一个状态的进展可能使另一个状态可解；其采样权重随后随新结果变化。
+
+Starting states receive different amounts of practice as the policy learns. SGS project ↗
+
+随着策略学习，起始状态获得不同数量的练习。SGS项目↗
+
+Single-component assembly experiment
+
+单组件装配实验
+
+Your browser does not support embedded video. Download the film.Play1:43
+
+您的浏览器不支持嵌入式视频。下载影片。播放1:43
+
+One policy performs all twenty assembly tasks, with one component to assemble in each run.
+
+一个策略执行所有二十个装配任务，每次运行装配一个组件。
+
+GearsNutsRodsPegsConnectors
+
+齿轮、螺母、杆、销、连接器
+
+Use the video controls to watch the complete film.
+
+使用视频控件观看完整影片。
+
+With binary task rewards, one policy trained across all twenty tasks reaches higher training success than twenty separate specialists. Adding rewards for reaching and alignment reduces success in this experiment.
+
+使用二元任务奖励，一个策略在所有二十个任务上训练达到的训练成功率高于二十个单独的专家。在此实验中，添加到达和对齐奖励会降低成功率。
+
+Swipe or scroll horizontally to view the full figure.Training success across varied starting states.
+
+水平滑动或滚动以查看完整图表。不同起始状态下的训练成功率。
+
+Emergent assembly behavior
+
+涌现装配行为
+
+The gripper puts down the 8 mm peg and picks it up near one end, leaving more of the peg exposed for insertion.
+
+夹爪放下8毫米销钉，并在靠近一端处拾起，使更多销钉暴露以便插入。
+
+The gripper uses contact with the board to turn the waterproof connector before inserting it.
+
+夹爪利用与板的接触来转动防水连接器，然后插入。
+
+The D-sub connector is set down and regrasped to align it with its socket.
+
+D-sub连接器被放下并重新抓取，以使其与插座对齐。
+
+Held from the side, the medium gear pivots into a horizontal pose above its mounting post.
+
+从侧面握住，中型齿轮在安装柱上方枢转至水平姿态。
+
+The gripper rolls the M12 nut from its edge onto a flat face before placing it on the bolt.
+
+夹爪将M12螺母从边缘滚到平面上，然后将其放在螺栓上。
+
+One-sided fingertip taps turn the M4 nut along the bolt.
+
+单侧指尖轻敲使M4螺母沿螺栓转动。
+
+A fingertip pushes the 8 mm rod across the surface before the gripper picks it up.
+
+指尖将8毫米杆推过表面，然后夹爪将其拾起。
+
+The gripper moves around the M16 nut, using fingertip contact to turn it along the bolt.
+
+夹爪围绕M16螺母移动，利用指尖接触使其沿螺栓转动。
+
+← →
+
+← →
+
+Citation
+
+引用
+
+@misc&#123;zhang2026alphanistemergentassemblyskills,
+
+title=&#123;AlphaNIST: Emergent Assembly Skills from Binary Task Rewards&#125;,
+
+author=&#123;Octi Zhang and Iretiayo Akinola and Rosario Scalise and
+
+Mateo Guaman Castro and Patrick Yin and Tobias Widmer and
+
+Miles Macklin and Chris Amevor and Dylan Turpin and
+
+Dirk Van Gelder and Jan Carius and Ankur Handa and
+
+Gavriel State and Yunrong Guo and Yashraj Narang&#125;,
+
+year=&#123;2026&#125;,
+
+eprint=&#123;2610.13354&#125;,
+
+archivePrefix=&#123;arXiv&#125;,
+
+primaryClass=&#123;cs.AI&#125;,
+
+url=&#123;https://arxiv.org/abs/2610.13354&#125;,
+
+&#125;
+
+@misc&#123;zhang2026alphanistemergentassemblyskills,
+
+title=&#123;AlphaNIST：从二元任务奖励中涌现的装配技能&#125;,
+
+author=&#123;Octi Zhang 和 Iretiayo Akinola 和 Rosario Scalise 和
+
+Mateo Guaman Castro 和 Patrick Yin 和 Tobias Widmer 和
+
+Miles Macklin 和 Chris Amevor 和 Dylan Turpin 和
+
+Dirk Van Gel
