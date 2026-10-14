@@ -1,0 +1,60 @@
+---
+title: "FTL A new operating system for clouds_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：FTL: A new operating system for clouds
+
+【文章正文】：
+
+What's FTL?
+
+- You can build your own OS as a library. This userspace OS design makes it easy to add features, debug, upgrade the OS safely, as if writing applications.
+
+- FTL kernel isolates containers (userspace OS instances) better than existing monolithic kernels, with a hypervisor-like interface based on a lightweight hardware-based isolation (user mode). You don't need bare-metal machines.
+
+- FTL is compatible with Linux binaries. For example, the Rust-based HTTP server serving this website is a Linux application running on FTL. You can also run Unikernel-like specialized applications without POSIX abstractions.
+
+How it works
+
+Each container runs a userspace OS. It is a shared library which implements most of OS concepts such as Linux process, VFS, and TCP/IP. FTL kernel provides a minimal interface to implement Linux system calls in userspace, just like a hypervisor.
+
+FTL combines the best of microkernels (flexible & secure) and monolithic kernels (performant & simple). Our goal is to make lightweight containers as secure as VMs, and unlock new OS-level abilities in applications, without sacrificing performance:
+
+FTL                                   Linux
+
+ââââââââââââââââââââââââââââââââââ    ââââââââââââââââââââââââââââââââââ
+
+ââââââââââââââââ  ââââââââââââââââ    ââââââââââââââââ  ââââââââââââââââ
+
+ââ             â  â             ââ    ââ             â  â             ââ
+
+ââ    Linux    â  â    Linux    ââ    ââ    Linux    â  â    Linux    ââ
+
+ââ   Process   â  â   Process   ââ    ââ   Process   â  â   Process   ââ
+
+ââ             â  â             ââ    ââ             â  â             ââ
+
+âââââââ Linux system calls âââââââ    ââââââââââââââââ  ââââââââââââââââ
+
+ââ                              ââ    ââââââââââââââââââââââââââââââââââ
+
+ââ         Userspace OS         ââ    ââââââââ Linux's interface âââââââ
+
+ââ   (Process, VFS, TCP, ...)   ââ    ââââââââââââââââââââââââââââââââââ
+
+ââââââââââââââââââââââââââââââââââ    â                                â
+
+ââââââââââââââââââââââââââââââââââ    â          Linux Kernel          â
+
+âââââââ minimal interface ââââââââ    â                                â
+
+ââââââââââââââââââââââââââââââââââ    â   process, fork/exec, memory,  â
+
+â           FTL Kernel           â    â     signals, TCP/IP, /proc,    â
+
+â    vCPU, memory, drivers, ...  â    â       /dev, drivers ...        â
+
+ââââââââââââââââââââââââââââââââââ    ââââââââââââââââââââââââââââââââââ
+
+Userspace OS design also enables you to extend most of Linux kernel features without kernel/eBPF programming. You can add printfs, apply security updates, and add new features quickly and safely. In FTL, OS is just a library. Read more.
