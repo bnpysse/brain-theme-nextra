@@ -39,6 +39,7 @@ export default {
   "Raw-逐字稿-Powerful-AI-Is-Becoming-Almost-Free": "Raw_逐字稿_Powerful AI Is Becoming Almost F...",
   "Raw-逐字稿-PewDiePie-is-setting-AI-free-and-OpenAI-is": "Raw_逐字稿_PewDiePie is setting AI free... ...",
   "Raw-逐字稿-Past-the-Point-of-No-Return": "Raw_逐字稿_Past the Point of No Return",
+  "Raw-逐字稿-OpenAIs-lead-engineer-was-secretly-a-spy": "Raw_逐字稿_OpenAIs lead engineer was secret...",
   "Raw-逐字稿-OpenAIs-AI-Agents-Just-Crossed-A-Line": "Raw_逐字稿_OpenAIs AI Agents Just Crossed A...",
   "Raw-逐字稿-OpenAIs-biggest-math-breakthrough-is-getti": "Raw_逐字稿_OpenAIs biggest math breakthroug...",
   "Raw-逐字稿-OpenAI-Just-Changed-What-It-Means-To-Do-Ma": "Raw_逐字稿_OpenAI Just Changed What It Mean...",
