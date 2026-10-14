@@ -3601,6 +3601,7 @@ export default {
   "Raw-翻译-Github-openai-codex": "Github__openai_codex",
   "Raw-翻译-Github-open-webui-open-webui": "Github__open-webui_open-webui",
   "Raw-翻译-Github-obra-superpowers": "Github__obra_superpowers",
+  "Raw-翻译-Github-nvm-sh-nvm": "Github__nvm-sh_nvm",
   "Raw-翻译-Github-nab138-iloader": "Github__nab138_iloader",
   "Raw-翻译-Github-mvschwarz-openrig": "Github__mvschwarz_openrig",
   "Raw-翻译-Github-multimodal-art-projection-YuE": "Github__multimodal-art-projection_YuE",
