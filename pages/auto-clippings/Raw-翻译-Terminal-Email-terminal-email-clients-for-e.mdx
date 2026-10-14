@@ -1,0 +1,180 @@
+---
+title: "Terminal Email terminal email clients for every system_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Terminal Email: terminal email clients for every system
+
+终端邮件：适用于各系统的终端邮件客户端
+
+【文章正文】：
+
+Terminal email clients for every system
+
+适用于各系统的终端邮件客户端
+
+Read and send email from a terminal on Linux, macOS, Windows, BSD and Android. 19 maintained clients and 7 mail tools, each with install commands for every system and a config that works with Forward Email or any other provider.
+
+在Linux、macOS、Windows、BSD和Android终端中收发邮件。19个维护中的客户端和7个邮件工具，每个都包含各系统的安装命令，以及适配Forward Email或其他邮件服务商的配置。
+
+The screenshots show Forward Email's terminal app, made by the team behind this site. It is the only client here with its own calendar, contact list and task list, alongside mail.
+
+截图展示的是本站团队开发的Forward Email终端应用。这是唯一集成日历、联系人列表、任务列表和邮件功能的客户端。
+
+forwardemail
+
+forwardemail（特色客户端）
+
+Featured
+
+特色功能
+
+The forwardemail command runs the same application as Forward Email's webmail inside a terminal, drawn as text. Mail, calendar, contacts, tasks and settings all work, with keyboard shortcuts, mouse clicks and scrolling, and plain-text reading and writing by default. It installs as one standalone executable on Linux, macOS and Windows, or from npm anywhere Node.js 22 runs. It signs in to Forward Email accounts, including self-hosted servers.
+
+forwardemail命令可在终端内运行与网页版相同的应用，以文本形式呈现。邮件、日历、联系人、任务和设置功能俱全，默认支持键盘快捷键、鼠标点击滚动、纯文本读写。在Linux/macOS/Windows上可安装独立执行文件，或通过npm在Node.js 22+环境运行。支持登录Forward Email账户（含自建服务器）。
+
+- Calendar, contacts and tasks in the same terminal app as mail
+
+- 邮件客户端内集成日历/联系人/任务功能
+
+- Mouse clicks, scrolling and text selection work, and the bottom row always shows the keys for the current screen
+
+- 支持鼠标点击/滚动/文本选择，底部常驻当前界面快捷键提示
+
+- One self-updating executable with no setup files to write
+
+- 单一自更新执行文件，无需配置文件
+
+- Works with self-hosted Forward Email through --api
+
+- 通过--api参数支持自建Forward Email服务
+
+A Forward Email account with a mailbox (paid plans start at $3 a month). forwardemail --demo opens a demo account with no sign-in.
+
+需拥有Forward Email邮箱账户（付费方案$3/月起）。forwardemail --demo可免登录开启演示账户。
+
+Install
+
+安装指南
+
+Linux
+
+Linux系统
+
+curl -fsSL https://github.com/forwardemail/mail.forwardemail.net/releases/latest/download/install.sh | shnpm install -g forwardemail
+
+Standalone builds for x64 and arm64 need glibc. On musl systems such as Alpine Linux, install with npm.
+
+x64/arm64独立构建版需glibc支持。Alpine Linux等musl系统请通过npm安装。
+
+macOS
+
+macOS系统
+
+curl -fsSL https://github.com/forwardemail/mail.forwardemail.net/releases/latest/download/install.sh | shnpm install -g forwardemail
+
+Standalone builds for Apple Silicon and Intel.
+
+支持Apple Silicon和Intel芯片的独立构建版。
+
+Windows
+
+Windows系统
+
+irm https://github.com/forwardemail/mail.forwardemail.net/releases/latest/download/install.ps1 | iexnpm install -g forwardemail
+
+Signed standalone builds for x64 and arm64. Windows Terminal is recommended over the legacy console.
+
+已签名的x64/arm64独立构建版。推荐使用Windows Terminal替代传统控制台。
+
+BSD
+
+BSD系统
+
+npm install -g forwardemail
+
+Through npm, which runs anywhere Node.js 22 or later does.
+
+通过npm安装（需Node.js 22+环境）。
+
+Android
+
+安卓系统
+
+pkg install nodejs && npm install -g forwardemail
+
+Through npm in Termux, which packages Node.js 24 and later. Not tested by the project.
+
+通过Termux中的npm安装（含Node.js 24+）。未经项目组测试。
+
+All features and screenshotsUse another client with Forward Email
+
+完整功能与截图 | 搭配Forward Email使用其他客户端
+
+Clients
+
+客户端列表
+
+Programs you read and write mail in. Pick a system to see what runs there, or filter by name, language or protocol.
+
+邮件读写程序。按系统查看可用客户端，或通过名称/语言/协议筛选。
+
+| 19 email clients |  |  |
+
+| 19款邮件客户端 |  |  |
+
+| Systems | Name | Language and license |
+
+| 支持系统 | 名称 | 开发语言及许可协议 |
+
+| Runs on Linux, macOS, Windows and BSD, on Android through Termux. | Forward EmailFeaturedTUISource-availableForward Email's webmail in the terminal: mail, calendar, contacts and settings, with mouse support and a key hint bar. | TypeScript Business Source License 1.1 |
+
+| 支持Linux/macOS/Windows/BSD，通过Termux支持安卓 | Forward Email（特色）TUI开源可用 - 终端内运行网页版：邮件/日历/联系人/设置，支持鼠标操作和快捷键提示栏 | TypeScript Business Source License 1.1 |
+
+| Runs on Linux, macOS and BSD, on Windows through WSL, on Android through Termux. | aercTUITerminal email client written in Go with IMAP, JMAP, Maildir and notmuch backends and an embedded terminal for editing. | Go MIT |
+
+| 支持Linux/macOS/BSD，通过WSL支持Windows，通过Termux支持安卓 | aerc（TUI）- Go语言开发的终端邮件客户端，支持IMAP/JMAP/Maildir/notmuch后端，内置编辑终端 | Go MIT |
+
+| Runs on Linux, macOS and BSD, on Windows through WSL. Not available for Android. | alotTUITerminal mail reader written in Python that works on a local notmuch database, with tag-based search and threads. | Python GPL 3.0 or later |
+
+| 支持Linux/macOS/BSD，通过WSL支持Windows | alot（TUI）- Python开发的终端邮件阅读器，基于本地notmuch数据库，支持标签搜索和会话视图 | Python GPL 3.0+ |
+
+| Runs on Linux, macOS, Windows and BSD, on Android through Termux. | AlpineTUIMenu-driven terminal email client descended from Pine, with built-in help, setup screens and native Windows builds. | C Apache 2.0 |
+
+| 全平台支持（通过Termux支持安卓） | Alpine（TUI）- 源自Pine的菜单驱动终端客户端，内置帮助/设置界面，提供原生Windows版本 | C Apache 2.0 |
+
+| Runs on BSD, on Windows through WSL, builds from source on Linux. Not available for macOS or Android. | ConeTUIFull-screen console mail client and newsreader from the Courier mail server project. | C++ GPL 3.0 |
+
+| 支持BSD，通过WSL支持Windows，Linux需源码编译 | Cone（TUI）- Courier邮件服务器项目的全屏控制台客户端/新闻阅读器 | C++ GPL 3.0 |
+
+| Runs on Linux, macOS, Windows and BSD, on Android through Termux. | GnusEmacsMail and news reader built into GNU Emacs, with back ends for IMAP, POP3, local mail folders and NNTP. | Emacs Lisp GPL 3.0 or later |
+
+| 全平台支持（通过Termux支持安卓） | Gnus（Emacs）- GNU Emacs内置邮件/新闻阅读器，支持IMAP/POP3/本地文件夹/NNTP后端 | Emacs Lisp GPL 3.0+ |
+
+| Runs on Linux, macOS and Windows, builds from source on BSD. Not available for Android. | HimalayaCLICommand-line email client written in Rust that lists, reads, sends and moves mail through shell commands with JSON output. | Rust MIT or Apache 2.0 |
+
+| 支持Linux/macOS/Windows，BSD需源码编译 | Himalaya（CLI）- Rust开发的命令行客户端，通过shell命令实现邮件列表/阅读/发送/移动，支持JSON输出 | Rust MIT/Apache 2.0 |
+
+| Runs on Linux, macOS and Windows, builds from source on BSD. Not available for Android. | MatchaTUITerminal email client written in Go with the Bubble Tea TUI library, with IMAP, JMAP and POP3 support. | Go MIT |
+
+| 支持Linux/macOS/Windows，BSD需源码编译 | Matcha（TUI）- 基于Bubble Tea库的Go语言终端客户端，支持IMAP/JMAP/POP3 | Go MIT |
+
+| Runs on Linux, macOS and BSD, on Windows through WSL. Not available for Android. | mblazeCLISet of small Unix utilities for reading, searching, threading and composing mail stored in Maildir folders. | C CC0 1.0 and MIT |
+
+| 支持Linux/macOS/BSD，通过WSL支持Windows | mblaze（CLI）- 用于读写/搜索/组织Maildir邮件的Unix工具集 | C CC0 1.0及MIT |
+
+| Runs on Linux, macOS and BSD. Not available for Windows or Android. | meliTUITerminal email client written in Rust with IMAP, JMAP, notmuch, Maildir, mbox and NNTP backends and TOML configuration. | Rust EUPL 1.2 or GPL 3.0 or later |
+
+| 支持Linux/macOS/BSD | meli（TUI）- Rust开发的终端客户端，支持IMAP/JMAP/notmuch/Maildir/mbox/NNTP后端，采用TOML配置 | Rust EUPL 1.2或GPL 3.0+ |
+
+| Runs on Linux, macOS and BSD, on Windows through WSL, on Android through Termux. |
+
+| 支持Linux/macOS/BSD，通过WSL支持Windows，通过Termux支持安卓 |
+
+## 🔗 知识库双向关联
+
+- [派评  近期值得关注的 App_简报](/auto-clippings/Auto-简报-派评-近期值得关注的-App)
+
+- [派评  近期值得关注的 App_简报](/auto-clippings/Auto-简报-派评-近期值得关注的-App)
+
+- [派评  近期值得关注的 App_全翻译](/auto-clippings/Raw-翻译-派评-近期值得关注的-App)
