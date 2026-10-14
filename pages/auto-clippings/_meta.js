@@ -3428,6 +3428,7 @@ export default {
   "Raw-翻译-I-compiled-Dooms-renderer-into-a-21B-parame": "I compiled Dooms renderer into a 21B-par...",
   "Raw-翻译-I-captured-72-hours-of-idle-Android-packets": "I captured 72 hours of idle Android pack...",
   "Raw-翻译-I-built-an-open-source-Cursor-Killer-with-O": "I built an open-source Cursor Killer wit...",
+  "Raw-翻译-I-built-a-tool-to-track-what-AI-leaders-say": "I built a tool to track what AI leaders ...",
   "Raw-翻译-I-built-a-local-first-hybrid-router-for-AI": "I built a local-first hybrid router for ...",
   "Raw-翻译-I-built-a-lightweight-project-planner-for-s": "I built a lightweight project planner fo...",
   "Raw-翻译-I-always-wonder-how-much-more-speed-andor-c": "I always wonder how much more speed ando...",
