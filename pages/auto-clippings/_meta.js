@@ -4162,6 +4162,7 @@ export default {
   "Raw-翻译-AI-即将接管流量，而广告正在疯狂「末日反扑」": "AI 即将接管流量，而广告正在疯狂「末日反扑」",
   "Raw-翻译-AI-助力改造非智能升降桌：智能升降、语音控制、多端联动……": "AI 助力改造非智能升降桌：智能升降、语音控制、多端联动……",
   "Raw-翻译-AI-创造了更多价值，谁有资格把它变成收入": "AI 创造了更多价值，谁有资格把它变成收入",
+  "Raw-翻译-AI-创业，道德有价值吗": "AI 创业，道德有价值吗",
   "Raw-翻译-AI-下一场竞争：谁能成为-Agent-的「上下文操作系统」": "AI 下一场竞争：谁能成为 Agent 的「上下文操作系统」",
   "Raw-翻译-AI-recursive-self-improvement-might-not-com": "AI recursive self-improvement might not ...",
   "Raw-翻译-AI-needs-6T-in-annual-revenue-to-justify-da": "AI needs $6T in annual revenue to justif...",
