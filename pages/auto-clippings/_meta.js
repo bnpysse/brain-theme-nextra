@@ -2509,6 +2509,7 @@ export default {
   "Raw-翻译-What-Is-a-Harness": "What Is a Harness",
   "Raw-翻译-What-I-learnt-co-leading-an-AI-Safety-bootc": "What I learnt co-leading an AI Safety bo...",
   "Raw-翻译-What-Heraldry-and-Mon-Can-Teach-Us-About-Bu": "What Heraldry and Mon Can Teach Us About...",
+  "Raw-翻译-Were-releasing-Jev-1140-along-with-experime": "Were releasing Jev 1.14.0 along with exp...",
   "Raw-翻译-Were-Software-Engineers-blue-collar-workers": "Were Software Engineers blue-collar work...",
   "Raw-翻译-Welcome-to-the-Medical-Clinic-at-the-Interp": "Welcome to the Medical Clinic at the Int...",
   "Raw-翻译-Weird-Little-Guys-of-FOSS": "Weird Little Guys of FOSS",
