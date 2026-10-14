@@ -4080,6 +4080,7 @@ export default {
   "Raw-翻译-Anthropic研究员因担心AGI失控而辞职：或十年内致人类灭绝": "Anthropic研究员因担心AGI失控而辞职：或十年内致人类灭绝",
   "Raw-翻译-Anthropic最新报告：AI开始批量崩老头了": "Anthropic最新报告：AI开始批量崩老头了",
   "Raw-翻译-Anthropics-best-AI-model-struggles-to-attra": "Anthropics best AI model struggles to at...",
+  "Raw-翻译-Anthropics-Scion-is-heavily-inspired-by-Mon": "Anthropics Scion is heavily inspired by ...",
   "Raw-翻译-Anthropic-最强模型难以吸引用户": "Anthropic 最强模型难以吸引用户",
   "Raw-翻译-Anthropic-招股书里，最耐人寻味的-7-个细节": "Anthropic 招股书里，最耐人寻味的 7 个细节",
   "Raw-翻译-Anthropic-将发招股书，预计募资-1300-亿美元超越-SpaceX；腾讯发布": "Anthropic 将发招股书，预计募资 1300 亿美元超越 SpaceX；腾...",
