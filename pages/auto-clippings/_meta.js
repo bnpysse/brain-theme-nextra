@@ -4325,6 +4325,7 @@ export default {
   "Raw-翻译-2万起售的华为三折叠，不想走8848的老路": "2万起售的华为三折叠，不想走8848的老路",
   "Raw-翻译-2万元的人形机器人，还成不了下一台iPhone": "2万元的人形机器人，还成不了下一台iPhone",
   "Raw-翻译-2万亿美元估值靠什么撑Anthropic-核心技术负责人：蒸馏会毁掉前沿研发，中美AI": "2万亿美元估值靠什么撑Anthropic 核心技术负责人：蒸馏会毁掉前沿研发，中...",
+  "Raw-翻译-29天内两次一箭十星，中国商业航天离班次化还有几步": "29天内两次一箭十星，中国商业航天离班次化还有几步",
   "Raw-翻译-29-Year-Olds-Can-Write-Memoirs-Too": "29-Year-Olds Can Write Memoirs Too",
   "Raw-翻译-284台秤只查出1台作弊：赵一鸣的低价神话，差在最后一克": "284台秤只查出1台作弊：赵一鸣的低价神话，差在最后一克",
   "Raw-翻译-28-of-job-postings-on-company-career-sites": "28 of job postings on company career sit...",
