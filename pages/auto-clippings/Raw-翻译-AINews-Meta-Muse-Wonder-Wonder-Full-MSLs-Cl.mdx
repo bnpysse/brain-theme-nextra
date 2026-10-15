@@ -1,0 +1,510 @@
+---
+title: "[AINews] Meta Muse Wonder  Wonder Full MSL’s Claude 5.5-tier_全翻译"
+tags: ["大咖视点_全文翻译", "Latent_Space_(AI_工程师社区深度)"]
+---
+
+【文章标题】：[AINews] Meta Muse Wonder & Wonder Full：MSL的Claude 5.5级前沿模型
+
+【文章正文】：
+
+We have been coveringe
+
+MSL’s 14 month journey to becoming a frontier lab
+
+, but only today did the final ball drop: Meta’s
+
+Muse Wonder
+
+to match
+
+Spark and Glimmer
+
+, the way that OpenAI has Sol/Terra/Luna and Anthropic has Opus/Sonnet/Haiku. Interestingly, while Muse doesn’t claim a specific size, Muse Wonder Full does beat Fable and Astra on some benchmarks, and with various degrees of posttraining it is a little unclear if Wonder is more of a Fable/Astra class model or not.
+
+我们一直在报道
+
+MSL成为前沿实验室的14个月历程
+
+，但直到今天才尘埃落定：Meta的
+
+Muse Wonder
+
+与
+
+Spark和Glimmer
+
+形成对应关系，就像OpenAI拥有Sol/Terra/Luna、Anthropic拥有Opus/Sonnet/Haiku一样。有趣的是，虽然Muse并未宣称具体规模，但Muse Wonder Full确实在某些基准测试上击败了Fable和Astra，而且由于后训练程度不同，目前尚不太清楚Wonder是否更接近Fable/Astra级别的模型。
+
+We have included a full breakdown of launch details below.
+
+我们在下方提供了发布细节的完整分解。
+
+AI News for 10/10/2026-10/12/2026. We checked 12 subreddits,
+
+544 Twitters
+
+and no further Discords.
+
+2026年10月10日至10月12日的AI新闻。我们检查了12个subreddit、
+
+544个Twitter账号
+
+，没有其他Discord频道。
+
+AINews’ website
+
+lets you search all past issues. As a reminder,
+
+AINews is now a section of Latent Space
+
+. You can
+
+opt in/out
+
+of email frequencies!
+
+AINews网站
+
+可让你搜索所有过往期刊。提醒一下，
+
+AINews现在是Latent Space的一个板块
+
+。你可以
+
+选择订阅/退订
+
+邮件频率！
+
+AI Twitter Recap
+
+AI Twitter摘要
+
+Top Story: Meta launches Muse Wonder and Muse Wonder Full
+
+头条新闻：Meta发布Muse Wonder和Muse Wonder Full
+
+What happened
+
+发生了什么
+
+Meta Superintelligence Labs (MSL) shipped Muse Wonder (codename “Watermelon” 🍉), its second-generation model family. Third-party evals put it near the frontier, roughly 14 months after the lab was founded.
+
+Meta超级智能实验室（MSL）发布了其第二代模型系列Muse Wonder（代号“Watermelon”🍉）。第三方评测将其定位在接近前沿水平，此时距该实验室成立约14个月。
+
+The run-up.
+
+发布前的铺垫。
+
+Hours before launch, insiders posted watermelon teasers:
+
+@rpnickson
+
+(”It is a BIG watermelon…”),
+
+@alexandr_wang
+
+,
+
+@finkd
+
+(”Muse ordered me 🍉”) and
+
+@EdwardSun0909
+
+.
+
+发布前数小时，内部人士发布了西瓜预告：
+
+@rpnickson
+
+（“这是一个大西瓜……”）、
+
+@alexandr_wang
+
+、
+
+@finkd
+
+（“Muse给我点了🍉”）以及
+
+@EdwardSun0909
+
+。
+
+@kimmonismus
+
+relayed leaked pricing from @synthwavedd: $4/M input, $20/M output, a 1M context window, and the max-reasoning “Wonder Full” tier exclusive to MuseCode Power/Maximum Usage plans.
+
+@kimmonismus
+
+转述了来自@synthwavedd的泄露定价：输入$4/百万token，输出$20/百万token，100万上下文窗口，以及MuseCode Power/Maximum Usage套餐专属的“Wonder Full”最大推理层级。
+
+Two models.
+
+两款模型。
+
+@finkd
+
+announced the family.
+
+@finkd
+
+宣布了这一模型系列。
+
+He explained
+
+that Muse Spark was MSL’s first family and Wonder is “a much larger and more advanced class of models that brings us to the frontier.” The two releases are Muse Wonder (fast frontier) and Muse Wonder Full (the full model).
+
+他解释说
+
+，Muse Spark是MSL的第一个系列，而Wonder是“一个更大、更先进的模型类别，将我们带到了前沿。”两款发布产品分别是Muse Wonder（快速前沿版）和Muse Wonder Full（完整版模型）。
+
+Availability is split
+
+(
+
+@AIatMeta
+
+,
+
+Newsroom
+
+):
+
+可用性有所区分
+
+（
+
+@AIatMeta
+
+、
+
+Newsroom
+
+）：
+
+Wonder is available via the Meta Model API and Muse Code.
+
+Wonder可通过Meta Model API和Muse Code使用。
+
+Full is available only to Muse Code subscribers.
+
+Full仅对Muse Code订阅者开放。
+
+Wonder will power the Muse personal-agent product, subscribers first (
+
+@finkd
+
+).
+
+Wonder将为Muse个人智能体产品提供支持，订阅者优先（
+
+@finkd
+
+）。
+
+Muse Code installs with
+
+curl dev.meta.ai/install.sh | bash
+
+(
+
+@alexandr_wang
+
+).
+
+Muse Code通过
+
+curl dev.meta.ai/install.sh | bash
+
+安装
+
+（
+
+@alexandr_wang
+
+）。
+
+Positioning.
+
+定位。
+
+Meta pitches the models as SOTA for “personal and professional agentic work.”
+
+Meta将这两款模型定位为“个人和专业智能体工作”的SOTA（最先进水平）。
+
+@alexandr_wang
+
+named three headline features:
+
+@alexandr_wang
+
+列出了三大核心特性：
+
+Active Memory:
+
+memory across days, weeks and months.
+
+主动记忆：
+
+跨天、跨周、跨月的记忆能力。
+
+Active Focus:
+
+working through blockers to finish tasks.
+
+主动专注：
+
+克服障碍以完成任务。
+
+Domain expertise:
+
+SOTA in finance and legal, “strong in health.”
+
+领域专长：
+
+在金融和法律领域达到SOTA，“在健康领域表现强劲”。
+
+Training story.
+
+训练历程。
+
+Wang says Meta continued scaling both pre-training and RL since Muse Spark shipped in April (
+
+post
+
+;
+
+research blog
+
+).
+
+Wang表示，自4月份Muse Spark发布以来（
+
+帖子
+
+；
+
+研究博客
+
+），Meta持续扩展预训练和强化学习规模。
+
+@AIatMeta
+
+framed it as going “from rebuilding our foundation to pushing the frontier in 14 months.”
+
+@AIatMeta
+
+将其概括为“从重建基础到在14个月内推进前沿”。
+
+Safety claims.
+
+安全声明。
+
+@AIatMeta
+
+says the family was trained for robustness to adversarial instructions and for careful handling of private information. No detailed system card was referenced.
+
+@AIatMeta
+
+表示该系列模型经过训练，能够抵御对抗性指令并谨慎处理私人信息。未提及详细的系统卡。
+
+Launch-day usage-limit bug.
+
+发布当天的用量限制漏洞。
+
+Wonder and Wonder Full were draining Muse Code quotas abnormally fast (
+
+@alexandr_wang
+
+,
+
+follow-up
+
+). It was fixed the same day, with a quota reset for all users (
+
+fix
+
+;
+
+@mjdouglas
+
+). Wang noted “there’s definitely still issues we’re trying to iron out” (
+
+post
+
+).
+
+Wonder和Wonder Full消耗Muse Code配额的速度异常快（
+
+@alexandr_wang
+
+、
+
+后续跟进
+
+）。当天即修复，所有用户的配额已重置（
+
+修复
+
+；
+
+@mjdouglas
+
+）。Wang指出“确实还有一些我们正在努力解决的问题”（
+
+帖子
+
+）。
+
+Media.
+
+媒体报道。
+
+Zuckerberg and Wang went on Stripe’s Cheeky Pint (
+
+@collision
+
+). Chapters include “Betting $100B,” agentic commerce, OpenRouter, “Why AI won’t be winner-take-all,” and MSL org structure.
+
+Zuckerberg和Wang参加了Stripe的Cheeky Pint播客（
+
+@collision
+
+）。章节包括“押注1000亿美元”、智能体商务、OpenRouter、“为什么AI不会是赢家通吃”以及MSL组织架构。
+
+Independent evals (facts)
+
+独立评测（事实数据）
+
+Artificial Analysis
+
+(
+
+@ArtificialAnlys
+
+) — the most detailed third-party read:
+
+Artificial Analysis
+
+（
+
+@ArtificialAnlys
+
+）——最详细的第三方解读：
+
+Intelligence Index v4.3:
+
+Wonder Full (max) scores 56 and Wonder (max) scores 52, up from Muse Spark 1.3 (max) at 48. The gap between Spark 1.3 and Wonder releases was only 6 weeks. Opus 5.5 leads at 58 (
+
+@TheRundownAI
+
+).
+
+智能指数v4.3：
+
+Wonder Full（最大）得分56，Wonder（最大）得分52，高于Muse Spark 1.3（最大）的48。Spark 1.3与Wonder发布之间仅相隔6周。Opus 5.5以58分领先（
+
+@TheRundownAI
+
+）。
+
+Wonder Full improved on all ten index evals.
+
+Wonder Full在全部十项指数评测中均有提升。
+
+The largest gains were agentic:
+
+最大提升出现在智能体相关领域：
+
+Terminal-Bench 4.0: 33% → 57%
+
+Terminal-Bench 4.0：33% → 57%
+
+GDPval-AA v2.1: 1681 → 1857 Elo
+
+GDPval-AA v2.1：1681 → 1857 Elo
+
+AA-Briefcase: 1581 → 1729 Elo
+
+AA-Briefcase：1581 → 1729 Elo
+
+Where Wonder Full ranks:
+
+Wonder Full的排名情况：
+
+top three on 6 of 10 evals.
+
+在10项评测中有6项进入前三。
+
+#1 on GDP.pdf (33%) and on CritPt (33%)
+
+在GDP.pdf（33%）和CritPt（33%）上排名第一
+
+#2 on GDPval
+
+在GDPval上排名第二
+
+#3 on AA-Briefcase, AutomationBench-AA (71%) and SciCode (63%)
+
+在AA-Briefcase、AutomationBench-AA（71%）和SciCode（63%）上排名第三
+
+Wonder (non-Full) gains:
+
+Wonder（非Full版）的提升：
+
+Terminal-Bench 33% → 52%; AutomationBench 58% → 68%.
+
+Terminal-Bench 33% → 52%；AutomationBench 58% → 68%。
+
+Token usage per index task:
+
+每项指数任务的Token使用量：
+
+Output: both models use about 54k, down ~10% from Spark 1.3’s 60k. For comparison: Gemini 4 Argon 62k, Fable 5.1 78k, GPT-6.1 Sol 38k, GPT-6 Astra 27k.
+
+输出：两款模型均使用约54k，较Spark 1.3的60k下降约10%。对比参考：Gemini 4 Argon 62k、Fable 5.1 78k、GPT-6.1 Sol 38k、GPT-6 Astra 27k。
+
+Input: Full uses 6.44M versus Wonder’s 7.69M.
+
+输入：Full使用6.44M，而Wonder为7.69M。
+
+Cost per index task:
+
+每项指数任务的成本：
+
+Wonder costs $4.52, driven by high input usage. The table also lists:
+
+Wonder成本为$4.52，主要受高输入使用量驱动。表格还列出了：
+
+ModelCost per taskFable 5.1$7.63Opus 5.5$5.98Sonnet 5.5$5.46Astra$3.26Argon$1.99Sol$0.72Spark 1.3$1.60
+
+模型每任务成本Fable 5.1$7.63Opus 5.5$5.98Sonnet 5.5$5.46Astra$3.26Argon$1.99Sol$0.72Spark 1.3$1.60
+
+Wonder Full has no published token price, so its cost can’t be computed.
+
+Wonder Full没有公布的token价格，因此无法计算其成本。
+
+Coding Agents Index:
+
+编码智能体指数：
+
+Wonder Full in Muse Code scores 68, tying Claude Code + Sonnet 5.5 (68) and ahead of Opus 5.5 (66). Wonder scores 63; Spark 1.3 scored 54.
+
+Muse Code中的Wonder Full得分68，与Claude Code + Sonnet 5.5（68）持平，领先于Opus 5.5（66）。Wonder得分63；Spark 1.3得分为54。
+
+Specs:
+
+规格参数：
+
+1M context
+
+100万上下文
+
+Input: text, image, video and audio; output: text only
+
+输入：文本、图像、视频和音频；输出：仅文本
+
+Pricing: $4 input / $0.20 cached input / $20 output per M
+
+定价：每百万token输入$4 / 缓存输入$0.20 / 输出$20
