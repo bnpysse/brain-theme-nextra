@@ -1,0 +1,256 @@
+---
+title: "11 year old unsoundness bugs found in Rust borrow checker_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：11 year old unsoundness bugs found in Rust borrow checker
+
+【文章正文】：
+
+Repository navigation
+
+struct's lifetime requirements can be bypassed via covariant field assignment #164250
+
+Description
+
+In the following code:
+
+use std::sync::Mutex;
+
+static KEPT: Mutex&lt;Vec&lt;Box&lt;dyn std::any::Any + Send&gt;&gt;&gt; = Mutex::new(Vec::new());
+
+struct Q&lt;T: 'static + Send&gt;(Option&lt;T&gt;);
+
+impl&lt;T: 'static + Send&gt; Drop for Q&lt;T&gt; &#123;
+
+fn drop(&mut self) &#123; if let Some(t) = self.0.take() &#123; KEPT.lock().unwrap().push(Box::new(t)); &#125; &#125;
+
+&#125;
+
+fn main() &#123;
+
+&#123;
+
+let l = String::from("hello world, this is long enough");
+
+let mut q = Q(None);
+
+q.0 = Some(&l);
+
+&#125;
+
+let _z = String::from("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+let k = KEPT.lock().unwrap();
+
+println!("&#123;&#125;", k[0].downcast_ref::&lt;&'static String&gt;().unwrap());
+
+&#125;
+
+I expected to see this happen: program is not accepted
+
+Instead, this happened: program compiles and prints XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX. With asan, the program will crash with a AddressSanitizer: stack-use-after-scope
+
+Meta
+
+Issue on current nightly, and stables at least down to 1.85.0
+
+Godbolt with asan: https://rust.godbolt.org/z/83MvfbKde
+
+Godbolt without asan: https://rust.godbolt.org/z/GsGdqqMWe
+
+Activity
+
+- addedneeds-triageThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingon Oct 13, 2026
+
+- addedI-unsoundIssue: A soundness hole (worst kind of bug), see: https://en.wikipedia.org/wiki/SoundnessIssue: A soundness hole (worst kind of bug), see: https://en.wikipedia.org/wiki/Soundnesson Oct 13, 2026
+
+- addedI-prioritizeIssue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;Issue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;on Oct 13, 2026
+
+- addedA-borrow-checkerArea: The borrow checkerArea: The borrow checkerT-typesRelevant to the types team, which will review and decide on the PR/issue.Relevant to the types team, which will review and decide on the PR/issue.and removedneeds-triageThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingon Oct 13, 2026
+
+- The core of the unsoundness: struct Q&lt;T: 'static&gt;(Option&lt;T&gt;); impl&lt;T: 'static&gt; Drop for Q&lt;T&gt; &#123; fn drop(&mut self) &#123; // Code in here has access to a non-'static &String // but assumes that it's a &'static String &#125; &#125; fn main() &#123; let l = String::new(); let mut q = Q(None); q.0 = Some(&l); &#125; Reacted by Daniel Vogelbacher, Serhiy, BioTomateDE, Timur Tugushev, palapapa, Ori Yadid, SeniorMars, dzmitry-lahoda and Til
+
+- addedA-destructorsArea: Destructors (`Drop`, …)Area: Destructors (`Drop`, …)on Oct 13, 2026
+
+- removedI-prioritizeIssue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;Issue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;on Oct 13, 2026
+
+- My version of the code has been compiling ever since 1.18.0 (2017) How on earth was this not found before this??? Reacted by Max, Alisa Sireneva, Leon, maxbry-uh, Luke, slaiyer, Screeching Bagel, Slanterns, maliciousblahaj, Timur Tugushev and 4 more
+
+- Possibly related: #128225
+
+- without relying on a staticstruct MyType&lt;'a, 'b: 'a, 'c&gt;(&'c mut &'a str, &'b str); impl&lt;'a, 'b: 'a, 'c&gt; Drop for MyType&lt;'a, 'b, 'c&gt; &#123; fn drop(&mut self) &#123; *self.0 = self.1; &#125; &#125; fn main() &#123; let mut me_out = "rarw"; &#123; let l = String::from("some cool string"); let mut q = MyType(&mut me_out, ""); q.1 = &l; &#125; println!("me_out: &#123;me_out&#125;"); &#125; Reacted by dzmitry-lahoda and Martijn Gribnau
+
+- unsound since 1.4 🤣 https://rust.godbolt.org/z/j1s1TevhP Reacted by Rémy Rakic, D. Savchenko, Mathijs Follon, FelixKLG, Alex Gershberg, Kamilla 'ova, Tux3, slaiyer, Daniil Kondratev, Timur Tugushev and 13 more
+
+- Assigning P-high (discussion on Zulip). Reacted by Jeremy Lempereur
+
+- Another version that segfaults/prints freed memory since 1.4 struct Q&lt;T, F: FnMut(&T)&gt;(Option&lt;T&gt;, F); impl&lt;T, F: FnMut(&T)&gt; Drop for Q&lt;T, F&gt; &#123; fn drop(&mut self) &#123; self.1(self.0.as_ref().unwrap()) &#125; &#125; fn main() &#123; let mut out: Option&lt;&'static _&gt; = None; &#123; let l = vec![vec![1]]; let mut q = Q(None, |s| &#123; out = Some(*s); &#125;); q.0 = Some(&l); &#125; println!("&#123;:?&#125;", out); &#125;
+
+- changed the title[-]struct's `T: 'static` bound bypassed via covariant field assignment[/-] [+]struct's lifetime requirements can be bypassed via covariant field assignment[/+]on Oct 13, 2026
+
+- addedA-lifetimesArea: Lifetimes / regionsArea: Lifetimes / regionsA-varianceArea: Variance (https://doc.rust-lang.org/nomicon/subtyping.html)Area: Variance (https://doc.rust-lang.org/nomicon/subtyping.html)on Oct 13, 2026
+
+- Another version, cuz why not. I think this version is probably the easiest to understand. use std::time::Duration; use std::thread; struct Q&lt;'a: 'static&gt;(Option&lt;&'a String&gt;);
+
+【文章标题】：11 year old unsoundness bugs found in Rust borrow checker
+
+【文章正文】：
+
+Repository navigation
+
+struct's lifetime requirements can be bypassed via covariant field assignment #164250
+
+Description
+
+In the following code:
+
+use std::sync::Mutex;
+
+static KEPT: Mutex&lt;Vec&lt;Box&lt;dyn std::any::Any + Send&gt;&gt;&gt; = Mutex::new(Vec::new());
+
+struct Q&lt;T: 'static + Send&gt;(Option&lt;T&gt;);
+
+impl&lt;T: 'static + Send&gt; Drop for Q&lt;T&gt; &#123;
+
+fn drop(&mut self) &#123; if let Some(t) = self.0.take() &#123; KEPT.lock().unwrap().push(Box::new(t)); &#125; &#125;
+
+&#125;
+
+fn main() &#123;
+
+&#123;
+
+let l = String::from("hello world, this is long enough");
+
+let mut q = Q(None);
+
+q.0 = Some(&l);
+
+&#125;
+
+let _z = String::from("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+let k = KEPT.lock().unwrap();
+
+println!("&#123;&#125;", k[0].downcast_ref::&lt;&'static String&gt;().unwrap());
+
+&#125;
+
+I expected to see this happen: program is not accepted
+
+Instead, this happened: program compiles and prints XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX. With asan, the program will crash with a AddressSanitizer: stack-use-after-scope
+
+Meta
+
+Issue on current nightly, and stables at least down to 1.85.0
+
+Godbolt with asan: https://rust.godbolt.org/z/83MvfbKde
+
+Godbolt without asan: https://rust.godbolt.org/z/GsGdqqMWe
+
+Activity
+
+- addedneeds-triageThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingon Oct 13, 2026
+
+- addedI-unsoundIssue: A soundness hole (worst kind of bug), see: https://en.wikipedia.org/wiki/SoundnessIssue: A soundness hole (worst kind of bug), see: https://en.wikipedia.org/wiki/Soundnesson Oct 13, 2026
+
+- addedI-prioritizeIssue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;Issue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;on Oct 13, 2026
+
+- addedA-borrow-checkerArea: The borrow checkerArea: The borrow checkerT-typesRelevant to the types team, which will review and decide on the PR/issue.Relevant to the types team, which will review and decide on the PR/issue.and removedneeds-triageThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingThis issue may need triage. Remove when done. See docs forge.rust-lang.org/release/issue-triagingon Oct 13, 2026
+
+- The core of the unsoundness: struct Q&lt;T: 'static&gt;(Option&lt;T&gt;); impl&lt;T: 'static&gt; Drop for Q&lt;T&gt; &#123; fn drop(&mut self) &#123; // Code in here has access to a non-'static &String // but assumes that it's a &'static String &#125; &#125; fn main() &#123; let l = String::new(); let mut q = Q(None); q.0 = Some(&l); &#125; Reacted by Daniel Vogelbacher, Serhiy, BioTomateDE, Timur Tugushev, palapapa, Ori Yadid, SeniorMars, dzmitry-lahoda and Til
+
+- addedA-destructorsArea: Destructors (`Drop`, …)Area: Destructors (`Drop`, …)on Oct 13, 2026
+
+- removedI-prioritizeIssue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;Issue needs a team member to assess the impact. Will be replaced by P-&#123;low,medium,high,critical&#125;on Oct 13, 2026
+
+- My version of the code has been compiling ever since 1.18.0 (2017) How on earth was this not found before this??? Reacted by Max, Alisa Sireneva, Leon, maxbry-uh, Luke, slaiyer, Screeching Bagel, Slanterns, maliciousblahaj, Timur Tugushev and 4 more
+
+- Possibly related: #128225
+
+- without relying on a staticstruct MyType&lt;'a, 'b: 'a, 'c&gt;(&'c mut &'a str, &'b str); impl&lt;'a, 'b: 'a, 'c&gt; Drop for MyType&lt;'a, 'b, 'c&gt; &#123; fn drop(&mut self) &#123; *self.0 = self.1; &#125; &#125; fn main() &#123; let mut me_out = "rarw"; &#123; let l = String::from("some cool string"); let mut q = MyType(&mut me_out, ""); q.1 = &l; &#125; println!("me_out: &#123;me_out&#125;"); &#125; Reacted by dzmitry-lahoda and Martijn Gribnau
+
+- unsound since 1.4 🤣 https://rust.godbolt.org/z/j1s1TevhP Reacted by Rémy Rakic, D. Savchenko, Mathijs Follon, FelixKLG, Alex Gershberg, Kamilla 'ova, Tux3, slaiyer, Daniil Kondratev, Timur Tugushev and 13 more
+
+- Assigning P-high (discussion on Zulip). Reacted by Jeremy Lempereur
+
+- Another version that segfaults/prints freed memory since 1.4 struct Q&lt;T, F: FnMut(&T)&gt;(Option&lt;T&gt;, F); impl&lt;T, F: FnMut(&T)&gt; Drop for Q&lt;T, F&gt; &#123; fn drop(&mut self) &#123; self.1(self.0.as_ref().unwrap()) &#125; &#125; fn main() &#123; let mut out: Option&lt;&'static _&gt; = None; &#123; let l = vec![vec![1]]; let mut q = Q(None, |s| &#123; out = Some(*s); &#125;); q.0 = Some(&l); &#125; println!("&#123;:?&#125;", out); &#125;
+
+- changed the title[-]struct's `T: 'static` bound bypassed via covariant field assignment[/-] [+]struct's lifetime requirements can be bypassed via covariant field assignment[/+]on Oct 13, 2026
+
+- addedA-lifetimesArea: Lifetimes / regionsArea: Lifetimes / regionsA-varianceArea: Variance (https://doc.rust-lang.org/nomicon/subtyping.html)Area: Variance (https://doc.rust-lang.org/nomicon/subtyping.html)on Oct 13, 2026
+
+- Another version, cuz why not. I think this version is probably the easiest to understand. use std::time::Duration; use std::thread; struct Q&lt;'a: 'static&gt;(Option&lt;&'a String&gt;);
+
+【文章标题】：在 Rust 借用检查器中发现的 11 年历史的不健全（unsoundness）错误
+
+【文章正文】：
+
+仓库导航
+
+通过协变字段赋值可以绕过 struct 的生命周期要求 #164250
+
+描述
+
+在以下代码中：
+
+use std::sync::Mutex;
+
+static KEPT: Mutex&lt;Vec&lt;Box&lt;dyn std::any::Any + Send&gt;&gt;&gt; = Mutex::new(Vec::new());
+
+struct Q&lt;T: 'static + Send&gt;(Option&lt;T&gt;);
+
+impl&lt;T: 'static + Send&gt; Drop for Q&lt;T&gt; &#123;
+
+fn drop(&mut self) &#123; if let Some(t) = self.0.take() &#123; KEPT.lock().unwrap().push(Box::new(t)); &#125; &#125;
+
+&#125;
+
+fn main() &#123;
+
+&#123;
+
+let l = String::from("hello world, this is long enough");
+
+let mut q = Q(None);
+
+q.0 = Some(&l);
+
+&#125;
+
+let _z = String::from("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+let k = KEPT.lock().unwrap();
+
+println!("&#123;&#125;", k[0].downcast_ref::&lt;&'static String&gt;().unwrap());
+
+&#125;
+
+我期望看到的情况是：程序不被接受
+
+然而实际发生的是：程序编译通过并打印出 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX。使用 asan 时，程序会崩溃并报出 AddressSanitizer: stack-use-after-scope
+
+元信息
+
+问题出现在当前的 nightly 版本，以及至少低至 1.85.0 的稳定版本上
+
+带 asan 的 Godbolt 链接：https://rust.godbolt.org/z/83MvfbKde
+
+不带 asan 的 Godbolt 链接：https://rust.godbolt.org/z/GsGdqqMWe
+
+活动
+
+- 添加了needs-triage此问题可能需要分诊。完成后移除。参见 docs forge.rust-lang.org/release/issue-triaging此问题可能需要分诊。完成后移除。参见 docs forge.rust-lang.org/release/issue-triaging于 2026 年 10 月 13 日
+
+- 添加了I-unsound问题：一个健全性漏洞（最严重的错误类型），参见：https://en.wikipedia.org/wiki/Soundness问题：一个健全性漏洞（最严重的错误类型），参见：https://en.wikipedia.org/wiki/Soundness于 2026 年 10 月 13 日
+
+- 添加了I-prioritize问题需要团队成员评估影响。将被替换为 P-&#123;low,medium,high,critical&#125;问题需要团队成员评估影响。将被替换为 P-&#123;low,medium,high,critical&#125;于 2026 年 10 月 13 日
+
+- 添加了A-borrow-checker领域：借用检查器领域：借用检查器T-types与类型团队相关，该团队将审查并决定 PR/问题。与类型团队相关，该团队将审查并决定 PR/问题。并移除了needs-triage此问题可能需要分诊。完成后移除。参见 docs forge.rust-lang.org/release/issue-triaging此问题可能需要分诊。完成后移除。参见 docs forge.rust-lang.org/release/issue-triaging于 2026 年 10 月 13 日
+
+- 不健全的核心：struct Q&lt;T: 'static&gt;(Option&lt;T&gt;); impl&lt;T: 'static&gt; Drop for Q&lt;T&gt; &#123; fn drop(&mut self) &#123; // 这里的代码可以访问一个非 'static 的 &String // 但假设它是一个 &'static String &#125; &#125; fn main() &#123; let l = String::new(); let mut q = Q(None); q.0 = Some(&l); &#125; 由 Daniel Vogelbacher、Serhiy、BioTomateDE、Timur Tugushev、palapapa、Ori Yadid、SeniorMars、dzmitry-lahoda 和 Til 回应
+
+- 添加了A-destructors领域：析构函数（`Drop`，…）领域：析构函数（`Drop`，…）于 2026 年 10 月 13 日
+
+- 移除了I-prioritize问题需要团队成员评估影响。将被替换为 P-&#123;low,medium,high,critical&#125;问题需要团队成员评估影响。将被替换为 P-&#123;low,medium,high,critical&#125;于 2026
