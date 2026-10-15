@@ -3293,6 +3293,7 @@ export default {
   "Raw-翻译-Muse-帮我卖键盘，顺便把我家地址也「卖」了": "Muse 帮我卖键盘，顺便把我家地址也「卖」了",
   "Raw-翻译-Muse-review-The-personal-AI-agent-that-gets": "Muse review The personal AI agent that g...",
   "Raw-翻译-Muse-Wonder": "Muse Wonder",
+  "Raw-翻译-Muse-Spark-Open": "Muse Spark Open",
   "Raw-翻译-Multi-Agents-LLM-Financial-Trading-Framewor": "Multi-Agents LLM Financial Trading Frame...",
   "Raw-翻译-Mozilla-报告称中国开放权重模型与美国前沿模型仅相差-44-个月": "Mozilla 报告称中国开放权重模型与美国前沿模型仅相差 4.4 个月",
   "Raw-翻译-Mozilla-Introduces-Firefox-Enterprise": "Mozilla Introduces Firefox Enterprise",
