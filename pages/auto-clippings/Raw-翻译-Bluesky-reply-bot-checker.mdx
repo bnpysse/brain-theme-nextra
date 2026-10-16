@@ -1,0 +1,98 @@
+---
+title: "Bluesky reply bot checker_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：Bluesky reply bot checker
+
+【文章标题】：Bluesky回复机器人检测器
+
+【文章正文】：
+
+Tool:
+
+工具：
+
+Bluesky reply bot checker
+
+Bluesky回复机器人检测器
+
+Automated reply bots on Twitter are a
+
+Twitter上的自动回复机器人简直是
+
+scourge
+
+一场灾难
+
+- as someone with a decent number of followers I attract a swarm of these, such that anything I post there attracts dozens of mindless automated replies.
+
+——作为一个拥有不少关注者的人，我总会吸引一大群这类机器人，导致我发布的任何内容都会招来数十条无脑的自动回复。
+
+They've started manifesting on Bluesky as well.
+
+现在它们也开始在Bluesky上出现了。
+
+Unlike Twitter, Bluesky still has a freely available and useful API. The lack of such a thing doesn't slow down the bots, but it does make investigating them a lot more frustrating.
+
+与Twitter不同，Bluesky仍然提供免费且实用的API。虽然缺乏这类API并不会减缓机器人的扩散，但确实会让调查它们变得更加令人沮丧。
+
+So I had Opus 5.5
+
+于是我让Opus 5.5
+
+vibe code this tool
+
+"氛围编码"了这个工具
+
+, which examines any Bluesky profile for evidence of a likely reply bot.
+
+它可以检查任何Bluesky账号，寻找可能是回复机器人的证据。
+
+It looks for signals like replies posted within seconds of other posts from the same account, or accounts that never post their own content (or images or links) but instead consistently reply to messages from other, higher-follower users.
+
+它会寻找一些信号，比如同一账号在几秒内连续发出的回复，或者那些从不发布自己的内容（或图片、链接），而是一致地回复其他高关注量用户消息的账号。
+
+It also looks for question marks, because I'm
+
+它还会特别关注问号，因为我
+
+extra
+
+格外
+
+infuriated by reply bots that I no tie me to waste my time answering a question that no human ever posed.
+
+对那些让我浪费时间回答一个根本没人提出的问题的回复机器人感到愤怒。
+
+Tags:
+
+标签：
+
+twitter
+
+twitter
+
+,
+
+,
+
+bluesky
+
+bluesky
+
+,
+
+,
+
+vibe-coding
+
+氛围编码
+
+,
+
+,
+
+ai-misuse
+
+AI滥用

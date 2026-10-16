@@ -1,0 +1,36 @@
+---
+title: "Linus Torvalds s first LLM-assisted patch series_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Linus Torvalds's first LLM-assisted patch series
+
+【文章正文】：
+
+Linus Torvalds's first LLM-assisted patch series
+
+The fairly short series of ten patches basically enhances folio
+
+lookup by noticing when folios are hot, and setting a "delay
+
+releasing this folio until after a RCU period", and then using that
+
+RCU delay it does not just the folio lookup itself under RCU (which
+
+we've done forever), but also the actual folio data accesses
+
+themselves under RCU. No refcount taking needed for the fastpath
+
+where we can just read the data from the folio entirely in an
+
+RCU-protected region when the user copy doesn't cause page faults.
+
+The end result is an order-of-magnitude speedup for a read()-heavy
+
+benchmark.  Review has already identified a race
+
+condition in the code, though, so further work will be needed.
+
+The LWN site is currently under high scraper load, so comment display has been suppressed for anonymous users. If you are a human, you may read the comments by clicking the button below:
+
+Note: you can avoid this step in the future by logging into your LWN account.

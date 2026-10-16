@@ -1,0 +1,120 @@
+---
+title: "Coris YC S22 Is Hiring Back End Engineer_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Coris (YC S22) Is Hiring Back End Engineer
+
+【文章标题】：Coris（YC S22）正在招聘后端工程师
+
+🧠 About Coris
+
+Coris is the AI platform for risk and financial operations. Platforms, marketplaces, payment providers, and banks - GoFundMe, Clio, Cherry, and a growing list - use Coris to onboard merchants faster, monitor them continuously, and act on fraud without adding headcount. One customer described us as "Cursor + Lovable for risk teams."
+
+We're backed by Y Combinator, Lux Capital, and Pathlight, founded by payments-domain experts, and growing quickly on customer pull. We're a small team; this hire owns a large share of the backend.
+
+🧠 关于 Coris
+
+Coris 是面向风险与金融运营的 AI 平台。各类平台、市场、支付服务商和银行——包括 GoFundMe、Clio、Cherry 以及越来越多的客户——都在使用 Coris 来更快地接入商户、持续监控风险，并在不增加人手的情况下应对欺诈。有客户将我们形容为“风险团队的 Cursor + Lovable”。
+
+我们获得了 Y Combinator、Lux Capital 和 Pathlight 的投资，由支付领域专家创立，并凭借客户口碑快速成长。我们是一个小团队；这个岗位将负责后端的大部分工作。
+
+👥 Who you'll work with
+
+Coris was started by Vinodh (CEO) and Shyam (CTO). We've each spent 20+ years in fraud and risk management, running risk engineering, operations and product teams at Google, eBay, PayPal and WePay. You'll work directly with both of us in Palo Alto.
+
+👥 你将与谁共事
+
+Coris 由 Vinodh（CEO）和 Shyam（CTO）共同创立。我们两人在欺诈和风险管理领域都有超过 20 年的经验，曾在 Google、eBay、PayPal 和 WePay 领导风险工程、运营和产品团队。你将在帕洛阿尔托直接与我们两人合作。
+
+🚀 Why this role matters
+
+Every Coris decision runs on data we pull from payment processors and platforms: Stripe, Adyen, Fiserv, TSYS, Repay, and more, over APIs, webhooks, and SFTP file feeds - hundreds of millions of events a month, billions of rows in Postgres. On top of that sits a signals and rules engine, an account graph, and the partner-facing API our customers build on.
+
+Here's the honest version of the work. Files arrive out of order over SFTP. One processor sends dates in UTC, another in the merchant's local time, and neither says which. A processor's decline code lives in a different column than the spec says. A webhook ships malformed JSON at 2am. A backfill worker runs out of memory on a 40B-row table. A customer's risk lead says "our numbers look off" and needs an answer today.
+
+We're hiring the engineer who will own all of that end-to-end, and who thinks it's the interesting part - because every integration we make reliably is one a competitor hasn't, and that's the moat. Getting the boring work right every time is how enduring companies are built!
+
+🚀 为什么这个岗位很重要
+
+Coris 的每一个决策都基于我们从支付处理商和平台获取的数据：Stripe、Adyen、Fiserv、TSYS、Repay 等，通过 API、webhook 和 SFTP 文件推送——每月数亿个事件，Postgres 中数十亿行数据。在这些数据之上，运行着信号与规则引擎、账户关系图谱，以及客户所依赖的面向合作伙伴的 API。
+
+以下是这份工作最真实的一面。文件通过 SFTP 到达时顺序错乱。一家处理商以 UTC 发送日期，另一家以商户本地时间发送，而且都没有标明。某家处理商的拒付代码所在的列与规范不符。凌晨 2 点，一个 webhook 推送了格式错误的 JSON。一个回填 worker 在 400 亿行的表上内存溢出。客户的風控负责人说“我们的数字看起来不对”，而且今天就要答案。
+
+我们要招聘的工程师，将端到端地负责所有这些工作，并且认为这才是最有意思的部分——因为我们每可靠地完成一个集成，就意味着竞争对手还没有做到，而这就是护城河。把枯燥的事情每次都做对，正是伟大公司得以长久的原因！
+
+🥷 What you'll do
+
+- Own processor and platform integrations. Build and operate ingestion from Stripe, Adyen, Fiserv, TSYS, Repay, and new processors as we sign them: APIs, webhooks, and batch file feeds. Make them correct, idempotent, observable, and PCI-safe.
+
+- Own the partner API and customer-specific work. Extend the v2 API, build per-customer configuration and signals, and work directly with customers' risk and ops teams to turn a vague report into a fix, fast.
+
+- Build the risk engine. Add signals and rules to the DAG engine that scores merchants and transactions; design Postgres schemas, indexes, partitions, and aggregations that stay fast at billions of rows.
+
+- Run it in prod. Celery workers, backfills, deadlocks, circuit breakers, latency, Sentry monitoring. You ship it, you own it.
+
+- Use AI everywhere it earns its place. Coding agents for first drafts and refactors, AI review on every PR, and LLMs inside the product (dispute agents, document parsing, structured extraction). You'll also help set the team's standards for how we use these tools.
+
+- ~10–20% product-facing TypeScript/Next.js when a feature needs it.
+
+🥷 你将做什么
+
+- 负责处理商和平台集成。构建并运营来自 Stripe、Adyen、Fiserv、TSYS、Repay 以及我们签约的新处理商的数据接入：API、webhook 和批量文件推送。确保其正确性、幂等性、可观测性，并符合 PCI 安全标准。
+
+- 负责合作伙伴 API 和客户定制化工作。扩展 v2 API，构建针对每个客户的配置和信号，并直接与客户的風控和运营团队合作，将模糊的报告快速转化为修复方案。
+
+- 构建风险引擎。为对商户和交易进行评分的 DAG 引擎添加信号和规则；设计在数十亿行数据下依然保持高性能的 Postgres 表结构、索引、分区和聚合。
+
+- 负责生产环境运维。Celery worker、回填、死锁、熔断器、延迟、Sentry 监控。你发布的代码，由你负责到底。
+
+- 在 AI 能发挥价值的地方全面使用 AI。使用编码代理完成初稿和重构，对每个 PR 进行 AI 审查，并在产品中集成 LLM（争议处理代理、文档解析、结构化提取）。你还将帮助团队制定使用这些工具的标准。
+
+- 约 10–20% 的时间用于面向产品的 TypeScript/Next.js 开发，当某个功能需要时。
+
+📅 Your first 90 days
+
+- Week 1: your first PR is merged and running in production.
+
+- 30 days: you're picking up substantial features and shipping them.
+
+- 60 days: you're taking on harder problems and building real depth in one or more parts of the system, like processor integrations, the risk engine or the partner API.
+
+- 90 days: you're the go-to person for a significant part of the platform.
+
+📅 你的第一个 90 天
+
+- 第 1 周：你的第一个 PR 被合并并在生产环境运行。
+
+- 30 天：你开始接手重要的功能并交付上线。
+
+- 60 天：你开始解决更棘手的问题，并在系统的一个或多个部分建立真正的深度，例如处理商集成、风险引擎或合作伙伴 API。
+
+- 90 天：你成为平台某个重要部分的负责人。
+
+✅ You may be a fit if
+
+Nobody matches every line below. If most of it sounds like you and the work above is the kind you want to do, we'd like to hear from you.
+
+- A few years shipping production Python backends (Django/Postgres or close; 3+ years is a guide, not a cutoff). Ideally you've owned a system in production through growth: schema changes on large tables, concurrency and locking bugs, backfills, on-call. You're at home in SQL and can read a query plan, or want to get very good at it.
+
+- An AI-native way of working. You reach for coding agents (Claude Code, Codex, Cursor or similar) by default, and you've built something with LLMs that people use, at work or on your own. If you're earlier on this curve but moving fast, tell us what you've built.
+
+- Judgment about what AI produces. You have a feel for which changes to let an agent run with (test scaffolding, a well-specified refactor, a migration you can diff) and which to read line by line (anything touching money, card data or PII, a schema change on a huge table, locking and concurrency). You want to understand every line of a diff before it ships, and you treat AI review comments as input, not instruction.
+
+- You like the schlep. Integrations, escalations, backfills, file formats from 1995. You see the pattern in the mess and don't burn out on it, because you understand why it's the product.
+
+- Comfortable with customers. You'd be at ease, or keen to get there, on a call with a customer's risk team, saying "give me an hour," and turning their problem into a fix.
+
+✅ 你可能适合这个岗位，如果
+
+没有人能完全符合以下每一条。如果大部分描述听起来像你，而上述工作正是你想做的，我们很期待收到你的来信。
+
+- 有数年生产级 Python 后端的交付经验（Django/Postgres 或相近技术栈；3 年以上是参考标准，不是硬性门槛）。理想情况下，你曾负责过一个系统在生产环境中经历增长：大表上的表结构变更、并发和锁问题、回填、on-call。你对 SQL 驾轻就熟，能读懂查询计划，或者非常想把它学好。
+
+- 以 AI 原生的方式工作。你默认会使用编码代理（Claude Code、Codex、Cursor 或类似工具），并且你用 LLM 构建过别人在使用的产品，无论是在工作中还是个人项目。如果你在这条曲线上还在早期但进步很快，请告诉我们你构建过什么。
+
+- 对 AI 产出的判断力。你能分辨哪些改动可以让代理放手去做（测试脚手架、定义明确的重构、可以 diff 的迁移脚本），哪些需要逐行审阅（任何涉及资金、卡数据或 PII 的改动、大表上的表结构变更、锁和并发问题）。你希望在代码上线前理解 diff 中的每一行，并且把 AI 的审查意见当作输入而非指令。
+
+- 你喜欢做苦活。集成、升级处理、回填、1995 年的文件格式。你能在混乱中看到规律，并且不会因此精疲力竭，因为你理解这正是产品的核心价值。
+
+- 善于与客户打交道。你能自如地（或渴望做到）与客户的風控团队通电话，说“给我一个小时”，然后把他们的问题变成解决方案。
