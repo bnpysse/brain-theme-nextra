@@ -1,0 +1,82 @@
+---
+title: "Zero to Calc in Six Days Inside XBOW s Chrome Full Chain_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Zero to Calc in Six Days: Inside XBOW's Chrome Full Chain
+
+【文章标题】：六天从零到计算器：揭秘XBOW的Chrome全链
+
+【文章正文】：
+
+The final chain combined a V8 compiler bug, an animated-WebP decoder bug, and a memory-safety bug in Crashpad. Together they turned JavaScript execution in an ordinary Chrome tab into code execution outside the renderer sandbox.
+
+最终链结合了一个V8编译器漏洞、一个动画WebP解码器漏洞，以及Crashpad中的一个内存安全漏洞。它们共同将普通Chrome标签页中的JavaScript执行，转变为渲染器沙箱之外的代码执行。
+
+Google awarded this chain the first $250,000 Chrome full-chain reward under the VRP rules introduced in April 2026. Our separate announcement covers the award and what it means for XBOW. This post is about the exploit: the boundaries it crossed, the root cause of each vulnerability, and the interfaces that connected them.
+
+谷歌根据2026年4月引入的VRP规则，授予了这个链首个25万美元的Chrome全链奖励。我们的单独公告涵盖了该奖励及其对XBOW的意义。本文是关于该漏洞利用：它跨越的边界、每个漏洞的根本原因，以及连接它们的接口。
+
+A web page in signed Chrome Beta launches Calculator via XBOW’s full chain exploit.
+
+One thing is talking about speed and how offensive is accelerating and another is to experience it first hand. Pre-LLMs a Chrome full chain would take a team of four around 6-9 months to be produced, our first submission took 2 months. The awarded one? six days. The speed is challenging even for us trying to understand how security is changing.
+
+在签名的Chrome Beta中，一个网页通过XBOW的全链漏洞利用启动了计算器。
+
+谈论速度和攻击如何加速是一回事，亲身经历则是另一回事。在LLM时代之前，一个Chrome全链需要四人团队大约6-9个月才能完成，我们第一次提交用了2个月。获奖的那个？六天。即使对于我们这些试图理解安全正在如何变化的人来说，这种速度也是具有挑战性的。
+
+We built the chain in six days, from Sunday, August 2, through Friday, August 7. Rather than ask one agent to produce an exploit end to end, we split the work into parallel campaigns with narrower goals: broad vulnerability search, V8 memory corruption, a V8 sandbox escape, a renderer sandbox escape, and integration. AI agents using OpenAI's gpt-5.6-sol model searched source code, tested hypotheses, built proofs of concept, and developed exploit stages; XBOW researchers chose targets, supplied context, challenged results, redirected searches, and decided which components to join. We also developed backup routes and gave each stage a clean interface, so that we could replace one component without rebuilding the rest of the exploit. Reconstructing usage from the archived Codex logs puts the six-day campaign at roughly $40,000 in API charges. We will cover the chronology and orchestration at Unprompted at the end of October; here, we focus on the vulnerabilities and the exploit mechanics that connected them into a full chain.
+
+我们在六天之内构建了这个链，从8月2日（周日）到8月7日（周五）。我们没有让一个智能体端到端地生成漏洞利用，而是将工作分解为多个并行的战役，每个战役目标更窄：广泛漏洞搜索、V8内存破坏、V8沙箱逃逸、渲染器沙箱逃逸以及集成。使用OpenAI的gpt-5.6-sol模型的AI智能体搜索源代码、测试假设、构建概念验证并开发漏洞利用阶段；XBOW的研究人员选择目标、提供上下文、挑战结果、重新定向搜索并决定哪些组件需要整合。我们还开发了备用路线，并为每个阶段提供了清晰的接口，这样我们就可以替换一个组件而无需重建漏洞利用的其他部分。根据存档的Codex日志重建使用情况，这六天的战役大约耗费了4万美元的API费用。我们将在10月底的Unprompted活动中介绍时间线和编排；在此，我们重点介绍这些漏洞以及将它们连接成全链的漏洞利用机制。
+
+Background: V8 and Renderer Sandboxes
+
+V8 first contains JavaScript-engine corruption inside an in-process sandbox. Most JavaScript heap objects live in a reserved 4 GiB region, and many pointers are represented as offsets within that region. References to native objects and executable code receive additional protection. A V8 memory corruption bug can therefore give an attacker extensive control inside the cage without immediately yielding native code execution. V8 describes this design in The V8 sandbox.
+
+Chrome then contains the renderer itself inside an operating-system process sandbox. Even an attacker with native code execution in the renderer cannot freely access the rest of the machine. Chromium's sandbox design document describes this outer boundary.
+
+背景：V8和渲染器沙箱
+
+V8首先将JavaScript引擎的破坏限制在进程内沙箱中。大多数JavaScript堆对象位于一个预留的4 GiB区域中，许多指针被表示为该区域内的偏移量。对原生对象和可执行代码的引用受到额外保护。因此，一个V8内存破坏漏洞可以让攻击者在笼子内部获得广泛的控制权，而不会立即获得原生代码执行能力。V8在其《V8沙箱》文档中描述了这一设计。
+
+Chrome随后将渲染器本身包含在操作系统进程沙箱中。即使攻击者在渲染器中获得了原生代码执行能力，也无法自由访问机器的其余部分。Chromium的沙箱设计文档描述了这一外层边界。
+
+The chain crossed both boundaries in three vulnerability stages:
+
+| Stage | Vulnerability | Capability gained |
+
+|---|---|---|
+
+| JavaScript engine | Maglev reused a mutable boxed number during deoptimization | Read and write access throughout V8's pointer-compression cage |
+
+| V8 sandbox | Animated WebP combined cached geometry with changed image bytes | One chosen native write outside the cage |
+
+| Renderer sandbox | Crashpad treated a failed read from a supposedly frozen renderer as a stable observation | Code execution in the unsandboxed crash handler |
+
+这个链通过三个漏洞阶段跨越了这两个边界：
+
+| 阶段 | 漏洞 | 获得的能力 |
+
+|---|---|---|
+
+| JavaScript引擎 | 在去优化过程中，Maglev重用了一个可变的装箱数字 | 在V8指针压缩笼子内实现读写访问 |
+
+| V8沙箱 | 动画WebP将缓存的几何数据与更改的图像字节结合 | 在笼子外进行一次选定的原生写入 |
+
+| 渲染器沙箱 | Crashpad将来自本应冻结的渲染器的读取失败视为稳定观测 | 在无沙箱的崩溃处理程序中执行代码 |
+
+The animated-WebP stage was a V8 sandbox escape, but rather than attacking the sandbox itself we exploited a property that the V8 sandbox deliberately does not enforce and that Blink incorrectly assumed it could trust. Finally, the exploit used an overflow in Crashpad to cross the final the outer process boundary and achieve unsandboxed code execution on the host.
+
+动画WebP阶段是一个V8沙箱逃逸，但我们并没有攻击沙箱本身，而是利用了V8沙箱故意不强制执行的一个属性，而Blink错误地认为它可以信任该属性。最后，漏洞利用使用了Crashpad中的一个溢出来跨越最终的外部进程边界，并在主机上实现无沙箱的代码执行。
+
+Stage 1: Mutating the Immutable
+
+The first vulnerability was in Maglev, V8's mid-tier optimizing compiler. To understand it, we need to look at deoptimization.
+
+Optimized code operates under assumptions about the values and objects it handles. When an assumption stops being true at runtime, V8 must reconstruct ordinary JavaScript objects and continue in less specialized code. Some of those objects never existed in memory while the optimized code was running; the compiler had represented them only as values. Deoptimization must materialize them.
+
+A JavaScript object field with a double representation needs a HeapNumber when V8 materializes the object. The vulnerable Maglev path created one old-space HeapNumber for the virtual value and stored the object itself in the deoptimization literal array:
+
+void BuildHeapNumber(const VirtualObject* vobject) &#123;
+
+DCHECK_EQ(v
