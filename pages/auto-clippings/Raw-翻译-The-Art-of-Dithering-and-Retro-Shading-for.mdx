@@ -1,0 +1,98 @@
+---
+title: "The Art of Dithering and Retro Shading for the Web_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The Art of Dithering and Retro Shading for the Web
+
+【文章正文】：
+
+The Art of Dithering and Retro Shading for the Web
+
+I spent the past few months building my personal website from the ground up, finally taking the time to incorporate some 3D work to showcase my shader and WebGL skills. Throughout this work, I got to truly understand the crucial role that post-processing plays in making a scene actually look good, which brought some resolutions to long-term frustrations I had with my past React Three Fiber and shader projects where my vision wouldn't materialize regardless of the amount of work and care I was putting into them.
+
+Taking the time to build, combine, and experiment with custom post-processing effects gave me an additional creative outlet, and among the many types I got to iterate on, I always had a particular affection for the several "retro" effects I came up with. With subtle details such as dithering, color quantization, or pixelization/CRT RGB cells, they bring a pleasant contrast between the modern web landscape and a long-gone era of technology we 90s/early 2000s kids are sometime longing for.
+
+Given the time I invested dissecting every aspect of these effects, I wanted to dive deep with you into the concepts powering them and the shader techniques I learned along the way. In this article, I hope to convince you of the power of post-processing effects and that nothing beats an elegant retro vibe applied to a website 👌✨. We'll also look into examples of dithering and pixel art from very talented folks who use the same processes that I'll be introducing later on, as well as some of my own creations that I built while learning about all this.
+
+Dithering originated as an early graphics technique to trick the viewer's brain into seeing more color or smoothness in gradients/shadows that the machines back in the day could output by intentionally introducing noise on top of an image or a render. Color palettes were very limited back then, thus relying on techniques like these was vital for game designers to realize their vision. This gave, as a result, a unique look and feel to games and media from that specific moment in time where computers became ubiquitous, but advanced graphic capabilities were not yet there.
+
+Today, dithering is more an artistic choice than a workaround. Many artists or game designers use this technique as a creative outlet to give their work a unique retro vibe, calling out to that early gaming era, or work within the realms of self-imposed limits in colors. Some great examples of such use of dithering include:
+
+- Basement Studio's Basement Chronicle game: a well-executed point-and-click game that reminds me a lot of my own early gaming experience.
+
+- @loackme's art, which I'm an absolute fan of.
+
+- @aweusmeuh's use of the original Game Boy camera for experimental photography which features a sublime dithering effect.
+
+The latter is how we will approach dithering in this blog post: to give our React Three Fiber/Three.js projects a unique style! In this first part, we'll explore how the dithering technique works, implement it as a shader, and build a first iteration of a custom dithering post-processing effect that we can apply on top of any 3D scene.
+
+A first pass at dithering in React Three Fiber
+
+For this project, we'll create a custom post-processing effect. As we did for the Moebius stylized shader, relying on post-processing will allow us to apply a shader to an already rendered scene and alter its style like adding an "image filter" to a photo.
+
+To create a custom effect, we will:
+
+- Declare a class that extends fromEffect
+
+- Define our fragment shader and call it from the parent constructor using thesuper keyword.
+
+- Define the set of uniforms we will need for our effect.
+
+- Call thewrapEffect function from@react-three/post-processing with our effect class as an argument. This will allow us to use our effect as a JSX component withinEffectComposer .
+
+Sample custom shader post-processing effect used in an R3F scene
+
+1import &#123; OrbitControls, OrthographicCamera, useFBO &#125; from '@react-three/drei';2import &#123; Canvas &#125; from '@react-three/fiber';3import &#123; wrapEffect, EffectComposer &#125; from '@react-three/postprocessing';4import &#123; Effect &#125; from 'postprocessing';5import &#123; Suspense, useRef, useState &#125; from 'react';6import &#123; v4 as uuidv4 &#125; from 'uuid';78import fragmentShader from './fragmentShader.glsl';910class RetroEffectImpl extends Effect &#123;11constructor() &#123;12super('RetroEffect', fragmentShader, &#123;13uniforms: new Map([]),14&#125;);15&#125;16&#125;1718const RetroEffect = wrapEffect(RetroEffectImpl);1920const Retro = () =&gt; &#123;21const mesh = useRef();2223return (24&lt;&gt;25&lt;mesh receiveShadow castShadow&gt;26&lt;torusKnotGeometry args=&#123;[1, 0.25, 128, 100]&#125; /&gt;27&lt;meshStandardMaterial color="cyan" /&gt;28&lt;/mesh&gt;29&lt;EffectComposer&gt;30&lt;RetroEffect /&gt;31&lt;/EffectComposer&gt;32&lt;/&gt;33);34&#125;;
+
+As a first step to building our effect, we'll start with a simple luminance-based white noise dithering. The idea behind this is to:
+
+- Look at the luminance
+
+---
+
+【文章标题】：网页抖动与复古着色艺术
+
+【文章正文】：
+
+网页抖动与复古着色艺术
+
+过去几个月，我从零开始构建我的个人网站，终于抽出时间融入一些3D作品来展示我的着色器和WebGL技能。在这项工作中，我真正理解了后期处理在让场景看起来真正出色方面所起的关键作用，这也解决了我过去在React Three Fiber和着色器项目中长期以来的挫败感——无论我投入多少工作和心血，我的愿景都无法实现。
+
+花时间构建、组合和实验自定义后期处理效果给了我额外的创作出口，在我迭代的众多类型中，我始终对我想出的几种“复古”效果情有独钟。通过抖动、颜色量化或像素化/CRT RGB单元等微妙细节，它们在现代网页景观与早已逝去的技术时代之间带来了令人愉悦的对比，而我们这些90后/00年代初的孩子有时会怀念那个时代。
+
+鉴于我投入了大量时间剖析这些效果的方方面面，我想与你深入探讨驱动它们的核心概念以及我一路学到的着色器技术。在这篇文章中，我希望让你相信后期处理效果的强大之处，并相信没有什么能比得上应用于网站的优雅复古氛围👌✨。我们还将看看一些非常有才华的人使用抖动和像素艺术的例子，他们使用了与我稍后介绍相同的流程，以及我自己在学习这一切时创作的一些作品。
+
+抖动最初是一种早期图形技术，通过在图像或渲染上故意引入噪点，来欺骗观众的大脑，使其看到当时机器无法输出的更多颜色或渐变/阴影中的平滑度。那时调色板非常有限，因此依赖这类技术对于游戏设计师实现他们的愿景至关重要。结果，这赋予了那个特定时代游戏和媒体独特的外观和感觉——那时计算机变得无处不在，但先进的图形能力尚未到位。
+
+如今，抖动更多是一种艺术选择，而非权宜之计。许多艺术家或游戏设计师将这种技术用作创作出口，为他们的作品赋予独特的复古氛围，向早期游戏时代致敬，或者在自我设定的颜色限制范围内创作。一些使用抖动的绝佳例子包括：
+
+- Basement Studio的《Basement Chronicle》游戏：一款执行良好的点击式游戏，让我想起很多自己早期的游戏体验。
+
+- @loackme的艺术作品，我是他的绝对粉丝。
+
+- @aweusmeuh使用原版Game Boy相机进行实验摄影，呈现出一种极致的抖动效果。
+
+后者正是我们在本博客文章中处理抖动的方式：为我们的React Three Fiber/Three.js项目赋予独特风格！在第一部分中，我们将探索抖动技术的工作原理，将其实现为着色器，并构建一个自定义抖动后期处理效果的初版，可以应用于任何3D场景之上。
+
+在React Three Fiber中首次尝试抖动
+
+对于这个项目，我们将创建一个自定义后期处理效果。正如我们为Moebius风格化着色器所做的那样，依赖后期处理将允许我们将着色器应用于已渲染的场景，并像给照片添加“图像滤镜”一样改变其风格。
+
+要创建自定义效果，我们将：
+
+- 声明一个继承自`Effect`的类
+
+- 定义我们的片段着色器，并使用`super`关键字从父构造函数中调用它。
+
+- 定义我们效果所需的一组uniforms。
+
+- 从`@react-three/post-processing`调用`wrapEffect`函数，并将我们的效果类作为参数。这将允许我们在`EffectComposer`内将我们的效果用作JSX组件。
+
+在R3F场景中使用的自定义着色器后期处理效果示例
+
+1import &#123; OrbitControls, OrthographicCamera, useFBO &#125; from '@react-three/drei';2import &#123; Canvas &#125; from '@react-three/fiber';3import &#123; wrapEffect, EffectComposer &#125; from '@react-three/postprocessing';4import &#123; Effect &#125; from 'postprocessing';5import &#123; Suspense, useRef, useState &#125; from 'react';6import &#123; v4 as uuidv4 &#125; from 'uuid';78import fragmentShader from './fragmentShader.glsl';910class RetroEffectImpl extends Effect &#123;11constructor() &#123;12super('RetroEffect', fragmentShader, &#123;13uniforms: new Map([]),14&#125;);15&#125;16&#125;1718const RetroEffect = wrapEffect(RetroEffectImpl);1920const Retro = () =&gt; &#123;21const mesh = useRef();2223return (24&lt;&gt;25&lt;mesh receiveShadow castShadow&gt;26&lt;torusKnotGeometry args=&#123;[1, 0.25, 128, 100]&#125; /&gt;27&lt;meshStandardMaterial color="cyan" /&gt;28&lt;/mesh&gt;29&lt;EffectComposer&gt;30&lt;RetroEffect /&gt;31&lt;/EffectComposer&gt;32&lt;/&gt;33);34&#125;;
+
+作为构建效果的第一步，我们将从简单的基于亮度的白噪声抖动开始。其背后的想法是：
+
+- 查看亮度
