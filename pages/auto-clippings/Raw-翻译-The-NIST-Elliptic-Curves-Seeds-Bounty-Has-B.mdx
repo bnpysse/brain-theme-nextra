@@ -1,0 +1,166 @@
+---
+title: "The NIST Elliptic Curves Seeds Bounty Has Been Claimed_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：The NIST Elliptic Curves Seeds Bounty Has Been Claimed
+
+【文章标题】：NIST椭圆曲线种子赏金已被领取
+
+【文章正文】：
+
+The NIST Elliptic Curves Seeds Bounty Has Been Claimed
+
+【文章正文】：
+
+NIST椭圆曲线种子赏金已被领取
+
+We now know how the seeds of the NIST elliptic curves were generated: they're not the hash of some saucy sentence, but the output of drand48 seeded with the time, which was indeed in 1997–98.
+
+我们现在知道NIST椭圆曲线的种子是如何生成的：它们不是某些俏皮句子的哈希值，而是用时间作为种子的drand48函数的输出，时间确实是在1997–98年。
+
+John Wood, Henry de Valence, Ava Howell, Zack Voase, Lucy Sweet, Amir Omidi, Paul Crowley, Iain McGinniss, Nicholas Carlini, and Steve Weis from Anthropic solved the riddle and on October 15th, 2026, at 01:07:51 UTC, claimed the full bounty I announced three years ago. They chose to donate the prize to ISRG, the non-profit that operates Let's Encrypt, tripling its value to $36,864 (36 Ki$). Thank you to Amir Omidi, Chris Palmer, Colm MacCárthaigh, David Adrian, David Anderson, Jeff Hodges, Matt Green, Matthew McPherrin, Paul Kehrer, Ryan Sleevi, and Soatok for contributing to the bounty.
+
+来自Anthropic的John Wood、Henry de Valence、Ava Howell、Zack Voase、Lucy Sweet、Amir Omidi、Paul Crowley、Iain McGinniss、Nicholas Carlini和Steve Weis解开了这个谜题，并于2026年10月15日01:07:51 UTC领取了我三年前宣布的全额赏金。他们选择将奖金捐赠给运营Let's Encrypt的非营利组织ISRG，并将价值翻了三倍，达到36,864美元（36 Ki$）。感谢Amir Omidi、Chris Palmer、Colm MacCárthaigh、David Adrian、David Anderson、Jeff Hodges、Matt Green、Matthew McPherrin、Paul Kehrer、Ryan Sleevi和Soatok对赏金的贡献。
+
+This helps fill out a page of cryptographic history, and reinforces our confidence in these critical cryptographic primitives.
+
+这有助于填补密码学历史的一页，并增强了我们对这些关键密码原语的信心。
+
+The NIST elliptic curves (P-192, P-224, P-256, P-384, and P-521) were published by NIST in FIPS 186-2 in 2000. They were generated at random according to ANSI X9.62 by taking an arbitrary seed, hashing it with SHA-1, and using the output to derive some of the parameters. Until this week, we had no idea how those arbitrary seeds were picked.
+
+NIST椭圆曲线（P-192、P-224、P-256、P-384和P-521）由NIST于2000年在FIPS 186-2中发布。它们是根据ANSI X9.62随机生成的，方法是取任意种子，用SHA-1进行哈希，然后使用输出来推导部分参数。直到这周，我们才知道这些任意种子是如何选择的。
+
+The lore was that Dr. Jerry Solinas, who passed away in early 2023, generated them in 1997 by hashing some English sentences that he later forgot. You can read more in this article by Steve Weis or in the original bounty announcement.
+
+传说中，于2023年初去世的Jerry Solinas博士在1997年通过哈希一些他后来忘记的英文句子生成了它们。你可以在Steve Weis的这篇文章或最初的赏金公告中了解更多。
+
+Turns out memory can play tricks on everyone: we now know they were instead generated with the POSIX-standard drand48 random number generator.
+
+事实证明，记忆会捉弄每个人：我们现在知道它们是用POSIX标准的drand48随机数生成器生成的。
+
+The algorithm is as simple as passing the then-current UNIX timestamp to srand48() and then producing one byte at a time with drand48. Each sequence of 20 bytes is tried as a seed following ANSI X9.62 and rejected if the resulting curve is not valid. Some timestamps are used to generate multiple curves, by continuing to try seeds after accepting the first one. I reimplemented the algorithm in Go to verify the claim. Read more in Anthropic's writeup.
+
+该算法简单地将当时的UNIX时间戳传递给srand48()，然后使用drand48一次生成一个字节。每个20字节序列按照ANSI X9.62作为种子进行尝试，如果生成的曲线无效则被拒绝。有些时间戳用于生成多条曲线，即在接受第一个种子后继续尝试其他种子。我用Go语言重新实现了该算法以验证这一声明。在Anthropic的文章中了解更多。
+
+There are two additional undocumented criteria beyond the ANSI X9.62 ones, one fairly clear and one that still escapes us.
+
+除了ANSI X9.62的标准外，还有两个未记录的额外标准，其中一个相当清晰，而另一个仍让我们困惑。
+
+If the bit length of the order n of the resulting curve is more than the bit length of the base field p of the curve, the seed is rejected. (The condition is not the stricter n &lt; p, because prime239v2 has p &lt; n &lt; 2²³⁹.)
+
+如果生成的曲线的阶n的比特长度大于该曲线的基域p的比特长度，则种子被拒绝。（这个条件不是更严格的n &lt; p，因为prime239v2的p &lt; n &lt; 2²³⁹。）
+
+This leaves us with roughly twice as many valid seeds as were published. We explored a number of explanations for this last bit, and found no good fit. Maybe the same RNG was used to validate seeds, consuming RNG output and skipping some potential candidates, although the "gaps" are not regular. Maybe there was just a bug in one of the algorithms that returned the wrong result half the time; these calculations, which we can now do with off-the-shelf software in minutes, were still very much state-of-the-art in 1997.
+
+这使得我们拥有的有效种子数量大约是其已发布数量的两倍。我们探讨了对这最后一点的一些解释，但没有找到合适的。也许是用相同的RNG来验证种子，消耗了RNG输出并跳过了一些潜在的候选者，尽管“间隙”并不规则。也许只是某个算法中存在一个错误，导致一半时间返回错误的结果；这些计算，我们现在可以用现成的软件在几分钟内完成，但在1997年仍然是非常前沿的。
+
+srand48(863711343) [1997-05-15 15:49:03 +0000 UTC]:
+
+accepted   36th seed 25e5[...]: not published
+
+accepted 1562nd seed d09b[...]: not published
+
+accepted 2185th seed e43b[...]: prime239v1
+
+accepted 2320th seed e8b4[...]: prime239v2
+
+accepted 2491st seed 1256[...]: not published
+
+accepted 2682nd seed d2c1[...]: not published
+
+accepted 2863rd seed 3a70[...]: not published
+
+accepted 3048th seed 7d73[...]: prime239v3
+
+srand48(863966734) [1997-05-18 14:45:34 +0000 UTC]:
+
+accepted  139th seed 3045[...]: P-192 a.k.a. prime192v1
+
+accepted 2198th seed 692d[...]: not published
+
+accepted 5228th seed c469[...]: prime192v3
+
+accepted 5405th seed 3ad1[...]: not published
+
+accepted 6013th seed 31a9[...]: prime192v2
+
+srand48(871002724) [1997-08-08 01:12:04 +0000 UTC]:
+
+accepted 1136th seed d09e[...]: P-521
+
+srand48(871696354) [1997-08-16 01:52:34 +0000 UTC]:
+
+accepted  876th seed 50c7[...]: not published
+
+accepted 1842nd seed c49d[...]: P-256 a.k.a. prime256v1
+
+srand48(872952608) [1997-08-30 14:50:08 +0000 UTC]:
+
+accepted 2688th seed a335[...]: P-384
+
+srand48(891607927) [1998-04-03 12:52:07 +0000 UTC]:
+
+accepted  777th seed d007[...]: not published
+
+accepted 1485th seed 18cf[...]: not published
+
+accepted 5736th seed 3c17[...]: not published
+
+accepted 7026th seed bd71[...]: P-224
+
+srand48(863711343) [1997-05-15 15:49:03 +0000 UTC]:
+
+接受    第36个种子 25e5[...]: 未发布
+
+接受  第1562个种子 d09b[...]: 未发布
+
+接受  第2185个种子 e43b[...]: prime239v1
+
+接受  第2320个种子 e8b4[...]: prime239v2
+
+接受  第2491个种子 1256[...]: 未发布
+
+接受  第2682个种子 d2c1[...]: 未发布
+
+接受  第2863个种子 3a70[...]: 未发布
+
+接受  第3048个种子 7d73[...]: prime239v3
+
+srand48(863966734) [1997-05-18 14:45:34 +0000 UTC]:
+
+接受    第139个种子 3045[...]: P-192 又名 prime192v1
+
+接受  第2198个种子 692d[...]: 未发布
+
+接受  第5228个种子 c469[...]: prime192v3
+
+接受  第5405个种子 3ad1[...]: 未发布
+
+接受  第6013个种子 31a9[...]: prime192v2
+
+srand48(871002724) [1997-08-08 01:12:04 +0000 UTC]:
+
+接受  第1136个种子 d09e[...]: P-521
+
+srand48(871696354) [1997-08-16 01:52:34 +0000 UTC]:
+
+接受    第876个种子 50c7[...]: 未发布
+
+接受  第1842个种子 c49d[...]: P-256 又名 prime256v1
+
+srand48(872952608) [1997-08-30 14:50:08 +0000 UTC]:
+
+接受  第2688个种子 a335[...]: P-384
+
+srand48(891607927) [1998-04-03 12:52:07 +0000 UTC]:
+
+接受    第777个种子 d007[...]: 未发布
+
+接受  第1485个种子 18cf[...]: 未发布
+
+接受  第5736个种子 3c17[...]: 未发布
+
+接受  第7026个种子 bd71[...]: P-224
+
+What does this mean for the security of elliptic curve cryptography based on the NIST curves? Well, even before this discovery there were no serious concerns among practitioners. In Section 3.1 of their 2015 paper "A riddle wrapped in an enigma," Koblitz and Menezes make a convincing argument that it's implaus
