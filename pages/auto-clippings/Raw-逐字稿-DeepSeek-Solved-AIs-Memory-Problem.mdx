@@ -1,0 +1,256 @@
+---
+title: "DeepSeek Solved AI’s Memory Problem_逐字稿"
+tags: ["YT_逐字稿", "财经解读", "Two_Minute_Papers"]
+---
+
+What if the best way for an AI to
+
+remember a book is to stop reading it?
+
+You see, every word an AI reads becomes
+
+tokens, and tokens are expensive. The
+
+longer the book, the more the AI chokes
+
+on it. But, we humans do something
+
+strange. We don't remember everything
+
+perfectly. Some details fade. The older
+
+grandpa is, the better he was at school.
+
+And scientists at Deep Seek asked the
+
+question, "What if we make an AI do
+
+that, too?" Asking artificial
+
+intelligence to do artificial
+
+forgetting.
+
+如果让AI记住一本书的最佳方式是停止阅读它呢？你看，AI读到的每一个词都会变成令牌（tokens），而令牌是昂贵的。书越长，AI就越难以处理。但我们人类会做一些奇怪的事情——我们不会完美地记住一切，有些细节会逐渐模糊。爷爷年纪越大，他在学校的表现就越好（这句是调侃记忆随年龄衰退）。Deep Seek的科学家们提出了一个问题：“如果我们让AI也这样做呢？”——让人工智能进行人工遗忘。
+
+But, what a crazy proposition. Why would
+
+you do that? How does that even make
+
+sense? Well, let's see together. As we
+
+keep talking to an AI system, the longer
+
+we talk, the more documents we attach,
+
+the more expensive it is to keep running
+
+because it has to remember everything.
+
+Now, Deep Seek OCR says not to worry.
+
+Let's take this big soup of information,
+
+even text, and render it as an image,
+
+and then compress that image, a bit like
+
+what JPEG compression does to images.
+
+But, this is learned and token-based.
+
+And now, this data is drastically
+
+smaller. But, this still doesn't make
+
+too much sense. So, how is that good? I
+
+mean, we lose a lot of information,
+
+right? Well, hold on to your papers,
+
+fellow scholars, and let's see how much
+
+information we lose at 10x compression
+
+level that is throwing away almost
+
+everything and using 90% less space.
+
+That is a lot of compression. And what
+
+can that be? We can recover more than
+
+96% of the text. That is insane. So,
+
+why not push it a bit further? Well, as
+
+we go up to nearly 20x compression, OCR
+
+accuracy falls to 60%.
+
+但这是一个多么疯狂的主张。为什么要这样做？这怎么可能说得通？好吧，让我们一起看看。当我们持续与AI系统对话时，对话越长，附加的文档越多，运行成本就越高，因为它必须记住所有内容。现在，Deep Seek OCR说别担心。让我们把这锅信息浓汤——即使是文本——渲染成图像，然后压缩该图像，有点像JPEG压缩对图像所做的那样。但这是经过学习且基于令牌的。现在，这些数据大幅缩小了。但这仍然不太说得通。那么，这有什么好处呢？我的意思是，我们会丢失大量信息，对吧？好吧，各位学者，请抓紧你们的论文，让我们看看在10倍压缩级别下我们会丢失多少信息——这几乎是丢弃一切，节省90%的空间。这是很大的压缩量。结果会怎样呢？我们可以恢复超过96%的文本。这太不可思议了。那么，为什么不更进一步呢？当我们接近20倍压缩时，OCR准确率下降到60%。
+
+Wow. I expected much, much lower. Okay,
+
+now important question. Is this really
+
+new? I mean, at first I was a bit
+
+confused by this work because this is an
+
+unassuming paper about OCR. Yes, this
+
+does OCR. So, you give it a document,
+
+maybe even a handwritten note, and it
+
+gives you the text back. Formally, it
+
+takes a small amount of compressed
+
+vision tokens and turns them into a much
+
+larger number of text tokens. But, is
+
+this just JPEG? I mean, that technology
+
+is more than 30 years old. The idea is
+
+good, but is this just JPEG plugged into
+
+an AI system? Well, not quite. There is
+
+tons of new stuff here. Dear fellow
+
+scholars, this is Two Minute Papers with
+
+Dr. Karolis Jonaityte. You see, JPEG
+
+compresses pixels. This compresses
+
+memories. First, these memories are
+
+turned into a picture, and then we
+
+compress that picture. But, we are not
+
+done yet. No, no, no.
+
+Not even close. The key engineering
+
+trick is that they created an encoder
+
+that is built to survive very
+
+high-resolution documents without
+
+exploding in cost. To do that, one, it
+
+uses local window attention first. Two,
+
+a 16x convolutional compressor. And
+
+three, it does global visual processing.
+
+Okay, and what does that mean? Well, in
+
+other words, it does not stare at every
+
+pixel with full attention. No, it skims,
+
+it squeezes, and only then it reads. And
+
+here is something brilliant. Once you
+
+can do this cheaply enough, suddenly
+
+this is not just about remembering old
+
+data. Wait, does that mean that it can
+
+not only understand documents, but also
+
+help generate new data? Yes. The paper
+
+says it can generate training data for
+
+LLMs and VLMs at more than 200,000
+
+pages per day on a single A100 GPU in
+
+sane speeds. Now, we are fellow scholars
+
+here, so we look at limitations, too.
+
+The paper itself says OCR alone is not
+
+enough to prove true text compression,
+
+and a later stress test suggests the
+
+model may rely heavily on language
+
+priors, not just visual memory. In other
+
+words, when the image becomes too
+
+compressed, it may not truly see the
+
+missing text anymore, but it also
+
+guesses the most likely words from the
+
+context, kind of like auto complete, but
+
+better.
+
+哇，我原本预期会低得多得多。好了，现在有个重要问题：这真的是新东西吗？我的意思是，起初我对这项工作有点困惑，因为这是一篇不起眼的关于OCR的论文。是的，它确实做OCR。你给它一份文档，甚至可能是手写笔记，它会把文本还给你。形式上，它取少量压缩的视觉令牌，并将它们转换成数量大得多的文本令牌。但这只是JPEG吗？我的意思是，那项技术已经30多年了。这个想法很好，但这只是把JPEG接入AI系统吗？嗯，不完全是。这里有很多新东西。亲爱的各位学者，这里是“两分钟论文”，我是Karolis Jonaityte博士。你看，JPEG压缩像素，而这压缩记忆。首先，这些记忆被转换成图片，然后我们压缩那张图片。但我们还没完。不不不，远未结束。关键的工程技巧在于，他们创建了一个编码器，其设计目的是在不导致成本爆炸的情况下处理超高分辨率文档。为此，第一，它首先使用局部窗口注意力；第二，使用16倍卷积压缩器；第三，进行全局视觉处理。好了，这意味着什么？换句话说，它不会用全部注意力盯着每个像素。不，它先略读、挤压，然后才读取。这里有个绝妙之处：一旦你能足够廉价地做到这一点，突然之间，这不仅仅是关于记住旧数据了。等等，这是否意味着它不仅能理解文档，还能帮助生成新数据？是的。论文称，它可以在单个A100 GPU上以合理的速度每天为LLM和VLM生成超过20万页的训练数据。既然我们是同行学者，我们也要看看局限性。论文本身指出，仅靠OCR不足以证明真正的文本压缩，后续的压力测试表明，该模型可能严重依赖语言先验，而不仅仅是视觉记忆。换句话说，当图像被过度压缩时，它可能不再真正“看到”缺失的文本，而是根据上下文猜测最可能的词语，有点像自动补全，但更好。
+
+Overall, this is absolutely fantastic.
+
+This is not only an open system that is
+
+free for all of us, but it also creates
+
+training data to help other open models
+
+come into being. That is absolutely
+
+amazing. What a time to be alive. And
+
+don't forget, every research paper
+
+pushes humanity forward. But, the future
+
+belongs to the ones who understand it.
+
+Perhaps, subscribe and hit the bell if
+
+you feel that you enjoyed this. I use
+
+Lambda to reproduce AI research papers
+
+often in minutes. It's also great to
+
+train your own models or fine-tune an
+
+existing one. Run inference or text to
+
+image or video, easy peasy. Running a
+
+deep sea chatbot or agent, super fast,
+
+super reliable. Lambda gives you
+
+powerful Nvidia GPUs to run your own
+
+experiments. I test ideas from the
+
+papers I cover, and moments later,
+
+results. Love it. Seriously, try it out
+
+now at lambda.ai/papers.
+
+总的来说，这绝对太棒了。这不仅是一个对我们所有人免费开放的系统，它还创建训练数据来帮助其他开放模型诞生。这绝对令人惊叹。我们活在一个多么美好的时代。别忘了，每一篇研究论文都在推动人类前进。但未来属于那些理解它的人。如果你觉得喜欢这期内容，也许可以订阅并点击铃铛。我使用Lambda来复现AI研究论文，通常几分钟就能完成。它也很适合训练你自己的模型或微调现有模型。运行推理或文本转图像、视频，轻松搞定。运行深海聊天机器人或智能体，超快、超可靠。Lambda为你提供强大的Nvidia GPU来运行你自己的实验。我测试我报道的论文中的想法，片刻之后就能得到结果。太喜欢了。说真的，现在就试试吧，访问lambda.ai/papers。
