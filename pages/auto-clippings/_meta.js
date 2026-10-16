@@ -3988,6 +3988,7 @@ export default {
   "Raw-翻译-Continuous-Diffusion-Language-Models-CDLMs": "Continuous Diffusion Language Models CDL...",
   "Raw-翻译-Computers-Cannot-Make-Decisions": "Computers Cannot Make Decisions",
   "Raw-翻译-Computation-and-Data-Movement-for-Inference": "Computation and Data Movement for Infere...",
+  "Raw-翻译-Comparing-Chromium-Development-at-Google-an": "Comparing Chromium Development at Google...",
   "Raw-翻译-Company-Deep-Dive-Chevron": "Company Deep Dive Chevron",
   "Raw-翻译-Commodore-64-released-September-1-1982": "Commodore 64 released September 1, 1982",
   "Raw-翻译-Commit-Description-as-a-Thinking-Tool": "Commit Description as a Thinking Tool",
