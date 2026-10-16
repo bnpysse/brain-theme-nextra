@@ -1,0 +1,122 @@
+---
+title: "A 20-year-long permanent cookie America.gov and tracking_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：A 20-year-long permanent cookie: America.gov and tracking
+
+【文章标题】：一份持续20年的永久性Cookie：America.gov与追踪技术
+
+【文章正文】：
+
+America.gov launches with privacy pledge as Login.gov code raises tracking questions
+
+America.gov在发布时作出隐私承诺，但Login.gov的代码引发了追踪质疑
+
+The Trump administration has launched America.gov as a single AI-powered gateway to federal information and services with an unusually explicit privacy promise. But the authentication system the new portal is ordered to use already contains recently added Login.gov code supporting a National Design Studio experiment (NDS) that creates a long-lived browser identifier and incorporates it into Login.gov analytics.
+
+特朗普政府推出的America.gov作为联邦信息和服务的统一AI门户，作出了异常明确的隐私承诺。但这个新门户被要求使用的认证系统中，已包含近期添加的Login.gov代码——该代码支持国家设计工作室(NDS)的实验项目，会创建长期存续的浏览器标识符并将其纳入Login.gov分析系统。
+
+Architecturally, America.gov is becoming the presentation and service-access layer for federal government services, while Login.gov is being positioned as the reusable identity and authentication layer underneath it.
+
+从架构上看，America.gov正成为联邦政府服务的呈现层和访问层，而Login.gov则被定位为其底层可复用的身份验证层。
+
+Users may encounter government through a single America.gov interface, but Login.gov is intended to provide common sign-in and identity verification infrastructure that participating agencies and services can reuse.
+
+用户可能通过统一的America.gov界面接触政府服务，但Login.gov旨在提供可被参与机构和服务重复使用的通用登录及身份验证基础设施。
+
+America.gov itself does not currently require users to identify themselves. Its privacy materials say it does not use advertising cookies or third-party trackers, does not retain chat history and uses only approximate location rather than precise GPS data.
+
+America.gov目前并不要求用户验证身份。其隐私声明称不使用广告Cookie或第三方追踪器，不保留聊天记录，且仅使用大致位置而非精确GPS数据。
+
+That is only the first stage.
+
+但这只是第一阶段。
+
+An executive order President Donald Trump signed Tuesday directs the General Services Administration (GSA) to make America.gov the federal government’s single digital point of entry and specifically orders GSA to integrate Login.gov and use it as America.gov’s authentication service.
+
+特朗普总统周二签署的行政命令要求总务管理局(GSA)将America.gov设为联邦政府唯一数字入口，并特别指示GSA整合Login.gov作为其认证服务。
+
+Federal agencies are also directed to connect covered services, digital forms, and application programming interfaces to the platform.
+
+联邦机构还被要求将相关服务、数字表格和应用程序接口接入该平台。
+
+The administration says the integrations are to occur in a "secure and privacy-preserving manner." The order also states that it does not authorize anyone other than an originating agency to access that agency’s records about an individual, except as permitted by the Privacy Act or other law.
+
+政府表示整合将以"安全且保护隐私的方式"进行。该命令还声明，除《隐私法》或其他法律允许外，不得授权原始机构以外的任何人访问该机构的个人记录。
+
+But public Login.gov source code shows that the National Design Studio’s work on the authentication platform has already introduced an identifier whose privacy implications have not been publicly explained.
+
+但Login.gov公开源代码显示，国家设计工作室在认证平台上的工作已引入一个标识符，其隐私影响尚未被公开说明。
+
+On September 4, Login.gov merged code for the National Design Studio’s new "look and feel" experiment that added a function called nds_experiment_uuid to Login.gov’s base application controller.
+
+9月4日，Login.gov合并了国家设计工作室新"界面风格"实验的代码，该代码向基础应用控制器添加了名为nds_experiment_uuid的函数。
+
+The code runs the function as a before_action and checks for an existing nds_experiment_uuid cookie. If one does not exist, it generates a random universally unique identifier (UUID) and stores it using Ruby on Rails’ cookies.permanent cookie jar. The same identifier is then used to determine which version of the NDS interface the visitor receives.
+
+代码将该函数作为前置动作运行，检查现有nds_experiment_uuid cookie。若不存在则生成随机通用唯一标识符(UUID)，并通过Ruby on Rails的cookies.permanent方法存储。该标识符随后用于决定访客看到的NDS界面版本。
+
+The framework’s documentation says cookies.permanent sets a cookie to expire in 20 years.
+
+框架文档显示cookies.permanent会将Cookie设为20年后过期。
+
+The code provides at least one technical reason for retaining the identifier. Login.gov records the opt-out assignment using nds_experiment_uuid as the discriminator, allowing the application to recognize that browser as having opted out on later visits.
+
+代码为保留该标识符提供了至少一个技术理由：Login.gov以nds_experiment_uuid作为区分标志记录退出选择，使应用能在后续访问中识别已退出的浏览器。
+
+An open GitHub issue notes that clearing the UUID causes the browser to lose that opt-out status. The privacy question is why the implementation gives that identifier a 20-year expiration and attaches it to analytics events.
+
+GitHub上的公开问题指出，清除UUID会导致浏览器失去退出状态。隐私质疑在于：为何该实现要给标识符设置20年有效期并将其关联到分析事件。
+
+Because the NDS experiment code places the function in Login.gov’s base application controller rather than waiting until a user authenticates, the identifier can be generated before the visitor signs in.
+
+由于NDS实验代码将该函数置于Login.gov基础应用控制器（而非等到用户认证时），标识符可在访客登录前生成。
+
+The code’s own tests show the UUID being stored on the first page load for visitors assigned either the NDS design or the legacy interface.
+
+代码测试显示，无论是分配NDS设计还是旧版界面的访客，UUID都会在首次页面加载时存储。
+
+On September 9, five days after Login.gov merged the code that created the nds_experiment_uuid, it merged another change that added the identifier to the attributes attached to analytics events generated by the service.
+
+9月9日，在合并创建nds_experiment_uuid的代码五天后，Login.gov又合并了将该标识符添加到服务生成的分析事件属性的变更。
+
+The cookie is part of Login.gov, not the America.gov chatbot. Nevertheless, it creates a persistent pseudonymous identifier that can distinguish one browser from another across repeated Login.gov visits for potentially many years.
+
+该Cookie属于Login.gov而非America.gov聊天机器人。但它创建了一个持久化假名标识符，可在多年间通过重复访问区分不同浏览器。
+
+Once the identifier is also included in analytics events, the privacy question becomes what other event attributes can be associated with it, how long those records are retained, and whether authentication or agency context can be correlated with them.
+
+当该标识符被纳入分析事件后，隐私问题就转变为：还能关联哪些事件属性、记录保存多久、以及能否与认证或机构上下文关联。
+
+Those questions have surfaced publicly inside Login.gov’s own GitHub repository.
+
+这些问题已在Login.gov的GitHub代码库中公开浮现。
+
+An open issue filed September 12 asks why the identifier was created even when the NDS experiment is set to a zero-percent rollout, why it is apparently generated on public Login.gov endpoints, and whether a 20-year lifetime is intentional.
+
+9月12日的公开问题质询：为何在NDS实验设置为零投放时仍创建标识符、为何明显在公开Login.gov端点生成、以及20年有效期是否故意为之。
+
+It also asks what privacy assessment covers the cookie and the related analytics records.
+
+该问题还追问哪些隐私评估涵盖了此Cookie及相关分析记录。
+
+The issue remains open.
+
+该问题至今未解决。
+
+Subsequent NDS code makes another aspect of the implementation notable.
+
+后续NDS代码暴露出该实现的另一个显著特点。
+
+Login.gov provides a mechanism that lets users opt out of the NDS interface and switch to the legacy design. A ch
+
+Login.gov提供允许用户退出NDS界面并切换至旧版设计的机制。一个...（原文截断）
+
+## 🔗 知识库双向关联
+
+- [强迫世界选边站队 美国为何要降下AI“数字铁幕”_全翻译](/auto-clippings/Raw-翻译-强迫世界选边站队-美国为何要降下AI数字铁幕)
+
+- [强迫世界选边站队 美国为何要降下AI“数字铁幕”_简报](/auto-clippings/Auto-简报-强迫世界选边站队-美国为何要降下AI数字铁幕)
+
+- [OpenAI’s AI Agents Just Crossed A Line_逐字稿](/auto-clippings/Raw-逐字稿-OpenAIs-AI-Agents-Just-Crossed-A-Line)
