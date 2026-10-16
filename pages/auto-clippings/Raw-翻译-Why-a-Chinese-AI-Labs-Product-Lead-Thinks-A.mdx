@@ -1,0 +1,166 @@
+---
+title: "Why a Chinese AI Lab’s Product Lead Thinks AGI is “Inevitabl_全翻译"
+tags: ["大咖视点_全文翻译", "ChinaTalk_(全球看中国科技与商业)"]
+---
+
+【文章标题】：Why a Chinese AI Lab’s Product Lead Thinks AGI is “Inevitable”
+
+【文章标题】：为什么一家中国AI实验室的产品负责人认为AGI“不可避免”
+
+【文章正文】：
+
+Richard Bian
+
+is the head of product operations for
+
+Ant Ling
+
+, the foundational LLM at Ant. If you don’t know
+
+Ant
+
+, they most famously make Alipay, which makes your money and your world run when you’re in China and sometimes beyond. Richard is a former software engineer at Microsoft and Square, and he previously served as head of open source at Ant, where he scaled the open source initiative into a dedicated team. He’s lived and worked in Singapore, Canada, the US, and China, and he loves to build products.
+
+Richard Bian
+
+是蚂蚁集团基础大模型
+
+Ant Ling
+
+的产品运营负责人。如果你不了解
+
+蚂蚁集团
+
+，他们最著名的产品是支付宝，在中国（有时在海外）它让你的资金和世界正常运转。Richard 曾是微软和 Square 的软件工程师，也曾担任蚂蚁集团的开源负责人，将开源计划扩展为一个专门的团队。他曾在新加坡、加拿大、美国和中国生活和工作，热爱构建产品。
+
+Topics covered:
+
+涵盖的主题：
+
+ChinaTalk is a reader-supported publication. To receive new posts and support my work, consider becoming a free or paid subscriber.
+
+ChinaTalk 是一份由读者支持的出版物。要接收新文章并支持我的工作，请考虑成为免费或付费订阅者。
+
+The Hugging Face hack as a sign of progress?
+
+Hugging Face 被黑是进步的标志吗？
+
+Why Richard sees the incident involving OpenAI research agents as an inevitable discovery rather than simply a disaster, and why finding a solution now is a positive development.
+
+为什么 Richard 将涉及 OpenAI 研究代理的事件视为不可避免的发现，而不仅仅是灾难，以及为什么现在找到解决方案是一个积极的发展。
+
+AGI is coming, but nobody knows what it will look like.
+
+AGI 即将到来，但没人知道它会是什么样子。
+
+AGI is inevitable, and we’re still in the early stages of figuring out what these models can do. Rather than obsessing over leaderboards, we need better evaluations and a more open-minded approach to judging models.
+
+AGI 是不可避免的，我们仍处于探索这些模型能力的早期阶段。与其执着于排行榜，我们需要更好的评估和更开放的心态来评判模型。
+
+Open source as a product strategy, not just a way to give things away.
+
+开源作为一种产品策略，而不仅仅是免费赠送的方式。
+
+How open-weight models can harness global talent, accelerate development, and support a diverse ecosystem of products, and why the real business challenge is gross margins rather than capex.
+
+开放权重模型如何利用全球人才、加速开发、支持多样化的产品生态系统，以及为什么真正的商业挑战是毛利率而非资本支出。
+
+Why the AI conversation needs more voices.
+
+为什么 AI 对话需要更多声音。
+
+Why we need to pay attention to diverse perspectives on where AI is going, and be more willing to explore rather than declare the endgame.
+
+为什么我们需要关注关于 AI 走向的多元视角，并更愿意去探索，而不是宣告终局。
+
+AI moves fast: since we recorded, Ant Ling has announced its latest LLM, Ling 3.1 Flash, which was
+
+open-sourced
+
+on October 14 with 560B parameters and up to a 1M-token context window.
+
+AI 发展迅速：在我们录制之后，Ant Ling 已宣布其最新大模型 Ling 3.1 Flash，该模型于 10 月 14 日
+
+开源
+
+，拥有 5600 亿参数，上下文窗口高达 100 万 token。
+
+Listen now on your
+
+favorite podcast app
+
+.
+
+现在就在你
+
+最喜欢的播客应用
+
+上收听。
+
+“
+
+here for the ride…
+
+”
+
+“在这里一路同行……”
+
+Source
+
+.
+
+来源
+
+.
+
+The Hugging Face Hack and the Age of Discovery
+
+Hugging Face 被黑与发现时代
+
+Irene Zhang:
+
+I want to start not with Ant, though we’ll get there, but with the recent Hugging Face incident. For listeners who haven’t caught up: back in July, a swarm of OpenAI research agents hacked into Hugging Face to look for the answers to tasks in a benchmark.
+
+Irene Zhang：
+
+我想先不谈蚂蚁集团（虽然我们稍后会谈到），而是从最近的 Hugging Face 事件说起。对于还没了解情况的听众：今年 7 月，一群 OpenAI 研究代理入侵了 Hugging Face，试图寻找某个基准测试中任务的答案。
+
+This is a serious security incident. METR, Redwood Research, and OpenAI itself all released detailed incident reports. Interestingly, while reconstructing the incident, Hugging Face found that frontier models wouldn’t help process its logs because the request triggered their cybersecurity guardrails. In the end, Hugging Face deployed an open model from the Chinese company Z.ai locally to process those logs.
+
+这是一起严重的安全事件。METR、Redwood Research 和 OpenAI 本身都发布了详细的事件报告。有趣的是，在重建事件过程中，Hugging Face 发现前沿模型无法帮助处理其日志，因为请求触发了它们的网络安全护栏。最终，Hugging Face 在本地部署了来自中国公司 Z.ai 的开放模型来处理这些日志。
+
+Richard, as someone sitting in another open lab in China and learning about this over the past two months, what has this incident made you think about?
+
+Richard，作为身处中国另一家开放实验室的人，在过去两个月里了解到这件事，这个事件让你想到了什么？
+
+Richard Bian:
+
+This is a long-overdue conversation. Irene and I have been trying to time it because we both care a lot about the frontier lab ecosystem, the open ecosystem, and the development of the model labs, especially those in China.
+
+Richard Bian：
+
+这是一次迟来的对话。Irene 和我一直在尝试安排时间，因为我们都非常关注前沿实验室生态系统、开放生态系统以及模型实验室的发展，尤其是中国的那些实验室。
+
+In my humble opinion, this incident is something we’d end up seeing sooner or later, one way or another, because we’re working on something human beings don’t fully understand. I use this metaphor a lot: the current AGI journey feels like the Age of Discovery in the 15th century. The Portuguese and Spanish set out to find new land, to find India. You build a ship and head into an ocean with no clue what you’ll be facing.
+
+在我看来，这个事件我们迟早会以某种方式遇到，因为我们在研究的东西是人类尚未完全理解的。我经常用这个比喻：当前的 AGI 之旅感觉就像 15 世纪的大航海时代。葡萄牙人和西班牙人出发去寻找新大陆，寻找印度。你造一艘船，驶入一片海洋，完全不知道会面临什么。
+
+Frontier models are developing the same way. I like the word “discovery,” when we train something, because we’re discovering the intelligence of this creation we all make, without understanding what’s going on inside it.
+
+前沿模型的发展也是如此。我喜欢“发现”这个词，当我们训练某个东西时，因为我们是在发现我们共同创造的这一造物的智能，而不理解其内部发生了什么。
+
+First, this incident demonstrates that we’re making significant progress. It’s like hitting land, or hitting a rock — either way, you’ve found something. This is expected. We find issues, and we deal with them. That’s what we do in scientific discovery and in engineering: we solve problems.
+
+首先，这个事件表明我们正在取得重大进展。就像撞上了陆地，或者撞上了岩石——无论如何，你发现了东西。这是意料之中的。我们发现问题，然后处理它们。这就是我们在科学发现和工程中所做的：我们解决问题。
+
+Second, open source folks use the word “ecosystem” a lot, sometimes without understanding it. One origin of the word is the real-life ecosystem, and the most important part of an ecosystem is diversity. A diversified ecosystem produces all sorts of different development, like the rainforest, or the Galápagos archipelago, one of the most famous isolated ecosystems, where you end up finding very weird creatures.
+
+其次，开源人士经常使用“生态系统”这个词，有时并不理解它。这个词的一个起源是现实中的生态系统，而生态系统最重要的部分是多样性。多样化的生态系统会产生各种不同的发展，就像雨林，或者加拉帕戈斯群岛——最著名的孤立生态系统之一，在那里你会发现非常奇特的生物。
+
+Looping back: we have open-weight models and closed-weight models. The closed-weight models are clearly the frontier. But in this case, an open-weight model was used for defense. Why? Because the closed-weight models have their own constraints. I won’t judge whether those constraints are good or bad, but clearly they didn’t solve the problem. An open-weight option did.
+
+回到正题：我们有开放权重模型和封闭权重模型。封闭权重模型显然是前沿。但在这种情况下，开放权重模型被用于防御。为什么？因为封闭权重模型有自己的限制。我不评判这些限制是好是坏，但显然它们没有解决问题。而开放权重的选项解决了。
+
+As a result, we see a pattern for using open and closed models together, and everyone is learning from it. Given that this would happen sooner or later, having it happen now, and having a solution, is a positive development.
+
+因此，我们看到了一种将开放和封闭模型结合使用的模式，每个人都在从中学习。鉴于这件事迟早会发生，现在发生并且有了解决方案，这是一个积极的发展。
