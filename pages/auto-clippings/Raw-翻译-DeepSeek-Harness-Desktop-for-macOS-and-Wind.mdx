@@ -1,0 +1,252 @@
+---
+title: "DeepSeek Harness Desktop for macOS and Windows_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：DeepSeek Harness Desktop for macOS and Windows
+
+【文章标题】：DeepSeek Harness桌面端（macOS与Windows版）
+
+【文章正文】：
+
+I'm DeepSeek Harness, an open-source harness from DeepSeek built on Cordis's "everything is a plugin" architecture. Run me as a desktop app or launch the web UI from code.
+
+我是DeepSeek Harness，一个基于Cordis"万物皆插件"架构的开源工作台。您可以将我作为桌面应用运行，或通过代码启动网页界面。
+
+I can help with:
+
+我能协助您完成：
+
+Everyday work – Organize files, analyze data, draft docs, and create slides.
+
+日常工作 – 整理文件、分析数据、起草文档、制作幻灯片。
+
+Coding – Explore repos, fix bugs, build features, and run tests.
+
+编程开发 – 探索代码库、修复错误、构建功能、运行测试。
+
+Research – Find information, verify facts, and cite sources.
+
+研究分析 – 查找信息、验证事实、引用文献。
+
+Background tasks – Run scripts, batch-process files, and track progress.
+
+后台任务 – 运行脚本、批量处理文件、追踪进度。
+
+Plugins – Add or build plugins to fit your workflow.
+
+插件系统 – 添加或构建插件以适应您的工作流程。
+
+And so much more...
+
+还有更多功能待您探索...
+
+Describe what you want to build, / commands, @ files or sessions
+
+通过描述构建目标、使用/命令、@文件或会话来操作
+
+Workspace Write
+
+工作区写入
+
+DeepSeek-V41-Flash High
+
+DeepSeek-V41-Flash高性能模式
+
+Expanding capabilities. Work on your terms.
+
+持续扩展的能力，按您的方式工作
+
+Everything is a plugin
+
+万物皆插件
+
+Install plugins, or create them through chat in "Creator mode", to extend tools, skills, and the interface.
+
+安装插件，或在"创造者模式"中通过聊天创建插件，以扩展工具、技能和界面
+
+Creator mode
+
+创造者模式
+
+Write a Pomodoro timer plugin for me.
+
+请为我编写番茄钟计时器插件
+
+Deep diving...
+
+深度探索中...
+
+Load skill cordis-plugin-development
+
+加载技能 cordis插件开发
+
+Read skills/cordis-plugin-development/SKILL.md
+
+读取 skills/cordis插件开发/SKILL.md
+
+Thinking shell.overlay is a frame-wide floating layer – the right target for an always-on-top window.
+
+思考：shell.overlay是全框架浮动层——实现置顶窗口的理想目标
+
+Organize documents, analyze spreadsheets, and write code. Preview the results directly and refine them through conversation.
+
+整理文档、分析电子表格、编写代码。直接预览结果并通过对话优化
+
+Brief.docx Word document
+
+Brief.docx Word文档
+
+Data.xlsx Excel spreadsheet
+
+Data.xlsx Excel表格
+
+index.html HTML page
+
+index.html HTML页面
+
+label.ts TypeScript code
+
+label.ts TypeScript代码
+
+analyze.py Python script
+
+analyze.py Python脚本
+
+Report.pdf PDF document
+
+Report.pdf PDF文档
+
+README.md Markdown document
+
+README.md Markdown文档
+
+Review · turn 1
+
+审查 · 第1轮
+
+src/label.ts +2−1
+
+@@ -8,3 +8,4 @@
+
+88 function label(name: string) &#123;
+
+9− return name;
+
+9+ const text = name.trim();
+
+10+ return text || 'Untitled';
+
+1011 &#125;
+
+Adapt to your workflow
+
+适配您的工作流程
+
+Enable the Scheduled tasks plugin to start tasks anytime and run recurring work on schedule. Stay on top of progress and inspect tool call details when needed.
+
+启用定时任务插件，随时启动任务并按计划执行重复性工作。掌握进度并在需要时检查工具调用详情
+
+Every Friday at 17:00 Beijing time, summarize this week's project notes in a weekly report.
+
+每周五北京时间17:00，将本周项目笔记汇总成周报
+
+Deep diving... Worked
+
+深度探索中... 已完成
+
+Create reminder Summarize this week's project notes in a weekly report. Weekly project report
+
+创建提醒 将本周项目笔记汇总成周报 项目周报
+
+IN schedule_create
+
+&#123;
+
+"prompt": "Summarize this week's project notes in a weekly report.",
+
+"title": "Weekly project report",
+
+"weekly": &#123;
+
+"time":"17:00:00",
+
+"time_zone":"Asia/Shanghai",
+
+"weekdays":[5]
+
+&#125;
+
+&#125;
+
+Weekly project report
+
+项目周报
+
+Scheduled for
+
+计划时间
+
+Repeat
+
+重复设置
+
+Weekly on Fri at 17:00 (Asia/Shanghai)
+
+每周五17:00（亚洲/上海时区）
+
+Status
+
+状态
+
+Scheduled
+
+已计划
+
+Created "Weekly project report", scheduled for Fridays at 17:00 Beijing time.
+
+已创建"项目周报"，计划每周五北京时间17:00执行
+
+Develop tools
+
+开发工具
+
+Inspect execution traces and detailed runtime information to troubleshoot issues with tool calls and task execution.
+
+检查执行轨迹和详细运行时信息，排查工具调用和任务执行问题
+
+Duration Turns Calls Search
+
+持续时间 轮次 调用 搜索
+
+Input Model Tools
+
+输入 模型 工具
+
+SYSTEM Initial System Prompt
+
+系统初始提示
+
+Turn 1 USER First run bash to print exactly NAVIGATION_OK, then read nav-a.md and nav-b.md with two read calls, then reply with the single word FIRST_DONE.
+
+第1轮 用户 首先运行bash准确输出NAVIGATION_OK，然后通过两次读取调用读取nav-a.md和nav-b.md，最后回复单个词FIRST_DONE
+
+CONTEXT Current runtime context: workspace policy, available skills, and this turn's environment snapshot.
+
+上下文 当前运行时环境：工作区策略、可用技能和本轮环境快照
+
+ASSISTANT Run bash to confirm the output, then read both navigation files.
+
+助手 运行bash确认输出，然后读取两个导航文件
+
+DeepSeek Harness is in preview, with evolving core plugins and APIs. We invite users and developers worldwide to explore the limits of intelligence together through open-source, reusable, and composable infrastructure.
+
+DeepSeek Harness目前处于预览阶段，核心插件和API持续演进。我们邀请全球用户和开发者通过开源、可复用、可组合的基础设施，共同探索智能的边界。
+
+## 🔗 知识库双向关联
+
+- [DeepSeek is back... and Silicon Valley is terrified_深度简报](/auto-clippings/Auto-简报-DeepSeek-is-back-and-Silicon-Valley-is-ter)
+
+- [DeepSeek is back... and Silicon Valley is terrified_逐字稿](/auto-clippings/Raw-逐字稿-DeepSeek-is-back-and-Silicon-Valley-is-ter)
+
+- [DeepSeek is back... and Silicon Valley is terrified_逐字稿](/auto-clippings/Raw-逐字稿-DeepSeek-is-back-and-Silicon-Valley-is-ter)

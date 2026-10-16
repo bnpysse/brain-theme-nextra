@@ -1,0 +1,136 @@
+---
+title: "Car is a smartphone on wheels. Here s who s listening_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Car is a smartphone on wheels. Here's who's listening
+
+【文章正文】：
+
+The first large-scale measurement study of the connected-vehicle ecosystem.
+
+A connected car is a vehicle with built-in internet access â Wi-Fi, cellular, GPS â that lets it communicate constantly with its manufacturer and outside companies. Over 75% of vehicles sold globally have this connectity built-in.
+
+Report Summary
+
+Partnering with Consumer Reports, we tested 21 late model vehicles and 30 companion mobile apps to understand the privacy implications of the connected vehicle ecosystem.
+
+We go through a lengthy disclosure process and provide insight into how manufacturer's perceive this data sharing issue.
+
+Our findings underscore the need for continued measurement and scrutiny of the connected vehicle ecosystem.
+
+Consumer Reports gave the team access to its purchased fleet of test vehicles â a sample that would have cost over $1.2M to assemble independently. Read CR's article on our work!
+
+This work is peer reviewed and will be published at IMC '26. Read the paper â
+
+We are a team of privacy, security, and networking-systems researchers at Northeastern University. See the full team â
+
+Jump directly to any section, or scroll to see the whole thing.
+
+What is this paper about, and what were we looking for?
+
+An accessible explanation of the experiments we ran.
+
+A list of the vehicles we looked at
+
+The main results and what they tell us.
+
+How the manufacturers responded to our findings
+
+The bigger picture and key takeaways.
+
+This diagram shows the data flows to and from a vehicle and its companion mobile app. Both devices send data, including private consumer data, to different 1st and 3rd party servers using Wi-Fi and cellular service. Solid arrows represent flows that were intercepted through our experiments.
+
+Once the data gets sent to these servers, it is up to the companies that receive the consumer information to
+
+make decisions on what they do with it. Unfortunately, in many cases, this includes
+
+sharing or selling consumer data to other undisclosed 3rd parties.
+
+Consumers have no control over their data once it has left their device
+
+In this paper, we take the first steps to address the limited visibility into the privacy implications of the connected vehicle ecosystem.
+
+We identify two vantage points in the ecosystem where we can gain insight into the data that connected vehicles
+
+are sharing with both manufacturers and third parties: the vehicles
+
+themselves and the mobile apps provided by manufacturers.
+
+We ask the following guiding questions:
+
+We investigated 21 vehicles from the U.S. market in a controlled environment along with 30 companion mobile apps instrumented with on-site vehicles between October 2024 and August 2025. Below is a description of the experiments we ran and our setup.
+
+To collect Wi-Fi traffic from vehicles,
+
+we configured a custom access point (AP) on a Raspberry Pi and
+
+used tcpdump to log all packets that were sent or received via this
+
+AP.
+
+This allowed us to see all the destinations the vehicles were sending data to but not the information within the packets as it was encrypted.
+
+drive 5â45 mph with acceleration & hard braking
+
+One hypothesis we tested was whether blocking a vehicleâs ability to communicate over its cellular network would force more Wi-Fi communication. To block external cellular signals, we drove 11 EVs in the sample into a car-sized Faraday tent providing â93 dB of attenuation, blocking their cellular connection entirely. Stationary Idle and Active tests were repeated inside the tent to see whether traffic that normally goes out over cellular rerouted to Wi-Fi instead.
+
+In total, we experimented with 30 connected vehicle
+
+companion apps that were paired with the vehicles at
+
+Consumer Reportsâs testing facility.
+
+| Manufacturer | Brand | Year | Model | Vehicle Tests |  |  |  |
+
+|---|---|---|---|---|---|---|---|
+
+|  |  |  |  | Driving | Idle | In-Tent | Cellular |
+
+| General Motors (GM) | Buick | 2024 | Envista | â | â | â | â |
+
+|  | Cadillac | 2024 | Lyriq | â | â | â | â |
+
+|  | Chevrolet | 2024 | Blazer | â | â | â | â |
+
+| Stellantis | Dodge | 2023 | Hornet | - | â | â | â |
+
+|  | Fiat | 2024 | 500e | â | â | â | â |
+
+|  | RAM | 2025 | 1500 Bighorn | â | â | â | â |
+
+| Fisker | Fisker | 2023 | Ocean | â | â | - | â |
+
+| Ford Motor Co. | Ford | 2022 | F150 Lightning | â | â | - | â |
+
+|  | Ford | 2024 | Mustang GT Fastback | â | â | â | â |
+
+| Honda Motor Co. | Honda | 2024 | Prologue Touring AWD | â | â | â | â |
+
+| Tata Motors | Land Rover | 2023 | Range Rover Sport | â | â | â | â |
+
+| Toyota Motor Corp. | Lexus | 2024 | NX450H+ PHEV | â | â | â | â |
+
+|  | Toyota | 2023 | Corolla Cross | â | â | â | â |
+
+|  | Subaru | 2023 | Solterra | â | â | â | â |
+
+| Lucid | Lucid | 2023 | Air Touring | â | â | â | â |
+
+| Mercedes-Benz Group AG | Mercedes | 2023 | EQS450 4Matic | â | â | - | â |
+
+| Renault-Nissan-Mitsubishi Alliance | Nissan | 2023 | Ariya Platinum | â | â | â | â |
+
+| Rivian | Rivian | 2022 | R1S | â | â | â | â |
+
+| Tesla | Tesla | 2024 | Cybertruck | â | â | â | â |
+
+|  | Tesla | 2024 | Model 3 | â | â | â | â |
+
+| Zhejiang Geely Holding Group | Volvo | 2024 | C40 | â | â | â | â |
+
+*While we tested a wide range of vehicles, we did not cover every manufacturer in the U.S. market. As with all empirical studies, our results should be interpreted as a snapshot in time, and may not generalize to vehicles outside our sample or outside the U.S.
+
+| App | VIN | Location | Phone |  |
+
+|---|---|---|---|---|
