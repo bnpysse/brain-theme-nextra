@@ -1,0 +1,94 @@
+---
+title: "How the Claude Code team does code review_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：How the Claude Code team does code review
+
+【文章正文】：
+
+How do you review code at the volume agents produce it? On the Claude Code team, once we had high coverage and deep reviews, we started optimizing for the minimum amount of human review time that doesn't raise reverts or incidents.
+
+We've said before that Claude writes about 90 percent of Claude Code's own code. So how do we review code at the volume we produce it? Does anyone read code anymore? And if something breaks, who catches it?
+
+This post covers the code review flow on the Claude Code team and how it has evolved. From June to September, merged pull requests to Claude Code's codebase more than doubled while the share that had to be reverted fell by more than 40 percent.
+
+We didn't remove review. But we did move most of the reading to machines, optimized for human time and attention, and invested heavily in making it fast and easy to undo mistakes.
+
+When agents write code, the number of changes goes up, fast. In Anthropic's monorepo, changes landing per day went from about 2,500 in May to more than 30,000 in September this year.
+
+Claude Code lives in its own repository, separate from the monorepo, but it's seeing a lot of pressure too. When you are shipping this fast, manual, line-by-line code review is incredibly difficult if not impossible.
+
+Code review does two jobs:
+
+This article mainly focuses on finding and fixing issues, but we will come back to the second job near the end.
+
+We think "did a human read the code?" is an imprecise proxy for "what could go wrong with this change, and which check—automated or human—is the right one to catch it?"
+
+Asking that question also changed when review happens. Before, review was a gate at the end of the road: write the code, open a PR, wait for your colleague.
+
+Now, review runs continuously, more like spellcheck while you write. Most changes have been reviewed and fixed by Claude at least once before a human is asked to look. This catches most routine mistakes, and saves team attention for higher-level questions and scrutiny.
+
+We want to preserve human time and attention for issues only humans can solve and make sure automated checks catch the rest. At our current rate of change, there is still an incredible amount of work for humans to do, and our team encounters new and novel challenges almost daily.
+
+Human time covers both sides of review's cost: the time people spend reviewing, and the time they spend fixing what bad code breaks. Cutting the first doesn't help if the time just shows up in the second.
+
+So the goal is that most pull requests in the Claude Code repos (the CLI, the desktop and web apps, and the mobile apps) merge with at most one human in the loop, who can be the author, with no increase in reverts or incidents. To measure human time, we track human approvals per PR (median and 95th percentile), human comments, and how long a PR waits on a person. Revert and incident rates are the guardrail: if they rise, we haven't saved human time, we've only moved it.
+
+A typical change, from an engineer's laptop (or a Claude session in Slack), goes through multiple layers of code review.
+
+Most review now happens before a PR exists. We give Claude something it can run—like tests, a build or a screenshot to compare against the design—and ask it to show the output instead of saying it's done. Then a subagent reviews the diff with fresh context. Both habits come from our best-practices guide.
+
+Before opening a PR, many of us also run a few internal skills: one hunts for bugs, one simplifies the diff, and one checks the behavior end to end. UI changes also get checked against our design guidelines.
+
+Boris Cherny, who created Claude Code, has called giving Claude a way to verify its work probably the most important thing for getting good results. He estimates it makes the final result two to three times better, and writes, "Verification looks different for each domain. It might be as simple as running a bash command, or running a test suite, or testing the app in a browser or phone simulator."
+
+When the automated reviewer keeps flagging the same thing, we fix it at the source: in the skill, with a lint rule, or with updates to instructional files such as:
+
+CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals. Every review loads it, so in a large codebase we keep it short and point to other docs from there. The reviewer also flags code that breaks a convention in it, and changes that make a line in it out of date.REVIEW.md, written by code owners, tells the reviewer what matters in their part of the code. We check separately whether the reviewer actually follows it. The good ones are short. They say what failure looks like in that repo (for docs it's "it lies," for config it's "it misroutes"), cap the nits, list paths to skip, and ask for a file and line as evidence instead of a guess from a name. They also ask for a summary that starts with a count and says plainly what changed and why.
+
+【中文翻译】：
+
+【文章标题】：Claude Code 团队如何进行代码审查
+
+【文章正文】：
+
+当代码量达到智能体（agent）生产的规模时，你们如何审查代码？在 Claude Code 团队，一旦我们实现了高覆盖率和深度审查，我们就开始优化，目标是让人工审查时间最少化，同时不增加回滚（revert）或事故（incident）的发生率。
+
+我们之前说过，Claude 编写了 Claude Code 自身约 90% 的代码。那么，面对我们生产的如此规模的代码，我们如何进行审查？还有人读代码吗？如果出了问题，谁来发现？
+
+这篇文章介绍了 Claude Code 团队的代码审查流程及其演变过程。从六月到九月，合并到 Claude Code 代码库的拉取请求（PR）数量翻了一倍多，而需要回滚的比例下降了超过 40%。
+
+我们并没有取消审查，而是将大部分阅读工作转移给了机器，优化了人类的时间和注意力，并大力投入，使撤销错误变得快速而容易。
+
+当智能体编写代码时，变更的数量会迅速增加。在 Anthropic 的 monorepo 中，每天落地的变更从今年五月的约 2,500 个增加到九月的超过 30,000 个。
+
+Claude Code 拥有自己的代码库，与 monorepo 分开，但也承受着很大的压力。当发布速度如此之快时，手动逐行代码审查即使不是不可能，也是极其困难的。
+
+代码审查承担两项工作：
+
+这篇文章主要关注发现和修复问题，但我们会在接近结尾时再回到第二项工作。
+
+我们认为“是否有人读过代码？”是“这个变更可能出什么问题，哪种检查——自动化还是人工——最适合发现它？”的一个不精确的替代指标。
+
+提出这个问题也改变了审查发生的时间。以前，审查是道路尽头的关卡：写代码，打开 PR，等待同事。
+
+现在，审查是持续进行的，更像是在写作时的拼写检查。大多数变更在请人类查看之前，已经至少被 Claude 审查和修复过一次。这能捕获大多数常规错误，并将团队的注意力节省下来，用于更高层次的问题和审查。
+
+我们希望将人类的时间和注意力保留给只有人类才能解决的问题，并确保自动化检查捕获其余问题。按照我们目前的变更速度，人类仍有大量工作要做，我们的团队几乎每天都会遇到新的、新颖的挑战。
+
+人类时间涵盖了审查成本的两方面：人们花在审查上的时间，以及他们花在修复坏代码造成的问题上的时间。如果削减前者只是让时间转移到后者，那并没有帮助。
+
+因此，我们的目标是，Claude Code 代码库（CLI、桌面和 Web 应用，以及移动应用）中的大多数拉取请求在合并时，最多只有一个人参与其中，这个人可以是作者本人，同时不增加回滚或事故的发生率。为了衡量人类时间，我们跟踪每个 PR 的人工批准次数（中位数和第 95 百分位）、人工评论，以及 PR 等待人的时间。回滚率和事故率是护栏：如果它们上升，说明我们并没有节省人类时间，只是转移了时间。
+
+一个典型的变更，从工程师的笔记本电脑（或 Slack 中的 Claude 会话）开始，会经过多层代码审查。
+
+现在，大多数审查发生在 PR 创建之前。我们给 Claude 一些可以运行的东西——比如测试、构建或与设计对比的截图——并要求它展示输出，而不是说“完成了”。然后，一个子代理（subagent）以全新的上下文审查差异（diff）。这两个习惯都来自我们的最佳实践指南。
+
+在打开 PR 之前，我们中的许多人还会运行一些内部技能（skills）：一个用于查找 bug，一个用于简化 diff，一个用于端到端检查行为。UI 变更还会根据我们的设计指南进行检查。
+
+Claude Code 的创建者 Boris Cherny 曾称，给 Claude 一种验证其工作的方法可能是获得良好结果的最重要的事情。他估计这能使最终结果好上两到三倍，并写道：“验证在每个领域看起来都不同。它可能简单到运行一个 bash 命令，或者运行测试套件，或者在浏览器或手机模拟器中测试应用。”
+
+当自动化审查者反复标记同一问题时，我们会从源头修复：在技能中，通过 lint 规则，或更新指令文件，例如：
+
+CLAUDE.md 告诉 Claude 项目是什么：技术栈、约定、目标和非目标。每次审查都会加载它，所以在大型代码库中，我们保持它简短，并从这里指向其他文档。审查者还会标记违反其中约定的代码，以及使其中某行过时的变更。REVIEW.md 由代码所有者编写，告诉审查者在他们负责的代码部分中什么最重要。我们会单独检查审查者是否真正遵循了它。好的 REVIEW.md 都很简短。它们说明该代码库中失败的样子（对于文档来说是“它撒谎了”，对于配置来说是“它路由错误了”），限制吹毛求疵的数量，列出可以跳过的路径，并要求提供文件和行号作为证据，而不是根据名字猜测。它们还要求总结以计数开头，并清楚说明更改了什么以及为什么。

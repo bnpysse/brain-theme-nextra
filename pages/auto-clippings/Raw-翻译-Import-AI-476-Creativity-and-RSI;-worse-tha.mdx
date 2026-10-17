@@ -1,0 +1,180 @@
+---
+title: "Import AI 476 Creativity and RSI; worse-than-China open weig_全翻译"
+tags: ["大咖视点_全文翻译", "Import_AI_(Jack_Clark_AI政策与技术前沿)"]
+---
+
+【文章标题】：Import AI 476: Creativity and RSI; worse-than-China open weight models; AI goes to space
+
+【文章正文】：
+
+Welcome to Import AI, a newsletter about AI research. Import AI runs on arXiv, cappuccinos, and feedback from readers. If you'd like to support this, please subscribe.
+
+欢迎阅读Import AI，一份关于AI研究的通讯。Import AI依靠arXiv、卡布奇诺咖啡和读者的反馈来运作。如果您愿意支持我们，请订阅。
+
+Subscribe now
+
+立即订阅
+
+New benchmark shows how AI models lack intuitive visual reasoning:
+
+新基准测试显示AI模型缺乏直觉性视觉推理能力：
+
+…Humanity's Sixth Sense highlights some shortcomings of current AI systems…
+
+……"人类的第六感"基准测试凸显了当前AI系统的一些缺陷……
+
+AI startups Elorian and Scale AI have built and released Humanity's Sixth Sense, a benchmark that "measures how a model interprets and reasons through information a visual scene implies but doesn't explicitly show." Some examples of the types of task in HSS are a picture of a bookcase and being asked whether it can fit more books, or a photo of horses pulling a plough and a question of whether the chains bear the plough's drag weight.
+
+AI初创公司Elorian和Scale AI构建并发布了"人类的第六感"（HSS）基准测试，该测试"衡量模型如何解读视觉场景中隐含但未明确展示的信息，并据此进行推理。"HSS中的任务类型示例包括：一张书柜的图片，询问是否还能放更多书；或一张马拉着犁的照片，询问链条是否能承受犁的牵引重量。
+
+HSS contains
+
+HSS包含
+
+522 questions that cover 288 images and 234 short video clips (totalling 17.6 hours of video). The questions fall into four categories:
+
+522个问题，涵盖288张图片和234个短视频片段（总计17.6小时视频）。这些问题分为四个类别：
+
+Temporal & causal dynamics:
+
+时间与因果动态：
+
+"What happened before the scene, and what happens next."
+
+"场景之前发生了什么，接下来会发生什么。"
+
+Physical & spatial logic:
+
+物理与空间逻辑：
+
+"What fits, what's in reach, and what someone else can see from where they are standing."
+
+"什么能放得下，什么够得着，以及别人站在他们的位置能看到什么。"
+
+Social understanding
+
+社会理解
+
+: "Intent, attention, belonging."
+
+："意图、注意力、归属感。"
+
+Abstract & contextual inference
+
+抽象与情境推理
+
+: "The patterns and rules a scene implies."
+
+："场景所暗示的模式和规则。"
+
+Results:
+
+结果：
+
+The human baseline for this is not perfect, but is very high, with people scoring aggregate pass@1 of 93.1, broken down across four categories: Image (94.1), video (91.9), time (97), and space (94.9).
+
+人类在此基准上的表现虽非完美，但非常高，综合pass@1得分达到93.1，四个类别的细分得分分别为：图像（94.1）、视频（91.9）、时间（97）和空间（94.9）。
+
+By comparison, the best scoring AI system, GPT 6 Astra, gets pass@1 of 53.6, across image (55.6), video (51.1), time (58.2), and space (53.6).
+
+相比之下，得分最高的AI系统GPT 6 Astra的pass@1为53.6，其中图像（55.6）、视频（51.1）、时间（58.2）和空间（53.6）。
+
+Interestingly, Chinese open weight models do poorly here, with GLM-5.3-flash getting a pass@1 of 26.8, and Kimi K3 getting pass@1 of 25.5.
+
+有趣的是，中国的开放权重模型在此表现不佳，GLM-5.3-flash的pass@1为26.8，Kimi K3的pass@1为25.5。
+
+"The two most common single mistakes were (1) missing a detail that decides the answer (21% of failures) and (2) misidentifying an object, person, or role (20%)," they write.
+
+"两种最常见的单一错误是：（1）遗漏了决定答案的关键细节（占失败的21%）；（2）错误识别了物体、人物或角色（占20%），"他们写道。
+
+Why this matters - HSS tells us whether world models are emergent:
+
+为何重要——HSS告诉我们世界模型是否具有涌现性：
+
+One way of looking at HSS is highlighting deficiencies in current systems, but a more interesting way is highlighting how adept today's frontier LLMs are at doing tasks which many people have long assumed would require sophisticated, different AI systems to solve. For instance, many people have claimed that true visual reasoning will rely on developing spatially aware 2D and 3D world models, then using that for reasoning. The fact LLMs like GPT and Claude do as well as they do on HSS is something of a counter to this argument.
+
+看待HSS的一种方式是强调当前系统的缺陷，但更有趣的方式是强调当今前沿大语言模型在完成许多人们长期认为需要复杂、不同的AI系统才能解决的任务时有多么娴熟。例如，许多人声称真正的视觉推理将依赖于开发具有空间感知能力的2D和3D世界模型，然后利用这些模型进行推理。GPT和Claude等大语言模型在HSS上表现出色这一事实，在某种程度上反驳了这一论点。
+
+Read more
+
+了解更多
+
+: Introducing Humanity's Sixth Sense (HSS) (Elorian)
+
+：Introducing Humanity's Sixth Sense (HSS)（Elorian）
+
+.
+
+。
+
+Read the paper here
+
+在此阅读论文
+
+: Humanity's Sixth Sense: Benchmarking Intuitive Visual Reasoning in Multimodal Models (Scale Labs)
+
+：Humanity's Sixth Sense: Benchmarking Intuitive Visual Reasoning in Multimodal Models（Scale Labs）
+
+.
+
+。
+
+***
+
+***
+
+The AI race is going to space - and sooner than you think:
+
+AI竞赛正在走向太空——而且比你想象的更快：
+
+…There are many ways that an AI could create a compounding advantage in space…
+
+……AI在太空中有多种方式可以创造复利优势……
+
+In the 2030s we're going to see the boom of the space economy as space-based power, computation, and manufacturing come online at scale thanks to greater orbital lift capacity from platforms like Starship. But could this also introduce a new danger - of AI systems both speeding our buildout of space, and eventually a nation (or perhaps an AI) being able to use space to concentrate power? That's the gist of a fascinating article in AI Frontiers.
+
+在2030年代，随着星舰等平台提供更大的轨道运载能力，天基能源、计算和制造将大规模上线，我们将见证太空经济的繁荣。但这是否也会引入新的危险——AI系统既加速了我们对太空的建设，最终某个国家（或者也许是某个AI）能够利用太空来集中权力？这正是AI Frontiers上一篇引人入胜的文章的核心要点。
+
+How AI unlocks space:
+
+AI如何解锁太空：
+
+Spacecraft can operate autonomously.
+
+航天器可以自主运行。
+
+We can redesign spacecraft around the assumption they will be hosting AIs rather than humans: "A speck of space debris that could puncture the International Space Station (ISS) with fatal consequences might leave an equivalent but uncrewed, unpressurized vessel largely functional"
+
+我们可以围绕航天器将搭载AI而非人类这一假设来重新设计它们："一粒可能刺穿国际空间站（ISS）并造成致命后果的太空碎片，可能只会让一艘同等规模但无人、非增压的航天器基本保持功能完好。"
+
+Space-based assembly and later manufacturing will let AI build large, complex things.
+
+天基组装以及后续的制造将让AI能够建造大型、复杂的物体。
+
+Is there a compounding advantage to first movers?
+
+先行者是否存在复利优势？
+
+If an AI civilization built up a foothold in space it might experience compounding advantages that make it economically and strategically dominant. For instance:
+
+如果一个AI文明在太空中建立了立足点，它可能会获得复利优势，使其在经济和战略上占据主导地位。例如：
+
+Space might support an industrial flywheel where initial infrastructure begets more energy and manufacturing capacity at lower costs which begets more infrastructure, etc.
+
+太空可能支撑一个工业飞轮效应：初始基础设施以更低成本催生更多能源和制造能力，进而催生更多基础设施，如此循环往复。
+
+Space has great domain awareness, where it may be possible for a space-based power to deny access to space for others.
+
+太空具有极佳的领域感知能力，一个天基强国可能能够阻止他人进入太空。
+
+First-movers could send out self-replicating probes that expand into deep space.
+
+先行者可以发射自我复制的探测器，向深空扩展。
+
+Why this matters:
+
+为何重要：
+
+"Space is not a brand-new domain, but AI may be about to drastically accelerate its industrialization, demanding make-or-break decisions of leaders under ever-greater urgency and uncertainty," AI Frontiers writes. I agree. I suspect space is going to go from a broadly academic topic of study (when it comes to AI and its relationship thereto) to one of extraordinary practical relevance sooner than we think. On the most basic level, given the distances involved and the latency on communication, we should expect some chunk of sol
+
+"太空并非一个全新的领域，但AI可能即将大幅加速其工业化进程，要求领导者在日益紧迫和不确定的情况下做出成败攸关的决策，"AI Frontiers写道。我同意这一观点。我怀疑太空将从一个大致属于学术研究的话题（就AI及其与太空的关系而言）转变为一个具有非凡实际意义的领域，而且这一转变会比我们想象的更快。在最基本的层面上，考虑到涉及的距离和通信延迟，我们应该预期会有相当一部分解决……
