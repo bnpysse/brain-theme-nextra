@@ -1,0 +1,140 @@
+---
+title: "Last rites for Gentoo s Chromium package_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Last rites for Gentoo's Chromium package
+
+【文章标题】：Gentoo Chromium 软件包的临终仪式
+
+【文章正文】：
+
+Last rites for Gentoo's Chromium package
+
+Chromium, the open-source upstream project for Google's Chrome web browser, is the browser of choice for many Linux users. It has also gained a reputation as being difficult for Linux distributions to package and build: Chromium has a complex build system, the project bundles many of its dependencies, and it has frequent releases. All of that, plus user complaints, has led the maintainers of the Gentoo Chromium package to give up on trying to maintain the package.
+
+【文章正文】：
+
+Gentoo Chromium 软件包的临终仪式
+
+Chromium 是谷歌 Chrome 浏览器的开源上游项目，也是许多 Linux 用户的首选浏览器。它同时也因难以被 Linux 发行版打包和构建而闻名：Chromium 拥有复杂的构建系统，项目捆绑了许多依赖项，并且发布频繁。所有这些，再加上用户的抱怨，导致 Gentoo Chromium 软件包的维护者放弃了继续维护该软件包的努力。
+
+Gentoo focuses on allowing users to build their own software from source
+
+using the Portage
+
+software-management tool. Gentoo packagers create ebuild files, which are text
+
+files written in a Bash-like syntax that contain the information needed by
+
+Portage to build the software. Users then build packages themselves using emerge, which is the
+
+command-line interface for Portage. A
+
+recent ebuild for Chromium illustrates the complexity of the package.
+
+Gentoo 专注于允许用户使用 Portage 软件管理工具从源代码构建自己的软件。Gentoo 打包者创建 ebuild 文件，这些文件是以类似 Bash 的语法编写的文本文件，包含 Portage 构建软件所需的信息。然后用户使用 emerge（Portage 的命令行界面）自行构建软件包。最近一个用于 Chromium 的 ebuild 就体现了该软件包的复杂性。
+
+Gentoo does offer prebuilt binary packages for some software via its Binhost project. However, building from source gives users the flexibility to declare USE flags to set compile-time options or change a package's configuration. For example, a user may wish to specify which optional libraries are linked with a package, or whether to install the accompanying documentation. With Chromium in particular, a user might employ the -bundled-toolchain USE flag (which tells Portage not to use the bundled toolchain) in order to use their system's version of Clang to compile Chromium rather than the bundled version included by the upstream project. That is optional for Gentoo users on x86-64 systems, but -bundled-toolchain is required for users on other architectures, since Chromium's bundled toolchain is only shipped for x86-64.
+
+Gentoo 确实通过其 Binhost 项目为某些软件提供预构建的二进制软件包。然而，从源代码构建让用户可以灵活地声明 USE 标志，以设置编译时选项或更改软件包的配置。例如，用户可能希望指定与软件包链接的可选库，或者是否安装附带的文档。特别是对于 Chromium，用户可以使用 -bundled-toolchain USE 标志（该标志告诉 Portage 不要使用捆绑的工具链），以便使用系统自带的 Clang 版本编译 Chromium，而不是使用上游项目包含的捆绑版本。对于 x86-64 系统上的 Gentoo 用户来说，这是可选的，但对于其他架构的用户，-bundled-toolchain 是必需的，因为 Chromium 的捆绑工具链仅针对 x86-64 提供。
+
+$ sudo subscribe today
+
+Subscribe today and elevate your LWN privileges. You’ll have access to all of LWN’s high-quality articles as soon as they’re published, and help support LWN in the process. Act now and you can start with a free trial subscription.
+
+$ sudo subscribe today
+
+立即订阅，提升您的 LWN 权限。您将能在 LWN 所有高质量文章发布后第一时间阅读，同时为 LWN 提供支持。立即行动，您可以从免费试用订阅开始。
+
+It is worth noting that Chromium is currently not available as a binary package from Gentoo due to problems with building the package with proprietary codecs.
+
+值得注意的是，由于使用专有编解码器构建软件包存在问题，Chromium 目前无法作为 Gentoo 的二进制软件包使用。
+
+Last rites
+
+Many distributions, including Arch Linux, Debian, and Fedora, use the term "orphan" to refer to packages that have been abandoned by their maintainer; the developer announces that a package has been orphaned, and other contributors have the opportunity to claim maintainership of it if they wish to do so. Gentoo's terminology is a bit more dramatic: a package maintainer announces "last rites" for a package on the gentoo-dev-announce mailing list to notify the project that it will be unmaintained, and as an opportunity to allow other developers to claim maintainership.
+
+临终仪式
+
+许多发行版（包括 Arch Linux、Debian 和 Fedora）使用“orphan”（孤儿）一词来指代已被维护者放弃的软件包；开发者宣布某个软件包成为孤儿，其他贡献者如果有意，可以认领该软件包的维护权。Gentoo 的术语则更具戏剧性：软件包维护者会在 gentoo-dev-announce 邮件列表上宣布某个软件包的“临终仪式”（last rites），以通知项目该软件包将不再被维护，同时也为其他开发者提供认领维护权的机会。
+
+After a developer has declared last rites, the package's ebuild is masked in Gentoo's ebuild repository to ensure that users will not accidentally install a package that is no longer being maintained. Users who have the package installed and attempt an upgrade will receive a warning that it has been masked. Chromium package maintainer Sam James declared last rites for the Chromium package on September 24, after a lengthy conversation in a bug report filed by Roman Žilka.
+
+开发者宣布临终仪式后，该软件包的 ebuild 会在 Gentoo 的 ebuild 仓库中被屏蔽（masked），以确保用户不会意外安装一个不再被维护的软件包。已安装该软件包并尝试升级的用户将收到警告，提示该软件包已被屏蔽。Chromium 软件包维护者 Sam James 在 Roman Žilka 提交的错误报告中进行了一番长谈之后，于 9 月 24 日宣布了对 Chromium 软件包的临终仪式。
+
+On September 9, Žilka had complained that the latest stable version of the Chromium ebuild was outdated:
+
+The latest stable www-client/chromium (and google-chrome and possibly others)
+
+is 151.0.7922.169, which contains a catastrophic 602 known
+
+vulnerabilities of all severities. Measures need to be taken by somebody
+
+qualified that this doesn't keep happening in packages as important as
+
+these.
+
+9 月 9 日，Žilka 抱怨 Chromium ebuild 的最新稳定版本已经过时：
+
+最新的稳定版 www-client/chromium（以及 google-chrome，可能还有其他）是 151.0.7922.169，其中包含灾难性的 602 个各种严重程度的已知漏洞。需要有合格的人采取措施，防止这种情况在如此重要的软件包中不断发生。
+
+He had attached an ebuild for a newer version of Chromium to the bug report, but noted that it would not work if a user tried to compile Chromium with the -bundled-toolchain USE flag.
+
+他在错误报告中附上了一个更新版本 Chromium 的 ebuild，但指出如果用户尝试使用 -bundled-toolchain USE 标志编译 Chromium，该 ebuild 将无法工作。
+
+James replied, "
+
+Chromium
+
+is horrible to maintain as a source package. It is easily the package in Gentoo
+
+that burns through maintainers the most.
+
+" Complaining about its maintenance
+
+isn't helpful, he said, and added that the maintainers have come close to
+
+giving Chromium last rites several times over the years due to the difficulty in
+
+keeping it up to date. He also noted that he had mentioned this to Žilka before,
+
+and said that it would be welcome if he wanted to assist with the package.
+
+James 回复说：“Chromium 作为源代码软件包维护起来非常糟糕。它很容易成为 Gentoo 中最消耗维护者的软件包。”他说，抱怨其维护工作并无帮助，并补充说，由于难以保持更新，维护者们多年来已多次接近为 Chromium 举行临终仪式。他还指出，他之前曾向 Žilka 提过这一点，并表示如果 Žilka 愿意协助维护该软件包，将非常欢迎。
+
+Indeed, Žilka had filed a similar
+
+bug in August complaining about the number of vulnerabilities present in the
+
+Chromium ebuild; James had replied then that the package had always
+
+been difficult to maintain, "
+
+and now they've added Go
+
+" as a dependency as
+
+well. Prior to that, Žilka had shown up in a bug report filed
+
+by Matt Jolly about Chromium vulnerabilities to complain
+
+that "
+
+the update process needs fixing, so that events like these don't happen
+
+again in packages as critical as these!
+
+"
+
+事实上，Žilka 在 8 月就提交过类似的错误报告，抱怨 Chromium ebuild 中存在的漏洞数量；当时 James 回复说，该软件包一直很难维护，“现在他们还把 Go 添加为依赖项”。在此之前，Žilka 曾出现在 Matt Jolly 提交的关于 Chromium 漏洞的错误报告中，抱怨“更新过程需要修复，这样的事件才不会在如此关键的软件包中再次发生！”
+
+Jolly had replied
+
+that the maintainers are a team of volunteers who do their best, but "
+
+build
+
+failures, human fac
+
+Jolly 曾回复说，维护者是一支尽最大努力的志愿者团队，但“构建失败、人为因
