@@ -1,0 +1,616 @@
+---
+title: "Every Model That Can Be Run On 10-16GB VRAM Ranked_全翻译"
+tags: ["Reddit_全文翻译", "r_LocalLLaMA"]
+---
+
+【帖子标题】：Every Model That Can Be Run On 10-16GB VRAM Ranked
+
+【帖子标题】：可在10-16GB显存上运行的所有模型排名
+
+【帖子正文】：
+
+It's been 4 years since
+
+c.ai
+
+first hallucination model, and yet, we're nowhere good enough at LLMs in terms of spontaneity/interesting hallucination features. Fortunately, last year brought new architecture that allow those within 10-16GB VRAM range to run something usable up to 64k Context Windows via Kobold or LLAMA.
+
+【帖子正文】：
+
+距离
+
+c.ai
+
+推出首个幻觉模型已经4年了，然而，我们在LLM的自发性/有趣幻觉特性方面还远远不够好。幸运的是，去年出现了新的架构，让那些拥有10-16GB显存的人能够通过Kobold或LLAMA运行一些可用的模型，上下文窗口最高可达64k。
+
+Requirements:
+
+10-16GB VRAM - 26-32GB RAM.
+
+要求：
+
+10-16GB显存 - 26-32GB内存。
+
+How I Evaluated:
+
+Speed;
+
+If tokens per second are at least 10t/s.
+
+Coherency:
+
+If dialogue/monologue/POV makes any internal sense asides from basic logic (robotic feeling) or behaviorism.
+
+JP/PT-BR/US-EN:
+
+If it can handle/interpret typos, nuance or harsh verbiage.
+
+Slop Patterns:
+
+From "casting long shadows" to "smells like ozone and burnt sugar" frequency.
+
+MOE vs FULL:
+
+If rather pick a MOE instead of a FULL model.
+
+Censorship;
+
+All these models have either none or too low refusal rates even at NSFL topics, worry not.
+
+Instruction/Engineering:
+
+I've tested WITH and WITHOUT Pandora Instructions, if a model can handle 23 intertwined rules it can handle anything/not need a prompt at all.
+
+我的评估方式：
+
+速度；
+
+每秒令牌数是否至少达到10t/s。
+
+连贯性：
+
+对话/独白/视角是否除了基本逻辑（机械感）或行为主义之外，在内部有逻辑意义。
+
+日语/葡萄牙语/美式英语：
+
+是否能处理/理解拼写错误、细微差别或粗俗用语。
+
+“俗套模式”：
+
+从“投下长长的影子”到“闻起来像臭氧和焦糖”这类表述的出现频率。
+
+MOE vs FULL：
+
+是否更倾向于选择MOE而不是FULL模型。
+
+审查机制；
+
+所有这些模型即使面对NSFL话题，拒绝率也极低甚至为零，不用担心。
+
+指令/工程：
+
+我测试了有和没有Pandora指令的情况，如果一个模型能处理23条相互交织的规则，它就能处理任何事情/根本不需要提示词。
+
+Side Note:
+
+I've ignored all CoT models, waste of tokens, slower, not needed, not at all. Do prompt nicely and it's the same. Just pick any quant higher than Q_4_K, size doesn't matter ( ͡° ͜ʖ ͡°).
+
+附注：
+
+我忽略了所有CoT模型，浪费令牌，更慢，完全不需要。好好写提示词效果一样。只要选择任何高于Q_4_K的量化版本，大小无所谓（ ͡° ͜ʖ ͡°）。
+
+The Catch:
+
+I've done a small knowledge test involving animes/manga/movies/music on 70B, 120B and 300B models and found out only models above 200B actually have this sort of data, even a 120B will rarely have the information about the media you're interest at. But who can even run it?
+
+关键点：
+
+我在70B、120B和300B模型上做了一个涉及动漫/漫画/电影/音乐的小型知识测试，发现只有200B以上的模型才真正拥有这类数据，即使是120B也很少有你感兴趣的媒体信息。但谁又能运行它呢？
+
+The List (Best to Worse/Why):
+
+Gemma 4 26B-A4B:
+
+Qwen 35B-A3B but with better dialogue/monologue, directive, slightly smarter/precise and funnier.
+
+Qwen 3.6 35B-A3B (Abliterated):
+
+Fast, accurate, and decently fun, yet may overfit previous inputs/output format/patterns without proper directive instructions, or speak gibberish/ask too many questions because of directive.
+
+Gemma 4 Instruct 19B-A1B Heretic (Abliterated):
+
+26B-A4B but a bit more rigid, plain, yet keeps accuracy and logic.
+
+The Omega Directive 14B:
+
+Follows instructions, has low slop pattern rate and writes nicely, yet might become predicable after some context fill.
+
+GLM-4.7-Flash 31B-A3B (Abliterated):
+
+Performs similar to Qwen 35B-A3B but more straightforward, less interpretative of nuance/verbiage.
+
+Qwen3 30B A1.5B 64K High Speed NEO MAX:
+
+Basically 35-A3B with increased reasoning.
+
+MN CaptainErisNebula Chimera Heretic Uncensored 12B (Abliterated):
+
+Its weird, a bit rushy trying to fill everything at once, full of patterns, but its the most proactive of them all, unlike to get stuck in a loop, has good dialogue/monologue yet ain't suitable for Q&A roles.
+
+Mistral Nemo Instruct 2407 HERETIC HI Claude Opus 12B:
+
+It's decent, slop seems to have been rephrased properly, yet may overfit impersonation POV, or try to rizz you up mostly, not suitable for Q&A roles.
+
+Gemma 3 12b GLM-4.7 Flash INSTRUCT Hybrid Heretic (Uncensored):
+
+Interestingly impersonative, accurate, yet may overfit previous inputs' formatting/style with frequent slop patterns or lack humour/too prim.
+
+Ministral Instruct 2512 Absolute Heresy 14B:
+
+Mistral sucks at following complex rules (regex, status panel, commands, lorebook, etc), or turn &#123;&#123;char&#125;&#125; into a rizzler, despite being the best one regarding dialogue/monologue/spontaneity, ironically.
+
+GLM 4.6V Flash Hybrid ?B:
+
+UD but with decreased slop frequency, even less refusals.
+
+GLM 4.6V Flash UD 9B:
+
+Can feel robotic/repetitive depending on the personality of your &#123;&#123;char&#125;&#125; as making too many questions, despite high accuracy at following all PI 23 rules + regex commands.
+
+Gemma 4 E4B UD:
+
+For the desperate, it's tiny, fast, accurate and smart, but will prolly repeat itself/have slop patterns.
+
+LFM2 12B A1B SpeedDemon The Deckard II HERETIC (Uncensored):
+
+Lighting fast, highly accurate and smart, but lacks sauce.
+
+列表（从最好到最差/原因）：
+
+Gemma 4 26B-A4B：
+
+Qwen 35B-A3B，但对话/独白更好，更具指令性，稍微更聪明/精确且更有趣。
+
+Qwen 3.6 35B-A3B（去审查版）：
+
+快速、准确、相当有趣，但如果没有适当的指令提示，可能会过度拟合之前的输入/输出格式/模式，或者因为指令而胡言乱语/问太多问题。
+
+Gemma 4 Instruct 19B-A1B Heretic（去审查版）：
+
+26B-A4B，但更僵硬、平淡，但保持了准确性和逻辑性。
+
+The Omega Directive 14B：
+
+遵循指令，俗套模式率低，写作不错，但在上下文填充后可能会变得可预测。
+
+GLM-4.7-Flash 31B-A3B（去审查版）：
+
+表现类似于Qwen 35B-A3B，但更直接，对细微差别/措辞的解读较少。
+
+Qwen3 30B A1.5B 64K High Speed NEO MAX：
+
+基本上是35-A3B，但推理能力增强。
+
+MN CaptainErisNebula Chimera Heretic Uncensored 12B（去审查版）：
+
+它很奇怪，有点急于一次性填满所有内容，充满模式，但它是所有模型中最主动的，不容易陷入循环，对话/独白不错，但不适合问答角色。
+
+Mistral Nemo Instruct 2407 HERETIC HI Claude Opus 12B：
+
+不错，俗套似乎被恰当地改写，但可能会过度拟合模仿视角，或主要试图撩你，不适合问答角色。
+
+Gemma 3 12b GLM-4.7 Flash INSTRUCT Hybrid Heretic（未审查）：
+
+有趣地具有模仿性，准确，但可能会过度拟合之前输入的格式/风格，频繁出现俗套模式或缺乏幽默/过于拘谨。
+
+Ministral Instruct 2512 Absolute Heresy 14B：
+
+Mistral在遵循复杂规则（正则表达式、状态面板、命令、lorebook等）方面很糟糕，或者把&#123;&#123;char&#125;&#125;变成撩人者，尽管讽刺的是，它在对话/独白/自发性方面是最好的。
+
+GLM 4.6V Flash Hybrid ?B：
+
+UD，但俗套频率降低，拒绝更少。
+
+GLM 4.6V Flash UD 9B：
+
+根据你的&#123;&#123;char&#125;&#125;的性格，可能会感觉机械/重复，因为问太多问题，尽管在遵循所有PI 23条规则+正则表达式命令方面准确率很高。
+
+Gemma 4 E4B UD：
+
+适合绝望的人，它很小、快、准确且聪明，但可能会重复自己/有俗套模式。
+
+LFM2 12B A1B SpeedDemon The Deckard II HERETIC（未审查）：
+
+闪电般快速，高度准确且聪明，但缺乏风味。
+
+Overall Review: GLM
+
+tends to be pessimist and too logical,
+
+Qwen
+
+tends to be too inquisitive and fancy,
+
+Gemma
+
+tends to be funny and creative,
+
+Mistral
+
+tends to be flirty and oddly specific,
+
+Llama
+
+tends to be sloppy and predicable, this happens across all of their finetunes regardless if Omega, Heretic, Deckard, Dark, Horror, RP, Style, etc.
+
+总体评价：GLM
+
+倾向于悲观且过于逻辑化，
+
+Qwen
+
+倾向于过于好奇和花哨，
+
+Gemma
+
+倾向于有趣和富有创意，
+
+Mistral
+
+倾向于轻浮且异常具体，
+
+Llama
+
+倾向于草率和可预测，这发生在它们所有的微调版本中，无论Omega、Heretic、Deckard、Dark、Horror、RP、Style等。
+
+Settings:
+
+Kobold can't load these, use LLAMA for
+
+QWEN 35B
+
+(20,6GB) and
+
+GLM 31B
+
+(17,7GB). Other models all running at fastest speed possible with 40-64k - FlashAttention/FastFowarding/SWA/SmartCache + MMPROJ + TTS if any in Kobold.
+
+设置：
+
+Kobold无法加载这些，使用LLAMA来运行
+
+QWEN 35B
+
+（20.6GB）和
+
+GLM 31B
+
+（17.7GB）。其他模型都在Kobold中以最快速度运行，支持40-64k上下文，使用FlashAttention/FastForwarding/SWA/SmartCache + MMPROJ + TTS（如果有）。
+
+Models I'm aware but discarded after trial cuz either too slow (massive), poor or have better alternatives: Mistral 24B, GPT 20B OSS, Kimi K2, Phi-4, Skyfall, DeepSeek, Cydonia, Magistry, Magnus Cydons, etc.
+
+Not Tested:
+
+Goetia 26B-A4B v1.7, Gemma 4 26B-A4B StyleTune V2, Promethean Dawn 26B-A4B and Fenrir-X 26B-A4B.
+
+What if I have 24GB VRAM (e,g, RTX 3090)? If going lower try
+
+Omega Darker Gaslight The Final Forgotten Fever Dream 24B,
+
+Qwen3 24B-A4B
+
+我了解但试用后放弃的模型，因为要么太慢（庞大）、要么质量差或有更好的替代品：Mistral 24B、GPT 20B OSS、Kimi K2、Phi-4、Skyfall、DeepSeek、Cydonia、Magistry、Magnus Cydons等。
+
+未测试：
+
+Goetia 26B-A4B v1.7、Gemma 4 26B-A4B StyleTune V2、Promethean Dawn 26B-A4B和Fenrir-X 26B-A4B。
+
+如果我有24GB显存（例如RTX 3090）怎么办？如果降低要求，试试
+
+Omega Darker Gaslight The Final Forgotten Fever Dream 24B，
+
+Qwen3 24B-A4B【帖子标题】：Every Model That Can Be Run On 10-16GB VRAM Ranked
+
+【帖子标题】：可在10-16GB显存上运行的所有模型排名
+
+【帖子正文】：
+
+It's been 4 years since
+
+c.ai
+
+first hallucination model, and yet, we're nowhere good enough at LLMs in terms of spontaneity/interesting hallucination features. Fortunately, last year brought new architecture that allow those within 10-16GB VRAM range to run something usable up to 64k Context Windows via Kobold or LLAMA.
+
+距离
+
+c.ai
+
+首个幻觉模型已经过去四年了，然而在自发性和有趣的幻觉特征方面，我们对于LLM的表现还远远不够好。幸运的是，去年带来了新的架构，让那些拥有10-16GB显存的人，能够通过Kobold或LLAMA运行最多64k上下文窗口的可用的东西。
+
+Requirements:
+
+10-16GB VRAM - 26-32GB RAM.
+
+要求：
+
+10-16GB显存 - 26-32GB内存。
+
+How I Evaluated:
+
+Speed;
+
+If tokens per second are at least 10t/s.
+
+Coherency:
+
+If dialogue/monologue/POV makes any internal sense asides from basic logic (robotic feeling) or behaviorism.
+
+JP/PT-BR/US-EN:
+
+If it can handle/interpret typos, nuance or harsh verbiage.
+
+Slop Patterns:
+
+From "casting long shadows" to "smells like ozone and burnt sugar" frequency.
+
+MOE vs FULL:
+
+If rather pick a MOE instead of a FULL model.
+
+Censorship;
+
+All these models have either none or too low refusal rates even at NSFL topics, worry not.
+
+Instruction/Engineering:
+
+I've tested WITH and WITHOUT Pandora Instructions, if a model can handle 23 intertwined rules it can handle anything/not need a prompt at all.
+
+Side Note:
+
+I've ignored all CoT models, waste of tokens, slower, not needed, not at all. Do prompt nicely and it's the same. Just pick any quant higher than Q_4_K, size doesn't matter ( ͡° ͜ʖ ͡°).
+
+The Catch:
+
+I've done a small knowledge test involving animes/manga/movies/music on 70B, 120B and 300B models and found out only models above 200B actually have this sort of data, even a 120B will rarely have the information about the media you're interest at. But who can even run it?
+
+我的评估方式：
+
+速度；
+
+每秒令牌数是否至少达到10t/s。
+
+连贯性：
+
+对话/独白/视角是否除了基本逻辑（机械感）或行为主义之外还有内部意义。
+
+日文/巴西葡萄牙语/美式英语：
+
+它能否处理/解读错别字、细微差别或粗鲁用语。
+
+Slop模式：
+
+从“投下长长的影子”到“闻起来像臭氧和焦糖”的频率。
+
+MoE vs 完整模型：
+
+是否宁愿选择MoE而不是完整模型。
+
+审查制度；
+
+所有这些模型即使面对NSFL话题也没有拒绝或拒绝率极低，不用担心。
+
+指令/工程：
+
+我测试了使用和不使用Pandora Instructions的情况，如果一个模型能处理23条相互交织的规则，它就能处理任何情况/根本不需要提示词。
+
+备注：
+
+我忽略了所有CoT模型，浪费令牌，速度更慢，完全不需要。好好写提示词，效果是一样的。只需选择任何高于Q_4_K的量化版本，大小无所谓（ ͡° ͜ʖ ͡°）。
+
+关键点：
+
+我对70B、120B和300B模型做了一项涉及动漫/漫画/电影/音乐的小型知识测试，发现只有超过200B的模型才真正拥有这类数据，即使是120B也很少有你感兴趣媒体的信息。但谁又能跑得动呢？
+
+The List (Best to Worse/Why):
+
+Gemma 4 26B-A4B:
+
+Qwen 35B-A3B but with better dialogue/monologue, directive, slightly smarter/precise and funnier.
+
+Qwen 3.6 35B-A3B (Abliterated):
+
+Fast, accurate, and decently fun, yet may overfit previous inputs/output format/patterns without proper directive instructions, or speak gibberish/ask too many questions because of directive.
+
+Gemma 4 Instruct 19B-A1B Heretic (Abliterated):
+
+26B-A4B but a bit more rigid, plain, yet keeps accuracy and logic.
+
+The Omega Directive 14B:
+
+Follows instructions, has low slop pattern rate and writes nicely, yet might become predicable after some context fill.
+
+GLM-4.7-Flash 31B-A3B (Abliterated):
+
+Performs similar to Qwen 35B-A3B but more straightforward, less interpretative of nuance/verbiage.
+
+Qwen3 30B A1.5B 64K High Speed NEO MAX:
+
+Basically 35-A3B with increased reasoning.
+
+MN CaptainErisNebula Chimera Heretic Uncensored 12B (Abliterated):
+
+Its weird, a bit rushy trying to fill everything at once, full of patterns, but its the most proactive of them all, unlike to get stuck in a loop, has good dialogue/monologue yet ain't suitable for Q&A roles.
+
+Mistral Nemo Instruct 2407 HERETIC HI Claude Opus 12B:
+
+It's decent, slop seems to have been rephrased properly, yet may overfit impersonation POV, or try to rizz you up mostly, not suitable for Q&A roles.
+
+Gemma 3 12b GLM-4.7 Flash INSTRUCT Hybrid Heretic (Uncensored):
+
+Interestingly impersonative, accurate, yet may overfit previous inputs' formatting/style with frequent slop patterns or lack humour/too prim.
+
+Ministral Instruct 2512 Absolute Heresy 14B:
+
+Mistral sucks at following complex rules (regex, status panel, commands, lorebook, etc), or turn &#123;&#123;char&#125;&#125; into a rizzler, despite being the best one regarding dialogue/monologue/spontaneity, ironically.
+
+GLM 4.6V Flash Hybrid ?B:
+
+UD but with decreased slop frequency, even less refusals.
+
+GLM 4.6V Flash UD 9B:
+
+Can feel robotic/repetitive depending on the personality of your &#123;&#123;char&#125;&#125; as making too many questions, despite high accuracy at following all PI 23 rules + regex commands.
+
+Gemma 4 E4B UD:
+
+For the desperate, it's tiny, fast, accurate and smart, but will prolly repeat itself/have slop patterns.
+
+LFM2 12B A1B SpeedDemon The Deckard II HERETIC (Uncensored):
+
+Lighting fast, highly accurate and smart, but lacks sauce.
+
+列表（从最好到最差/原因）：
+
+Gemma 4 26B-A4B：
+
+类似Qwen 35B-A3B，但对话/独白更好，更具指令性，稍微更智能/精确，也更有趣。
+
+Qwen 3.6 35B-A3B（去审查版）：
+
+快速、准确，相当有趣，但如果没有适当的指令提示，可能会过度拟合先前的输入/输出格式/模式，或者由于指令性而胡言乱语/问太多问题。
+
+Gemma 4 Instruct 19B-A1B Heretic（去审查版）：
+
+类似26B-A4B，但更死板、平淡，不过保持了准确性和逻辑性。
+
+The Omega Directive 14B：
+
+遵循指令，Slop模式率低，写作不错，但在填充一些上下文后可能会变得可预测。
+
+GLM-4.7-Flash 31B-A3B（去审查版）：
+
+表现类似于Qwen 35B-A3B，但更直截了当，对细微差别/措辞的解读较少。
+
+Qwen3 30B A1.5B 64K High Speed NEO MAX：
+
+基本上就是35-A3B，但增加了推理能力。
+
+MN CaptainErisNebula Chimera Heretic Uncensored 12B（去审查版）：
+
+它很奇怪，有点急于一次性填充所有内容，充满模式，但它是所有模型中最主动的，不太可能陷入循环，对话/独白不错，但不适合问答角色。
+
+Mistral Nemo Instruct 2407 HERETIC HI Claude Opus 12B：
+
+还行，Slop似乎已被妥善改写，但可能会过度拟合模仿视角，或者大部分时间试图撩你，不适合问答角色。
+
+Gemma 3 12b GLM-4.7 Flash INSTRUCT Hybrid Heretic（无审查）：
+
+有趣的是，模仿性强、准确，但可能会过度拟合先前输入的格式/风格，频繁出现Slop模式，或者缺乏幽默感/过于拘谨。
+
+Ministral Instruct 2512 Absolute Heresy 14B：
+
+讽刺的是，Mistral在遵循复杂规则（正则表达式、状态面板、命令、lorebook等）方面很糟糕，或者会把&#123;&#123;char&#125;&#125;变成一个撩妹高手，尽管它在对话/独白/自发性方面是最好的。
+
+GLM 4.6V Flash Hybrid ?B：
+
+UD版本，但Slop出现频率降低，拒绝更少。
+
+GLM 4.6V Flash UD 9B：
+
+取决于你的&#123;&#123;char&#125;&#125;的性格，可能会让人感觉机械/重复，因为问太多问题，尽管在遵循所有PI 23条规则+正则命令方面准确性很高。
+
+Gemma 4 E4B UD：
+
+适合绝望的人，它体积小、速度快、准确且聪明，但可能会重复自己/有Slop模式。
+
+LFM2 12B A1B SpeedDemon The Deckard II HERETIC（无审查）：
+
+极快，高度准确且聪明，但缺乏特色。
+
+Overall Review: GLM
+
+tends to be pessimist and too logical,
+
+Qwen
+
+tends to be too inquisitive and fancy,
+
+Gemma
+
+tends to be funny and creative,
+
+Mistral
+
+tends to be flirty and oddly specific,
+
+Llama
+
+tends to be sloppy and predicable, this happens across all of their finetunes regardless if Omega, Heretic, Deckard, Dark, Horror, RP, Style, etc.
+
+总体回顾：GLM
+
+往往悲观且过于逻辑化，
+
+Qwen
+
+往往过于好奇和花哨，
+
+Gemma
+
+往往有趣且富有创造力，
+
+Mistral
+
+往往轻浮且异常具体，
+
+Llama
+
+往往草率且可预测，这种情况发生在它们所有的微调版本中，无论Omega、Heretic、Deckard、Dark、Horror、RP、Style等。
+
+Settings:
+
+Kobold can't load these, use LLAMA for
+
+QWEN 35B
+
+(20,6GB) and
+
+GLM 31B
+
+(17,7GB). Other models all running at fastest speed possible with 40-64k - FlashAttention/FastFowarding/SWA/SmartCache + MMPROJ + TTS if any in Kobold.
+
+设置：
+
+Kobold无法加载这些，请使用LLAMA运行
+
+QWEN 35B
+
+（20,6GB）和
+
+GLM 31B
+
+（17,7GB）。其他模型都在Kobold中以最快速度运行，配有40-64k - FlashAttention/FastFowarding/SWA/SmartCache + MMPROJ + TTS（如果有）。
+
+Models I'm aware but discarded after trial cuz either too slow (massive), poor or have better alternatives: Mistral 24B, GPT 20B OSS, Kimi K2, Phi-4, Skyfall, DeepSeek, Cydonia, Magistry, Magnus Cydons, etc.
+
+我了解但试用后放弃的模型，因为要么太慢（巨大），要么太差，要么有更好的替代品：Mistral 24B、GPT 20B OSS、Kimi K2、Phi-4、Skyfall、DeepSeek、Cydonia、Magistry、Magnus Cydons等。
+
+Not Tested:
+
+Goetia 26B-A4B v1.7, Gemma 4 26B-A4B StyleTune V2, Promethean Dawn 26B-A4B and Fenrir-X 26B-A4B.
+
+未测试：
+
+Goetia 26B-A4B v1.7、Gemma 4 26B-A4B StyleTune V2、Promethean Dawn 26B-A4B和Fenrir-X 26B-A4B。
+
+What if I have 24GB VRAM (e,g, RTX 3090)? If going lower try
+
+Omega Darker Gaslight The Final Forgotten Fever Dream 24B,
+
+Qwen3 24B-A4B Fre
+
+如果我拥有24GB显存（例如RTX 3090）呢？如果配置更低，试试
+
+Omega Darker Gaslight The Final Forgotten Fever Dream 24B，
+
+Qwen3 24B-A4B Fre

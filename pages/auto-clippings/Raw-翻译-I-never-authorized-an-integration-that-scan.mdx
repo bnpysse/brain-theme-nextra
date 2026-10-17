@@ -1,0 +1,100 @@
+---
+title: "I never authorized an integration that scans my secrets_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：I never authorized an integration that scans my secrets
+
+【文章正文】：
+
+Repository navigation
+
+i never authorized an integration that scans my secrets #49314
+
+Description
+
+Type of issue
+
+Other (issue in content formatting, broken link or image, non-working widget)
+
+Problem description
+
+This is a pretty severe invasion of privacy.
+
+I never authorized any integrations or plugins for scanning secrets and sending them up the line, even if they are hashed or not.
+
+This mechanism could be abused by a malicious threat actor with access to the home assistant github repos in a variety of ways.
+
+how do i turn this thing off?
+
+Suggested solution
+
+make this an opt-in feature, do not just opt people in to scanning for secrets with a system they were not aware existed.
+
+URL
+
+https://www.home-assistant.io/more-info/pwned-passwords/
+
+Version
+
+2026.10.1
+
+How do you know the suggested solution is correct?
+
+No response
+
+Additional information
+
+No response
+
+Leaving this closed since this repository is for our documentation, but I want to follow up, because my earlier replies were more dismissive than this deserved. My apologies.
+
+As it turns out, this check can already be turned off after all:
+
+ha security options --pwned=false
+
+To be transparent: this check isn't new, it has been part of the Supervisor for years. It checks app options that are marked as passwords. A recent release fixed the warning that surfaces it, which is why you're seeing it now.
+
+Privacy was a design requirement for this feature from the start, which is why your secrets never leave your system. The Supervisor hashes them locally and sends only the first 5 characters of th…
+
+Activity
+
+- Oh hi there 👋 It is not an invasion of privacy and there are sure other apps out there doing this (most notably the 1Password password manager). Your passwords are never send out, never published. Read more about it here: https://blog.cloudflare.com/validating-leaked-passwords-with-k-anonymity/ As a matter of fact, it is designed to handled these types of data with privacy in mind, see also: https://en.wikipedia.org/wiki/K-anonymity If anything, learn from the output, because the secrets you are using are listed in the password databases and thus easily "hackable". ../Frenck Blogging my personal ramblings at frenck.dev Reacted by xor eax,eax
+
+- I run Phobos Group, and I travel all over the world giving presentations about security.
+
+I am very well acquainted with HIBP, and have met troy in the past.
+
+I helped deploy 1password at twitter when I was their sole red-team staff member in 2011.I am still not happy that home assistant, without my opt-in, without my permission, scanned my HA installation and send stuff up the line to HIBP. This should be an opt-in feature, and not something that 'just happens'.
+
+As a red teamer, I can give you a list as long as my arm about how I could abuse this to loot credentials from every HA install on the planet.Reacted by Daniel W. Crompton
+
+- this issue is not closed until I am satisfied that HA is not taking things off my system without my permission and sending them to a 3rd party Reacted by Daniel W. Crompton
+
+- This issue is closed as won't fix. Sorry. ../Frenck Reacted by Latte macchiatoReacted by Ryan Carter, Ben Lee, Ciarán Ainsworth, Daniel W. Crompton, xor eax,eax and Jamie Bliss
+
+- Hi, long time HA user here. Please re-open this issue and address the question of how to disable this. If a method to disable it is not currently implemented, please consider implementing this rather than insisting the userbase accept this and take your word on it. This response feels extremely dismissive and as a user of this platform I feel secondhand offended by it as I share the exact same concerns as OP and do not believe the response here adequately addressed the concerns. If there is no interest in addressing this reasonably, please let us know so we can uninstall and fork. Reacted by Daniel W. CromptonReacted by Justin Myers
+
+- please let us know so we can uninstall and fork Sorry, these are not statements we can work with. Doing such threats and trying to intimidate it not going to bring you anywhere. If you want to do a feature request, that is fine, we have places for that. This report is on our documentation. There is no amount of documentation I can adjust to adjust this or address this. Thus closed as won't fix. If this is all reason for you to uninstall and fork... 🤷 So be it, it is open source after all. ../Frenck Blogging my personal ramblings at frenck.dev
+
+- It is not an invasion of privacy Yes. Yes it is. /whitehat hacker
+
+- locked as too heated and limited conversation to collaboratorson Oct 16, 2026
+
+- Leaving this closed since this repository is for our documentation, but I want to follow up, because my earlier replies were more dismissive than this deserved. My apologies. As it turns out, this check can already be turned off after all: ha security options --pwned=false
+
+To be transparent: this check isn't new, it has been part of the Supervisor for years. It checks app options that are marked as passwords. A recent release fixed the warning that surfaces it, which is why you're seeing it now. Privacy was a design requirement for this feature from the start, which is why your secrets never leave your system. The Supervisor hashes them locally and sends only the first 5 characters of the SHA-1 hash to Have I Been Pwned. HIBP returns every hash starting with that prefix, and the matching happens on your own instance. You can see exactly what it does here: https://github.com/home-assistant/supervisor/blob/main/supervisor/utils/pwned.py You are right that our documentation should have explained this, including how to turn it off. We'll get that page updated. ../Frenck Blogging my personal ramblings at frenck.dev
+
+Metadata
+
+Metadata
+
+Assignees
+
+Labels
+
+Type
+
+Fields
+
+Priority

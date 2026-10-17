@@ -1,0 +1,148 @@
+---
+title: "90 of US working hours are spent on tasks not covered well b_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：90% of US working hours are spent on tasks not covered well by AI benchmarks
+
+【文章标题】：美国90%的工作时间花在了AI基准测试未能充分覆盖的任务上
+
+【文章正文】：
+
+AI benchmarks have multiplied in recent years, but coverage of economically valuable work remains limited. To measure this, we compiled relevant benchmarks to measure their coverage of American jobs. This Benchmark Map is our first step toward building a comprehensive, continuously updated resource for understanding AI capabilities across the economy.
+
+【文章正文】：
+
+近年来，AI基准测试数量激增，但对具有经济价值的工作的覆盖仍然有限。为了衡量这一点，我们汇编了相关基准测试，以评估它们对美国职业的覆盖情况。这份基准测试地图是我们构建全面、持续更新的资源以了解AI在整个经济中能力的第一步。
+
+Each tile represents one of the 923 O*NET occupations making up the US labor force, grouped into 22 job families. Occupations are shaded according to the share of their tasks which are represented in our initial list of AI benchmarks. A single benchmark prompt can be mapped to multiple O*NET tasks.
+
+每个色块代表构成美国劳动力的923个O*NET职业之一，这些职业被分为22个职业族。职业的着色深浅取决于其任务在我们初始AI基准测试列表中的覆盖比例。一个基准测试提示词可以映射到多个O*NET任务。
+
+click a family to open it
+
+点击一个职业族以展开
+
+| All 22 O*NET job families, with the share of their occupations covered by an AI benchmark. |  |
+
+|---|---|
+
+| Job family | Occupations covered |
+
+|---|---|
+
+|  | 29 / 36 |
+
+|  | 33 / 48 |
+
+|  | 10 / 14 |
+
+|  | 5 / 7 |
+
+|  | 21 / 51 |
+
+|  | 21 / 56 |
+
+|  | 19 / 56 |
+
+|  | 6 / 22 |
+
+|  | 13 / 40 |
+
+|  | 15 / 60 |
+
+|  | 12 / 89 |
+
+|  | 9 / 62 |
+
+| 全部22个O*NET职业族，及其职业被AI基准测试覆盖的比例。 |  |
+
+|---|---|
+
+| 职业族 | 被覆盖的职业数 |
+
+|---|---|
+
+|  | 29 / 36 |
+
+|  | 33 / 48 |
+
+|  | 10 / 14 |
+
+|  | 5 / 7 |
+
+|  | 21 / 51 |
+
+|  | 21 / 56 |
+
+|  | 19 / 56 |
+
+|  | 6 / 22 |
+
+|  | 13 / 40 |
+
+|  | 15 / 60 |
+
+|  | 12 / 89 |
+
+|  | 9 / 62 |
+
+In our data set: only 208 of 923 occupations have a task with at least 5 benchmark prompts, and 6 of 22 job families have no such occupations.
+
+在我们的数据集中：923个职业中只有208个职业拥有至少5个基准测试提示词的任务，22个职业族中有6个没有此类职业。
+
+Our findings suggest that 90% of American working hours are spent on tasks with little or no coverage from existing benchmarks. This makes it very hard to know how good AI models are at the work Americans actually do.
+
+我们的研究结果表明，美国90%的工作时间花在了现有基准测试覆盖很少或完全未覆盖的任务上。这使得我们很难了解AI模型在实际工作中表现如何。
+
+The coverage of existing benchmarks is not random, either. Our map suggests that the AI community is focusing on the largest labor markets first:
+
+现有基准测试的覆盖并非随机分布。我们的地图显示，AI社区首先关注的是最大的劳动力市场：
+
+For example, benchmarks in our initial list heavily cover AI-exposed lawyers’ tasks, but barely cover any of the O*NET tasks of similarly AI-exposed legal secretaries or court clerks. The long tail of smaller, middle-income knowledge work jobs appears undercovered.
+
+例如，我们初始列表中的基准测试大量覆盖了受AI影响较大的律师任务，但几乎未覆盖同样受AI影响较大的法律秘书或法院书记员的任何O*NET任务。较小规模、中等收入的知识型工作的长尾部分似乎覆盖不足。
+
+As we build out our coverage of model capabilities across the economy, we hope to both surface and help fill more gaps in our understanding of what models can do.
+
+随着我们扩展对AI模型在经济各领域能力的覆盖，我们希望既能揭示也能帮助填补我们对模型能力的认知空白。
+
+To break down the economy into sectors, occupations, and tasks, we used the US Department of Labor’s O*NET taxonomy. O*NET divides the US workforce into 923 occupations; for each occupation, O*NET attempts to provide a comprehensive list of “tasks” which make up the occupation, totaling 18,797 tasks across all occupations.
+
+为了将经济分解为行业、职业和任务，我们使用了美国劳工部的O*NET分类体系。O*NET将美国劳动力分为923个职业；对于每个职业，O*NET都试图提供构成该职业的“任务”的全面列表，所有职业共包含18,797项任务。
+
+To measure benchmark coverage, we start with a list of 29 benchmarks selected for their quality and economic relevance. (The full list and selection criteria are in the Benchmark Index tab). In selecting benchmarks for this list, we prioritized:
+
+为了衡量基准测试的覆盖情况，我们从29个基准测试列表开始，这些基准测试因其质量和经济相关性而被选中。（完整列表和选择标准见“基准测试索引”标签页）。在选择这些基准测试时，我们优先考虑了：
+
+Following work by Wang et al., we then ask an LLM judge to tag each benchmark prompt with as many O*NET tasks as it thinks correspond to that prompt. We validate our LLM tagging with human expert tags on Mercor’s APEX benchmarks, a subset of this list of 29. On the Benchmark Map, an O*NET task counts as “covered” if our LLM judge has mapped it to at least 5 prompts from our 29 benchmarks.
+
+遵循Wang等人的研究方法，我们随后让一个LLM评审为每个基准测试提示词标注尽可能多的对应O*NET任务。我们使用人类专家对Mercor的APEX基准测试（这29个基准测试的子集）的标注来验证我们的LLM标注。在基准测试地图上，如果我们的LLM评审已将某个O*NET任务映射到29个基准测试中的至少5个提示词，则该任务被视为“已覆盖”。
+
+To estimate the total share of working hours Americans spend on tasks covered by benchmarks on this list, we combine our coverage estimates with Hatgis-Kessell et al.’s LLM-derived estimates of the working time share of each O*NET task.
+
+为了估算美国人花在此列表基准测试所覆盖任务上的总工作时间比例，我们将我们的覆盖估算与Hatgis-Kessell等人基于LLM得出的每个O*NET任务工作时间占比估算相结合。
+
+A more detailed account of our methodology can be found in the Methodology tab.
+
+关于我们方法的更详细说明可在“方法论”标签页中找到。
+
+Our estimates of total economic coverage, and of patterns in coverage, all come from the initial list of 29 benchmarks we chose. This is not a complete or perfectly representative sample of the broader universe of unsaturated, public, agentic economic benchmarks. Any incomplete list will necessarily bias down estimates of economic coverage, and it is difficult to bound that bias. We want to stress, therefore, that these results are provisional. We will update them as we expand the initial benchmark list.
+
+我们对经济总覆盖率和覆盖模式的估算均来自我们选择的初始29个基准测试列表。这不是对更广泛的未饱和、公开、代理型经济基准测试的完整或完全代表性样本。任何不完整的列表都必然会导致经济覆盖率估算偏低，且很难界定这种偏差的范围。因此，我们要强调，这些结果是暂定性的。随着我们扩展初始基准测试列表，我们将更新这些结果。
+
+We also capped the number of included benchmarks in each job family in order to maximize breadth of coverage. We think this makes our estimate of economy-wide benchmark coverage more accurate, at the cost of biasing down our estimates of coverage in the most-benchmarked job families (e.g. software engineering).
+
+我们还对每个职业族中包含的基准测试数量设置了上限，以最大化覆盖广度。我们认为这使我们对经济整体基准测试覆盖率的估算更加准确，但代价是低估了基准测试最多的职业族（如软件工程）的覆盖率。
+
+By selecting for unsaturated benchmarks, we risk understating benchmark coverage on O*NET tasks which are easier for LLMs to complete. On the other hand, including saturated benchmarks would risk overstating benchmark coverage if saturation is downstream of lower task realism. The latter claim seems likely, given that benchmarks often overstate LLM performance in real-world deployments. We think that the bias from including saturated benchmarks would be greater than the bias from excluding them, but neither option is ideal.
+
+通过选择未饱和的基准测试，我们可能低估了LLM更容易完成的O*NET任务上的基准测试覆盖率。另一方面，如果饱和源于任务真实性较低，那么包含饱和基准测试则可能导致覆盖率被高估。鉴于基准测试常常高估LLM在实际部署中的表现，后一种说法似乎更有可能。我们认为，包含饱和基准测试带来的偏差会大于排除它们带来的偏差，但两种选择都不是理想的。
+
+Finally, while we outline our benchmark selection criteria in the Benchmark Index tab, several criteria (like “Economic Realism”) are difficult to formalize and introduce some subjectivity in our choices.
+
+最后，虽然我们在“基准测试索引”标签页中概述了基准测试选择标准，但一些标准（如“经济现实性”）难以形式化，并在我们的选择中引入了一定的主观性。
+
+The benchmarks in our index have relatively deep and narrow coverage of the overall economy. They are concentrated in a few job families, and within those families, they cover only a small number of occupations. This means that our map likely understates the true coverage of AI benchmarks across the economy, but it also highlights where the gaps are.
+
+我们索引中的基准测试对整体经济的覆盖相对深入但狭窄。它们集中在少数几个职业族中，且在这些职业族内，仅覆盖了少数职业。这意味着我们的地图可能低估了AI基准测试在经济中的真实覆盖率，但它也凸显了差距所在。
