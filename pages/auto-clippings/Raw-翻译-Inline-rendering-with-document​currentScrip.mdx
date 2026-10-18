@@ -1,0 +1,64 @@
+---
+title: "Inline rendering with document​.currentScript_全翻译"
+tags: ["大咖视点_全文翻译", "Simon_Willison_(AI_实用工程化)"]
+---
+
+【文章标题】：Inline rendering with document​.currentScript
+
+【文章标题】：使用document.currentScript进行内联渲染
+
+【文章正文】：
+
+【文章正文】：
+
+Inline rendering with document​.currentScript
+
+使用document.currentScript进行内联渲染
+
+Lean Rada describes a neat trick that takes advantage of the
+
+Lean Rada描述了一个巧妙技巧，利用了
+
+document.currentScript
+
+document.currentScript（保留）
+
+property. You can use that to drop in a tiny inline
+
+属性。你可以用它来插入一个小的内联
+
+&lt;script&gt;
+
+&lt;script&gt;（保留）
+
+element that replaces itself when the page loads:
+
+元素，当页面加载时它会替换自身：
+
+The year is &lt;script&gt;
+
+document.currentScript.replaceWith(
+
+new Date().getFullYear())&lt;/script&gt;
+
+年份是 &lt;script&gt;
+
+document.currentScript.replaceWith(
+
+new Date().getFullYear())&lt;/script&gt;
+
+If you define a shortcut function like this:
+
+如果你定义一个像这样的快捷函数：
+
+$=(...n)=&gt;document.currentScript.replaceWith(...n)
+
+$=(...n)=&gt;document.currentScript.replaceWith(...n)（保留）
+
+You get a tiny template language:
+
+你就得到了一种微型模板语言：
+
+The year is &lt;script&gt;$(new Date().getFullYear())&lt;/script&gt;
+
+年份是 &lt;script&gt;$(new Date().getFullYear())&lt;/script&gt;
