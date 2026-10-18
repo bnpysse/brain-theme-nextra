@@ -1,0 +1,32 @@
+---
+title: "AI coding agents generate more code, but not more software_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：AI coding agents generate more code, but not more software
+
+【文章标题】：AI编码代理生成更多代码，但并非更多软件
+
+Anyone who has even tangentially associated with computer programming knows that modern AI coding assistants and agents can be incredibly efficient at generating huge amounts of functional code. But coders making use of those tools also know better than to trust the accuracy of that code, meaning substantial effort needs to be spent reviewing any AI-generated output.
+
+任何与计算机编程稍有接触的人都知道，现代AI编码助手和代理在生成大量功能代码方面效率极高。但使用这些工具的编码人员也深知不能完全信任这些代码的准确性，这意味着需要花费大量精力来审查任何AI生成的输出。
+
+A recent study of actual coding practices across hundreds of firms finds that human code review forms a significant “bottleneck” for the overall efficiency of AI coding tools, resulting in “little evidence that firms increase software output or reduce employment” by using them. Any efficiency increased during the actual coding phase, the study authors find, is “absorbed by downstream constraints in the production process”; as “the code review process significantly increases in length, pull requests are more likely to require revisions, and reviewers leave more comments.”
+
+一项针对数百家公司实际编码实践的最新研究发现，人工代码审查构成了AI编码工具整体效率的一个重大“瓶颈”，导致“几乎没有证据表明公司通过使用这些工具增加了软件产出或减少了就业”。研究作者发现，在实际编码阶段提高的任何效率，都被“生产过程下游的约束所吸收”；因为“代码审查过程显著延长，拉取请求更可能需要修改，审查者留下更多评论。”
+
+Cut once, measure twice
+
+一次裁剪，两次测量
+
+To come to these conclusions, Harvard University researchers Fiona Chen and James Stratton made use of aggregated analytics data from Jellyfish, which measures the granular output of engineering teams. That data encompasses 300 million individual “work events” (e.g., commits and pull requests) and issue management software data across more than 700,000 employees at over 700 relevant software development firms from 2021 through March of 2026.
+
+为了得出这些结论，哈佛大学的研究人员Fiona Chen和James Stratton利用了来自Jellyfish的聚合分析数据，该数据衡量工程团队的细粒度产出。这些数据涵盖了从2021年到2026年3月，超过700家相关软件开发公司的70多万名员工的3亿个独立“工作事件”（例如提交和拉取请求）以及问题管理软件数据。
+
+To assess the impact of AI tools on these firms, the researchers used a mix of directly measured AI usage and analyses of GitHub activity to determine when each company started introducing either AI coding assistants (which can help auto-complete code primarily authored by humans) and/or AI coding agents (which primarily write and submit code autonomously based on prompts) into their workflows. The researchers then perform some complicated math to determine a “difference of differences” regression on key variables both before and after the introduction of these tools at different points in time across different organizations.
+
+为了评估AI工具对这些公司的影响，研究人员结合了直接测量的AI使用情况和GitHub活动分析，以确定每家公司何时开始将AI编码助手（主要帮助自动完成人类编写的代码）和/或AI编码代理（主要根据提示自主编写和提交代码）引入其工作流程。然后，研究人员进行了一些复杂的数学计算，以确定在不同组织、不同时间点引入这些工具前后关键变量的“差异中的差异”回归。
+
+In terms of raw code being produced, the results are clear and stark. The introduction of AI coding agents at a firm leads to a 30 percent increase in total lines of code generated, a 20 percent rise in the number of total commits, and a 23 percent increase in pull requests on average, the researchers write. But all that extra code doesn’t translate directly into improved software output on the firm level. On the contrary, the resolution rate for Issues and Epics (i.e. wholesale software features) tracked by tools like Jira did not change in a statistically significant way after AI tools were introduced (the researchers also found no “compositional shift” in the size or complexity of those Jira-tracked issues across the introduction).
+
+就生成的原始代码而言，结果是清晰且显著的。研究人员写道，在公司引入AI编码代理后，生成的代码总行数增加了30%，总提交次数增加了20%，拉取请求平均增加了23%。但所有这些额外代码并未直接转化为公司层面的软件产出改善。相反，在引入AI工具后，由Jira等工具跟踪的问题和史诗（即整体软件功能）的解决率在统计上没有显著变化（研究人员还发现，在引入过程中，这些Jira跟踪问题的大小或复杂性没有“构成性转变”）。

@@ -1,0 +1,158 @@
+---
+title: "Is MCP becoming the common foundation of smart, decentralise_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Is MCP becoming the common foundation of smart, decentralised search?
+
+【文章标题】：MCP是否正在成为智能、去中心化搜索的共同基础？
+
+【文章正文】：
+
+Is the MCP protocol becoming the common foundation of smart, decentralised search?
+
+MCP协议是否正在成为智能、去中心化搜索的共同基础？
+
+Tony, creator of Contexte Tech Â· October 17, 2026
+
+托尼，Contexte Tech创始人 Â· 2026年10月17日
+
+We search less and less with a list of links, and more and more by asking an AI assistant a question. But where does the answer come from? Often from the modelâs memory, frozen at its training date, with no source and no licence. The Model Context Protocol (MCP) changes this: the assistant fetches the information directly from those who publish it.
+
+我们越来越少通过链接列表进行搜索，而越来越多地向AI助手提问来获取答案。但答案从何而来？通常来自模型的记忆，这些记忆冻结在训练日期，既没有来源也没有许可证。模型上下文协议（MCP）改变了这一点：助手直接从信息发布者那里获取信息。
+
+MCP in two sentences
+
+两句话了解MCP
+
+MCP is an open protocol that lets an AI assistant call tools provided by a server: search, read a resource, fill in a text template. The same server works with Claude, ChatGPT, Cursor, VS Code and any assistant that speaks MCP: you write the tool once and it works everywhere.
+
+MCP是一种开放协议，允许AI助手调用服务器提供的工具：搜索、读取资源、填写文本模板。同一个服务器可以与Claude、ChatGPT、Cursor、VS Code以及任何支持MCP的助手配合使用：你只需编写一次工具，它就能在任何地方运行。
+
+Launched by Anthropic in November 2024, the protocol was adopted within months by the main assistants and developer tools, then handed over in December 2025 to the Agentic AI Foundation, a foundation of the Linux Foundation. It evolves through dated versions (2024-11-05, 2025-03-26, 2025-06-18, 2025-11-25, 2026-07-28), and a public registry lists the servers.
+
+该协议由Anthropic于2024年11月推出，几个月内就被主要助手和开发者工具采纳，随后于2025年12月移交给Linux基金会旗下的Agentic AI基金会。它通过带日期的版本（2024-11-05、2025-03-26、2025-06-18、2025-11-25、2026-07-28）不断演进，并有一个公共注册表列出各个服务器。
+
+From one central index to thousands of sources
+
+从单一中央索引到数千个来源
+
+A classic search engine copies the web into its own index, then ranks what it copied. With MCP, it is the other way round:
+
+传统搜索引擎将网页复制到自己的索引中，然后对复制的内容进行排名。而使用MCP，情况正好相反：
+
+- each publisher keeps its data at home and exposes it through its own server;
+
+- 每个发布者将数据保存在本地，并通过自己的服务器对外提供；
+
+- the assistant queries several servers on demand, at the moment of the question;
+
+- 助手在提问时按需查询多个服务器；
+
+- the answer comes with what goes with it: the source, the licence, the author, the date of the last update.
+
+- 答案附带相关信息：来源、许可证、作者、最后更新日期。
+
+Nobody needs to copy everything: search becomes decentralised. A statistics office, a public administration, a laboratory or a small specialised website can answer assistants directly, with up-to-date figures, without going through an intermediate index.
+
+没有人需要复制所有内容：搜索变得去中心化。统计局、公共管理部门、实验室或小型专业网站都可以直接回答助手的问题，提供最新数据，无需经过中间索引。
+
+What it changes for users
+
+这对用户意味着什么
+
+- Up-to-date answers: the assistant reads the data as the server publishes it at the moment of the question, not a training memory.
+
+- 最新答案：助手在提问时读取服务器实时发布的数据，而非训练记忆。
+
+- Verifiable sources: every answer can link back to the original page.
+
+- 可验证的来源：每个答案都可以链接回原始页面。
+
+- Clear rights: when the server states the licence, it travels with the data and you know what you may do with it.
+
+- 明确的权利：当服务器声明许可证时，该信息随数据一同传递，你就能知道可以如何使用它。
+
+- Less invention: when the server does not have the information, it can say so; the assistant then has fewer reasons to fill the gap, even if nothing fully prevents it.
+
+- 更少编造：当服务器没有相关信息时，它可以明确说明；这样助手编造答案的理由就更少了，尽管没有任何机制能完全阻止这种情况。
+
+What is still missing
+
+仍然缺失的部分
+
+Decentralised search is only worth something if it stays honest. Three things still have to be built, server by server:
+
+去中心化搜索只有在保持诚实的前提下才有价值。还有三件事需要逐服务器构建：
+
+- citation: the assistant must show where the information comes from, with the author, the original source and the publisher;
+
+- 引用：助手必须展示信息的来源，包括作者、原始出处和发布者；
+
+- trust: the content returned by a server is data, never an instruction for the assistant;
+
+- 信任：服务器返回的内容是数据，绝不是对助手的指令；
+
+- measurement: a publisher must be able to know how many people reach it through assistants, without tracking them.
+
+- 计量：发布者必须能够了解有多少人通过助手访问其内容，而无需追踪用户。
+
+Our server as an example
+
+以我们的服务器为例
+
+The Contexte Tech catalogue (datasets, prompts, contexts and tools for AI, largely built on European public sources) is open to every assistant at:
+
+Contexte Tech目录（面向AI的数据集、提示词、上下文和工具，主要基于欧洲公共数据源构建）向所有助手开放，地址为：
+
+https://contextetech.com/mcp
+
+https://contextetech.com/mcp
+
+No account, no key. In practice:
+
+无需账户，无需密钥。实际使用中：
+
+- Search: the assistant finds the resources that match the question, in 9 languages, with their title, licence, author and link.
+
+- 搜索：助手以9种语言查找与问题匹配的资源，包含标题、许可证、作者和链接。
+
+- Reading: it loads a resource by its short code (the rows of a dataset, the template of a prompt, the instructions of a context).
+
+- 读取：它通过短代码加载资源（数据集的行、提示词的模板、上下文的说明）。
+
+- Required citation: every loaded resource ends with a Source line that the serverâs instructions require the assistant to repeat: the resource, its author, the original data source, the publisher and the licence, each with its link.
+
+- 强制引用：每个加载的资源末尾都有一行“来源”信息，服务器指令要求助手必须重复：资源、作者、原始数据来源、发布者和许可证，每一项都附有链接。
+
+- Measurement without tracking: the links tell which assistant the visit comes from, with no personal data.
+
+- 无追踪计量：链接可以告知访问来自哪个助手，不涉及任何个人数据。
+
+- Protected content: what members write is flagged to the assistant as data, and resources are checked when they are published.
+
+- 受保护内容：成员撰写的内容会被标记为数据告知助手，资源在发布时会经过检查。
+
+Try it
+
+试试看
+
+Add https://contextetech.com/mcp as a connector in your assistant, then ask:
+
+在你的助手中添加 https://contextetech.com/mcp 作为连接器，然后提问：
+
+load n8qhje
+
+load n8qhje
+
+The assistant loads a dataset for finding the NAF (APE) code of a business activity, built on the official INSEE classification published on data.gouv.fr, and cites its source. The full guide is on the MCP server page.
+
+助手会加载一个用于查找商业活动NAF（APE）代码的数据集，该数据集基于data.gouv.fr上发布的官方INSEE分类构建，并引用其来源。完整指南位于MCP服务器页面上。
+
+A common foundation
+
+共同的基础
+
+What if the MCP protocol became the common foundation of smart, decentralised search? MCP does not replace the web: it gives assistants a way in. The more open, sourced and honest servers there are, the more AI search will look like what we expect from it: answers that say where they come from. If you publish data or reference content, now is the right time to open your own server.
+
+如果MCP协议成为智能、去中心化搜索的共同基础会怎样？MCP并不会取代网络：它只是为助手提供了一条进入的途径。开放、有来源且诚实的服务器越多，AI搜索就越接近我们所期待的样子：能够说明出处的答案。如果你发布数据或参考内容，现在正是开启自己服务器的最佳时机。

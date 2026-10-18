@@ -1,0 +1,60 @@
+---
+title: "Show HN PS2 games statically recompiled to WebAssembly_全翻译"
+tags: ["大咖视点_全文翻译", "Hacker_News_Top_(硅谷极客风向标)"]
+---
+
+【文章标题】：Show HN: PS2 games statically recompiled to WebAssembly
+
+【文章正文】：
+
+PlayStation 2 games running in the browser without an emulator. The game's Emotion Engine machine code is translated ahead of time into C++, compiled to WebAssembly, and linked against a reimplementation of the PS2's operating system and hardware that draws with WebGPU.
+
+PlayStation 2 游戏无需模拟器即可在浏览器中运行。游戏的情感引擎机器代码被提前翻译成 C++，编译为 WebAssembly，并与重新实现的 PS2 操作系统和硬件（使用 WebGPU 进行绘制）链接。
+
+Watch the full recording (1:24)
+
+This is the sibling of psp-web-recomp and follows the same method. The first title brought up this way is Gran Turismo 4, chosen because it is one of the most demanding games on the system: it leans on both vector units, on exact floating point behaviour for its replays and license tests, and on graphics tricks that read rendered images back as palettes. It plays from boot through the opening movie, the menus and races, with music and sound effects, and saves to a memory card kept in the browser. A race runs at full speed, 50 frames per second for this PAL release, in Chrome on a laptop's integrated GPU at twice the PS2's resolution, which is how the recording above was made.
+
+观看完整录像（1:24）
+
+这是 psp-web-recomp 的姊妹项目，采用相同的方法。首个通过这种方式运行的游戏是《GT赛车4》，之所以选择它，是因为它是该系统上要求最高的游戏之一：它依赖两个向量单元，依赖精确的浮点行为来实现回放和驾照考试，并依赖将渲染图像读回为调色板的图形技巧。游戏从启动到开场动画、菜单和比赛都能正常运行，带有音乐和音效，并可保存到浏览器中的记忆卡。在 Chrome 浏览器中，使用笔记本电脑的集成显卡，以 PS2 两倍分辨率运行该 PAL 版本时，比赛以全速 50 帧/秒运行，上述录像即由此生成。
+
+God of War II followed through the same scripts. It needed no game-specific code, but it found two bugs that Gran Turismo 4 had never triggered, one in the recompiler and one in the vector unit timing, and a few missing pieces of the PS2's input/output processor. It now plays from the menus through its cutscenes into combat, and holds 60 frames per second in heavy combat at the PS2's resolution in Chrome. At twice the resolution it runs at 48 to 60, limited by the laptop's integrated GPU.
+
+《战神II》也通过了相同的脚本。它不需要针对特定游戏的代码，但发现了《GT赛车4》从未触发的两个 bug，一个在重编译器中，另一个在向量单元时序中，以及 PS2 输入/输出处理器中缺失的几个部分。现在，它可以从菜单播放到过场动画，再进入战斗，在 Chrome 中以 PS2 分辨率进行激烈战斗时保持 60 帧/秒。在两倍分辨率下，运行速度为 48 到 60 帧/秒，受限于笔记本电脑的集成显卡。
+
+No game data is included here. You bring a disc image of a game you own, and the scripts in this repository turn it into a web page on your machine.
+
+此处不包含任何游戏数据。您需要提供自己拥有的游戏光盘镜像，本仓库中的脚本会将其转换为您机器上的一个网页。
+
+Recompilation. eerecomp reads the game's executable, follows its control flow to find the functions and emits C++ for them in units of 16 KiB of guest code. The output keeps the R5900's quirks: 128-bit registers and the multimedia instructions that work on them, branch delay slots, the PS2's floating point unit, which has no infinities or denormals and rounds differently from IEEE, and vector unit 0 used as a coprocessor. Jumps between units become tail calls, and a thread switch unwinds the host stack and resumes at the guest address, so the generated code never needs a stack per guest thread.
+
+重编译。eerecomp 读取游戏的可执行文件，跟踪其控制流以查找函数，并以 16 KiB 客户代码为单位为它们生成 C++ 代码。输出保留了 R5900 的特性：128 位寄存器及其多媒体指令、分支延迟槽、PS2 的浮点单元（该单元没有无穷大或非规格化数，舍入方式与 IEEE 不同），以及用作协处理器的向量单元 0。单元之间的跳转变为尾调用，线程切换会展开宿主栈并在客户地址处恢复，因此生成的代码无需为每个客户线程维护栈。
+
+A small PS2 kernel. The EE side of the operating system is answered by high-level emulation: threads, semaphores, interrupt handlers for the DMA controller and the vertical blank, alarms, and the SIF channel that connects the main CPU to the I/O processor. The I/O processor runs the game's own IRX modules, the sound driver, the disc streaming code and the controller and memory card drivers that ship on the disc, on an interpreter of its R3000 CPU, while the IOP kernel and the libraries those modules call are reimplemented in C++. The disc is read over HTTP Range requests, so only the executable is downloaded up front.
+
+一个小型 PS2 内核。操作系统的 EE 侧通过高级模拟实现：线程、信号量、DMA 控制器和垂直空白的中断处理程序、警报，以及连接主 CPU 和 I/O 处理器的 SIF 通道。I/O 处理器在其 R3000 CPU 的解释器上运行游戏自带的 IRX 模块、声音驱动程序、光盘流式传输代码以及光盘上附带的控制器和记忆卡驱动程序，而 IOP 内核和这些模块调用的库则用 C++ 重新实现。光盘通过 HTTP Range 请求读取，因此只需预先下载可执行文件。
+
+Vector units. Most of a PS2 game's 3D work happens in microprograms the game uploads to vector unit 1. They run with bit-exact PS2 float math and with the pipeline delays of the MAC, status and clip flags modelled, because games schedule their code around them. Microprograms seen during a test run are compiled ahead of time into SIMD C++; any the page meets for the first time are translated into a WebAssembly module on the spot, which takes a few milliseconds per program.
+
+向量单元。PS2 游戏的大部分 3D 工作发生在游戏上传到向量单元 1 的微程序中。它们以位精确的 PS2 浮点数学运行，并模拟了 MAC、状态和裁剪标志的流水线延迟，因为游戏会围绕这些延迟来调度代码。测试运行期间遇到的微程序会提前编译为 SIMD C++；页面首次遇到的任何微程序都会即时翻译为 WebAssembly 模块，每个程序只需几毫秒。
+
+Graphics. The Graphics Synthesizer's 4 MB of video memory lives on the GPU, in its native swizzled layouts, and drawing is done by WebGPU compute shaders: triangles are binned into tiles and rasterized with the GS's own rules for texturing, palettes, alpha blending, depth and destination alpha tests. Because everything stays in GS memory, effects that render into a texture or reinterpret a framebuffer as a palette work the way they do on the console. The internal resolution can be one, two or three times the native one. A software rasterizer of the same GS remains as the reference the GPU output is compared against.
+
+图形。图形合成器的 4 MB 视频内存驻留在 GPU 上，采用其原生交错布局，绘制由 WebGPU 计算着色器完成：三角形被分箱到瓦片中，并使用 GS 自身的纹理、调色板、Alpha 混合、深度和目标 Alpha 测试规则进行光栅化。由于所有内容都保留在 GS 内存中，因此渲染到纹理或将帧缓冲重新解释为调色板的效果与在主机上的工作方式相同。内部分辨率可以是原生分辨率的一倍、两倍或三倍。同一 GS 的软件光栅化器仍作为参考，用于与 GPU 输出进行比较。
+
+Threads. The emulation runs in a worker, vector unit 1 has a worker of its own the way it runs in parallel on the console, and the GS commands go through a ring buffer to the page thread, which owns the WebGPU device.
+
+线程。模拟在 worker 中运行，向量单元 1 拥有自己的 worker，就像在主机上并行运行一样，GS 命令通过环形缓冲区传递到页面线程，该线程拥有 WebGPU 设备。
+
+Sound and movies. The SPU2 is reimplemented with its 48 voices of ADPCM, ADSR envelopes and the streaming DMA games use for music, and its output goes to an AudioWorklet through shared memory. Movies are decoded by an implementation of the IPU, the PS2's MPEG-2 decoder.
+
+声音和电影。SPU2 被重新实现，具有 48 个 ADPCM 声道、ADSR 包络以及游戏用于音乐的流式 DMA，其输出通过共享内存发送到 AudioWorklet。电影由 IPU（PS2 的 MPEG-2 解码器）的实现解码。
+
+The first race ran at 3 frames per second natively, with a software rasterizer and an interpreter for vector unit 1. Moving the GS to WebGPU compute shaders and compiling the vector unit programs brought it to about 70 natively, and most of the remaining work was about where the browser spent its time rather than the emulation.
+
+第一次比赛在原生环境下以 3 帧/秒的速度运行，使用软件光栅化器和向量单元 1 的解释器。将 GS 迁移到 WebGPU 计算着色器并编译向量单元程序后，原生速度提升到约 70 帧/秒，剩余的大部分工作集中在浏览器的时间消耗上，而非模拟本身。
+
+The first version of the GPU renderer submitted around 650 compute dispatches per frame, because every texture upload and palette load split
+
+GPU 渲染器的第一个版本每帧提交约 650 次计算调度，因为每次纹理上传和调色板加载都被拆分
